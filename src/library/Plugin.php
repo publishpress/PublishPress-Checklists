@@ -81,7 +81,7 @@ class Plugin
      */
     protected function checkRequirements()
     {
-        return defined('PUBLISHPRESS_VERSION') && version_compare(PUBLISHPRESS_VERSION, '1.3.0', 'gte');
+        return defined('PUBLISHPRESS_VERSION') && version_compare(PUBLISHPRESS_VERSION, '1.3.0', 'ge');
     }
 
     public function warning_requirements()
