@@ -41,7 +41,7 @@ if (!class_exists('PP_Checklist')) {
          */
         public function __construct()
         {
-            $this->twigPath = __DIR__ . '/twig';
+            $this->twigPath = dirname(dirname(dirname(__FILE__))) . '/twig';
 
             $this->module_url = $this->get_module_url(__FILE__);
 
