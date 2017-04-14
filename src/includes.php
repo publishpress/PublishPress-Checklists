@@ -1,6 +1,4 @@
 <?php
-defined('ABSPATH') or die("No direct script access allowed.");
-
 /**
  * File responsible for defining basic general constants used by the plugin.
  *
@@ -10,6 +8,8 @@ defined('ABSPATH') or die("No direct script access allowed.");
  * @license     GPLv2 or later
  * @since       1.0.0
  */
+
+defined('ABSPATH') or die("No direct script access allowed.");
 
 require_once 'freemius.php';
 
@@ -62,7 +62,24 @@ if (!defined('PUBLISHPRESS_PLG_CHECKLIST_HALT')) {
         define('PUBLISHPRESS_PLG_CHECKLIST_VERSION', "1.0.0");
     }
 
+    if (!defined('PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH')) {
+        define('PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist');   
+    }
+
+    if (!class_exists('PP_Module')) {
+        require_once(PUBLISHPRESS_ROOT . '/common/php/class-module.php');
+    }
+
+    if (!class_exists('PublishPress\\Addon\\Checklist')) {
+        require_once PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . '/library/Plugin.php';
+    }
+
+    // Load the modules
+    if (!class_exists('PP_Checklist')) {
+        require_once PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH . '/checklist.php';
+    }
+
     if (!defined('PUBLISHPRESS_PLG_CHECKLIST_LOADED')) {
-        define('PUBLISHPRESS_PLG_CHECKLIST_LOADED', 1);
+        define('PUBLISHPRESS_PLG_CHECKLIST_LOADED', 1);   
     }
 }

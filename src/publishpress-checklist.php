@@ -20,6 +20,5 @@
 
 require_once __DIR__ . "/includes.php";
 
-if (defined('PUBLISHPRESS_PLG_CHECKLIST_LOADED')) {
-    
-}
+$plugin = new PublishPress\Addon\Checklist\Plugin;
+$plugin->init();
