@@ -205,7 +205,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global',
 				array(
-					'post_type' => 'global'
+					'post_type'   => 'global',
+					'description' => __( 'Leave empty to disable' )
 				)
 			);
 		}

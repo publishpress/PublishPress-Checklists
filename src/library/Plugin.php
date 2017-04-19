@@ -15,79 +15,77 @@ use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Twig_Extension_Debug;
 
-defined('ABSPATH') or die("No direct script access allowed.");
+defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Plugin
-{
-    const LANGUAGE_CONTEXT = 'publishpress-checklist';
+class Plugin {
 
-    /**
-     * Twig instance
-     * @var Twig
-     */
-    protected $twig;
+	const LANGUAGE_CONTEXT = 'publishpress-checklist';
 
-    /**
-     * Flag for debug
-     * 
-     * @var boolean
-     */
-    protected $debug = false;
+	/**
+	 * Twig instance
+	 *
+	 * @var Twig
+	 */
+	protected $twig;
 
-    /**
-     * The constructor
-     */
-    public function __construct()
-    {
-        $twigPath = PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . 'twig';
+	/**
+	 * Flag for debug
+	 *
+	 * @var boolean
+	 */
+	protected $debug = false;
 
-        $loader = new Twig_Loader_Filesystem($twigPath);
-        $this->twig = new Twig_Environment($loader, array('debug' => $this->debug));
+	/**
+	 * The constructor
+	 */
+	public function __construct() {
+		$twigPath = PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . 'twig';
 
-        if ($this->debug) {
-            $this->twig->addExtension(new Twig_Extension_Debug());
-        }
-    }
+		$loader = new Twig_Loader_Filesystem( $twigPath );
+		$this->twig = new Twig_Environment( $loader, array(
+			'debug' => $this->debug,
+		) );
 
-    /**
-     * The method which runs the plugin
-     */
-    public function init()
-    {
-        if (!$this->checkRequirements()) {
-            add_action('admin_notices', array($this, 'warning_requirements'));
-    
-            return false;
-        }
+		if ( $this->debug ) {
+			$this->twig->addExtension( new Twig_Extension_Debug() );
+		}
+	}
 
-        add_filter('pp_module_dirs', array($this, 'filter_module_dirs'));
-    }
+	/**
+	 * The method which runs the plugin
+	 */
+	public function init() {
+		if ( ! $this->checkRequirements() ) {
+			add_action( 'admin_notices', array( $this, 'warning_requirements' ) );
 
-    /**
-     * Add custom module directory
-     * 
-     * @param  array
-     * @return array
-     */
-    public function filter_module_dirs($dirs)
-    {
-        $dirs['checklist'] = rtrim(PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE, '/');
+			return false;
+		}
 
-        return $dirs;
-    }
+		add_filter( 'pp_module_dirs', array( $this, 'filter_module_dirs' ) );
+	}
 
-    /**
-     * Check if the system complies the requirements
-     * 
-     * @return bool
-     */
-    protected function checkRequirements()
-    {
-        return defined('PUBLISHPRESS_VERSION') && version_compare(PUBLISHPRESS_VERSION, '1.3.0', 'ge');
-    }
+	/**
+	 * Add custom module directory
+	 *
+	 * @param  array
+	 * @return array
+	 */
+	public function filter_module_dirs( $dirs ) {
+		$dirs['checklist'] = rtrim( PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE, '/' );
 
-    public function warning_requirements()
-    {
-        echo $this->twig->render('requirements-warning.twig');
-    }
+		return $dirs;
+	}
+
+	/**
+	 * Check if the system complies the requirements
+	 *
+	 * @return bool
+	 */
+	protected function checkRequirements() {
+		return defined( 'PUBLISHPRESS_VERSION' ) && version_compare( PUBLISHPRESS_VERSION, '1.3.0', 'ge' );
+	}
+
+	public function warning_requirements() {
+		echo $this->twig->render( 'requirements-warning.twig' );
+	}
 }

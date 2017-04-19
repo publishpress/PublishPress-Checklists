@@ -16,9 +16,9 @@
  * Description: Add a checklist for posts before publish
  * Author:      PressShack
  * Author URI:  https://pressshack.com
-*/
+ */
 
-require_once __DIR__ . "/includes.php";
+require_once __DIR__ . '/includes.php';
 
 $plugin = new PublishPress\Addon\Checklist\Plugin;
 $plugin->init();
