@@ -34,8 +34,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 	/**
 	 * class PP_Checklist
 	 */
-	class PP_Checklist extends PP_Module
-	{
+	class PP_Checklist extends PP_Module {
+
 
 		const SETTINGS_SLUG = 'pp-editorial-metadata-settings';
 
@@ -44,8 +44,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		/**
 		 * Construct the PP_Checklist class
 		 */
-		public function __construct()
-		{
+		public function __construct() {
 			$this->twigPath = dirname( dirname( dirname( __FILE__ ) ) ) . '/twig';
 
 			$this->module_url = $this->get_module_url( __FILE__ );
@@ -71,40 +70,38 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->configure_twig();
 		}
 
-		protected function configure_twig()
-		{
-			$function = new Twig_SimpleFunction('settings_fields', function () {
-				return settings_fields($this->module->options_group_name);
-			});
-			$this->twig->addFunction($function);
+		protected function configure_twig() {
+			$function = new Twig_SimpleFunction( 'settings_fields', function () {
+				return settings_fields( $this->module->options_group_name );
+			} );
+			$this->twig->addFunction( $function );
 
-			$function = new Twig_SimpleFunction('nonce_field', function ($context) {
-				return wp_nonce_field($context);
-			});
-			$this->twig->addFunction($function);
+			$function = new Twig_SimpleFunction( 'nonce_field', function ( $context ) {
+				return wp_nonce_field( $context );
+			} );
+			$this->twig->addFunction( $function );
 
-			$function = new Twig_SimpleFunction('submit_button', function () {
+			$function = new Twig_SimpleFunction( 'submit_button', function () {
 				return submit_button();
-			});
-			$this->twig->addFunction($function);
+			} );
+			$this->twig->addFunction( $function );
 
-			$function = new Twig_SimpleFunction('__', function ($id) {
-				return __($id, Plugin::LANGUAGE_CONTEXT);
-			});
-			$this->twig->addFunction($function);
+			$function = new Twig_SimpleFunction( '__', function ( $id ) {
+				return __( $id, Plugin::LANGUAGE_CONTEXT );
+			} );
+			$this->twig->addFunction( $function );
 
-			$function = new Twig_SimpleFunction('do_settings_sections', function ($section) {
-				return do_settings_sections($section);
-			});
-			$this->twig->addFunction($function);
+			$function = new Twig_SimpleFunction( 'do_settings_sections', function ( $section ) {
+				return do_settings_sections( $section );
+			} );
+			$this->twig->addFunction( $function );
 		}
 
 		/**
 		 * Initialize the module. Conditionally loads if the module is enabled
 		 */
-		public function init()
-		{
-			add_action('admin_init', array($this, 'register_settings'));
+		public function init() {
+			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
 
 		/**
@@ -112,8 +109,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 *
 		 * @since 0.7
 		 */
-		public function install()
-		{
+		public function install() {
 
 		}
 
@@ -122,8 +118,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 *
 		 * @since 0.7
 		 */
-		public function upgrade($previous_version)
-		{
+		public function upgrade( $previous_version ) {
 
 		}
 
@@ -135,19 +130,17 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @param array $args (optional) Action and any query args to add to the URL
 		 * @return string $link Direct link to complete the action
 		 */
-		protected function get_link($args = array())
-		{
+		protected function get_link( $args = array() ) {
 			$args['page']   = 'pp-modules-settings';
 			$args['module'] = 'pp-checklist-settings';
 
-			return add_query_arg($args, get_admin_url(null, 'admin.php'));
+			return add_query_arg( $args, get_admin_url( null, 'admin.php' ) );
 		}
 
 		/**
 		 * Print the content of the configure tab.
 		 */
-		public function print_configure_view()
-		{
+		public function print_configure_view() {
 			echo $this->twig->render(
 				'tab.twig',
 				array(
@@ -162,12 +155,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * Register settings for notifications so we can partially use the Settings API
 		 * (We use the Settings API for form generation, but not saving)
 		 */
-		public function register_settings()
-		{
+		public function register_settings() {
 			/**
 			 *
 			 * Post types
-			 *
 			 */
 
 			add_settings_section(
@@ -179,8 +170,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_field(
 				'post_types',
-				__('Add to these post types:', 'publishpress-checklist'),
-				array($this, 'settings_post_types_option'),
+				__( 'Add to these post types:', 'publishpress-checklist' ),
+				array( $this, 'settings_post_types_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_post_types'
 			);
@@ -188,25 +179,24 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			/**
 			 *
 			 * Global settings
-			 *
 			 */
 
 			add_settings_section(
 				$this->module->options_group_name . '_global',
-				__('Global Settings'),
+				__( 'Global Settings' ),
 				'__return_false',
 				$this->module->options_group_name
 			);
 
 			add_settings_field(
 				'global_min_word_count',
-				__('Minimum Word Count:', 'publishpress-checklist'),
+				__( 'Minimum Word Count:', 'publishpress-checklist' ),
 				array( $this, 'settings_min_word_count_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global',
 				array(
 					'post_type'   => 'global',
-					'description' => __( 'Leave empty to disable' )
+					'description' => __( 'Leave empty to disable' ),
 				)
 			);
 		}
@@ -214,11 +204,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		/**
 		 * Displays the field to allow select the post types for checklist.
 		 */
-		public function settings_post_types_option()
-		{
+		public function settings_post_types_option() {
 			global $publishpress;
 
-			$publishpress->settings->helper_option_custom_post_type($this->module);
+			$publishpress->settings->helper_option_custom_post_type( $this->module );
 		}
 
 		/**
@@ -232,11 +221,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 *
 		 * @array  $args
 		 */
-		public function settings_min_word_count_option( $args = array() )
-		{
+		public function settings_min_word_count_option( $args = array() ) {
 			$defaults = array(
 				'post_type'   => 'global',
-				'description' => ''
+				'description' => '',
 			);
 			$args = wp_parse_args( $args, $defaults );
 
@@ -244,7 +232,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					. $this->module->options_group_name . '[min_word_count][' . esc_attr( $args['post_type'] ) . ']" '
 					. 'value="' . $this->module->options->min_word_count[ $defaults['post_type'] ] . '" />';
 
-			if ( !empty( trim( $args['description'] ) ) ) {
+			if ( ! empty( trim( $args['description'] ) ) ) {
 				echo "<p class='description'>{$args['description']}</p>";
 			}
 		}
@@ -255,10 +243,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @param array $new_options New values that have been entered by the user
 		 * @return array $new_options Form values after they've been sanitized
 		 */
-		public function settings_validate( $new_options )
-		{
+		public function settings_validate( $new_options ) {
 			// Whitelist validation for the post type options
-			if ( !isset( $new_options['post_types'] ) ) {
+			if ( ! isset( $new_options['post_types'] ) ) {
 				$new_options['post_types'] = array();
 			}
 
@@ -284,4 +271,4 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			return $new_options;
 		}
 	}
-}
+}// End if().
