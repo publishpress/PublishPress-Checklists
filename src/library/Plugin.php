@@ -18,7 +18,9 @@ use Twig_Extension_Debug;
 defined('ABSPATH') or die("No direct script access allowed.");
 
 class Plugin
-{   
+{
+    const LANGUAGE_CONTEXT = 'publishpress-checklist';
+
     /**
      * Twig instance
      * @var Twig
