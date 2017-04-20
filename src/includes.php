@@ -66,6 +66,10 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 		define( 'PUBLISHPRESS_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
 	}
 
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LANG_CONTEXT' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_LANG_CONTEXT', 'publishpress-checklist' );
+	}
+
 	if ( ! class_exists( 'PP_Module' ) ) {
 		require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );
 	}

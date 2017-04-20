@@ -28,8 +28,6 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use PublishPress\Addon\Checklist\Plugin;
-
 if ( ! class_exists( 'PP_Checklist' ) ) {
 	/**
 	 * class PP_Checklist
@@ -52,9 +50,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			// Register the module with PublishPress
 			$args = array(
-				'title'                => __( 'Checklist', 'publishpress' ),
-				'short_description'    => __( 'Description...', 'publishpress' ),
-				'extended_description' => __( 'Checklist extended description...', 'publishpress' ),
+				'title'                => __( 'Checklist', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'short_description'    => __( 'Description...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'extended_description' => __( 'Checklist extended description...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				'module_url'           => $this->module_url,
 				'icon_class'           => 'dashicons dashicons-feedback',
 				'slug'                 => 'checklist',
@@ -95,7 +93,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->twig->addFunction( $function );
 
 			$function = new Twig_SimpleFunction( '__', function ( $id ) {
-				return __( $id, Plugin::LANGUAGE_CONTEXT );
+				return __( $id, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
 			} );
 			$this->twig->addFunction( $function );
 
@@ -187,7 +185,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_field(
 				'post_types',
-				__( 'Add to these post types:', 'publishpress-checklist' ),
+				__( 'Add to these post types:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				array( $this, 'settings_post_types_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_post_types'
@@ -200,20 +198,21 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_section(
 				$this->module->options_group_name . '_global',
-				__( 'Global Settings' ),
+				__( 'Global Settings', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				'__return_false',
 				$this->module->options_group_name
 			);
 
+			// Min Word Count
 			add_settings_field(
 				'global_min_word_count',
-				__( 'Minimum Word Count:', 'publishpress-checklist' ),
+				__( 'Minimum Word Count:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				array( $this, 'settings_min_word_count_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global',
 				array(
 					'post_type'   => 'global',
-					'description' => __( 'Leave empty to disable' ),
+					'description' => __( 'Leave empty to disable', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				)
 			);
 
@@ -257,14 +256,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					. $this->module->options_group_name . '[min_word_count][' . esc_attr( $args['post_type'] ) . ']" '
 					. 'value="' . $this->module->options->min_word_count[ $args['post_type'] ] . '" />';
 
-			echo '<span>' . __( 'Action:' ) . '&nbsp;';
+			echo '<span class="pp-checklist-action-label">' . __( 'Action:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '&nbsp;';
 			echo '<select id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count-rule" name="'
 						. $this->module->options_group_name . '[min_word_count_rule][' . esc_attr( $args['post_type'] ) . ']">';
 
 			$rules = array(
-				'warn'   => __( 'Warn' ),
-				'block'  => __( 'Block' ),
-				'silent' => __( 'Only display' ),
+				'warn'         => __( 'Warn', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'block'        => __( 'Block', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'only_display' => __( 'Only display', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 			);
 			foreach ( $rules as $rule => $label ) {
 				echo '<option value="' . $rule . '" ' . selected( $rule, $this->module->options->min_word_count_rule[ $args['post_type'] ], false ) . '>'
@@ -358,13 +357,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			 */
 
 
-			$title = __( 'Checklist', 'publishpress' );
+			$title = __( 'Checklist', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
 
 			if ( current_user_can( 'manage_options' ) ) {
 				// Make the metabox title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
 				$url = $this->get_link();
 
-				$title .= ' <span class="postbox-title-action"><a href="' . esc_url( $url ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>';
+				$title .= ' <span class="postbox-title-action"><a href="' . esc_url( $url ) . '" class="edit-box open-box">' . __( 'Configure', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '</a></span>';
 			}
 
 			$supported_post_types = $this->get_post_types_for_module( $this->module );
@@ -409,7 +408,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( ! empty( $req_min_word_count ) ) {
 				$requirements['min_word_count'] = array(
 					'status' => str_word_count( $post->post_content ) >= $req_min_word_count,
-					'label'  => sprintf( __('Minimum of %s words'), $req_min_word_count ),
+					'label'  => sprintf( __( 'Minimum of %s words', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_word_count ),
 					'value'  => $req_min_word_count,
 					'rule'   => $req_min_word_count_rule
 				);
@@ -431,9 +430,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
                     'objectL10n_checklist_req_min_words',
                     array(
 						'requirements'         => $requirements,
-						'msg_missed_optional'  => __( 'The following requirements are not completed yet. Are you sure you want to publish?' ),
-						'msg_missed_required'  => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.' ),
-						'msg_missed_important' => __( 'Not required, but important: ' ),
+						'msg_missed_optional'  => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_required'  => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_important' => __( 'Not required, but important: ', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
                     )
                 );
 			}
