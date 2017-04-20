@@ -36,8 +36,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 	 */
 	class PP_Checklist extends PP_Module {
 
-
-		const SETTINGS_SLUG = 'pp-editorial-metadata-settings';
+		const METADATA_TAXONOMY     = 'pp_checklist_meta';
+		const METADATA_POSTMETA_KEY = "_pp_checklist_meta";
+		const SETTINGS_SLUG         = 'pp-checklist-settings';
 
 		public $module_name = 'checklist';
 
@@ -102,6 +103,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		public function init() {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
+
+			// Scripts
+			add_action( 'admin_print_styles-post.php', array( $this, 'add_requirement_scripts' ) );
+			add_action( 'admin_print_styles-post-new.php', array( $this, 'add_requirement_scripts' ) );
+
+			// Editor
+			add_filter( 'mce_external_plugins', array( $this, 'add_mce_plugin' ) );
 		}
 
 		/**
@@ -270,5 +279,111 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			return $new_options;
 		}
+
+		public function add_mce_plugin( $plugin_array ) {
+			$plugin_array['pp_checklist_requirements'] =
+				plugin_dir_url( 'publishpress-checklist/publishpress-checklist.php' )
+				. 'modules/checklist/assets/js/tinymce-pp-checklist-requirements.js';
+
+			return $plugin_array;
+		}
+
+		/*
+		==================================
+		=            Meta boxes          =
+		==================================
+		*/
+
+		/**
+		 * Load the post metaboxes for all of the post types that are supported
+		 */
+		public function handle_post_metaboxes() {
+			/**
+
+				TODO:
+				- Check if there is any active requirement before display the box
+
+			 */
+
+
+			$title = __( 'Checklist', 'publishpress' );
+
+			if ( current_user_can( 'manage_options' ) ) {
+				// Make the metabox title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
+				$url = $this->get_link();
+
+				$title .= ' <span class="postbox-title-action"><a href="' . esc_url( $url ) . '" class="edit-box open-box">' . __( 'Configure' ) . '</a></span>';
+			}
+
+			$supported_post_types = $this->get_post_types_for_module( $this->module );
+
+			foreach ( $supported_post_types as $post_type ) {
+				add_meta_box( self::METADATA_TAXONOMY, $title, array( $this, 'display_meta_box' ), $post_type, 'side' );
+			}
+		}
+
+		/**
+		 * Displays HTML output for Checklist post meta box
+		 *
+		 * @param object $post Current post
+		 */
+		public function display_meta_box( $post ) {
+			/*
+			====================================
+			=            Requirements          =
+			====================================
+			*/
+			$requirements = array();
+
+			// Min Word Count
+			if ( ! isset( $this->module->options->min_word_count[ $post->post_type ] )
+				|| empty( $this->module->options->min_word_count[ $post->post_type ] )
+			) {
+				$req_min_word_count = $this->module->options->min_word_count['global'];
+			} else {
+				$req_min_word_count = $this->module->options->min_word_count[ $post->post_type ];
+			}
+			$req_min_word_count = (int) $req_min_word_count;
+
+			if ( ! empty( $req_min_word_count ) ) {
+				$requirements['min_word_count'] = array(
+					'status' => str_word_count( $post->post_content ) >= $req_min_word_count,
+					'label'  => sprintf( __('Minimum of %s words'), $req_min_word_count ),
+				);
+
+				wp_enqueue_script(
+					'pp-checklist-req-min-words',
+					plugins_url( '/modules/checklist/assets/js/checklist.js', 'publishpress-checklist/publishpress-checklist.php' ),
+					array( 'jquery' ),
+					PUBLISHPRESS_PLG_CHECKLIST_VERSION,
+					true
+				);
+
+				// Add localization data for the script
+				wp_localize_script(
+                    'pp-checklist-req-min-words',
+                    'objectL10n_checklist_req_min_words',
+                    array(
+                        'req_min_words_count' => $req_min_word_count,
+                    )
+                );
+			}
+
+			/*=====  End of Requirements  ======*/
+
+			// Apply filters to the list of requirements
+			$requirements = apply_filters( 'pp_checklist_requirements', $requirements, $post, $this->module );
+
+			// Render the box
+			echo $this->twig->render(
+				'checklist-metabox.twig',
+				array(
+					'metadata_taxonomy' => self::METADATA_TAXONOMY,
+					'requirements'      => $requirements,
+				)
+			);
+		}
+
+		/*=====  End of Meta boxes  ======*/
 	}
 }// End if().

@@ -1,0 +1,10 @@
+<div id="{{ metadata_taxonomy }}-meta-box">
+	<ul id="pp-checklist-req-box">
+		{% for key, req in requirements %}
+			<li id="pp-checklist-req-{{ key }}">
+				<span class="dashicons dashicons-{{ req.status ? 'yes' : 'no' }}"></span>
+				{{ req.label }}
+			</li>
+		{% endfor %}
+	</ul>
+</div>
