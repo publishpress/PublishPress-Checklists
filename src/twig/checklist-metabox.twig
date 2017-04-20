@@ -1,10 +1,23 @@
+{% set show_required_legend = false %}
+
 <div id="{{ metadata_taxonomy }}-meta-box">
 	<ul id="pp-checklist-req-box">
 		{% for key, req in requirements %}
-			<li id="pp-checklist-req-{{ key }}">
+			<li id="pp-checklist-req-{{ key }}" class="pp-checklist-req {{ req.rule }}" data-id="{{ key }}">
 				<span class="dashicons dashicons-{{ req.status ? 'yes' : 'no' }}"></span>
-				{{ req.label }}
+				<span class="status-label status-{{ req.status ? 'yes' : 'no' }}">
+					{{ req.label }}
+					{% if req.rule == 'block' %}
+						*
+
+						{% set show_required_legend = true %}
+					{% endif %}
+				</span>
 			</li>
 		{% endfor %}
 	</ul>
+
+	{% if show_required_legend %}
+		<em>(*) {{ __( 'Required' ) }}</em>
+	{% endif %}
 </div>

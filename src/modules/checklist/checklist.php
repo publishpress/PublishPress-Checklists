@@ -59,7 +59,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'icon_class'           => 'dashicons dashicons-feedback',
 				'slug'                 => 'checklist',
 				'default_options'      => array(
-					'enabled' => 'on',
+					'enabled'             => 'on',
+					'post_types'          => array( 'post' ),
+					'min_word_count'      => array(
+						'global' => 0,
+					),
+					'min_word_count_rule' => array(
+						'global' => 'warn',
+					),
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
@@ -105,12 +112,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
 
-			// Scripts
-			add_action( 'admin_print_styles-post.php', array( $this, 'add_requirement_scripts' ) );
-			add_action( 'admin_print_styles-post-new.php', array( $this, 'add_requirement_scripts' ) );
 
 			// Editor
 			add_filter( 'mce_external_plugins', array( $this, 'add_mce_plugin' ) );
+
+			// add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
+			add_action( 'admin_print_scripts-post.php', array( $this, 'add_admin_scripts' ) );
+			add_action( 'admin_print_scripts-post-new.php', array( $this, 'add_admin_scripts' ) );
 		}
 
 		/**
@@ -208,6 +216,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'description' => __( 'Leave empty to disable' ),
 				)
 			);
+
+			add_settings_field(
+				'global_min_word_count_rule',
+				false,
+				'__return_false',
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_global'
+			);
 		}
 
 		/**
@@ -237,9 +253,25 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			);
 			$args = wp_parse_args( $args, $defaults );
 
-			echo '<input id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '" name="'
+			echo '<input type="text" id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count" name="'
 					. $this->module->options_group_name . '[min_word_count][' . esc_attr( $args['post_type'] ) . ']" '
-					. 'value="' . $this->module->options->min_word_count[ $defaults['post_type'] ] . '" />';
+					. 'value="' . $this->module->options->min_word_count[ $args['post_type'] ] . '" />';
+
+			echo '<span>' . __( 'Action:' ) . '&nbsp;';
+			echo '<select id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count-rule" name="'
+						. $this->module->options_group_name . '[min_word_count_rule][' . esc_attr( $args['post_type'] ) . ']">';
+
+			$rules = array(
+				'warn'   => __( 'Warn' ),
+				'block'  => __( 'Block' ),
+				'silent' => __( 'Only display' ),
+			);
+			foreach ( $rules as $rule => $label ) {
+				echo '<option value="' . $rule . '" ' . selected( $rule, $this->module->options->min_word_count_rule[ $args['post_type'] ], false ) . '>'
+					. $label . '</option>';
+			}
+
+			echo '</select>';
 
 			if ( ! empty( trim( $args['description'] ) ) ) {
 				echo "<p class='description'>{$args['description']}</p>";
@@ -280,12 +312,32 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			return $new_options;
 		}
 
+		/**
+		 * Add the MCE plugin file to make the interface between the editor and
+		 * the requirement meta box. This was the unique way that worked, making
+		 * it loaded before the MCE is initialized, allowing to configure it.
+		 *
+		 * @param array  $plugin_array
+		 */
 		public function add_mce_plugin( $plugin_array ) {
 			$plugin_array['pp_checklist_requirements'] =
 				plugin_dir_url( 'publishpress-checklist/publishpress-checklist.php' )
 				. 'modules/checklist/assets/js/tinymce-pp-checklist-requirements.js';
 
 			return $plugin_array;
+		}
+
+		/**
+		 * Enqueue scripts and stylesheets for the admin pages.
+		 */
+		public function add_admin_scripts() {
+			wp_enqueue_style(
+				'pp-checklist-requirements',
+				$this->module_url . 'assets/css/checklist-requirements.css',
+				false,
+				PUBLISHPRESS_PLG_CHECKLIST_VERSION,
+				'all'
+			);
 		}
 
 		/*
@@ -345,10 +397,21 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			}
 			$req_min_word_count = (int) $req_min_word_count;
 
+			// Min Word Count Rule
+			if ( ! isset( $this->module->options->min_word_count_rule[ $post->post_type ] )
+				|| empty( $this->module->options->min_word_count_rule[ $post->post_type ] )
+			) {
+				$req_min_word_count_rule = $this->module->options->min_word_count_rule['global'];
+			} else {
+				$req_min_word_count_rule = $this->module->options->min_word_count_rule[ $post->post_type ];
+			}
+
 			if ( ! empty( $req_min_word_count ) ) {
 				$requirements['min_word_count'] = array(
 					'status' => str_word_count( $post->post_content ) >= $req_min_word_count,
 					'label'  => sprintf( __('Minimum of %s words'), $req_min_word_count ),
+					'value'  => $req_min_word_count,
+					'rule'   => $req_min_word_count_rule
 				);
 
 				// We are adding this empty script to have a handle to insert the
@@ -356,7 +419,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				// mce plugin pp-checklist-requirements.
 				wp_enqueue_script(
 					'pp-checklist-req-min-words',
-					plugins_url( '/modules/checklist/assets/js/checklist.js', 'publishpress-checklist/publishpress-checklist.php' ),
+					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', 'publishpress-checklist/publishpress-checklist.php' ),
 					array( 'jquery' ),
 					PUBLISHPRESS_PLG_CHECKLIST_VERSION,
 					true
@@ -367,7 +430,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
                     'pp-checklist-req-min-words',
                     'objectL10n_checklist_req_min_words',
                     array(
-                        'req_min_words_count' => $req_min_word_count,
+						'requirements'         => $requirements,
+						'msg_missed_optional'  => __( 'The following requirements are not completed yet. Are you sure you want to publish?' ),
+						'msg_missed_required'  => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.' ),
+						'msg_missed_important' => __( 'Not required, but important: ' ),
                     )
                 );
 			}
