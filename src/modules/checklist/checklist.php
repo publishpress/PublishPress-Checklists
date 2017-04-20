@@ -351,6 +351,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'label'  => sprintf( __('Minimum of %s words'), $req_min_word_count ),
 				);
 
+				// We are adding this empty script to have a handle to insert the
+				// localize script with the min word count value. It is used by the
+				// mce plugin pp-checklist-requirements.
 				wp_enqueue_script(
 					'pp-checklist-req-min-words',
 					plugins_url( '/modules/checklist/assets/js/checklist.js', 'publishpress-checklist/publishpress-checklist.php' ),
