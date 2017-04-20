@@ -3,10 +3,16 @@
 <div id="{{ metadata_taxonomy }}-meta-box">
 	<ul id="pp-checklist-req-box">
 		{% for key, req in requirements %}
-			<li id="pp-checklist-req-{{ key }}" class="pp-checklist-req {{ req.rule }}" data-id="{{ key }}">
+			<li
+				id="pp-checklist-req-{{ key }}"
+				class="pp-checklist-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }}"
+				data-id="{{ key }}">
+
 				<span class="dashicons dashicons-{{ req.status ? 'yes' : 'no' }}"></span>
-				<span class="status-label status-{{ req.status ? 'yes' : 'no' }}">
+				<span class="status-label">
 					{{ req.label }}
+				</span>
+				<span>
 					{% if req.rule == 'block' %}
 						*
 

@@ -48,34 +48,30 @@
 			unchecked_block = [];
 
 		for ( var i = 0; i < $requirements_warn.length; i++ ) {
-			var item = $requirements_warn[ i ];
+			var $item = $( $requirements_warn[ i ] );
 
-			if ( is_submit ) {
+			if ( is_submit && $item.hasClass( 'status-no' ) ) {
 				// Check if the requirement is not ok
-				$unchecked_req = $( item ).find( '.status-no' );
+				$unchecked_req = $item.find( '.status-label' );
 
 				if ( $unchecked_req.length > 0 ) {
-					unchecked_warn.push( $unchecked_req.html() );
+					unchecked_warn.push( $unchecked_req.html().trim() );
 				}
 			}
-
-			is_submit = false;
 		}
 
 		// Check if any of the requirements is set to block the submission
 		for ( var i = 0; i < $requirements_block.length; i++ ) {
-			var item = $requirements_block[ i ];
+			var $item = $( $requirements_block[ i ] );
 
-			if ( is_submit ) {
+			if ( is_submit && $item.hasClass( 'status-no' ) ) {
 				// Check if the requirement is not ok
-				$unchecked_req = $( item ).find( '.status-no' );
+				$unchecked_req = $item.find( '.status-label' );
 
 				if ( $unchecked_req.length > 0 ) {
-					unchecked_block.push( $unchecked_req.html() );
+					unchecked_block.push( $unchecked_req.html().trim() );
 				}
 			}
-
-			is_submit = false;
 		}
 
 		// Check if we have warnings to display
@@ -100,9 +96,33 @@
 			}
 		}
 
+		is_submit = false;
+
 		// Check if we should block the submission
 		if ( should_block ) {
 			return false;
 		}
 	} );
+
+	// Add constant check for the featured image
+	if ( $( '#pp-checklist-req-featured_image' ).length > 0 ) {
+		setInterval( function() {
+			var has_image     = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0,
+				$status       = $( '#pp-checklist-req-featured_image' ).find( '.dashicons' )
+
+			if ( has_image ) {
+				// Ok
+				$status.removeClass('dashicons-no');
+				$status.addClass('dashicons-yes');
+				$status.parent().removeClass('status-no');
+				$status.parent().addClass('status-yes');
+			} else {
+				// Not ok
+				$status.removeClass('dashicons-yes');
+				$status.addClass('dashicons-no');
+				$status.parent().removeClass('status-yes');
+				$status.parent().addClass('status-no');
+			}
+		}, 500);
+	}
 } )( jQuery );

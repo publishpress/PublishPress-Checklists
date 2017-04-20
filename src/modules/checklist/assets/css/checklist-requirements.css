@@ -1,4 +1,11 @@
-#pp-checklist-req-box .dashicons-yes,
-#pp-checklist-req-box .status-yes {
+.pp-checklist-req.status-yes * {
 	color: #cacaca;
+}
+
+.pp-checklist-small-input {
+	width: 70px;
+}
+
+.pp-checklist-action-label {
+	margin-left: 10px;
 }

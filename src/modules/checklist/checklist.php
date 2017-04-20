@@ -36,6 +36,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 		const METADATA_TAXONOMY     = 'pp_checklist_meta';
 		const METADATA_POSTMETA_KEY = "_pp_checklist_meta";
+
 		const SETTINGS_SLUG         = 'pp-checklist-settings';
 
 		public $module_name = 'checklist';
@@ -63,7 +64,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						'global' => 0,
 					),
 					'min_word_count_rule' => array(
-						'global' => 'warn',
+						'global' => 'only_display',
+					),
+					'featured_image'      => array(
+						'global' => 'off',
+					),
+					'featured_image_rule' => array(
+						'global' => 'only_display',
 					),
 				),
 				'configure_page_cb' => 'print_configure_view',
@@ -110,13 +117,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
 
-
 			// Editor
 			add_filter( 'mce_external_plugins', array( $this, 'add_mce_plugin' ) );
 
-			// add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
-			add_action( 'admin_print_scripts-post.php', array( $this, 'add_admin_scripts' ) );
-			add_action( 'admin_print_scripts-post-new.php', array( $this, 'add_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
 		}
 
 		/**
@@ -223,6 +227,26 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global'
 			);
+
+			// Featured Image
+			add_settings_field(
+				'global_featured_image',
+				__( 'Featured Image:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				array( $this, 'settings_featured_image_option' ),
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_global',
+				array(
+					'post_type'   => 'global',
+				)
+			);
+
+			add_settings_field(
+				'global_featured_image_rule',
+				false,
+				'__return_false',
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_global'
+			);
 		}
 
 		/**
@@ -235,8 +259,37 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		}
 
 		/**
-		 * Displays the field to set the minimum word count for a specific
-		 * post type.
+		 * Returns the HTML tag for a list of actions. Used for settings fields,
+		 * to specify if the requirement is required or not.
+		 *
+		 * @param  string  $option
+		 * @param  string  $post_type
+		 *
+		 * @return string
+		 */
+		public function list_of_actions( $option, $post_type = 'global') {
+			$output = '<span class="pp-checklist-action-label">' . __( 'Action:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '&nbsp;';
+			$output .= '<select id="' . esc_attr( $post_type ) . '-' . $this->module->slug . '-' . $option . '-rule" name="'
+						. $this->module->options_group_name . '[' . $option . '_rule][' . esc_attr( $post_type ) . ']">';
+
+			$rules = array(
+				'warn'         => __( 'Warn', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'block'        => __( 'Block', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'only_display' => __( 'Only display', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+			);
+			$attr = $option . '_rule';
+			foreach ( $rules as $rule => $label ) {
+				$output .= '<option value="' . $rule . '" ' . selected( $rule, $this->module->options->{$attr}[ $post_type ], false ) . '>'
+					. $label . '</option>';
+			}
+
+			$output .= '</select>';
+
+			return $output;
+		}
+
+		/**
+		 * Displays the field to set the minimum word count.
 		 *
 		 * Arguments:
 		 *
@@ -252,25 +305,42 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			);
 			$args = wp_parse_args( $args, $defaults );
 
-			echo '<input type="text" id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count" name="'
+			echo '<input type="number" id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count" name="'
 					. $this->module->options_group_name . '[min_word_count][' . esc_attr( $args['post_type'] ) . ']" '
-					. 'value="' . $this->module->options->min_word_count[ $args['post_type'] ] . '" />';
+					. 'value="' . $this->module->options->min_word_count[ $args['post_type'] ] . '" class="pp-checklist-small-input"/>';
 
-			echo '<span class="pp-checklist-action-label">' . __( 'Action:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '&nbsp;';
-			echo '<select id="' . esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-min-word-count-rule" name="'
-						. $this->module->options_group_name . '[min_word_count_rule][' . esc_attr( $args['post_type'] ) . ']">';
+			echo $this->list_of_actions( 'min_word_count', $args['post_type'] );
 
-			$rules = array(
-				'warn'         => __( 'Warn', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-				'block'        => __( 'Block', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-				'only_display' => __( 'Only display', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-			);
-			foreach ( $rules as $rule => $label ) {
-				echo '<option value="' . $rule . '" ' . selected( $rule, $this->module->options->min_word_count_rule[ $args['post_type'] ], false ) . '>'
-					. $label . '</option>';
+			if ( ! empty( trim( $args['description'] ) ) ) {
+				echo "<p class='description'>{$args['description']}</p>";
 			}
+		}
 
-			echo '</select>';
+		/**
+		 * Displays the field to set the featured image as requirement.
+		 *
+		 * Arguments:
+		 *
+		 *   - post_type [default: global] *
+		 *   - description
+		 *
+		 * @array  $args
+		 */
+		public function settings_featured_image_option( $args = array() ) {
+			$defaults = array(
+				'post_type'   => 'global',
+				'description' => '',
+			);
+			$args = wp_parse_args( $args, $defaults );
+
+			$id = esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-featured-image';
+
+			echo '<input type="checkbox" id="' . $id . '" name="'
+					. $this->module->options_group_name . '[featured_image][' . esc_attr( $args['post_type'] ) . ']" value="yes" '
+					. checked( 'yes', $this->module->options->featured_image[ $args['post_type'] ], false ) . '/>';
+			echo '<label for="' . $id . '">' . __( 'Display', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '</label>';
+
+			echo $this->list_of_actions( 'featured_image', $args['post_type'] );
 
 			if ( ! empty( trim( $args['description'] ) ) ) {
 				echo "<p class='description'>{$args['description']}</p>";
@@ -305,6 +375,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						$new_options['min_word_count'][ $option_group ],
 						FILTER_SANITIZE_NUMBER_INT
 					);
+				}
+
+				if ( isset( $new_options['featured_image'][ $option_group ] ) ) {
+					if ( 'yes' !== $new_options['featured_image'][ $option_group ] ) {
+						$new_options['featured_image'][ $option_group ] = 'no';
+					}
+				} else {
+					$new_options['featured_image'][ $option_group ] = 'no';
 				}
 			}
 
@@ -412,21 +490,61 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'value'  => $req_min_word_count,
 					'rule'   => $req_min_word_count_rule
 				);
+			}
 
-				// We are adding this empty script to have a handle to insert the
-				// localize script with the min word count value. It is used by the
-				// mce plugin pp-checklist-requirements.
+			// Featured Image
+			/**
+
+				TODO:
+				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
+
+			 */
+			// if ( ! isset( $this->module->options->featured_image[ $post->post_type ] )
+			// 	|| empty( $this->module->options->featured_image[ $post->post_type ] )
+			// ) {
+			// 	$req_featured_image = $this->module->options->featured_image['global'];
+			// } else {
+			// 	$req_featured_image = $this->module->options->featured_image[ $post->post_type ];
+			// }
+			$req_featured_image = 'yes' === $this->module->options->featured_image['global'];
+
+			// Featured Image Rule
+			/**
+
+				TODO:
+				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
+
+			 */
+			// if ( ! isset( $this->module->options->featured_image_rule[ $post->post_type ] )
+			// 	|| empty( $this->module->options->featured_image_rule[ $post->post_type ] )
+			// ) {
+			// 	$req_featured_image_rule = $this->module->options->featured_image_rule['global'];
+			// } else {
+			// 	$req_featured_image_rule = $this->module->options->featured_image_rule[ $post->post_type ];
+			// }
+			$req_featured_image_rule = $this->module->options->featured_image_rule['global'];
+
+			if ( ! empty( $req_featured_image ) ) {
+				$requirements['featured_image'] = array(
+					'status' => ! empty( get_the_post_thumbnail( $post ) ),
+					'label'  => __( 'Featured image', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+					'value'  => $req_featured_image,
+					'rule'   => $req_featured_image_rule
+				);
+			}
+
+			// Add the scripts
+			if ( ! empty( $requirements ) ) {
 				wp_enqueue_script(
-					'pp-checklist-req-min-words',
+					'pp-checklist-requirements',
 					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', 'publishpress-checklist/publishpress-checklist.php' ),
 					array( 'jquery' ),
 					PUBLISHPRESS_CHECKLIST_VERSION,
 					true
 				);
 
-				// Add localization data for the script
 				wp_localize_script(
-                    'pp-checklist-req-min-words',
+                    'pp-checklist-requirements',
                     'objectL10n_checklist_req_min_words',
                     array(
 						'requirements'         => $requirements,

@@ -34,8 +34,8 @@
 ( function( $, counter, tinymce, _ ) {
 	"use strict";
 
-	if ( typeof objectL10n_checklist_req_min_words.requirements.min_word_count === 'undefined' ) {
-		return;
+	if ( 'undefined' === typeof objectL10n_checklist_req_min_words.requirements.min_word_count ) {
+
 	}
 
 	var editor = tinyMCE.editors['content'];
@@ -43,7 +43,6 @@
 	editor.onInit.add( function() {
 		var $content      = $( '#content' ),
 			$status       = $( '#pp-checklist-req-min_word_count' ).find( '.dashicons' ),
-			$status_label = $( '#pp-checklist-req-min_word_count' ).find( '.status-label' ),
 			prev_count    = 0,
 			content_editor;
 
@@ -67,14 +66,14 @@
 					// Ok
 					$status.removeClass('dashicons-no');
 					$status.addClass('dashicons-yes');
-					$status_label.removeClass('status-no');
-					$status_label.addClass('status-yes');
+					$status.parent().removeClass('status-no');
+					$status.parent().addClass('status-yes');
 				} else {
 					// Not ok
 					$status.removeClass('dashicons-yes');
 					$status.addClass('dashicons-no');
-					$status_label.removeClass('status-yes');
-					$status_label.addClass('status-no');
+					$status.parent().removeClass('status-yes');
+					$status.parent().addClass('status-no');
 				}
 			}
 
