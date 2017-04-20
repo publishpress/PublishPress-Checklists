@@ -335,7 +335,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'pp-checklist-requirements',
 				$this->module_url . 'assets/css/checklist-requirements.css',
 				false,
-				PUBLISHPRESS_PLG_CHECKLIST_VERSION,
+				PUBLISHPRESS_CHECKLIST_VERSION,
 				'all'
 			);
 		}
@@ -421,7 +421,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'pp-checklist-req-min-words',
 					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', 'publishpress-checklist/publishpress-checklist.php' ),
 					array( 'jquery' ),
-					PUBLISHPRESS_PLG_CHECKLIST_VERSION,
+					PUBLISHPRESS_CHECKLIST_VERSION,
 					true
 				);
 

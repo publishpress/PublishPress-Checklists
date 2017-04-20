@@ -28,42 +28,42 @@ if ( ! file_exists( $publishpressPath ) || is_plugin_inactive( 'publishpress/pub
 	}
 	add_action( 'admin_notices', 'pp_checklist_admin_error' );
 
-	define( 'PUBLISHPRESS_PLG_CHECKLIST_HALT', 1 );
+	define( 'PUBLISHPRESS_CHECKLIST_HALT', 1 );
 }
 
-if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_HALT' ) ) {
+if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 	require_once $publishpressPath;
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST', 'Checklist' );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST', 'Checklist' );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_NAME' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_NAME', 'PublishPress Checklist' );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_NAME' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_NAME', 'PublishPress Checklist' );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_SLUG' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_SLUG', strtolower( PUBLISHPRESS_PLG_CHECKLIST ) );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_SLUG' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_SLUG', strtolower( PUBLISHPRESS_CHECKLIST ) );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_NAMESPACE' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_NAMESPACE', 'PublishPress\\' . PUBLISHPRESS_PLG_CHECKLIST );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_NAMESPACE' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_NAMESPACE', 'PublishPress\\' . PUBLISHPRESS_CHECKLIST );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_PATH_BASE' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_PATH_CORE' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_PATH_CORE', PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . PUBLISHPRESS_PLG_CHECKLIST );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_PATH_CORE' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_PATH_CORE', PUBLISHPRESS_CHECKLIST_PATH_BASE . PUBLISHPRESS_CHECKLIST );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_VERSION' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_VERSION', '1.0.0' );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_VERSION' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_VERSION', '1.0.0' );
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_MODULE_PATH' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
 	}
 
 	if ( ! class_exists( 'PP_Module' ) ) {
@@ -71,15 +71,15 @@ if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_HALT' ) ) {
 	}
 
 	if ( ! class_exists( 'PublishPress\\Addon\\Checklist' ) ) {
-		require_once PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . '/library/Plugin.php';
+		require_once PUBLISHPRESS_CHECKLIST_PATH_BASE . '/library/Plugin.php';
 	}
 
 	// Load the modules
 	if ( ! class_exists( 'PP_Checklist' ) ) {
-		require_once PUBLISHPRESS_PLG_CHECKLIST_MODULE_PATH . '/checklist.php';
+		require_once PUBLISHPRESS_CHECKLIST_MODULE_PATH . '/checklist.php';
 	}
 
-	if ( ! defined( 'PUBLISHPRESS_PLG_CHECKLIST_LOADED' ) ) {
-		define( 'PUBLISHPRESS_PLG_CHECKLIST_LOADED', 1 );
+	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LOADED' ) ) {
+		define( 'PUBLISHPRESS_CHECKLIST_LOADED', 1 );
 	}
 }// End if().

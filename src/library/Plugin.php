@@ -39,7 +39,7 @@ class Plugin {
 	 * The constructor
 	 */
 	public function __construct() {
-		$twigPath = PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE . 'twig';
+		$twigPath = PUBLISHPRESS_CHECKLIST_PATH_BASE . 'twig';
 
 		$loader = new Twig_Loader_Filesystem( $twigPath );
 		$this->twig = new Twig_Environment( $loader, array(
@@ -71,7 +71,7 @@ class Plugin {
 	 * @return array
 	 */
 	public function filter_module_dirs( $dirs ) {
-		$dirs['checklist'] = rtrim( PUBLISHPRESS_PLG_CHECKLIST_PATH_BASE, '/' );
+		$dirs['checklist'] = rtrim( PUBLISHPRESS_CHECKLIST_PATH_BASE, '/' );
 
 		return $dirs;
 	}
