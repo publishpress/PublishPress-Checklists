@@ -1,5 +1,10 @@
 .pp-checklist-req.status-yes * {
-	color: #cacaca;
+	color: #66bb6a;
+}
+
+.pp-checklist-req.status-no * {
+	color: #ef5350;
+	font-weight: bold;
 }
 
 .pp-checklist-small-input {

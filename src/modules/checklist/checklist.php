@@ -489,7 +489,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$supported_post_types = $this->get_post_types_for_module( $this->module );
 
 			foreach ( $supported_post_types as $post_type ) {
-				add_meta_box( self::METADATA_TAXONOMY, $title, array( $this, 'display_meta_box' ), $post_type, 'side' );
+				add_meta_box( self::METADATA_TAXONOMY, $title, array( $this, 'display_meta_box' ), $post_type, 'side', 'high' );
 			}
 		}
 
