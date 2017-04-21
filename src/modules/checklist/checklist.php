@@ -338,7 +338,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			echo '<input type="checkbox" id="' . $id . '" name="'
 					. $this->module->options_group_name . '[featured_image][' . esc_attr( $args['post_type'] ) . ']" value="yes" '
 					. checked( 'yes', $this->module->options->featured_image[ $args['post_type'] ], false ) . '/>';
-			echo '<label for="' . $id . '">' . __( 'Display', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '</label>';
+			echo '<label for="' . $id . '">' . __( 'Require', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ) . '</label>';
 
 			echo $this->list_of_actions( 'featured_image', $args['post_type'] );
 
