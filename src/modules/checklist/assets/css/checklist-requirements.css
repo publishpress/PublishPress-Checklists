@@ -1,3 +1,7 @@
+#pp_checklist_meta em {
+	color: #afafaf;
+}
+
 .pp-checklist-req.status-yes * {
 	color: #66bb6a;
 }
@@ -24,3 +28,4 @@
 	list-style: square;
     display: inline-block;
 }
+

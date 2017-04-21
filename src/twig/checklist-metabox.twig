@@ -4,9 +4,8 @@
 	<ul id="pp-checklist-req-box">
 		{% if not requirements %}
 			<p>
-				<em>{{ __( 'No requirements found!' ) }}</em>
+				<em>{{ __( 'To use the checklist, ' ) }} <a href="{{ configure_link }}" class="">{{ __( 'please choose some requirements' ) }}</a></em>
 			</p>
-			<a href="{{ configure_link }}" class="">{{ __( 'Configure' ) }}</a>
 		{% endif %}
 
 		{% for key, req in requirements %}
