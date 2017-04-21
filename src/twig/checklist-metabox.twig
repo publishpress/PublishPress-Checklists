@@ -2,6 +2,13 @@
 
 <div id="{{ metadata_taxonomy }}-meta-box">
 	<ul id="pp-checklist-req-box">
+		{% if not requirements %}
+			<p>
+				<em>{{ __( 'No requirements found!' ) }}</em>
+			</p>
+			<a href="{{ configure_link }}" class="">{{ __( 'Configure' ) }}</a>
+		{% endif %}
+
 		{% for key, req in requirements %}
 			<li
 				id="pp-checklist-req-{{ key }}"

@@ -30,6 +30,4 @@
 ( function ($) {
 	"use strict";
 
-	$('.pp-settings-hidden').parent().parent().remove();
-
 } )( jQuery );
