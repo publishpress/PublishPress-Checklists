@@ -223,7 +223,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_settings_field(
 				'global_min_word_count_rule',
 				false,
-				'__return_false',
+				array( $this, 'settings_hidden_field' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global'
 			);
@@ -243,10 +243,18 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_settings_field(
 				'global_featured_image_rule',
 				false,
-				'__return_false',
+				array( $this, 'settings_hidden_field' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global'
 			);
+		}
+
+		/**
+		 * Displays a dump div which will be used to locate blank rows
+		 * in the settings form. A Javascript code will remove that rows.
+		 */
+		public function settings_hidden_field() {
+			echo '<div class="pp-settings-hidden"></div>';
 		}
 
 		/**
@@ -398,7 +406,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		public function add_mce_plugin( $plugin_array ) {
 			$plugin_array['pp_checklist_requirements'] =
-				plugin_dir_url( 'publishpress-checklist/publishpress-checklist.php' )
+				plugin_dir_url( PUBLISHPRESS_CHECKLIST_FILE )
 				. 'modules/checklist/assets/js/tinymce-pp-checklist-requirements.js';
 
 			return $plugin_array;
@@ -414,6 +422,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				false,
 				PUBLISHPRESS_CHECKLIST_VERSION,
 				'all'
+			);
+
+			wp_enqueue_script(
+				'pp-checklist-admin',
+				plugins_url( '/modules/checklist/assets/js/admin.js', PUBLISHPRESS_CHECKLIST_FILE ),
+				array( 'jquery' ),
+				PUBLISHPRESS_CHECKLIST_VERSION,
+				true
 			);
 
 			wp_enqueue_style( 'pp-remodal-default-theme' );
@@ -540,7 +556,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( ! empty( $requirements ) ) {
 				wp_enqueue_script(
 					'pp-checklist-requirements',
-					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', 'publishpress-checklist/publishpress-checklist.php' ),
+					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', PUBLISHPRESS_CHECKLIST_FILE ),
 					array( 'jquery' ),
 					PUBLISHPRESS_CHECKLIST_VERSION,
 					true
@@ -563,7 +579,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Apply filters to the list of requirements
 			$requirements = apply_filters( 'pp_checklist_requirements', $requirements, $post, $this->module );
 
+
 			// Render the box
+
 			echo $this->twig->render(
 				'checklist-metabox.twig',
 				array(
