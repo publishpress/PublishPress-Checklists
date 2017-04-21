@@ -30,27 +30,43 @@
 ( function ($) {
 	"use strict";
 
-	var is_submit = false;
+	var is_publishing = false,
+		is_confirmed  = false;
 
 	$( '#publish' ).click( function() {
-		is_submit = true;
+		is_publishing = true;
+	} );
+
+	// Adds event for the confimation button in the modal window
+	$( document ).on( 'confirmation', '.remodal', function () {
+		is_confirmed = true;
+
+		// Trigger the publish button
+		$( '#publish' ).trigger( 'click' );
 	} );
 
 	// Hook to the submit button
 	$( 'form#post' ).submit( function( e ) {
 
+		// Bypass all checks because the confirmation button was clicked.
+		if ( is_confirmed ) {
+			is_confirmed = false;
+
+			return true;
+		}
+
 		// Check if any of the requirements is set to trigger warnings
-		var $requirements_warn = $( '.pp-checklist-req.warn' ),
+		var $requirements_warn  = $( '.pp-checklist-req.warn' ),
 			$requirements_block = $( '.pp-checklist-req.block' ),
-			should_block = false,
+			should_block        = false,
 			$unchecked_req,
-			unchecked_warn = [],
-			unchecked_block = [];
+			unchecked_warn      = [],
+			unchecked_block     = [];
 
 		for ( var i = 0; i < $requirements_warn.length; i++ ) {
 			var $item = $( $requirements_warn[ i ] );
 
-			if ( is_submit && $item.hasClass( 'status-no' ) ) {
+			if ( is_publishing && $item.hasClass( 'status-no' ) ) {
 				// Check if the requirement is not ok
 				$unchecked_req = $item.find( '.status-label' );
 
@@ -64,7 +80,7 @@
 		for ( var i = 0; i < $requirements_block.length; i++ ) {
 			var $item = $( $requirements_block[ i ] );
 
-			if ( is_submit && $item.hasClass( 'status-no' ) ) {
+			if ( is_publishing && $item.hasClass( 'status-no' ) ) {
 				// Check if the requirement is not ok
 				$unchecked_req = $item.find( '.status-label' );
 
@@ -81,27 +97,37 @@
 			// Check if we don't have any unchecked block req
 			if ( 0 === unchecked_block.length ) {
 				// Only display a warning
-				message = objectL10n_checklist_req_min_words.msg_missed_optional + '\n\n - ' + unchecked_warn.join('\n - ');
+				message = objectL10n_checklist_req_min_words.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
 
-				should_block = ! confirm( message );
+				// Display the confirm
+				jQuery( '#pp-checklist-modal-confirm-content' ).html(message);
+				jQuery( '[data-remodal-id=pp-checklist-modal-confirm]' ).remodal().open();
+
+
+
+				// should_block = ! confirm( message );
 			} else {
-				message = objectL10n_checklist_req_min_words.msg_missed_required + '\n\n - ' + unchecked_block.join('\n - ');
+				message = objectL10n_checklist_req_min_words.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_block.join('</li><li>') + '</li></ul></div>';
 
 				if ( unchecked_warn.length > 0 ) {
-					message += '\n\n' + objectL10n_checklist_req_min_words.msg_missed_important + '\n\n - ' + unchecked_warn.join('\n - ');
+					message += '' + objectL10n_checklist_req_min_words.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
 				}
 
-				alert( message );
+				// Display the alert
+				jQuery( '#pp-checklist-modal-alert-content' ).html(message);
+				jQuery( '[data-remodal-id=pp-checklist-modal-alert]' ).remodal().open();
+
 				should_block = true;
 			}
 		}
 
-		is_submit = false;
+		is_publishing = false;
 
 		// Check if we should block the submission
 		if ( should_block ) {
-			return false;
 		}
+
+		return false;
 	} );
 
 	// Add constant check for the featured image

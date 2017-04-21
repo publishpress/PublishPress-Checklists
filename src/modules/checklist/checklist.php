@@ -415,6 +415,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				PUBLISHPRESS_CHECKLIST_VERSION,
 				'all'
 			);
+
+			wp_enqueue_style( 'pp-remodal-default-theme' );
+			wp_enqueue_script( 'pp-remodal' );
 		}
 
 		/*

@@ -9,3 +9,13 @@
 .pp-checklist-action-label {
 	margin-left: 10px;
 }
+
+.pp-checklist-modal-list {
+	text-align: center;
+}
+
+.pp-checklist-modal-list ul {
+	text-align: left;
+	list-style: square;
+    display: inline-block;
+}
