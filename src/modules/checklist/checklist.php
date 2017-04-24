@@ -61,6 +61,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'enabled'             => 'on',
 					'post_types'          => array( 'post' ),
 					'min_word_count'      => array(
+						'global' => 'off',
+					),
+					'min_word_count_value'      => array(
 						'global' => 0,
 					),
 					'min_word_count_rule' => array(
@@ -70,6 +73,15 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						'global' => 'off',
 					),
 					'featured_image_rule' => array(
+						'global' => 'only_display',
+					),
+					'min_tags_count'      => array(
+						'global' => 'off',
+					),
+					'min_tags_count_value'      => array(
+						'global' => 0,
+					),
+					'min_tags_count_rule' => array(
 						'global' => 'only_display',
 					),
 				),
@@ -415,6 +427,21 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				} else {
 					$new_options['featured_image'][ $option_group ] = 'no';
 				}
+
+				if ( isset( $new_options['min_tags_count'][ $option_group ] ) ) {
+					if ( 'yes' !== $new_options['min_tags_count'][ $option_group ] ) {
+						$new_options['min_tags_count'][ $option_group ] = 'no';
+					}
+				} else {
+					$new_options['min_tags_count'][ $option_group ] = 'no';
+				}
+
+				if ( isset( $new_options['min_tags_count_value'][ $option_group ] ) ) {
+					$new_options['min_tags_count_value'][ $option_group ] = filter_var(
+						$new_options['min_tags_count_value'][ $option_group ],
+						FILTER_SANITIZE_NUMBER_INT
+					);
+				}
 			}
 
 			return $new_options;
@@ -542,7 +569,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( ! empty( $req_min_word_count ) ) {
 				$requirements['min_word_count'] = array(
 					'status' => str_word_count( $post->post_content ) >= $req_min_word_count_value,
-					'label'  => sprintf( __( 'Minimum of %s words', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_word_count_value ),
+					'label'  => sprintf( _n( 'Minimum of %s word', 'Minimum of %s words', $req_min_word_count_value, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_word_count_value ),
 					'value'  => $req_min_word_count ? $req_min_word_count_value : '',
 					'rule'   => $req_min_word_count_rule
 				);
@@ -588,6 +615,37 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'rule'   => $req_featured_image_rule
 				);
 			}
+
+			// Tags Count
+			$req_min_tags_count = 'yes' === $this->module->options->min_tags_count['global'];
+
+			if ( ! isset( $this->module->options->min_tags_count_value[ $post->post_type ] )
+				|| empty( $this->module->options->min_tags_count_value[ $post->post_type ] )
+			) {
+				$req_min_tags_count_value = $this->module->options->min_tags_count_value['global'];
+			} else {
+				$req_min_tags_count_value = $this->module->options->min_tags_count_value[ $post->post_type ];
+			}
+			$req_min_tags_count_value = (int) $req_min_tags_count_value;
+
+			// Min Tags Count Rule
+			if ( ! isset( $this->module->options->min_tags_count_rule[ $post->post_type ] )
+				|| empty( $this->module->options->min_tags_count_rule[ $post->post_type ] )
+			) {
+				$req_min_tags_count_rule = $this->module->options->min_tags_count_rule['global'];
+			} else {
+				$req_min_tags_count_rule = $this->module->options->min_tags_count_rule[ $post->post_type ];
+			}
+
+			if ( ! empty( $req_min_tags_count ) ) {
+				$requirements['min_tags_count'] = array(
+					'status' => str_word_count( $post->post_content ) >= $req_min_tags_count_value,
+					'label'  => sprintf( _n( 'Minimum of %s tag', 'Minimum of %s tags', $req_min_tags_count_value, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_tags_count_value ),
+					'value'  => $req_min_tags_count ? $req_min_tags_count_value : '',
+					'rule'   => $req_min_tags_count_rule
+				);
+			}
+
 
 			// Add the scripts
 			if ( ! empty( $requirements ) ) {

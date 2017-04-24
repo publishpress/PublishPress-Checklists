@@ -143,4 +143,26 @@
 			}
 		}, 500);
 	}
+
+	// Add constant check for the tags count
+	if ( $( '#pp-checklist-req-min_tags_count' ).length > 0 ) {
+		setInterval( function() {
+			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_req_min_words.requirements.min_tags_count.value,
+				$status = $( '#pp-checklist-req-min_tags_count' ).find( '.dashicons' )
+
+			if ( has_min_tags ) {
+				// Ok
+				$status.removeClass('dashicons-no');
+				$status.addClass('dashicons-yes');
+				$status.parent().removeClass('status-no');
+				$status.parent().addClass('status-yes');
+			} else {
+				// Not ok
+				$status.removeClass('dashicons-yes');
+				$status.addClass('dashicons-no');
+				$status.parent().removeClass('status-yes');
+				$status.parent().addClass('status-no');
+			}
+		}, 500);
+	}
 } )( jQuery );
