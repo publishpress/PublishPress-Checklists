@@ -102,10 +102,6 @@
 				// Display the confirm
 				jQuery( '#pp-checklist-modal-confirm-content' ).html(message);
 				jQuery( '[data-remodal-id=pp-checklist-modal-confirm]' ).remodal().open();
-
-
-
-				// should_block = ! confirm( message );
 			} else {
 				message = objectL10n_checklist_req_min_words.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_block.join('</li><li>') + '</li></ul></div>';
 
@@ -116,18 +112,14 @@
 				// Display the alert
 				jQuery( '#pp-checklist-modal-alert-content' ).html(message);
 				jQuery( '[data-remodal-id=pp-checklist-modal-alert]' ).remodal().open();
-
-				should_block = true;
 			}
+
+			should_block = true;
 		}
 
 		is_publishing = false;
 
-		// Check if we should block the submission
-		if ( should_block ) {
-		}
-
-		return false;
+		return ! should_block;
 	} );
 
 	// Add constant check for the featured image
