@@ -125,8 +125,8 @@
 	// Add constant check for the featured image
 	if ( $( '#pp-checklist-req-featured_image' ).length > 0 ) {
 		setInterval( function() {
-			var has_image     = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0,
-				$status       = $( '#pp-checklist-req-featured_image' ).find( '.dashicons' )
+			var has_image = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0,
+				$status   = $( '#pp-checklist-req-featured_image' ).find( '.dashicons' )
 
 			if ( has_image ) {
 				// Ok
