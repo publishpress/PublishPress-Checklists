@@ -11,11 +11,11 @@ namespace PublishPress\Addon\Checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Word_Count extends Base_counter {
+class Words_Count extends Base_counter {
 	/**
 	 * The name of this requirement.
 	 */
-	const NAME = 'min_word_count';
+	const NAME = 'min_words_count';
 
 	/**
 	 * The label to be displayed in the metabox for value == 1

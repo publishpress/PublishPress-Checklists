@@ -68,7 +68,7 @@ class Base_counter extends Base_bool implements Interface_required {
 		}
 
 		// Make sure we don't have 0 as value if enabled
-		if ( empty( $new_options[ $index ][ $option_group ] ) && $new_options[ static::NAME ][ $option_group ] ) {
+		if ( empty( $new_options[ $index ][ $option_group ] ) && static::VALUE_YES === $new_options[ static::NAME ][ $option_group ] ) {
 			$new_options[ $index ][ $option_group ] = 1;
 		}
 

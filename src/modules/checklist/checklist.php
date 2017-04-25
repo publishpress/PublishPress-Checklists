@@ -251,7 +251,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name
 			);
 
-			// Min Word Count
+			// Min Words Count
 			add_settings_field(
 				'global_requirements',
 				__( 'Global:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
@@ -323,7 +323,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		}
 
 		/**
-		 * Displays the field to set the minimum word count.
+		 * Displays the field to set the minimum words count.
 		 *
 		 * Arguments:
 		 *

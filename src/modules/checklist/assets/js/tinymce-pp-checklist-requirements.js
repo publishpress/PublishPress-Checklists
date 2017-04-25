@@ -28,13 +28,13 @@
  */
 
 /*====================================
-=            Min Word Count          =
+=            Min Words Count          =
 =====================================*/
-// Based on the TinyMCE word count display found at /wp-admin/js/post.js
+// Based on the TinyMCE words count display found at /wp-admin/js/post.js
 ( function( $, counter, tinymce, _ ) {
 	"use strict";
 
-	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.min_word_count ) {
+	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.min_words_count ) {
 
 	}
 
@@ -42,12 +42,12 @@
 
 	editor.onInit.add( function() {
 		var $content      = $( '#content' ),
-			$status       = $( '#pp-checklist-req-min_word_count' ).find( '.dashicons' ),
+			$status       = $( '#pp-checklist-req-min_words_count' ).find( '.dashicons' ),
 			prev_count    = 0,
 			content_editor;
 
 		/**
-		 * Get the word count from TinyMCE and update the status of the requirement
+		 * Get the words count from TinyMCE and update the status of the requirement
 		 */
 		function update() {
 			var text, count;
@@ -62,7 +62,7 @@
 
 			if ( count !== prev_count ) {
 				// Compare the count with the configured value
-				if ( count >= objectL10n_checklist_requirements.requirements.min_word_count.value ) {
+				if ( count >= objectL10n_checklist_requirements.requirements.min_words_count.value ) {
 					// Ok
 					$status.removeClass('dashicons-no');
 					$status.addClass('dashicons-yes');
@@ -81,7 +81,7 @@
 		}
 
 		/**
-		 * Bind the word count update triggers.
+		 * Bind the words count update triggers.
 		 *
 		 * When a node change in the main TinyMCE editor has been triggered.
 		 * When a key has been released in the plain text content editor.
@@ -99,4 +99,4 @@
 		update();
 	} );
 } )( jQuery, new wp.utils.WordCounter(), tinymce, _ );
-/*====  End of Min Word Count  ====*/
+/*====  End of Min Words Count  ====*/
