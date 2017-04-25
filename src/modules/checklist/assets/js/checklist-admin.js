@@ -165,4 +165,27 @@
 			}
 		}, 500);
 	}
+
+	// Add constant check for the categories count
+	if ( $( '#pp-checklist-req-min_categories_count' ).length > 0 ) {
+		setInterval( function() {
+			// Ignores the "Uncategorized"
+			var has_min_categories = $('#categorychecklist input:checked').filter('input[id!="in-category-1"]').length >= objectL10n_checklist_requirements.requirements.min_categories_count.value,
+				$status = $( '#pp-checklist-req-min_categories_count' ).find( '.dashicons' )
+
+			if ( has_min_categories ) {
+				// Ok
+				$status.removeClass('dashicons-no');
+				$status.addClass('dashicons-yes');
+				$status.parent().removeClass('status-no');
+				$status.parent().addClass('status-yes');
+			} else {
+				// Not ok
+				$status.removeClass('dashicons-yes');
+				$status.addClass('dashicons-no');
+				$status.parent().removeClass('status-yes');
+				$status.parent().addClass('status-no');
+			}
+		}, 500);
+	}
 } )( jQuery );

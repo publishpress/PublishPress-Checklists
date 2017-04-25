@@ -18,12 +18,12 @@ class Base_counter extends Base_bool implements Interface_required {
 	const DEFAULT_OPTION_VALUE = 0;
 
 	/**
-	 * The label to be displayed in the metabox for value <= 1
+	 * The label to be displayed in the metabox for value == 1
 	 */
 	const LABEL_SINGULAR = 'My Requirement';
 
 	/**
-	 * The label to be displayed in the metabox for value > 1
+	 * The label to be displayed in the metabox for value > 1 or 0
 	 */
 	const LABEL_PLURAL = 'My Requirements';
 
@@ -65,6 +65,11 @@ class Base_counter extends Base_bool implements Interface_required {
 				$new_options[ $index ][ $option_group ],
 				FILTER_SANITIZE_NUMBER_INT
 			);
+		}
+
+		// Make sure we don't have 0 as value if enabled
+		if ( empty( $new_options[ $index ][ $option_group ] ) && $new_options[ static::NAME ][ $option_group ] ) {
+			$new_options[ $index ][ $option_group ] = 1;
 		}
 
 		return $new_options;

@@ -18,12 +18,12 @@ class Word_Count extends Base_counter {
 	const NAME = 'min_word_count';
 
 	/**
-	 * The label to be displayed in the metabox for value <= 1
+	 * The label to be displayed in the metabox for value == 1
 	 */
 	const LABEL_SINGULAR = 'Minimum of %s word';
 
 	/**
-	 * The label to be displayed in the metabox for value > 1
+	 * The label to be displayed in the metabox for value > 1 or 0
 	 */
 	const LABEL_PLURAL = 'Minimum of %s words';
 
