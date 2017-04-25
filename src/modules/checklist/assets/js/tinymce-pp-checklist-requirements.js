@@ -34,7 +34,7 @@
 ( function( $, counter, tinymce, _ ) {
 	"use strict";
 
-	if ( 'undefined' === typeof objectL10n_checklist_req_min_words.requirements.min_word_count ) {
+	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.min_word_count ) {
 
 	}
 
@@ -62,7 +62,7 @@
 
 			if ( count !== prev_count ) {
 				// Compare the count with the configured value
-				if ( count >= objectL10n_checklist_req_min_words.requirements.min_word_count.value ) {
+				if ( count >= objectL10n_checklist_requirements.requirements.min_word_count.value ) {
 					// Ok
 					$status.removeClass('dashicons-no');
 					$status.addClass('dashicons-yes');

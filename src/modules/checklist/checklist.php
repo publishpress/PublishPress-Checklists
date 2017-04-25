@@ -28,6 +28,8 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use PublishPress\Addon\Checklist\Requirement\Base_requirement;
+
 if ( ! class_exists( 'PP_Checklist' ) ) {
 	/**
 	 * class PP_Checklist
@@ -41,6 +43,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 		public $module_name = 'checklist';
 
+		protected $requirement_instances;
+
 		/**
 		 * Construct the PP_Checklist class
 		 */
@@ -48,6 +52,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->twigPath = dirname( dirname( dirname( __FILE__ ) ) ) . '/twig';
 
 			$this->module_url = $this->get_module_url( __FILE__ );
+
+			// Load the requirements
+			$this->instantiate_requirements();
+			do_action( 'pp_checklist_load_requirements' );
 
 			// Register the module with PublishPress
 			$args = array(
@@ -60,39 +68,48 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'default_options'      => array(
 					'enabled'             => 'on',
 					'post_types'          => array( 'post' ),
-					'min_word_count'      => array(
-						'global' => 'off',
-					),
-					'min_word_count_value'      => array(
-						'global' => 0,
-					),
-					'min_word_count_rule' => array(
-						'global' => 'only_display',
-					),
-					'featured_image'      => array(
-						'global' => 'off',
-					),
-					'featured_image_rule' => array(
-						'global' => 'only_display',
-					),
-					'min_tags_count'      => array(
-						'global' => 'off',
-					),
-					'min_tags_count_value'      => array(
-						'global' => 0,
-					),
-					'min_tags_count_rule' => array(
-						'global' => 'only_display',
-					),
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
 			);
+
+			// Apply a filter to the default options
+			$args['default_options'] = apply_filters( 'pp_checklist_requirements_default_options', $args['default_options'] );
+
 			PublishPress()->register_module( $this->module_name, $args );
 
 			parent::__construct();
 
 			$this->configure_twig();
+		}
+
+		/**
+		 * Finds the requirement class files at the library folder and
+		 * instantiate the class
+		 */
+		protected function instantiate_requirements() {
+			$base_path = PUBLISHPRESS_CHECKLIST_LIB_PATH . '/Requirement/';
+			$req_files = glob( $base_path . '*.php' );
+
+			foreach ( $req_files as $path ) {
+				// Extract the class name
+				$class = str_replace( array( $base_path, '.php' ), '', $path );
+
+				// Check if it is a base class or interface to bypass
+				if ( preg_match( '/^Base_|^Interface_/i', $class) ) {
+					continue;
+				}
+
+				// Append the namespace
+				$class = '\\PublishPress\\Addon\\Checklist\\Requirement\\' . $class;
+
+				// Create a reflection to check if the class is not abstract or interface
+				$reflection = new \ReflectionClass( $class );
+
+				if ( class_exists( $class ) && ! $reflection->isAbstract() && ! $reflection->isInterface() ) {
+					new $class;
+				}
+			}
 		}
 
 		protected function configure_twig() {
@@ -405,43 +422,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			);
 
 			foreach ( $option_groups as $option_group ) {
-				if ( isset( $new_options['min_word_count'][ $option_group ] ) ) {
-					if ( 'yes' !== $new_options['min_word_count'][ $option_group ] ) {
-						$new_options['min_word_count'][ $option_group ] = 'no';
-					}
-				} else {
-					$new_options['min_word_count'][ $option_group ] = 'no';
-				}
-
-				if ( isset( $new_options['min_word_count_value'][ $option_group ] ) ) {
-					$new_options['min_word_count_value'][ $option_group ] = filter_var(
-						$new_options['min_word_count_value'][ $option_group ],
-						FILTER_SANITIZE_NUMBER_INT
-					);
-				}
-
-				if ( isset( $new_options['featured_image'][ $option_group ] ) ) {
-					if ( 'yes' !== $new_options['featured_image'][ $option_group ] ) {
-						$new_options['featured_image'][ $option_group ] = 'no';
-					}
-				} else {
-					$new_options['featured_image'][ $option_group ] = 'no';
-				}
-
-				if ( isset( $new_options['min_tags_count'][ $option_group ] ) ) {
-					if ( 'yes' !== $new_options['min_tags_count'][ $option_group ] ) {
-						$new_options['min_tags_count'][ $option_group ] = 'no';
-					}
-				} else {
-					$new_options['min_tags_count'][ $option_group ] = 'no';
-				}
-
-				if ( isset( $new_options['min_tags_count_value'][ $option_group ] ) ) {
-					$new_options['min_tags_count_value'][ $option_group ] = filter_var(
-						$new_options['min_tags_count_value'][ $option_group ],
-						FILTER_SANITIZE_NUMBER_INT
-					);
-				}
+				$new_options = apply_filters( 'pp_checklist_validate_option_group', $new_options, $option_group );
 			}
 
 			return $new_options;
@@ -526,126 +507,10 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @param object $post Current post
 		 */
 		public function display_meta_box( $post ) {
-			/*
-			====================================
-			=            Requirements          =
-			====================================
-			*/
 			$requirements = array();
 
-			// Min Word Count
-			/**
-
-				TODO:
-				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
-
-			 */
-			$req_min_word_count = 'yes' === $this->module->options->min_word_count['global'];
-
-			if ( ! isset( $this->module->options->min_word_count_value[ $post->post_type ] )
-				|| empty( $this->module->options->min_word_count_value[ $post->post_type ] )
-			) {
-				$req_min_word_count_value = $this->module->options->min_word_count_value['global'];
-			} else {
-				$req_min_word_count_value = $this->module->options->min_word_count_value[ $post->post_type ];
-			}
-			$req_min_word_count_value = (int) $req_min_word_count_value;
-
-			// Min Word Count Rule
-			/**
-
-				TODO:
-				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
-
-			 */
-			if ( ! isset( $this->module->options->min_word_count_rule[ $post->post_type ] )
-				|| empty( $this->module->options->min_word_count_rule[ $post->post_type ] )
-			) {
-				$req_min_word_count_rule = $this->module->options->min_word_count_rule['global'];
-			} else {
-				$req_min_word_count_rule = $this->module->options->min_word_count_rule[ $post->post_type ];
-			}
-
-			if ( ! empty( $req_min_word_count ) ) {
-				$requirements['min_word_count'] = array(
-					'status' => str_word_count( $post->post_content ) >= $req_min_word_count_value,
-					'label'  => sprintf( _n( 'Minimum of %s word', 'Minimum of %s words', $req_min_word_count_value, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_word_count_value ),
-					'value'  => $req_min_word_count ? $req_min_word_count_value : '',
-					'rule'   => $req_min_word_count_rule
-				);
-			}
-
-			// Featured Image
-			/**
-
-				TODO:
-				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
-
-			 */
-			// if ( ! isset( $this->module->options->featured_image[ $post->post_type ] )
-			// 	|| empty( $this->module->options->featured_image[ $post->post_type ] )
-			// ) {
-			// 	$req_featured_image = $this->module->options->featured_image['global'];
-			// } else {
-			// 	$req_featured_image = $this->module->options->featured_image[ $post->post_type ];
-			// }
-			$req_featured_image = 'yes' === $this->module->options->featured_image['global'];
-
-			// Featured Image Rule
-			/**
-
-				TODO:
-				- Uncomment after implement post type specific settings. Adapt for inherite/no/yes
-
-			 */
-			// if ( ! isset( $this->module->options->featured_image_rule[ $post->post_type ] )
-			// 	|| empty( $this->module->options->featured_image_rule[ $post->post_type ] )
-			// ) {
-			// 	$req_featured_image_rule = $this->module->options->featured_image_rule['global'];
-			// } else {
-			// 	$req_featured_image_rule = $this->module->options->featured_image_rule[ $post->post_type ];
-			// }
-			$req_featured_image_rule = $this->module->options->featured_image_rule['global'];
-
-			if ( ! empty( $req_featured_image ) ) {
-				$requirements['featured_image'] = array(
-					'status' => ! empty( get_the_post_thumbnail( $post ) ),
-					'label'  => __( 'Featured image', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-					'value'  => $req_featured_image,
-					'rule'   => $req_featured_image_rule
-				);
-			}
-
-			// Tags Count
-			$req_min_tags_count = 'yes' === $this->module->options->min_tags_count['global'];
-
-			if ( ! isset( $this->module->options->min_tags_count_value[ $post->post_type ] )
-				|| empty( $this->module->options->min_tags_count_value[ $post->post_type ] )
-			) {
-				$req_min_tags_count_value = $this->module->options->min_tags_count_value['global'];
-			} else {
-				$req_min_tags_count_value = $this->module->options->min_tags_count_value[ $post->post_type ];
-			}
-			$req_min_tags_count_value = (int) $req_min_tags_count_value;
-
-			// Min Tags Count Rule
-			if ( ! isset( $this->module->options->min_tags_count_rule[ $post->post_type ] )
-				|| empty( $this->module->options->min_tags_count_rule[ $post->post_type ] )
-			) {
-				$req_min_tags_count_rule = $this->module->options->min_tags_count_rule['global'];
-			} else {
-				$req_min_tags_count_rule = $this->module->options->min_tags_count_rule[ $post->post_type ];
-			}
-
-			if ( ! empty( $req_min_tags_count ) ) {
-				$requirements['min_tags_count'] = array(
-					'status' => str_word_count( $post->post_content ) >= $req_min_tags_count_value,
-					'label'  => sprintf( _n( 'Minimum of %s tag', 'Minimum of %s tags', $req_min_tags_count_value, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ), $req_min_tags_count_value ),
-					'value'  => $req_min_tags_count ? $req_min_tags_count_value : '',
-					'rule'   => $req_min_tags_count_rule
-				);
-			}
-
+			// Apply filters to the list of requirements
+			$requirements = apply_filters( 'pp_checklist_requirements_metabox', $requirements, $post, $this->module );
 
 			// Add the scripts
 			if ( ! empty( $requirements ) ) {
@@ -659,7 +524,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 				wp_localize_script(
                     'pp-checklist-requirements',
-                    'objectL10n_checklist_req_min_words',
+                    'objectL10n_checklist_requirements',
                     array(
 						'requirements'         => $requirements,
 						'msg_missed_optional'  => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
@@ -668,12 +533,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
                     )
                 );
 			}
-
-			/*=====  End of Requirements  ======*/
-
-			// Apply filters to the list of requirements
-			$requirements = apply_filters( 'pp_checklist_requirements', $requirements, $post, $this->module );
-
 
 			// Render the box
 			echo $this->twig->render(

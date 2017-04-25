@@ -9,6 +9,8 @@
  * @since       1.0.0
  */
 
+use \PublishPress\Addon\Checklist\Auto_loader;
+
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 require_once 'freemius.php';
@@ -17,6 +19,9 @@ if ( ! function_exists( 'is_plugin_inactive' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 
+/*======================================================================
+=            Check if PublishPress is installed and active             =
+======================================================================*/
 $publishpressPath = WP_PLUGIN_DIR . '/publishpress/publishpress.php';
 if ( ! file_exists( $publishpressPath ) || is_plugin_inactive( 'publishpress/publishpress.php' ) ) {
 	function pp_checklist_admin_error() {
@@ -30,6 +35,7 @@ if ( ! file_exists( $publishpressPath ) || is_plugin_inactive( 'publishpress/pub
 
 	define( 'PUBLISHPRESS_CHECKLIST_HALT', 1 );
 }
+/*=====  End of Check if PublishPress is installed and active   ======*/
 
 if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 	require_once $publishpressPath;
@@ -41,7 +47,6 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 	/*==========================================================
 	=            Check PublishPress minimum version            =
 	==========================================================*/
-
 	if ( version_compare( PUBLISHPRESS_VERSION, PUBLISHPRESS_CHECKLIST_MIN_PARENT_VERSION, '<' ) ) {
 		function pp_checklist_admin_version_error() {
 			?>
@@ -54,7 +59,6 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 
 		define( 'PUBLISHPRESS_CHECKLIST_HALT', 1 );
 	}
-
 	/*=====  End of Check PublishPress minimum version  ======*/
 
 	if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
@@ -98,12 +102,12 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 			define( 'PUBLISHPRESS_CHECKLIST_FILE', 'publishpress-checklist/publishpress-checklist.php' );
 		}
 
-		if ( ! class_exists( 'PP_Module' ) ) {
-			require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );
+		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LIB_PATH' ) ) {
+			define( 'PUBLISHPRESS_CHECKLIST_LIB_PATH', PUBLISHPRESS_CHECKLIST_PATH_BASE . '/library' );
 		}
 
-		if ( ! class_exists( '\\PublishPress\\Addon\\Checklist\\Plugin' ) ) {
-			require_once PUBLISHPRESS_CHECKLIST_PATH_BASE . '/library/Plugin.php';
+		if ( ! class_exists( 'PP_Module' ) ) {
+			require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );
 		}
 
 		// Load the modules
@@ -111,6 +115,15 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 			require_once PUBLISHPRESS_CHECKLIST_MODULE_PATH . '/checklist.php';
 		}
 
+		// Register the autoloader
+		if ( ! class_exists( '\\PublishPress\\Addon\\Checklist\\Auto_loader' ) ) {
+			require_once PUBLISHPRESS_CHECKLIST_LIB_PATH . '/Auto_loader.php';
+		}
+
+		// Register the library
+    	Auto_loader::register('\\PublishPress\\Addon\\Checklist', PUBLISHPRESS_CHECKLIST_PATH_BASE . '/library');
+
+    	// Define the add-on as loaded
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LOADED' ) ) {
 			define( 'PUBLISHPRESS_CHECKLIST_LOADED', 1 );
 		}

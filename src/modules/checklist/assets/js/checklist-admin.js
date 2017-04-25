@@ -97,16 +97,16 @@
 			// Check if we don't have any unchecked block req
 			if ( 0 === unchecked_block.length ) {
 				// Only display a warning
-				message = objectL10n_checklist_req_min_words.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
+				message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
 
 				// Display the confirm
 				jQuery( '#pp-checklist-modal-confirm-content' ).html(message);
 				jQuery( '[data-remodal-id=pp-checklist-modal-confirm]' ).remodal().open();
 			} else {
-				message = objectL10n_checklist_req_min_words.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_block.join('</li><li>') + '</li></ul></div>';
+				message = objectL10n_checklist_requirements.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_block.join('</li><li>') + '</li></ul></div>';
 
 				if ( unchecked_warn.length > 0 ) {
-					message += '' + objectL10n_checklist_req_min_words.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
+					message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
 				}
 
 				// Display the alert
@@ -147,7 +147,7 @@
 	// Add constant check for the tags count
 	if ( $( '#pp-checklist-req-min_tags_count' ).length > 0 ) {
 		setInterval( function() {
-			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_req_min_words.requirements.min_tags_count.value,
+			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_requirements.requirements.min_tags_count.value,
 				$status = $( '#pp-checklist-req-min_tags_count' ).find( '.dashicons' )
 
 			if ( has_min_tags ) {
