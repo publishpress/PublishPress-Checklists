@@ -60,8 +60,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Register the module with PublishPress
 			$args = array(
 				'title'                => __( 'Checklist', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-				'short_description'    => __( 'Description...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-				'extended_description' => __( 'Checklist extended description...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'short_description'    => __( 'Define tasks that must be complete before content is published', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'extended_description' => __( 'Define tasks that must be complete before content is published', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				'module_url'           => $this->module_url,
 				'icon_class'           => 'dashicons dashicons-feedback',
 				'slug'                 => 'checklist',
