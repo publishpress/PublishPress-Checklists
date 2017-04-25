@@ -29,3 +29,10 @@
     display: inline-block;
 }
 
+.pp-checklist-warning-icon {
+	font-size: 30px;
+    padding-top: 1px;
+    width: 30px;
+    height: 30px;
+    color: #ef5350;
+}

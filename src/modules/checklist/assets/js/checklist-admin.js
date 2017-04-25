@@ -188,4 +188,25 @@
 			}
 		}, 500);
 	}
+
+	// Show warning icon close to the submit button
+	if ( objectL10n_checklist_requirements.show_warning_icon_submit ) {
+		var $icon = $('<span>')
+			.addClass('dashicons dashicons-warning pp-checklist-warning-icon')
+			.hide()
+			.prependTo($('#publishing-action'))
+			.attr('title', objectL10n_checklist_requirements.title_warning_icon);
+
+		setInterval( function() {
+			var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+
+			if ( has_uncheked.length > 0 ) {
+				// Not ok
+				$icon.show();
+			} else {
+				// Ok
+				$icon.hide();
+			}
+		}, 500);
+	}
 } )( jQuery );

@@ -66,8 +66,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'icon_class'           => 'dashicons dashicons-feedback',
 				'slug'                 => 'checklist',
 				'default_options'      => array(
-					'enabled'             => 'on',
-					'post_types'          => array( 'post' ),
+					'enabled'                  => 'on',
+					'post_types'               => array( 'post' ),
+					'show_warning_icon_submit' => 'no',
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
@@ -239,6 +240,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name . '_post_types'
 			);
 
+			add_settings_field(
+				'show_warning_icon_submit',
+				__( 'Show warning icon:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				array( $this, 'settings_show_warning_icon_submit_option' ),
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_post_types'
+			);
+
 			/**
 			 *
 			 * Global settings
@@ -271,6 +280,21 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			global $publishpress;
 
 			$publishpress->settings->helper_option_custom_post_type( $this->module );
+		}
+
+		/**
+		 * Displays the field to choose between display or not the warning icon
+		 * close to the submit button
+		 *
+		 * @param  array
+		 */
+		public function settings_show_warning_icon_submit_option( $args = array() ) {
+			$id    = $this->module->options_group_name . '_show_warning_icon_submit';
+			$value = isset( $this->module->options->show_warning_icon_submit ) ? $this->module->options->show_warning_icon_submit : 'no';
+
+			echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[show_warning_icon_submit]" '
+				. checked( $value, 'yes', false ) . ' />';
+			echo '<label for="' . $id . '">' . __( 'Show close to the submit button', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
 		}
 
 		/**
@@ -416,10 +440,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->post_type_support
 			);
 
+
 			$option_groups = array_merge(
 				array( 'global' ),
 				array_keys( $new_options['post_types'] )
 			);
+
+			$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
 			foreach ( $option_groups as $option_group ) {
 				$new_options = apply_filters( 'pp_checklist_validate_option_group', $new_options, $option_group );
@@ -526,10 +553,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
                     'pp-checklist-requirements',
                     'objectL10n_checklist_requirements',
                     array(
-						'requirements'         => $requirements,
-						'msg_missed_optional'  => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-						'msg_missed_required'  => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-						'msg_missed_important' => __( 'Not required, but important: ', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'requirements'             => $requirements,
+						'msg_missed_optional'      => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_required'      => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_important'     => __( 'Not required, but important: ', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
+						'title_warning_icon'       => __( 'One or more items in the checklist are not completed. Are you sure you want to publish?' ),
                     )
                 );
 			}
