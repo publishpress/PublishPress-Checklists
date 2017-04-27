@@ -318,7 +318,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'lang'              => array(
 						'description'     => __( 'Description', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'required'        => __( 'Required', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-						'active'          => __( 'Active', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'action'          => __( 'Action', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'min_numb_words'  => __( 'Minimum number of words', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'type'            => __( 'type...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'featured_image'  => __( 'Featured image', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
