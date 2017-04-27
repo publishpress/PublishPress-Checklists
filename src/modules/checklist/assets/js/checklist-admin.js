@@ -33,6 +33,10 @@
 	var is_publishing = false,
 		is_confirmed  = false;
 
+	function is_published() {
+		return $( '#original_post_status' ).val() === 'publish';
+	}
+
 	$( '#publish' ).click( function() {
 		is_publishing = true;
 	} );
@@ -52,6 +56,12 @@
 		if ( is_confirmed ) {
 			is_confirmed = false;
 
+			return true;
+		}
+
+		// Check if the post is already published, to bypass the check
+		if ( is_published() ) {
+			// Bypass
 			return true;
 		}
 
@@ -190,7 +200,7 @@
 	}
 
 	// Show warning icon close to the submit button
-	if ( objectL10n_checklist_requirements.show_warning_icon_submit ) {
+	if ( objectL10n_checklist_requirements.show_warning_icon_submit && ! is_published() ) {
 		var $icon = $('<span>')
 			.addClass('dashicons dashicons-warning pp-checklist-warning-icon')
 			.hide()
