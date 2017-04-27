@@ -292,9 +292,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$id    = $this->module->options_group_name . '_show_warning_icon_submit';
 			$value = isset( $this->module->options->show_warning_icon_submit ) ? $this->module->options->show_warning_icon_submit : 'no';
 
+			echo '<label for="' . $id . '">';
 			echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[show_warning_icon_submit]" '
 				. checked( $value, 'yes', false ) . ' />';
-			echo '<label for="' . $id . '">' . __( 'Show close to the submit button', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
+			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will display a warning icon in the "Publish" box', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
+			echo '</label>';
 		}
 
 		/**
@@ -313,6 +315,16 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				array(
 					'metadata_taxonomy' => self::METADATA_TAXONOMY,
 					'post_type'         => $args['post_type'],
+					'lang'              => array(
+						'description'     => __( 'Description', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'required'        => __( 'Required', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'active'          => __( 'Active', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'min_numb_words'  => __( 'Minimum number of words', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'type'            => __( 'type...', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'featured_image'  => __( 'Featured image', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'min_numb_tags'   => __( 'Minimum number of tags', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'min_numb_categs' => __( 'Minimum number of categories', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+					)
 				)
 			);
 		}
@@ -333,7 +345,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$rules = array(
 				'block'        => __( 'Prevent publishing', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				'warn'         => __( 'Show a pop-up message', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-				'only_display' => __( 'Show only a sidebar message', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'only_display' => __( 'Show a sidebar message', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 			);
 			$attr = $option . '_rule';
 			foreach ( $rules as $rule => $label ) {
@@ -570,6 +582,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'metadata_taxonomy' => self::METADATA_TAXONOMY,
 					'requirements'      => $requirements,
 					'configure_link'    => $this->get_link(),
+					'lang'              => array(
+						'to_use_checklists' => __( 'To use the checklist', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'please_choose_req' => __( 'please choose some requirements', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'required'          => __( 'Required', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'dont_publish'      => __( 'Don\'t publish', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'yes_publish'       => __( 'Yes, publish', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+
+					),
 				)
 			);
 		}

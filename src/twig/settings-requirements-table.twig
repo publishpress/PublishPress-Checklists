@@ -1,24 +1,24 @@
 <table class="wp-list-table fixed striped">
 	<thead>
 		<tr>
-			<th width="30%">Description</th>
-			<th width="50%">Required</th>
-			<th width="20%">Action</th>
+			<th width="30%">{{ lang.description }}</th>
+			<th width="50%">{{ lang.required }}</th>
+			<th width="20%">{{ lang.action }}</th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<tr>
-			<td>{{ __( 'Minimum Words Count' ) }}</td>
+			<td>{{ lang.min_numb_words }}</td>
 			<td>
 				{{ html_checkbox_bool( { 'id': 'min-word-count', 'name': 'min_words_count', 'post_type': 'global' } ) }}
-				{{ html_small_input( { 'id': 'min-word-count-value', 'name': 'min_words_count_value', 'post_type': 'global', 'placeholder': __( 'type...' ), 'type': 'number' } ) }}
+				{{ html_small_input( { 'id': 'min-word-count-value', 'name': 'min_words_count_value', 'post_type': 'global', 'placeholder': lang.type, 'type': 'number' } ) }}
 			</td>
 			<td>{{ html_list_of_actions( 'min_words_count', 'global' )|raw }}</td>
 		</tr>
 
 		<tr>
-			<td>{{ __( 'Featured Image' ) }}</td>
+			<td>{{ lang.featured_image }}</td>
 			<td>
 				{{ html_checkbox_bool( { 'id': 'featured-image', 'name': 'featured_image', 'post_type': 'global' } ) }}
 			</td>
@@ -26,19 +26,19 @@
 		</tr>
 
 		<tr>
-			<td>{{ __( 'Minimum Tags Count' ) }}</td>
+			<td>{{ lang.min_numb_tags }}</td>
 			<td>
 				{{ html_checkbox_bool( { 'id': 'min-tags-count', 'name': 'min_tags_count', 'post_type': 'global' } ) }}
-				{{ html_small_input( { 'id': 'min-tags-count-value', 'name': 'min_tags_count_value', 'post_type': 'global', 'placeholder': __( 'type...' ), 'type': 'number' } ) }}
+				{{ html_small_input( { 'id': 'min-tags-count-value', 'name': 'min_tags_count_value', 'post_type': 'global', 'placeholder': lang.type, 'type': 'number' } ) }}
 			</td>
 			<td>{{ html_list_of_actions( 'min_tags_count', 'global' )|raw }}</td>
 		</tr>
 
 		<tr>
-			<td>{{ __( 'Minimum Categories Count' ) }}</td>
+			<td>{{ lang.min_numb_categs }}</td>
 			<td>
 				{{ html_checkbox_bool( { 'id': 'min-categories-count', 'name': 'min_categories_count', 'post_type': 'global' } ) }}
-				{{ html_small_input( { 'id': 'min-categories-count-value', 'name': 'min_categories_count_value', 'post_type': 'global', 'placeholder': __( 'type...' ), 'type': 'number' } ) }}
+				{{ html_small_input( { 'id': 'min-categories-count-value', 'name': 'min_categories_count_value', 'post_type': 'global', 'placeholder': lang.type, 'type': 'number' } ) }}
 			</td>
 			<td>{{ html_list_of_actions( 'min_categories_count', 'global' )|raw }}</td>
 		</tr>

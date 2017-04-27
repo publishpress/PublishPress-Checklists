@@ -1,0 +1,11 @@
+<form class="basic-settings" action="{{ form_action }}" method="post">
+    {{ settings_fields(options_group_name)|raw }}
+    {{ do_settings_sections(options_group_name)|raw }}
+
+    {{ nonce_field( 'edit-publishpress-settings' )|raw }}
+
+    <input type="hidden" name="publishpress_module_name[]" value="{{ module_name }}" />
+    <input type="hidden" name="action" value="update" />
+
+    {{ submit_button()|raw }}
+</form>

@@ -86,6 +86,14 @@ class Plugin {
 	}
 
 	public function warning_requirements() {
-		echo $this->twig->render( 'requirements-warning.twig' );
+		echo $this->twig->render(
+			'requirements-warning.twig',
+			array(
+				'lang' => array(
+					'publishpress' => __( 'PublishPress', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+					'warning' => __('PublishPress Checklist requires __plugin__ 1.3.0 or later. Please, update.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				),
+			)
+		);
 	}
 }
