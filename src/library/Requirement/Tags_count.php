@@ -36,6 +36,8 @@ class Tags_Count extends Base_counter {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value ) {
-		return count( wp_get_post_tags( $post->id ) ) >= $option_value;
+		$tags = wp_get_post_tags( $post->ID );
+
+		return count( $tags ) >= $option_value;
 	}
 }

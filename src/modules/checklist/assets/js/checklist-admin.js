@@ -180,7 +180,7 @@
 	if ( $( '#pp-checklist-req-min_categories_count' ).length > 0 ) {
 		setInterval( function() {
 			// Ignores the "Uncategorized"
-			var has_min_categories = $('#categorychecklist input:checked').filter('input[id!="in-category-1"]').length >= objectL10n_checklist_requirements.requirements.min_categories_count.value,
+			var has_min_categories = $('#categorychecklist input:checked').length >= objectL10n_checklist_requirements.requirements.min_categories_count.value,
 				$status = $( '#pp-checklist-req-min_categories_count' ).find( '.dashicons' )
 
 			if ( has_min_categories ) {

@@ -36,6 +36,8 @@ class Categories_count extends Base_counter {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value ) {
-		return count( wp_get_post_categories( $post->id ) ) >= $option_value;
+		$categories = wp_get_post_categories( $post->ID );
+
+		return count( $categories ) >= $option_value;
 	}
 }
