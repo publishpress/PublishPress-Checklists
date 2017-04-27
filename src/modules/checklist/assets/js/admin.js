@@ -30,4 +30,9 @@
 ( function ($) {
 	"use strict";
 
+	$( function() {
+		// Minor fix to the style
+		// Sticks the requirement settings table to the left
+		$( 'table.pp-checklist-requirements-settings' ).parent().prev().hide();
+	} );
 } )( jQuery );
