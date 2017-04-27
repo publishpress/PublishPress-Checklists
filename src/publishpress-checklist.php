@@ -9,11 +9,11 @@
  * @license     GPLv2 or later
  * @since       1.0.0
  *
- * @embedpress-wistia
+ * @publishpress-checklist
  * Plugin Name: PublishPress Checklist
- * Plugin URI:  https://pressshack.com/embedpress/wistia/
+ * Plugin URI:  https://pressshack.com/publishpress/
  * Version:     1.0.0
- * Description: Add a checklist for posts before publish
+ * Description: Add a pre-publishing checklist for posts
  * Author:      PressShack
  * Author URI:  https://pressshack.com
  */
