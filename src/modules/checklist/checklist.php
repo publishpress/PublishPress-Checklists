@@ -263,7 +263,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Min Words Count
 			add_settings_field(
 				'global_requirements',
-				__( 'Global:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				false,
 				array( $this, 'settings_requirements' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_global',
