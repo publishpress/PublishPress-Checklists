@@ -54,7 +54,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->module_url = $this->get_module_url( __FILE__ );
 
 			// Load the requirements
-			$this->instantiate_requirements();
+			$this->instantiate_requirement_classes();
 			do_action( 'pp_checklist_load_requirements' );
 
 			// Register the module with PublishPress
@@ -88,7 +88,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * Finds the requirement class files at the library folder and
 		 * instantiate the class
 		 */
-		protected function instantiate_requirements() {
+		protected function instantiate_requirement_classes() {
 			$base_path = PUBLISHPRESS_CHECKLIST_LIB_PATH . '/Requirement/';
 			$req_files = glob( $base_path . '*.php' );
 
