@@ -52,4 +52,4 @@ There're two ways to install PublishPress plugin:
 - Added checklist to the post form
 - Added option to select specific post types
 
-For full changelog, see changelog.txt.
+For full changelog, see CHANGELOG.md.

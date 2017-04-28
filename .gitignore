@@ -8,7 +8,7 @@
 ehthumbs.db
 Thumbs.db
 .idea
-packages/*
-!packages/.gitkeep
-/EmbedPress-Wistia.sublime-project
-/EmbedPress-Wistia.sublime-workspace
+/build/packages/*
+!/build/packages/.gitkeep
+*.sublime-project
+*.sublime-workspace

@@ -9,7 +9,7 @@ use Robo\Exception\TaskExitException;
  */
 class RoboFile extends \Robo\Tasks
 {
-    const SOURCE_PATH = 'src';
+    const SOURCE_PATH = '../';
 
     const PACKAGE_PATH = 'packages';
 
@@ -43,7 +43,17 @@ class RoboFile extends \Robo\Tasks
 
         $srcContent = scandir(self::SOURCE_PATH);
         foreach ($srcContent as $content) {
-            if (! in_array($content, array('.', '..'))) {
+            $ignore = array(
+                '.',
+                '..',
+                'build',
+                'tests',
+                '.git',
+                '.gitignore',
+                'README',
+            );
+
+            if (! in_array($content, $ignore)) {
                 $path = self::SOURCE_PATH . '/' . $content;
 
                 if (is_file($path)) {
@@ -139,9 +149,7 @@ class RoboFile extends \Robo\Tasks
      */
     protected function getPoFiles()
     {
-        $languageDir = 'src/languages';
-
-        return glob($languageDir . '/*.po');
+        return glob(SOURCE_PATH . 'languages' . '/*.po');
     }
 
     /**
