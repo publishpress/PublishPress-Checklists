@@ -6,9 +6,9 @@
         "source": {
             "type": "git",
             "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration",
-            "reference": "fa86e668984dd3b5eb73c5f44f3f6e9c7a6facb7"
+            "reference": "b0781efe4c77a73c4d91e1037079fa2e33091aba"
         },
-        "time": "2017-05-01 13:04:41",
+        "time": "2017-05-01 13:52:31",
         "type": "library",
         "installation-source": "source",
         "autoload": {

@@ -29,7 +29,9 @@
  */
 
 use PublishPress\Addon\Checklist\Requirement\Base_requirement;
-use PressShack\EDD_License;
+use PressShack\EDD_License\Updater;
+use PressShack\EDD_License\License;
+use PressShack\EDD_License\Setting\Field\License_key as Field_License_key;
 
 
 if ( ! class_exists( 'PP_Checklist' ) ) {
@@ -92,7 +94,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			$this->configure_twig();
 
-			$this->license_manager = new EDD_License\License;
+			$this->license_manager = new License;
 		}
 
 		/**
@@ -348,7 +350,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'license_status'     => $license_status,
 				'link_more_info'     => 'https://pressshack.com/publishpress/docs/activate-license',
 			);
-			$field = new EDD_License\Setting\Field\License_key( $field_args );
+			$field = new Field_License_key( $field_args );
 
 			echo $field;
 		}
@@ -659,7 +661,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		public function load_updater() {
 
 			$license_key    = isset( $this->module->options->license_key ) ? (string) $this->module->options->license_key : '';
-			$license_status = isset( $this->module->options->license_status ) ? (string) $this->module->options->license_status : EDD_License\License::STATUS_MISSING;
+			$license_status = isset( $this->module->options->license_status ) ? (string) $this->module->options->license_status : License::STATUS_MISSING;
 
 			$args = array(
 				'version'        => PUBLISHPRESS_CHECKLIST_VERSION,
@@ -669,7 +671,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'author'         => "PressShack"
 			);
 
-			new EDD_License\Updater(
+			new Updater(
 				PRESSSHACK_LICENSES_API_URL,
 				PUBLISHPRESS_CHECKLIST_FILE,
 				$args
