@@ -89,7 +89,7 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 		}
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_VERSION' ) ) {
-			define( 'PUBLISHPRESS_CHECKLIST_VERSION', '1.0.0' );
+			define( 'PUBLISHPRESS_CHECKLIST_VERSION', '1.0.1' );
 		}
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_MODULE_PATH' ) ) {
