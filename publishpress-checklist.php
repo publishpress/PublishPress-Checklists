@@ -1,26 +1,26 @@
 <?php
 /**
- * PublishPress Checklist plugin bootstrap file.
+ * PublishPress Content Checklist plugin bootstrap file.
  *
  * @link        https://pressshack.com/publishpress/checklist/
- * @package     PublishPress\Checklist
+ * @package     PublishPress\Content_checklist
  * @author      PressShack <help@pressshack.com>
  * @copyright   Copyright (C) 2017 Open Source Training, LLC. All rights reserved.
  * @license     GPLv2 or later
  * @since       1.0.0
  *
- * @publishpress-checklist
- * Plugin Name: PublishPress Checklist
+ * @publishpress-content-checklist
+ * Plugin Name: PublishPress Content Checklist
  * Plugin URI:  https://pressshack.com/publishpress/
  * Version:     1.0.0
- * Description: Add a pre-publishing checklist for posts
+ * Description: Add a content checklist for posts
  * Author:      PressShack
  * Author URI:  https://pressshack.com
  */
 
 require_once __DIR__ . '/includes.php';
 
-if ( defined( 'PUBLISHPRESS_CHECKLIST_LOADED' ) ) {
-	$plugin = new PublishPress\Addon\Checklist\Plugin;
+if ( defined( 'PP_CONTENT_CHECKLIST_LOADED' ) ) {
+	$plugin = new PublishPress\Addon\Content_checklist\Plugin;
 	$plugin->init();
 }

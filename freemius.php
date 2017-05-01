@@ -27,7 +27,7 @@ function ppch_fs() {
 
         $ppch_fs = fs_dynamic_init( array(
             'id'                  => '985',
-            'slug'                => 'publishpress-checklist',
+            'slug'                => 'publishpress-content-checklist',
             'type'                => 'plugin',
             'public_key'          => 'pk_c005cb9f742a61050d20e932e37bf',
             'is_premium'          => false,

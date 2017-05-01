@@ -1,13 +1,13 @@
 <?php
 /**
- * @package     PublishPress\Checklist
+ * @package     PublishPress\Content_checklist
  * @author      PressShack <help@pressshack.com>
  * @copyright   Copyright (C) 2017 Open Source Training, LLC. All rights reserved.
  * @license     GPLv2 or later
  * @since       1.0.0
  */
 
-namespace PublishPress\Addon\Checklist\Requirement;
+namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
@@ -82,7 +82,7 @@ class Base_bool extends Base_requirement implements Interface_required {
 		if ( $status ) {
 			$requirements[ static::NAME ] = array(
 				'status' => $this->get_current_status( $post, $status ),
-				'label'  => __( static::LABEL, PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'label'  => __( static::LABEL, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 				'value'  => $status,
 				'rule'   => $rule
 			);

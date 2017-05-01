@@ -1,4 +1,4 @@
-=== PublishPress Checklist ===
+=== PublishPress Content Checklist ===
 Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.0
@@ -20,17 +20,17 @@ There're two ways to install PublishPress plugin:
 1. Go to your site's admin page;
 2. Access the "Plugins" page;
 3. Click on the "Add New" button;
-4. Search for "PublishPress Checklist";
-5. Install PublishPress Checklist plugin;
-6. Activate the PublishPress Checklist plugin.
+4. Search for "PublishPress Content Checklist";
+5. Install PublishPress Content Checklist plugin;
+6. Activate the PublishPress Content Checklist plugin.
 
 **Manually uploading the plugin to your repository**
 
-1. Download the PublishPress Checklist plugin zip file;
+1. Download the PublishPress Content Checklist plugin zip file;
 2. Upload the plugin to your site's repository under the *"/wp-content/plugins/"* directory;
 3. Go to your site's admin page;
 4. Access the "Plugins" page;
-5. Activate the PublishPress Checklist plugin.
+5. Activate the PublishPress Content Checklist plugin.
 
 == Usage ==
 - Make sure you have PublishPress plugin installed and active;

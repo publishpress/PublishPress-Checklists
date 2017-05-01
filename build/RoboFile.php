@@ -13,7 +13,7 @@ class RoboFile extends \Robo\Tasks
 
     const PACKAGE_PATH = 'packages';
 
-    const PLUGIN_NAME = 'publishpress-checklist';
+    const PLUGIN_NAME = 'publishpress-content-checklist';
 
     /**
      * Get the current version of the plugin

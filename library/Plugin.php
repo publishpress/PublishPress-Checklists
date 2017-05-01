@@ -2,14 +2,14 @@
 /**
  * File responsible for defining basic addon class
  *
- * @package     PublishPress\Checklist
+ * @package     PublishPress\Content_checklist
  * @author      PressShack <help@pressshack.com>
  * @copyright   Copyright (C) 2017 Open Source Training, LLC. All rights reserved.
  * @license     GPLv2 or later
  * @since       1.0.0
  */
 
-namespace PublishPress\Addon\Checklist;
+namespace PublishPress\Addon\Content_checklist;
 
 use Twig_Loader_Filesystem;
 use Twig_Environment;
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Plugin {
 
-	const LANGUAGE_CONTEXT = 'publishpress-checklist';
+	const LANGUAGE_CONTEXT = 'publishpress-content-checklist';
 
 	/**
 	 * Twig instance
@@ -39,7 +39,7 @@ class Plugin {
 	 * The constructor
 	 */
 	public function __construct() {
-		$twigPath = PUBLISHPRESS_CHECKLIST_PATH_BASE . 'twig';
+		$twigPath = PP_CONTENT_CHECKLIST_PATH_BASE . 'twig';
 
 		$loader = new Twig_Loader_Filesystem( $twigPath );
 		$this->twig = new Twig_Environment( $loader, array(
@@ -71,7 +71,7 @@ class Plugin {
 	 * @return array
 	 */
 	public function filter_module_dirs( $dirs ) {
-		$dirs['checklist'] = rtrim( PUBLISHPRESS_CHECKLIST_PATH_BASE, '/' );
+		$dirs['checklist'] = rtrim( PP_CONTENT_CHECKLIST_PATH_BASE, '/' );
 
 		return $dirs;
 	}
@@ -90,8 +90,8 @@ class Plugin {
 			'requirements-warning.twig',
 			array(
 				'lang' => array(
-					'publishpress' => __( 'PublishPress', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-					'warning' => __('PublishPress Checklist requires __plugin__ 1.3.0 or later. Please, update.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+					'publishpress' => __( 'PublishPress', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+					'warning' => __('PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, update.', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 				),
 			)
 		);

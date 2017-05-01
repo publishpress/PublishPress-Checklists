@@ -1,13 +1,13 @@
 <?php
 /**
- * @package     PublishPress\Checklist
+ * @package     PublishPress\Content_checklist
  * @author      PressShack <help@pressshack.com>
  * @copyright   Copyright (C) 2017 Open Source Training, LLC. All rights reserved.
  * @license     GPLv2 or later
  * @since       1.0.0
  */
 
-namespace PublishPress\Addon\Checklist;
+namespace PublishPress\Addon\Content_checklist;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
