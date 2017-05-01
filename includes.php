@@ -105,7 +105,7 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 		}
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_ITEM_NAME' ) ) {
-			define( 'PUBLISHPRESS_CHECKLIST_ITEM_NAME', 'The Checklist Add-on for PublishPress' );
+			define( 'PUBLISHPRESS_CHECKLIST_ITEM_NAME', 'PublishPress Content Checklist' );
 		}
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LIB_PATH' ) ) {
