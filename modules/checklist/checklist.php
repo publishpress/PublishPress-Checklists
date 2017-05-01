@@ -629,7 +629,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					array(
 						'requirements'             => $requirements,
 						'msg_missed_optional'      => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
-						'msg_missed_required'      => __( 'The following requirements are not completed yet. Sorry, but you can not publish it.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_required'      => __( 'Please complete the following requirements before publishing.', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'msg_missed_important'     => __( 'Not required, but important: ', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 						'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
 						'title_warning_icon'       => __( 'One or more items in the checklist are not completed. Are you sure you want to publish?' ),
