@@ -29,6 +29,8 @@
  */
 
 use PublishPress\Addon\Checklist\Requirement\Base_requirement;
+use PressShack\EDD_License;
+
 
 if ( ! class_exists( 'PP_Checklist' ) ) {
 	/**
@@ -44,6 +46,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		public $module_name = 'checklist';
 
 		protected $requirement_instances;
+
+		/**
+		 * WordPress-EDD-License-Integration
+		 *
+		 * @var License
+		 */
+		protected $license_manager;
 
 		/**
 		 * Construct the PP_Checklist class
@@ -82,6 +91,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			parent::__construct();
 
 			$this->configure_twig();
+
+			$this->license_manager = new EDD_License\License;
 		}
 
 		/**
@@ -160,6 +171,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		public function init() {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			add_action( 'admin_init', array( $this, 'load_updater' ) );
 			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
 
 			// Editor
@@ -222,12 +234,32 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		public function register_settings() {
 			/**
 			 *
+			 * License
+			 *
+			 */
+			add_settings_section(
+				$this->module->options_group_name . '_license',
+				__( 'Licensing:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				'__return_false',
+				$this->module->options_group_name
+			);
+
+			add_settings_field(
+				'license_key',
+				__( 'License key:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
+				array( $this, 'settings_license_key_option' ),
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_license'
+			);
+
+			/**
+			 *
 			 * Post types
 			 */
 
 			add_settings_section(
 				$this->module->options_group_name . '_post_types',
-				false,
+				__( 'General:', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT ),
 				'__return_false',
 				$this->module->options_group_name
 			);
@@ -297,6 +329,28 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				. checked( $value, 'yes', false ) . ' />';
 			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will display a warning icon in the "Publish" box', PUBLISHPRESS_CHECKLIST_LANG_CONTEXT );
 			echo '</label>';
+		}
+
+		/**
+		 * Displays the field to choose between display or not the warning icon
+		 * close to the submit button
+		 *
+		 * @param  array
+		 */
+		public function settings_license_key_option( $args = array() ) {
+			$license_key    = isset( $this->module->options->license_key ) ? $this->module->options->license_key : '';
+			$license_status = isset( $this->module->options->license_status ) ? $this->module->options->license_status : '';
+
+			$field_args = array(
+				'options_group_name' => $this->module->options_group_name,
+				'name'               => 'license_key',
+				'value'              => $license_key,
+				'license_status'     => $license_status,
+				'link_more_info'     => 'https://pressshack.com/publishpress/docs/activate-license',
+			);
+			$field = new EDD_License\Setting\Field\License_key( $field_args );
+
+			echo $field;
 		}
 
 		/**
@@ -442,6 +496,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @return array $new_options Form values after they've been sanitized
 		 */
 		public function settings_validate( $new_options ) {
+			if ( ! isset( $new_options['license_key'] ) ) {
+				$new_options['license_key'] = '';
+			}
+			$new_options['license_key']    = $this->license_manager->sanitize_license_key( $new_options['license_key'] );
+			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PUBLISHPRESS_CHECKLIST_ITEM_NAME );
+
 			// Whitelist validation for the post type options
 			if ( ! isset( $new_options['post_types'] ) ) {
 				$new_options['post_types'] = array();
@@ -595,5 +655,25 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		}
 
 		/*=====  End of Meta boxes  ======*/
+
+		public function load_updater() {
+
+			$license_key    = isset( $this->module->options->license_key ) ? (string) $this->module->options->license_key : '';
+			$license_status = isset( $this->module->options->license_status ) ? (string) $this->module->options->license_status : EDD_License\License::STATUS_MISSING;
+
+			$args = array(
+				'version'        => PUBLISHPRESS_CHECKLIST_VERSION,
+				'license'        => $license_key,
+				'license_status' => $license_status,
+				'item_name'      => PUBLISHPRESS_CHECKLIST_ITEM_NAME,
+				'author'         => "PressShack"
+			);
+
+			new EDD_License\Updater(
+				PRESSSHACK_LICENSES_API_URL,
+				PUBLISHPRESS_CHECKLIST_FILE,
+				$args
+			);
+		}
 	}
 }// End if().

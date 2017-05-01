@@ -14,6 +14,8 @@ use \PublishPress\Addon\Checklist\Auto_loader;
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 require_once 'freemius.php';
+require_once 'vendor/autoload.php';
+require_once 'vendor/pressshack/wordpress-edd-license-integration/include.php';
 
 if ( ! function_exists( 'is_plugin_inactive' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -100,6 +102,10 @@ if ( ! defined( 'PUBLISHPRESS_CHECKLIST_HALT' ) ) {
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_FILE' ) ) {
 			define( 'PUBLISHPRESS_CHECKLIST_FILE', 'publishpress-checklist/publishpress-checklist.php' );
+		}
+
+		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_ITEM_NAME' ) ) {
+			define( 'PUBLISHPRESS_CHECKLIST_ITEM_NAME', 'The Checklist Add-on for PublishPress' );
 		}
 
 		if ( ! defined( 'PUBLISHPRESS_CHECKLIST_LIB_PATH' ) ) {
