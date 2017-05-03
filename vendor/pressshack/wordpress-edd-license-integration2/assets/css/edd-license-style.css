@@ -1,0 +1,9 @@
+.wp-eddli-container .dashicons-warning,
+.wp-eddli-container .wp-eddli-label-danger {
+	color: red;
+}
+
+.wp-eddli-container .dashicons-yes,
+.wp-eddli-container .wp-eddli-label-success {
+	color: green;
+}
