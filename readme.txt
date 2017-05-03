@@ -39,17 +39,23 @@ There're two ways to install PublishPress plugin:
 
 == Changelog ==
 
-## [1.0.0] - 2017-04-27
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
 
-### Added
+= [1.0.1] - 2017-05-03 =
 
-- Added requirement for minimum number of words
-- Added requirement for featured image
-- Added requirement for minimum number of tags
-- Added requirement for minimum number of categories
-- Added Freemius integration for feedback and contact form
-- Added option to display a warning icon in the publish box
-- Added checklist to the post form
-- Added option to select specific post types
+* Fixed:
+* Fixed the name of plugin's main file
+* Fixed WordPress-EDD-License-Integration library in the vendor dir
 
-For full changelog, see CHANGELOG.md.
+= [1.0.0] - 2017-04-27 =
+
+* Added:
+* Added requirement for minimum number of words
+* Added requirement for featured image
+* Added requirement for minimum number of tags
+* Added requirement for minimum number of categories
+* Added Freemius integration for feedback and contact form
+* Added option to display a warning icon in the publish box
+* Added checklist to the post form
+* Added option to select specific post types
