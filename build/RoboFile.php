@@ -210,9 +210,9 @@ class RoboFile extends \Robo\Tasks
     /**
      * Sync WP files with src files
      */
-    public function syncWp()
+    public function syncStaging()
     {
-        $return = $this->_exec('sh ./sync-wp.sh');
+        $return = $this->_exec('sh ./sync-staging.sh');
 
         return $return;
     }
@@ -220,9 +220,9 @@ class RoboFile extends \Robo\Tasks
     /**
      * Sync src files with WP files
      */
-    public function syncSrc()
+    public function syncRepo()
     {
-        $return = $this->_exec('sh ./sync-src.sh');
+        $return = $this->_exec('sh ./sync-repo.sh');
 
         return $return;
     }
