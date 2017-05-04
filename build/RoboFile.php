@@ -212,7 +212,9 @@ class RoboFile extends \Robo\Tasks
      */
     public function syncStaging()
     {
-        $return = $this->_exec('sh ./sync-staging.sh');
+        $wp_path = getenv('WP_PATH');
+
+        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-staging.sh');
 
         return $return;
     }
@@ -222,7 +224,9 @@ class RoboFile extends \Robo\Tasks
      */
     public function syncRepo()
     {
-        $return = $this->_exec('sh ./sync-repo.sh');
+        $wp_path = getenv('WP_PATH');
+
+        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-repo.sh');
 
         return $return;
     }
