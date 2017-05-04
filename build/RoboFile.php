@@ -9,7 +9,7 @@ use Robo\Exception\TaskExitException;
  */
 class RoboFile extends \Robo\Tasks
 {
-    const SOURCE_PATH = '../';
+    const SOURCE_PATH = '../plugin';
 
     const PACKAGE_PATH = 'packages';
 
