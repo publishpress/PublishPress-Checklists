@@ -96,21 +96,10 @@
 		},
 
 		/**
-		 * Initialize the object
+		 * Initialize the object and events
 		 * @return {void}
 		 */
 		init: function() {
-			this.set_events();
-
-			// Triggers the init event
-			// this.elems.document.trigger( this.EVENT_INIT );
-		},
-
-		/**
-		 * Set the event listeners
-		 * @return {void}
-		 */
-		set_events: function() {
 			// Create a custom event
 			this.elems.document.on( this.EVENT_VALIDATE_REQUIREMENTS, function( event ) {
 				this.validate_requirements( event );
