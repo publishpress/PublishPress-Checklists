@@ -27,188 +27,262 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ($) {
+( function ( $, window, document ) {
 	"use strict";
 
-	var is_publishing = false,
-		is_confirmed  = false;
+	/*----------  Handler  ----------*/
 
-	function is_published() {
-		return $( '#original_post_status' ).val() === 'publish';
-	}
+	/**
+	 * Object for handling the requirements in the post form.
+	 * @type {Object}
+	 */
+	var PP_Content_Checklist = {
+		/**
+		 * Constant for the event validate_requirements
+		 * @type {String}
+		 */
+		EVENT_VALIDATE_REQUIREMENTS: 'pp-content-checklist:validate_requirements',
 
-	$( '#publish' ).click( function() {
-		is_publishing = true;
-	} );
+		/**
+		 * Constant for the event tick. Trigered by a setInterval
+		 * @type {String}
+		 */
+		EVENT_TIC: 'pp-content-checklist:tic',
 
-	// Adds event for the confimation button in the modal window
-	$( document ).on( 'confirmation', '.remodal', function () {
-		is_confirmed = true;
+		/**
+		 * Constant for the interval of the tic event
+		 * @type {Number}
+		 */
+		TIC_INTERVAL: 500,
 
-		// Trigger the publish button
-		$( '#publish' ).trigger( 'click' );
-	} );
+		/**
+		 * List of interface elements
+		 * @type {Object}
+		 */
+		elems: {
+			'original_post_status': $( '#original_post_status' ),
+			'publish_button'      : $( '#publish' ),
+			'document'            : $( document ),
+		},
 
-	// Hook to the submit button
-	$( 'form#post' ).submit( function( e ) {
+		/**
+		 * Stores the states for the object.
+		 * @type {Object}
+		 */
+		state: {
+			/**
+			 * Flag for the publishing state
+			 * @type {Boolean}
+			 */
+			is_publishing: false,
 
-		// Bypass all checks because the confirmation button was clicked.
-		if ( is_confirmed ) {
-			is_confirmed = false;
+			/**
+			 * Flag for the confirmed state
+			 * @type {Boolean}
+			 */
+			is_confirmed: false,
 
-			return true;
-		}
+			/**
+			 * Flag for the should_block state
+			 * @type {Boolean}
+			 */
+			should_block: false,
+		},
 
-		// Check if the post is already published, to bypass the check
-		if ( is_published() ) {
-			// Bypass
-			return true;
-		}
+		/**
+		 * Initialize the object
+		 * @return {void}
+		 */
+		init: function() {
+			this.set_events();
 
-		// Check if any of the requirements is set to trigger warnings
-		var $requirements_warn  = $( '.pp-checklist-req.warn' ),
-			$requirements_block = $( '.pp-checklist-req.block' ),
-			should_block        = false,
-			$unchecked_req,
-			unchecked_warn      = [],
-			unchecked_block     = [];
+			// Triggers the init event
+			// this.elems.document.trigger( this.EVENT_INIT );
+		},
 
-		for ( var i = 0; i < $requirements_warn.length; i++ ) {
-			var $item = $( $requirements_warn[ i ] );
+		/**
+		 * Set the event listeners
+		 * @return {void}
+		 */
+		set_events: function() {
+			// Create a custom event
+			this.elems.document.on( this.EVENT_VALIDATE_REQUIREMENTS, function( event ) {
+				this.validate_requirements( event );
+			}.bind( this ) );
 
-			if ( is_publishing && $item.hasClass( 'status-no' ) ) {
-				// Check if the requirement is not ok
-				$unchecked_req = $item.find( '.status-label' );
+			// On clicking the submit button
+			this.elems.publish_button.click( function() {
+				this.state.is_publishing = true;
+			}.bind( this ) );
 
-				if ( $unchecked_req.length > 0 ) {
-					unchecked_warn.push( $unchecked_req.html().trim() );
+			// On clicking the confimation button in the modal window
+			this.elems.document.on( 'confirmation', '.remodal', function() {
+				this.state.is_confirmed = true;
+
+				// Trigger the publish button
+				this.elems.publish_button.trigger( 'click' );
+			}.bind( this ) );
+
+			// Hook to the submit button
+			$( 'form#post' ).submit( function( event ) {
+				// Reset the should_block state
+				this.state.should_block = false;
+
+				this.elems.document.trigger( this.EVENT_VALIDATE_REQUIREMENTS );
+
+				return ! this.state.should_block;
+			}.bind( this ) );
+
+			// Start the tic event
+			setInterval( function() {
+				$( document ).trigger( this.EVENT_TIC );
+			}.bind( this ), this.TIC_INTERVAL );
+		},
+
+		/**
+		 * Check if the current post is already published
+		 * @return {Boolean} True if published.
+		 */
+		is_published: function() {
+			return 'publish' === this.elems.original_post_status.val();
+		},
+
+		/**
+		 * Validates the requirements and show the warning, blocking or not the
+		 * submission, according to the config. Returns false if the submission
+		 * should be blocked.
+		 *
+		 * @param  {[type]} event
+		 * @return {Boolean}
+		 */
+		validate_requirements: function( event ) {
+			this.state.should_block = false;
+
+			// Bypass all checks because the confirmation button was clicked.
+			if ( this.state.is_confirmed ) {
+				this.state.is_confirmed = false;
+
+				return;
+			}
+
+			// Check if the post is already published, to bypass the check
+			if ( this.is_published() ) {
+				return;
+			}
+
+			var list_unchecked = {
+					'block': [],
+					'warn' : [],
+				};
+
+			/**
+			 * Check the element of the requirement, to see if it is marked
+			 * as incomplete.
+			 *
+			 * @param  {Object} $req The DOM element
+			 * @param  {Array}  list The list to inject the requirement, if incomplete
+			 * @return {void}
+			 */
+			var check_requirement = function( $req, list ) {
+				if ( this.state.is_publishing && $req.hasClass( 'status-no' ) ) {
+					// Check if the requirement is not ok
+					var $unchecked_req = $req.find( '.status-label' );
+
+					if ( $unchecked_req.length > 0 ) {
+						list.push( $unchecked_req.html().trim() );
+					}
 				}
-			}
-		}
+			}.bind( this );
 
-		// Check if any of the requirements is set to block the submission
-		for ( var i = 0; i < $requirements_block.length; i++ ) {
-			var $item = $( $requirements_block[ i ] );
+			var check_requirement_action = function( action_type ) {
+				var $elems = $( '.pp-checklist-req.' + action_type ),
+					$unchecked_label,
+					$req;
 
-			if ( is_publishing && $item.hasClass( 'status-no' ) ) {
-				// Check if the requirement is not ok
-				$unchecked_req = $item.find( '.status-label' );
-
-				if ( $unchecked_req.length > 0 ) {
-					unchecked_block.push( $unchecked_req.html().trim() );
+				for ( var i = 0; i < $elems.length; i++ ) {
+					check_requirement( $( $elems[ i ] ), list_unchecked[ action_type ] );
 				}
-			}
-		}
+			}.bind( this );
 
-		// Check if we have warnings to display
-		if ( unchecked_warn.length > 0 || unchecked_block.length > 0 ) {
-			var message = '';
+			// Check if any of the requirements is set to trigger warnings
+			check_requirement_action( 'warn' );
+			check_requirement_action( 'block' );
 
-			// Check if we don't have any unchecked block req
-			if ( 0 === unchecked_block.length ) {
-				// Only display a warning
-				message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
+			// Check if we have warnings to display
+			if ( list_unchecked.warn.length > 0 || list_unchecked.block.length > 0 ) {
+				var message = '';
 
-				// Display the confirm
-				jQuery( '#pp-checklist-modal-confirm-content' ).html(message);
-				jQuery( '[data-remodal-id=pp-checklist-modal-confirm]' ).remodal().open();
-			} else {
-				message = objectL10n_checklist_requirements.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_block.join('</li><li>') + '</li></ul></div>';
+				// Check if we don't have any unchecked block req
+				if ( 0 === list_unchecked.block.length ) {
+					// Only display a warning
+					message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warn.join( '</li><li>' ) + '</li></ul></div>';
 
-				if ( unchecked_warn.length > 0 ) {
-					message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + unchecked_warn.join('</li><li>') + '</li></ul></div>';
+					// Display the confirm
+					$( '#pp-checklist-modal-confirm-content' ).html( message );
+					$( '[data-remodal-id=pp-checklist-modal-confirm]' ).remodal().open();
+				} else {
+					message = objectL10n_checklist_requirements.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.block.join( '</li><li>' ) + '</li></ul></div>';
+
+					if ( list_unchecked.warn.length > 0 ) {
+						message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warn.join( '</li><li>' ) + '</li></ul></div>';
+					}
+
+					// Display the alert
+					$( '#pp-checklist-modal-alert-content' ).html( message );
+					$( '[data-remodal-id=pp-checklist-modal-alert]' ).remodal().open();
 				}
 
-				// Display the alert
-				jQuery( '#pp-checklist-modal-alert-content' ).html(message);
-				jQuery( '[data-remodal-id=pp-checklist-modal-alert]' ).remodal().open();
+				this.state.should_block = true;
 			}
 
-			should_block = true;
-		}
+			this.state.is_publishing = false;
+		},
 
-		is_publishing = false;
-
-		return ! should_block;
-	} );
-
-	// Add constant check for the featured image
-	if ( $( '#pp-checklist-req-featured_image' ).length > 0 ) {
-		setInterval( function() {
-			var has_image = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0,
-				$status   = $( '#pp-checklist-req-featured_image' ).find( '.dashicons' )
-
-			if ( has_image ) {
-				// Ok
-				$status.removeClass('dashicons-no');
-				$status.addClass('dashicons-yes');
-				$status.parent().removeClass('status-no');
-				$status.parent().addClass('status-yes');
-			} else {
-				// Not ok
-				$status.removeClass('dashicons-yes');
-				$status.addClass('dashicons-no');
-				$status.parent().removeClass('status-yes');
-				$status.parent().addClass('status-no');
-			}
-		}, 500);
-	}
-
-	// Add constant check for the tags count
-	if ( $( '#pp-checklist-req-min_tags_count' ).length > 0 ) {
-		setInterval( function() {
-			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_requirements.requirements.min_tags_count.value,
-				$status = $( '#pp-checklist-req-min_tags_count' ).find( '.dashicons' )
-
-			if ( has_min_tags ) {
-				// Ok
-				$status.removeClass('dashicons-no');
-				$status.addClass('dashicons-yes');
-				$status.parent().removeClass('status-no');
-				$status.parent().addClass('status-yes');
-			} else {
-				// Not ok
-				$status.removeClass('dashicons-yes');
-				$status.addClass('dashicons-no');
-				$status.parent().removeClass('status-yes');
-				$status.parent().addClass('status-no');
-			}
-		}, 500);
-	}
-
-	// Add constant check for the categories count
-	if ( $( '#pp-checklist-req-min_categories_count' ).length > 0 ) {
-		setInterval( function() {
+		/**
+		 * Updates the icon in the requirement checklist according to the
+		 * current state.
+		 *
+		 * @param  {Boolean} is_completed
+		 * @param  {Object}  $element
+		 * @return {void}
+		 */
+		update_requirement_icon: function( is_completed, $element ) {
 			// Ignores the "Uncategorized"
-			var has_min_categories = $('#categorychecklist input:checked').length >= objectL10n_checklist_requirements.requirements.min_categories_count.value,
-				$status = $( '#pp-checklist-req-min_categories_count' ).find( '.dashicons' )
+			var $icon_element = $element.find( '.dashicons' )
 
-			if ( has_min_categories ) {
+			if ( is_completed ) {
 				// Ok
-				$status.removeClass('dashicons-no');
-				$status.addClass('dashicons-yes');
-				$status.parent().removeClass('status-no');
-				$status.parent().addClass('status-yes');
+				$icon_element.removeClass( 'dashicons-no' );
+				$icon_element.addClass( 'dashicons-yes' );
+				$icon_element.parent().removeClass( 'status-no' );
+				$icon_element.parent().addClass( 'status-yes' );
 			} else {
 				// Not ok
-				$status.removeClass('dashicons-yes');
-				$status.addClass('dashicons-no');
-				$status.parent().removeClass('status-yes');
-				$status.parent().addClass('status-no');
+				$icon_element.removeClass( 'dashicons-yes' );
+				$icon_element.addClass( 'dashicons-no' );
+				$icon_element.parent().removeClass( 'status-yes' );
+				$icon_element.parent().addClass( 'status-no' );
 			}
-		}, 500);
-	}
+		},
+	};
+
+	// Exposes and initialize the object
+	window.PP_Content_Checklist = PP_Content_Checklist;
+	PP_Content_Checklist.init();
+
+
+	/*----------  Warning icon in submit button  ----------*/
 
 	// Show warning icon close to the submit button
-	if ( objectL10n_checklist_requirements.show_warning_icon_submit && ! is_published() ) {
-		var $icon = $('<span>')
-			.addClass('dashicons dashicons-warning pp-checklist-warning-icon')
+	if ( objectL10n_checklist_requirements.show_warning_icon_submit && ! PP_Content_Checklist.is_published() ) {
+		var $icon = $( '<span>' )
+			.addClass( 'dashicons dashicons-warning pp-checklist-warning-icon' )
 			.hide()
-			.prependTo($('#publishing-action'))
-			.attr('title', objectL10n_checklist_requirements.title_warning_icon);
+			.prependTo( $( '#publishing-action' ) )
+			.attr( 'title', objectL10n_checklist_requirements.title_warning_icon );
 
-		setInterval( function() {
-			var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_uncheked = $( '#pp-checklist-req-box' ).children( '.status-no' );
 
 			if ( has_uncheked.length > 0 ) {
 				// Not ok
@@ -217,6 +291,37 @@
 				// Ok
 				$icon.hide();
 			}
-		}, 500);
+		} );
 	}
-} )( jQuery );
+
+	/*----------  Featured Image  ----------*/
+
+	if ( $( '#pp-checklist-req-featured_image' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_image = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0;
+
+			PP_Content_Checklist.update_requirement_icon( has_image, $( '#pp-checklist-req-featured_image' ) );
+		} );
+	}
+
+	/*---------- Tags Min Number  ----------*/
+
+	if ( $( '#pp-checklist-req-min_tags_count' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_requirements.requirements.min_tags_count.value;
+
+			PP_Content_Checklist.update_requirement_icon( has_min_tags, $( '#pp-checklist-req-min_tags_count' ) );
+		} );
+	}
+
+	/*----------  Categories Min Number  ----------*/
+
+	if ( $( '#pp-checklist-req-min_categories_count' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_min_categories = $( '#categorychecklist input:checked' ).length >= objectL10n_checklist_requirements.requirements.min_categories_count.value;
+
+			PP_Content_Checklist.update_requirement_icon( has_min_categories, $( '#pp-checklist-req-min_categories_count' ) );
+		} );
+	}
+
+} )( jQuery, window, document );

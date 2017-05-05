@@ -42,7 +42,6 @@
 
 	editor.onInit.add( function() {
 		var $content      = $( '#content' ),
-			$status       = $( '#pp-checklist-req-min_words_count' ).find( '.dashicons' ),
 			prev_count    = 0,
 			content_editor;
 
@@ -62,19 +61,9 @@
 
 			if ( count !== prev_count ) {
 				// Compare the count with the configured value
-				if ( count >= objectL10n_checklist_requirements.requirements.min_words_count.value ) {
-					// Ok
-					$status.removeClass('dashicons-no');
-					$status.addClass('dashicons-yes');
-					$status.parent().removeClass('status-no');
-					$status.parent().addClass('status-yes');
-				} else {
-					// Not ok
-					$status.removeClass('dashicons-yes');
-					$status.addClass('dashicons-no');
-					$status.parent().removeClass('status-yes');
-					$status.parent().addClass('status-no');
-				}
+				var has_min_words = count >= objectL10n_checklist_requirements.requirements.min_words_count.value;
+
+				PP_Content_Checklist.update_requirement_icon( has_min_words, $( '#pp-checklist-req-min_words_count' ) );
 			}
 
 			prev_count = count;
