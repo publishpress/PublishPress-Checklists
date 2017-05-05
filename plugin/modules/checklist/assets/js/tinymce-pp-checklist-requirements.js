@@ -63,7 +63,10 @@
 				// Compare the count with the configured value
 				var has_min_words = count >= objectL10n_checklist_requirements.requirements.min_words_count.value;
 
-				PP_Content_Checklist.update_requirement_icon( has_min_words, $( '#pp-checklist-req-min_words_count' ) );
+				$( '#pp-checklist-req-min_words_count' ).trigger(
+					PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+					has_min_words
+				);
 			}
 
 			prev_count = count;

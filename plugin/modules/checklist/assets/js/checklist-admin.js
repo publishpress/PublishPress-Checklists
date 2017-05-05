@@ -50,6 +50,12 @@
 		EVENT_TIC: 'pp-content-checklist:tic',
 
 		/**
+		 * Constant for the event update_requirement_state
+		 * @type {String}
+		 */
+		EVENT_UPDATE_REQUIREMENT_STATE: 'pp-content-checklist:update_requirement_state',
+
+		/**
 		 * Constant for the interval of the tic event
 		 * @type {Number}
 		 */
@@ -131,6 +137,11 @@
 				this.elems.document.trigger( this.EVENT_VALIDATE_REQUIREMENTS );
 
 				return ! this.state.should_block;
+			}.bind( this ) );
+
+			// Hook to the requirement items
+			$( '[id^=pp-checklist-req]' ).on( this.EVENT_UPDATE_REQUIREMENT_STATE, function( event, state ) {
+				this.update_requirement_icon( state, $( event.target ) );
 			}.bind( this ) );
 
 			// Start the tic event
@@ -247,7 +258,6 @@
 		 * @return {void}
 		 */
 		update_requirement_icon: function( is_completed, $element ) {
-			// Ignores the "Uncategorized"
 			var $icon_element = $element.find( '.dashicons' )
 
 			if ( is_completed ) {
@@ -300,7 +310,10 @@
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
 			var has_image = $( '#postimagediv' ).find( '#set-post-thumbnail' ).find( 'img' ).length > 0;
 
-			PP_Content_Checklist.update_requirement_icon( has_image, $( '#pp-checklist-req-featured_image' ) );
+			$( '#pp-checklist-req-featured_image' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_image
+			);
 		} );
 	}
 
@@ -310,7 +323,10 @@
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
 			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_requirements.requirements.min_tags_count.value;
 
-			PP_Content_Checklist.update_requirement_icon( has_min_tags, $( '#pp-checklist-req-min_tags_count' ) );
+			$( '#pp-checklist-req-min_tags_count' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_min_tags
+			);
 		} );
 	}
 
@@ -320,7 +336,10 @@
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
 			var has_min_categories = $( '#categorychecklist input:checked' ).length >= objectL10n_checklist_requirements.requirements.min_categories_count.value;
 
-			PP_Content_Checklist.update_requirement_icon( has_min_categories, $( '#pp-checklist-req-min_categories_count' ) );
+			$( '#pp-checklist-req-min_categories_count' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_min_categories
+			);
 		} );
 	}
 
