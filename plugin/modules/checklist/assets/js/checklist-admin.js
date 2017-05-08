@@ -332,4 +332,17 @@
 		} );
 	}
 
+	/*----------  Categories Max Number  ----------*/
+
+	if ( $( '#pp-checklist-req-max_categories_count' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_max_categories = $( '#categorychecklist input:checked' ).length <= objectL10n_checklist_requirements.requirements.max_categories_count.value;
+
+			$( '#pp-checklist-req-max_categories_count' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_max_categories
+			);
+		} );
+	}
+
 } )( jQuery, window, document );

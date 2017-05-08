@@ -11,11 +11,11 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Featured_image extends Base_bool {
+class Min_categories_count extends Base_counter {
 	/**
 	 * The name of this requirement.
 	 */
-	const NAME = 'featured_image';
+	const NAME = 'min_categories_count';
 
 	/**
 	 * Initialize the language strings for the instance
@@ -23,8 +23,9 @@ class Featured_image extends Base_bool {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label']          = __( 'Featured image', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_settings'] = __( 'Featured image', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_singular'] = __( 'Minimum of %s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_plural']   = __( 'Minimum of %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_settings'] = __( 'Minimum number of categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
 	}
 
 	/**
@@ -36,6 +37,8 @@ class Featured_image extends Base_bool {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value ) {
-		return ! empty( get_the_post_thumbnail( $post ) );
+		$categories = wp_get_post_categories( $post->ID );
+
+		return count( $categories ) >= $option_value;
 	}
 }

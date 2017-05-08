@@ -40,7 +40,7 @@ interface Interface_required {
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_metabox( $requirements, $post, $module );
+	public function filter_requirements_list( $requirements, $post, $module );
 
 	/**
 	 * Returns the current status of the requirement.
@@ -54,4 +54,11 @@ interface Interface_required {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value );
+
+	/**
+	 * Initialize the language strings for the instance
+	 *
+	 * @return void
+	 */
+	public function init_language();
 }

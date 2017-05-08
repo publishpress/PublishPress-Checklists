@@ -12,10 +12,6 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Base_bool extends Base_requirement implements Interface_required {
-	/**
-	 * The label to be displayed in the metabox
-	 */
-	const LABEL = 'My Requirement';
 
 	/**
 	 * Injects the respective default options into the main add-on.
@@ -24,14 +20,12 @@ class Base_bool extends Base_requirement implements Interface_required {
 	 * @return array
 	 */
 	public function filter_default_options( $default_options ) {
-		$name = static::NAME;
-
 		$options = array(
-			$name          => array(
+			$this->name    => array(
 				static::GROUP_GLOBAL => static::DEFAULT_OPTION_STATUS,
 			),
-			"{$name}_rule" => array(
-				static::GROUP_GLOBAL => static::DEFAULT_OPTION_RULE,
+			"{$this->name}_rule" => array(
+				static::GROUP_GLOBAL => static::RULE_ONLY_DISPLAY,
 			),
 		);
 
@@ -48,12 +42,12 @@ class Base_bool extends Base_requirement implements Interface_required {
 	 * @return array
 	 */
 	public function filter_settings_validate( $new_options, $option_group ) {
-		if ( isset( $new_options[ static::NAME ][ $option_group ] ) ) {
-			if ( static::VALUE_YES !== $new_options[ static::NAME ][ $option_group ] ) {
-				$new_options[ static::NAME ][ $option_group ] = static::VALUE_NO;
+		if ( isset( $new_options[ $this->name ][ $option_group ] ) ) {
+			if ( static::VALUE_YES !== $new_options[ $this->name ][ $option_group ] ) {
+				$new_options[ $this->name ][ $option_group ] = static::VALUE_NO;
 			}
 		} else {
-			$new_options[ static::NAME ][ $option_group ] = static::VALUE_NO;
+			$new_options[ $this->name ][ $option_group ] = static::VALUE_NO;
 		}
 
 		return $new_options;
@@ -68,22 +62,23 @@ class Base_bool extends Base_requirement implements Interface_required {
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_metabox( $requirements, $post, $module ) {
-		$option_property       = static::NAME;
-		$option_rule_property  = static::NAME . '_rule';
+	public function filter_requirements_list( $requirements, $post, $module ) {
+		$option_property       = $this->name;
+		$option_rule_property  = $this->name . '_rule';
 		$options               = $module->options;
 
-		$status = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
+		// The enabled status
+		$enabled = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
 
 		// Featured Image Rule
 		$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
 
 		// Register in the requirements list
-		if ( $status ) {
-			$requirements[ static::NAME ] = array(
-				'status' => $this->get_current_status( $post, $status ),
-				'label'  => __( static::LABEL, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-				'value'  => $status,
+		if ( $enabled ) {
+			$requirements[ $this->name ] = array(
+				'status' => $this->get_current_status( $post, $enabled ),
+				'label'  => $this->lang['label'],
+				'value'  => $enabled,
 				'rule'   => $rule
 			);
 		}

@@ -56,6 +56,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		protected $license_manager;
 
+		public $module;
+
 		/**
 		 * Construct the PP_Checklist class
 		 */
@@ -63,10 +65,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->twigPath = dirname( dirname( dirname( __FILE__ ) ) ) . '/twig';
 
 			$this->module_url = $this->get_module_url( __FILE__ );
-
-			// Load the requirements
-			$this->instantiate_requirement_classes();
-			do_action( 'pp_checklist_load_requirements' );
 
 			// Register the module with PublishPress
 			$args = array(
@@ -88,13 +86,17 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Apply a filter to the default options
 			$args['default_options'] = apply_filters( 'pp_checklist_requirements_default_options', $args['default_options'] );
 
-			PublishPress()->register_module( $this->module_name, $args );
+			$this->module = PublishPress()->register_module( $this->module_name, $args );
 
 			parent::__construct();
 
 			$this->configure_twig();
 
 			$this->license_manager = new License;
+
+			// Load the requirements
+			$this->instantiate_requirement_classes();
+			do_action( 'pp_checklist_load_requirements' );
 		}
 
 		/**
@@ -121,7 +123,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$reflection = new \ReflectionClass( $class );
 
 				if ( class_exists( $class ) && ! $reflection->isAbstract() && ! $reflection->isInterface() ) {
-					new $class;
+					new $class( $this->module );
 				}
 			}
 		}
@@ -149,21 +151,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			$function = new Twig_SimpleFunction( 'do_settings_sections', function ( $section ) {
 				return do_settings_sections( $section );
-			} );
-			$this->twig->addFunction( $function );
-
-			$function = new Twig_SimpleFunction( 'html_list_of_actions', function ( $option_name, $post_type ) {
-				return $this->html_list_of_actions( $option_name, $post_type );
-			} );
-			$this->twig->addFunction( $function );
-
-			$function = new Twig_SimpleFunction( 'html_checkbox_bool', function ( $args ) {
-				return $this->html_checkbox_bool( $args );
-			} );
-			$this->twig->addFunction( $function );
-
-			$function = new Twig_SimpleFunction( 'html_small_input', function ( $args ) {
-				return $this->html_small_input( $args );
 			} );
 			$this->twig->addFunction( $function );
 		}
@@ -294,7 +281,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name
 			);
 
-			// Min Words Count
 			add_settings_field(
 				'global_requirements',
 				false,
@@ -366,129 +352,24 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			);
 			$args = wp_parse_args( $args, $defaults );
 
+			$requirements = array();
+
+			// Apply filters to the list of requirements
+			$requirements = apply_filters( 'pp_checklist_requirement_instances', $requirements );
+
 			echo $this->twig->render(
 				'settings-requirements-table.twig',
 				array(
 					'metadata_taxonomy' => self::METADATA_TAXONOMY,
 					'post_type'         => $args['post_type'],
+					'requirements'      => $requirements,
 					'lang'              => array(
 						'description'     => __( 'Description', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 						'required'        => __( 'Required', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 						'action'          => __( 'Action', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'min_numb_words'  => __( 'Minimum number of words', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'type'            => __( 'type...', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'featured_image'  => __( 'Featured image', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'min_numb_tags'   => __( 'Minimum number of tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'min_numb_categs' => __( 'Minimum number of categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 					)
 				)
 			);
-		}
-
-		/**
-		 * Returns the HTML tag for a list of actions. Used for settings fields,
-		 * to specify if the requirement is required or not.
-		 *
-		 * @param  string  $option
-		 * @param  string  $post_type
-		 *
-		 * @return string
-		 */
-		public function html_list_of_actions( $option, $post_type = 'global') {
-			$output = '<select id="' . esc_attr( $post_type ) . '-' . $this->module->slug . '-' . $option . '-rule" name="'
-						. $this->module->options_group_name . '[' . $option . '_rule][' . esc_attr( $post_type ) . ']">';
-
-			$rules = array(
-				'block'        => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-				'warn'         => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-				'only_display' => __( 'Show a sidebar message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			);
-			$attr = $option . '_rule';
-			foreach ( $rules as $rule => $label ) {
-				$output .= '<option value="' . $rule . '" ' . selected( $rule, $this->module->options->{$attr}[ $post_type ], false ) . '>'
-					. $label . '</option>';
-			}
-
-			$output .= '</select>';
-
-			return $output;
-		}
-
-		/**
-		 * Displays the field to set the minimum words count.
-		 *
-		 * Arguments:
-		 *
-		 *   - post_type [default: global] *
-		 *   - description
-		 *
-		 * @array  $args
-		 */
-		public function html_small_input( $args = array() ) {
-			$defaults = array(
-				'post_type'   => 'global',
-				'id'          => 'settings-field',
-				'name'        => 'settings_field',
-				'class'       => '',
-				'label'       => '',
-				'type'        => 'text',
-				'placeholder' => '',
-			);
-			$args = wp_parse_args( $args, $defaults );
-
-			// Get the value
-			$value = '';
-			if ( isset( $this->module->options->{$args['name']} ) ) {
-				if ( isset( $this->module->options->{$args['name']}[ $args['post_type'] ] ) ) {
-					$value = $this->module->options->{$args['name']}[ $args['post_type'] ];
-				}
-			}
-
-			// Output
-			echo '<input type="' . $args['type'] . '" id="' . $args['post_type'] . '-' . $this->module->slug . '-' . $args['id'] . '" placeholder="' . $args['placeholder'] . '" name="'
-					. $this->module->options_group_name . '[' . $args['name'] . '][' . $args['post_type'] . ']" '
-					. 'value="' . $value . '" class="pp-checklist-small-input"/>';
-		}
-
-		/**
-		 * Displays the field to set the featured image as requirement.
-		 *
-		 * Arguments:
-		 *
-		 *   - post_type [default: global] *
-		 *   - description
-		 *
-		 * @array  $args
-		 */
-		public function html_checkbox_bool( $args = array() ) {
-			$defaults = array(
-				'post_type' => 'global',
-				'id'        => 'settings-field',
-				'name'      => 'settings_field',
-				'class'     => '',
-				'label'     => '',
-				'value'     => 'yes'
-			);
-			$args = wp_parse_args( $args, $defaults );
-
-			$id = esc_attr( $args['post_type'] ) . '-' . $this->module->slug . '-' . $args['id'];
-
-			// Get the value
-			$value = 'no';
-			if ( isset( $this->module->options->{$args['name']} ) ) {
-				if ( isset( $this->module->options->{$args['name']}[ $args['post_type'] ] ) ) {
-					$value = $this->module->options->{$args['name']}[ $args['post_type'] ];
-				}
-			}
-
-			// Output
-			echo '<input type="checkbox" id="' . $id . '" class="' . $args['class'] . '" name="'
-					. $this->module->options_group_name . '[' . $args['name'] . '][' . esc_attr( $args['post_type'] ) . ']" value="' . $args['value'] . '" '
-					. checked( 'yes', $value, false ) . '/>';
-
-			if ( ! empty( $args['label' ] ) ) {
-				echo '<label for="' . $id . '">' . __( $args['label'], PP_CONTENT_CHECKLIST_LANG_CONTEXT ) . '</label>';
-			}
 		}
 
 		/**
@@ -611,7 +492,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$requirements = array();
 
 			// Apply filters to the list of requirements
-			$requirements = apply_filters( 'pp_checklist_requirements_metabox', $requirements, $post, $this->module );
+			$requirements = apply_filters( 'pp_checklist_requirement_list', $requirements, $post, $this->module );
 
 			// Add the scripts
 			if ( ! empty( $requirements ) ) {

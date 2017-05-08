@@ -18,28 +18,16 @@ class Base_counter extends Base_bool implements Interface_required {
 	const DEFAULT_OPTION_VALUE = 0;
 
 	/**
-	 * The label to be displayed in the metabox for value == 1
-	 */
-	const LABEL_SINGULAR = 'My Requirement';
-
-	/**
-	 * The label to be displayed in the metabox for value > 1 or 0
-	 */
-	const LABEL_PLURAL = 'My Requirements';
-
-	/**
 	 * Injects the respective default options into the main add-on.
 	 *
 	 * @param  array  $default_options
 	 * @return array
 	 */
 	public function filter_default_options( $default_options ) {
-		$name = static::NAME;
-
 		$default_options = parent::filter_default_options( $default_options );
 
 		$options = array(
-			"{$name}_value" => array(
+			"{$this->name}_value" => array(
 				static::GROUP_GLOBAL => static::DEFAULT_OPTION_VALUE,
 			),
 		);
@@ -59,7 +47,7 @@ class Base_counter extends Base_bool implements Interface_required {
 	public function filter_settings_validate( $new_options, $option_group ) {
 		$new_options = parent::filter_settings_validate( $new_options, $option_group );
 
-		$index = static::NAME . '_value';
+		$index = $this->name . '_value';
 		if ( isset( $new_options[ $index ][ $option_group ] ) ) {
 			$new_options[ $index ][ $option_group ] = filter_var(
 				$new_options[ $index ][ $option_group ],
@@ -68,7 +56,7 @@ class Base_counter extends Base_bool implements Interface_required {
 		}
 
 		// Make sure we don't have 0 as value if enabled
-		if ( empty( $new_options[ $index ][ $option_group ] ) && static::VALUE_YES === $new_options[ static::NAME ][ $option_group ] ) {
+		if ( empty( $new_options[ $index ][ $option_group ] ) && static::VALUE_YES === $new_options[ $this->name ][ $option_group ] ) {
 			$new_options[ $index ][ $option_group ] = 1;
 		}
 
@@ -84,31 +72,83 @@ class Base_counter extends Base_bool implements Interface_required {
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_metabox( $requirements, $post, $module ) {
-		$option_property       = static::NAME;
-		$option_value_property = static::NAME . '_value';
-		$option_rule_property  = static::NAME . '_rule';
+	public function filter_requirements_list( $requirements, $post, $module ) {
+		$option_property       = $this->name;
+		$option_value_property = $this->name . '_value';
+		$option_rule_property  = $this->name . '_rule';
 		$options               = $module->options;
 
-		// The status
-		$status = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
+		// The enabled status
+		$enabled = isset( $options->{$option_property}[ static::GROUP_GLOBAL ] ) ?
+			static::VALUE_YES === $options->{$option_property}[ static::GROUP_GLOBAL ] : false;
 
-		// The Value
-		$value = (int) $options->{ $option_value_property }[ static::GROUP_GLOBAL ];
-
-		// The rule
-		$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
-
-		// Register in the requirements list
-		if ( $status ) {
-			$requirements[ static::NAME ] = array(
-				'status' => $this->get_current_status( $post, $value ),
-				'label'  => sprintf( _n( static::LABEL_SINGULAR, static::LABEL_PLURAL, $value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $value ),
-				'value'  => $status ? $value : '',
-				'rule'   => $rule
-			);
+		// If not enabled, bypass the method
+		if ( ! $enabled ) {
+			return $requirements;
 		}
 
+		// The Value
+		$value = isset( $options->{$option_value_property}[ static::GROUP_GLOBAL ] ) ?
+			(int) $options->{$option_value_property}[ static::GROUP_GLOBAL ] : 0;
+
+		// The rule
+		$rule = isset( $options->{$option_rule_property}[ static::GROUP_GLOBAL ] ) ?
+			$options->{$option_rule_property}[ static::GROUP_GLOBAL ] : static::RULE_ONLY_DISPLAY;
+
+		// The Label
+		$label = _n(
+			$this->lang['label_singular'],
+			$this->lang['label_plural'],
+			$value,
+			PP_CONTENT_CHECKLIST_LANG_CONTEXT
+		);
+
+		// Register in the requirements list
+		$requirements[ $this->name ] = array(
+			'status' => $this->get_current_status( $post, $value ),
+			'label'  => sprintf( $label, $value ),
+			'value'  => $value,
+			'rule'   => $rule
+		);
+
 		return $requirements;
+	}
+
+	/**
+	 * Get the HTML for the setting field for the specific post type.
+	 *
+	 * @param  string $post_type
+	 *
+	 * @return string
+	 */
+	public function get_setting_field_html( $post_type, $css_class = '' ) {
+		$post_type = esc_attr( $post_type );
+		$css_class = esc_attr( $css_class );
+
+		$html = parent::get_setting_field_html( $post_type, $css_class );
+
+		$option_name = $this->name . '_value';
+
+		// Get the value
+		$value = '';
+		if ( isset( $this->module->options->{$option_name} ) ) {
+			if ( isset( $this->module->options->{$option_name}[ $post_type ] ) ) {
+				$value = $this->module->options->{$option_name}[ $post_type ];
+			}
+		}
+
+		$id   = "{$post_type}-{$this->module->slug}-{$option_name}";
+		$name = "{$this->module->options_group_name}[{$option_name}][{$post_type}]";
+
+		// Output
+		$html .= sprintf(
+			'<input type="number" " id="%s" name="%s" value="%s" class="pp-checklist-small-input" />',
+			$id,
+			$name,
+			$value
+
+		);
+
+		return $html;
 	}
 }

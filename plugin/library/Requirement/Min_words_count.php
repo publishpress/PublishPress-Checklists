@@ -11,21 +11,22 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Words_Count extends Base_counter {
+class Min_words_Count extends Base_counter {
 	/**
 	 * The name of this requirement.
 	 */
 	const NAME = 'min_words_count';
 
 	/**
-	 * The label to be displayed in the metabox for value == 1
+	 * Initialize the language strings for the instance
+	 *
+	 * @return void
 	 */
-	const LABEL_SINGULAR = 'Minimum of %s word';
-
-	/**
-	 * The label to be displayed in the metabox for value > 1 or 0
-	 */
-	const LABEL_PLURAL = 'Minimum of %s words';
+	public function init_language() {
+		$this->lang['label_singular'] = __( 'Minimum of %s word', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_plural']   = __( 'Minimum of %s words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_settings'] = __( 'Minimum number of words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+	}
 
 	/**
 	 * Returns the current status of the requirement.
