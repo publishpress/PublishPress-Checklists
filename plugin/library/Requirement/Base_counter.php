@@ -116,6 +116,11 @@ class Base_counter extends Base_bool implements Interface_required {
 			$max_value = $min_value;
 		}
 
+		// Check if both values are empty, to skip
+		if ( empty( $min_value ) && empty( $max_value ) ) {
+			return $requirements;
+		}
+
 		// The rule
 		$rule = isset( $options->{$option_name_rule}[ static::GROUP_GLOBAL ] ) ?
 			$options->{$option_name_rule}[ static::GROUP_GLOBAL ] : static::RULE_ONLY_DISPLAY;
