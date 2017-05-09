@@ -345,4 +345,17 @@
 		} );
 	}
 
+	/*---------- Tags Max Number  ----------*/
+
+	if ( $( '#pp-checklist-req-max_tags_count' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_max_tags = $( '.tagchecklist' ).children( 'span' ).length <= objectL10n_checklist_requirements.requirements.max_tags_count.value;
+
+			$( '#pp-checklist-req-max_tags_count' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_max_tags
+			);
+		} );
+	}
+
 } )( jQuery, window, document );
