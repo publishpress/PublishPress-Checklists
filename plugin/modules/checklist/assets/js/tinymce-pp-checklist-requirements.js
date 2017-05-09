@@ -34,8 +34,9 @@
 ( function( $, counter, tinymce, _ ) {
 	"use strict";
 
-	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.min_words_count ) {
-
+	if ( ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.min_words_count )
+		&& ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.max_words_count ) ) {
+		return true;
 	}
 
 	var editor = tinyMCE.editors['content'];
@@ -62,10 +63,16 @@
 			if ( count !== prev_count ) {
 				// Compare the count with the configured value
 				var has_min_words = count >= objectL10n_checklist_requirements.requirements.min_words_count.value;
+				var has_max_words = count <= objectL10n_checklist_requirements.requirements.max_words_count.value;
 
 				$( '#pp-checklist-req-min_words_count' ).trigger(
 					PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
 					has_min_words
+				);
+
+				$( '#pp-checklist-req-max_words_count' ).trigger(
+					PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+					has_max_words
 				);
 			}
 
