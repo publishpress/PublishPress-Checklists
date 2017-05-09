@@ -401,6 +401,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				array_keys( $new_options['post_types'] )
 			);
 
+			if ( ! isset ( $new_options['show_warning_icon_submit'] ) ) {
+				$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES;
+			}
 			$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
 			foreach ( $option_groups as $option_group ) {

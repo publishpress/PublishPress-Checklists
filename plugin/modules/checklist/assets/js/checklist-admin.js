@@ -27,7 +27,7 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( $, window, document ) {
+( function ( $, window, document, counter ) {
 	"use strict";
 
 	/*----------  Handler  ----------*/
@@ -358,4 +358,21 @@
 		} );
 	}
 
-} )( jQuery, window, document );
+	/*----------  Filled in Excerpt  ----------*/
+
+	if ( $( '#pp-checklist-req-filled_excerpt' ).length > 0 ) {
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_excerpt = false;
+
+			if ( $( '#excerpt' ).val().trim().length > 0 ) {
+				has_excerpt = true;
+			}
+
+			$( '#pp-checklist-req-filled_excerpt' ).trigger(
+				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+				has_excerpt
+			);
+		} );
+	}
+
+} )( jQuery, window, document, new wp.utils.WordCounter() );

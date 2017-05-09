@@ -68,10 +68,16 @@ class Base_bool extends Base_requirement implements Interface_required {
 		$options               = $module->options;
 
 		// The enabled status
-		$enabled = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
+		$enabled = false;
+		if ( isset( $options->{ $option_property }[ static::GROUP_GLOBAL ] ) ) {
+			$enabled = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
+		}
 
 		// Featured Image Rule
-		$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
+		$rule = static::RULE_ONLY_DISPLAY;
+		if ( isset( $options->{ $option_rule_property }[ static::GROUP_GLOBAL ] ) ) {
+			$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
+		}
 
 		// Register in the requirements list
 		if ( $enabled ) {
