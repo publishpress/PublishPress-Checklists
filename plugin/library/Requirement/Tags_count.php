@@ -11,11 +11,11 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Max_tags_count extends Base_counter {
+class Tags_Count extends Base_counter {
 	/**
 	 * The name of this requirement.
 	 */
-	const NAME = 'max_tags_count';
+	const NAME = 'tags_count';
 
 	/**
 	 * Initialize the language strings for the instance
@@ -23,9 +23,12 @@ class Max_tags_count extends Base_counter {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label_singular'] = __( 'Maximum of %s tag', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_plural']   = __( 'Maximum of %s tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_settings'] = __( 'Maximum number of tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_settings']     = __( 'Number of tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_min_singular'] = __( 'Minimum of %s tag', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_min_plural']   = __( 'Minimum of %s tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_max_singular'] = __( 'Maximum of %s tag', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_max_plural']   = __( 'Maximum of %s tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_between']      = __( 'Between %s and %s tags', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
 	}
 
 	/**
@@ -39,6 +42,8 @@ class Max_tags_count extends Base_counter {
 	public function get_current_status( $post, $option_value ) {
 		$tags = wp_get_post_tags( $post->ID );
 
-		return count( $tags ) <= $option_value;
+		$count = count( $tags );
+
+		return ( $count >= $option_value[0] ) && ( $count <= $option_value[1] );
 	}
 }

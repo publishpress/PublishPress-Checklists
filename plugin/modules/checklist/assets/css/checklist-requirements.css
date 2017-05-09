@@ -36,3 +36,12 @@
     height: 30px;
     color: #ef5350;
 }
+
+.pp-checklist-requirements-settings {
+	width: 100%;
+	max-width: 800px;
+}
+
+.pp-checklist-requirements-settings th {
+	width: auto;
+}

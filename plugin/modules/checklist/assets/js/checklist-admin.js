@@ -306,54 +306,32 @@
 		} );
 	}
 
-	/*---------- Tags Min Number  ----------*/
+	/*---------- Tags Number  ----------*/
 
-	if ( $( '#pp-checklist-req-min_tags_count' ).length > 0 ) {
+	if ( $( '#pp-checklist-req-tags_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var has_min_tags = $( '.tagchecklist' ).children( 'span' ).length >= objectL10n_checklist_requirements.requirements.min_tags_count.value;
+			var count = $( '.tagchecklist' ).children( 'span' ).length;
+			var is_valid = ( count >= objectL10n_checklist_requirements.requirements.tags_count.value[0] ) &&
+				( count <= objectL10n_checklist_requirements.requirements.tags_count.value[1] );
 
-			$( '#pp-checklist-req-min_tags_count' ).trigger(
+			$( '#pp-checklist-req-tags_count' ).trigger(
 				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				has_min_tags
+				is_valid
 			);
 		} );
 	}
 
-	/*----------  Categories Min Number  ----------*/
+	/*----------  Categories Number  ----------*/
 
-	if ( $( '#pp-checklist-req-min_categories_count' ).length > 0 ) {
+	if ( $( '#pp-checklist-req-categories_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var has_min_categories = $( '#categorychecklist input:checked' ).length >= objectL10n_checklist_requirements.requirements.min_categories_count.value;
+			var count = $( '#categorychecklist input:checked' ).length;
+			var is_valid = ( count >= objectL10n_checklist_requirements.requirements.categories_count.value[0] ) &&
+				( count <= objectL10n_checklist_requirements.requirements.categories_count.value[1] );
 
-			$( '#pp-checklist-req-min_categories_count' ).trigger(
+			$( '#pp-checklist-req-categories_count' ).trigger(
 				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				has_min_categories
-			);
-		} );
-	}
-
-	/*----------  Categories Max Number  ----------*/
-
-	if ( $( '#pp-checklist-req-max_categories_count' ).length > 0 ) {
-		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var has_max_categories = $( '#categorychecklist input:checked' ).length <= objectL10n_checklist_requirements.requirements.max_categories_count.value;
-
-			$( '#pp-checklist-req-max_categories_count' ).trigger(
-				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				has_max_categories
-			);
-		} );
-	}
-
-	/*---------- Tags Max Number  ----------*/
-
-	if ( $( '#pp-checklist-req-max_tags_count' ).length > 0 ) {
-		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var has_max_tags = $( '.tagchecklist' ).children( 'span' ).length <= objectL10n_checklist_requirements.requirements.max_tags_count.value;
-
-			$( '#pp-checklist-req-max_tags_count' ).trigger(
-				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				has_max_tags
+				is_valid
 			);
 		} );
 	}

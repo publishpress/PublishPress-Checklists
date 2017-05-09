@@ -104,10 +104,6 @@ class Base_requirement {
 	 */
 	public function init_language() {
 		// override
-		// $this->lang['label']          = __( 'My Requirement', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		// $this->lang['label_singular'] = __( 'My Requirement', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		// $this->lang['label_plural']   = __( 'My Requirements', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		// $this->lang['label_settings'] = __( 'My Requirements', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
 	}
 
 	/**
@@ -154,9 +150,12 @@ class Base_requirement {
 
 		// Get the value
 		$value = static::VALUE_NO;
-		if ( isset( $this->module->options->{$this->name} ) ) {
-			if ( isset( $this->module->options->{$this->name}[ $post_type ] ) ) {
-				$value = $this->module->options->{$this->name}[ $post_type ];
+		if ( isset( $this->module->options->{$this->name}[ $post_type ] ) ) {
+			$value = $this->module->options->{$this->name}[ $post_type ];
+		} else {
+			// Not set yet, check if we have the legacy option
+			if ( isset( $this->module->options->min_{$this->name}[ $post_type ] ) ) {
+				$value = $this->module->options->min_{$this->name}[ $post_type ];
 			}
 		}
 
@@ -204,8 +203,8 @@ class Base_requirement {
 
 		$rules = array(
 			static::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			'warn'         => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			'block'        => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+			'warn'                    => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+			'block'                   => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 		);
 
 		$value = isset( $this->module->options->{$option_name}[ $post_type ] ) ?
