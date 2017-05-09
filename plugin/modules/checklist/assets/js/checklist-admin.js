@@ -263,6 +263,47 @@
 				$icon_element.parent().addClass( 'status-no' );
 			}
 		},
+
+		/**
+		 * Check if the value is valid, based on the min and max values.
+		 * It makes a smarty check based on the following:
+		 *
+		 *  - Both same value = exact
+		 *  - Min not empty, max empty or < min = only min
+		 *  - Min not empty, max not empty and > min = both min and max
+		 *  - Min empty, max not empty and > min = only max
+		 *
+		 * @param  {Int} count
+		 * @param  {Int} min_value
+		 * @param  {Int} max_value
+		 *
+		 * @return {Bool}
+		 */
+		check_valid_quantity: function( count, min_value, max_value ) {
+			var is_valid = false;
+
+			// Both same value = exact
+			if ( min_value === max_value ) {
+				is_valid = count === min_value;
+			}
+
+			// Min not empty, max empty or < min = only min
+			if ( min_value > 0 && max_value < min_value ) {
+				is_valid = count >= min_value;
+			}
+
+			// Min not empty, max not empty and > min = both min and max
+			if ( min_value > 0 && max_value > min_value ) {
+				is_valid = count >= min_value && count <= max_value;
+			}
+
+			// Min empty, max not empty and > min = only max
+			if ( min_value === 0 && max_value > min_value ) {
+				is_valid = count <= max_value;
+			}
+
+			return is_valid;
+		}
 	};
 
 	// Exposes and initialize the object
@@ -310,13 +351,13 @@
 
 	if ( $( '#pp-checklist-req-tags_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var count = $( '.tagchecklist' ).children( 'span' ).length;
-			var is_valid = ( count >= objectL10n_checklist_requirements.requirements.tags_count.value[0] ) &&
-				( count <= objectL10n_checklist_requirements.requirements.tags_count.value[1] );
+			var count = $( '.tagchecklist' ).children( 'span' ).length,
+				min_value = parseInt( objectL10n_checklist_requirements.requirements.tags_count.value[0] ),
+				max_value = parseInt( objectL10n_checklist_requirements.requirements.tags_count.value[1] );
 
 			$( '#pp-checklist-req-tags_count' ).trigger(
 				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				is_valid
+				PP_Content_Checklist.check_valid_quantity( count, min_value, max_value )
 			);
 		} );
 	}
@@ -325,13 +366,13 @@
 
 	if ( $( '#pp-checklist-req-categories_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var count = $( '#categorychecklist input:checked' ).length;
-			var is_valid = ( count >= objectL10n_checklist_requirements.requirements.categories_count.value[0] ) &&
-				( count <= objectL10n_checklist_requirements.requirements.categories_count.value[1] );
+			var count = $( '#categorychecklist input:checked' ).length,
+				min_value = parseInt( objectL10n_checklist_requirements.requirements.categories_count.value[0] ),
+				max_value = parseInt( objectL10n_checklist_requirements.requirements.categories_count.value[1] );
 
 			$( '#pp-checklist-req-categories_count' ).trigger(
 				PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-				is_valid
+				PP_Content_Checklist.check_valid_quantity( count, min_value, max_value )
 			);
 		} );
 	}

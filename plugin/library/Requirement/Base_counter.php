@@ -94,26 +94,21 @@ class Base_counter extends Base_bool implements Interface_required {
 		$option_name_rule  = $this->name . '_rule';
 
 		// Get the min value
-		$min_value = '';
+		$min_value = 0;
 		if ( isset( $this->module->options->{$option_name_min}[ static::GROUP_GLOBAL ] ) ) {
-			$min_value = $this->module->options->{$option_name_min}[ static::GROUP_GLOBAL ];
+			$min_value = (int) $this->module->options->{$option_name_min}[ static::GROUP_GLOBAL ];
 		}
-		// If empty, we try the legacy option. At that time, we only had min values.
-		if ( empty( $min_value ) ) {
+		// If not set, we try the legacy option. At that time, we only had min values.
+		if ( '' === $min_value ) {
 			if ( isset( $this->module->options->{$legacy_option_name}[ static::GROUP_GLOBAL ] ) ) {
-				$min_value = $this->module->options->{$legacy_option_name}[ static::GROUP_GLOBAL ];
+				$min_value = (int) $this->module->options->{$legacy_option_name}[ static::GROUP_GLOBAL ];
 			}
 		}
-		$min_value = (int) $min_value;
 
 		// Get the max value
-		$max_value = '';
+		$max_value = 0;
 		if ( isset( $this->module->options->{$option_name_max}[ static::GROUP_GLOBAL ] ) ) {
-			$max_value = $this->module->options->{$option_name_max}[ static::GROUP_GLOBAL ];
-		}
-		$max_value = (int) $max_value;
-		if ( empty( $max_value ) ) {
-			$max_value = $min_value;
+			$max_value = (int) $this->module->options->{$option_name_max}[ static::GROUP_GLOBAL ];
 		}
 
 		// Check if both values are empty, to skip
@@ -121,15 +116,51 @@ class Base_counter extends Base_bool implements Interface_required {
 			return $requirements;
 		}
 
+
+		$label = '';
+
+		// Both same value = exact
+		if ( $min_value == $max_value ) {
+			$label = sprintf(
+				_n( $this->lang['label_exact_singular'], $this->lang['label_exact_plural'], $min_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				$min_value
+			);
+		}
+
+		// Min not empty, max empty or < min = only min
+		if ( ! empty( $min_value ) && ( $max_value < $min_value ) ) {
+			$label = sprintf(
+				_n( $this->lang['label_min_singular'], $this->lang['label_min_plural'], $min_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				$min_value
+			);
+		}
+
+		// Min not empty, max not empty and > min = both min and max
+		if ( ! empty( $min_value ) && ( $max_value > $min_value ) ) {
+			$label = sprintf(
+				__( $this->lang['label_between'], PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				$min_value,
+				$max_value
+			);
+		}
+
+		// Min empty, max not empty and > min = only max
+		if ( empty( $min_value ) && ( $max_value > $min_value ) ) {
+			$label = sprintf(
+				_n( $this->lang['label_max_singular'], $this->lang['label_max_plural'], $max_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				$max_value
+			);
+		}
+
+
 		// The rule
 		$rule = isset( $options->{$option_name_rule}[ static::GROUP_GLOBAL ] ) ?
 			$options->{$option_name_rule}[ static::GROUP_GLOBAL ] : static::RULE_ONLY_DISPLAY;
 
-		// The Label
 		// Register in the requirements list
 		$requirements[ $this->name ] = array(
 			'status'    => $this->get_current_status( $post, array( $min_value, $max_value ) ),
-			'label'     => sprintf( $this->lang['label_between'], $min_value, $max_value ),
+			'label'     => $label,
 			'value'     => array( $min_value, $max_value ),
 			'rule'      => $rule,
 		);
@@ -162,26 +193,21 @@ class Base_counter extends Base_bool implements Interface_required {
 		// Get the min value
 		$min_value = '';
 		if ( isset( $this->module->options->{$option_name_min}[ $post_type ] ) ) {
-			$min_value = $this->module->options->{$option_name_min}[ $post_type ];
+			$min_value = (int) $this->module->options->{$option_name_min}[ $post_type ];
 		}
-		// If empty, we try the legacy option. At that time, we only had min values.
-		if ( empty( $min_value ) ) {
+		// If not set, we try the legacy option. At that time, we only had min values.
+		if ( '' === $min_value ) {
 			if ( isset( $this->module->options->{$legacy_option_name}[ $post_type ] ) ) {
-				$min_value = $this->module->options->{$legacy_option_name}[ $post_type ];
+				$min_value = (int) $this->module->options->{$legacy_option_name}[ $post_type ];
 			}
 		}
-		$min_value = (int) $min_value;
 
 		// Get the max value
 		$max_value = '';
 		if ( isset( $this->module->options->{$option_name_max}[ $post_type ] ) ) {
 			$max_value = $this->module->options->{$option_name_max}[ $post_type ];
+			$max_value = (int) $max_value;
 		}
-		$max_value = (int) $max_value;
-		if ( empty( $max_value ) ) {
-			$max_value = $min_value;
-		}
-
 
 		// Get the field markup for min value
 		$min_field = sprintf(
@@ -199,7 +225,7 @@ class Base_counter extends Base_bool implements Interface_required {
 			$max_value
 		);
 
-		$html .= '&nbsp;' . sprintf( __( 'Between %s and %s', PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $min_field, $max_field );
+		$html .= '&nbsp;' . sprintf( __( 'Min %s Max %s', PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $min_field, $max_field );
 
 		return $html;
 	}

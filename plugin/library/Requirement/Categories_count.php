@@ -23,12 +23,14 @@ class Categories_count extends Base_counter {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label_settings']     = __( 'Number of categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_min_singular'] = __( 'Minimum of %s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_min_plural']   = __( 'Minimum of %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_max_singular'] = __( 'Maximum of %s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_max_plural']   = __( 'Maximum of %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_between']      = __( 'Between %s and %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_settings']       = __( 'Number of categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_min_singular']   = __( 'Minimum of %s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_min_plural']     = __( 'Minimum of %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_max_singular']   = __( 'Maximum of %s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_max_plural']     = __( 'Maximum of %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_exact_singular'] = __( '%s category', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_exact_plural']   = __( '%s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_between']        = __( 'Between %s and %s categories', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
 	}
 
 	/**
