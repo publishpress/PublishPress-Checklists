@@ -3,7 +3,7 @@ Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,15 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.1.0] = 2017-05-11 =
+
+* Added:
+* Added "Excerpt has text" as requirement
+* Added option to set "max" value for the number of categories, tags and words - now you can have min, max or an interval for each requirement.
+
+* Changed:
+* Improved the JavaScript code for better readbility
 
 = [1.0.1] - 2017-05-03 =
 
