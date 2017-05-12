@@ -176,9 +176,6 @@ class Base_counter extends Base_simple implements Interface_required {
 		$post_type = esc_attr( $post_type );
 		$css_class = esc_attr( $css_class );
 
-		// Get the checkbox
-		$html = parent::get_setting_field_html( $post_type, $css_class );
-
 		// Legacy option. Only the "min" option were available
 		$legacy_option_name = 'min_' . $this->name . '_value';
 
@@ -222,7 +219,7 @@ class Base_counter extends Base_simple implements Interface_required {
 			$max_value
 		);
 
-		$html .= '&nbsp;' . sprintf( __( 'Min %s Max %s', PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $min_field, $max_field );
+		$html = sprintf( __( 'Min %s Max %s', PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $min_field, $max_field );
 
 		return $html;
 	}
