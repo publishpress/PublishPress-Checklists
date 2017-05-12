@@ -41,6 +41,11 @@ class RoboFile extends \Robo\Tasks
         $packPath = self::PACKAGE_PATH . '/'. $filename;
         $pack     = $this->taskPack($packPath);
 
+        // Remove existent package
+        if (file_exists($packPath)) {
+            unlink($packPath);
+        }
+
         $srcContent = scandir(self::SOURCE_PATH);
         foreach ($srcContent as $content) {
             $ignore = array(
@@ -51,6 +56,7 @@ class RoboFile extends \Robo\Tasks
                 '.git',
                 '.gitignore',
                 'README',
+                '.DS_Store',
             );
 
             if (! in_array($content, $ignore)) {
