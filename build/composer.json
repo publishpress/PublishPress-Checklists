@@ -1,0 +1,24 @@
+{
+    "name": "pressshack/publishpress-content-checklist",
+    "type": "wordpress-plugin",
+    "license": "GPL-2",
+    "authors": [
+        {
+            "name": "PressShack",
+            "email": "help@pressshack.com"
+        }
+    ],
+    "config"     : {
+        "vendor-dir": "../src/vendor"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration"
+        }
+    ],
+    "require": {
+        "pressshack/wordpress-edd-license-integration": "dev-master"
+    },
+    "minimum-stability": "dev"
+}

@@ -9,7 +9,7 @@ use Robo\Exception\TaskExitException;
  */
 class RoboFile extends \Robo\Tasks
 {
-    const SOURCE_PATH = '../';
+    const SOURCE_PATH = '../plugin';
 
     const PACKAGE_PATH = 'packages';
 
@@ -216,9 +216,11 @@ class RoboFile extends \Robo\Tasks
     /**
      * Sync WP files with src files
      */
-    public function syncWp()
+    public function syncStaging()
     {
-        $return = $this->_exec('sh ./sync-wp.sh');
+        $wp_path = getenv('WP_PATH');
+
+        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-staging.sh');
 
         return $return;
     }
@@ -226,9 +228,11 @@ class RoboFile extends \Robo\Tasks
     /**
      * Sync src files with WP files
      */
-    public function syncSrc()
+    public function syncRepo()
     {
-        $return = $this->_exec('sh ./sync-src.sh');
+        $wp_path = getenv('WP_PATH');
+
+        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-repo.sh');
 
         return $return;
     }

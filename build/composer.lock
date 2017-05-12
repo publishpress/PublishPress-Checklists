@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "65fd9bec868b12c85cc32f3339cc2ead",
+    "content-hash": "131dff3ea1e75af4d7940ecf4d38634f",
+    "packages": [
+        {
+            "name": "pressshack/wordpress-edd-license-integration",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration",
+                "reference": "b0781efe4c77a73c4d91e1037079fa2e33091aba"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PressShack\\EDD_License\\": "lib/"
+                }
+            },
+            "license": [
+                "GPL-2"
+            ],
+            "authors": [
+                {
+                    "name": "PressShack",
+                    "email": "help@pressshack.com"
+                }
+            ],
+            "time": "2017-05-01 13:52:31"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "pressshack/wordpress-edd-license-integration": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
