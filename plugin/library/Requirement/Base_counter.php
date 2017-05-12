@@ -205,7 +205,7 @@ class Base_counter extends Base_simple implements Interface_required {
 
 		// Get the field markup for min value
 		$min_field = sprintf(
-			'<input type="number" " id="%s" name="%s" value="%s" class="pp-checklist-small-input" />',
+			'<input type="text" " id="%s" name="%s" value="%s" class="pp-checklist-small-input pp-checklist-number" />',
 			"{$post_type}-{$this->module->slug}-{$option_name_min}",
 			"{$this->module->options_group_name}[{$option_name_min}][{$post_type}]",
 			$min_value
@@ -213,7 +213,7 @@ class Base_counter extends Base_simple implements Interface_required {
 
 		// Get the field markup for max value
 		$max_field = sprintf(
-			'<input type="number" " id="%s" name="%s" value="%s" class="pp-checklist-small-input" />',
+			'<input type="text" " id="%s" name="%s" value="%s" class="pp-checklist-small-input pp-checklist-number" />',
 			"{$post_type}-{$this->module->slug}-{$option_name_max}",
 			"{$this->module->options_group_name}[{$option_name_max}][{$post_type}]",
 			$max_value

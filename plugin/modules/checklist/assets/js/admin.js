@@ -34,5 +34,17 @@
 		// Minor fix to the style
 		// Sticks the requirement settings table to the left
 		$( 'table.pp-checklist-requirements-settings' ).parent().prev().hide();
+
+		// Set the mask for settings fields
+		$( '.pp-checklist-number' ).on( 'keypress', function( event ) {
+			// Ignore any key different than number
+			if ( event.keyCode < 48 || event.keyCode > 57 ) {
+				event.preventDefault();
+
+				return false;
+			}
+
+			return true;
+		} );
 	} );
 } )( jQuery );

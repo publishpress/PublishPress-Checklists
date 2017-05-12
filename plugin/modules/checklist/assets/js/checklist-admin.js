@@ -303,7 +303,7 @@
 			}
 
 			return is_valid;
-		}
+		},
 	};
 
 	// Exposes and initialize the object
