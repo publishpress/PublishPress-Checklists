@@ -352,9 +352,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			);
 			$args = wp_parse_args( $args, $defaults );
 
-			$requirements = array();
-
 			// Apply filters to the list of requirements
+			$requirements = array();
 			$requirements = apply_filters( 'pp_checklist_requirement_instances', $requirements );
 
 			echo $this->twig->render(
@@ -365,7 +364,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'requirements'      => $requirements,
 					'lang'              => array(
 						'description'     => __( 'Description', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'required'        => __( 'Required', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+						'params'          => __( 'Parameters', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 						'action'          => __( 'Action', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 					)
 				)
@@ -495,7 +494,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$requirements = array();
 
 			// Apply filters to the list of requirements
-			$requirements = apply_filters( 'pp_checklist_requirement_list', $requirements, $post, $this->module );
+			$requirements = apply_filters( 'pp_checklist_requirement_list', $requirements, $post );
 
 			// Add the scripts
 			if ( ! empty( $requirements ) ) {

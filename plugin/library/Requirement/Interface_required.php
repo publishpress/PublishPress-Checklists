@@ -36,11 +36,10 @@ interface Interface_required {
 	 *
 	 * @param  array      $requirements
 	 * @param  stdClass   $post
-	 * @param  PP_Module  $module
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_list( $requirements, $post, $module );
+	public function filter_requirements_list( $requirements, $post );
 
 	/**
 	 * Returns the current status of the requirement.

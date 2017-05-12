@@ -11,7 +11,7 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Filled_excerpt extends Base_bool {
+class Filled_excerpt extends Base_simple {
 	/**
 	 * The name of this requirement.
 	 */

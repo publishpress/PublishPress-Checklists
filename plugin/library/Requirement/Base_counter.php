@@ -11,7 +11,7 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Base_counter extends Base_bool implements Interface_required {
+class Base_counter extends Base_simple implements Interface_required {
 	/**
 	 * The default value for the option related to the value.
 	 */
@@ -68,17 +68,15 @@ class Base_counter extends Base_bool implements Interface_required {
 	 *
 	 * @param  array      $requirements
 	 * @param  stdClass   $post
-	 * @param  PP_Module  $module
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_list( $requirements, $post, $module ) {
+	public function filter_requirements_list( $requirements, $post ) {
 		$option_name = $this->name;
-		$options     = $module->options;
+		$options     = $this->module->options;
 
 		// The enabled status
-		$enabled = isset( $options->{$option_name}[ static::GROUP_GLOBAL ] ) ?
-			static::VALUE_YES === $options->{$option_name}[ static::GROUP_GLOBAL ] : false;
+		$enabled = $this->is_enabled();
 
 		// If not enabled, bypass the method
 		if ( ! $enabled ) {
@@ -154,8 +152,7 @@ class Base_counter extends Base_bool implements Interface_required {
 
 
 		// The rule
-		$rule = isset( $options->{$option_name_rule}[ static::GROUP_GLOBAL ] ) ?
-			$options->{$option_name_rule}[ static::GROUP_GLOBAL ] : static::RULE_ONLY_DISPLAY;
+		$rule = $this->get_option_rule();
 
 		// Register in the requirements list
 		$requirements[ $this->name ] = array(

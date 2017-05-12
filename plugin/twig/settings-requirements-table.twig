@@ -2,8 +2,8 @@
 	<thead>
 		<tr>
 			<th width="20%">{{ lang.description }}</th>
-			<th width="60%">{{ lang.required }}</th>
 			<th width="20%">{{ lang.action }}</th>
+			<th width="60%">{{ lang.params }}</th>
 		</tr>
 	</thead>
 
@@ -11,8 +11,8 @@
 		{% for requirement in requirements %}
 			<tr>
 				<td>{{ requirement.lang['label_settings'] }}</td>
-				<td>{{ requirement.get_setting_field_html( 'global' )|raw }}</td>
 				<td>{{ requirement.get_setting_action_list_html( 'global' )|raw }}</td>
+				<td>{{ requirement.get_setting_field_html( 'global' )|raw }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>

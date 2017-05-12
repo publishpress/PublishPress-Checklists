@@ -11,7 +11,7 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Base_bool extends Base_requirement implements Interface_required {
+class Base_simple extends Base_requirement implements Interface_required {
 
 	/**
 	 * Injects the respective default options into the main add-on.
@@ -22,7 +22,7 @@ class Base_bool extends Base_requirement implements Interface_required {
 	public function filter_default_options( $default_options ) {
 		$options = array(
 			$this->name    => array(
-				static::GROUP_GLOBAL => static::DEFAULT_OPTION_STATUS,
+				static::GROUP_GLOBAL => static::VALUE_NO,
 			),
 			"{$this->name}_rule" => array(
 				static::GROUP_GLOBAL => static::RULE_ONLY_DISPLAY,
@@ -54,30 +54,55 @@ class Base_bool extends Base_requirement implements Interface_required {
 	}
 
 	/**
+	 * Returns the value for the rule option. The default value is "Disabled"
+	 *
+	 * @return string
+	 */
+	public function get_option_rule() {
+		$option_rule_property  = $this->name . '_rule';
+		$options               = $this->module->options;
+
+		// Rule
+		$rule = static::RULE_DISABLED;
+		if ( isset( $options->{ $option_rule_property }[ static::GROUP_GLOBAL ] ) ) {
+			$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
+		}
+
+		return $rule;
+	}
+
+	/**
+	 * Returns true if the requirement is enabled in the settings.
+	 *
+	 * @return boolean
+	 */
+	public function is_enabled() {
+		$rule = $this->get_option_rule();
+
+		return in_array(
+			$rule,
+			array(
+				static::RULE_ONLY_DISPLAY,
+				static::RULE_WARNING,
+				static::RULE_BLOCK,
+			)
+		);
+	}
+
+	/**
 	 * Add the requirement to the list to be displayed in the metabox.
 	 *
 	 * @param  array      $requirements
 	 * @param  stdClass   $post
-	 * @param  PP_Module  $module
 	 *
 	 * @return array
 	 */
-	public function filter_requirements_list( $requirements, $post, $module ) {
-		$option_property       = $this->name;
-		$option_rule_property  = $this->name . '_rule';
-		$options               = $module->options;
+	public function filter_requirements_list( $requirements, $post ) {
+		// Rule
+		$rule = $this->get_option_rule();
 
-		// The enabled status
-		$enabled = false;
-		if ( isset( $options->{ $option_property }[ static::GROUP_GLOBAL ] ) ) {
-			$enabled = static::VALUE_YES === $options->{ $option_property }[ static::GROUP_GLOBAL ];
-		}
-
-		// Featured Image Rule
-		$rule = static::RULE_ONLY_DISPLAY;
-		if ( isset( $options->{ $option_rule_property }[ static::GROUP_GLOBAL ] ) ) {
-			$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
-		}
+		// Enabled
+		$enabled = $this->is_enabled();
 
 		// Register in the requirements list
 		if ( $enabled ) {

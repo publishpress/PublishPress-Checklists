@@ -11,7 +11,7 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-class Featured_image extends Base_bool {
+class Featured_image extends Base_simple {
 	/**
 	 * The name of this requirement.
 	 */

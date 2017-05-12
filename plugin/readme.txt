@@ -44,6 +44,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [1.1.1] = UNRELEASED =
 
+* Changed:
+* Improved settings merging the checkbox and the action list for each requirement
+
 * Fixed:
 * Removed .DS_Store file from the package
 

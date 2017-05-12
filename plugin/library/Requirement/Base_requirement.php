@@ -13,19 +13,24 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Base_requirement {
 	/**
-	 * The default value for the option related to the status.
+	 * The rule that disables
 	 */
-	const DEFAULT_OPTION_STATUS = 'no';
+	const RULE_DISABLED = 'off';
 
 	/**
-	 * The default value for the option related to the rule.
+	 * The rule that do not warning, or block
 	 */
 	const RULE_ONLY_DISPLAY = 'only_display';
 
 	/**
-	 * The rule
+	 * The rule that displays a warning
 	 */
-	const OPTION_RULE = 'only_display';
+	const RULE_WARNING = 'warning';
+
+	/**
+	 * The rule that blocks
+	 */
+	const RULE_BLOCK = 'block';
 
 	/**
 	 * The Yes value
@@ -143,39 +148,7 @@ class Base_requirement {
 	 * @return string
 	 */
 	public function get_setting_field_html( $post_type, $css_class = '' ) {
-		$post_type = esc_attr( $post_type );
-		$css_class = esc_attr( $css_class );
-
-		$id = "{$post_type}-{$this->module->slug}-{$this->name}";
-
-		// Get the value
-		$value = static::VALUE_NO;
-		if ( isset( $this->module->options->{$this->name}[ $post_type ] ) ) {
-			$value = $this->module->options->{$this->name}[ $post_type ];
-		} else {
-			// Not set yet, check if we have the legacy option
-			if ( isset( $this->module->options->min_{$this->name}[ $post_type ] ) ) {
-				$value = $this->module->options->min_{$this->name}[ $post_type ];
-			}
-		}
-
-		// Get the name
-		$name = "{$this->module->options_group_name}[{$this->name}][{$post_type}]";
-
-		// Checked
-		$checked = checked( static::VALUE_YES, $value, false );
-
-		// Output
-		$html = sprintf(
-			'<input type="checkbox" id="%s" class="%s" name="%s" value="%s" %s />',
-			$id,
-			$css_class,
-			$name,
-			static::VALUE_YES,
-			$checked
-		);
-
-		return $html;
+		return '';
 	}
 
 	/**
@@ -202,13 +175,17 @@ class Base_requirement {
 		);
 
 		$rules = array(
+			static::RULE_DISABLED     => __( 'Disabled', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 			static::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			'warn'                    => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			'block'                   => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+			static::RULE_WARNING      => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+			static::RULE_BLOCK        => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
 		);
 
-		$value = isset( $this->module->options->{$option_name}[ $post_type ] ) ?
-			$this->module->options->{$option_name}[ $post_type ] : static::RULE_ONLY_DISPLAY;
+		// Get the value
+		$value = static::RULE_DISABLED;
+		if ( isset( $this->module->options->{$option_name}[ $post_type ] ) ) {
+			$value = $this->module->options->{$option_name}[ $post_type ];
+		}
 
 		foreach ( $rules as $rule => $label ) {
 			$html .= sprintf(
