@@ -18,6 +18,11 @@ class Tags_Count extends Base_counter {
 	const NAME = 'tags_count';
 
 	/**
+	 * The priority for the action to load the requirement
+	 */
+	const PRIORITY = 9;
+
+	/**
 	 * Initialize the language strings for the instance
 	 *
 	 * @return void

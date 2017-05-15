@@ -18,6 +18,11 @@ class Categories_count extends Base_counter {
 	const NAME = 'categories_count';
 
 	/**
+	 * The priority for the action to load the requirement
+	 */
+	const PRIORITY = 8;
+
+	/**
 	 * Initialize the language strings for the instance
 	 *
 	 * @return void

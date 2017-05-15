@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Changed:
 * Improved settings merging the checkbox and the action list for each requirement
+* Changed order for Categories and Tags to stay together in the list
 
 * Fixed:
 * Removed .DS_Store file from the package

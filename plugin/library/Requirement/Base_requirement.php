@@ -53,6 +53,11 @@ class Base_requirement {
 	const LABEL_SETTINGS = 'Base Class - Please, override this constant';
 
 	/**
+	 * The priority for the action to load the requirement
+	 */
+	const PRIORITY = 10;
+
+	/**
 	 * A reference for the current module
 	 *
 	 * @var PP_Checklist
@@ -81,7 +86,7 @@ class Base_requirement {
 	 * @return  void
 	 */
 	public function __construct( $module ) {
-		add_action( 'pp_checklist_load_requirements', array( $this, 'init' ) );
+		add_action( 'pp_checklist_load_requirements', array( $this, 'init' ), static::PRIORITY );
 
 		$this->name   = static::NAME;
 		$this->module = $module;
