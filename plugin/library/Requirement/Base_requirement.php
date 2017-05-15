@@ -180,10 +180,10 @@ class Base_requirement {
 		);
 
 		$rules = array(
-			static::RULE_DISABLED     => __( 'Disabled', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			static::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			static::RULE_WARNING      => __( 'Show a pop-up message', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-			static::RULE_BLOCK        => __( 'Prevent publishing', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+			static::RULE_DISABLED     => __( 'Disabled', 'publishpress-content-checklist' ),
+			static::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', 'publishpress-content-checklist' ),
+			static::RULE_WARNING      => __( 'Show a pop-up message', 'publishpress-content-checklist' ),
+			static::RULE_BLOCK        => __( 'Prevent publishing', 'publishpress-content-checklist' ),
 		);
 
 		// Get the value

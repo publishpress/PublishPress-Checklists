@@ -96,10 +96,6 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 			define( 'PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
 		}
 
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_LANG_CONTEXT' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_LANG_CONTEXT', 'publishpress-content-checklist' );
-		}
-
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_FILE' ) ) {
 			define( 'PP_CONTENT_CHECKLIST_FILE', 'publishpress-content-checklist/publishpress-content-checklist.php' );
 		}

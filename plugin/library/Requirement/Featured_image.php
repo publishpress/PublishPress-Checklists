@@ -23,8 +23,8 @@ class Featured_image extends Base_simple {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label']          = __( 'Featured image', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_settings'] = __( 'Featured image', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label']          = __( 'Featured image', 'publishpress-content-checklist' );
+		$this->lang['label_settings'] = __( 'Featured image', 'publishpress-content-checklist' );
 	}
 
 	/**

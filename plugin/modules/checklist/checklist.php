@@ -68,9 +68,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			// Register the module with PublishPress
 			$args = array(
-				'title'                => __( 'Checklist', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-				'short_description'    => __( 'Define tasks that must be complete before content is published', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-				'extended_description' => __( 'Define tasks that must be complete before content is published', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				'title'                => __( 'Checklist', 'publishpress-content-checklist' ),
+				'short_description'    => __( 'Define tasks that must be complete before content is published', 'publishpress-content-checklist' ),
+				'extended_description' => __( 'Define tasks that must be complete before content is published', 'publishpress-content-checklist' ),
 				'module_url'           => $this->module_url,
 				'icon_class'           => 'dashicons dashicons-feedback',
 				'slug'                 => 'checklist',
@@ -145,7 +145,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->twig->addFunction( $function );
 
 			$function = new Twig_SimpleFunction( '__', function ( $id ) {
-				return __( $id, PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+				return __( $id, 'publishpress-content-checklist' );
 			} );
 			$this->twig->addFunction( $function );
 
@@ -228,14 +228,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			 */
 			add_settings_section(
 				$this->module->options_group_name . '_license',
-				__( 'Licensing:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'Licensing:', 'publishpress-content-checklist' ),
 				'__return_false',
 				$this->module->options_group_name
 			);
 
 			add_settings_field(
 				'license_key',
-				__( 'License key:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'License key:', 'publishpress-content-checklist' ),
 				array( $this, 'settings_license_key_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_license'
@@ -248,14 +248,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_section(
 				$this->module->options_group_name . '_post_types',
-				__( 'General:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'General:', 'publishpress-content-checklist' ),
 				'__return_false',
 				$this->module->options_group_name
 			);
 
 			add_settings_field(
 				'post_types',
-				__( 'Add to these post types:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'Add to these post types:', 'publishpress-content-checklist' ),
 				array( $this, 'settings_post_types_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_post_types'
@@ -263,7 +263,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_field(
 				'show_warning_icon_submit',
-				__( 'Show warning icon:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'Show warning icon:', 'publishpress-content-checklist' ),
 				array( $this, 'settings_show_warning_icon_submit_option' ),
 				$this->module->options_group_name,
 				$this->module->options_group_name . '_post_types'
@@ -276,7 +276,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_settings_section(
 				$this->module->options_group_name . '_global',
-				__( 'Requirements', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( 'Requirements', 'publishpress-content-checklist' ),
 				'__return_false',
 				$this->module->options_group_name
 			);
@@ -315,7 +315,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			echo '<label for="' . $id . '">';
 			echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[show_warning_icon_submit]" '
 				. checked( $value, 'yes', false ) . ' />';
-			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will display a warning icon in the "Publish" box', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will display a warning icon in the "Publish" box', 'publishpress-content-checklist' );
 			echo '</label>';
 		}
 
@@ -363,9 +363,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'post_type'         => $args['post_type'],
 					'requirements'      => $requirements,
 					'lang'              => array(
-						'description'     => __( 'Description', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'params'          => __( 'Parameters', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'action'          => __( 'Action', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+						'description'     => __( 'Description', 'publishpress-content-checklist' ),
+						'params'          => __( 'Parameters', 'publishpress-content-checklist' ),
+						'action'          => __( 'Action', 'publishpress-content-checklist' ),
 					)
 				)
 			);
@@ -469,13 +469,13 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			 */
 
 
-			$title = __( 'Checklist', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+			$title = __( 'Checklist', 'publishpress-content-checklist' );
 
 			if ( current_user_can( 'manage_options' ) ) {
 				// Make the metabox title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
 				$url = $this->get_link();
 
-				$title .= ' <span class="postbox-title-action"><a href="' . esc_url( $url ) . '" class="edit-box open-box">' . __( 'Configure', PP_CONTENT_CHECKLIST_LANG_CONTEXT ) . '</a></span>';
+				$title .= ' <span class="postbox-title-action"><a href="' . esc_url( $url ) . '" class="edit-box open-box">' . __( 'Configure', 'publishpress-content-checklist' ) . '</a></span>';
 			}
 
 			$supported_post_types = $this->get_post_types_for_module( $this->module );
@@ -511,9 +511,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'objectL10n_checklist_requirements',
 					array(
 						'requirements'             => $requirements,
-						'msg_missed_optional'      => __( 'The following requirements are not completed yet. Are you sure you want to publish?', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'msg_missed_required'      => __( 'Please complete the following requirements before publishing:', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'msg_missed_important'     => __( 'Not required, but important: ', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+						'msg_missed_optional'      => __( 'The following requirements are not completed yet. Are you sure you want to publish?', 'publishpress-content-checklist' ),
+						'msg_missed_required'      => __( 'Please complete the following requirements before publishing:', 'publishpress-content-checklist' ),
+						'msg_missed_important'     => __( 'Not required, but important: ', 'publishpress-content-checklist' ),
 						'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
 						'title_warning_icon'       => __( 'One or more items in the checklist are not completed. Are you sure you want to publish?' ),
 					)
@@ -528,11 +528,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'requirements'      => $requirements,
 					'configure_link'    => $this->get_link(),
 					'lang'              => array(
-						'to_use_checklists' => __( 'To use the checklist', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'please_choose_req' => __( 'please choose some requirements', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'required'          => __( 'Required', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'dont_publish'      => __( 'Don\'t publish', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
-						'yes_publish'       => __( 'Yes, publish', PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+						'to_use_checklists' => __( 'To use the checklist', 'publishpress-content-checklist' ),
+						'please_choose_req' => __( 'please choose some requirements', 'publishpress-content-checklist' ),
+						'required'          => __( 'Required', 'publishpress-content-checklist' ),
+						'dont_publish'      => __( 'Don\'t publish', 'publishpress-content-checklist' ),
+						'yes_publish'       => __( 'Yes, publish', 'publishpress-content-checklist' ),
 
 					),
 				)

@@ -23,8 +23,8 @@ class Filled_excerpt extends Base_simple {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label']          = __( 'Excerpt has text', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_settings'] = __( 'Excerpt has text', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label']          = __( 'Excerpt has text', 'publishpress-content-checklist' );
+		$this->lang['label_settings'] = __( 'Excerpt has text', 'publishpress-content-checklist' );
 	}
 
 	/**

@@ -120,7 +120,7 @@ class Base_counter extends Base_simple implements Interface_required {
 		// Both same value = exact
 		if ( $min_value == $max_value ) {
 			$label = sprintf(
-				_n( $this->lang['label_exact_singular'], $this->lang['label_exact_plural'], $min_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				_n( $this->lang['label_exact_singular'], $this->lang['label_exact_plural'], $min_value, 'publishpress-content-checklist' ),
 				$min_value
 			);
 		}
@@ -128,7 +128,7 @@ class Base_counter extends Base_simple implements Interface_required {
 		// Min not empty, max empty or < min = only min
 		if ( ! empty( $min_value ) && ( $max_value < $min_value ) ) {
 			$label = sprintf(
-				_n( $this->lang['label_min_singular'], $this->lang['label_min_plural'], $min_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				_n( $this->lang['label_min_singular'], $this->lang['label_min_plural'], $min_value, 'publishpress-content-checklist' ),
 				$min_value
 			);
 		}
@@ -136,7 +136,7 @@ class Base_counter extends Base_simple implements Interface_required {
 		// Min not empty, max not empty and > min = both min and max
 		if ( ! empty( $min_value ) && ( $max_value > $min_value ) ) {
 			$label = sprintf(
-				__( $this->lang['label_between'], PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				__( $this->lang['label_between'], 'publishpress-content-checklist' ),
 				$min_value,
 				$max_value
 			);
@@ -145,7 +145,7 @@ class Base_counter extends Base_simple implements Interface_required {
 		// Min empty, max not empty and > min = only max
 		if ( empty( $min_value ) && ( $max_value > $min_value ) ) {
 			$label = sprintf(
-				_n( $this->lang['label_max_singular'], $this->lang['label_max_plural'], $max_value, PP_CONTENT_CHECKLIST_LANG_CONTEXT ),
+				_n( $this->lang['label_max_singular'], $this->lang['label_max_plural'], $max_value, 'publishpress-content-checklist' ),
 				$max_value
 			);
 		}
@@ -219,7 +219,7 @@ class Base_counter extends Base_simple implements Interface_required {
 			$max_value
 		);
 
-		$html = sprintf( __( 'Min %s Max %s', PP_CONTENT_CHECKLIST_LANG_CONTEXT ), $min_field, $max_field );
+		$html = sprintf( __( 'Min %s Max %s', 'publishpress-content-checklist' ), $min_field, $max_field );
 
 		return $html;
 	}

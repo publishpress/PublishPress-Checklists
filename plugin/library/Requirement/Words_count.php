@@ -23,14 +23,14 @@ class Words_Count extends Base_counter {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label_settings']       = __( 'Number of words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_min_singular']   = __( 'Minimum of %s word', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_min_plural']     = __( 'Minimum of %s words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_max_singular']   = __( 'Maximum of %s word', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_max_plural']     = __( 'Maximum of %s words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_exact_singular'] = __( '%s word', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_exact_plural']   = __( '%s words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
-		$this->lang['label_between']        = __( 'Between %s and %s words', PP_CONTENT_CHECKLIST_LANG_CONTEXT );
+		$this->lang['label_settings']       = __( 'Number of words', 'publishpress-content-checklist' );
+		$this->lang['label_min_singular']   = __( 'Minimum of %s word', 'publishpress-content-checklist' );
+		$this->lang['label_min_plural']     = __( 'Minimum of %s words', 'publishpress-content-checklist' );
+		$this->lang['label_max_singular']   = __( 'Maximum of %s word', 'publishpress-content-checklist' );
+		$this->lang['label_max_plural']     = __( 'Maximum of %s words', 'publishpress-content-checklist' );
+		$this->lang['label_exact_singular'] = __( '%s word', 'publishpress-content-checklist' );
+		$this->lang['label_exact_plural']   = __( '%s words', 'publishpress-content-checklist' );
+		$this->lang['label_between']        = __( 'Between %s and %s words', 'publishpress-content-checklist' );
 	}
 
 	/**
