@@ -89,7 +89,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_VERSION' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_VERSION', '1.1.1b1' );
+			define( 'PP_CONTENT_CHECKLIST_VERSION', '1.1.1' );
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_MODULE_PATH' ) ) {
