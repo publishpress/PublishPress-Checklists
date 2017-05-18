@@ -43,14 +43,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [1.1.1] = UNRELEASED =
+* Fixed:
+* Removed .DS_Store file from the package
+* Fixed the "Hello Dolly" message in the Freemius opt-in dialog
+* Increased the minimum WordPress version to 4.6
 
 * Changed:
 * Improved settings merging the checkbox and the action list for each requirement
 * Changed order for Categories and Tags to stay together in the list
 * Changed code to use correct language domain
-
-* Fixed:
-* Removed .DS_Store file from the package
 
 = [1.1.0] = 2017-05-11 =
 
