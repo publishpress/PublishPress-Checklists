@@ -212,6 +212,11 @@ class Base_counter extends Base_simple implements Interface_required {
 			$max_value = '';
 		}
 
+		// Make sure to do not display max_value, if less than min_value
+		if ( $max_value < $min_value ) {
+			$max_value = '';
+		}
+
 		// Get the field markup for min value
 		$min_field = sprintf(
 			'<input type="text" " id="%s" name="%s" value="%s" class="pp-checklist-small-input pp-checklist-number" />',
