@@ -60,8 +60,33 @@
 			count = counter.count( text );
 
 			if ( count !== prev_count ) {
+				var is_valid = false,
+					min = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[0]),
+					max = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[1]);
+
 				// Compare the count with the configured value
-				var is_valid = ( count >= objectL10n_checklist_requirements.requirements.words_count.value[0] )
+
+				// Both same value = exact
+				if ( min === max ) {
+					is_valid = count === min;
+				}
+
+				// Min not empty, max empty or < min = only min
+				if ( min > 0 && ( max === 0 || max < min ) ) {
+					is_valid = count >= min;
+				}
+
+				// Min not empty, max not empty and > min = both min and max
+				if ( min > 0 && max > 0 && max > min ) {
+					is_valid = count >= min && count <= max;
+				}
+
+				// Min empty, max not empty and > min = only max
+				if ( min === 0 && max > 0 && max > min ) {
+					is_valid = count <= max;
+				}
+
+				( count >= objectL10n_checklist_requirements.requirements.words_count.value[0] )
 					&& ( count <= objectL10n_checklist_requirements.requirements.words_count.value[1] );
 
 				$( '#pp-checklist-req-words_count' ).trigger(
