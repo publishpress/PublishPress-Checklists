@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixes the word count feature
 
 * Changed:
-* Displays empty value in the max fields when max is less then min
+* Displays empty value in the max fields when max is less than min
 * Improves the min and max fields for value equal 0. Displays empty fields.
 
 = [1.1.1] - 2017-05-18 =
