@@ -3,7 +3,7 @@ Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,15 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.1.2] - 2017-05-23 =
+
+* Fixed:
+* Fixes the word count feature
+
+* Changed:
+* Displays empty value in the max fields when max is less then min
+* Improves the min and max fields for value equal 0. Displays empty fields.
 
 = [1.1.1] - 2017-05-18 =
 
