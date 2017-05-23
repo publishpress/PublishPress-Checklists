@@ -40,9 +40,9 @@ function ppch_fs() {
                 'name'       => 'PublishPress',
             ),
             'menu'                => array(
-                'slug'           => 'publishpress',
-                'support'        => false,
-                'account'        => false,
+                'slug'    => 'publishpress',
+                'support' => false,
+                'account' => false,
             ),
         ) );
     }
