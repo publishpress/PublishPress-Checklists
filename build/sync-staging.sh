@@ -17,7 +17,7 @@
 # developing. Used with fswatch in Mac OS to detect file changes.
 
 STAGING_PATH=$WP_PATH/wp-content/plugins/publishpress-content-checklist
-SRC_PATH=../plugin
+SRC_PATH=../src
 
 
 if [ ! -d $STAGING_PATH ]; then
