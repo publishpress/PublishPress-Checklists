@@ -42,6 +42,12 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.2.0] - UNRELEASED =
+
+* Changed:
+* Added the option to hide the Publish button if the checklist is not completed
+* The warning icon in the publish box now appears even for published content
+
 = [1.1.2] - 2017-05-23 =
 
 * Fixed:

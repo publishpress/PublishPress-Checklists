@@ -314,7 +314,7 @@
 	/*----------  Warning icon in submit button  ----------*/
 
 	// Show warning icon close to the submit button
-	if ( objectL10n_checklist_requirements.show_warning_icon_submit && ! PP_Content_Checklist.is_published() ) {
+	if ( objectL10n_checklist_requirements.show_warning_icon_submit ) {
 		var $icon = $( '<span>' )
 			.addClass( 'dashicons dashicons-warning pp-checklist-warning-icon' )
 			.hide()
@@ -330,6 +330,25 @@
 			} else {
 				// Ok
 				$icon.hide();
+			}
+		} );
+	}
+
+	/*----------  Hide submit button  ----------*/
+
+	// Hide the submit button
+	if ( objectL10n_checklist_requirements.hide_publish_button ) {
+		var $button = $('#publish');
+
+		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
+			var has_uncheked = $( '#pp-checklist-req-box' ).children( '.status-no' );
+
+			if ( has_uncheked.length > 0 ) {
+				// Not ok
+				$button.hide();
+			} else {
+				// Ok
+				$button.show();
 			}
 		} );
 	}

@@ -78,6 +78,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'enabled'                  => 'on',
 					'post_types'               => array( 'post' ),
 					'show_warning_icon_submit' => 'no',
+					'hide_publish_button'      => 'no',
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
@@ -269,6 +270,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->options_group_name . '_post_types'
 			);
 
+			add_settings_field(
+				'hide_publish_button',
+				__( 'Hide Publish button:', 'publishpress-content-checklist' ),
+				array( $this, 'settings_hide_publish_button_option' ),
+				$this->module->options_group_name,
+				$this->module->options_group_name . '_post_types'
+			);
+
 			/**
 			 *
 			 * Global settings
@@ -316,6 +325,23 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[show_warning_icon_submit]" '
 				. checked( $value, 'yes', false ) . ' />';
 			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will display a warning icon in the "Publish" box', 'publishpress-content-checklist' );
+			echo '</label>';
+		}
+
+		/**
+		 * Displays the field for the option of hide the submit button if the
+		 * checklist is not complete.
+		 *
+		 * @param  array
+		 */
+		public function settings_hide_publish_button_option( $args = array() ) {
+			$id    = $this->module->options_group_name . '_hide_publish_button';
+			$value = isset( $this->module->options->hide_publish_button ) ? $this->module->options->hide_publish_button : 'no';
+
+			echo '<label for="' . $id . '">';
+			echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[hide_publish_button]" '
+				. checked( $value, 'yes', false ) . ' />';
+			echo '&nbsp;&nbsp;&nbsp;' . __( 'This will hide the Publish button if the checklist is not complete', 'publishpress-content-checklist' );
 			echo '</label>';
 		}
 
@@ -515,7 +541,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						'msg_missed_required'      => __( 'Please complete the following requirements before publishing:', 'publishpress-content-checklist' ),
 						'msg_missed_important'     => __( 'Not required, but important: ', 'publishpress-content-checklist' ),
 						'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
-						'title_warning_icon'       => __( 'One or more items in the checklist are not completed. Are you sure you want to publish?' ),
+						'hide_publish_button'      => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
+						'title_warning_icon'       => __( 'One or more items in the checklist are not completed' ),
 					)
 				);
 			}
