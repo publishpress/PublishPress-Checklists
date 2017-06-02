@@ -13,9 +13,17 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Filled_excerpt extends Base_simple {
 	/**
-	 * The name of this requirement.
+	 * The constructor. It adds the action to load the requirement.
+	 *
+	 * @var  string
+	 *
+	 * @return  void
 	 */
-	const NAME = 'filled_excerpt';
+	public function __construct( $module ) {
+		$this->name = 'filled_excerpt';
+
+		parent::__construct( $module );
+	}
 
 	/**
 	 * Initialize the language strings for the instance

@@ -56,6 +56,12 @@
 		EVENT_UPDATE_REQUIREMENT_STATE: 'pp-content-checklist:update_requirement_state',
 
 		/**
+		 * Constat for the event toggle_custom_item
+		 * @type {String}
+		 */
+		EVENT_TOGGLE_CUSTOM_ITEM: 'pp-content-checklist:toggle_custom_item',
+
+		/**
 		 * Constant for the interval of the tic event
 		 * @type {Number}
 		 */
@@ -131,6 +137,40 @@
 			// Hook to the requirement items
 			$( '[id^=pp-checklist-req]' ).on( this.EVENT_UPDATE_REQUIREMENT_STATE, function( event, state ) {
 				this.update_requirement_icon( state, $( event.target ) );
+			}.bind( this ) );
+
+			// Add event to the custom items
+			$( '.pp-checklist-custom-item' ).click( function( event ) {
+				var target = event.target;
+
+				if ( 'LI' !== target.nodeNAME ) {
+					target = $( target ).parent( 'li' )[0];
+				}
+
+				if ( typeof target !== 'undefined' ) {
+					this.elems.document.trigger( this.EVENT_TOGGLE_CUSTOM_ITEM, $( target ) );
+				}
+			}.bind( this ) );
+
+			// On clicking the confimation button in the modal window
+			this.elems.document.on( this.EVENT_TOGGLE_CUSTOM_ITEM, function( event, item ) {
+				var $item   = $( item ),
+					$icon   = $item.children( '.dashicons' ),
+					checked = $icon.hasClass( 'dashicons-yes' );
+
+				if ( checked ) {
+					$icon.removeClass( 'dashicons-yes' );
+					$item.removeClass( 'status-yes' );
+					$icon.addClass( 'dashicons-no' );
+					$item.addClass( 'status-no' );
+				} else {
+					$icon.removeClass( 'dashicons-no' );
+					$item.removeClass( 'status-no' );
+					$icon.addClass( 'dashicons-yes' );
+					$item.addClass( 'status-yes' );
+				}
+
+				$item.children( 'input[type="hidden"]' ).val( $item.hasClass( 'status-yes' ) ? 'yes' : 'no' );
 			}.bind( this ) );
 
 			// Start the tic event

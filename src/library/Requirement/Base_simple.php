@@ -9,6 +9,8 @@
 
 namespace PublishPress\Addon\Content_checklist\Requirement;
 
+use PublishPress\Addon\Content_checklist\Plugin;
+
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Base_simple extends Base_requirement implements Interface_required {
@@ -25,7 +27,7 @@ class Base_simple extends Base_requirement implements Interface_required {
 				static::GROUP_GLOBAL => static::VALUE_NO,
 			),
 			"{$this->name}_rule" => array(
-				static::GROUP_GLOBAL => static::RULE_ONLY_DISPLAY,
+				static::GROUP_GLOBAL => Plugin::RULE_ONLY_DISPLAY,
 			),
 		);
 
@@ -63,7 +65,7 @@ class Base_simple extends Base_requirement implements Interface_required {
 		$options               = $this->module->options;
 
 		// Rule
-		$rule = static::RULE_DISABLED;
+		$rule = Plugin::RULE_DISABLED;
 		if ( isset( $options->{ $option_rule_property }[ static::GROUP_GLOBAL ] ) ) {
 			$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
 		}
@@ -82,9 +84,9 @@ class Base_simple extends Base_requirement implements Interface_required {
 		return in_array(
 			$rule,
 			array(
-				static::RULE_ONLY_DISPLAY,
-				static::RULE_WARNING,
-				static::RULE_BLOCK,
+				Plugin::RULE_ONLY_DISPLAY,
+				Plugin::RULE_WARNING,
+				Plugin::RULE_BLOCK,
 			)
 		);
 	}

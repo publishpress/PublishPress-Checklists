@@ -1,4 +1,4 @@
-<table class="wp-list-table striped pp-checklist-requirements-settings">
+<table class="wp-list-table striped pp-checklist-requirements-settings" id="pp-checklist-requirements">
 	<thead>
 		<tr>
 			<th width="20%">{{ lang.description }}</th>
@@ -9,11 +9,17 @@
 
 	<tbody>
 		{% for requirement in requirements %}
-			<tr>
-				<td>{{ requirement.lang['label_settings'] }}</td>
+			<tr data-id="{{ requirement.name }}">
+				<td>{{ requirement.get_setting_title_html( 'global' )|raw }}</td>
 				<td>{{ requirement.get_setting_action_list_html( 'global' )|raw }}</td>
 				<td>{{ requirement.get_setting_field_html( 'global' )|raw }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>
 </table>
+<br>
+<div>
+	<a id="pp-checklist-add-button" href="javascript:void(0);">
+		<span class="dashicons dashicons-plus-alt"></span> {{ lang['add_custom_item'] }}
+	</a>
+</div>

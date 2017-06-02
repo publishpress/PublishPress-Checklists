@@ -45,3 +45,12 @@
 .pp-checklist-requirements-settings th {
 	width: auto;
 }
+
+.pp-checklist-custom-item {
+	cursor: pointer;
+}
+
+.pp-checklist-custom-item .dashicons {
+    border: 1px solid silver;
+    border-radius: 4px;
+}

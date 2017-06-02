@@ -13,9 +13,17 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Words_Count extends Base_counter {
 	/**
-	 * The name of this requirement.
+	 * The constructor. It adds the action to load the requirement.
+	 *
+	 * @var  string
+	 *
+	 * @return  void
 	 */
-	const NAME = 'words_count';
+	public function __construct( $module ) {
+		$this->name = 'words_count';
+
+		parent::__construct( $module );
+	}
 
 	/**
 	 * Initialize the language strings for the instance

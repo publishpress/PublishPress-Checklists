@@ -11,6 +11,7 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
+use PublishPress\Addon\Content_checklist\Plugin;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Twig_Extension_Debug;
@@ -19,7 +20,25 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Plugin {
 
-	const LANGUAGE_CONTEXT = 'publishpress-content-checklist';
+	/**
+	 * The rule that disables
+	 */
+	const RULE_DISABLED = 'off';
+
+	/**
+	 * The rule that do not warning, or block
+	 */
+	const RULE_ONLY_DISPLAY = 'only_display';
+
+	/**
+	 * The rule that displays a warning
+	 */
+	const RULE_WARNING = 'warning';
+
+	/**
+	 * The rule that blocks
+	 */
+	const RULE_BLOCK = 'block';
 
 	/**
 	 * Twig instance
@@ -62,6 +81,7 @@ class Plugin {
 		}
 
 		add_filter( 'pp_module_dirs', array( $this, 'filter_module_dirs' ) );
+		add_filter( 'pp_checklist_rules_list', array( $this, 'filter_rules_list' ) );
 	}
 
 	/**
@@ -95,5 +115,24 @@ class Plugin {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Get a list of rules for the requirement
+	 *
+	 * @return array
+	 */
+	public function filter_rules_list( $rules ) {
+		$rules = array_merge(
+			$rules,
+			array(
+				Plugin::RULE_DISABLED     => __( 'Disabled', 'publishpress-content-checklist' ),
+				Plugin::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', 'publishpress-content-checklist' ),
+				Plugin::RULE_WARNING      => __( 'Show a pop-up message', 'publishpress-content-checklist' ),
+				Plugin::RULE_BLOCK        => __( 'Prevent publishing', 'publishpress-content-checklist' ),
+			)
+		);
+
+		return $rules;
 	}
 }

@@ -1,6 +1,8 @@
 {% set show_required_legend = false %}
 
 <div id="{{ metadata_taxonomy }}-meta-box">
+	<input type="hidden" name="{{ metadata_taxonomy }}_nonce" value="{{ nonce }}" />
+
 	<ul id="pp-checklist-req-box">
 		{% if not requirements %}
 			<p>
@@ -11,13 +13,16 @@
 		{% for key, req in requirements %}
 			<li
 				id="pp-checklist-req-{{ key }}"
-				class="pp-checklist-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }}"
+				class="pp-checklist-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }} {{ req.is_custom ? 'pp-checklist-custom-item' : '' }}"
 				data-id="{{ key }}">
 
+				{% if req.is_custom %}
+					<input type="hidden" name="_pp_content_checklist_custom_item[{{ req.id }}]" value="{{ req.status ? 'yes' : 'no' }}" />
+				{% endif %}
+
 				<span class="dashicons dashicons-{{ req.status ? 'yes' : 'no' }}"></span>
-				<span class="status-label">
-					{{ req.label }}
-				</span>
+				<span class="status-label">{{ req.label }}</span>
+
 				<span>
 					{% if req.rule == 'block' %}
 						*

@@ -13,14 +13,22 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Tags_Count extends Base_counter {
 	/**
-	 * The name of this requirement.
-	 */
-	const NAME = 'tags_count';
-
-	/**
 	 * The priority for the action to load the requirement
 	 */
 	const PRIORITY = 9;
+
+	/**
+	 * The constructor. It adds the action to load the requirement.
+	 *
+	 * @var  string
+	 *
+	 * @return  void
+	 */
+	public function __construct( $module ) {
+		$this->name = 'tags_count';
+
+		parent::__construct( $module );
+	}
 
 	/**
 	 * Initialize the language strings for the instance

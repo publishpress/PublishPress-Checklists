@@ -45,6 +45,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 		const SETTINGS_SLUG         = 'pp-checklist-settings';
 
+		const POST_META_PREFIX = 'pp_checklist_custom_item_';
+
 		public $module_name = 'checklist';
 
 		protected $requirement_instances;
@@ -79,6 +81,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'post_types'               => array( 'post' ),
 					'show_warning_icon_submit' => 'no',
 					'hide_publish_button'      => 'no',
+					'custom_items'             => array( 'global' => array() ),
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
@@ -94,10 +97,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$this->configure_twig();
 
 			$this->license_manager = new License;
-
-			// Load the requirements
-			$this->instantiate_requirement_classes();
-			do_action( 'pp_checklist_load_requirements' );
 		}
 
 		/**
@@ -106,25 +105,37 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		protected function instantiate_requirement_classes() {
 			$base_path = PP_CONTENT_CHECKLIST_LIB_PATH . '/Requirement/';
-			$req_files = glob( $base_path . '*.php' );
+			$req_files = array(
+				'Words_count',
+				'Categories_count',
+				'Tags_count',
+				'Featured_image',
+				'Filled_excerpt',
+			);
 
-			foreach ( $req_files as $path ) {
-				// Extract the class name
-				$class = str_replace( array( $base_path, '.php' ), '', $path );
-
-				// Check if it is a base class or interface to bypass
-				if ( preg_match( '/^Base_|^Interface_/i', $class) ) {
-					continue;
-				}
-
+			foreach ( $req_files as $class_name ) {
 				// Append the namespace
-				$class = '\\PublishPress\\Addon\\Content_checklist\\Requirement\\' . $class;
+				$class = '\\PublishPress\\Addon\\Content_checklist\\Requirement\\' . $class_name;
 
 				// Create a reflection to check if the class is not abstract or interface
 				$reflection = new \ReflectionClass( $class );
 
 				if ( class_exists( $class ) && ! $reflection->isAbstract() && ! $reflection->isInterface() ) {
 					new $class( $this->module );
+				}
+			}
+
+			// Instantiate custom items
+			if ( isset( $this->module->options->custom_items ) && ! empty( $this->module->options->custom_items ) ) {
+				foreach ( $this->module->options->custom_items as $id ) {
+					$var_name = $id . '_title';
+					if ( isset( $this->module->options->$var_name['global'] )
+						&& empty( $this->module->options->$var_name['global'] ) ) {
+
+						continue;
+					}
+
+					new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module );
 				}
 			}
 		}
@@ -163,11 +174,16 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 			add_action( 'admin_init', array( $this, 'load_updater' ) );
 			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
+			add_action( 'save_post', array( $this, 'save_post_metabox' ), 10, 2 );
 
 			// Editor
 			add_filter( 'mce_external_plugins', array( $this, 'add_mce_plugin' ) );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
+
+			// Load the requirements
+			$this->instantiate_requirement_classes();
+			do_action( 'pp_checklist_load_requirements' );
 		}
 
 		/**
@@ -392,6 +408,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						'description'     => __( 'Description', 'publishpress-content-checklist' ),
 						'params'          => __( 'Parameters', 'publishpress-content-checklist' ),
 						'action'          => __( 'Action', 'publishpress-content-checklist' ),
+						'add_custom_item' => __( 'Add custom item', 'publishpress-content-checklist' ),
 					)
 				)
 			);
@@ -420,16 +437,20 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->post_type_support
 			);
 
-
 			$option_groups = array_merge(
 				array( 'global' ),
 				array_keys( $new_options['post_types'] )
 			);
 
 			if ( ! isset ( $new_options['show_warning_icon_submit'] ) ) {
-				$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES;
+				$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
 			}
 			$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
+
+			if ( ! isset ( $new_options['hide_publish_button'] ) ) {
+				$new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
+			}
+			$new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
 			foreach ( $option_groups as $option_group ) {
 				$new_options = apply_filters( 'pp_checklist_validate_option_group', $new_options, $option_group );
@@ -465,12 +486,32 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'all'
 			);
 
+			wp_enqueue_style(
+				'pp-checklist-admin',
+				$this->module_url . 'assets/css/admin.css',
+				false,
+				PP_CONTENT_CHECKLIST_VERSION,
+				'all'
+			);
+
 			wp_enqueue_script(
 				'pp-checklist-admin',
 				plugins_url( '/modules/checklist/assets/js/admin.js', PP_CONTENT_CHECKLIST_FILE ),
 				array( 'jquery' ),
 				PP_CONTENT_CHECKLIST_VERSION,
 				true
+			);
+
+			$rules = array();
+			$rules = apply_filters( 'pp_checklist_rules_list', $rules );
+
+			wp_localize_script(
+				'pp-checklist-admin',
+				'objectL10n_checklist_admin',
+				array(
+					'rules'     => $rules,
+					'post_type' => 'global',
+				)
 			);
 
 			wp_enqueue_style( 'pp-remodal-default-theme' );
@@ -554,6 +595,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'metadata_taxonomy' => self::METADATA_TAXONOMY,
 					'requirements'      => $requirements,
 					'configure_link'    => $this->get_link(),
+					'nonce'             => wp_create_nonce( __FILE__ ),
 					'lang'              => array(
 						'to_use_checklists' => __( 'To use the checklist', 'publishpress-content-checklist' ),
 						'please_choose_req' => __( 'please choose some requirements', 'publishpress-content-checklist' ),
@@ -565,6 +607,38 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				)
 			);
 		}
+
+		/**
+         * Save the state of custom items.
+         *
+         * @param int $id Unique ID for the post being saved
+         * @param object $post Post object
+         */
+        public function save_post_metabox( $id, $post ) {
+
+            // Authentication checks: make sure data came from our meta box and that the current user is allowed to edit the post
+            // TODO: switch to using check_admin_referrer? See core (e.g. edit.php) for usage
+            if ( ! isset( $_POST[ self::METADATA_TAXONOMY . "_nonce" ] )
+                || ! wp_verify_nonce( $_POST[ self::METADATA_TAXONOMY . "_nonce" ], __FILE__ ) ) {
+                return $id;
+            }
+
+            if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+                || ! in_array( $post->post_type, $this->get_post_types_for_module( $this->module ) )
+                || $post->post_type == 'post' && !current_user_can( 'edit_post', $id )
+                || $post->post_type == 'page' && !current_user_can( 'edit_page', $id ) ) {
+                return $id;
+            }
+
+            // Check if we have data coming from custom items
+            if ( isset( $_POST['_pp_content_checklist_custom_item'] ) ) {
+            	if ( ! empty( $_POST['_pp_content_checklist_custom_item'] ) ) {
+            		foreach ( $_POST['_pp_content_checklist_custom_item'] as $item_id => $value ) {
+            			update_post_meta( $id, self::POST_META_PREFIX . $item_id, $value );
+            		}
+            	}
+            }
+        }
 
 		/*=====  End of Meta boxes  ======*/
 

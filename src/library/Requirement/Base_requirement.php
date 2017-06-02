@@ -9,29 +9,11 @@
 
 namespace PublishPress\Addon\Content_checklist\Requirement;
 
+use PublishPress\Addon\Content_checklist\Plugin;
+
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Base_requirement {
-	/**
-	 * The rule that disables
-	 */
-	const RULE_DISABLED = 'off';
-
-	/**
-	 * The rule that do not warning, or block
-	 */
-	const RULE_ONLY_DISPLAY = 'only_display';
-
-	/**
-	 * The rule that displays a warning
-	 */
-	const RULE_WARNING = 'warning';
-
-	/**
-	 * The rule that blocks
-	 */
-	const RULE_BLOCK = 'block';
-
 	/**
 	 * The Yes value
 	 */
@@ -46,11 +28,6 @@ class Base_requirement {
 	 * The global group
 	 */
 	const GROUP_GLOBAL = 'global';
-
-	/**
-	 * The label for settings
-	 */
-	const LABEL_SETTINGS = 'Base Class - Please, override this constant';
 
 	/**
 	 * The priority for the action to load the requirement
@@ -79,6 +56,13 @@ class Base_requirement {
 	public $lang = array();
 
 	/**
+	 * Define if it is a custom requirement or not
+	 *
+	 * @var array
+	 */
+	public $is_custom = false;
+
+	/**
 	 * The constructor. It adds the action to load the requirement.
 	 *
 	 * @var  string
@@ -88,7 +72,6 @@ class Base_requirement {
 	public function __construct( $module ) {
 		add_action( 'pp_checklist_load_requirements', array( $this, 'init' ), static::PRIORITY );
 
-		$this->name   = static::NAME;
 		$this->module = $module;
 	}
 
@@ -139,10 +122,20 @@ class Base_requirement {
 	 * @return array
 	 */
 	public function filter_requirement_instances( $requirements ) {
-
 		$requirements[ $this->name ] = $this;
 
 		return $requirements;
+	}
+
+	/**
+	 * Get the HTML for the title setting field.
+	 *
+	 * @param  string $post_type
+	 *
+	 * @return string
+	 */
+	public function get_setting_title_html( $post_type, $css_class = '' ) {
+		return $this->lang['label_settings'];
 	}
 
 	/**
@@ -179,15 +172,11 @@ class Base_requirement {
 			$name
 		);
 
-		$rules = array(
-			static::RULE_DISABLED     => __( 'Disabled', 'publishpress-content-checklist' ),
-			static::RULE_ONLY_DISPLAY => __( 'Show a sidebar message', 'publishpress-content-checklist' ),
-			static::RULE_WARNING      => __( 'Show a pop-up message', 'publishpress-content-checklist' ),
-			static::RULE_BLOCK        => __( 'Prevent publishing', 'publishpress-content-checklist' ),
-		);
+		$rules = array();
+		$rules = apply_filters( 'pp_checklist_rules_list', $rules );
 
 		// Get the value
-		$value = static::RULE_DISABLED;
+		$value = Plugin::RULE_DISABLED;
 		if ( isset( $this->module->options->{$option_name}[ $post_type ] ) ) {
 			$value = $this->module->options->{$option_name}[ $post_type ];
 		}

@@ -27,7 +27,7 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ($) {
+( function ( $, objectL10n_checklist_admin ) {
 	"use strict";
 
 	$( function() {
@@ -46,5 +46,104 @@
 
 			return true;
 		} );
+
+		function remove_row( id ) {
+			$( 'tr[data-id="' + id + '"]' ).remove();
+		}
+
+		/**
+		 * Create a row inside the requirements table
+		 *
+		 * @param  {string} title
+		 * @param  {string} action
+		 *
+		 * @return {Element}
+		 */
+		function create_row( id, title, action, post_type ) {
+			var $table        = $( '#pp-checklist-requirements' ),
+				$tr           = $( '<tr>' ),
+				$td           = null,
+				$titleField   = $( '<input type="text" />' ),
+				$idField    = $( '<input type="hidden" />' ),
+				$actionField  = $( '<select>' ),
+				$option,
+				$a,
+				$icon,
+				rule;
+
+			$table.append( $tr );
+
+			$tr.data( 'id', id );
+
+			// Title cell
+			$td = $( '<td>' ).appendTo( $tr );
+			$titleField
+				.attr(
+					'name',
+					'publishpress_checklist_options[' + id + '_title][' + post_type + ']'
+				)
+				.val( title )
+				.addClass( 'pp-checklist-custom-item-title' )
+				.focus()
+				.data( 'id', id )
+				.appendTo( $td );
+
+			// id fields
+			$idField
+				.attr(
+					'name',
+					'publishpress_checklist_options[custom_items][]'
+				)
+				.val( id )
+				.appendTo( $td );
+
+			// Action cell
+			$td = $( '<td>' ).appendTo( $tr );
+			$actionField
+				.attr(
+					'name',
+					'publishpress_checklist_options[' + id + '_rule][' + post_type + ']'
+				)
+				.data( 'id', id )
+				.appendTo( $td );
+
+			$.each( objectL10n_checklist_admin.rules, function ( value, label ) {
+				$option = $( '<option>' )
+					.attr( 'value', value )
+					.text( label )
+					.appendTo( $actionField );
+			} );
+
+			// Params cell
+			$td   = $( '<td>' )
+				.data( 'id', id )
+				.appendTo( $tr );
+			$a    = $( '<a>' )
+				.attr( 'href', 'javascript:void(0);' )
+				.addClass( 'pp-checklist-remove-custom-item' )
+				.data( 'id', id )
+				.appendTo( $td );
+			$icon = $( '<span>' )
+				.addClass( 'dashicons dashicons-trash' )
+				.data( 'id', id )
+				.appendTo( $a );
+
+			$a.on( 'click', function( event ) {
+				remove_row( id );
+			} );
+		}
+
+		/*----------  Custom items  ----------*/
+		$( '#pp-checklist-add-button' ).on( 'click', function( event ) {
+			var newId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
+
+			create_row( newId, '', '', objectL10n_checklist_admin.post_type );
+		} );
+
+		$( '.pp-checklist-remove-custom-item' ).on( 'click', function( event ) {
+			var target = $( event.target );
+
+			remove_row(  target.data( 'id' ) );
+		} );
 	} );
-} )( jQuery );
+} )( jQuery, objectL10n_checklist_admin );
