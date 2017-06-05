@@ -173,9 +173,7 @@ class Custom_item extends Base_simple implements Interface_required {
 			}
 		}
 
-		// // Check if we need to remove items
-		$plugin = PublishPress();
-
+		// Check if we need to remove items
 		if ( isset( $new_options['custom_items_remove'] )
 			&& ! empty( $new_options['custom_items_remove'] ) ) {
 
@@ -197,6 +195,7 @@ class Custom_item extends Base_simple implements Interface_required {
 
 		unset( $new_options['custom_items_remove'] );
 
+		$plugin = PublishPress();
 		update_option( $plugin->options_group . 'content_checklist_options', $this->module->options );
 
 		return $new_options;
