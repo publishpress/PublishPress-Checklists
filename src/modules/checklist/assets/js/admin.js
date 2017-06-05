@@ -48,6 +48,12 @@
 		} );
 
 		function remove_row( id ) {
+			// Add a special hidden input to flag the delete action
+			var $input = $( '<input type="hidden" />')
+				.attr( 'name', 'publishpress_checklist_options[custom_items_remove][]' )
+				.val( id )
+				.appendTo( $( '#pp-checklist-requirements' ) );
+
 			$( 'tr[data-id="' + id + '"]' ).remove();
 		}
 

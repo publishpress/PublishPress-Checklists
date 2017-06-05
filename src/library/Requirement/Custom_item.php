@@ -162,8 +162,8 @@ class Custom_item extends Base_simple implements Interface_required {
 		if ( isset( $new_options[ $this->name . '_title' ][ $option_group ] )
 			&& empty( $new_options[ $this->name . '_title' ][ $option_group ] ) ) {
 
+			// Look for empty title
 			$index = array_search( $this->name, $new_options[ 'custom_items' ] );
-
 			if ( false !== $index ) {
 				unset(
 					$new_options[ $this->name . '_title' ][ $option_group ],
@@ -172,6 +172,32 @@ class Custom_item extends Base_simple implements Interface_required {
 				);
 			}
 		}
+
+		// // Check if we need to remove items
+		$plugin = PublishPress();
+
+		if ( isset( $new_options['custom_items_remove'] )
+			&& ! empty( $new_options['custom_items_remove'] ) ) {
+
+			foreach ( $new_options['custom_items_remove'] as $id ) {
+				$var_name = $id	. '_title';
+				unset( $this->module->options->{$var_name} );
+
+				$var_name = $id	. '_rule';
+				unset( $this->module->options->{$var_name} );
+
+				unset( $this->module->options->{$id} );
+
+				$index_remove = array_search( $id, $this->module->options->custom_items );
+				if ( false !== $index_remove ) {
+					unset( $this->module->options->custom_items[ $index_remove ] );
+				}
+			}
+		}
+
+		unset( $new_options['custom_items_remove'] );
+
+		update_option( $plugin->options_group . 'content_checklist_options', $this->module->options );
 
 		return $new_options;
 	}
