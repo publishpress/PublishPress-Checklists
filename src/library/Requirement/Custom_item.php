@@ -80,13 +80,13 @@ class Custom_item extends Base_simple implements Interface_required {
 		$html = sprintf(
 			'<input type="text" name="%s" value="%s" data-id="%s" class="pp-checklist-custom-item-title" />',
 			$name,
-			$this->get_title( $post_type ),
-			$this->name
+			esc_attr( $this->get_title( $post_type ) ),
+			esc_attr( $this->name )
 		);
 
 		$html .= sprintf(
 			'<input type="hidden" name="publishpress_checklist_options[custom_items][]" value="%s" />',
-			$this->name
+			esc_attr( $this->name )
 		);
 
 		return $html;
@@ -102,7 +102,7 @@ class Custom_item extends Base_simple implements Interface_required {
 	public function get_setting_field_html( $post_type, $css_class = '' ) {
 		$html = sprintf(
 			'<a href="javascript:void(0);" class="pp-checklist-remove-custom-item" data-id="%1$s"><span class="dashicons dashicons-trash" data-id="%1$s"></span></a>',
-			$this->name
+			esc_attr( $this->name )
 		);
 
 		return $html;
