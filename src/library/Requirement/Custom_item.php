@@ -55,13 +55,14 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return string
 	 */
 	public function get_title( $post_type ) {
+		$title    = '';
 		$var_name = $this->name . '_title';
 
 		if ( isset( $this->module->options->{ $var_name }[ $post_type ] ) ) {
-			return $this->module->options->{ $var_name }[ $post_type ];
+			$title = stripslashes( $this->module->options->{ $var_name }[ $post_type ] );
 		}
 
-		return '';
+		return $title;
 	}
 
 	/**
