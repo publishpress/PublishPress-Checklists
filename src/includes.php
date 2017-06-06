@@ -101,7 +101,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_ITEM_NAME' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'PublishPress Content Checklist' );
+			define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_LIB_PATH' ) ) {
