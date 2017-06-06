@@ -44,8 +44,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [1.2.0] - UNRELEASED =
 
-* Changed:
+* Added:
 * Added the option to hide the Publish button if the checklist is not completed
+* Added the option to add custom items for the checklist
+* Added POT file and English PO files
+
+* Fixed:
+* Fixes the mask for numeric input fields in the settings tab on Firefox
+* Fixes the license key validation
+* Fixes the update system
+
+* Changed:
 * The warning icon in the publish box now appears even for published content
 
 = [1.1.2] - 2017-05-23 =
