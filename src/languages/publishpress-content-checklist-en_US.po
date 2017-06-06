@@ -1,0 +1,361 @@
+# Copyright (C) 2017 PublishPress Content Checklist
+# This file is distributed under the same license as the PublishPress Content Checklist package.
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Content Checklist 1.1.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
+"POT-Creation-Date: 2017-06-06 11:08-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-06-06 11:22-0300\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+
+#: freemius/includes/class-fs-plugin-updater.php:565
+msgid "Unable to connect to the filesystem. Please confirm your credentials."
+msgstr "Unable to connect to the filesystem. Please confirm your credentials."
+
+#: library/Plugin.php:113
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#: library/Plugin.php:114
+msgid ""
+"PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, "
+"update."
+msgstr ""
+"PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, "
+"update."
+
+#: library/Plugin.php:129
+msgid "Disabled"
+msgstr "Disabled"
+
+#: library/Plugin.php:130
+msgid "Show a sidebar message"
+msgstr "Show a sidebar message"
+
+#: library/Plugin.php:131
+msgid "Show a pop-up message"
+msgstr "Show a pop-up message"
+
+#: library/Plugin.php:132
+msgid "Prevent publishing"
+msgstr "Prevent publishing"
+
+#: library/Requirement/Base_counter.php:236
+msgid "Min %s Max %s"
+msgstr "Min %s Max %s"
+
+#: library/Requirement/Categories_count.php:39
+msgid "Number of categories"
+msgstr "Number of categories"
+
+#: library/Requirement/Categories_count.php:40
+msgid "Minimum of %s category"
+msgstr "Minimum of %s category"
+
+#: library/Requirement/Categories_count.php:41
+msgid "Minimum of %s categories"
+msgstr "Minimum of %s categories"
+
+#: library/Requirement/Categories_count.php:42
+msgid "Maximum of %s category"
+msgstr "Maximum of %s category"
+
+#: library/Requirement/Categories_count.php:43
+msgid "Maximum of %s categories"
+msgstr "Maximum of %s categories"
+
+#: library/Requirement/Categories_count.php:44
+msgid "%s category"
+msgstr "%s category"
+
+#: library/Requirement/Categories_count.php:45
+msgid "%s categories"
+msgstr "%s categories"
+
+#: library/Requirement/Categories_count.php:46
+msgid "Between %s and %s categories"
+msgstr "Between %s and %s categories"
+
+#: library/Requirement/Custom_item.php:47
+#: library/Requirement/Custom_item.php:48
+msgid "Custom"
+msgstr "Custom"
+
+#: library/Requirement/Featured_image.php:34
+#: library/Requirement/Featured_image.php:35
+msgid "Featured image"
+msgstr "Featured image"
+
+#: library/Requirement/Filled_excerpt.php:34
+#: library/Requirement/Filled_excerpt.php:35
+msgid "Excerpt has text"
+msgstr "Excerpt has text"
+
+#: library/Requirement/Tags_count.php:39
+msgid "Number of tags"
+msgstr "Number of tags"
+
+#: library/Requirement/Tags_count.php:40
+msgid "Minimum of %s tag"
+msgstr "Minimum of %s tag"
+
+#: library/Requirement/Tags_count.php:41
+msgid "Minimum of %s tags"
+msgstr "Minimum of %s tags"
+
+#: library/Requirement/Tags_count.php:42
+msgid "Maximum of %s tag"
+msgstr "Maximum of %s tag"
+
+#: library/Requirement/Tags_count.php:43
+msgid "Maximum of %s tags"
+msgstr "Maximum of %s tags"
+
+#: library/Requirement/Tags_count.php:44
+msgid "%s tag"
+msgstr "%s tag"
+
+#: library/Requirement/Tags_count.php:45
+msgid "%s tags"
+msgstr "%s tags"
+
+#: library/Requirement/Tags_count.php:46
+msgid "Between %s and %s tags"
+msgstr "Between %s and %s tags"
+
+#: library/Requirement/Words_count.php:34
+msgid "Number of words"
+msgstr "Number of words"
+
+#: library/Requirement/Words_count.php:35
+msgid "Minimum of %s word"
+msgstr "Minimum of %s word"
+
+#: library/Requirement/Words_count.php:36
+msgid "Minimum of %s words"
+msgstr "Minimum of %s words"
+
+#: library/Requirement/Words_count.php:37
+msgid "Maximum of %s word"
+msgstr "Maximum of %s word"
+
+#: library/Requirement/Words_count.php:38
+msgid "Maximum of %s words"
+msgstr "Maximum of %s words"
+
+#: library/Requirement/Words_count.php:39
+msgid "%s word"
+msgstr "%s word"
+
+#: library/Requirement/Words_count.php:40
+msgid "%s words"
+msgstr "%s words"
+
+#: library/Requirement/Words_count.php:41
+msgid "Between %s and %s words"
+msgstr "Between %s and %s words"
+
+#: modules/checklist/checklist.php:73 modules/checklist/checklist.php:539
+msgid "Checklist"
+msgstr "Checklist"
+
+#: modules/checklist/checklist.php:74 modules/checklist/checklist.php:75
+msgid "Define tasks that must be complete before content is published"
+msgstr "Define tasks that must be complete before content is published"
+
+#: modules/checklist/checklist.php:248
+msgid "Licensing:"
+msgstr "Licensing:"
+
+#: modules/checklist/checklist.php:255
+msgid "License key:"
+msgstr "License key:"
+
+#: modules/checklist/checklist.php:268
+msgid "General:"
+msgstr "General:"
+
+#: modules/checklist/checklist.php:275
+msgid "Add to these post types:"
+msgstr "Add to these post types:"
+
+#: modules/checklist/checklist.php:283
+msgid "Show warning icon:"
+msgstr "Show warning icon:"
+
+#: modules/checklist/checklist.php:291
+msgid "Hide Publish button:"
+msgstr "Hide Publish button:"
+
+#: modules/checklist/checklist.php:304
+msgid "Requirements"
+msgstr "Requirements"
+
+#: modules/checklist/checklist.php:343
+msgid "This will display a warning icon in the \"Publish\" box"
+msgstr "This will display a warning icon in the “Publish” box"
+
+#: modules/checklist/checklist.php:360
+msgid "This will hide the Publish button if the checklist is not complete"
+msgstr "This will hide the Publish button if the checklist is not complete"
+
+#: modules/checklist/checklist.php:408
+msgid "Description"
+msgstr "Description"
+
+#: modules/checklist/checklist.php:409
+msgid "Parameters"
+msgstr "Parameters"
+
+#: modules/checklist/checklist.php:410
+msgid "Action"
+msgstr "Action"
+
+#: modules/checklist/checklist.php:411
+msgid "Add custom item"
+msgstr "Add custom item"
+
+#: modules/checklist/checklist.php:545
+msgid "Configure"
+msgstr "Configure"
+
+#: modules/checklist/checklist.php:581
+msgid ""
+"The following requirements are not completed yet. Are you sure you want to "
+"publish?"
+msgstr ""
+"The following requirements are not completed yet. Are you sure you want to "
+"publish?"
+
+#: modules/checklist/checklist.php:582
+msgid "Please complete the following requirements before publishing:"
+msgstr "Please complete the following requirements before publishing:"
+
+#: modules/checklist/checklist.php:583
+msgid "Not required, but important: "
+msgstr "Not required, but important: "
+
+#: modules/checklist/checklist.php:586
+msgid "One or more items in the checklist are not completed"
+msgstr "One or more items in the checklist are not completed"
+
+#: modules/checklist/checklist.php:600
+msgid "To use the checklist"
+msgstr "To use the checklist"
+
+#: modules/checklist/checklist.php:601
+msgid "please choose some requirements"
+msgstr "please choose some requirements"
+
+#: modules/checklist/checklist.php:602
+msgid "Required"
+msgstr "Required"
+
+#: modules/checklist/checklist.php:603
+msgid "Don't publish"
+msgstr "Don’t publish"
+
+#: modules/checklist/checklist.php:604
+msgid "Yes, publish"
+msgstr "Yes, publish"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/License.php:109
+msgid "An error occurred. Please, try again."
+msgstr "An error occurred. Please, try again."
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:104
+msgid "Missing license"
+msgstr "Missing license"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:107
+msgid "Your license key is expired"
+msgstr "Your license key is expired"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:110
+msgid "Your license key has been disabled"
+msgstr "Your license key has been disabled"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:114
+msgid "Invalid license"
+msgstr "Invalid license"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:117
+msgid "Your license is not active for this URL"
+msgstr "Your license is not active for this URL"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:120
+msgid "This appears to be an invalid license key for this product"
+msgstr "This appears to be an invalid license key for this product"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:123
+msgid "Your license key has reached its activation limit"
+msgstr "Your license key has reached its activation limit"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:128
+msgid "Activated"
+msgstr "Activated"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:131
+msgid "Not validated yet"
+msgstr "Not validated yet"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:144
+msgid "Status"
+msgstr "Status"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:146
+msgid "Click here to read more about licenses."
+msgstr "Click here to read more about licenses."
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Setting/Field/License_key.php:147
+msgid "More information"
+msgstr "More information"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:198
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:206
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
+"or %5$supdate now%6$s."
+msgstr ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
+"or %5$supdate now%6$s."
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:359
+msgid "You do not have permission to install plugin updates"
+msgstr "You do not have permission to install plugin updates"
+
+#: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:359
+msgid "Error"
+msgstr "Error"
+
+#. Plugin Name of the plugin/theme
+msgid "PublishPress Content Checklist"
+msgstr "PublishPress Content Checklist"
+
+#. Plugin URI of the plugin/theme
+msgid "https://pressshack.com/publishpress/"
+msgstr "https://pressshack.com/publishpress/"
+
+#. Description of the plugin/theme
+msgid "Add a content checklist for posts"
+msgstr "Add a content checklist for posts"
+
+#. Author of the plugin/theme
+msgid "PressShack"
+msgstr "PressShack"
+
+#. Author URI of the plugin/theme
+msgid "https://pressshack.com"
+msgstr "https://pressshack.com"
