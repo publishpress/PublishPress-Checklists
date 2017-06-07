@@ -48,7 +48,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added pt-BR translations
 
 * Fixed:
-* Fixes PHP warnings after install and activate
+* Fixed PHP warnings after install and activate
+* Fixed the license and update checker
+
+* Changed:
+* Removed English language files
 
 = [1.2.0] - 2017-06-06 =
 
