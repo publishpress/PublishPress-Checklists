@@ -9,7 +9,7 @@
         }
     ],
     "config"     : {
-        "vendor-dir": "../src/vendor"
+        "vendor-dir": "src/vendor"
     },
     "repositories": [
         {
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "pressshack/wordpress-edd-license-integration": "dev-master"
+        "pressshack/wordpress-edd-license-integration": "1.0.1"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
