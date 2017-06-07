@@ -427,7 +427,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$new_options['license_key'] = '';
 			}
 			$new_options['license_key']    = $this->license_manager->sanitize_license_key( $new_options['license_key'] );
-			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_NAME );
+			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_ID );
 
 			// Whitelist validation for the post type options
 			if ( ! isset( $new_options['post_types'] ) ) {
@@ -653,7 +653,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'version'        => PP_CONTENT_CHECKLIST_VERSION,
 				'license'        => $license_key,
 				'license_status' => $license_status,
-				'item_name'      => PP_CONTENT_CHECKLIST_ITEM_NAME,
+				'item_id'        => PP_CONTENT_CHECKLIST_ITEM_ID,
 				'author'         => "PressShack"
 			);
 

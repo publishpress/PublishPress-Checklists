@@ -36,7 +36,7 @@ if ( ! defined( 'PRESSSHACK_LICENSES_ASSETS_PATH' ) ) {
 }
 
 if ( ! defined( 'PRESSSHACK_LICENSES_VERSION' ) ) {
-    define( 'PRESSSHACK_LICENSES_VERSION', '1.0.0' );
+    define( 'PRESSSHACK_LICENSES_VERSION', '1.0.1' );
 }
 
 $edd_license_language = new PressShack\EDD_License\Language;

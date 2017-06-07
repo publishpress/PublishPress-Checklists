@@ -68,8 +68,8 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 			define( 'PP_CONTENT_CHECKLIST', 'Checklist' );
 		}
 
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_NAME' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_NAME', 'PublishPress Content Checklist' );
+		if ( ! defined( 'PP_CONTENT_CHECKLIST_ITEM_ID' ) ) {
+			define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_SLUG' ) ) {
