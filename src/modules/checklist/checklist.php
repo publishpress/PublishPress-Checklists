@@ -129,10 +129,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( isset( $this->module->options->custom_items ) && ! empty( $this->module->options->custom_items ) ) {
 				foreach ( $this->module->options->custom_items as $id ) {
 					$var_name = $id . '_title';
-					if ( isset( $this->module->options->$var_name['global'] )
-						&& empty( $this->module->options->$var_name['global'] ) ) {
-
-						continue;
+					if ( isset( $this->module->options->$var_name ) ) {
+						if ( array_key_exists( 'global', $this->module->options->$var_name ) ) {
+							if ( empty( $this->module->options->$var_name['global'] ) ) {
+								continue;
+							}
+						}
 					}
 
 					new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module );

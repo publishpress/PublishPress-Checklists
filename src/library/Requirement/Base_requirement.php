@@ -122,7 +122,9 @@ class Base_requirement {
 	 * @return array
 	 */
 	public function filter_requirement_instances( $requirements ) {
-		$requirements[ $this->name ] = $this;
+		if ( ! empty( $this->name ) ) {
+			$requirements[ $this->name ] = $this;
+		}
 
 		return $requirements;
 	}
