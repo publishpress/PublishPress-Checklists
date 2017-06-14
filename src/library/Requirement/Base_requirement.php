@@ -46,7 +46,7 @@ class Base_requirement {
 	 *
 	 * @var string
 	 */
-	public $name;
+	public $name = '';
 
 	/**
 	 * Array for language strings

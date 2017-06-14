@@ -31,7 +31,7 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return  void
 	 */
 	public function __construct( $name, $module ) {
-		$this->name      = $name;
+		$this->name      = (string) $name;
 		$this->is_custom = true;
 
 		parent::__construct( $module );
