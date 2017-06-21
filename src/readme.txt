@@ -49,10 +49,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Fixed:
 * Fixed PHP warnings after install and activate
+* Fixed PHP warnings about wrong index type
 * Fixed the license and update checker
 
 * Changed:
 * Removed English language files
+* Updated Tested Up to 4.8
 
 = [1.2.0] - 2017-06-06 =
 
