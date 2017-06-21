@@ -68,8 +68,8 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 			define( 'PP_CONTENT_CHECKLIST', 'Checklist' );
 		}
 
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_NAME' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_NAME', 'PublishPress Content Checklist' );
+		if ( ! defined( 'PP_CONTENT_CHECKLIST_ITEM_ID' ) ) {
+			define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_SLUG' ) ) {
@@ -89,7 +89,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_VERSION' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_VERSION', '1.2.0' );
+			define( 'PP_CONTENT_CHECKLIST_VERSION', '1.2.1' );
 		}
 
 		if ( ! defined( 'PP_CONTENT_CHECKLIST_MODULE_PATH' ) ) {

@@ -129,10 +129,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( isset( $this->module->options->custom_items ) && ! empty( $this->module->options->custom_items ) ) {
 				foreach ( $this->module->options->custom_items as $id ) {
 					$var_name = $id . '_title';
-					if ( isset( $this->module->options->$var_name['global'] )
-						&& empty( $this->module->options->$var_name['global'] ) ) {
-
-						continue;
+					if ( isset( $this->module->options->$var_name ) ) {
+						if ( array_key_exists( 'global', $this->module->options->$var_name ) ) {
+							if ( empty( $this->module->options->$var_name['global'] ) ) {
+								continue;
+							}
+						}
 					}
 
 					new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module );
@@ -425,7 +427,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$new_options['license_key'] = '';
 			}
 			$new_options['license_key']    = $this->license_manager->sanitize_license_key( $new_options['license_key'] );
-			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_NAME );
+			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_ID );
 
 			// Whitelist validation for the post type options
 			if ( ! isset( $new_options['post_types'] ) ) {
@@ -651,7 +653,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'version'        => PP_CONTENT_CHECKLIST_VERSION,
 				'license'        => $license_key,
 				'license_status' => $license_status,
-				'item_name'      => PP_CONTENT_CHECKLIST_ITEM_NAME,
+				'item_id'        => PP_CONTENT_CHECKLIST_ITEM_ID,
 				'author'         => "PressShack"
 			);
 

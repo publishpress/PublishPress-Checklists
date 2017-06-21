@@ -3,7 +3,7 @@ Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,20 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.2.1] - UNRELEASED =
+
+* Added:
+* Added pt-BR translations
+
+* Fixed:
+* Fixed PHP warnings after install and activate
+* Fixed PHP warnings about wrong index type
+* Fixed the license and update checker
+
+* Changed:
+* Removed English language files
+* Updated Tested Up to 4.8
 
 = [1.2.0] - 2017-06-06 =
 

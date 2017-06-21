@@ -83,11 +83,11 @@ class License {
 	 * Method that validates a license key.
 	 *
 	 * @param string $license_key
-	 * @param string $item_name
+	 * @param string $item_id
 	 *
 	 * @return  mixed
 	 */
-	public function validate_license_key( $license_key, $item_name ) {
+	public function validate_license_key( $license_key, $item_id ) {
 		$response = wp_remote_post(
 			PRESSSHACK_LICENSES_API_URL,
 			array(
@@ -96,7 +96,7 @@ class License {
 				'body'      => array(
 					'edd_action' => "activate_license",
 					'license'    => $license_key,
-					'item_name'  => $item_name,
+					'item_id'    => $item_id,
 					'url'        => home_url()
 				)
 			)
