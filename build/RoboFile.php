@@ -57,6 +57,8 @@ class RoboFile extends \Robo\Tasks
                 '.gitignore',
                 'README',
                 '.DS_Store',
+                '.babelrc',
+                'package.json',
             );
 
             if (! in_array($content, $ignore)) {
@@ -88,6 +90,64 @@ class RoboFile extends \Robo\Tasks
         $this->say("Package built successfully");
 
         return $return;
+    }
+
+    /**
+     * Build and move the package to a global path, set by
+     * PS_GLOBAL_PACKAGES_PATH
+     */
+    public function packBuildGlobal() {
+        $new_path = getenv('PS_GLOBAL_PACKAGES_PATH');
+
+        if (! empty($new_path)) {
+            $this->packBuild($new_path);
+        }
+    }
+
+    /**
+     * Build and move the package to an S4 bucket. After moving, display and
+     * copy the shared link for the file.
+     *
+     * Tested on linux only.
+     *
+     * Requirements:
+     *
+     *    - s3cmd <http://s3tools.org>
+     *    - xclip
+     *
+     * Configuring:
+     *
+     *    - Run: s3cmd --configure
+     *    - Set the environment variables:
+     *        - PS_S3_BUCKET
+     *
+     */
+    public function packBuildS3() {
+        $s3Bucket = getenv('PS_S3_BUCKET');
+        $filename = self::PLUGIN_NAME . '.zip';
+        $packPath = self::PACKAGE_PATH . '/'. $filename;
+
+        $this->packBuild();
+
+        // Create new prefix
+        $prefix = md5(microtime());
+
+        // Upload the new package to s3
+        $s3Path = sprintf(
+            's3://%s/%s/%s',
+            $s3Bucket,
+            $prefix,
+            $filename
+        );
+        $cmd    = sprintf(
+            's3cmd put --acl-public --reduced-redundancy %s %s',
+            $packPath,
+            $s3Path
+        );
+        $this->_exec($cmd);
+
+        // Copy the public link to the clipboard
+        $this->_exec('s3cmd info ' . $s3Path . ' | grep "URL:" | awk \'{ print $2 }\' | xclip');
     }
 
     /**
@@ -214,25 +274,55 @@ class RoboFile extends \Robo\Tasks
     }
 
     /**
-     * Sync WP files with src files
+     * Sync src files with staging files
      */
-    public function syncStaging()
+    public function syncSrc()
     {
-        $wp_path = getenv('WP_PATH');
+        $wpPath      = getenv('PS_WP_PATH');
+        $stagingPath = $wpPath  . '/wp-content/plugins/' . self::PLUGIN_NAME;
 
-        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-staging.sh');
+        if (empty($wpPath)) {
+            throw new RuntimeException('Invalid WordPress path. Please, set the environment variable: PS_WP_PATH');
+        }
+
+        if (!file_exists($wpPath . '/wp-config.php')) {
+            throw new RuntimeException('WordPress not found on: ' . $wpPath . '. Check the PS_WP_PATH environment variable');
+        }
+
+        $this->say('Removing current source files...');
+        $this->_exec('rm -rf ' . self::SOURCE_PATH . '/*');
+
+        $this->say('Copying files from ' . $stagingPath . ' to ' . self::SOURCE_PATH);
+        $return = $this->_exec('cp -R ' . $stagingPath . '/* ' . self::SOURCE_PATH);
 
         return $return;
     }
 
     /**
-     * Sync src files with WP files
+     * Sync staging files with src files
      */
-    public function syncRepo()
+    public function syncStaging()
     {
-        $wp_path = getenv('WP_PATH');
+        $wpPath      = getenv('PS_WP_PATH');
+        $stagingPath = $wpPath  . '/wp-content/plugins/' . self::PLUGIN_NAME;
 
-        $return = $this->_exec('WP_PATH=' . $wp_path . ' sh ./sync-repo.sh');
+        if (empty($wpPath)) {
+            throw new RuntimeException('Invalid WordPress path. Please, set the environment variable: PS_WP_PATH');
+        }
+
+        if (!file_exists($wpPath . '/wp-config.php')) {
+            throw new RuntimeException('WordPress not found on: ' . $wpPath . '. Check the PS_WP_PATH environment variable');
+        }
+
+        if (is_dir($stagingPath)) {
+            $this->say('Removing current files...');
+            $this->_exec('rm -rf ' . $stagingPath . '/*');
+        } else {
+            mkdir($stagingPath);
+        }
+
+        $this->say('Copying files from ' . self::SOURCE_PATH . ' to ' . $stagingPath);
+        $return = $this->_exec('cp -R ' . self::SOURCE_PATH . '/* ' . $stagingPath);
 
         return $return;
     }
