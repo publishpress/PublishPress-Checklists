@@ -42,7 +42,7 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [1.2.1] - UNRELEASED =
+= [1.2.1] - 2017-06-21 =
 
 * Added:
 * Added pt-BR translations
