@@ -40,7 +40,7 @@ function ppch_fs() {
                 'name'       => 'PublishPress',
             ),
             'menu'                => array(
-                'slug'    => 'publishpress',
+                'slug'    => 'pp-calendar',
                 'support' => false,
                 'account' => false,
             ),
