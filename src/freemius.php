@@ -40,9 +40,10 @@ function ppch_fs() {
                 'name'       => 'PublishPress',
             ),
             'menu'                => array(
-                'slug'    => 'pp-calendar',
-                'support' => false,
-                'account' => false,
+                'slug'       => 'pp-calendar',
+                'first-path' => 'admin.php?page=pp-calendar',
+                'support'    => false,
+                'account'    => false,
             ),
         ) );
     }
