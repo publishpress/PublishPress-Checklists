@@ -42,6 +42,11 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= UNRELEASED =
+
+* Fixed:
+* Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
+
 = [1.2.1] - 2017-06-21 =
 
 * Added:
