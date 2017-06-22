@@ -65,6 +65,18 @@
 		}
 
 		/**
+		 * Callback for events where we want to trigger
+		 * a remove row action
+		 *
+		 * @param  {Event} event
+		 */
+		function callback_remove_row( event ) {
+			var target = $( event.target );
+
+			remove_row(  target.data( 'id' ) );
+		}
+
+		/**
 		 * Create a row inside the requirements table
 		 *
 		 * @param  {string} title
@@ -86,7 +98,7 @@
 
 			$table.append( $tr );
 
-			$tr.data( 'id', id );
+			$tr.attr( 'data-id', id );
 
 			// Title cell
 			$td = $( '<td>' ).appendTo( $tr );
@@ -98,7 +110,7 @@
 				.val( title )
 				.addClass( 'pp-checklist-custom-item-title' )
 				.focus()
-				.data( 'id', id )
+				.attr( 'data-id', id )
 				.appendTo( $td );
 
 			// id fields
@@ -117,7 +129,7 @@
 					'name',
 					'publishpress_checklist_options[' + id + '_rule][' + post_type + ']'
 				)
-				.data( 'id', id )
+				.attr( 'data-id', id )
 				.appendTo( $td );
 
 			$.each( objectL10n_checklist_admin.rules, function ( value, label ) {
@@ -129,21 +141,19 @@
 
 			// Params cell
 			$td   = $( '<td>' )
-				.data( 'id', id )
+				.attr( 'data-id', id )
 				.appendTo( $tr );
 			$a    = $( '<a>' )
 				.attr( 'href', 'javascript:void(0);' )
 				.addClass( 'pp-checklist-remove-custom-item' )
-				.data( 'id', id )
+				.attr( 'data-id', id )
 				.appendTo( $td );
 			$icon = $( '<span>' )
 				.addClass( 'dashicons dashicons-trash' )
-				.data( 'id', id )
+				.attr( 'data-id', id )
 				.appendTo( $a );
 
-			$a.on( 'click', function( event ) {
-				remove_row( id );
-			} );
+			$a.on( 'click', callback_remove_row );
 		}
 
 		/*----------  Custom items  ----------*/
@@ -153,10 +163,6 @@
 			create_row( newId, '', '', objectL10n_checklist_admin.post_type );
 		} );
 
-		$( '.pp-checklist-remove-custom-item' ).on( 'click', function( event ) {
-			var target = $( event.target );
-
-			remove_row(  target.data( 'id' ) );
-		} );
+		$( '.pp-checklist-remove-custom-item' ).on( 'click', callback_remove_row );
 	} );
 } )( jQuery, objectL10n_checklist_admin );
