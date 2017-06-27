@@ -87,7 +87,7 @@ class Base_requirement {
 	 */
 	public function init() {
 		add_filter( 'pp_checklist_requirements_default_options', array( $this, 'filter_default_options' ) );
-		add_filter( 'pp_checklist_validate_option_group', array( $this, 'filter_settings_validate' ), 10, 2 );
+		add_filter( 'pp_checklist_validate_requirement_settings', array( $this, 'filter_settings_validate' ) );
 		add_filter( 'pp_checklist_requirement_list', array( $this, 'filter_requirements_list' ), 10, 3 );
 		add_filter( 'pp_checklist_requirement_instances', array( $this, 'filter_requirement_instances' ), 10, 4 );
 

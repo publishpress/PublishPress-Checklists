@@ -162,16 +162,17 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 							continue;
 						}
 
-						if ( ! isset( $title[ 'global' ] ) ) {
+						if ( ! isset( $title[ $post_type ] ) ) {
 							continue;
 						}
 
-						if ( isset( $title[ 'global' ] ) && empty( $title[ 'global'] ) ) {
+						if ( isset( $title[ $post_type ] ) && empty( $title[ $post_type] ) ) {
 							continue;
 						}
 					}
 
-					new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module );
+					$custom_item = new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module, $post_type );
+					$this->requirements[ $post_type ][] = $custom_item;
 				}
 			}
 		}
@@ -541,11 +542,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				$this->module->post_type_support
 			);
 
-			$option_groups = array_merge(
-				array( 'global' ),
-				array_keys( $new_options['post_types'] )
-			);
-
 			if ( ! isset ( $new_options['show_warning_icon_submit'] ) ) {
 				$new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
 			}
@@ -556,9 +552,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			}
 			$new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
-			foreach ( $option_groups as $option_group ) {
-				$new_options = apply_filters( 'pp_checklist_validate_option_group', $new_options, $option_group );
-			}
+			$new_options = apply_filters( 'pp_checklist_validate_requirement_settings', $new_options );
 
 			return $new_options;
 		}

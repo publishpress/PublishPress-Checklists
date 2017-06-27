@@ -209,11 +209,23 @@
 
 		/*----------  Custom items  ----------*/
 		$( '#pp-checklist-add-button' ).on( 'click', function( event ) {
-			var newId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
+			var newId = uidGen( 10 );
 
 			create_row( newId, '', '', get_current_post_type() );
 		} );
 
 		$( '.pp-checklist-remove-custom-item' ).on( 'click', callback_remove_row );
 	} );
+
+	function uidGen(len)
+	{
+	    var text = " ",
+	    	charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+	    for( var i=0; i < len; i++ )
+	        text += charset.charAt( Math.floor( Math.random() * charset.length ) );
+
+	    return text;
+	}
+
 } )( jQuery, objectL10n_checklist_admin );
