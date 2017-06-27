@@ -49,7 +49,20 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 		public $module_name = 'checklist';
 
-		protected $requirement_instances;
+		/**
+		 * List of requirements, filled with instances of requirement classes.
+		 * The list is indexed by post types.
+		 *
+		 * @var array
+		 */
+		protected $requirements = array();
+
+		/**
+		 * List of post types which supports checklist
+		 *
+		 * @var array
+		 */
+		protected $post_types = array();
 
 		/**
 		 * WordPress-EDD-License-Integration
@@ -58,6 +71,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 */
 		protected $license_manager;
 
+		/**
+		 * Instace for the module
+		 *
+		 * @var stdClass
+		 */
 		public $module;
 
 		/**
@@ -100,28 +118,33 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		}
 
 		/**
-		 * Finds the requirement class files at the library folder and
-		 * instantiate the class
+		 * Loads the requirements for each post type
 		 */
 		protected function instantiate_requirement_classes() {
-			$base_path = PP_CONTENT_CHECKLIST_LIB_PATH . '/Requirement/';
-			$req_files = array(
-				'Words_count',
-				'Categories_count',
-				'Tags_count',
-				'Featured_image',
-				'Filled_excerpt',
-			);
+			$post_types = $this->get_post_types();
 
-			foreach ( $req_files as $class_name ) {
-				// Append the namespace
-				$class = '\\PublishPress\\Addon\\Content_checklist\\Requirement\\' . $class_name;
+			foreach ( $post_types as $slug => $label ) {
+				$this->instantiate_post_type_requirements( $slug );
+			}
+		}
 
-				// Create a reflection to check if the class is not abstract or interface
-				$reflection = new \ReflectionClass( $class );
+		/**
+		 * Instantiates the requirements for the given post type
+		 *
+		 * @param string $post_type
+		 */
+		protected function instantiate_post_type_requirements( $post_type ) {
 
-				if ( class_exists( $class ) && ! $reflection->isAbstract() && ! $reflection->isInterface() ) {
-					new $class( $this->module );
+			$req_classes = apply_filters( 'pp_checklist_post_type_requirements', array(), $post_type );
+
+			if ( ! isset( $this->requirements[ $post_type ] ) ) {
+				$this->requirements[ $post_type ] = array();
+			}
+
+			foreach ( $req_classes as $class_name ) {
+				if ( class_exists( $class_name ) ) {
+					// Instantiate the class
+					$this->requirements[ $post_type ][] = new $class_name( $this->module, $post_type );
 				}
 			}
 
@@ -151,6 +174,59 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module );
 				}
 			}
+		}
+
+		/**
+		 * Set the list of post types
+		 *
+		 * @param  array  $post_types
+		 *
+		 * @return array
+		 */
+		public function filter_post_types( $post_types ) {
+			$list = array(
+				'post' => esc_html__( 'Posts' ),
+				'page' => esc_html__( 'Pages' ),
+			);
+
+			return array_merge( $post_types, $list );
+		}
+
+		/**
+		 * Set the requirements list for the given post type
+		 *
+		 * @param  array  $requirements
+		 * @param  string $post_type
+		 *
+		 * @return array
+		 */
+		public function filter_post_type_requirements( $requirements, $post_type ) {
+			$classes = array();
+
+			switch ( $post_type ) {
+				case 'post':
+					$classes = array(
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Categories_count',
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Tags_count',
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Words_count',
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Featured_image',
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Filled_excerpt',
+					);
+					break;
+
+				case 'page':
+					$classes = array(
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Words_count',
+						'\\PublishPress\\Addon\\Content_checklist\\Requirement\\Featured_image',
+					);
+					break;
+			}
+
+			if ( ! empty( $classes ) ) {
+				$requirements = array_merge( $requirements, $classes );
+			}
+
+			return $requirements;
 		}
 
 		protected function configure_twig() {
@@ -188,6 +264,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			add_action( 'admin_init', array( $this, 'load_updater' ) );
 			add_action( 'add_meta_boxes', array( $this, 'handle_post_metaboxes' ) );
 			add_action( 'save_post', array( $this, 'save_post_metabox' ), 10, 2 );
+
+			add_filter( 'pp_checklist_post_type_requirements', array( $this, 'filter_post_type_requirements' ), 10, 2 );
+			add_filter( 'pp_checklist_post_types', array( $this, 'filter_post_types' ) );
 
 			// Editor
 			add_filter( 'mce_external_plugins', array( $this, 'add_mce_plugin' ) );
@@ -309,12 +388,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			/**
 			 *
-			 * Global settings
+			 * Requirement settings
 			 */
 
 			add_settings_section(
-				$this->module->options_group_name . '_global',
-				__( 'Requirements', 'publishpress-content-checklist' ),
+				$this->module->options_group_name . '_requirements',
+				__( 'Requirements per Post Type:', 'publishpress-content-checklist' ),
 				'__return_false',
 				$this->module->options_group_name
 			);
@@ -324,7 +403,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				false,
 				array( $this, 'settings_requirements' ),
 				$this->module->options_group_name,
-				$this->module->options_group_name . '_global',
+				$this->module->options_group_name . '_requirements',
 				array(
 					'post_type'   => 'global',
 				)
@@ -337,7 +416,9 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		public function settings_post_types_option() {
 			global $publishpress;
 
-			$publishpress->settings->helper_option_custom_post_type( $this->module );
+			$post_types = $this->get_post_types();
+
+			$publishpress->settings->helper_option_custom_post_type( $this->module, $post_types );
 		}
 
 		/**
@@ -402,21 +483,17 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @param  array  $args
 		 */
 		public function settings_requirements( $args = array() ) {
-			$defaults = array(
-				'post_type'   => 'global',
-			);
-			$args = wp_parse_args( $args, $defaults );
+			// Apply filters to the list of requirements
+			$post_types = $this->get_post_types();
 
 			// Apply filters to the list of requirements
-			$requirements = array();
-			$requirements = apply_filters( 'pp_checklist_requirement_instances', $requirements );
+			// $requirements = apply_filters( 'pp_checklist_requirement_instances', array() );
 
 			echo $this->twig->render(
 				'settings-requirements-table.twig',
 				array(
-					'metadata_taxonomy' => self::METADATA_TAXONOMY,
-					'post_type'         => $args['post_type'],
-					'requirements'      => $requirements,
+					'requirements'      => $this->requirements,
+					'post_types'        => $post_types,
 					'lang'              => array(
 						'description'     => __( 'Description', 'publishpress-content-checklist' ),
 						'params'          => __( 'Parameters', 'publishpress-content-checklist' ),
@@ -425,6 +502,20 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					)
 				)
 			);
+		}
+
+		/**
+		 * Returns a list of post types the checklist support.
+		 *
+		 * @return array
+		 */
+		public function get_post_types() {
+			if ( empty( $this->post_types ) ) {
+				// Apply filters to the list of requirements
+				$this->post_types = apply_filters( 'pp_checklist_post_types', array() );
+			}
+
+			return $this->post_types;
 		}
 
 		/**
@@ -518,12 +609,17 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$rules = array();
 			$rules = apply_filters( 'pp_checklist_rules_list', $rules );
 
+			// Get all the keys of post types, to select the first one for the JS script
+			$post_types = array_keys( $this->get_post_types() );
+			// Make sure we are on the first item
+			reset( $post_types );
+
 			wp_localize_script(
 				'pp-checklist-admin',
 				'objectL10n_checklist_admin',
 				array(
-					'rules'     => $rules,
-					'post_type' => 'global',
+					'rules'           => $rules,
+					'first_post_type' => current( $post_types ),
 				)
 			);
 

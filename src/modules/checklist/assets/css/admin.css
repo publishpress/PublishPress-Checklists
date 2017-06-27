@@ -1,3 +1,13 @@
 .pp-checklist-custom-item-title {
 	width: 100%;
 }
+
+#pp-checklist-post-type-filter a {
+	padding: 2px 8px;
+    border: 1px solid silver;
+}
+
+#pp-checklist-post-type-filter a.pp-selected {
+	font-weight: bold;
+	background-color: #fff;
+}

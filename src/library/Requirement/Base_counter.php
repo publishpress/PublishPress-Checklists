@@ -40,24 +40,23 @@ class Base_counter extends Base_simple implements Interface_required {
 	 * It runs for each option group, including "global".
 	 *
 	 * @param  array   $new_options
-	 * @param  string  $option_group
 	 *
 	 * @return array
 	 */
-	public function filter_settings_validate( $new_options, $option_group ) {
-		$new_options = parent::filter_settings_validate( $new_options, $option_group );
+	public function filter_settings_validate( $new_options ) {
+		$new_options = parent::filter_settings_validate( $new_options, $this->post_type );
 
 		$index = $this->name . '_value';
-		if ( isset( $new_options[ $index ][ $option_group ] ) ) {
-			$new_options[ $index ][ $option_group ] = filter_var(
-				$new_options[ $index ][ $option_group ],
+		if ( isset( $new_options[ $index ][ $this->post_type ] ) ) {
+			$new_options[ $index ][ $this->post_type ] = filter_var(
+				$new_options[ $index ][ $this->post_type ],
 				FILTER_SANITIZE_NUMBER_INT
 			);
 		}
 
 		// Make sure we don't have 0 as value if enabled
-		if ( empty( $new_options[ $index ][ $option_group ] ) && static::VALUE_YES === $new_options[ $this->name ][ $option_group ] ) {
-			$new_options[ $index ][ $option_group ] = 1;
+		if ( empty( $new_options[ $index ][ $this->post_type ] ) && static::VALUE_YES === $new_options[ $this->name ][ $this->post_type ] ) {
+			$new_options[ $index ][ $this->post_type ] = 1;
 		}
 
 		return $new_options;
@@ -168,12 +167,10 @@ class Base_counter extends Base_simple implements Interface_required {
 	/**
 	 * Get the HTML for the setting field for the specific post type.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_field_html( $post_type, $css_class = '' ) {
-		$post_type = esc_attr( $post_type );
+	public function get_setting_field_html( $css_class = '' ) {
+		$post_type = esc_attr( $this->post_type );
 		$css_class = esc_attr( $css_class );
 
 		// Legacy option. Only the "min" option were available
