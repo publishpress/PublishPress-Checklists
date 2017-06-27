@@ -129,11 +129,22 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( isset( $this->module->options->custom_items ) && ! empty( $this->module->options->custom_items ) ) {
 				foreach ( $this->module->options->custom_items as $id ) {
 					$var_name = $id . '_title';
+
+					// Check if there is an empty title to ignore
 					if ( isset( $this->module->options->$var_name ) ) {
-						if ( array_key_exists( 'global', $this->module->options->$var_name ) ) {
-							if ( empty( $this->module->options->$var_name['global'] ) ) {
-								continue;
-							}
+						$title = $this->module->options->$var_name;
+
+						// It is expected to be an array
+						if ( ! is_array( $title ) || empty( $title ) ) {
+							continue;
+						}
+
+						if ( ! isset( $title[ 'global' ] ) ) {
+							continue;
+						}
+
+						if ( isset( $title[ 'global' ] ) && empty( $title[ 'global'] ) ) {
+							continue;
 						}
 					}
 
