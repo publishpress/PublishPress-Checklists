@@ -44,8 +44,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = UNRELEASED =
 
+* Added:
+* Added support for setting specific requirements for each post type, instead of global only;
+
 * Fixed:
 * Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
+* Fixed PHP warning in the settings page about undefined index in array;
+
+* Changed:
+* Changed the required minimun version of PublishPress to 1.6.0;
 
 = [1.2.1] - 2017-06-21 =
 
