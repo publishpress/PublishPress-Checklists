@@ -22,7 +22,6 @@ interface Interface_required {
 
 	/**
 	 * Validates the option group, making sure the values are sanitized.
-	 * It runs for each option group, including "global".
 	 *
 	 * @param  array   $new_options
 	 *

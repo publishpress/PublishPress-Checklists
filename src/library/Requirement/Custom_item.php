@@ -126,6 +126,11 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return array
 	 */
 	public function filter_requirements_list( $requirements, $post ) {
+		// Check if it is a compatible post type. If not, ignore this requirement.
+		if ( $post->post_type !== $this->post_type ) {
+			return $requirements;
+		}
+
 		// Rule
 		$rule = $this->get_option_rule();
 
