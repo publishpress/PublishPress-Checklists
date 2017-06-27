@@ -43,7 +43,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 	require_once $publishpressPath;
 
 	if ( ! defined( 'PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION' ) ) {
-		define( 'PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION', '1.3.0' );
+		define( 'PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION', '1.6.0' );
 	}
 
 	/*==========================================================
