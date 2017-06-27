@@ -159,15 +159,21 @@
 					checked = $icon.hasClass( 'dashicons-yes' );
 
 				if ( checked ) {
-					$icon.removeClass( 'dashicons-yes' );
-					$item.removeClass( 'status-yes' );
-					$icon.addClass( 'dashicons-no' );
-					$item.addClass( 'status-no' );
+					$icon
+						.removeClass( 'dashicons-yes' )
+						.addClass( 'dashicons-no' );
+
+					$item
+						.removeClass( 'status-yes' )
+						.addClass( 'status-no' );
 				} else {
-					$icon.removeClass( 'dashicons-no' );
-					$item.removeClass( 'status-no' );
-					$icon.addClass( 'dashicons-yes' );
-					$item.addClass( 'status-yes' );
+					$icon
+						.removeClass( 'dashicons-no' )
+						.addClass( 'dashicons-yes' );
+
+					$item
+						.removeClass( 'status-no' )
+						.addClass( 'status-yes' );
 				}
 
 				$item.children( 'input[type="hidden"]' ).val( $item.hasClass( 'status-yes' ) ? 'yes' : 'no' );
@@ -211,8 +217,8 @@
 			}
 
 			var list_unchecked = {
-					'block': [],
-					'warn' : [],
+					'block'   : [],
+					'warning' : [],
 				};
 
 			/**
@@ -245,17 +251,17 @@
 			}.bind( this );
 
 			// Check if any of the requirements is set to trigger warnings
-			check_requirement_action( 'warn' );
+			check_requirement_action( 'warning' );
 			check_requirement_action( 'block' );
 
 			// Check if we have warnings to display
-			if ( list_unchecked.warn.length > 0 || list_unchecked.block.length > 0 ) {
+			if ( list_unchecked.warning.length > 0 || list_unchecked.block.length > 0 ) {
 				var message = '';
 
 				// Check if we don't have any unchecked block req
 				if ( 0 === list_unchecked.block.length ) {
 					// Only display a warning
-					message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warn.join( '</li><li>' ) + '</li></ul></div>';
+					message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join( '</li><li>' ) + '</li></ul></div>';
 
 					// Display the confirm
 					$( '#pp-checklist-modal-confirm-content' ).html( message );
@@ -263,8 +269,8 @@
 				} else {
 					message = objectL10n_checklist_requirements.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.block.join( '</li><li>' ) + '</li></ul></div>';
 
-					if ( list_unchecked.warn.length > 0 ) {
-						message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warn.join( '</li><li>' ) + '</li></ul></div>';
+					if ( list_unchecked.warning.length > 0 ) {
+						message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join( '</li><li>' ) + '</li></ul></div>';
 					}
 
 					// Display the alert
