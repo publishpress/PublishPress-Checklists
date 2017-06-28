@@ -489,9 +489,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Apply filters to the list of requirements
 			$post_types = $this->get_post_types();
 
-			// Apply filters to the list of requirements
-			// $requirements = apply_filters( 'pp_checklist_requirement_instances', array() );
-
 			echo $this->twig->render(
 				'settings-requirements-table.twig',
 				array(
