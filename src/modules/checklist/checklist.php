@@ -274,6 +274,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_scripts' ) );
 
+			do_action( 'pp_checklist_load_addons' );
+
 			// Load the requirements
 			$this->instantiate_requirement_classes();
 			do_action( 'pp_checklist_load_requirements' );
