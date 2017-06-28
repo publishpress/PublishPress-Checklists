@@ -39,7 +39,7 @@ if ( ! file_exists( $publishpressPath ) || is_plugin_inactive( 'publishpress/pub
 }
 /*=====  End of Check if PublishPress is installed and active   ======*/
 
-if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
+if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIST_LOADED' ) ) {
 	require_once $publishpressPath;
 
 	if ( ! defined( 'PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION' ) ) {
@@ -64,49 +64,14 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 	/*=====  End of Check PublishPress minimum version  ======*/
 
 	if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
-		if ( ! defined( 'PP_CONTENT_CHECKLIST' ) ) {
-			define( 'PP_CONTENT_CHECKLIST', 'Checklist' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_ITEM_ID' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_SLUG' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_SLUG', strtolower( PP_CONTENT_CHECKLIST ) );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_NAMESPACE' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_NAMESPACE', 'PublishPress\\' . PP_CONTENT_CHECKLIST );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_PATH_BASE' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_PATH_CORE' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_PATH_CORE', PP_CONTENT_CHECKLIST_PATH_BASE . PP_CONTENT_CHECKLIST );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_VERSION' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_VERSION', '1.2.2a1' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_MODULE_PATH' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_FILE' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_FILE', 'publishpress-content-checklist/publishpress-content-checklist.php' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_ITEM_NAME' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
-		}
-
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_LIB_PATH' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_LIB_PATH', PP_CONTENT_CHECKLIST_PATH_BASE . '/library' );
-		}
+		define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
+		define( 'PP_CONTENT_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
+		define( 'PP_CONTENT_CHECKLIST_VERSION', '1.2.2a1' );
+		define( 'PP_CONTENT_CHECKLIST_FILE', 'publishpress-content-checklist/publishpress-content-checklist.php');
+		define( 'PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
+		define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
+		define( 'PP_CONTENT_CHECKLIST_LIB_PATH', PP_CONTENT_CHECKLIST_PATH_BASE . '/library' );
+		define( 'PP_CONTENT_CHECKLIST_LOADED', 1 );
 
 		if ( ! class_exists( 'PP_Module' ) ) {
 			require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );
@@ -125,9 +90,5 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		// Register the library
     	Auto_loader::register('\\PublishPress\\Addon\\Content_checklist', PP_CONTENT_CHECKLIST_PATH_BASE . '/library');
 
-    	// Define the add-on as loaded
-		if ( ! defined( 'PP_CONTENT_CHECKLIST_LOADED' ) ) {
-			define( 'PP_CONTENT_CHECKLIST_LOADED', 1 );
-		}
 	}
 }// End if().
