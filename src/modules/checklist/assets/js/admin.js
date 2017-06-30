@@ -66,6 +66,26 @@
 			return true;
 		} );
 
+		$( '.pp-checklist-float' ).on( 'keypress', function( event ) {
+			var key = event.keyCode || event.which;
+			var allowed_keys = [
+				35, 36, 37, 38, 39, 40, // arrows
+            	44, 46, // decimal separators
+				8, 9, 46, 27, 13, // backspace, tab, delete, esc, enter
+				48, 49, 50, 51, 52, 53, 54, 55, 56, 57 // 0-9
+			];
+
+			// Ignore any key different than number
+			if ( allowed_keys.indexOf( key ) < 0 ) {
+				event.preventDefault();
+
+				return false;
+			}
+
+			return true;
+		} );
+
+
 		/**
 		 * Show the requirements for the specific post type and hide all the
 		 * others.
