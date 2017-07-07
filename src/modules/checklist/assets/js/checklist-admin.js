@@ -319,9 +319,9 @@
 		 *  - Min not empty, max not empty and > min = both min and max
 		 *  - Min empty, max not empty and > min = only max
 		 *
-		 * @param  {Int} count
-		 * @param  {Int} min_value
-		 * @param  {Int} max_value
+		 * @param  {Float} count
+		 * @param  {Float} min_value
+		 * @param  {Float} max_value
 		 *
 		 * @return {Bool}
 		 */
