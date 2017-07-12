@@ -3,7 +3,7 @@ Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [1.3.0] - 2017-07-12 =
 
 * Added:
 * Added support for setting specific requirements for each post type, instead of global only;
@@ -50,9 +50,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed:
 * Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
 * Fixed PHP warning in the settings page about undefined index in array;
+* Fixed the menu slug in the Freemius integration;
 
 * Changed:
 * Changed the required minimun version of PublishPress to 1.6.0;
+* Imprived extensibility for add-ons;
 
 = [1.2.1] - 2017-06-21 =
 
