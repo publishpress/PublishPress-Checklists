@@ -25,11 +25,6 @@ class Base_requirement {
 	const VALUE_NO = 'no';
 
 	/**
-	 * The global group
-	 */
-	const GROUP_GLOBAL = 'global';
-
-	/**
 	 * The priority for the action to load the requirement
 	 */
 	const PRIORITY = 10;
@@ -63,16 +58,25 @@ class Base_requirement {
 	public $is_custom = false;
 
 	/**
+	 * The post type of this requirement.
+	 *
+	 * @var string
+	 */
+	protected $post_type;
+
+	/**
 	 * The constructor. It adds the action to load the requirement.
 	 *
-	 * @var  string
+	 * @param  string  $module
+	 * @param  string  $post_type
 	 *
 	 * @return  void
 	 */
-	public function __construct( $module ) {
+	public function __construct( $module, $post_type ) {
 		add_action( 'pp_checklist_load_requirements', array( $this, 'init' ), static::PRIORITY );
 
-		$this->module = $module;
+		$this->module    = $module;
+		$this->post_type = $post_type;
 	}
 
 	/**
@@ -83,7 +87,7 @@ class Base_requirement {
 	 */
 	public function init() {
 		add_filter( 'pp_checklist_requirements_default_options', array( $this, 'filter_default_options' ) );
-		add_filter( 'pp_checklist_validate_option_group', array( $this, 'filter_settings_validate' ), 10, 2 );
+		add_filter( 'pp_checklist_validate_requirement_settings', array( $this, 'filter_settings_validate' ) );
 		add_filter( 'pp_checklist_requirement_list', array( $this, 'filter_requirements_list' ), 10, 3 );
 		add_filter( 'pp_checklist_requirement_instances', array( $this, 'filter_requirement_instances' ), 10, 4 );
 
@@ -132,22 +136,18 @@ class Base_requirement {
 	/**
 	 * Get the HTML for the title setting field.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_title_html( $post_type, $css_class = '' ) {
+	public function get_setting_title_html( $css_class = '' ) {
 		return $this->lang['label_settings'];
 	}
 
 	/**
 	 * Get the HTML for the setting field for the specific post type.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_field_html( $post_type, $css_class = '' ) {
+	public function get_setting_field_html( $css_class = '' ) {
 		return '';
 	}
 
@@ -156,12 +156,10 @@ class Base_requirement {
 	 * Used for settings fields to specify if the requirement is required or
 	 * not.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_action_list_html( $post_type ) {
-		$post_type = esc_attr( $post_type );
+	public function get_setting_action_list_html() {
+		$post_type = esc_attr( $this->post_type );
 
 		$option_name = $this->name . '_rule';
 
@@ -195,5 +193,14 @@ class Base_requirement {
 		$html .= '</select>';
 
 		return $html;
+	}
+
+	/**
+	 * Returns the post type of this requirement
+	 *
+	 * @return string
+	 */
+	public function get_post_type() {
+		return $this->post_type;
 	}
 }

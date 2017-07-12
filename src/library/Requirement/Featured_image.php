@@ -13,17 +13,11 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Featured_image extends Base_simple {
 	/**
-	 * The constructor. It adds the action to load the requirement.
+	 * The name of the requirement, in a slug format
 	 *
-	 * @var  string
-	 *
-	 * @return  void
+	 * @var string
 	 */
-	public function __construct( $module ) {
-		$this->name = 'featured_image';
-
-		parent::__construct( $module );
-	}
+	public $name = 'featured_image';
 
 	/**
 	 * Initialize the language strings for the instance

@@ -18,17 +18,11 @@ class Tags_Count extends Base_counter {
 	const PRIORITY = 9;
 
 	/**
-	 * The constructor. It adds the action to load the requirement.
+	 * The name of the requirement, in a slug format
 	 *
-	 * @var  string
-	 *
-	 * @return  void
+	 * @var string
 	 */
-	public function __construct( $module ) {
-		$this->name = 'tags_count';
-
-		parent::__construct( $module );
-	}
+	public $name = 'tags_count';
 
 	/**
 	 * Initialize the language strings for the instance

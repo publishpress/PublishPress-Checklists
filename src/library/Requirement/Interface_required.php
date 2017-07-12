@@ -22,14 +22,12 @@ interface Interface_required {
 
 	/**
 	 * Validates the option group, making sure the values are sanitized.
-	 * It runs for each option group, including "global".
 	 *
 	 * @param  array   $new_options
-	 * @param  string  $option_group
 	 *
 	 * @return array
 	 */
-	public function filter_settings_validate( $new_options, $option_group );
+	public function filter_settings_validate( $new_options );
 
 	/**
 	 * Add the requirement to the list to be displayed in the metabox.

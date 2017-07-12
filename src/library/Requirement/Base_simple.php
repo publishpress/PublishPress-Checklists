@@ -24,10 +24,10 @@ class Base_simple extends Base_requirement implements Interface_required {
 	public function filter_default_options( $default_options ) {
 		$options = array(
 			$this->name    => array(
-				static::GROUP_GLOBAL => static::VALUE_NO,
+				$this->post_type => static::VALUE_NO,
 			),
 			"{$this->name}_rule" => array(
-				static::GROUP_GLOBAL => Plugin::RULE_ONLY_DISPLAY,
+				$this->post_type => Plugin::RULE_ONLY_DISPLAY,
 			),
 		);
 
@@ -36,20 +36,18 @@ class Base_simple extends Base_requirement implements Interface_required {
 
 	/**
 	 * Validates the option group, making sure the values are sanitized.
-	 * It runs for each option group, including "global".
 	 *
 	 * @param  array   $new_options
-	 * @param  string  $option_group
 	 *
 	 * @return array
 	 */
-	public function filter_settings_validate( $new_options, $option_group ) {
-		if ( isset( $new_options[ $this->name ][ $option_group ] ) ) {
-			if ( static::VALUE_YES !== $new_options[ $this->name ][ $option_group ] ) {
-				$new_options[ $this->name ][ $option_group ] = static::VALUE_NO;
+	public function filter_settings_validate( $new_options ) {
+		if ( isset( $new_options[ $this->name ][ $this->post_type ] ) ) {
+			if ( static::VALUE_YES !== $new_options[ $this->name ][ $this->post_type ] ) {
+				$new_options[ $this->name ][ $this->post_type ] = static::VALUE_NO;
 			}
 		} else {
-			$new_options[ $this->name ][ $option_group ] = static::VALUE_NO;
+			$new_options[ $this->name ][ $this->post_type ] = static::VALUE_NO;
 		}
 
 		return $new_options;
@@ -66,8 +64,8 @@ class Base_simple extends Base_requirement implements Interface_required {
 
 		// Rule
 		$rule = Plugin::RULE_DISABLED;
-		if ( isset( $options->{ $option_rule_property }[ static::GROUP_GLOBAL ] ) ) {
-			$rule = $options->{ $option_rule_property }[ static::GROUP_GLOBAL ];
+		if ( isset( $options->{ $option_rule_property }[ $this->post_type ] ) ) {
+			$rule = $options->{ $option_rule_property }[ $this->post_type ];
 		}
 
 		return $rule;
@@ -100,6 +98,11 @@ class Base_simple extends Base_requirement implements Interface_required {
 	 * @return array
 	 */
 	public function filter_requirements_list( $requirements, $post ) {
+		// Check if it is a compatible post type. If not, ignore this requirement.
+		if ( $post->post_type !== $this->post_type ) {
+			return $requirements;
+		}
+
 		// Rule
 		$rule = $this->get_option_rule();
 

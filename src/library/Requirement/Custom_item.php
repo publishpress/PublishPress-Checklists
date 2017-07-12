@@ -26,15 +26,17 @@ class Custom_item extends Base_simple implements Interface_required {
 	/**
 	 * The constructor. It adds the action to load the requirement.
 	 *
-	 * @var  string
+	 * @param  string  $name
+	 * @param  string  $module
+	 * @param  string  $post_type
 	 *
 	 * @return  void
 	 */
-	public function __construct( $name, $module ) {
+	public function __construct( $name, $module, $post_type ) {
 		$this->name      = (string) $name;
 		$this->is_custom = true;
 
-		parent::__construct( $module );
+		parent::__construct( $module, $post_type );
 
 	}
 
@@ -51,15 +53,14 @@ class Custom_item extends Base_simple implements Interface_required {
 	/**
 	 * Returns the title of this custom item.
 	 *
-	 * @param  string $post_type
 	 * @return string
 	 */
-	public function get_title( $post_type ) {
+	public function get_title() {
 		$title    = '';
 		$var_name = $this->name . '_title';
 
-		if ( isset( $this->module->options->{ $var_name }[ $post_type ] ) ) {
-			$title = stripslashes( $this->module->options->{ $var_name }[ $post_type ] );
+		if ( isset( $this->module->options->{ $var_name }[ $this->post_type ] ) ) {
+			$title = stripslashes( $this->module->options->{ $var_name }[ $this->post_type ] );
 		}
 
 		return $title;
@@ -68,19 +69,17 @@ class Custom_item extends Base_simple implements Interface_required {
 	/**
 	 * Get the HTML for the title setting field for the specific post type.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_title_html( $post_type, $css_class = '' ) {
+	public function get_setting_title_html( $css_class = '' ) {
 		$var_name = $this->name . '_title';
 
-		$name = 'publishpress_checklist_options[' . $var_name . '][' . $post_type . ']';
+		$name = 'publishpress_checklist_options[' . $var_name . '][' . $this->post_type . ']';
 
 		$html = sprintf(
 			'<input type="text" name="%s" value="%s" data-id="%s" class="pp-checklist-custom-item-title" />',
 			$name,
-			esc_attr( $this->get_title( $post_type ) ),
+			esc_attr( $this->get_title( $this->post_type ) ),
 			esc_attr( $this->name )
 		);
 
@@ -95,11 +94,9 @@ class Custom_item extends Base_simple implements Interface_required {
 	/**
 	 * Get the HTML for the setting field for the specific post type.
 	 *
-	 * @param  string $post_type
-	 *
 	 * @return string
 	 */
-	public function get_setting_field_html( $post_type, $css_class = '' ) {
+	public function get_setting_field_html( $css_class = '' ) {
 		$html = sprintf(
 			'<a href="javascript:void(0);" class="pp-checklist-remove-custom-item" data-id="%1$s"><span class="dashicons dashicons-trash" data-id="%1$s"></span></a>',
 			esc_attr( $this->name )
@@ -129,6 +126,11 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return array
 	 */
 	public function filter_requirements_list( $requirements, $post ) {
+		// Check if it is a compatible post type. If not, ignore this requirement.
+		if ( $post->post_type !== $this->post_type ) {
+			return $requirements;
+		}
+
 		// Rule
 		$rule = $this->get_option_rule();
 
@@ -139,7 +141,7 @@ class Custom_item extends Base_simple implements Interface_required {
 		if ( $enabled ) {
 			$requirements[ $this->name ] = array(
 				'status'    => $this->get_current_status( $post, $enabled ),
-				'label'     => $this->get_title( 'global' ),
+				'label'     => $this->get_title(),
 				'value'     => $enabled,
 				'rule'      => $rule,
 				'id'        => $this->name,
@@ -152,23 +154,21 @@ class Custom_item extends Base_simple implements Interface_required {
 
 	/**
 	 * Validates the option group, making sure the values are sanitized.
-	 * It runs for each option group, including "global".
 	 *
 	 * @param  array   $new_options
-	 * @param  string  $option_group
 	 *
 	 * @return array
 	 */
-	public function filter_settings_validate( $new_options, $option_group ) {
-		if ( isset( $new_options[ $this->name . '_title' ][ $option_group ] )
-			&& empty( $new_options[ $this->name . '_title' ][ $option_group ] ) ) {
+	public function filter_settings_validate( $new_options ) {
+		if ( isset( $new_options[ $this->name . '_title' ][ $this->post_type ] )
+			&& empty( $new_options[ $this->name . '_title' ][ $this->post_type ] ) ) {
 
 			// Look for empty title
 			$index = array_search( $this->name, $new_options[ 'custom_items' ] );
 			if ( false !== $index ) {
 				unset(
-					$new_options[ $this->name . '_title' ][ $option_group ],
-					$new_options[ $this->name . '_rule' ][ $option_group ],
+					$new_options[ $this->name . '_title' ][ $this->post_type ],
+					$new_options[ $this->name . '_rule' ][ $this->post_type ],
 					$new_options[ 'custom_items' ][ $index ]
 				);
 			}

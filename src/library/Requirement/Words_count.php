@@ -12,18 +12,13 @@ namespace PublishPress\Addon\Content_checklist\Requirement;
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
 class Words_Count extends Base_counter {
-	/**
-	 * The constructor. It adds the action to load the requirement.
-	 *
-	 * @var  string
-	 *
-	 * @return  void
-	 */
-	public function __construct( $module ) {
-		$this->name = 'words_count';
 
-		parent::__construct( $module );
-	}
+	/**
+	 * The name of the requirement, in a slug format
+	 *
+	 * @var string
+	 */
+	public $name = 'words_count';
 
 	/**
 	 * Initialize the language strings for the instance
