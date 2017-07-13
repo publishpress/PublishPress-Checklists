@@ -3,7 +3,7 @@ Contributors: PressShack
 Tags: publishpress, checklist
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,11 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.3.1] - 2017-07-13 =
+
+* Fixed:
+* Fixed support for custom post types allowing to use custom items as requirements;
 
 = [1.3.0] - 2017-07-12 =
 

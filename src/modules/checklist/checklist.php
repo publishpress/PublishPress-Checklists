@@ -185,10 +185,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @return array
 		 */
 		public function filter_post_types( $post_types ) {
-			$list = array(
-				'post' => esc_html__( 'Posts' ),
-				'page' => esc_html__( 'Pages' ),
+			$list = get_post_types(
+				array( 'public' => true )
 			);
+
+			unset( $list['attachment'] );
 
 			return array_merge( $post_types, $list );
 		}
@@ -513,6 +514,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			if ( empty( $this->post_types ) ) {
 				// Apply filters to the list of requirements
 				$this->post_types = apply_filters( 'pp_checklist_post_types', array() );
+
+				// Try a more readable name
+				foreach ( $this->post_types as $type => $label ) {
+					$this->post_types[ $type ] = esc_html__( ucfirst( $label ) );
+				}
 			}
 
 			return $this->post_types;
