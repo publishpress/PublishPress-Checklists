@@ -21,7 +21,7 @@
 				{% endif %}
 
 				<span class="dashicons dashicons-{{ req.status ? 'yes' : 'no' }}"></span>
-				<span class="status-label">{{ req.label }}</span>
+				<span class="status-label">{{ req.label|raw }}</span>
 
 				<span>
 					{% if req.rule == 'block' %}
