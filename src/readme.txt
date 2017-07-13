@@ -42,6 +42,11 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.3.1] - 2017-07-13 =
+
+* Fixed:
+* Fixed support for custom post types allowing to use custom items as requirements
+
 = [1.3.0] - 2017-07-12 =
 
 * Added:
