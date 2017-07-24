@@ -9,8 +9,9 @@ ehthumbs.db
 Thumbs.db
 .idea
 
-/build/packages/*
-!/build/packages/.gitkeep
-
 *.sublime-project
 *.sublime-workspace
+
+# Ignores the "dev" composer file
+/composer.lock
+/vendor
