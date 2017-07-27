@@ -15,3 +15,4 @@ Thumbs.db
 # Ignores the "dev" composer file
 /composer.lock
 /vendor
+/packages
