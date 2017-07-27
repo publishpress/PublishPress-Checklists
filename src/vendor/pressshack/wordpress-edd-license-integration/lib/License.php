@@ -23,6 +23,8 @@
 
 namespace PressShack\EDD_License;
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * Class for license
  */

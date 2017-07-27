@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "pressshack/wordpress-edd-license-integration": "1.0.1"
+        "pressshack/wordpress-edd-license-integration": "~1"
     },
     "minimum-stability": "stable"
 }
