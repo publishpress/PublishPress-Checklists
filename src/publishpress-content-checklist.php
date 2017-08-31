@@ -12,7 +12,7 @@
  * @publishpress-content-checklist
  * Plugin Name: PublishPress Content Checklist
  * Plugin URI:  https://pressshack.com/publishpress/
- * Version:     1.3.2
+ * Version:     1.3.1
  * Description: Add a content checklist for posts
  * Author:      PressShack
  * Author URI:  https://pressshack.com
