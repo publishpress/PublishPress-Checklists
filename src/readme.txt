@@ -47,6 +47,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed:
 * Fixed EDD integration and updates;
 
+* Changed:
+* Removed Freemius integration;
+
 = [1.3.1] - 2017-07-13 =
 
 * Fixed:
