@@ -10,13 +10,12 @@
     ],
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/OSTraining/WordPress-Plugin-Builder"
+            "type": "git",
+            "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration"
         }
     ],
     "require": {
-        "pressshack/wordpress-plugin-builder": "*",
-        "consolidation/robo": "~1"
+        "pressshack/wordpress-edd-license-integration": "~1"
     },
     "minimum-stability": "stable"
 }

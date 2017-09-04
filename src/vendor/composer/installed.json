@@ -1,14 +1,14 @@
 [
     {
         "name": "pressshack/wordpress-edd-license-integration",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration",
-            "reference": "403f7fa6bf87b1af5c5ffe753a80696dab955773"
+            "reference": "fc84c86982bf194ba7498a5f13483ea792766b29"
         },
-        "time": "2017-06-07 21:30:38",
+        "time": "2017-07-27T00:52:19+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {

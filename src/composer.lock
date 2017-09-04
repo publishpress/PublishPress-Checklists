@@ -4,16 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "626fe9d88d94596a28c6426e431013b9",
-    "content-hash": "2ee0e6084e0f8383c81663b11cd764be",
+    "content-hash": "e5c14a26a7715112da54f843da991864",
     "packages": [
         {
             "name": "pressshack/wordpress-edd-license-integration",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration",
-                "reference": "403f7fa6bf87b1af5c5ffe753a80696dab955773"
+                "reference": "fc84c86982bf194ba7498a5f13483ea792766b29"
             },
             "type": "library",
             "autoload": {
@@ -30,7 +29,7 @@
                     "email": "help@pressshack.com"
                 }
             ],
-            "time": "2017-06-07 21:30:38"
+            "time": "2017-07-27T00:52:19+00:00"
         }
     ],
     "packages-dev": [],
