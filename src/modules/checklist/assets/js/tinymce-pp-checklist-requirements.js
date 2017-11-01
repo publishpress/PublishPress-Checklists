@@ -34,6 +34,10 @@
 ( function( $, counter, tinymce, _ ) {
 	"use strict";
 
+	if ( 'undefined' === typeof objectL10n_checklist_requirements ) {
+		return true;
+	}
+
 	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.words_count ) {
 		return true;
 	}
