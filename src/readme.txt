@@ -42,6 +42,12 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= UNRELEASED =
+
+*Fixed:*
+
+* Fixed JS error when the checklist is empty (no requirements are selected);
+
 = [1.3.2] - 2017-08-31 =
 
 * Fixed:
