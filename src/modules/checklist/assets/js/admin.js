@@ -229,7 +229,7 @@
 
 		/*----------  Custom items  ----------*/
 		$( '#pp-checklist-add-button' ).on( 'click', function( event ) {
-			var newId = uidGen( 10 );
+			var newId = uidGen( 15 );
 
 			create_row( newId, '', '', get_current_post_type() );
 		} );
@@ -237,13 +237,14 @@
 		$( '.pp-checklist-remove-custom-item' ).on( 'click', callback_remove_row );
 	} );
 
-	function uidGen(len)
+	function uidGen( len )
 	{
 	    var text = " ",
-	    	charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+	    	charset = "abcdefghijklmnopqrstuvwxyz";
 
-	    for( var i=0; i < len; i++ )
+	    for ( var i=0; i < len; i++ ) {
 	        text += charset.charAt( Math.floor( Math.random() * charset.length ) );
+	    }
 
 	    return text;
 	}
