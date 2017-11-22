@@ -29,6 +29,7 @@
  */
 
 use PublishPress\Addon\Content_checklist\Requirement\Base_requirement;
+use PublishPress\Addon\Content_checklist\Requirement\Custom_item;
 use PressShack\EDD_License\Updater;
 use PressShack\EDD_License\License;
 use PressShack\EDD_License\Setting\Field\License_key as Field_License_key;
@@ -151,6 +152,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Instantiate custom items
 			if ( isset( $this->module->options->custom_items ) && ! empty( $this->module->options->custom_items ) ) {
 				foreach ( $this->module->options->custom_items as $id ) {
+					$id = trim( (string) $id );
+
 					$var_name = $id . '_title';
 
 					// Check if there is an empty title to ignore
@@ -169,9 +172,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						if ( isset( $title[ $post_type ] ) && empty( $title[ $post_type] ) ) {
 							continue;
 						}
+					} else {
+						// Ignore corrupted items
+						continue;
 					}
 
-					$custom_item = new \PublishPress\Addon\Content_checklist\Requirement\Custom_item( $id, $this->module, $post_type );
+					$custom_item = new Custom_item( $id, $this->module, $post_type );
 					$this->requirements[ $post_type ][] = $custom_item;
 				}
 			}
@@ -558,6 +564,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			$new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
 			$new_options = apply_filters( 'pp_checklist_validate_requirement_settings', $new_options );
+
 
 			return $new_options;
 		}
