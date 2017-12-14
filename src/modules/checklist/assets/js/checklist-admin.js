@@ -416,7 +416,7 @@
 
 	if ( $( '#pp-checklist-req-tags_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var count = $( '.tagchecklist' ).children( 'span' ).length,
+			var count = $( '.tagchecklist' ).children( 'li' ).length,
 				min_value = parseInt( objectL10n_checklist_requirements.requirements.tags_count.value[0] ),
 				max_value = parseInt( objectL10n_checklist_requirements.requirements.tags_count.value[1] );
 
