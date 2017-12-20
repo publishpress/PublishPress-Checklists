@@ -38,6 +38,8 @@ class Featured_image extends Base_simple {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value ) {
-		return ! empty( get_the_post_thumbnail( $post ) );
+		$thumbnail = get_the_post_thumbnail( $post );
+
+		return ! empty( $thumbnail );
 	}
 }
