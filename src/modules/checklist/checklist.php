@@ -701,6 +701,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 						'title_warning_icon'       => __( 'One or more items in the checklist are not completed' ),
 					)
 				);
+
+				do_action('pp_checklist_enqueue_scripts');
 			}
 
 			// Render the box

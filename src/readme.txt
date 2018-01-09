@@ -48,6 +48,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Fixed JS error when the checklist is empty (no requirements are selected);
 
+*Added:*
+
+* Added action to load plugins' script files;
+
 = [1.3.2] - 2017-08-31 =
 
 * Fixed:
