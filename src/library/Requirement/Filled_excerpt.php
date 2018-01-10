@@ -38,6 +38,8 @@ class Filled_excerpt extends Base_simple {
 	 * @return mixed
 	 */
 	public function get_current_status( $post, $option_value ) {
-		return ! empty( trim( get_the_excerpt( $post ) ) );
+		$excerpt = trim( get_the_excerpt( $post ) );
+
+		return ! empty( $excerpt );
 	}
 }
