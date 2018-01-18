@@ -1,9 +1,9 @@
 <?php
 /**
  * @package PublishPress
- * @author PressShack
+ * @author PublishPress
  *
- * Copyright (c) 2017 PressShack
+ * Copyright (C) 2018 PublishPress
  *
  * ------------------------------------------------------------------------------
  * Based on Edit Flow
@@ -480,7 +480,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'name'               => 'license_key',
 				'value'              => $license_key,
 				'license_status'     => $license_status,
-				'link_more_info'     => 'https://pressshack.com/publishpress/docs/activate-license',
+				'link_more_info'     => 'https://publishpress.com/docs/activate-license',
 			);
 			$field = new Field_License_key( $field_args );
 

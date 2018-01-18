@@ -52,6 +52,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Added action to load plugins' script files;
 
+*Changed:*
+
+* Rebranded to PublishPress;
+
 = [1.3.2] - 2017-08-31 =
 
 * Fixed:

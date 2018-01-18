@@ -1,4 +1,4 @@
-# Copyright (C) 2017 PublishPress Content Checklist
+# Copyright (C) 2018 PublishPress Content Checklist
 # This file is distributed under the same license as the PublishPress Content Checklist package.
 msgid ""
 msgstr ""
@@ -335,7 +335,7 @@ msgid "PublishPress Content Checklist"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://pressshack.com/publishpress/"
+msgid "https://publishpress.com/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -347,5 +347,5 @@ msgid "PressShack"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://pressshack.com"
+msgid "https://publishpress.com"
 msgstr ""

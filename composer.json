@@ -1,11 +1,11 @@
 {
-    "name": "pressshack/publishpress-content-checklist",
+    "name": "publishpress/publishpress-content-checklist",
     "type": "wordpress-plugin",
     "license": "GPL-2",
     "authors": [
         {
-            "name": "PressShack",
-            "email": "help@pressshack.com"
+            "name": "PublishPress",
+            "email": "help@publishpress.com"
         }
     ],
     "repositories": [
