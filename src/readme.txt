@@ -42,11 +42,12 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [1.3.3] - 2018-01-25 =
 
 *Fixed:*
 
 * Fixed JS error when the checklist is empty (no requirements are selected);
+* Fixed compatibility with PHP 5.4 (we will soon require min 5.6);
 
 *Added:*
 
