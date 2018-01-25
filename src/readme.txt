@@ -48,6 +48,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Fixed JS error when the checklist is empty (no requirements are selected);
 * Fixed compatibility with PHP 5.4 (we will soon require min 5.6);
+* Fixed custom requirements;
+* Fixed the requirement of tags;
+* Fixed PHP Fatal error on some PHP on the featured image requirement;
 
 *Added:*
 
