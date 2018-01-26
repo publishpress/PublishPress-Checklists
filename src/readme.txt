@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed custom requirements;
 * Fixed the requirement of tags;
 * Fixed PHP Fatal error on some PHP on the featured image requirement;
+* Fixed category count in the checklist;
 
 *Added:*
 
