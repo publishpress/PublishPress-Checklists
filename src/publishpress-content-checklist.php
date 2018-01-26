@@ -14,8 +14,10 @@
  * Plugin URI:  https://publishpress.com/
  * Version:     1.3.3
  * Description: Add a content checklist for posts
- * Author:      PressShack
+ * Author:      PublishPress
  * Author URI:  https://publishpress.com
+ * Text Domain: publishpress-content-checklist
+ * Domain Path: /languages
  */
 
 require_once __DIR__ . '/includes.php';
