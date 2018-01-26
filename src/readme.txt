@@ -63,99 +63,119 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [1.3.2] - 2017-08-31 =
 
-* Fixed:
+*Fixed:*
+
 * Fixed EDD integration and updates;
 
-* Changed:
+*Changed:*
+
 * Removed Freemius integration;
 
 = [1.3.1] - 2017-07-13 =
 
-* Fixed:
+*Fixed:*
+
 * Fixed support for custom post types allowing to use custom items as requirements;
 
 = [1.3.0] - 2017-07-12 =
 
-* Added:
+*Added:*
+
 * Added support for setting specific requirements for each post type, instead of global only;
 
-* Fixed:
+*Fixed:*
+
 * Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
 * Fixed PHP warning in the settings page about undefined index in array;
 * Fixed the menu slug in the Freemius integration;
 
-* Changed:
+*Changed:*
+
 * Changed the required minimun version of PublishPress to 1.6.0;
 * Imprived extensibility for add-ons;
 
 = [1.2.1] - 2017-06-21 =
 
-* Added:
+*Added:*
+
 * Added pt-BR translations
 
-* Fixed:
+*Fixed:*
+
 * Fixed PHP warnings after install and activate
 * Fixed PHP warnings about wrong index type
 * Fixed the license and update checker
 
-* Changed:
+*Changed:*
+
 * Removed English language files
 * Updated Tested Up to 4.8
 
 = [1.2.0] - 2017-06-06 =
 
-* Added:
+*Added:*
+
 * Added the option to hide the Publish button if the checklist is not completed
 * Added the option to add custom items for the checklist
 * Added POT file and English PO files
 
-* Fixed:
+*Fixed:*
+
 * Fixes the mask for numeric input fields in the settings tab on Firefox
 * Fixes the license key validation
 * Fixes the update system
 
-* Changed:
+*Changed:*
+
 * The warning icon in the publish box now appears even for published content
 
 = [1.1.2] - 2017-05-23 =
 
-* Fixed:
+*Fixed:*
+
 * Fixes the word count feature
 
-* Changed:
+*Changed:*
+
 * Displays empty value in the max fields when max is less than min
 * Improves the min and max fields for value equal 0. Displays empty fields.
 
 = [1.1.1] - 2017-05-18 =
 
-* Fixed:
+*Fixed:*
+
 * Removed .DS_Store file from the package
 * Fixed the "Hello Dolly" message in the Freemius opt-in dialog
 * Increased the minimum WordPress version to 4.6
 
-* Changed:
+*Changed:*
+
 * Improved settings merging the checkbox and the action list for each requirement
 * Changed order for Categories and Tags to stay together in the list
 * Changed code to use correct language domain
 
 = [1.1.0] - 2017-05-11 =
 
-* Added:
+*Added:*
+
 * Added "Excerpt has text" as requirement
 * Added option to set "max" value for the number of categories, tags and words - now you can have min, max or an interval for each requirement.
 
-* Changed:
+*Changed:*
+
 * Improved the JavaScript code for better readbility
 
 = [1.0.1] - 2017-05-03 =
 
-* Fixed:
+*Fixed:*
+
 * Fixed the name of plugin's main file
 * Fixed WordPress-EDD-License-Integration library in the vendor dir
 
 = [1.0.0] - 2017-04-27 =
 
-* Added:
+*Added:*
+
 * Added requirement for minimum number of words
 * Added requirement for featured image
 * Added requirement for minimum number of tags
