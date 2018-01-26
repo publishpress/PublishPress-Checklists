@@ -431,7 +431,7 @@
 
 	if ( $( '#pp-checklist-req-categories_count' ).length > 0 ) {
 		$( document ).on( PP_Content_Checklist.EVENT_TIC, function( event ) {
-			var count = $( '.categorychecklist input:checked' ).length,
+			var count = $( '#categorychecklist input:checked' ).length,
 				min_value = parseInt( objectL10n_checklist_requirements.requirements.categories_count.value[0] ),
 				max_value = parseInt( objectL10n_checklist_requirements.requirements.categories_count.value[1] );
 
