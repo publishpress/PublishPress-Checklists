@@ -17,11 +17,11 @@ class Custom_item extends Base_simple implements Interface_required {
 	const VALUE_YES = 'yes';
 
 	/**
-	 * The custom title
+	 * The title.
 	 *
 	 * @var string
 	 */
-	public $title;
+	protected $title;
 
 	/**
 	 * The constructor. It adds the action to load the requirement.
@@ -33,7 +33,7 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return  void
 	 */
 	public function __construct( $name, $module, $post_type ) {
-		$this->name      = (string) $name;
+		$this->name      = trim( (string) $name );
 		$this->is_custom = true;
 
 		parent::__construct( $module, $post_type );
@@ -56,6 +56,10 @@ class Custom_item extends Base_simple implements Interface_required {
 	 * @return string
 	 */
 	public function get_title() {
+		if ( ! empty( $this->title ) ) {
+			return $this->title;
+		}
+
 		$title    = '';
 		$var_name = $this->name . '_title';
 
@@ -63,7 +67,10 @@ class Custom_item extends Base_simple implements Interface_required {
 			$title = stripslashes( $this->module->options->{$var_name}[ $this->post_type ] );
 		}
 
-		return $title;
+		$this->title = $title;
+		// echo '<pre>'; echo $var_name; print_r($this->module->options); die;
+
+		return $this->title;
 	}
 
 	/**
@@ -79,7 +86,7 @@ class Custom_item extends Base_simple implements Interface_required {
 		$html = sprintf(
 			'<input type="text" name="%s" value="%s" data-id="%s" class="pp-checklist-custom-item-title" />',
 			$name,
-			esc_attr( $this->get_title( $this->post_type ) ),
+			esc_attr( $this->get_title() ),
 			esc_attr( $this->name )
 		);
 
@@ -195,9 +202,6 @@ class Custom_item extends Base_simple implements Interface_required {
 		}
 
 		unset( $new_options['custom_items_remove'] );
-
-		$plugin = PublishPress();
-		update_option( $plugin->options_group . 'content_checklist_options', $this->module->options );
 
 		return $new_options;
 	}

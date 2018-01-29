@@ -158,7 +158,7 @@
 				$tr           = $( '<tr>' ),
 				$td           = null,
 				$titleField   = $( '<input type="text" />' ),
-				$idField    = $( '<input type="hidden" />' ),
+				$idField      = $( '<input type="hidden" />' ),
 				$actionField  = $( '<select>' ),
 				$option,
 				$a,
@@ -171,8 +171,18 @@
 				.attr( 'data-id', id )
 				.attr( 'data-post-type', post_type );
 
-			// Title cell
 			$td = $( '<td>' ).appendTo( $tr );
+
+			// ID field
+			$idField
+				.attr(
+					'name',
+					'publishpress_checklist_options[custom_items][]'
+				)
+				.val( id )
+				.appendTo( $td );
+
+			// Title cell
 			$titleField
 				.attr(
 					'name',
@@ -182,15 +192,6 @@
 				.addClass( 'pp-checklist-custom-item-title' )
 				.focus()
 				.attr( 'data-id', id )
-				.appendTo( $td );
-
-			// id fields
-			$idField
-				.attr(
-					'name',
-					'publishpress_checklist_options[custom_items][]'
-				)
-				.val( id )
 				.appendTo( $td );
 
 			// Action cell
@@ -246,7 +247,7 @@
 	        text += charset.charAt( Math.floor( Math.random() * charset.length ) );
 	    }
 
-	    return text;
+	    return text.trim();
 	}
 
 } )( jQuery, objectL10n_checklist_admin );

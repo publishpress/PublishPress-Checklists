@@ -109,6 +109,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			// Apply a filter to the default options
 			$args['default_options'] = apply_filters( 'pp_checklist_requirements_default_options', $args['default_options'] );
 
+			add_filter( 'publishpress_validate_module_settings', array( $this, 'filter_settings_validate' ), 12, 2 );
+
 			$this->module = PublishPress()->register_module( $this->module_name, $args );
 
 			parent::__construct();
@@ -154,31 +156,12 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				foreach ( $this->module->options->custom_items as $id ) {
 					$id = trim( (string) $id );
 
+					// Check if there is a title set for this post type. If not, we do not instantiate
 					$var_name = $id . '_title';
-
-					// Check if there is an empty title to ignore
-					if ( isset( $this->module->options->$var_name ) ) {
-						$title = $this->module->options->$var_name;
-
-						// It is expected to be an array
-						if ( ! is_array( $title ) || empty( $title ) ) {
-							continue;
-						}
-
-						if ( ! isset( $title[ $post_type ] ) ) {
-							continue;
-						}
-
-						if ( isset( $title[ $post_type ] ) && empty( $title[ $post_type] ) ) {
-							continue;
-						}
-					} else {
-						// Ignore corrupted items
-						continue;
+					if ( isset( $this->module->options->{$var_name}[ $post_type ] ) ) {
+						$custom_item = new Custom_item( $id, $this->module, $post_type );
+						$this->requirements[ $post_type ][] = $custom_item;
 					}
-
-					$custom_item = new Custom_item( $id, $this->module, $post_type );
-					$this->requirements[ $post_type ][] = $custom_item;
 				}
 			}
 		}
@@ -533,10 +516,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		/**
 		 * Validate data entered by the user
 		 *
-		 * @param array $new_options New values that have been entered by the user
+		 * @param array  $new_options New values that have been entered by the user
+		 * @param string $module_name The name of the module
 		 * @return array $new_options Form values after they've been sanitized
 		 */
-		public function settings_validate( $new_options ) {
+		public function filter_settings_validate( $new_options, $module_name ) {
 			if ( ! isset( $new_options['license_key'] ) ) {
 				$new_options['license_key'] = '';
 			}
@@ -563,10 +547,30 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			}
 			$new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
+			// Instantiate custom items so they are able to process the settings validations
+			$this->instantiate_custom_items_to_validate_settings( $new_options );
+
 			$new_options = apply_filters( 'pp_checklist_validate_requirement_settings', $new_options );
 
-
 			return $new_options;
+		}
+
+		/**
+		 * Instantiate custom items according to the new_options.
+		 *
+		 * @param  array $new_options
+		 */
+		protected function instantiate_custom_items_to_validate_settings( $new_options ) {
+			if ( isset( $new_options['custom_items'] ) && ! empty( $new_options['custom_items'] ) ) {
+				foreach ( $new_options['custom_items'] as $id ) {
+					if ( isset( $new_options[ $id . '_title' ] ) ) {
+						foreach ( $new_options[ $id . '_title' ] as $post_type => $title ) {
+							$custom_item = new Custom_item( $id, $this->module, $post_type );
+							$custom_item->init();
+						}
+					}
+				}
+			}
 		}
 
 		/**
