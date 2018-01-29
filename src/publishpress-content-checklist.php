@@ -12,7 +12,7 @@
  * @publishpress-content-checklist
  * Plugin Name: PublishPress Content Checklist
  * Plugin URI:  https://publishpress.com/
- * Version:     1.3.5
+ * Version:     1.3.5b1
  * Description: Add a content checklist for posts
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
