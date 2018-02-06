@@ -9,14 +9,14 @@ class ComposerStaticInit13ffe964fa47366893f6d480a6358d77
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'PressShack\\EDD_License\\' => 23,
+            'PublishPress\\EDD_License\\Core\\' => 30,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'PressShack\\EDD_License\\' => 
+        'PublishPress\\EDD_License\\Core\\' => 
         array (
-            0 => __DIR__ . '/..' . '/pressshack/wordpress-edd-license-integration/lib',
+            0 => __DIR__ . '/..' . '/publishpress/wordpress-edd-license-integration/src/core',
         ),
     );
 

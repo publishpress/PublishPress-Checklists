@@ -1,10 +1,10 @@
 {
-    "name": "pressshack/publishpress-content-checklist",
+    "name": "publishpress/publishpress-content-checklist",
     "type": "wordpress-plugin",
     "license": "GPL-2",
     "authors": [
         {
-            "name": "PressShack",
+            "name": "PublishPress",
             "email": "help@publishpress.com"
         }
     ],
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "pressshack/wordpress-edd-license-integration": "~1"
+        "publishpress/wordpress-edd-license-integration": "^2.0.0"
     },
     "minimum-stability": "stable"
 }

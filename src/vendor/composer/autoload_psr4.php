@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PressShack\\EDD_License\\' => array($vendorDir . '/pressshack/wordpress-edd-license-integration/lib'),
+    'PublishPress\\EDD_License\\Core\\' => array($vendorDir . '/publishpress/wordpress-edd-license-integration/src/core'),
 );

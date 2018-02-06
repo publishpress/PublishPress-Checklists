@@ -1,19 +1,22 @@
 [
     {
-        "name": "pressshack/wordpress-edd-license-integration",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "name": "publishpress/wordpress-edd-license-integration",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration",
-            "reference": "fc84c86982bf194ba7498a5f13483ea792766b29"
+            "reference": "a1432d6478af6ff690d0108eb99afba7c29db5e1"
         },
-        "time": "2017-07-27T00:52:19+00:00",
+        "require-dev": {
+            "lucatume/wp-browser": "^1.22"
+        },
+        "time": "2018-02-05T18:04:04+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
             "psr-4": {
-                "PressShack\\EDD_License\\": "lib/"
+                "PublishPress\\EDD_License\\Core\\": "src/core/"
             }
         },
         "license": [
@@ -21,8 +24,8 @@
         ],
         "authors": [
             {
-                "name": "PressShack",
-                "email": "help@pressshack.com"
+                "name": "PublishPress",
+                "email": "help@publishpress.com"
             }
         ]
     }
