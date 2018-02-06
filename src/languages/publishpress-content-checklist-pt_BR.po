@@ -8,30 +8,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-06-07 12:37-0300\n"
+"PO-Revision-Date: 2018-02-05 22:21-0200\n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.6\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: pt_BR\n"
 
 #: freemius/includes/class-fs-plugin-updater.php:565
 msgid "Unable to connect to the filesystem. Please confirm your credentials."
-msgstr ""
-"Não foi possível se comunicar com o sistema de arquivos. Por favor confirme "
-"suas credenciais."
-
-#: library/Plugin.php:113
-msgid "PublishPress"
-msgstr "PublishPress"
+msgstr "Não foi possível se comunicar com o sistema de arquivos. Por favor confirme suas credenciais."
 
 #: library/Plugin.php:114
-msgid ""
-"PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, "
-"update."
-msgstr ""
-"PublishPress Content Checklist requer __plugin__ 1.3.0 ou mais tarde. Por "
-"favor, atualize."
+msgid "PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, update."
+msgstr "PublishPress Content Checklist requer __plugin__ 1.3.0 ou mais tarde. Por favor, atualize."
 
 #: library/Plugin.php:129
 msgid "Disabled"
@@ -170,8 +160,7 @@ msgstr "Checklist"
 
 #: modules/checklist/checklist.php:74 modules/checklist/checklist.php:75
 msgid "Define tasks that must be complete before content is published"
-msgstr ""
-"Define tarefas que devem ser completadas antes do conteúdo ser publicado"
+msgstr "Define tarefas que devem ser completadas antes do conteúdo ser publicado"
 
 #: modules/checklist/checklist.php:248
 msgid "Licensing:"
@@ -207,8 +196,7 @@ msgstr "Isto irá mostrar um ícone de aviso na caixa de publicação"
 
 #: modules/checklist/checklist.php:360
 msgid "This will hide the Publish button if the checklist is not complete"
-msgstr ""
-"Isto irá ocultar o botão de publicação se a lista não estiver completada"
+msgstr "Isto irá ocultar o botão de publicação se a lista não estiver completada"
 
 #: modules/checklist/checklist.php:408
 msgid "Description"
@@ -231,12 +219,8 @@ msgid "Configure"
 msgstr "Configurar"
 
 #: modules/checklist/checklist.php:581
-msgid ""
-"The following requirements are not completed yet. Are you sure you want to "
-"publish?"
-msgstr ""
-"Os seguintes requisitos ainda não estão completos. Tem certeza de que "
-"deseja publicar?"
+msgid "The following requirements are not completed yet. Are you sure you want to publish?"
+msgstr "Os seguintes requisitos ainda não estão completos. Tem certeza de que deseja publicar?"
 
 #: modules/checklist/checklist.php:582
 msgid "Please complete the following requirements before publishing:"
@@ -244,7 +228,7 @@ msgstr "Por favor, complete os seguintes requisitos antes de publicar:"
 
 #: modules/checklist/checklist.php:583
 msgid "Not required, but important: "
-msgstr "Não obrigatório, mas importante:"
+msgstr "Não obrigatório, mas importante: "
 
 #: modules/checklist/checklist.php:586
 msgid "One or more items in the checklist are not completed"
@@ -323,27 +307,20 @@ msgid "More information"
 msgstr "Mais informações"
 
 #: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:198
-msgid ""
-"There is a new version of %1$s available. %2$sView version %3$s details%4$s."
-msgstr ""
-"Há uma nova versão de %1$s disponível. %2$s Ver detalhes da versão %3$s "
-"%4$s."
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr "Há uma nova versão de %1$s disponível. %2$s Ver detalhes da versão %3$s %4$s."
 
 #: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:206
-msgid ""
-"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
-"or %5$supdate now%6$s."
-msgstr ""
-"Há uma nova versão de %1$s disponível. %2$s Ver detalhes da versão %3$s "
-"%4$s ou %5$satualize agora%6$s."
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s."
+msgstr "Há uma nova versão de %1$s disponível. %2$s Ver detalhes da versão %3$s %4$s ou %5$satualize agora%6$s."
 
 #: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:359
 msgid "You do not have permission to install plugin updates"
 msgstr "Você não tem permissão para instalar atualizações para este plugin"
 
 #: vendor/pressshack/wordpress-edd-license-integration/lib/Updater.php:359
-msgid "Error"
-msgstr "Erro"
+msgid "Error\""
+msgstr "Erro”"
 
 #. Plugin Name of the plugin/theme
 msgid "PublishPress Content Checklist"
@@ -358,9 +335,5 @@ msgid "Add a content checklist for posts"
 msgstr "Adicione uma Checklist de conteúdo para posts"
 
 #. Author of the plugin/theme
-msgid "PressShack"
-msgstr "PressShack"
-
-#. Author URI of the plugin/theme
-msgid "https://publishpress.com"
-msgstr "https://publishpress.com"
+msgid "PublishPress"
+msgstr "PublishPress"

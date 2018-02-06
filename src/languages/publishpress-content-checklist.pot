@@ -1,21 +1,24 @@
 # Copyright (C) 2018 PublishPress Content Checklist
 # This file is distributed under the same license as the PublishPress Content Checklist package.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress Content Checklist 1.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
-"POT-Creation-Date: 2017-06-06 14:07:37+00:00\n"
+"POT-Creation-Date: 2018-02-05 22:21-0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: freemius/includes/class-fs-plugin-updater.php:565
 msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr ""
 
+#. Author of the plugin/theme
 #: library/Plugin.php:113
 msgid "PublishPress"
 msgstr ""
@@ -340,10 +343,6 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid "Add a content checklist for posts"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "PressShack"
 msgstr ""
 
 #. Author URI of the plugin/theme
