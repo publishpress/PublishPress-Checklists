@@ -71,7 +71,9 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIS
 		define( 'PP_CONTENT_CHECKLIST_LIB_PATH', PP_CONTENT_CHECKLIST_PATH_BASE . '/library' );
 		define( 'PP_CONTENT_CHECKLIST_LOADED', 1 );
 
-        require_once __DIR__ . '/vendor/autoload.php';
+		if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+            require_once __DIR__ . '/vendor/autoload.php';
+        }
 
         // Includes the EDD integration library
         require_once __DIR__ . '/vendor/publishpress/wordpress-edd-license-integration/src/includes.php';

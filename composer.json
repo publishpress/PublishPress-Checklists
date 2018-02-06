@@ -1,22 +1,38 @@
 {
-    "name": "publishpress/publishpress-content-checklist",
-    "type": "wordpress-plugin",
-    "license": "GPL-2",
-    "authors": [
-        {
-            "name": "PublishPress",
-            "email": "help@publishpress.com"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/OSTraining/WordPress-Plugin-Builder"
-        }
-    ],
-    "require": {
-        "pressshack/wordpress-plugin-builder": "*",
-        "consolidation/robo": "~1"
+  "name": "publishpress/publishpress-content-checklist",
+  "type": "wordpress-plugin",
+  "license": "GPL-2",
+  "authors": [
+    {
+      "name": "PublishPress",
+      "email": "help@publishpress.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/OSTraining/WordPress-Plugin-Builder"
     },
-    "minimum-stability": "stable"
+    {
+      "type": "git",
+      "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/OSTraining/EDD-License-handler"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "vendor-dir": "src/vendor"
+  },
+  "require": {
+    "pimple/pimple": "~3.0",
+    "publishpress/wordpress-edd-license-integration": "^2.1.0a3"
+  },
+  "require-dev": {
+    "publishpress/wordpress-plugin-builder": "1.5.0",
+    "consolidation/robo": "~1"
+  },
+  "minimum-stability": "stable"
 }
