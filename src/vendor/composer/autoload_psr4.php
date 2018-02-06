@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PublishPress\\EDD_License\\Core\\' => array($vendorDir . '/publishpress/wordpress-edd-license-integration/src/core'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
 );

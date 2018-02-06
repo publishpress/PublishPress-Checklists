@@ -13,12 +13,11 @@ use \PublishPress\Addon\Content_checklist\Auto_loader;
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
 
-require_once 'vendor/autoload.php';
-require_once 'vendor/pressshack/wordpress-edd-license-integration/include.php';
 
 if ( ! function_exists( 'is_plugin_inactive' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
+
 
 /*======================================================================
 =            Check if PublishPress is installed and active             =
@@ -71,6 +70,11 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIS
 		define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
 		define( 'PP_CONTENT_CHECKLIST_LIB_PATH', PP_CONTENT_CHECKLIST_PATH_BASE . '/library' );
 		define( 'PP_CONTENT_CHECKLIST_LOADED', 1 );
+
+        require_once __DIR__ . '/vendor/autoload.php';
+
+        // Includes the EDD integration library
+        require_once __DIR__ . '/vendor/publishpress/wordpress-edd-license-integration/src/includes.php';
 
 		if ( ! class_exists( 'PP_Module' ) ) {
 			require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );

@@ -30,9 +30,8 @@
 
 use PublishPress\Addon\Content_checklist\Requirement\Base_requirement;
 use PublishPress\Addon\Content_checklist\Requirement\Custom_item;
-use PressShack\EDD_License\Updater;
-use PressShack\EDD_License\License;
-use PressShack\EDD_License\Setting\Field\License_key as Field_License_key;
+use PublishPress\Addon\Content_checklist\Factory;
+use PublishPress\EDD_License\Core\Setting\Field\License_key as Field_License_key;
 
 
 if ( ! class_exists( 'PP_Checklist' ) ) {
@@ -64,13 +63,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @var array
 		 */
 		protected $post_types = array();
-
-		/**
-		 * WordPress-EDD-License-Integration
-		 *
-		 * @var License
-		 */
-		protected $license_manager;
 
 		/**
 		 * Instace for the module
@@ -116,8 +108,6 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 			parent::__construct();
 
 			$this->configure_twig();
-
-			$this->license_manager = new License;
 		}
 
 		/**
@@ -521,11 +511,19 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @return array $new_options Form values after they've been sanitized
 		 */
 		public function filter_settings_validate( $new_options, $module_name ) {
+            if ($module_name !== 'checklist') {
+                return $new_options;
+            }
+
 			if ( ! isset( $new_options['license_key'] ) ) {
 				$new_options['license_key'] = '';
 			}
-			$new_options['license_key']    = $this->license_manager->sanitize_license_key( $new_options['license_key'] );
-			$new_options['license_status'] = $this->license_manager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_ID );
+
+            $container      = Factory::get_container();
+            $licenseManager = $container['edd_container']['license_manager'];
+
+			$new_options['license_key']    = $licenseManager->sanitize_license_key( $new_options['license_key'] );
+			$new_options['license_status'] = $licenseManager->validate_license_key( $new_options['license_key'], PP_CONTENT_CHECKLIST_ITEM_ID );
 
 			// Whitelist validation for the post type options
 			if ( ! isset( $new_options['post_types'] ) ) {
@@ -763,24 +761,14 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 
 		/*=====  End of Meta boxes  ======*/
 
-		public function load_updater() {
+        /**
+         * @return EDD_SL_Plugin_Updater
+         */
+		public function load_updater()
+        {
+            $container = Factory::get_container();
 
-			$license_key    = isset( $this->module->options->license_key ) ? (string) $this->module->options->license_key : '';
-			$license_status = isset( $this->module->options->license_status ) ? (string) $this->module->options->license_status : License::STATUS_MISSING;
-
-			$args = array(
-				'version'        => PP_CONTENT_CHECKLIST_VERSION,
-				'license'        => $license_key,
-				'license_status' => $license_status,
-				'item_id'        => PP_CONTENT_CHECKLIST_ITEM_ID,
-				'author'         => "PressShack"
-			);
-
-			new Updater(
-				PRESSSHACK_LICENSES_API_URL,
-				PP_CONTENT_CHECKLIST_FILE,
-				$args
-			);
-		}
+            return $container['edd_container']['update_manager'];
+        }
 	}
 }// End if().

@@ -15,6 +15,7 @@
         }
     ],
     "require": {
+        "pimple/pimple": "~3.0",
         "publishpress/wordpress-edd-license-integration": "^2.0.0"
     },
     "minimum-stability": "stable"

@@ -10,6 +10,7 @@ class ComposerStaticInit13ffe964fa47366893f6d480a6358d77
         'P' => 
         array (
             'PublishPress\\EDD_License\\Core\\' => 30,
+            'Psr\\Container\\' => 14,
         ),
     );
 
@@ -18,6 +19,20 @@ class ComposerStaticInit13ffe964fa47366893f6d480a6358d77
         array (
             0 => __DIR__ . '/..' . '/publishpress/wordpress-edd-license-integration/src/core',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'Pimple' => 
+            array (
+                0 => __DIR__ . '/..' . '/pimple/pimple/src',
+            ),
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -25,6 +40,7 @@ class ComposerStaticInit13ffe964fa47366893f6d480a6358d77
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit13ffe964fa47366893f6d480a6358d77::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit13ffe964fa47366893f6d480a6358d77::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit13ffe964fa47366893f6d480a6358d77::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
