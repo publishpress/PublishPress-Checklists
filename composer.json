@@ -28,10 +28,10 @@
   },
   "require": {
     "pimple/pimple": "~3.0",
-    "publishpress/wordpress-edd-license-integration": "^2.1.0"
+    "publishpress/wordpress-edd-license-integration": "~2.1"
   },
   "require-dev": {
-    "publishpress/wordpress-plugin-builder": "1.5.0",
+    "publishpress/wordpress-plugin-builder": "~1",
     "consolidation/robo": "~1"
   },
   "minimum-stability": "stable"
