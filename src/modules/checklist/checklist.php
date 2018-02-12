@@ -163,15 +163,22 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 *
 		 * @return array
 		 */
-		public function filter_post_types( $post_types ) {
-			$list = get_post_types(
-				array( 'public' => true )
-			);
+		public function filter_post_types( $post_types )
+        {
+            $allowed_post_types = array(
+                'post' => __( 'Post' ),
+                'page' => __( 'Page' ),
+            );
 
-			unset( $list['attachment'] );
+            $args = array(
+                '_builtin' => false,
+                'public'   => true,
+            );
 
-			return array_merge( $post_types, $list );
-		}
+            $list = get_post_types($args);
+
+            return array_merge($post_types, $allowed_post_types, $list);
+        }
 
 		/**
 		 * Set the requirements list for the given post type
@@ -399,9 +406,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		public function settings_post_types_option() {
 			global $publishpress;
 
-			$post_types = $this->get_post_types();
-
-			$publishpress->settings->helper_option_custom_post_type( $this->module, $post_types );
+			$publishpress->settings->helper_option_custom_post_type( $this->module );
 		}
 
 		/**
@@ -490,7 +495,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @return array
 		 */
 		public function get_post_types() {
-			if ( empty( $this->post_types ) ) {
+            if ( empty( $this->post_types ) ) {
 				// Apply filters to the list of requirements
 				$this->post_types = apply_filters( 'pp_checklist_post_types', array() );
 
