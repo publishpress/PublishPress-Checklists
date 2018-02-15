@@ -1,18 +1,15 @@
-# OS generated files #
-######################
+.svn
+.git
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-.idea
+wpcom-helper.php
 
-*.sublime-project
-*.sublime-workspace
+/local.sh
+node_modules
 
-# Ignores the "dev" composer file
-/composer.lock
-/src/vendor
+/.properties.ini
+
 /packages
+/vendor
+/composer.lock
+.idea
+/dist

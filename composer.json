@@ -23,16 +23,12 @@
     }
   ],
   "config": {
-    "preferred-install": "dist",
-    "vendor-dir": "src/vendor"
+    "preferred-install": "dist"
   },
   "require": {
     "pimple/pimple": "~3.0",
-    "publishpress/wordpress-edd-license-integration": "~2.1"
-  },
-  "require-dev": {
-    "publishpress/wordpress-plugin-builder": "~1",
-    "consolidation/robo": "~1"
+    "publishpress/wordpress-edd-license-integration": "~2.1",
+    "publishpress/wordpress-plugin-builder": "^2"
   },
   "minimum-stability": "stable"
 }
