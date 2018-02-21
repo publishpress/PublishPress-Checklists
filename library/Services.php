@@ -67,7 +67,7 @@ class Services implements ServiceProviderInterface {
             $config->setApiUrl('https://publishpress.com');
             $config->setLicenseKey($c['LICENSE_KEY']);
             $config->setLicenseStatus($c['LICENSE_STATUS']);
-            $config->setPluginVersion(PP_CONTENT_CHECKLIST_VERSION);
+            $config->setPluginVersion(PUBLISHPRESS_CONTENT_CHECKLIST_VERSION);
             $config->setEddItemId(PP_CONTENT_CHECKLIST_ITEM_ID);
             $config->setPluginAuthor('PublishPress');
             $config->setPluginFile(PP_CONTENT_CHECKLIST_FILE);
