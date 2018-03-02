@@ -55,11 +55,22 @@ class Services implements ServiceProviderInterface {
         };
 
         $container['LICENSE_KEY'] = function ($c) {
-            return $c['module']->module->options->license_key;
+            $key = '';
+            if (isset($c['module']->module->options->license_key)) {
+                $key = $c['module']->module->options->license_key;
+            }
+
+            return $key;
         };
 
         $container['LICENSE_STATUS'] = function ($c) {
-            return $c['module']->module->options->license_status;
+            $status = '';
+
+            if (isset($c['module']->module->options->license_status)) {
+                $status = $c['module']->module->options->license_status;
+            }
+
+            return $status;
         };
 
         $container['edd_container'] = function ($c) {

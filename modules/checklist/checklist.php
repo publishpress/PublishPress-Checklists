@@ -93,6 +93,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'show_warning_icon_submit' => 'no',
 					'hide_publish_button'      => 'no',
 					'custom_items'             => array(),
+                    'license_key'              => '',
+                    'license_status'           => '',
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
