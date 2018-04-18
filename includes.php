@@ -64,7 +64,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIS
 	if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
 		define( 'PP_CONTENT_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
-		define( 'PUBLISHPRESS_CONTENT_CHECKLIST_VERSION', '1.3.8-beta3' );
+		define( 'PUBLISHPRESS_CONTENT_CHECKLIST_VERSION', '1.3.8' );
 		define( 'PP_CONTENT_CHECKLIST_FILE', 'publishpress-content-checklist/publishpress-content-checklist.php');
 		define( 'PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
 		define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
