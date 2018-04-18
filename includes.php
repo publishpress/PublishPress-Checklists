@@ -64,7 +64,7 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIS
 	if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) ) {
 		define( 'PP_CONTENT_CHECKLIST_ITEM_ID', '6465' );
 		define( 'PP_CONTENT_CHECKLIST_PATH_BASE', plugin_dir_path( __FILE__ ) );
-		define( 'PP_CONTENT_CHECKLIST_VERSION', '1.3.7-beta1' );
+		define( 'PUBLISHPRESS_CONTENT_CHECKLIST_VERSION', '1.3.8' );
 		define( 'PP_CONTENT_CHECKLIST_FILE', 'publishpress-content-checklist/publishpress-content-checklist.php');
 		define( 'PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist' );
 		define( 'PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress' );
@@ -74,9 +74,6 @@ if ( ! defined( 'PP_CONTENT_CHECKLIST_HALT' ) && ! defined( 'PP_CONTENT_CHECKLIS
 		if (file_exists(__DIR__ . '/vendor/autoload.php')) {
             require_once __DIR__ . '/vendor/autoload.php';
         }
-
-        // Includes the EDD integration library
-        require_once __DIR__ . '/vendor/publishpress/wordpress-edd-license-integration/src/includes.php';
 
 		if ( ! class_exists( 'PP_Module' ) ) {
 			require_once( PUBLISHPRESS_ROOT . '/common/php/class-module.php' );

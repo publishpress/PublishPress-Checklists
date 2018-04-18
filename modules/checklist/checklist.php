@@ -93,6 +93,8 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'show_warning_icon_submit' => 'no',
 					'hide_publish_button'      => 'no',
 					'custom_items'             => array(),
+                    'license_key'              => '',
+                    'license_status'           => '',
 				),
 				'configure_page_cb' => 'print_configure_view',
 				'options_page'      => true,
@@ -599,7 +601,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'pp-checklist-requirements',
 				$this->module_url . 'assets/css/checklist-requirements.css',
 				false,
-				PP_CONTENT_CHECKLIST_VERSION,
+				PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
 				'all'
 			);
 
@@ -607,7 +609,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'pp-checklist-admin',
 				$this->module_url . 'assets/css/admin.css',
 				false,
-				PP_CONTENT_CHECKLIST_VERSION,
+				PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
 				'all'
 			);
 
@@ -615,7 +617,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 				'pp-checklist-admin',
 				plugins_url( '/modules/checklist/assets/js/admin.js', PP_CONTENT_CHECKLIST_FILE ),
 				array( 'jquery' ),
-				PP_CONTENT_CHECKLIST_VERSION,
+				PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
 				true
 			);
 
@@ -691,7 +693,7 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 					'pp-checklist-requirements',
 					plugins_url( '/modules/checklist/assets/js/checklist-admin.js', PP_CONTENT_CHECKLIST_FILE ),
 					array( 'jquery' ),
-					PP_CONTENT_CHECKLIST_VERSION,
+					PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
 					true
 				);
 

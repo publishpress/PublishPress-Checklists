@@ -55,11 +55,22 @@ class Services implements ServiceProviderInterface {
         };
 
         $container['LICENSE_KEY'] = function ($c) {
-            return $c['module']->module->options->license_key;
+            $key = '';
+            if (isset($c['module']->module->options->license_key)) {
+                $key = $c['module']->module->options->license_key;
+            }
+
+            return $key;
         };
 
         $container['LICENSE_STATUS'] = function ($c) {
-            return $c['module']->module->options->license_status;
+            $status = '';
+
+            if (isset($c['module']->module->options->license_status)) {
+                $status = $c['module']->module->options->license_status;
+            }
+
+            return $status;
         };
 
         $container['edd_container'] = function ($c) {
@@ -67,7 +78,7 @@ class Services implements ServiceProviderInterface {
             $config->setApiUrl('https://publishpress.com');
             $config->setLicenseKey($c['LICENSE_KEY']);
             $config->setLicenseStatus($c['LICENSE_STATUS']);
-            $config->setPluginVersion(PP_CONTENT_CHECKLIST_VERSION);
+            $config->setPluginVersion(PUBLISHPRESS_CONTENT_CHECKLIST_VERSION);
             $config->setEddItemId(PP_CONTENT_CHECKLIST_ITEM_ID);
             $config->setPluginAuthor('PublishPress');
             $config->setPluginFile(PP_CONTENT_CHECKLIST_FILE);

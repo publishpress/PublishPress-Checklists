@@ -6,7 +6,7 @@ Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
 Tested up to: 4.9.4
-Stable tag: 1.3.6
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,14 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [1.3.8] - 2018-04-18 =
+
+*Fixed:*
+
+* Fixed wrong reference to a legacy EDD library's include file;
+* Fixed PHP warning about undefined property and constant;
+
+= [1.3.7] - 2018-02-21 =
 
 *Fixed:*
 
