@@ -116,7 +116,7 @@
 				this.state.is_publishing = true;
 			}.bind( this ) );
 
-			// On clicking the confimation button in the modal window
+			// On clicking the confirmation button in the modal window
 			this.elems.document.on( 'confirmation', '.remodal', function() {
 				this.state.is_confirmed = true;
 
