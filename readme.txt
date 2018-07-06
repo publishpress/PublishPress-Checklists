@@ -45,6 +45,12 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= UNRELEASED +
+
+*Fixed:*
+
+* Fixed The TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized.
+
 = [1.3.8] - 2018-04-18 =
 
 *Fixed:*
