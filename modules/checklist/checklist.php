@@ -586,9 +586,11 @@ if ( ! class_exists( 'PP_Checklist' ) ) {
 		 * @param array  $plugin_array
 		 */
 		public function add_mce_plugin( $plugin_array ) {
-			$plugin_array['pp_checklist_requirements'] =
-				plugin_dir_url( PP_CONTENT_CHECKLIST_FILE )
-				. 'modules/checklist/assets/js/tinymce-pp-checklist-requirements.js';
+			if ( is_admin() ) {
+				$plugin_array['pp_checklist_requirements'] =
+					plugin_dir_url( PP_CONTENT_CHECKLIST_FILE )
+					. 'modules/checklist/assets/js/tinymce-pp-checklist-requirements.js';
+			}
 
 			return $plugin_array;
 		}
