@@ -9,19 +9,20 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
-use PP_Checklist;
-use Pimple\ServiceProviderInterface;
 use Pimple\Container as Pimple;
+use Pimple\ServiceProviderInterface;
+use PP_Checklist;
 use PublishPress\EDD_License\Core\Container as EDDContainer;
-use PublishPress\EDD_License\Core\ServicesConfig as EDDServicesConfig;
 use PublishPress\EDD_License\Core\Services as EDDServices;
+use PublishPress\EDD_License\Core\ServicesConfig as EDDServicesConfig;
 
-defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
+defined('ABSPATH') or die('No direct script access allowed.');
 
 /**
  * Class Services
  */
-class Services implements ServiceProviderInterface {
+class Services implements ServiceProviderInterface
+{
     /**
      * @since 1.3.5
      * @var PP_Checklist
@@ -32,6 +33,7 @@ class Services implements ServiceProviderInterface {
      * Services constructor.
      *
      * @since 1.3.5
+     *
      * @param PP_Checklist $module
      */
     public function __construct(PP_Checklist $module)
@@ -47,9 +49,11 @@ class Services implements ServiceProviderInterface {
      * It should not get services.
      *
      * @since 1.3.5
+     *
      * @param Pimple $container A container instance
      */
-    public function register(Pimple $container) {
+    public function register(Pimple $container)
+    {
         $container['module'] = function ($c) {
             return $this->module;
         };

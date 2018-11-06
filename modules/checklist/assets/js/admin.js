@@ -27,227 +27,225 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-( function ( $, objectL10n_checklist_admin ) {
-	"use strict";
+(function ($, objectL10n_checklist_admin) {
+    'use strict';
 
-	$( function() {
-		// Minor fix to the style
-		// Sticks the requirement settings table to the left
-		$( 'table.pp-checklist-requirements-settings' ).parent().prev().hide();
+    $(function () {
+        // Minor fix to the style
+        // Sticks the requirement settings table to the left
+        $('table.pp-checklist-requirements-settings').parent().prev().hide();
 
-		show_post_type_requirements( objectL10n_checklist_admin.first_post_type );
+        show_post_type_requirements(objectL10n_checklist_admin.first_post_type);
 
-		// Set the event for the post type filter
-		$( '#pp-checklist-post-type-filter a' ).on( 'click', function( event ) {
-			event.preventDefault();
+        // Set the event for the post type filter
+        $('#pp-checklist-post-type-filter a').on('click', function (event) {
+            event.preventDefault();
 
-			var $target = $( event.toElement || event.target ),
-				post_type = $target.attr( 'href' ).substring(1);
+            var $target = $(event.toElement || event.target),
+                post_type = $target.attr('href').substring(1);
 
-			show_post_type_requirements( post_type );
-		} );
+            show_post_type_requirements(post_type);
+        });
 
-		// Set the mask for settings fields
-		$( '.pp-checklist-number' ).on( 'keypress', function( event ) {
-			var key = event.keyCode || event.which;
-			var allowed_keys = [
-				35, 36, 37, 38, 39, 40, // arrows
-				8, 9, 46, 27, 13, // backspace, tab, delete, esc, enter
-				48, 49, 50, 51, 52, 53, 54, 55, 56, 57 // 0-9
-			];
+        // Set the mask for settings fields
+        $('.pp-checklist-number').on('keypress', function (event) {
+            var key = event.keyCode || event.which;
+            var allowed_keys = [
+                35, 36, 37, 38, 39, 40, // arrows
+                8, 9, 46, 27, 13, // backspace, tab, delete, esc, enter
+                48, 49, 50, 51, 52, 53, 54, 55, 56, 57 // 0-9
+            ];
 
-			// Ignore any key different than number
-			if ( allowed_keys.indexOf( key ) < 0 ) {
-				event.preventDefault();
+            // Ignore any key different than number
+            if (allowed_keys.indexOf(key) < 0) {
+                event.preventDefault();
 
-				return false;
-			}
+                return false;
+            }
 
-			return true;
-		} );
+            return true;
+        });
 
-		$( '.pp-checklist-float' ).on( 'keypress', function( event ) {
-			var key = event.keyCode || event.which;
-			var allowed_keys = [
-				35, 36, 37, 38, 39, 40, // arrows
-            	44, 46, // decimal separators
-				8, 9, 46, 27, 13, // backspace, tab, delete, esc, enter
-				48, 49, 50, 51, 52, 53, 54, 55, 56, 57 // 0-9
-			];
+        $('.pp-checklist-float').on('keypress', function (event) {
+            var key = event.keyCode || event.which;
+            var allowed_keys = [
+                35, 36, 37, 38, 39, 40, // arrows
+                44, 46, // decimal separators
+                8, 9, 46, 27, 13, // backspace, tab, delete, esc, enter
+                48, 49, 50, 51, 52, 53, 54, 55, 56, 57 // 0-9
+            ];
 
-			// Ignore any key different than number
-			if ( allowed_keys.indexOf( key ) < 0 ) {
-				event.preventDefault();
+            // Ignore any key different than number
+            if (allowed_keys.indexOf(key) < 0) {
+                event.preventDefault();
 
-				return false;
-			}
+                return false;
+            }
 
-			return true;
-		} );
+            return true;
+        });
 
+        /**
+         * Show the requirements for the specific post type and hide all the
+         * others.
+         *
+         * @param  {string} post_type
+         */
+        function show_post_type_requirements (post_type) {
+            // Hide the requirements which are not for the current post type
+            $('#pp-checklist-requirements tr.pp-checklist-requirement-row').hide();
+            // Display the correct requirements
+            $('#pp-checklist-requirements tr[data-post-type="' + post_type + '"]').show();
+            // Mark the filter as selected
+            $('#pp-checklist-post-type-filter a.pp-selected').removeClass('pp-selected');
+            $('#pp-checklist-post-type-filter a[href=#' + post_type + ']').addClass('pp-selected');
+        }
 
-		/**
-		 * Show the requirements for the specific post type and hide all the
-		 * others.
-		 *
-		 * @param  {string} post_type
-		 */
-		function show_post_type_requirements( post_type ) {
-			// Hide the requirements which are not for the current post type
-			$( '#pp-checklist-requirements tr.pp-checklist-requirement-row' ).hide();
-			// Display the correct requirements
-			$( '#pp-checklist-requirements tr[data-post-type="' + post_type + '"]' ).show();
-			// Mark the filter as selected
-			$( '#pp-checklist-post-type-filter a.pp-selected' ).removeClass( 'pp-selected' );
-			$( '#pp-checklist-post-type-filter a[href=#' + post_type + ']' ).addClass( 'pp-selected' );
-		}
+        /**
+         * Returns the current post type, selected by the filter.
+         *
+         * @return string
+         */
+        function get_current_post_type () {
+            var post_type = $('#pp-checklist-post-type-filter a.pp-selected').attr('href').substring(1);
 
-		/**
-		 * Returns the current post type, selected by the filter.
-		 *
-		 * @return string
-		 */
-		function get_current_post_type() {
-			var post_type = $( '#pp-checklist-post-type-filter a.pp-selected' ).attr( 'href' ).substring( 1 );
+            if (post_type === '' || post_type === false || post_type === null || typeof post_type === undefined) {
+                post_type = objectL10n_checklist_admin.first_post_type;
+            }
 
-			if ( post_type === '' || post_type === false || post_type === null || typeof post_type === undefined ) {
-				post_type = objectL10n_checklist_admin.first_post_type;
-			}
+            return post_type;
+        }
 
-			return post_type;
-		}
+        /**
+         * Method to remove custom item fromt the requirements list, identified
+         * by the temporary ID/
+         *
+         * @param  {string} id
+         */
+        function remove_row (id) {
+            // Add a special hidden input to flag the delete action
+            var $input = $('<input type="hidden" />')
+                .attr('name', 'publishpress_checklist_options[custom_items_remove][]')
+                .val(id)
+                .appendTo($('#pp-checklist-requirements'));
 
-		/**
-		 * Method to remove custom item fromt the requirements list, identified
-		 * by the temporary ID/
-		 *
-		 * @param  {string} id
-		 */
-		function remove_row( id ) {
-			// Add a special hidden input to flag the delete action
-			var $input = $( '<input type="hidden" />')
-				.attr( 'name', 'publishpress_checklist_options[custom_items_remove][]' )
-				.val( id )
-				.appendTo( $( '#pp-checklist-requirements' ) );
+            $('tr[data-id="' + id + '"]').remove();
+        }
 
-			$( 'tr[data-id="' + id + '"]' ).remove();
-		}
+        /**
+         * Callback for events where we want to trigger
+         * a remove row action
+         *
+         * @param  {Event} event
+         */
+        function callback_remove_row (event) {
+            var $target = $(event.target);
 
-		/**
-		 * Callback for events where we want to trigger
-		 * a remove row action
-		 *
-		 * @param  {Event} event
-		 */
-		function callback_remove_row( event ) {
-			var $target = $( event.target );
+            remove_row($target.data('id'));
+        }
 
-			remove_row(  $target.data( 'id' ) );
-		}
+        /**
+         * Create a row inside the requirements table
+         *
+         * @param  {string} title
+         * @param  {string} action
+         *
+         * @return {Element}
+         */
+        function create_row (id, title, action, post_type) {
+            var $table = $('#pp-checklist-requirements'),
+                $tr = $('<tr>'),
+                $td = null,
+                $titleField = $('<input type="text" />'),
+                $idField = $('<input type="hidden" />'),
+                $actionField = $('<select>'),
+                $option,
+                $a,
+                $icon,
+                rule;
 
-		/**
-		 * Create a row inside the requirements table
-		 *
-		 * @param  {string} title
-		 * @param  {string} action
-		 *
-		 * @return {Element}
-		 */
-		function create_row( id, title, action, post_type ) {
-			var $table        = $( '#pp-checklist-requirements' ),
-				$tr           = $( '<tr>' ),
-				$td           = null,
-				$titleField   = $( '<input type="text" />' ),
-				$idField      = $( '<input type="hidden" />' ),
-				$actionField  = $( '<select>' ),
-				$option,
-				$a,
-				$icon,
-				rule;
+            $table.append($tr);
 
-			$table.append( $tr );
+            $tr.addClass('pp-checklist-requirement-row')
+                .attr('data-id', id)
+                .attr('data-post-type', post_type);
 
-			$tr.addClass( 'pp-checklist-requirement-row' )
-				.attr( 'data-id', id )
-				.attr( 'data-post-type', post_type );
+            $td = $('<td>').appendTo($tr);
 
-			$td = $( '<td>' ).appendTo( $tr );
+            // ID field
+            $idField
+                .attr(
+                    'name',
+                    'publishpress_checklist_options[custom_items][]'
+                )
+                .val(id)
+                .appendTo($td);
 
-			// ID field
-			$idField
-				.attr(
-					'name',
-					'publishpress_checklist_options[custom_items][]'
-				)
-				.val( id )
-				.appendTo( $td );
+            // Title cell
+            $titleField
+                .attr(
+                    'name',
+                    'publishpress_checklist_options[' + id + '_title][' + post_type + ']'
+                )
+                .val(title)
+                .addClass('pp-checklist-custom-item-title')
+                .focus()
+                .attr('data-id', id)
+                .appendTo($td);
 
-			// Title cell
-			$titleField
-				.attr(
-					'name',
-					'publishpress_checklist_options[' + id + '_title][' + post_type + ']'
-				)
-				.val( title )
-				.addClass( 'pp-checklist-custom-item-title' )
-				.focus()
-				.attr( 'data-id', id )
-				.appendTo( $td );
+            // Action cell
+            $td = $('<td>').appendTo($tr);
+            $actionField
+                .attr(
+                    'name',
+                    'publishpress_checklist_options[' + id + '_rule][' + post_type + ']'
+                )
+                .attr('data-id', id)
+                .appendTo($td);
 
-			// Action cell
-			$td = $( '<td>' ).appendTo( $tr );
-			$actionField
-				.attr(
-					'name',
-					'publishpress_checklist_options[' + id + '_rule][' + post_type + ']'
-				)
-				.attr( 'data-id', id )
-				.appendTo( $td );
+            $.each(objectL10n_checklist_admin.rules, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .text(label)
+                    .appendTo($actionField);
+            });
 
-			$.each( objectL10n_checklist_admin.rules, function ( value, label ) {
-				$option = $( '<option>' )
-					.attr( 'value', value )
-					.text( label )
-					.appendTo( $actionField );
-			} );
+            // Params cell
+            $td = $('<td>')
+                .attr('data-id', id)
+                .appendTo($tr);
+            $a = $('<a>')
+                .attr('href', 'javascript:void(0);')
+                .addClass('pp-checklist-remove-custom-item')
+                .attr('data-id', id)
+                .appendTo($td);
+            $icon = $('<span>')
+                .addClass('dashicons dashicons-trash')
+                .attr('data-id', id)
+                .appendTo($a);
 
-			// Params cell
-			$td   = $( '<td>' )
-				.attr( 'data-id', id )
-				.appendTo( $tr );
-			$a    = $( '<a>' )
-				.attr( 'href', 'javascript:void(0);' )
-				.addClass( 'pp-checklist-remove-custom-item' )
-				.attr( 'data-id', id )
-				.appendTo( $td );
-			$icon = $( '<span>' )
-				.addClass( 'dashicons dashicons-trash' )
-				.attr( 'data-id', id )
-				.appendTo( $a );
+            $a.on('click', callback_remove_row);
+        }
 
-			$a.on( 'click', callback_remove_row );
-		}
+        /*----------  Custom items  ----------*/
+        $('#pp-checklist-add-button').on('click', function (event) {
+            var newId = uidGen(15);
 
-		/*----------  Custom items  ----------*/
-		$( '#pp-checklist-add-button' ).on( 'click', function( event ) {
-			var newId = uidGen( 15 );
+            create_row(newId, '', '', get_current_post_type());
+        });
 
-			create_row( newId, '', '', get_current_post_type() );
-		} );
+        $('.pp-checklist-remove-custom-item').on('click', callback_remove_row);
+    });
 
-		$( '.pp-checklist-remove-custom-item' ).on( 'click', callback_remove_row );
-	} );
+    function uidGen (len) {
+        var text = ' ',
+            charset = 'abcdefghijklmnopqrstuvwxyz';
 
-	function uidGen( len )
-	{
-	    var text = " ",
-	    	charset = "abcdefghijklmnopqrstuvwxyz";
+        for (var i = 0; i < len; i++) {
+            text += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
 
-	    for ( var i=0; i < len; i++ ) {
-	        text += charset.charAt( Math.floor( Math.random() * charset.length ) );
-	    }
+        return text.trim();
+    }
 
-	    return text.trim();
-	}
-
-} )( jQuery, objectL10n_checklist_admin );
+})(jQuery, objectL10n_checklist_admin);

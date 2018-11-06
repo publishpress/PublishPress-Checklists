@@ -9,7 +9,7 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
-defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
+defined('ABSPATH') or die('No direct script access allowed.');
 
 class Auto_loader
 {
@@ -19,7 +19,7 @@ class Auto_loader
      *
      * @var array
      */
-    protected static $prefixes = array();
+    protected static $prefixes = [];
 
     /**
      * Associative array of prefixes for loading specialized camelCase classes
@@ -27,7 +27,7 @@ class Auto_loader
      *
      * @var array
      */
-    protected static $camelPrefixes = array();
+    protected static $camelPrefixes = [];
 
     /**
      * @var AutoLoader
@@ -40,7 +40,7 @@ class Auto_loader
             static::$instance = new static();
         }
 
-        spl_autoload_register(array(static::$instance, $method));
+        spl_autoload_register([static::$instance, $method]);
     }
 
     /**
@@ -75,7 +75,7 @@ class Auto_loader
 
         // initialise the namespace prefix array
         if (empty(self::$prefixes[$prefix])) {
-            self::$prefixes[$prefix] = array();
+            self::$prefixes[$prefix] = [];
         }
 
         // retain the base directory for the namespace prefix
@@ -132,6 +132,7 @@ class Auto_loader
 
             if (is_file($path)) {
                 require_once $path;
+
                 return $path;
             }
         }
@@ -165,7 +166,7 @@ class Auto_loader
      */
     public static function registerCamelBase($prefix, $baseDir)
     {
-        if (!is_dir($baseDir)) {
+        if ( ! is_dir($baseDir)) {
             throw new \Exception("Cannot register '{$prefix}'. The requested base directory does not exist!'");
         }
 
@@ -188,7 +189,7 @@ class Auto_loader
      */
     protected function loadCamelClass($class)
     {
-        if (!class_exists($class)) {
+        if ( ! class_exists($class)) {
             foreach (self::$camelPrefixes as $prefix => $baseDir) {
                 if (strpos($class, $prefix) === 0) {
                     $parts = preg_split('/(?<=[a-z])(?=[A-Z])/x', substr($class, strlen($prefix)));
@@ -198,6 +199,7 @@ class Auto_loader
 
                     if (is_file($filePath)) {
                         require_once $filePath;
+
                         return $filePath;
                     }
                 }

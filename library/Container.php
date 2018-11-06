@@ -9,11 +9,12 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
-defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
+defined('ABSPATH') or die('No direct script access allowed.');
 
 /**
  * Class Container
  */
-class Container extends \Pimple\Container {
+class Container extends \Pimple\Container
+{
 
 }
