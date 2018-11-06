@@ -447,6 +447,10 @@
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var has_excerpt = false;
 
+            if ($('#excerpt').length === 0) {
+                return;
+            }
+
             if ($('#excerpt').val().trim().length > 0) {
                 has_excerpt = true;
             }

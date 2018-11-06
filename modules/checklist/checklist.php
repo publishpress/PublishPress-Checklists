@@ -190,6 +190,21 @@ if ( ! class_exists('PP_Checklist')) {
             return array_merge($post_types, $allowed_post_types, $list);
         }
 
+        protected function getPostTypeTaxonomies($post_type)
+        {
+            global $wp_taxonomies;
+
+            $postTypeTaxonomies = [];
+
+            foreach ($wp_taxonomies as $taxonomy) {
+                if (in_array($post_type, $taxonomy->object_type)) {
+                    $postTypeTaxonomies[] = $taxonomy->name;
+                }
+            }
+
+            return $postTypeTaxonomies;
+        }
+
         /**
          * Set the requirements list for the given post type
          *
@@ -202,28 +217,46 @@ if ( ! class_exists('PP_Checklist')) {
         {
             $classes = [];
 
-            switch ($post_type) {
-                case 'post':
-                    $classes = [
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Categories_count',
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Tags_count',
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Words_count',
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Featured_image',
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Filled_excerpt',
-                    ];
-                    break;
+            // Check the supported taxonomies for the post type.
+            $taxonomies = $this->getPostTypeTaxonomies($post_type);
 
-                case 'page':
-                    $classes = [
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Words_count',
-                        '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Featured_image',
-                    ];
-                    break;
+            $taxonomies_map = [
+                'category' => '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Categories_count',
+                'post_tag' => '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Tags_count',
+            ];
+
+            foreach ($taxonomies as $taxonomy) {
+                if (array_key_exists($taxonomy, $taxonomies_map)) {
+                    $classes[] = $taxonomies_map[$taxonomy];
+                }
+            }
+
+            // Check the "supports" for the post type.
+            $supports_map = [
+                'editor'    => [
+                    '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Words_count',
+                ],
+                'thumbnail' => [
+                    '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Featured_image',
+                ],
+                'excerpt'   => [
+                    '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Filled_excerpt',
+                ],
+            ];
+            foreach ($supports_map as $supports => $requirements) {
+                foreach ($requirements as $requirement) {
+                    if (post_type_supports($post_type, $supports)) {
+                        $classes[] = $requirement;
+                    }
+                }
             }
 
             if ( ! empty($classes)) {
                 $requirements = array_merge($requirements, $classes);
             }
+
+            // Make sure we have only unique values.
+            $requirements = array_unique($requirements);
 
             return $requirements;
         }
