@@ -441,6 +441,42 @@
         });
     }
 
+    /*----------  Hierarchical Taxonomies Number  ----------*/
+
+    if ($('[data-type^="taxonomy_counter_hierarchical_"]').length > 0) {
+        $('[data-type^="taxonomy_counter_hierarchical_"]').each(function(index, elem) {
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
+                    count = $('#' + taxonomy + 'checklist input:checked').length,
+                    min_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[1]);
+
+                $('#pp-checklist-req-' + taxonomy + '_count').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
+                );
+            });
+        });
+    }
+
+    /*----------  Non-hierarchical Taxonomies Number  ----------*/
+
+    if ($('[data-type^="taxonomy_counter_non_hierarchical_"]').length > 0) {
+        $('[data-type^="taxonomy_counter_non_hierarchical_"]').each(function(index, elem) {
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var taxonomy = $(elem).data('type').replace('taxonomy_counter_non_hierarchical_', ''),
+                    count = $('#' + taxonomy + ' .tagchecklist').children('li').length,
+                    min_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[1]);
+
+                $('#pp-checklist-req-' + taxonomy + '_count').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
+                );
+            });
+        });
+    }
+
     /*----------  Filled in Excerpt  ----------*/
 
     if ($('#pp-checklist-req-filled_excerpt').length > 0) {

@@ -66,6 +66,11 @@ class Base_requirement
     protected $post_type;
 
     /**
+     * @var string
+     */
+    protected $type = 'base';
+
+    /**
      * The constructor. It adds the action to load the requirement.
      *
      * @param  string $module

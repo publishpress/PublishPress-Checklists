@@ -14,6 +14,11 @@ defined('ABSPATH') or die('No direct script access allowed.');
 class Base_counter extends Base_simple implements Interface_required
 {
     /**
+     * @var string
+     */
+    protected $type = 'counter';
+
+    /**
      * The default value for the option related to the value.
      */
     const DEFAULT_OPTION_VALUE = 0;
@@ -171,6 +176,7 @@ class Base_counter extends Base_simple implements Interface_required
             'label'  => $label,
             'value'  => [$min_value, $max_value],
             'rule'   => $rule,
+            'type'   => $this->type,
         ];
 
         return $requirements;

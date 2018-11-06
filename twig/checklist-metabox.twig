@@ -15,7 +15,8 @@
             <li
                     id="pp-checklist-req-{{ key }}"
                     class="pp-checklist-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }} {{ req.is_custom ? 'pp-checklist-custom-item' : '' }}"
-                    data-id="{{ key }}">
+                    data-id="{{ key }}"
+                    data-type="{{ req.type }}">
 
                 {% if req.is_custom %}
                     <input type="hidden" name="_pp_content_checklist_custom_item[{{ req.id }}]"

@@ -15,6 +15,10 @@ defined('ABSPATH') or die('No direct script access allowed.');
 
 class Base_simple extends Base_requirement implements Interface_required
 {
+    /**
+     * @var string
+     */
+    protected $type = 'simple';
 
     /**
      * Injects the respective default options into the main add-on.
@@ -58,6 +62,41 @@ class Base_simple extends Base_requirement implements Interface_required
     }
 
     /**
+     * Add the requirement to the list to be displayed in the metabox.
+     *
+     * @param  array    $requirements
+     * @param  stdClass $post
+     *
+     * @return array
+     */
+    public function filter_requirements_list($requirements, $post)
+    {
+        // Check if it is a compatible post type. If not, ignore this requirement.
+        if ($post->post_type !== $this->post_type) {
+            return $requirements;
+        }
+
+        // Rule
+        $rule = $this->get_option_rule();
+
+        // Enabled
+        $enabled = $this->is_enabled();
+
+        // Register in the requirements list
+        if ($enabled) {
+            $requirements[$this->name] = [
+                'status' => $this->get_current_status($post, $enabled),
+                'label'  => $this->lang['label'],
+                'value'  => $enabled,
+                'rule'   => $rule,
+                'type'   => $this->type,
+            ];
+        }
+
+        return $requirements;
+    }
+
+    /**
      * Returns the value for the rule option. The default value is "Disabled"
      *
      * @return string
@@ -93,39 +132,5 @@ class Base_simple extends Base_requirement implements Interface_required
                 Plugin::RULE_BLOCK,
             ]
         );
-    }
-
-    /**
-     * Add the requirement to the list to be displayed in the metabox.
-     *
-     * @param  array    $requirements
-     * @param  stdClass $post
-     *
-     * @return array
-     */
-    public function filter_requirements_list($requirements, $post)
-    {
-        // Check if it is a compatible post type. If not, ignore this requirement.
-        if ($post->post_type !== $this->post_type) {
-            return $requirements;
-        }
-
-        // Rule
-        $rule = $this->get_option_rule();
-
-        // Enabled
-        $enabled = $this->is_enabled();
-
-        // Register in the requirements list
-        if ($enabled) {
-            $requirements[$this->name] = [
-                'status' => $this->get_current_status($post, $enabled),
-                'label'  => $this->lang['label'],
-                'value'  => $enabled,
-                'rule'   => $rule,
-            ];
-        }
-
-        return $requirements;
     }
 }

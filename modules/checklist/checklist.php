@@ -137,6 +137,7 @@ if ( ! class_exists('PP_Checklist')) {
          */
         protected function instantiate_post_type_requirements($post_type)
         {
+            global $wp_taxonomies;
 
             $req_classes = apply_filters('pp_checklist_post_type_requirements', [], $post_type);
 
@@ -145,9 +146,43 @@ if ( ! class_exists('PP_Checklist')) {
             }
 
             foreach ($req_classes as $class_name) {
+                $params = null;
+
+                // Some classes can be sent as serialized data, containing the class and params. If it is only string, it won't be affected.
+                $class_name = maybe_unserialize($class_name);
+
+                // Add support to additional arguments.
+                if (is_array($class_name)) {
+                    $params     = $class_name['params'];
+                    $class_name = $class_name['class'];
+
+                    // Check if the taxonomy is displayed in the UI.
+                    if (isset($params['taxonomy'])) {
+                        if (isset($wp_taxonomies[$params['taxonomy']])) {
+                            $taxonomy = $wp_taxonomies[$params['taxonomy']];
+
+                            if ( ! $taxonomy->show_ui) {
+                                continue;
+                            }
+
+                            // Ignore multiple authors taxonomy
+                            // @todo: add support for multiple authors
+                            if ($taxonomy->query_var === 'ppma_author') {
+                                continue;
+                            }
+                        }
+                    }
+                }
+
                 if (class_exists($class_name)) {
                     // Instantiate the class
-                    $this->requirements[$post_type][] = new $class_name($this->module, $post_type);
+                    $instance = new $class_name($this->module, $post_type);
+
+                    if ( ! is_null($params) && method_exists($instance, 'set_params')) {
+                        $instance->set_params($params);
+                    }
+
+                    $this->requirements[$post_type][] = $instance;
                 }
             }
 
@@ -228,6 +263,14 @@ if ( ! class_exists('PP_Checklist')) {
             foreach ($taxonomies as $taxonomy) {
                 if (array_key_exists($taxonomy, $taxonomies_map)) {
                     $classes[] = $taxonomies_map[$taxonomy];
+                } else {
+                    $classes[] = maybe_serialize([
+                        'class'  => '\\PublishPress\\Addon\\Content_checklist\\Requirement\\Taxonomies_count',
+                        'params' => [
+                            'post_type' => $post_type,
+                            'taxonomy'  => $taxonomy,
+                        ],
+                    ]);
                 }
             }
 
