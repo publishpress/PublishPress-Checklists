@@ -47,9 +47,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = UNRELEASED =
 
-*Fixed:*
-
-* Fixed The TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized.
+* Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
+* Fixed the assets loading to load tinymce-pp-checklist-requirements.js only in the admin;
+* Added better support for custom post types and custom taxonomies which use WordPress default UI;
+* Fixed conflict between custom taxonomies and tags in the checklist while counting items;
 
 = [1.3.8] - 2018-04-18 =
 
