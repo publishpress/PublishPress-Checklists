@@ -76,6 +76,7 @@ if ( ! defined('PP_CONTENT_CHECKLIST_HALT') && ! defined('PP_CONTENT_CHECKLIST_L
         define('PP_CONTENT_CHECKLIST_MODULE_PATH', __DIR__ . '/modules/checklist');
         define('PP_CONTENT_CHECKLIST_ITEM_NAME', 'Content Checklist for PublishPress');
         define('PP_CONTENT_CHECKLIST_LIB_PATH', PP_CONTENT_CHECKLIST_PATH_BASE . '/library');
+        define('PP_CONTENT_CHECKLIST_RELATIVE_PATH', 'publishpress-content-checklist');
         define('PP_CONTENT_CHECKLIST_LOADED', 1);
 
         if (file_exists(__DIR__ . '/vendor/autoload.php')) {

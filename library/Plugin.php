@@ -84,6 +84,7 @@ class Plugin
 
         add_filter('pp_module_dirs', [$this, 'filter_module_dirs']);
         add_filter('pp_checklist_rules_list', [$this, 'filter_rules_list']);
+        add_filter('plugins_loaded', [$this, 'loadTextDomain']);
     }
 
     /**
@@ -142,5 +143,13 @@ class Plugin
         );
 
         return $rules;
+    }
+
+    /**
+     * Load the text domain.
+     */
+    public function loadTextDomain()
+    {
+        load_plugin_textdomain( 'publishpress-content-checklist', false, PP_CONTENT_CHECKLIST_RELATIVE_PATH . '/languages/' );
     }
 }
