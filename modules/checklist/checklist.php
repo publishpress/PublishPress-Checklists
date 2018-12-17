@@ -822,6 +822,7 @@ if ( ! class_exists('PP_Checklist')) {
                         'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
                         'hide_publish_button'      => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
                         'title_warning_icon'       => __('One or more items in the checklist are not completed'),
+                        'gutenberg_css'            => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg.css'),
                     ]
                 );
 

@@ -358,6 +358,15 @@
             }
 
             return is_valid;
+        },
+
+        /**
+         * Returns true if the Gutenberg editor is active on the page.
+         *
+         * @returns {boolean}
+         */
+        is_gutenberg_active: function () {
+            return typeof wp !== 'undefined' && typeof wp.blocks !== 'undefined';
         }
     };
 
@@ -369,23 +378,45 @@
 
     // Show warning icon close to the submit button
     if (ppChecklist.show_warning_icon_submit) {
-        var $icon = $('<span>')
-            .addClass('dashicons dashicons-warning pp-checklist-warning-icon')
-            .hide()
-            .prependTo($('#publishing-action'))
-            .attr('title', ppChecklist.title_warning_icon);
+        if (PP_Content_Checklist.is_gutenberg_active()) {
+            var styleTagId = 'ppChecklistWarningIcon';
 
-        $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-            var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+            // For Gutenberg, we don't inject an element, but change the style of the submit button.
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+                if (has_uncheked.length > 0) {
+                    var $head = $('head');
 
-            if (has_uncheked.length > 0) {
-                // Not ok
-                $icon.show();
-            } else {
-                // Ok
-                $icon.hide();
-            }
-        });
+                    if ($head.find('#' + styleTagId).length === 0) {
+                        var $style = $('<style>');
+
+                        $style.attr('type', 'text/css');
+                        $style.text(ppChecklist.gutenberg_css);
+                        $style.attr('id', styleTagId);
+                        $head.append($style);
+                    }
+                } else {
+                    $('#' + styleTagId).remove();
+                }
+            });
+        } else {
+            var $icon = $('<span>')
+                .addClass('dashicons dashicons-warning pp-checklist-warning-icon')
+                .hide()
+                .prependTo($('#publishing-action'))
+                .attr('title', ppChecklist.title_warning_icon);
+
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+                if (has_uncheked.length > 0) {
+                    // Not ok
+                    $icon.show();
+                } else {
+                    // Ok
+                    $icon.hide();
+                }
+            });
+        }
     }
 
     /*----------  Hide submit button  ----------*/
