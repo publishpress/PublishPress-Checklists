@@ -34,11 +34,11 @@
 (function ($, counter, tinymce, _) {
     'use strict';
 
-    if ('undefined' === typeof objectL10n_checklist_requirements) {
+    if ('undefined' === typeof ppChecklist) {
         return true;
     }
 
-    if ('undefined' === typeof objectL10n_checklist_requirements.requirements.words_count) {
+    if ('undefined' === typeof ppChecklist.requirements.words_count) {
         return true;
     }
 
@@ -65,8 +65,8 @@
 
             if (count !== prev_count) {
                 var is_valid = false,
-                    min = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[0]),
-                    max = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[1]);
+                    min = parseInt(ppChecklist.requirements.words_count.value[0]),
+                    max = parseInt(ppChecklist.requirements.words_count.value[1]);
 
                 // Compare the count with the configured value
 
@@ -90,8 +90,8 @@
                     is_valid = count <= max;
                 }
 
-                (count >= objectL10n_checklist_requirements.requirements.words_count.value[0])
-                && (count <= objectL10n_checklist_requirements.requirements.words_count.value[1]);
+                (count >= ppChecklist.requirements.words_count.value[0])
+                && (count <= ppChecklist.requirements.words_count.value[1]);
 
                 $('#pp-checklist-req-words_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,

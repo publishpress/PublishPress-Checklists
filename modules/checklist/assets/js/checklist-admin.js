@@ -30,6 +30,15 @@
 (function ($, window, document, counter) {
     'use strict';
 
+    /**
+     * This variable is deprecated. Use ppChecklist instead.
+     * Added here just for backward compatibility with other
+     * plugins.
+     *
+     * @deprecated 1.4.0
+     */
+    window.objectL10n_checklist_requirements = ppChecklist;
+
     /*----------  Handler  ----------*/
 
     /**
@@ -261,16 +270,16 @@
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
                     // Only display a warning
-                    message = objectL10n_checklist_requirements.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
+                    message = ppChecklist.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
                     // Display the confirm
                     $('#pp-checklist-modal-confirm-content').html(message);
                     $('[data-remodal-id=pp-checklist-modal-confirm]').remodal().open();
                 } else {
-                    message = objectL10n_checklist_requirements.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
+                    message = ppChecklist.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
 
                     if (list_unchecked.warning.length > 0) {
-                        message += '' + objectL10n_checklist_requirements.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
+                        message += '' + ppChecklist.msg_missed_important + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
                     }
 
                     // Display the alert
@@ -359,12 +368,12 @@
     /*----------  Warning icon in submit button  ----------*/
 
     // Show warning icon close to the submit button
-    if (objectL10n_checklist_requirements.show_warning_icon_submit) {
+    if (ppChecklist.show_warning_icon_submit) {
         var $icon = $('<span>')
             .addClass('dashicons dashicons-warning pp-checklist-warning-icon')
             .hide()
             .prependTo($('#publishing-action'))
-            .attr('title', objectL10n_checklist_requirements.title_warning_icon);
+            .attr('title', ppChecklist.title_warning_icon);
 
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
@@ -382,7 +391,7 @@
     /*----------  Hide submit button  ----------*/
 
     // Hide the submit button
-    if (objectL10n_checklist_requirements.hide_publish_button) {
+    if (ppChecklist.hide_publish_button) {
         var $button = $('#publish');
 
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
@@ -416,8 +425,8 @@
     if ($('#pp-checklist-req-tags_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var count = $('#post_tag.tagsdiv ul.tagchecklist').children('li').length,
-                min_value = parseInt(objectL10n_checklist_requirements.requirements.tags_count.value[0]),
-                max_value = parseInt(objectL10n_checklist_requirements.requirements.tags_count.value[1]);
+                min_value = parseInt(ppChecklist.requirements.tags_count.value[0]),
+                max_value = parseInt(ppChecklist.requirements.tags_count.value[1]);
 
             $('#pp-checklist-req-tags_count').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -431,8 +440,8 @@
     if ($('#pp-checklist-req-categories_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var count = $('#categorychecklist input:checked').length,
-                min_value = parseInt(objectL10n_checklist_requirements.requirements.categories_count.value[0]),
-                max_value = parseInt(objectL10n_checklist_requirements.requirements.categories_count.value[1]);
+                min_value = parseInt(ppChecklist.requirements.categories_count.value[0]),
+                max_value = parseInt(ppChecklist.requirements.categories_count.value[1]);
 
             $('#pp-checklist-req-categories_count').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -448,8 +457,8 @@
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
                     count = $('#' + taxonomy + 'checklist input:checked').length,
-                    min_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[0]),
-                    max_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[1]);
+                    min_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[1]);
 
                 $('#pp-checklist-req-' + taxonomy + '_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -466,8 +475,8 @@
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_non_hierarchical_', ''),
                     count = $('#' + taxonomy + ' .tagchecklist').children('li').length,
-                    min_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[0]),
-                    max_value = parseInt(objectL10n_checklist_requirements.requirements[taxonomy + '_count'].value[1]);
+                    min_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[1]);
 
                 $('#pp-checklist-req-' + taxonomy + '_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,

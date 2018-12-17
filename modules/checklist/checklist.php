@@ -810,7 +810,7 @@ if ( ! class_exists('PP_Checklist')) {
 
                 wp_localize_script(
                     'pp-checklist-requirements',
-                    'objectL10n_checklist_requirements',
+                    'ppChecklist',
                     [
                         'requirements'             => $requirements,
                         'msg_missed_optional'      => __('The following requirements are not completed yet. Are you sure you want to publish?',
