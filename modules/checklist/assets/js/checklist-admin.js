@@ -367,6 +367,33 @@
          */
         is_gutenberg_active: function () {
             return typeof wp !== 'undefined' && typeof wp.blocks !== 'undefined';
+        },
+
+        /**
+         * Add a style tag.
+         *
+         * @param id
+         * @param css
+         */
+        add_style_tag: function (id, css) {
+            var $head = $('head');
+
+            if ($head.find('#' + id).length === 0) {
+                var $style = $('<style>');
+
+                $style.attr('type', 'text/css');
+                $style.text(css);
+                $style.attr('id', id);
+                $head.append($style);
+            }
+        },
+
+        /**
+         *
+         * @param id
+         */
+        remove_style_tag: function (id) {
+            $('#' + id).remove();
         }
     };
 
@@ -383,20 +410,11 @@
 
             // For Gutenberg, we don't inject an element, but change the style of the submit button.
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-                var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
-                if (has_uncheked.length > 0) {
-                    var $head = $('head');
-
-                    if ($head.find('#' + styleTagId).length === 0) {
-                        var $style = $('<style>');
-
-                        $style.attr('type', 'text/css');
-                        $style.text(ppChecklist.gutenberg_css);
-                        $style.attr('id', styleTagId);
-                        $head.append($style);
-                    }
+                var has_unchecked = $('#pp-checklist-req-box').children('.status-no');
+                if (has_unchecked.length > 0) {
+                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklist.gutenberg_warning_css);
                 } else {
-                    $('#' + styleTagId).remove();
+                    PP_Content_Checklist.remove_style_tag(styleTagId);
                 }
             });
         } else {
@@ -407,8 +425,8 @@
                 .attr('title', ppChecklist.title_warning_icon);
 
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-                var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
-                if (has_uncheked.length > 0) {
+                var has_unchecked = $('#pp-checklist-req-box').children('.status-no');
+                if (has_unchecked.length > 0) {
                     // Not ok
                     $icon.show();
                 } else {
@@ -423,19 +441,31 @@
 
     // Hide the submit button
     if (ppChecklist.hide_publish_button) {
-        var $button = $('#publish');
+        if (PP_Content_Checklist.is_gutenberg_active()) {
+            var styleTagId = 'ppChecklistHideSubmit';
 
-        $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-            var has_uncheked = $('#pp-checklist-req-box').children('.status-no');
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var has_unchecked = $('#pp-checklist-req-box').children('.status-no');
+                if (has_unchecked.length > 0) {
+                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklist.gutenberg_hide_submit_css);
+                } else {
+                    PP_Content_Checklist.remove_style_tag(styleTagId);
+                }
+            });
+        } else {
+            $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
+                var has_unchecked = $('#pp-checklist-req-box').children('.status-no'),
+                    $button = $('#publish');
 
-            if (has_uncheked.length > 0) {
-                // Not ok
-                $button.hide();
-            } else {
-                // Ok
-                $button.show();
-            }
-        });
+                if (has_unchecked.length > 0) {
+                    // Not ok
+                    $button.hide();
+                } else {
+                    // Ok
+                    $button.show();
+                }
+            });
+        }
     }
 
     /*----------  Featured Image  ----------*/

@@ -812,17 +812,18 @@ if ( ! class_exists('PP_Checklist')) {
                     'pp-checklist-requirements',
                     'ppChecklist',
                     [
-                        'requirements'             => $requirements,
-                        'msg_missed_optional'      => __('The following requirements are not completed yet. Are you sure you want to publish?',
+                        'requirements'              => $requirements,
+                        'msg_missed_optional'       => __('The following requirements are not completed yet. Are you sure you want to publish?',
                             'publishpress-content-checklist'),
-                        'msg_missed_required'      => __('Please complete the following requirements before publishing:',
+                        'msg_missed_required'       => __('Please complete the following requirements before publishing:',
                             'publishpress-content-checklist'),
-                        'msg_missed_important'     => __('Not required, but important: ',
+                        'msg_missed_important'      => __('Not required, but important: ',
                             'publishpress-content-checklist'),
-                        'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
-                        'hide_publish_button'      => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
-                        'title_warning_icon'       => __('One or more items in the checklist are not completed'),
-                        'gutenberg_css'            => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg.css'),
+                        'show_warning_icon_submit'  => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
+                        'hide_publish_button'       => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
+                        'title_warning_icon'        => __('One or more items in the checklist are not completed'),
+                        'gutenberg_warning_css'     => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-warning.css'),
+                        'gutenberg_hide_submit_css' => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'),
                     ]
                 );
 
