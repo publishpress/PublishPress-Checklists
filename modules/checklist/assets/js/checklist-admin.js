@@ -65,7 +65,7 @@
         EVENT_UPDATE_REQUIREMENT_STATE: 'pp-content-checklist:update_requirement_state',
 
         /**
-         * Constat for the event toggle_custom_item
+         * Constant for the event toggle_custom_item
          * @type {String}
          */
         EVENT_TOGGLE_CUSTOM_ITEM: 'pp-content-checklist:toggle_custom_item',
