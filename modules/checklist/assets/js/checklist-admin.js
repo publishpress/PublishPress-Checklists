@@ -53,7 +53,7 @@
         EVENT_VALIDATE_REQUIREMENTS: 'pp-content-checklist:validate_requirements',
 
         /**
-         * Constant for the event tick. Trigered by a setInterval
+         * Constant for the event tick. Triggered by a setInterval
          * @type {String}
          */
         EVENT_TIC: 'pp-content-checklist:tic',
