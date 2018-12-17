@@ -74,7 +74,7 @@
          * Constant for the interval of the tic event
          * @type {Number}
          */
-        TIC_INTERVAL: 500,
+        TIC_INTERVAL: 300,
 
         /**
          * List of interface elements
