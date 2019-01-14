@@ -31,94 +31,94 @@
 =            Min Words Count          =
 =====================================*/
 // Based on the TinyMCE words count display found at /wp-admin/js/post.js
-( function( $, counter, tinymce, _ ) {
-	"use strict";
+(function ($, counter, tinymce, _) {
+    'use strict';
 
-	if ( 'undefined' === typeof objectL10n_checklist_requirements ) {
-		return true;
-	}
+    if ('undefined' === typeof objectL10n_checklist_requirements) {
+        return true;
+    }
 
-	if ( 'undefined' === typeof objectL10n_checklist_requirements.requirements.words_count ) {
-		return true;
-	}
+    if ('undefined' === typeof objectL10n_checklist_requirements.requirements.words_count) {
+        return true;
+    }
 
-	var editor = tinyMCE.editors['content'];
+    var editor = tinyMCE.editors['content'];
 
-	editor.onInit.add( function() {
-		var $content      = $( '#content' ),
-			prev_count    = 0,
-			content_editor;
+    editor.onInit.add(function () {
+        var $content = $('#content'),
+            prev_count = 0,
+            content_editor;
 
-		/**
-		 * Get the words count from TinyMCE and update the status of the requirement
-		 */
-		function update() {
-			var text, count;
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update () {
+            var text, count;
 
-			if ( ! content_editor || content_editor.isHidden() ) {
-				text = $content.val();
-			} else {
-				text = content_editor.getContent( { format: 'raw' } );
-			}
+            if (!content_editor || content_editor.isHidden()) {
+                text = $content.val();
+            } else {
+                text = content_editor.getContent({format: 'raw'});
+            }
 
-			count = counter.count( text );
+            count = counter.count(text);
 
-			if ( count !== prev_count ) {
-				var is_valid = false,
-					min = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[0]),
-					max = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[1]);
+            if (count !== prev_count) {
+                var is_valid = false,
+                    min = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[0]),
+                    max = parseInt(objectL10n_checklist_requirements.requirements.words_count.value[1]);
 
-				// Compare the count with the configured value
+                // Compare the count with the configured value
 
-				// Both same value = exact
-				if ( min === max ) {
-					is_valid = count === min;
-				}
+                // Both same value = exact
+                if (min === max) {
+                    is_valid = count === min;
+                }
 
-				// Min not empty, max empty or < min = only min
-				if ( min > 0 && ( max === 0 || max < min ) ) {
-					is_valid = count >= min;
-				}
+                // Min not empty, max empty or < min = only min
+                if (min > 0 && (max === 0 || max < min)) {
+                    is_valid = count >= min;
+                }
 
-				// Min not empty, max not empty and > min = both min and max
-				if ( min > 0 && max > 0 && max > min ) {
-					is_valid = count >= min && count <= max;
-				}
+                // Min not empty, max not empty and > min = both min and max
+                if (min > 0 && max > 0 && max > min) {
+                    is_valid = count >= min && count <= max;
+                }
 
-				// Min empty, max not empty and > min = only max
-				if ( min === 0 && max > 0 && max > min ) {
-					is_valid = count <= max;
-				}
+                // Min empty, max not empty and > min = only max
+                if (min === 0 && max > 0 && max > min) {
+                    is_valid = count <= max;
+                }
 
-				( count >= objectL10n_checklist_requirements.requirements.words_count.value[0] )
-					&& ( count <= objectL10n_checklist_requirements.requirements.words_count.value[1] );
+                (count >= objectL10n_checklist_requirements.requirements.words_count.value[0])
+                && (count <= objectL10n_checklist_requirements.requirements.words_count.value[1]);
 
-				$( '#pp-checklist-req-words_count' ).trigger(
-					PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-					is_valid
-				);
-			}
+                $('#pp-checklist-req-words_count').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    is_valid
+                );
+            }
 
-			prev_count = count;
-		}
+            prev_count = count;
+        }
 
-		/**
-		 * Bind the words count update triggers.
-		 *
-		 * When a node change in the main TinyMCE editor has been triggered.
-		 * When a key has been released in the plain text content editor.
-		 */
+        /**
+         * Bind the words count update triggers.
+         *
+         * When a node change in the main TinyMCE editor has been triggered.
+         * When a key has been released in the plain text content editor.
+         */
 
-		if ( editor.id !== 'content' ) {
-			return;
-		}
+        if (editor.id !== 'content') {
+            return;
+        }
 
-		content_editor = editor;
+        content_editor = editor;
 
-		editor.on( 'nodechange keyup', _.debounce( update, 500 ) );
-		$content.on( 'input keyup', _.debounce( update, 500 ) );
+        editor.on('nodechange keyup', _.debounce(update, 500));
+        $content.on('input keyup', _.debounce(update, 500));
 
-		update();
-	} );
-} )( jQuery, new wp.utils.WordCounter(), tinymce, _ );
+        update();
+    });
+})(jQuery, new wp.utils.WordCounter(), tinymce, _);
 /*====  End of Min Words Count  ====*/

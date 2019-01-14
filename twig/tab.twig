@@ -4,8 +4,8 @@
 
     {{ nonce_field( 'edit-publishpress-settings' )|raw }}
 
-    <input type="hidden" name="publishpress_module_name[]" value="{{ module_name }}" />
-    <input type="hidden" name="action" value="update" />
+    <input type="hidden" name="publishpress_module_name[]" value="{{ module_name }}"/>
+    <input type="hidden" name="action" value="update"/>
 
     {{ submit_button()|raw }}
 </form>

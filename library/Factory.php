@@ -9,31 +9,33 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
-defined( 'ABSPATH' ) or die( 'No direct script access allowed.' );
+defined('ABSPATH') or die('No direct script access allowed.');
 
-if (!defined('PP_CONTENT_CHECKLIST_LOADED')) {
+if ( ! defined('PP_CONTENT_CHECKLIST_LOADED')) {
     require_once __DIR__ . '/../includes.php';
 }
 
 /**
  * Class Factory
  */
-abstract class Factory {
-	/**
+abstract class Factory
+{
+    /**
      * @var Container
      */
     protected static $container = null;
+
     /**
      * @return Container
      */
     public static function get_container()
     {
         if (static::$container === null) {
-	        $module   = PublishPress()->checklist;
-        	$services = new Services($module);
+            $module   = PublishPress()->checklist;
+            $services = new Services($module);
 
             static::$container = new Container();
-            static::$container->register( $services );
+            static::$container->register($services);
         }
 
         return static::$container;

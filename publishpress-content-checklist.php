@@ -12,7 +12,7 @@
  * @publishpress-content-checklist
  * Plugin Name: PublishPress Content Checklist
  * Plugin URI:  https://publishpress.com/
- * Version: 1.3.8
+ * Version: 1.4.0
  * Description: Add a content checklist for posts
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
@@ -22,7 +22,7 @@
 
 require_once __DIR__ . '/includes.php';
 
-if ( defined( 'PP_CONTENT_CHECKLIST_LOADED' ) ) {
-	$plugin = new PublishPress\Addon\Content_checklist\Plugin;
-	$plugin->init();
+if (defined('PP_CONTENT_CHECKLIST_LOADED')) {
+    $plugin = new PublishPress\Addon\Content_checklist\Plugin;
+    $plugin->init();
 }
