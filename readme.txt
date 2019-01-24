@@ -45,6 +45,10 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.4.1] - 2019-01-24 =
+
+* Disable post types by default, if Gutenberg is installed;
+
 = [1.4.0] - 2019-01-14 =
 
 * Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
