@@ -78,6 +78,10 @@ if ( ! class_exists('PP_Checklist')) {
          */
         public function __construct()
         {
+            global $publishpress;
+
+            $defaultChecked = $publishpress->isBlockEditorActive() ? 'off' : 'on';
+
             $this->twigPath = dirname(dirname(dirname(__FILE__))) . '/twig';
 
             $this->module_url = $this->get_module_url(__FILE__);
@@ -94,7 +98,9 @@ if ( ! class_exists('PP_Checklist')) {
                 'slug'                 => 'checklist',
                 'default_options'      => [
                     'enabled'                  => 'on',
-                    'post_types'               => ['post'],
+                    'post_types'               => [
+                        'post' => $defaultChecked,
+                    ],
                     'show_warning_icon_submit' => 'no',
                     'hide_publish_button'      => 'no',
                     'custom_items'             => [],

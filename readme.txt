@@ -6,7 +6,7 @@ Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
 Tested up to: 4.9.4
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.4.1] - 2019-01-24 =
+
+* Disable post types by default, if Gutenberg is installed;
 
 = [1.4.0] - 2019-01-14 =
 
