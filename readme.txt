@@ -45,12 +45,18 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [1.4.1] - 2019-01-24 =
+
+* Disable post types by default, if Gutenberg is installed;
+
+= [1.4.0] - 2019-01-14 =
 
 * Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
 * Fixed the assets loading to load tinymce-pp-checklist-requirements.js only in the admin;
 * Added better support for custom post types and custom taxonomies which use WordPress default UI;
 * Fixed conflict between custom taxonomies and tags in the checklist while counting items;
+* Update POT file and fixed translations loading the text domain;
+* Updated PT-BT language files;
 
 = [1.3.8] - 2018-04-18 =
 

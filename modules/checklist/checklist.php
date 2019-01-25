@@ -31,7 +31,6 @@
 use PublishPress\Addon\Content_checklist\Factory;
 use PublishPress\Addon\Content_checklist\Requirement\Base_requirement;
 use PublishPress\Addon\Content_checklist\Requirement\Custom_item;
-use PublishPress\EDD_License\Core\Setting\Field\License_key as Field_License_key;
 
 
 if ( ! class_exists('PP_Checklist')) {
@@ -78,6 +77,10 @@ if ( ! class_exists('PP_Checklist')) {
          */
         public function __construct()
         {
+            global $publishpress;
+
+            $defaultChecked = $publishpress->isBlockEditorActive() ? 'off' : 'on';
+
             $this->twigPath = dirname(dirname(dirname(__FILE__))) . '/twig';
 
             $this->module_url = $this->get_module_url(__FILE__);
@@ -94,7 +97,9 @@ if ( ! class_exists('PP_Checklist')) {
                 'slug'                 => 'checklist',
                 'default_options'      => [
                     'enabled'                  => 'on',
-                    'post_types'               => ['post'],
+                    'post_types'               => [
+                        'post' => $defaultChecked,
+                    ],
                     'show_warning_icon_submit' => 'no',
                     'hide_publish_button'      => 'no',
                     'custom_items'             => [],
@@ -417,26 +422,6 @@ if ( ! class_exists('PP_Checklist')) {
         {
             /**
              *
-             * License
-             *
-             */
-            add_settings_section(
-                $this->module->options_group_name . '_license',
-                __('Licensing:', 'publishpress-content-checklist'),
-                '__return_false',
-                $this->module->options_group_name
-            );
-
-            add_settings_field(
-                'license_key',
-                __('License key:', 'publishpress-content-checklist'),
-                [$this, 'settings_license_key_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_license'
-            );
-
-            /**
-             *
              * Post types
              */
 
@@ -541,29 +526,6 @@ if ( ! class_exists('PP_Checklist')) {
             echo '&nbsp;&nbsp;&nbsp;' . __('This will hide the Publish button if the checklist is not complete',
                     'publishpress-content-checklist');
             echo '</label>';
-        }
-
-        /**
-         * Displays the field to choose between display or not the warning icon
-         * close to the submit button
-         *
-         * @param  array
-         */
-        public function settings_license_key_option($args = [])
-        {
-            $license_key    = isset($this->module->options->license_key) ? $this->module->options->license_key : '';
-            $license_status = isset($this->module->options->license_status) ? $this->module->options->license_status : '';
-
-            $field_args = [
-                'options_group_name' => $this->module->options_group_name,
-                'name'               => 'license_key',
-                'value'              => $license_key,
-                'license_status'     => $license_status,
-                'link_more_info'     => 'https://publishpress.com/docs/activate-license',
-            ];
-            $field      = new Field_License_key($field_args);
-
-            echo $field;
         }
 
         /**
