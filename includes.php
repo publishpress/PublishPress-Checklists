@@ -22,6 +22,7 @@ if ( ! function_exists('is_plugin_inactive')) {
 /*======================================================================
 =            Check if PublishPress is installed and active             =
 ======================================================================*/
+define('PP_HALT_CONSTANT', 'PP_CONTENT_CHECKLIST_HALT');
 $publishpressPath = WP_PLUGIN_DIR . '/publishpress/publishpress.php';
 if ( ! file_exists($publishpressPath) || is_plugin_inactive('publishpress/publishpress.php')) {
     function pp_checklist_admin_error()
@@ -36,11 +37,11 @@ if ( ! file_exists($publishpressPath) || is_plugin_inactive('publishpress/publis
 
     add_action('admin_notices', 'pp_checklist_admin_error');
 
-    define('PP_CONTENT_CHECKLIST_HALT', 1);
+    define(PP_HALT_CONSTANT, 1);
 }
 /*=====  End of Check if PublishPress is installed and active   ======*/
 
-if ( ! defined('PP_CONTENT_CHECKLIST_HALT') && ! defined('PP_CONTENT_CHECKLIST_LOADED')) {
+if ( ! defined(PP_HALT_CONSTANT) && ! defined('PP_CONTENT_CHECKLIST_LOADED')) {
     require_once $publishpressPath;
 
     if ( ! defined('PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION')) {
@@ -64,11 +65,11 @@ if ( ! defined('PP_CONTENT_CHECKLIST_HALT') && ! defined('PP_CONTENT_CHECKLIST_L
 
         add_action('admin_notices', 'pp_checklist_admin_version_error');
 
-        define('PP_CONTENT_CHECKLIST_HALT', 1);
+        define(PP_HALT_CONSTANT, 1);
     }
     /*=====  End of Check PublishPress minimum version  ======*/
 
-    if ( ! defined('PP_CONTENT_CHECKLIST_HALT')) {
+    if ( ! defined(PP_HALT_CONSTANT)) {
         define('PP_CONTENT_CHECKLIST_ITEM_ID', '6465');
         define('PP_CONTENT_CHECKLIST_PATH_BASE', plugin_dir_path(__FILE__));
         define('PUBLISHPRESS_CONTENT_CHECKLIST_VERSION', '1.4.1');
