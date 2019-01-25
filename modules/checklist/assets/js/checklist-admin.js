@@ -568,4 +568,55 @@
         });
     }
 
+    /*----------  Word Count, for Gutenberg ----------*/
+    var lastCount = 0;
+    if (PP_Content_Checklist.is_gutenberg_active()) {
+        if ($('#pp-checklist-req-words_count').length > 0) {
+            wp.data.subscribe(
+                function() {
+                    var content = wp.data.select( "core/editor" ).getEditedPostAttribute('content');
+                    var count = wp.utils.WordCounter.prototype.count(content);
+
+                    if (lastCount == count) {
+                        return;
+                    }
+
+                    lastCount = count;
+
+                    var is_valid = false,
+                        min = parseInt(ppChecklist.requirements.words_count.value[0]),
+                        max = parseInt(ppChecklist.requirements.words_count.value[1]);
+
+                    // Compare the count with the configured value
+
+                    // Both same value = exact
+                    if (min === max) {
+                        is_valid = count === min;
+                    }
+
+                    // Min not empty, max empty or < min = only min
+                    if (min > 0 && (max === 0 || max < min)) {
+                        is_valid = count >= min;
+                    }
+
+                    // Min not empty, max not empty and > min = both min and max
+                    if (min > 0 && max > 0 && max > min) {
+                        is_valid = count >= min && count <= max;
+                    }
+
+                    // Min empty, max not empty and > min = only max
+                    if (min === 0 && max > 0 && max > min) {
+                        is_valid = count <= max;
+                    }
+
+                    console.log(min, max, count, is_valid);
+
+                    $('#pp-checklist-req-words_count').trigger(
+                        PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                        is_valid
+                    );
+                }
+            );
+        }
+    }
 })(jQuery, window, document, new wp.utils.WordCounter());

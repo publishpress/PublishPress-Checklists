@@ -31,6 +31,7 @@
 =            Min Words Count          =
 =====================================*/
 // Based on the TinyMCE words count display found at /wp-admin/js/post.js
+// Ignored if Gutenberg is in use.
 (function ($, counter, tinymce, _) {
     'use strict';
 
@@ -89,9 +90,6 @@
                 if (min === 0 && max > 0 && max > min) {
                     is_valid = count <= max;
                 }
-
-                (count >= ppChecklist.requirements.words_count.value[0])
-                && (count <= ppChecklist.requirements.words_count.value[1]);
 
                 $('#pp-checklist-req-words_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
