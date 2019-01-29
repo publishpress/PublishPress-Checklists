@@ -394,6 +394,15 @@
          */
         remove_style_tag: function (id) {
             $('#' + id).remove();
+        },
+
+        /**
+         * Return the editor
+         *
+         * @returns {object}
+         */
+        getEditor: function () {
+            return wp.data.select('core/editor');
         }
     };
 
@@ -514,7 +523,7 @@
     /*----------  Hierarchical Taxonomies Number  ----------*/
 
     if ($('[data-type^="taxonomy_counter_hierarchical_"]').length > 0) {
-        $('[data-type^="taxonomy_counter_hierarchical_"]').each(function(index, elem) {
+        $('[data-type^="taxonomy_counter_hierarchical_"]').each(function (index, elem) {
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
                     count = $('#' + taxonomy + 'checklist input:checked').length,
@@ -532,7 +541,7 @@
     /*----------  Non-hierarchical Taxonomies Number  ----------*/
 
     if ($('[data-type^="taxonomy_counter_non_hierarchical_"]').length > 0) {
-        $('[data-type^="taxonomy_counter_non_hierarchical_"]').each(function(index, elem) {
+        $('[data-type^="taxonomy_counter_non_hierarchical_"]').each(function (index, elem) {
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_non_hierarchical_', ''),
                     count = $('#' + taxonomy + ' .tagchecklist').children('li').length,
@@ -553,12 +562,20 @@
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var has_excerpt = false;
 
-            if ($('#excerpt').length === 0) {
-                return;
-            }
+            if (PP_Content_Checklist.is_gutenberg_active()) {
+                var excerpt = PP_Content_Checklist.getEditor().getEditedPostAttribute('excerpt');
 
-            if ($('#excerpt').val().trim().length > 0) {
-                has_excerpt = true;
+                if (excerpt.trim().length > 0) {
+                    has_excerpt = true;
+                }
+            } else {
+                if ($('#excerpt').length === 0) {
+                    return;
+                }
+
+                if ($('#excerpt').val().trim().length > 0) {
+                    has_excerpt = true;
+                }
             }
 
             $('#pp-checklist-req-filled_excerpt').trigger(
@@ -573,8 +590,8 @@
     if (PP_Content_Checklist.is_gutenberg_active()) {
         if ($('#pp-checklist-req-words_count').length > 0) {
             wp.data.subscribe(
-                function() {
-                    var content = wp.data.select( "core/editor" ).getEditedPostAttribute('content');
+                function () {
+                    var content = PP_Content_Checklist.getEditor().getEditedPostAttribute('content');
                     var count = wp.utils.WordCounter.prototype.count(content);
 
                     if (lastCount == count) {
