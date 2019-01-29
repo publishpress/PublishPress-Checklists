@@ -494,9 +494,15 @@
 
     if ($('#pp-checklist-req-tags_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-            var count = $('#post_tag.tagsdiv ul.tagchecklist').children('li').length,
+            var count = 0,
                 min_value = parseInt(ppChecklist.requirements.tags_count.value[0]),
                 max_value = parseInt(ppChecklist.requirements.tags_count.value[1]);
+
+            if (PP_Content_Checklist.is_gutenberg_active()) {
+                count = PP_Content_Checklist.getEditor().getEditedPostAttribute('tags').length;
+            } else {
+                count = $('#post_tag.tagsdiv ul.tagchecklist').children('li').length;
+            }
 
             $('#pp-checklist-req-tags_count').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
