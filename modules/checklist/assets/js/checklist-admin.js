@@ -509,9 +509,15 @@
 
     if ($('#pp-checklist-req-categories_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-            var count = $('#categorychecklist input:checked').length,
+            var count = 0,
                 min_value = parseInt(ppChecklist.requirements.categories_count.value[0]),
                 max_value = parseInt(ppChecklist.requirements.categories_count.value[1]);
+
+            if (PP_Content_Checklist.is_gutenberg_active()) {
+                count = PP_Content_Checklist.getEditor().getEditedPostAttribute('categories').length;
+            } else {
+                count = $('#categorychecklist input:checked').length;
+            }
 
             $('#pp-checklist-req-categories_count').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
