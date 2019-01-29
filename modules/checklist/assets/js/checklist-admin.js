@@ -481,7 +481,13 @@
 
     if ($('#pp-checklist-req-featured_image').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
-            var has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
+            var has_image = false;
+
+            if (PP_Content_Checklist.is_gutenberg_active()) {
+                has_image = PP_Content_Checklist.getEditor().getEditedPostAttribute('featured_media') > 0;
+            } else {
+                has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
+            }
 
             $('#pp-checklist-req-featured_image').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
