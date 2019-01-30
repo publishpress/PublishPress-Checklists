@@ -271,7 +271,7 @@
 
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
-                    if (this.state.is_publishing) {
+                    if ( ! this.is_gutenberg_active()) {
                         // Only display a warning
                         message = ppChecklist.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
@@ -301,6 +301,8 @@
             } else {
                 wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
             }
+
+            wp.hooks.doAction('publishpress-content-checklist.update-failed-requirements', list_unchecked.warning);
 
             this.state.is_publishing = false;
         },
@@ -655,8 +657,6 @@
                     if (min === 0 && max > 0 && max > min) {
                         is_valid = count <= max;
                     }
-
-                    console.log(min, max, count, is_valid);
 
                     $('#pp-checklist-req-words_count').trigger(
                         PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
