@@ -13,7 +13,6 @@ const {
 const {
   registerPlugin
 } = wp.plugins;
-let reqs = [2, 3, 923];
 
 class PPChecklistWarning extends Component {
   constructor() {
