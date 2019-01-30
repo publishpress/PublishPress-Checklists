@@ -346,6 +346,7 @@ if ( ! class_exists('PP_Checklist')) {
             add_action('admin_init', [$this, 'load_updater']);
             add_action('add_meta_boxes', [$this, 'handle_post_metaboxes']);
             add_action('save_post', [$this, 'save_post_metabox'], 10, 2);
+            add_action('enqueue_block_editor_assets', [$this, 'enqueue_block_editor_assets']);
 
             add_filter('pp_checklist_post_type_requirements', [$this, 'filter_post_type_requirements'], 10, 2);
             add_filter('pp_checklist_post_types', [$this, 'filter_post_types']);
@@ -385,11 +386,11 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Generate a link to one of the editorial metadata actions
          *
-         * @since 0.7
-         *
          * @param array $args (optional) Action and any query args to add to the URL
          *
          * @return string $link Direct link to complete the action
+         * @since 0.7
+         *
          */
         protected function get_link($args = [])
         {
@@ -772,18 +773,20 @@ if ( ! class_exists('PP_Checklist')) {
 
                 wp_localize_script(
                     'pp-checklist-requirements',
-                    'objectL10n_checklist_requirements',
+                    'ppChecklist',
                     [
-                        'requirements'             => $requirements,
-                        'msg_missed_optional'      => __('The following requirements are not completed yet. Are you sure you want to publish?',
+                        'requirements'              => $requirements,
+                        'msg_missed_optional'       => __('The following requirements are not completed yet. Are you sure you want to publish?',
                             'publishpress-content-checklist'),
-                        'msg_missed_required'      => __('Please complete the following requirements before publishing:',
+                        'msg_missed_required'       => __('Please complete the following requirements before publishing:',
                             'publishpress-content-checklist'),
-                        'msg_missed_important'     => __('Not required, but important: ',
+                        'msg_missed_important'      => __('Not required, but important: ',
                             'publishpress-content-checklist'),
-                        'show_warning_icon_submit' => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
-                        'hide_publish_button'      => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
-                        'title_warning_icon'       => __('One or more items in the checklist are not completed'),
+                        'show_warning_icon_submit'  => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
+                        'hide_publish_button'       => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
+                        'title_warning_icon'        => __('One or more items in the checklist are not completed'),
+                        'gutenberg_warning_css'     => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-warning.css'),
+                        'gutenberg_hide_submit_css' => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'),
                     ]
                 );
 
@@ -841,6 +844,20 @@ if ( ! class_exists('PP_Checklist')) {
                     }
                 }
             }
+        }
+
+        /**
+         * Enqueue Gutenberg assets.
+         */
+        public function enqueue_block_editor_assets()
+        {
+            wp_enqueue_script(
+                'pp-checklist-requirements-gutenberg',
+                plugins_url('/modules/checklist/assets/js/gutenberg-warning.js', PP_CONTENT_CHECKLIST_FILE),
+                ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-hooks'],
+                PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
+                true
+            );
         }
 
         /*=====  End of Meta boxes  ======*/

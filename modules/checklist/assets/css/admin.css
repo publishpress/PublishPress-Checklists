@@ -11,3 +11,13 @@
     font-weight: bold;
     background-color: #fff;
 }
+
+.pp-checklist-failed-requirements-warning p {
+    font-weight: bold;
+}
+
+.pp-checklist-failed-requirements-warning ul {
+    list-style-type: none;
+    color: #ef5350;
+    font-weight: bold;
+}
