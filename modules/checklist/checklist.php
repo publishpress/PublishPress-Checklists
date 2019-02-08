@@ -766,7 +766,7 @@ if ( ! class_exists('PP_Checklist')) {
                 wp_enqueue_script(
                     'pp-checklist-requirements',
                     plugins_url('/modules/checklist/assets/js/checklist-admin.js', PP_CONTENT_CHECKLIST_FILE),
-                    ['jquery'],
+                    ['jquery', 'word-count'],
                     PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
                     true
                 );
