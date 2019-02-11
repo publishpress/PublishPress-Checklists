@@ -136,8 +136,8 @@ class Plugin
             $rules,
             [
                 Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-content-checklist'),
-                Plugin::RULE_ONLY_DISPLAY => __('Show a sidebar message', 'publishpress-content-checklist'),
-                Plugin::RULE_WARNING      => __('Show a pop-up message', 'publishpress-content-checklist'),
+                Plugin::RULE_ONLY_DISPLAY => __('Show a message in the sidebar while writing', 'publishpress-content-checklist'),
+                Plugin::RULE_WARNING      => __('Show a message on the screen before publishing', 'publishpress-content-checklist'),
                 Plugin::RULE_BLOCK        => __('Prevent publishing', 'publishpress-content-checklist'),
             ]
         );
