@@ -45,6 +45,13 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.4.3] 2019-02-11 =
+
+* Changed the label for checklist options in the settings panel;
+* Fixed translation to PT-BR (thanks to Dionizio Bach);
+* Fixed bug when word-count script was not loaded;
+* Fixed JS error if an editor is not found;
+
 = [1.4.2] - 2019-01-30 =
 
 * Removed license key field from the settings tab;
