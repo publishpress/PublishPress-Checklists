@@ -271,7 +271,7 @@
 
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
-                    if ( ! this.is_gutenberg_active()) {
+                    if ( ! PP_Content_Checklist.is_gutenberg_active()) {
                         // Only display a warning
                         message = ppChecklist.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
@@ -282,7 +282,7 @@
 
                     wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
                 } else {
-                    if (this.is_gutenberg_active()) {
+                    if (PP_Content_Checklist.is_gutenberg_active()) {
                         wp.data.dispatch('core/editor').lockPostSaving('pp-content-checklist');
                     } else {
                         message = ppChecklist.msg_missed_required + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
@@ -299,7 +299,9 @@
 
                 this.state.should_block = true;
             } else {
-                wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
+                if (PP_Content_Checklist.is_gutenberg_active()) {
+                    wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
+                }
             }
 
             wp.hooks.doAction('publishpress-content-checklist.update-failed-requirements', list_unchecked.warning);
