@@ -45,6 +45,10 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.4.4] 2019-02-12 =
+
+* Fixed JS error that was preventing the Preview button to work properly in the classic editor;
+
 = [1.4.3] 2019-02-11 =
 
 * Changed the label for checklist options in the settings panel;
