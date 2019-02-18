@@ -133,7 +133,7 @@
                 this.elems.publish_button.trigger('click');
             }.bind(this));
 
-            if ( ! PP_Content_Checklist.is_gutenberg_active()) {
+            if (!PP_Content_Checklist.is_gutenberg_active()) {
                 // Hook to the submit button
                 $('form#post').submit(function (event) {
                     // Reset the should_block state
@@ -213,6 +213,7 @@
          * @return {Boolean}
          */
         validate_requirements: function (event) {
+            debugger;
             this.state.should_block = false;
 
             // Bypass all checks because the confirmation button was clicked.
@@ -224,6 +225,11 @@
 
             // Check if the post is already published, to bypass the check
             if (this.is_published()) {
+                return;
+            }
+
+            // Check if the publish button was pressed.
+            if (!this.state.is_publishing) {
                 return;
             }
 
@@ -271,7 +277,7 @@
 
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
-                    if ( ! PP_Content_Checklist.is_gutenberg_active()) {
+                    if (!PP_Content_Checklist.is_gutenberg_active()) {
                         // Only display a warning
                         message = ppChecklist.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
