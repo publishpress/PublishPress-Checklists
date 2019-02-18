@@ -1,16 +1,16 @@
-const {
+let {
   Component
 } = React;
-const {
+let {
   __
 } = wp.i18n;
-const {
+let {
   Fragment
 } = wp.element;
-const {
+let {
   PluginPrePublishPanel
 } = wp.editPost;
-const {
+let {
   registerPlugin
 } = wp.plugins;
 
