@@ -213,7 +213,6 @@
          * @return {Boolean}
          */
         validate_requirements: function (event) {
-            debugger;
             this.state.should_block = false;
 
             // Bypass all checks because the confirmation button was clicked.
