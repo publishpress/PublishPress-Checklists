@@ -227,10 +227,11 @@
                 return;
             }
 
-            // Check if the publish button was pressed.
-            if (!this.state.is_publishing) {
+            // Check if the publish button was pressed, without Gutenberg.
+            if (!this.state.is_publishing && !PP_Content_Checklist.is_gutenberg_active()) {
                 return;
             }
+
 
             var list_unchecked = {
                 'block': [],
