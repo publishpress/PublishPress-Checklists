@@ -853,7 +853,7 @@ if ( ! class_exists('PP_Checklist')) {
         {
             wp_enqueue_script(
                 'pp-checklist-requirements-gutenberg',
-                plugins_url('/modules/checklist/assets/js/gutenberg-warning.js', PP_CONTENT_CHECKLIST_FILE),
+                plugins_url('/modules/checklist/assets/js/gutenberg-warning.min.js', PP_CONTENT_CHECKLIST_FILE),
                 ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-hooks'],
                 PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
                 true

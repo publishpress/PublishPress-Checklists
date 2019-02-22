@@ -133,7 +133,7 @@
                 this.elems.publish_button.trigger('click');
             }.bind(this));
 
-            if ( ! PP_Content_Checklist.is_gutenberg_active()) {
+            if (!PP_Content_Checklist.is_gutenberg_active()) {
                 // Hook to the submit button
                 $('form#post').submit(function (event) {
                     // Reset the should_block state
@@ -227,6 +227,12 @@
                 return;
             }
 
+            // Check if the publish button was pressed, without Gutenberg.
+            if (!this.state.is_publishing && !PP_Content_Checklist.is_gutenberg_active()) {
+                return;
+            }
+
+
             var list_unchecked = {
                 'block': [],
                 'warning': []
@@ -271,7 +277,7 @@
 
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
-                    if ( ! PP_Content_Checklist.is_gutenberg_active()) {
+                    if (!PP_Content_Checklist.is_gutenberg_active()) {
                         // Only display a warning
                         message = ppChecklist.msg_missed_optional + '<div class="pp-checklist-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 

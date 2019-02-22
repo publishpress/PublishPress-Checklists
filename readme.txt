@@ -5,8 +5,8 @@ Author URI: https://publishpress.com
 Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
-Tested up to: 5.0
-Stable tag: 1.4.4
+Tested up to: 5.1
+Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.4.5] 2019-02-22 =
+
+* Fixed the pre-publishing check to avoid blocking save when not publishing;
 
 = [1.4.4] 2019-02-12 =
 
