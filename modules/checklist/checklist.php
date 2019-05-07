@@ -81,7 +81,7 @@ if ( ! class_exists('PP_Checklist')) {
 
             $defaultChecked = $publishpress->isBlockEditorActive() ? 'off' : 'on';
 
-            $this->twigPath = dirname(dirname(dirname(__FILE__))) . '/twig';
+            $this->twigPath = dirname(dirname(__DIR__)) . '/twig';
 
             $this->module_url = $this->get_module_url(__FILE__);
 
