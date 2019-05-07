@@ -209,7 +209,7 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Set the list of post types
          *
-         * @param  array $post_types
+         * @param array $post_types
          *
          * @return array
          */
@@ -248,8 +248,8 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Set the requirements list for the given post type
          *
-         * @param  array  $requirements
-         * @param  string $post_type
+         * @param array  $requirements
+         * @param string $post_type
          *
          * @return array
          */
@@ -495,7 +495,7 @@ if ( ! class_exists('PP_Checklist')) {
          * Displays the field to choose between display or not the warning icon
          * close to the submit button
          *
-         * @param  array
+         * @param array
          */
         public function settings_show_warning_icon_submit_option($args = [])
         {
@@ -514,7 +514,7 @@ if ( ! class_exists('PP_Checklist')) {
          * Displays the field for the option of hide the submit button if the
          * checklist is not complete.
          *
-         * @param  array
+         * @param array
          */
         public function settings_hide_publish_button_option($args = [])
         {
@@ -532,7 +532,7 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Displays the table of requirements in the place of a field.
          *
-         * @param  array $args
+         * @param array $args
          */
         public function settings_requirements($args = [])
         {
@@ -630,7 +630,7 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Instantiate custom items according to the new_options.
          *
-         * @param  array $new_options
+         * @param array $new_options
          */
         protected function instantiate_custom_items_to_validate_settings($new_options)
         {

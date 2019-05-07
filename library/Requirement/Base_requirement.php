@@ -73,8 +73,8 @@ class Base_requirement
     /**
      * The constructor. It adds the action to load the requirement.
      *
-     * @param  string $module
-     * @param  string $post_type
+     * @param string $module
+     * @param string $post_type
      *
      * @return  void
      */
@@ -118,8 +118,8 @@ class Base_requirement
      * The child class should
      * evaluate the status and override this method.
      *
-     * @param  stdClass $post
-     * @param  mixed    $option_value
+     * @param stdClass $post
+     * @param mixed    $option_value
      *
      * @return mixed
      */
@@ -131,7 +131,7 @@ class Base_requirement
     /**
      * Add the instance of the requirement class to the list.
      *
-     * @param  array $requirements
+     * @param array $requirements
      *
      * @return array
      */

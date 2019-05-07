@@ -27,9 +27,9 @@ class Custom_item extends Base_simple implements Interface_required
     /**
      * The constructor. It adds the action to load the requirement.
      *
-     * @param  string $name
-     * @param  string $module
-     * @param  string $post_type
+     * @param string $name
+     * @param string $module
+     * @param string $post_type
      *
      * @return  void
      */
@@ -122,8 +122,8 @@ class Custom_item extends Base_simple implements Interface_required
     /**
      * Returns the current status of the requirement.
      *
-     * @param  stdClass $post
-     * @param  mixed    $option_value
+     * @param stdClass $post
+     * @param mixed    $option_value
      *
      * @return mixed
      */
@@ -135,8 +135,8 @@ class Custom_item extends Base_simple implements Interface_required
     /**
      * Add the requirement to the list to be displayed in the metabox.
      *
-     * @param  array    $requirements
-     * @param  stdClass $post
+     * @param array    $requirements
+     * @param stdClass $post
      *
      * @return array
      */
@@ -171,7 +171,7 @@ class Custom_item extends Base_simple implements Interface_required
     /**
      * Validates the option group, making sure the values are sanitized.
      *
-     * @param  array $new_options
+     * @param array $new_options
      *
      * @return array
      */

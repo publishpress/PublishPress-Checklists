@@ -26,7 +26,7 @@ class Base_counter extends Base_simple implements Interface_required
     /**
      * Injects the respective default options into the main add-on.
      *
-     * @param  array $default_options
+     * @param array $default_options
      *
      * @return array
      */
@@ -46,7 +46,7 @@ class Base_counter extends Base_simple implements Interface_required
     /**
      * Validates the option group, making sure the values are sanitized.
      *
-     * @param  array $new_options
+     * @param array $new_options
      *
      * @return array
      */
@@ -73,8 +73,8 @@ class Base_counter extends Base_simple implements Interface_required
     /**
      * Add the requirement to the list to be displayed in the metabox.
      *
-     * @param  array    $requirements
-     * @param  stdClass $post
+     * @param array    $requirements
+     * @param stdClass $post
      *
      * @return array
      */

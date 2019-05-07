@@ -34,8 +34,8 @@ class Featured_image extends Base_simple
     /**
      * Returns the current status of the requirement.
      *
-     * @param  stdClass $post
-     * @param  mixed    $option_value
+     * @param stdClass $post
+     * @param mixed    $option_value
      *
      * @return mixed
      */
