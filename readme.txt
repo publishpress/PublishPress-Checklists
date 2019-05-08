@@ -45,6 +45,10 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [1.4.6] =
+
+* Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled
+
 = [1.4.5] 2019-02-22 =
 
 * Fixed the pre-publishing check to avoid blocking save when not publishing;
