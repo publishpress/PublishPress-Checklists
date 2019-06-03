@@ -677,10 +677,15 @@ if ( ! class_exists('PP_Checklist')) {
                 'all'
             );
 
+            wp_register_style('pp-remodal', $this->module_url . 'assets/css/remodal.css', false, PUBLISHPRESS_VERSION,
+                'all');
+            wp_register_style('pp-remodal-default-theme', $this->module_url . 'assets/css/remodal-default-theme.css',
+                ['pp-remodal'], PUBLISHPRESS_VERSION, 'all');
+
             wp_enqueue_style(
                 'pp-checklist-admin',
                 $this->module_url . 'assets/css/admin.css',
-                false,
+                ['pp-remodal', 'pp-remodal-default-theme'],
                 PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
                 'all'
             );
@@ -688,10 +693,13 @@ if ( ! class_exists('PP_Checklist')) {
             wp_enqueue_script(
                 'pp-checklist-admin',
                 plugins_url('/modules/checklist/assets/js/admin.js', PP_CONTENT_CHECKLIST_FILE),
-                ['jquery'],
+                ['jquery', 'pp-remodal'],
                 PUBLISHPRESS_CONTENT_CHECKLIST_VERSION,
                 true
             );
+
+            wp_register_script('pp-remodal', $this->module_url . 'assets/js/remodal.min.js', ['jquery'],
+                PUBLISHPRESS_VERSION, true);
 
             $rules = [];
             $rules = apply_filters('pp_checklist_rules_list', $rules);
