@@ -113,16 +113,7 @@ class Plugin
 
     public function warning_requirements()
     {
-        echo $this->twig->render(
-            'requirements-warning.twig',
-            [
-                'lang' => [
-                    'publishpress' => __('PublishPress', 'publishpress-content-checklist'),
-                    'warning'      => __('PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, update.',
-                        'publishpress-content-checklist'),
-                ],
-            ]
-        );
+        Utils::load_template('notice-missed-requirements.php');
     }
 
     /**

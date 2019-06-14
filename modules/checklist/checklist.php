@@ -73,6 +73,11 @@ if ( ! class_exists('PP_Checklist')) {
         public $module;
 
         /**
+         * Flag to assist conditional loading
+         */
+        private $twig_configured = false;
+
+        /**
          * Construct the PP_Checklist class
          */
         public function __construct()
@@ -119,8 +124,6 @@ if ( ! class_exists('PP_Checklist')) {
             $this->module = PublishPress()->register_module($this->module_name, $args);
 
             parent::__construct();
-
-            $this->configure_twig();
         }
 
         /**
@@ -311,6 +314,10 @@ if ( ! class_exists('PP_Checklist')) {
 
         protected function configure_twig()
         {
+            if ($this->twig_configured) {
+                return;
+            }
+
             $function = new Twig_SimpleFunction('settings_fields', function () {
                 return settings_fields($this->module->options_group_name);
             });
@@ -335,6 +342,8 @@ if ( ! class_exists('PP_Checklist')) {
                 return do_settings_sections($section);
             });
             $this->twig->addFunction($function);
+
+            $this->twig_configured = true;
         }
 
         /**
@@ -405,6 +414,8 @@ if ( ! class_exists('PP_Checklist')) {
          */
         public function print_configure_view()
         {
+            $this->configure_twig();
+
             echo $this->twig->render(
                 'settings-tab.twig',
                 [
@@ -538,6 +549,8 @@ if ( ! class_exists('PP_Checklist')) {
         {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
+
+            $this->configure_twig();
 
             echo $this->twig->render(
                 'settings-requirements-table.twig',
@@ -792,6 +805,8 @@ if ( ! class_exists('PP_Checklist')) {
 
                 do_action('pp_checklist_enqueue_scripts');
             }
+
+            $this->configure_twig();
 
             // Render the box
             echo $this->twig->render(
