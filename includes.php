@@ -45,7 +45,7 @@ if ( ! defined(PP_HALT_CONSTANT) && ! defined('PP_CONTENT_CHECKLIST_LOADED')) {
     require_once $publishpressPath;
 
     if ( ! defined('PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION')) {
-        define('PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION', '1.6.0');
+        define('PP_CONTENT_CHECKLIST_MIN_PARENT_VERSION', '1.20.0');
     }
 
     /*==========================================================
