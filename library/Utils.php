@@ -9,8 +9,6 @@
 
 namespace PublishPress\Addon\Content_checklist;
 
-use PublishPress\Addon\Multiple_authors\Classes\Objects\Author;
-
 /**
  * Class Utils
  *
