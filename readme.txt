@@ -6,7 +6,7 @@ Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
 Tested up to: 5.1
-Stable tag: 1.4.7
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,19 +45,19 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [1.4.6] =
+= [1.4.6] - 2019-06-20 =
 
 * Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled
 
-= [1.4.5] 2019-02-22 =
+= [1.4.5] - 2019-02-22 =
 
 * Fixed the pre-publishing check to avoid blocking save when not publishing;
 
-= [1.4.4] 2019-02-12 =
+= [1.4.4] - 2019-02-12 =
 
 * Fixed JS error that was preventing the Preview button to work properly in the classic editor;
 
-= [1.4.3] 2019-02-11 =
+= [1.4.3] - 2019-02-11 =
 
 * Changed the label for checklist options in the settings panel;
 * Fixed translation to PT-BR (thanks to Dionizio Bach);
