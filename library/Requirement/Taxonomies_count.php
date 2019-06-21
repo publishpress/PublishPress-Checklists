@@ -53,8 +53,8 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
     /**
      * Returns the current status of the requirement.
      *
-     * @param  stdClass $post
-     * @param  mixed    $option_value
+     * @param stdClass $post
+     * @param mixed    $option_value
      *
      * @return mixed
      */

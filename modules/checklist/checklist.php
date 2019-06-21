@@ -73,6 +73,11 @@ if ( ! class_exists('PP_Checklist')) {
         public $module;
 
         /**
+         * Flag to assist conditional loading
+         */
+        private $twig_configured = false;
+
+        /**
          * Construct the PP_Checklist class
          */
         public function __construct()
@@ -81,7 +86,7 @@ if ( ! class_exists('PP_Checklist')) {
 
             $defaultChecked = $publishpress->isBlockEditorActive() ? 'off' : 'on';
 
-            $this->twigPath = dirname(dirname(dirname(__FILE__))) . '/twig';
+            $this->twigPath = dirname(dirname(__DIR__)) . '/twig';
 
             $this->module_url = $this->get_module_url(__FILE__);
 
@@ -119,8 +124,6 @@ if ( ! class_exists('PP_Checklist')) {
             $this->module = PublishPress()->register_module($this->module_name, $args);
 
             parent::__construct();
-
-            $this->configure_twig();
         }
 
         /**
@@ -209,7 +212,7 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Set the list of post types
          *
-         * @param  array $post_types
+         * @param array $post_types
          *
          * @return array
          */
@@ -248,8 +251,8 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Set the requirements list for the given post type
          *
-         * @param  array  $requirements
-         * @param  string $post_type
+         * @param array  $requirements
+         * @param string $post_type
          *
          * @return array
          */
@@ -311,6 +314,10 @@ if ( ! class_exists('PP_Checklist')) {
 
         protected function configure_twig()
         {
+            if ($this->twig_configured) {
+                return;
+            }
+
             $function = new Twig_SimpleFunction('settings_fields', function () {
                 return settings_fields($this->module->options_group_name);
             });
@@ -335,6 +342,8 @@ if ( ! class_exists('PP_Checklist')) {
                 return do_settings_sections($section);
             });
             $this->twig->addFunction($function);
+
+            $this->twig_configured = true;
         }
 
         /**
@@ -405,6 +414,8 @@ if ( ! class_exists('PP_Checklist')) {
          */
         public function print_configure_view()
         {
+            $this->configure_twig();
+
             echo $this->twig->render(
                 'settings-tab.twig',
                 [
@@ -495,7 +506,7 @@ if ( ! class_exists('PP_Checklist')) {
          * Displays the field to choose between display or not the warning icon
          * close to the submit button
          *
-         * @param  array
+         * @param array
          */
         public function settings_show_warning_icon_submit_option($args = [])
         {
@@ -514,7 +525,7 @@ if ( ! class_exists('PP_Checklist')) {
          * Displays the field for the option of hide the submit button if the
          * checklist is not complete.
          *
-         * @param  array
+         * @param array
          */
         public function settings_hide_publish_button_option($args = [])
         {
@@ -532,12 +543,14 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Displays the table of requirements in the place of a field.
          *
-         * @param  array $args
+         * @param array $args
          */
         public function settings_requirements($args = [])
         {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
+
+            $this->configure_twig();
 
             echo $this->twig->render(
                 'settings-requirements-table.twig',
@@ -630,7 +643,7 @@ if ( ! class_exists('PP_Checklist')) {
         /**
          * Instantiate custom items according to the new_options.
          *
-         * @param  array $new_options
+         * @param array $new_options
          */
         protected function instantiate_custom_items_to_validate_settings($new_options)
         {
@@ -792,6 +805,8 @@ if ( ! class_exists('PP_Checklist')) {
 
                 do_action('pp_checklist_enqueue_scripts');
             }
+
+            $this->configure_twig();
 
             // Render the box
             echo $this->twig->render(

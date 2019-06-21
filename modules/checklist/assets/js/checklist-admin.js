@@ -232,7 +232,6 @@
                 return;
             }
 
-
             var list_unchecked = {
                 'block': [],
                 'warning': []
@@ -527,15 +526,20 @@
                 max_value = parseInt(ppChecklist.requirements.tags_count.value[1]);
 
             if (PP_Content_Checklist.is_gutenberg_active()) {
-                count = PP_Content_Checklist.getEditor().getEditedPostAttribute('tags').length;
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var obj = PP_Content_Checklist.getEditor().getEditedPostAttribute('tags');
             } else {
-                count = $('#post_tag.tagsdiv ul.tagchecklist').children('li').length;
+                var obj = $('#post_tag.tagsdiv ul.tagchecklist').children('li');
             }
 
-            $('#pp-checklist-req-tags_count').trigger(
-                PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-                PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
-            );
+            if (typeof obj !== 'undefined') {
+                count = obj.length;
+
+                $('#pp-checklist-req-tags_count').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
+                );
+            }
         });
     }
 
@@ -548,15 +552,20 @@
                 max_value = parseInt(ppChecklist.requirements.categories_count.value[1]);
 
             if (PP_Content_Checklist.is_gutenberg_active()) {
-                count = PP_Content_Checklist.getEditor().getEditedPostAttribute('categories').length;
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var obj = PP_Content_Checklist.getEditor().getEditedPostAttribute('categories');
             } else {
-                count = $('#categorychecklist input:checked').length;
+                var obj = $('#categorychecklist input:checked');
             }
 
-            $('#pp-checklist-req-categories_count').trigger(
-                PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-                PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
-            );
+            if (typeof obj !== 'undefined') {
+                count = obj.length;
+
+                $('#pp-checklist-req-categories_count').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Content_Checklist.check_valid_quantity(count, min_value, max_value)
+                );
+            }
         });
     }
 
@@ -603,25 +612,26 @@
             var has_excerpt = false;
 
             if (PP_Content_Checklist.is_gutenberg_active()) {
-                var excerpt = PP_Content_Checklist.getEditor().getEditedPostAttribute('excerpt');
-
-                if (excerpt.trim().length > 0) {
-                    has_excerpt = true;
-                }
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var obj = PP_Content_Checklist.getEditor().getEditedPostAttribute('excerpt');
             } else {
                 if ($('#excerpt').length === 0) {
                     return;
                 }
 
-                if ($('#excerpt').val().trim().length > 0) {
-                    has_excerpt = true;
-                }
+                var obj = $('#excerpt').val();
             }
 
-            $('#pp-checklist-req-filled_excerpt').trigger(
-                PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-                has_excerpt
-            );
+            if (typeof obj !== 'undefined') {
+                if (obj.trim().length > 0) {
+                    has_excerpt = true;
+                }
+
+                $('#pp-checklist-req-filled_excerpt').trigger(
+                    PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                    has_excerpt
+                );
+            }
         });
     }
 
@@ -631,7 +641,13 @@
         if ($('#pp-checklist-req-words_count').length > 0) {
             wp.data.subscribe(
                 function () {
+                    // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                     var content = PP_Content_Checklist.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
                     var count = wp.utils.WordCounter.prototype.count(content);
 
                     if (lastCount == count) {

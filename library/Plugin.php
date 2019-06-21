@@ -90,7 +90,7 @@ class Plugin
     /**
      * Add custom module directory
      *
-     * @param  array
+     * @param array
      *
      * @return array
      */
@@ -113,16 +113,7 @@ class Plugin
 
     public function warning_requirements()
     {
-        echo $this->twig->render(
-            'requirements-warning.twig',
-            [
-                'lang' => [
-                    'publishpress' => __('PublishPress', 'publishpress-content-checklist'),
-                    'warning'      => __('PublishPress Content Checklist requires __plugin__ 1.3.0 or later. Please, update.',
-                        'publishpress-content-checklist'),
-                ],
-            ]
-        );
+        Utils::load_template('notice-missed-requirements.php');
     }
 
     /**
@@ -136,8 +127,10 @@ class Plugin
             $rules,
             [
                 Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-content-checklist'),
-                Plugin::RULE_ONLY_DISPLAY => __('Show a message in the sidebar while writing', 'publishpress-content-checklist'),
-                Plugin::RULE_WARNING      => __('Show a message on the screen before publishing', 'publishpress-content-checklist'),
+                Plugin::RULE_ONLY_DISPLAY => __('Show a message in the sidebar while writing',
+                    'publishpress-content-checklist'),
+                Plugin::RULE_WARNING      => __('Show a message on the screen before publishing',
+                    'publishpress-content-checklist'),
                 Plugin::RULE_BLOCK        => __('Prevent publishing', 'publishpress-content-checklist'),
             ]
         );
@@ -150,6 +143,7 @@ class Plugin
      */
     public function loadTextDomain()
     {
-        load_plugin_textdomain( 'publishpress-content-checklist', false, PP_CONTENT_CHECKLIST_RELATIVE_PATH . '/languages/' );
+        load_plugin_textdomain('publishpress-content-checklist', false,
+            PP_CONTENT_CHECKLIST_RELATIVE_PATH . '/languages/');
     }
 }

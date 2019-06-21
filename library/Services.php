@@ -32,9 +32,10 @@ class Services implements ServiceProviderInterface
     /**
      * Services constructor.
      *
+     * @param PP_Checklist $module
+     *
      * @since 1.3.5
      *
-     * @param PP_Checklist $module
      */
     public function __construct(PP_Checklist $module)
     {
@@ -48,9 +49,10 @@ class Services implements ServiceProviderInterface
      * This method should only be used to configure services and parameters.
      * It should not get services.
      *
+     * @param Pimple $container A container instance
+     *
      * @since 1.3.5
      *
-     * @param Pimple $container A container instance
      */
     public function register(Pimple $container)
     {

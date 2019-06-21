@@ -16,7 +16,7 @@ interface Interface_parametrized
     /**
      * Set the parameters
      *
-     * @param  array $params
+     * @param array $params
      *
      * @return array
      */
