@@ -47,7 +47,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [1.4.6] - 2019-06-20 =
 
-* Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled
+* Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled;
+* Change minimum required version of PublishPress to 1.20.0;
 
 = [1.4.5] - 2019-02-22 =
 
