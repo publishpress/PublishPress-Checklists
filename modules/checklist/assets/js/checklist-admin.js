@@ -283,9 +283,9 @@
                         // Display the confirm
                         $('#pp-checklist-modal-confirm-content').html(message);
                         $('[data-remodal-id=pp-checklist-modal-confirm]').remodal().open();
+                    } else {
+                        wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
                     }
-
-                    wp.data.dispatch('core/editor').unlockPostSaving('pp-content-checklist');
                 } else {
                     if (PP_Content_Checklist.is_gutenberg_active()) {
                         wp.data.dispatch('core/editor').lockPostSaving('pp-content-checklist');
