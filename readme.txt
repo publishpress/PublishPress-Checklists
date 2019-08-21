@@ -6,7 +6,7 @@ Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
 Tested up to: 5.1
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ There're two ways to install PublishPress plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [1.4.7] - 2019-07-21 =
+
+* Fixed: A JS error was preventing to block the post save action when displaying a popup with missed requirements on Classic Editor
 
 = [1.4.6] - 2019-06-20 =
 
