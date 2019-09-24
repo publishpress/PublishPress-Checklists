@@ -71,6 +71,12 @@
         EVENT_TOGGLE_CUSTOM_ITEM: 'pp-content-checklist:toggle_custom_item',
 
         /**
+         * Constant for the event tinymce_loaded
+         * @type {String}
+         */
+        EVENT_TINYMCE_LOADED: 'pp-content-checklist:tinymce_loaded',
+
+        /**
          * Constant for the interval of the tic event
          * @type {Number}
          */
@@ -425,6 +431,8 @@
         getEditor: function () {
             return wp.data.select('core/editor');
         }
+
+
     };
 
     // Exposes and initialize the object
@@ -635,9 +643,12 @@
         });
     }
 
-    /*----------  Word Count, for Gutenberg ----------*/
+    /*----------  Word Count ----------*/
     var lastCount = 0;
     if (PP_Content_Checklist.is_gutenberg_active()) {
+        /**
+         * For Gutemberg
+         */
         if ($('#pp-checklist-req-words_count').length > 0) {
             wp.data.subscribe(
                 function () {
@@ -654,41 +665,83 @@
                         return;
                     }
 
-                    lastCount = count;
 
-                    var is_valid = false,
-                        min = parseInt(ppChecklist.requirements.words_count.value[0]),
+                    var min = parseInt(ppChecklist.requirements.words_count.value[0]),
                         max = parseInt(ppChecklist.requirements.words_count.value[1]);
-
-                    // Compare the count with the configured value
-
-                    // Both same value = exact
-                    if (min === max) {
-                        is_valid = count === min;
-                    }
-
-                    // Min not empty, max empty or < min = only min
-                    if (min > 0 && (max === 0 || max < min)) {
-                        is_valid = count >= min;
-                    }
-
-                    // Min not empty, max not empty and > min = both min and max
-                    if (min > 0 && max > 0 && max > min) {
-                        is_valid = count >= min && count <= max;
-                    }
-
-                    // Min empty, max not empty and > min = only max
-                    if (min === 0 && max > 0 && max > min) {
-                        is_valid = count <= max;
-                    }
 
                     $('#pp-checklist-req-words_count').trigger(
                         PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
-                        is_valid
+                        PP_Content_Checklist.check_valid_quantity(count, min, max)
                     );
+
+                    lastCount = count;
                 }
             );
         }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var lastCount = 0;
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update () {
+            var text, count;
+
+            if (typeof editor == 'undefined' || ! editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            count = counter.count(text);
+
+            if (lastCount == count) {
+                return;
+            }
+
+            var min = parseInt(ppChecklist.requirements.words_count.value[0]),
+                max = parseInt(ppChecklist.requirements.words_count.value[1]);
+
+            $('#pp-checklist-req-words_count').trigger(
+                PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
+                PP_Content_Checklist.check_valid_quantity(count, min, max)
+            );
+
+            lastCount = count;
+        }
+
+        // For the editor.
+        $(document).on(PP_Content_Checklist.EVENT_TINYMCE_LOADED, function(event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup', _.debounce(update, 500));
+        update();
     }
 
     /*----------  Block publishing, for Gutenberg ----------*/
