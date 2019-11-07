@@ -1,5 +1,5 @@
 {
-  "name": "publishpress/publishpress-content-checklist",
+  "name": "publishpress/publishpress-checklists",
   "type": "wordpress-plugin",
   "license": "GPL-2",
   "authors": [
@@ -20,6 +20,11 @@
   ],
   "config": {
     "preferred-install": "dist"
+  },
+  "autoload": {
+    "psr-4": {
+      "PublishPress\\Checklists\\Core\\": "core/"
+    }
   },
   "require": {
     "pimple/pimple": "~3.0",

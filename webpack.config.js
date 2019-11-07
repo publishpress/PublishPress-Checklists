@@ -5,11 +5,11 @@ module.exports = {
     mode: NODE_ENV,
 
     // entry is the source script
-    entry: './modules/checklist/assets/js/gutenberg-warning.jsx',
+    entry: './modules/checklists/assets/js/gutenberg-warning.jsx',
 
     // output is where to write the built file
     output: {
-        path: __dirname + '/modules/checklist/assets/js',
+        path: __dirname + '/modules/checklists/assets/js',
         filename: 'gutenberg-warning.min.js'
     },
     module: {

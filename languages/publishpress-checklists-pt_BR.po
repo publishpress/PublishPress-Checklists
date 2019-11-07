@@ -1,0 +1,485 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists\n"
+"POT-Creation-Date: 2019-11-07 12:29-0300\n"
+"PO-Revision-Date: 2019-11-07 12:34-0300\n"
+"Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
+"Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: library/Legacy/LegacyPlugin.php:205 modules/checklists/checklists.php:724
+msgid "Configure"
+msgstr "Configurar"
+
+#: library/Legacy/LegacyPlugin.php:208
+msgid "Please correct your form errors below and try again."
+msgstr "Por favor corrija os erros do formulário abaixo e tente novamente."
+
+#: library/Legacy/LegacyPlugin.php:210 modules/settings/settings.php:330
+msgid "Cheatin&#8217; uh?"
+msgstr "Trapaceando&#8217; hein?"
+
+#: library/Legacy/LegacyPlugin.php:211
+msgid "You do not have necessary permissions to complete this action."
+msgstr "Você não tem as permissões necessárias para completar esta ação."
+
+#: library/Legacy/LegacyPlugin.php:213
+msgid "Post does not exist"
+msgstr "O post não existe"
+
+#: library/Legacy/LegacyPlugin.php:342
+msgid "Authors"
+msgstr "Autores"
+
+#: library/Legacy/Module.php:53 modules/checklists/checklists.php:220
+msgid "Post"
+msgstr "Post"
+
+#: library/Legacy/Module.php:54 modules/checklists/checklists.php:221
+msgid "Page"
+msgstr "Página"
+
+#: library/Plugin.php:80
+msgid "Disabled"
+msgstr "Inativo"
+
+#: library/Plugin.php:81
+msgid "Show a message in the sidebar while writing"
+msgstr "Mostre uma mensagem na barra lateral enquanto escreve"
+
+#: library/Plugin.php:83
+msgid "Show a message on the screen before publishing"
+msgstr "Mostre uma mensagem na tela antes de publicar"
+
+#: library/Plugin.php:85
+msgid "Prevent publishing"
+msgstr "Evitar a publicação"
+
+#: library/Requirement/Base_counter.php:252
+#, php-format
+msgid "Min %s Max %s"
+msgstr "Min %s Máx %s"
+
+#: library/Requirement/Categories_count.php:35
+msgid "Number of categories"
+msgstr "Número de categorias"
+
+#: library/Requirement/Categories_count.php:36
+#, php-format
+msgid "Minimum of %s category"
+msgstr "Mínimo de %s categoria"
+
+#: library/Requirement/Categories_count.php:37
+#, php-format
+msgid "Minimum of %s categories"
+msgstr "Mínimo de %s categorias"
+
+#: library/Requirement/Categories_count.php:38
+#, php-format
+msgid "Maximum of %s category"
+msgstr "Máximo de %s categoria"
+
+#: library/Requirement/Categories_count.php:39
+#, php-format
+msgid "Maximum of %s categories"
+msgstr "Máximo de %s categorias"
+
+#: library/Requirement/Categories_count.php:40
+#, php-format
+msgid "%s category"
+msgstr "%s categoria"
+
+#: library/Requirement/Categories_count.php:41
+#, php-format
+msgid "%s categories"
+msgstr "%s categorias"
+
+#: library/Requirement/Categories_count.php:42
+#, php-format
+msgid "Between %s and %s categories"
+msgstr "Entre %s e %s categorias"
+
+#: library/Requirement/Custom_item.php:52
+#: library/Requirement/Custom_item.php:53
+msgid "Custom"
+msgstr "Personalizado"
+
+#: library/Requirement/Featured_image.php:30
+#: library/Requirement/Featured_image.php:31
+msgid "Featured image"
+msgstr "Imagem destacada"
+
+#: library/Requirement/Filled_excerpt.php:30
+#: library/Requirement/Filled_excerpt.php:31
+msgid "Excerpt has text"
+msgstr "Resumo tem texto"
+
+#: library/Requirement/Tags_count.php:35
+msgid "Number of tags"
+msgstr "Número de tags"
+
+#: library/Requirement/Tags_count.php:36
+#, php-format
+msgid "Minimum of %s tag"
+msgstr "Mínimo de %s tag"
+
+#: library/Requirement/Tags_count.php:37
+#, php-format
+msgid "Minimum of %s tags"
+msgstr "Mínimo de %s tags"
+
+#: library/Requirement/Tags_count.php:38
+#, php-format
+msgid "Maximum of %s tag"
+msgstr "Máximo de %s tag"
+
+#: library/Requirement/Tags_count.php:39
+#, php-format
+msgid "Maximum of %s tags"
+msgstr "Máximo de %s tags"
+
+#: library/Requirement/Tags_count.php:40
+#, php-format
+msgid "%s tag"
+msgstr "%s tag"
+
+#: library/Requirement/Tags_count.php:41
+#, php-format
+msgid "%s tags"
+msgstr "%s tags"
+
+#: library/Requirement/Tags_count.php:42
+#, php-format
+msgid "Between %s and %s tags"
+msgstr "Entre %s e %s tags"
+
+#: library/Requirement/Taxonomies_count.php:43
+msgid "Number of "
+msgstr "Número de "
+
+#: library/Requirement/Taxonomies_count.php:44
+#: library/Requirement/Taxonomies_count.php:45
+#, php-format
+msgid "Minimum of %s "
+msgstr "Mínimo de %s "
+
+#: library/Requirement/Taxonomies_count.php:46
+#: library/Requirement/Taxonomies_count.php:47
+#, php-format
+msgid "Maximum of %s "
+msgstr "Máximo de %s "
+
+#: library/Requirement/Taxonomies_count.php:48
+#: library/Requirement/Taxonomies_count.php:49
+#, php-format
+msgid "%s "
+msgstr "%s "
+
+#: library/Requirement/Taxonomies_count.php:50
+#, php-format
+msgid "Between %s and %s "
+msgstr "Entre %s e %s "
+
+#: library/Requirement/Words_count.php:31
+msgid "Number of words"
+msgstr "Número de palavras"
+
+#: library/Requirement/Words_count.php:32
+#, php-format
+msgid "Minimum of %s word"
+msgstr "Mínimo de %s palavra"
+
+#: library/Requirement/Words_count.php:33
+#, php-format
+msgid "Minimum of %s words"
+msgstr "Mínimo de %s palavras"
+
+#: library/Requirement/Words_count.php:34
+#, php-format
+msgid "Maximum of %s word"
+msgstr "Máximo de %s palavra"
+
+#: library/Requirement/Words_count.php:35
+#, php-format
+msgid "Maximum of %s words"
+msgstr "Máximo de %s palavras"
+
+#: library/Requirement/Words_count.php:36
+#, php-format
+msgid "%s word"
+msgstr "%s palavra"
+
+#: library/Requirement/Words_count.php:37
+#, php-format
+msgid "%s words"
+msgstr "%s palavras"
+
+#: library/Requirement/Words_count.php:38
+#, php-format
+msgid "Between %s and %s words"
+msgstr "Entre %s e %s palavras"
+
+#: modules/checklists/checklists.php:93 modules/checklists/checklists.php:718
+#: modules/checklists/checklists.php:872 modules/checklists/checklists.php:887
+#: modules/checklists/checklists.php:888
+msgid "Checklist"
+msgstr "Checklist"
+
+#: modules/checklists/checklists.php:94 modules/checklists/checklists.php:96
+msgid "Define tasks that must be complete before content is published"
+msgstr ""
+"Defina tarefas que devem ser completadas antes do conteúdo ser publicado"
+
+#: modules/checklists/checklists.php:406
+msgid "General:"
+msgstr "Geral:"
+
+#: modules/checklists/checklists.php:413
+msgid "Add to these post types:"
+msgstr "Adicionar a estes tipos de post:"
+
+#: modules/checklists/checklists.php:421
+msgid "Show warning icon:"
+msgstr "Mostrar ícone de aviso:"
+
+#: modules/checklists/checklists.php:429
+msgid "Hide Publish button:"
+msgstr "Ocultar ícone de publicação:"
+
+#: modules/checklists/checklists.php:442
+msgid "Requirements per Post Type:"
+msgstr "Requisitos por tipo de post:"
+
+#: modules/checklists/checklists.php:483
+msgid "This will display a warning icon in the \"Publish\" box"
+msgstr "Isso mostrará um ícone de aviso na caixa de publicação"
+
+#: modules/checklists/checklists.php:502
+msgid "This will hide the Publish button if the checklist is not complete"
+msgstr "Isso ocultará o botão de publicação se a lista não estiver completa"
+
+#: modules/checklists/checklists.php:523
+msgid "Description"
+msgstr "Descrição"
+
+#: modules/checklists/checklists.php:524
+msgid "Parameters"
+msgstr "Parâmetros"
+
+#: modules/checklists/checklists.php:525
+msgid "Action"
+msgstr "Ação"
+
+#: modules/checklists/checklists.php:526
+msgid "Add custom item"
+msgstr "Adicionar item personalizado"
+
+#: modules/checklists/checklists.php:762
+msgid ""
+"The following requirements are not completed yet. Are you sure you want to "
+"publish?"
+msgstr ""
+"Os seguintes requisitos ainda não estão completos. Tem certeza de que deseja "
+"publicar?"
+
+#: modules/checklists/checklists.php:764
+msgid "Please complete the following requirements before publishing:"
+msgstr "Complete os seguintes requisitos antes de publicar:"
+
+#: modules/checklists/checklists.php:766
+msgid "Not required, but important: "
+msgstr "Não é obrigatório, mas é importante: "
+
+#: modules/checklists/checklists.php:770
+msgid "One or more items in the checklist are not completed"
+msgstr "Um ou mais itens na Checklist não estão completos"
+
+#: modules/checklists/checklists.php:788
+msgid "To use the checklist"
+msgstr "Para usar a checklist"
+
+#: modules/checklists/checklists.php:789
+msgid "please choose some requirements"
+msgstr "selecione alguns requisitos"
+
+#: modules/checklists/checklists.php:790
+msgid "Required"
+msgstr "Obrigatório"
+
+#: modules/checklists/checklists.php:791
+msgid "Don't publish"
+msgstr "Não publicar"
+
+#: modules/checklists/checklists.php:792
+msgid "Yes, publish"
+msgstr "Sim, publicar"
+
+#: modules/modules-settings/modules-settings.php:52
+msgid "Authors Settings"
+msgstr "Configurações do autor"
+
+#: modules/modules-settings/modules-settings.php:221
+msgid "Features"
+msgstr "Funcionalidades"
+
+#: modules/modules-settings/modules-settings.php:222
+msgid "Feel free to select only the features you need."
+msgstr ""
+"Sinta-se livre para selecionar somente as funcionalidades de que precisa."
+
+#: modules/modules-settings/modules-settings.php:228
+msgid "Enabled features"
+msgstr "Funcionalidades ativadas"
+
+#. Plugin Name of the plugin/theme
+#: modules/settings/settings.php:59
+msgid "PublishPress Checklists"
+msgstr "PublishPress Checklists"
+
+#: modules/settings/settings.php:102
+msgid "PublishPress Settings"
+msgstr "Configurações do PublishPress"
+
+#: modules/settings/settings.php:103
+msgid "Settings"
+msgstr "Configurações"
+
+#: modules/settings/settings.php:216
+msgid "There are no PublishPress modules registered"
+msgstr "Não há módulos do PublishPress registrados"
+
+#: modules/settings/settings.php:283
+msgid "Posts"
+msgstr "Posts"
+
+#: modules/settings/settings.php:284
+msgid "Pages"
+msgstr "Páginas"
+
+#: modules/settings/settings.php:306
+#, php-format
+msgid ""
+"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
+"loaded file."
+msgstr ""
+"Desabilitado, pois add_post_type_support('%1$s', '%2$s') está incluído em um "
+"arquivo já carregado."
+
+#. Plugin URI of the plugin/theme
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#. Description of the plugin/theme
+msgid "Add a content checklist for posts"
+msgstr "Adicione uma Checklist de conteúdo para os posts"
+
+#. Author of the plugin/theme
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Author URI of the plugin/theme
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#~ msgid ""
+#~ "PublishPress Content Checklist requires __plugin__ 1.3.0 or later. "
+#~ "Please, update."
+#~ msgstr ""
+#~ "PublishPress Content Checklist requer __plugin__ 1.3.0 ou mais tarde. "
+#~ "Atualize."
+
+#~ msgid "Show a sidebar message"
+#~ msgstr "Mostrar uma mensagem na lateral"
+
+#~ msgid "Show a pop-up message"
+#~ msgstr "Mostrar uma mensagem pop-up"
+
+#~ msgid "Licensing:"
+#~ msgstr "Licença:"
+
+#~ msgid "License key:"
+#~ msgstr "Chave de licença:"
+
+#~ msgid "%1$s License Key"
+#~ msgstr "Chave de licença do %1$s"
+
+#~ msgid "Deactivate License"
+#~ msgstr "Desativar licença"
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. %2$sView version %3$s details"
+#~ "%4$s."
+#~ msgstr ""
+#~ "Há uma nova versão do %1$s disponível. %2$sVer detalhes da versão %3$s"
+#~ "%4$s."
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. %2$sView version %3$s details"
+#~ "%4$s or %5$supdate now%6$s."
+#~ msgstr ""
+#~ "Há uma nova versão do %1$s disponível. %2$sVer detalhes da versão %3$s"
+#~ "%4$s ou %5$satualize agora%6$s."
+
+#~ msgid "Error"
+#~ msgstr "Erro"
+
+#~ msgid "An error occurred. Please, try again."
+#~ msgstr "Ocorreu um erro, tente novamente."
+
+#~ msgid "Missing license"
+#~ msgstr "Licença não encontrada"
+
+#~ msgid "Your license key is expired"
+#~ msgstr "Sua chave de licença expirou"
+
+#~ msgid "Your license key has been disabled"
+#~ msgstr "Sua chave de licença foi desativada"
+
+#~ msgid "Invalid license"
+#~ msgstr "Licença inválida"
+
+#~ msgid "Your license is not active for this URL"
+#~ msgstr "Sua licença não está ativa para esse URL"
+
+#~ msgid "This appears to be an invalid license key for this product"
+#~ msgstr "Esta parece ser uma chave de licença inválida para este produto"
+
+#~ msgid "Your license key has reached its activation limit"
+#~ msgstr "Sua chave de licença atingiu o limite de ativações"
+
+#~ msgid "Activated"
+#~ msgstr "Ativado"
+
+#~ msgid "Not validated yet"
+#~ msgstr "Ainda não validado"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Click here to read more about licenses."
+#~ msgstr "Clique aqui para ler mais sobre as licenças."
+
+#~ msgid "More information"
+#~ msgstr "Mais informações"
+
+#~ msgid ""
+#~ "Unable to connect to the filesystem. Please confirm your credentials."
+#~ msgstr ""
+#~ "Não foi possível se comunicar com o sistema de arquivos. Por favor "
+#~ "confirme suas credenciais."

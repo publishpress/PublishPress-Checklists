@@ -1,4 +1,4 @@
-=== PublishPress Content Checklist ===
+=== PublishPress Checklists ===
 Contributors: publishpress, andergmartins, stevejburge, pressshack
 Author: PublishPress, PressShack
 Author URI: https://publishpress.com
@@ -6,7 +6,7 @@ Tags: publishpress, checklist
 Requires at least: 4.6
 Requires PHP: 5.4
 Tested up to: 5.1
-Stable tag: 1.4.7
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,17 +23,17 @@ There're two ways to install PublishPress plugin:
 1. Go to your site's admin page;
 2. Access the "Plugins" page;
 3. Click on the "Add New" button;
-4. Search for "PublishPress Content Checklist";
-5. Install PublishPress Content Checklist plugin;
-6. Activate the PublishPress Content Checklist plugin.
+4. Search for "PublishPress Checklists";
+5. Install PublishPress Checklists plugin;
+6. Activate the PublishPress Checklists plugin.
 
 **Manually uploading the plugin to your repository**
 
-1. Download the PublishPress Content Checklist plugin zip file;
+1. Download the PublishPress Checklists plugin zip file;
 2. Upload the plugin to your site's repository under the *"/wp-content/plugins/"* directory;
 3. Go to your site's admin page;
 4. Access the "Plugins" page;
-5. Activate the PublishPress Content Checklist plugin.
+5. Activate the PublishPress Checklists plugin.
 
 == Usage ==
 - Make sure you have PublishPress plugin installed and active;
@@ -81,7 +81,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [1.4.0] - 2019-01-14 =
 
 * Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
-* Fixed the assets loading to load tinymce-pp-checklist-requirements.js only in the admin;
+* Fixed the assets loading to load tinymce-pp-checklists-requirements.js only in the admin;
 * Added better support for custom post types and custom taxonomies which use WordPress default UI;
 * Fixed conflict between custom taxonomies and tags in the checklist while counting items;
 * Update POT file and fixed translations loading the text domain;

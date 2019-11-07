@@ -3,7 +3,7 @@
 <div id="{{ metadata_taxonomy }}-meta-box">
     <input type="hidden" name="{{ metadata_taxonomy }}_nonce" value="{{ nonce }}"/>
 
-    <ul id="pp-checklist-req-box">
+    <ul id="pp-checklists-req-box">
         {% if not requirements %}
             <p>
                 <em>{{ lang.to_use_checklists }} <a href="{{ configure_link }}"
@@ -13,13 +13,13 @@
 
         {% for key, req in requirements %}
             <li
-                    id="pp-checklist-req-{{ key }}"
-                    class="pp-checklist-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }} {{ req.is_custom ? 'pp-checklist-custom-item' : '' }}"
+                    id="pp-checklists-req-{{ key }}"
+                    class="pp-checklists-req {{ req.rule }} status-{{ req.status ? 'yes' : 'no' }} {{ req.is_custom ? 'pp-checklists-custom-item' : '' }}"
                     data-id="{{ key }}"
                     data-type="{{ req.type }}">
 
                 {% if req.is_custom %}
-                    <input type="hidden" name="_pp_content_checklist_custom_item[{{ req.id }}]"
+                    <input type="hidden" name="_PUBLISHPRESS_CHECKLISTS_custom_item[{{ req.id }}]"
                            value="{{ req.status ? 'yes' : 'no' }}"/>
                 {% endif %}
 
@@ -43,16 +43,16 @@
 </div>
 
 {# Modal Windows #}
-<div class="remodal" data-remodal-id="pp-checklist-modal-alert"
+<div class="remodal" data-remodal-id="pp-checklists-modal-alert"
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
-    <div id="pp-checklist-modal-alert-content"></div>
+    <div id="pp-checklists-modal-alert-content"></div>
     <br>
     <button data-remodal-action="cancel" class="remodal-cancel">{{ lang.dont_publish }}</button>
 </div>
 
-<div class="remodal" data-remodal-id="pp-checklist-modal-confirm"
+<div class="remodal" data-remodal-id="pp-checklists-modal-confirm"
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
-    <div id="pp-checklist-modal-confirm-content"></div>
+    <div id="pp-checklists-modal-confirm-content"></div>
     <br>
     <button data-remodal-action="cancel" class="remodal-cancel">{{ lang.dont_publish }}</button>
     <button data-remodal-action="confirm" class="remodal-confirm">{{ lang.yes_publish }}</button>

@@ -1,0 +1,23 @@
+.pp-checklists-custom-item-title {
+    width: 100%;
+}
+
+#pp-checklists-post-type-filter a {
+    padding: 2px 8px;
+    border: 1px solid silver;
+}
+
+#pp-checklists-post-type-filter a.pp-selected {
+    font-weight: bold;
+    background-color: #fff;
+}
+
+.pp-checklists-failed-requirements-warning p {
+    font-weight: bold;
+}
+
+.pp-checklists-failed-requirements-warning ul {
+    list-style-type: none;
+    color: #ef5350;
+    font-weight: bold;
+}

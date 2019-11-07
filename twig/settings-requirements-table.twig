@@ -1,10 +1,10 @@
-<div id="pp-checklist-post-type-filter">
+<div id="pp-checklists-post-type-filter">
     {% for post_type_key, post_type_label in post_types %}
         <a href="#{{ post_type_key }}">{{ post_type_label }}</a>
     {% endfor %}
 </div>
 
-<table class="wp-list-table striped pp-checklist-requirements-settings" id="pp-checklist-requirements">
+<table class="wp-list-table striped pp-checklists-requirements-settings" id="pp-checklists-requirements">
     <thead>
     <tr>
         <th width="20%">{{ lang.description }}</th>
@@ -19,7 +19,7 @@
         {% for requirement in post_type_requirements %}
 
             <tr
-                    class="pp-checklist-requirement-row"
+                    class="pp-checklists-requirement-row"
                     data-id="{{ requirement.name }}"
                     data-post-type="{{ post_type }}">
 
@@ -33,7 +33,7 @@
 </table>
 <br>
 <div>
-    <a id="pp-checklist-add-button" href="javascript:void(0);">
+    <a id="pp-checklists-add-button" href="javascript:void(0);">
         <span class="dashicons dashicons-plus-alt"></span> {{ lang.add_custom_item }}
     </a>
 </div>
