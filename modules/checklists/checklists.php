@@ -343,7 +343,6 @@ if ( ! class_exists('PPCH_Checklists')) {
             do_action('publishpress_checklists_load_requirements');
 
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
-            add_filter('script_loader_tag', [$this, 'modifyJSXTag'], 10, 3);
         }
 
         /**
@@ -685,47 +684,20 @@ if ( ! class_exists('PPCH_Checklists')) {
         public function enqueue_block_editor_assets()
         {
             // Required thing to build Gutenberg Blocks
-            $required_js_files = [
-                'wp-blocks',
-                'wp-i18n',
-                'wp-element',
-                'wp-hooks',
-                'react',
-                'react-dom',
-            ];
-            // Add React files - you may wish to save and move these directly into your plugin if you'd rather not load from a CDN
-            //            wp_enqueue_script( 'react', 'https://unpkg.com/react@16/umd/react.development.js', $required_js_files );
-            //            $required_js_files[] = 'react';
-            // Add React DOM
-            //            wp_enqueue_script( 'react-dom', 'https://unpkg.com/react-dom@16/umd/react-dom.development.js', $required_js_files );
-            //            $required_js_files[] = 'react-dom';
-            // Add Babel file
-            wp_enqueue_script('babel',
-                plugins_url('/modules/checklists/assets/js/babel.min.js', PUBLISHPRESS_CHECKLISTS_FILE),
-                $required_js_files);
-            $required_js_files[] = 'babel';
-            // Your Gutenberg Block JSX code
             wp_enqueue_script(
                 'pp-checklists-requirements-gutenberg',
-                plugins_url('/modules/checklists/assets/js/gutenberg-warning.jsx', PUBLISHPRESS_CHECKLISTS_FILE),
-                $required_js_files,
+                plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PUBLISHPRESS_CHECKLISTS_FILE),
+                [
+                    'wp-blocks',
+                    'wp-i18n',
+                    'wp-element',
+                    'wp-hooks',
+                    'react',
+                    'react-dom',
+                ],
                 PUBLISHPRESS_CHECKLISTS_VERSION,
                 true
             );
-        }
-
-        public function modifyJSXTag($tag, $handle, $src)
-        {
-            // Convert our custom block file to be recognized as a JSX file
-            if ('pp-checklists-requirements-gutenberg' === $handle) {
-                if (strpos($tag, 'text/javascript') !== false) {
-                    $tag = str_replace("<script type='text/javascript'", "<script type='text/babel'", $tag);
-                } else {
-                    $tag = str_replace('<script ', '<script type="text/babel" ', $tag);
-                }
-            }
-
-            return $tag;
         }
 
         /**
