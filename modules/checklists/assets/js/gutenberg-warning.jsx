@@ -4,7 +4,7 @@ let {Fragment} = wp.element;
 let {PluginPrePublishPanel} = wp.editPost;
 let {registerPlugin} = wp.plugins;
 
-class PPChecklistWarning extends Component {
+class PPChecklistsWarning extends Component {
     constructor () {
         super();
 
@@ -14,7 +14,7 @@ class PPChecklistWarning extends Component {
             requirements: []
         };
 
-        wp.hooks.addAction('publishpress-content-checklist.update-failed-requirements', 'publishpress/content-checklist', this.updateFailedRequirements, 10);
+        wp.hooks.addAction('pp-checklists.update-failed-requirements', 'publishpress/checklists', this.updateFailedRequirements, 10);
     };
 
     updateFailedRequirements (failedRequirements) {
@@ -32,8 +32,8 @@ class PPChecklistWarning extends Component {
                 title={__('Checklist')}
                 initialOpen="true"
             >
-                <div class="pp-checklist-failed-requirements-warning">
-                    <p>{__('The following requirements are not completed yet. Are you sure you want to publish', 'publishpress-content-checklist')}</p>
+                <div class="pp-checklists-failed-requirements-warning">
+                    <p>{__('The following requirements are not completed yet. Are you sure you want to publish', 'publishpress-checklists')}</p>
                     <ul>
                         {this.state.requirements.map((item, i) => <li><span
                             className="dashicons dashicons-no"></span><span>{item}</span></li>)}
@@ -44,8 +44,8 @@ class PPChecklistWarning extends Component {
     }
 }
 
-registerPlugin('publishpress-content-checklist-warning', {
+registerPlugin('pp-checklists-warning', {
     icon: 'admin-site',
-    render: () => (<PPChecklistWarning/>)
+    render: () => (<PPChecklistsWarning/>)
 });
 
