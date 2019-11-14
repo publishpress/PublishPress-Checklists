@@ -505,6 +505,8 @@ if ( ! class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
+            $legacyPlugin = Factory::getLegacyPlugin();
+
             // Add the scripts
             if ( ! empty($requirements)) {
                 wp_enqueue_script(
@@ -517,7 +519,7 @@ if ( ! class_exists('PPCH_Checklists')) {
 
                 wp_localize_script(
                     'pp-checklists-requirements',
-                    'ppChecklist',
+                    'ppChecklists',
                     [
                         'requirements'              => $requirements,
                         'msg_missed_optional'       => __('The following requirements are not completed yet. Are you sure you want to publish?',
@@ -526,8 +528,8 @@ if ( ! class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'),
                         'msg_missed_important'      => __('Not required, but important: ',
                             'publishpress-checklists'),
-                        'show_warning_icon_submit'  => Base_requirement::VALUE_YES === $this->module->options->show_warning_icon_submit,
-                        'hide_publish_button'       => Base_requirement::VALUE_YES === $this->module->options->hide_publish_button,
+                        'show_warning_icon_submit'  => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
+                        'hide_publish_button'       => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->hide_publish_button,
                         'title_warning_icon'        => __('One or more items in the checklist are not completed'),
                         'gutenberg_warning_css'     => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-warning.css'),
                         'gutenberg_hide_submit_css' => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'),

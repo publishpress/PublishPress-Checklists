@@ -31,13 +31,13 @@
     'use strict';
 
     /**
-     * This variable is deprecated. Use ppChecklist instead.
+     * This variable is deprecated. Use ppChecklists instead.
      * Added here just for backward compatibility with other
      * plugins.
      *
      * @deprecated 1.4.0
      */
-    window.objectL10n_checklist_requirements = ppChecklist;
+    window.objectL10n_checklist_requirements = ppChecklists;
 
     /*----------  Handler  ----------*/
 
@@ -284,7 +284,7 @@
                 if (0 === list_unchecked.block.length) {
                     if (!PP_Content_Checklist.is_gutenberg_active()) {
                         // Only display a warning
-                        message = ppChecklist.msg_missed_optional + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
+                        message = ppChecklists.msg_missed_optional + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
                         // Display the confirm
                         $('#pp-checklists-modal-confirm-content').html(message);
@@ -296,10 +296,10 @@
                     if (PP_Content_Checklist.is_gutenberg_active()) {
                         wp.data.dispatch('core/editor').lockPostSaving('pp-checklists');
                     } else {
-                        message = ppChecklist.msg_missed_required + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
+                        message = ppChecklists.msg_missed_required + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
 
                         if (list_unchecked.warning.length > 0) {
-                            message += '' + ppChecklist.msg_missed_important + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
+                            message += '' + ppChecklists.msg_missed_important + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
                         }
 
                         // Display the alert
@@ -442,15 +442,15 @@
     /*----------  Warning icon in submit button  ----------*/
 
     // Show warning icon close to the submit button
-    if (ppChecklist.show_warning_icon_submit) {
+    if (ppChecklists.show_warning_icon_submit) {
         if (PP_Content_Checklist.is_gutenberg_active()) {
-            var styleTagId = 'ppChecklistWarningIcon';
+            var styleTagId = 'ppChecklistsWarningIcon';
 
             // For Gutenberg, we don't inject an element, but change the style of the submit button.
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
                 if (has_unchecked.length > 0) {
-                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklist.gutenberg_warning_css);
+                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklists.gutenberg_warning_css);
                 } else {
                     PP_Content_Checklist.remove_style_tag(styleTagId);
                 }
@@ -460,7 +460,7 @@
                 .addClass('dashicons dashicons-warning pp-checklists-warning-icon')
                 .hide()
                 .prependTo($('#publishing-action'))
-                .attr('title', ppChecklist.title_warning_icon);
+                .attr('title', ppChecklists.title_warning_icon);
 
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
@@ -478,14 +478,14 @@
     /*----------  Hide submit button  ----------*/
 
     // Hide the submit button
-    if (ppChecklist.hide_publish_button) {
+    if (ppChecklists.hide_publish_button) {
         if (PP_Content_Checklist.is_gutenberg_active()) {
-            var styleTagId = 'ppChecklistHideSubmit';
+            var styleTagId = 'ppChecklistsHideSubmit';
 
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
                 if (has_unchecked.length > 0) {
-                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklist.gutenberg_hide_submit_css);
+                    PP_Content_Checklist.add_style_tag(styleTagId, ppChecklists.gutenberg_hide_submit_css);
                 } else {
                     PP_Content_Checklist.remove_style_tag(styleTagId);
                 }
@@ -530,8 +530,8 @@
     if ($('#pp-checklists-req-tags_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var count = 0,
-                min_value = parseInt(ppChecklist.requirements.tags_count.value[0]),
-                max_value = parseInt(ppChecklist.requirements.tags_count.value[1]);
+                min_value = parseInt(ppChecklists.requirements.tags_count.value[0]),
+                max_value = parseInt(ppChecklists.requirements.tags_count.value[1]);
 
             if (PP_Content_Checklist.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
@@ -556,8 +556,8 @@
     if ($('#pp-checklists-req-categories_count').length > 0) {
         $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
             var count = 0,
-                min_value = parseInt(ppChecklist.requirements.categories_count.value[0]),
-                max_value = parseInt(ppChecklist.requirements.categories_count.value[1]);
+                min_value = parseInt(ppChecklists.requirements.categories_count.value[0]),
+                max_value = parseInt(ppChecklists.requirements.categories_count.value[1]);
 
             if (PP_Content_Checklist.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
@@ -584,8 +584,8 @@
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
                     count = $('#' + taxonomy + 'checklist input:checked').length,
-                    min_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[0]),
-                    max_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[1]);
+                    min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
 
                 $('#pp-checklists-req-' + taxonomy + '_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -602,8 +602,8 @@
             $(document).on(PP_Content_Checklist.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_non_hierarchical_', ''),
                     count = $('#' + taxonomy + ' .tagchecklist').children('li').length,
-                    min_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[0]),
-                    max_value = parseInt(ppChecklist.requirements[taxonomy + '_count'].value[1]);
+                    min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
+                    max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
 
                 $('#pp-checklists-req-' + taxonomy + '_count').trigger(
                     PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -666,8 +666,8 @@
                     }
 
 
-                    var min = parseInt(ppChecklist.requirements.words_count.value[0]),
-                        max = parseInt(ppChecklist.requirements.words_count.value[1]);
+                    var min = parseInt(ppChecklists.requirements.words_count.value[0]),
+                        max = parseInt(ppChecklists.requirements.words_count.value[1]);
 
                     $('#pp-checklists-req-words_count').trigger(
                         PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -706,8 +706,8 @@
                 return;
             }
 
-            var min = parseInt(ppChecklist.requirements.words_count.value[0]),
-                max = parseInt(ppChecklist.requirements.words_count.value[1]);
+            var min = parseInt(ppChecklists.requirements.words_count.value[0]),
+                max = parseInt(ppChecklists.requirements.words_count.value[1]);
 
             $('#pp-checklists-req-words_count').trigger(
                 PP_Content_Checklist.EVENT_UPDATE_REQUIREMENT_STATE,

@@ -31,6 +31,7 @@
 use PublishPress\Checklists\Core\Legacy\Module;
 use PublishPress\Checklists\Core\Legacy\Util;
 use PublishPress\Checklists\Core\Factory;
+use PublishPress\Checklists\Core\Requirement\Base_requirement;
 
 if ( ! class_exists('PPCH_Settings')) {
     class PPCH_Settings extends Module
@@ -496,11 +497,11 @@ if ( ! class_exists('PPCH_Settings')) {
             }
 
             if (!isset($new_options['show_warning_icon_submit'])) {
-                $new_options['show_warning_icon_submit'] = 'off';
+                $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
 
             if (!isset($new_options['hide_publish_button'])) {
-                $new_options['hide_publish_button'] = 'off';
+                $new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
             }
 
             return $new_options;
