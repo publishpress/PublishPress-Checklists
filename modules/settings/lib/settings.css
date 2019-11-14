@@ -107,57 +107,57 @@
     background: #7569A7;
 }
 
-.publishpress-admin a.cancel-settings-link {
+.publishpress-checklists-admin a.cancel-settings-link {
     margin-left: 10px;
 }
 
-.publishpress-admin .inline-edit-row fieldset label span.title {
+.publishpress-checklists-admin .inline-edit-row fieldset label span.title {
     width: 6em;
 }
 
-.publishpress-admin .inline-edit-row fieldset label span.input-text-wrap {
+.publishpress-checklists-admin .inline-edit-row fieldset label span.input-text-wrap {
     margin-left: 6em;
 }
 
-.publishpress-admin .explanation,
-.publishpress-admin .explanation p {
+.publishpress-checklists-admin .explanation,
+.publishpress-checklists-admin .explanation p {
     font-size: 14px;
     line-height: 20px;
 }
 
-.publishpress-admin .explanation {
+.publishpress-checklists-admin .explanation {
     margin-bottom: 1em;
 }
 
-.publishpress-admin .explanation p {
+.publishpress-checklists-admin .explanation p {
     margin: 0.5em 0;
 }
 
-.publishpress-admin .tablenav {
+.publishpress-checklists-admin .tablenav {
     display: none;
 }
 
 /* Display drag handles for the cursor on sortable list tables for our custom taxonomies */
-.publishpress-admin table.wp-list-table tbody.ui-sortable tr.term-static {
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.term-static {
     cursor: move;
 }
 
-.publishpress-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td,
-.publishpress-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper .row-actions {
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td,
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper .row-actions {
     visibility: hidden;
 }
 
-.publishpress-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper {
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper {
     border: 1px solid #DFDFDF;
 }
 
-.publishpress-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td.column-name {
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td.column-name {
     visibility: visible;
     border-bottom: none;
 }
 
 /* Display disabled inputs with a very light gray background */
-.publishpress-admin input[disabled] {
+.publishpress-checklists-admin input[disabled] {
     background-color: #eee;
 }
 
@@ -227,8 +227,69 @@ h3.nav-tab-wrapper {
     color: black !important;
 }
 
+#modules-wrapper {
+    padding-top: 20px;
+}
+
+#modules-wrapper .module-box {
+    padding: 10px;
+    line-height: 26px;
+    background: #fff;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    max-width: 265px;
+    border: 1px solid #e1e1e1;
+    position: relative;
+    float: left;
+    height: 100px;
+    min-width: 265px;
+}
+
+#modules-wrapper .module-box h4 {
+    max-width: 150px;
+    margin: 0;
+    position: absolute;
+    left: 35px;
+    top: 7px;
+}
+
+#modules-wrapper .module-box .enable-disable-publishpress-module {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    box-shadow: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BBB', endColorstr='#888');
+    text-shadow: none;
+    color: #f1f1f1;
+    border: solid 1px #bbb;
+    background: #b5b9bD;
+}
+
+#modules-wrapper .module-box.module-enabled .enable-disable-publishpress-module {
+    color: #f1f1f1;
+    border: solid 1px #666;
+    background: #655997;
+}
+
+#modules-wrapper .module-box .enable-disable-publishpress-module:hover {
+    color: #f1f1f1;
+    border: solid 1px #bbb;
+    background: #c5c9cD;
+}
+
+#modules-wrapper .module-box.module-enabled .enable-disable-publishpress-module:hover {
+    color: #fff;
+    border-color: #7569a7;
+    background: #7569a7;
+}
+
+#modules-wrapper .dashicons {
+    color: #b0b0b0;
+}
+
+
 /* Admin Menu Icon */
-#adminmenu .toplevel_page_ppma-settings .wp-menu-image img {
+#adminmenu .toplevel_page_ppch-settings .wp-menu-image img {
     width: 16px;
     height: 16px;
 }

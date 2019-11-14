@@ -48,32 +48,9 @@ class Plugin
      */
     public function init()
     {
-        add_filter('publishpress_checklists_rules_list', [$this, 'filter_rules_list']);
         add_filter('plugins_loaded', [$this, 'loadTextDomain']);
 
         Factory::getLegacyPlugin();
-    }
-
-    /**
-     * Get a list of rules for the requirement
-     *
-     * @param $rules
-     *
-     * @return array
-     */
-    public function filter_rules_list($rules)
-    {
-        return array_merge(
-            $rules,
-            [
-                Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                Plugin::RULE_ONLY_DISPLAY => __('Show a message in the sidebar while writing',
-                    'publishpress-checklists'),
-                Plugin::RULE_WARNING      => __('Show a message on the screen before publishing',
-                    'publishpress-checklists'),
-                Plugin::RULE_BLOCK        => __('Prevent publishing', 'publishpress-checklists'),
-            ]
-        );
     }
 
     /**

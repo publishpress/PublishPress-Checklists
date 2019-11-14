@@ -48,6 +48,16 @@
 
 .pp-checklists-requirements-settings th {
     width: auto;
+    text-align: left;
+    height: 35px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.pp-checklists-requirements-settings td {
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .pp-checklists-custom-item {
@@ -57,4 +67,22 @@
 .pp-checklists-custom-item .dashicons {
     border: 1px solid silver;
     border-radius: 4px;
+}
+
+#pp-checklists-post-type-filter {
+    margin-bottom: 20px;
+}
+
+#pp-checklists-post-type-filter a {
+    padding: 8px 18px;
+    border: 1px solid silver;
+}
+
+#pp-checklists-post-type-filter a.pp-selected {
+    font-weight: bold;
+    background-color: #fff;
+}
+
+#pp-checklists-global #submit {
+    margin-top: 50px;
 }

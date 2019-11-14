@@ -62,7 +62,7 @@ class Base_simple extends Base_requirement implements Interface_required
     }
 
     /**
-     * Add the requirement to the list to be displayed in the metabox.
+     * Add the requirement to the list to be displayed in the meta box.
      *
      * @param array    $requirements
      * @param stdClass $post
@@ -90,6 +90,7 @@ class Base_simple extends Base_requirement implements Interface_required
                 'value'  => $enabled,
                 'rule'   => $rule,
                 'type'   => $this->type,
+                'is_custom' => false,
             ];
         }
 

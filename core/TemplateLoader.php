@@ -26,22 +26,25 @@ class TemplateLoader
      */
     public function load($moduleName, $templateName, $context = [], $return = false, $requireOnce = true)
     {
-        if ($return) {
-            ob_start();
-        }
 
         $templatePath = $this->locate($moduleName, $templateName);
 
         if ( ! empty($templatePath)) {
+            if ($return) {
+                ob_start();
+            }
+
             if ($requireOnce) {
                 require_once $templatePath;
             } else {
                 require $templatePath;
             }
-        }
 
-        if ($return) {
-            return ob_get_clean();
+            if ($return) {
+                return ob_get_clean();
+            }
+        } else {
+            Factory::getErrorHandler()->add('PublishPress Checklists template path not found', $templatePath);
         }
     }
 
@@ -67,8 +70,8 @@ class TemplateLoader
         $paths = apply_filters('publishpress_checklists_template_paths', $paths);
 
         foreach ($paths as $path) {
-            if (file_exists($path . '/' . $templateName)) {
-                $located = $path . '/' . $templateName;
+            if (file_exists($path . '/' . $templateName . '.php')) {
+                $located = $path . '/' . $templateName . '.php';
                 break;
             }
         }

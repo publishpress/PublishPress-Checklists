@@ -20,7 +20,7 @@ class LegacyPlugin
      * @var stdClass
      */
     public $modules;
-    public $defaultMenuSlug = 'ppcc_checklist';
+    public $defaultMenuSlug = 'ppch-checklists';
     private $optionsGroup = 'publishpress_checklists_';
     private $addedMenuPage = false;
 
@@ -46,7 +46,7 @@ class LegacyPlugin
         add_action('admin_menu', [$this, 'addAdminMenu'], 9);
 
         // Fix the order of the submenus
-        add_filter('custom_menu_order', [$this, 'filter_custom_menu_order']);
+        add_filter('custom_menu_order', [$this, 'setCustomMenuOrder']);
 
         do_action_ref_array('publishpress_checklists_after_setup_actions', [$this]);
 
@@ -62,13 +62,13 @@ class LegacyPlugin
         $this->loadModules();
 
         // Load all of the module options
-        $this->load_module_options();
+        $this->loadModulesOptions();
 
         // Init all of the modules that are enabled.
         // Modules won't have an options value if they aren't enabled
-        foreach ($this->modules as $mod_name => $mod_data) {
-            if (isset($mod_data->options->enabled) && $mod_data->options->enabled == 'on') {
-                $this->$mod_name->init();
+        foreach ($this->modules as $moduleName => $moduleData) {
+            if (isset($moduleData->options->enabled) && $moduleData->options->enabled == 'on') {
+                $this->$moduleName->init();
             }
         }
 
@@ -112,7 +112,7 @@ class LegacyPlugin
         // but make sure they exist too
         foreach ($class_names as $slug => $class_name) {
             if (class_exists($class_name)) {
-                $slug            = Util::sanitize_module_name($slug);
+                $slug            = Util::sanitizeModuleName($slug);
                 $module_instance = new $class_name();
 
                 $this->$slug = $module_instance;
@@ -123,8 +123,8 @@ class LegacyPlugin
                     $args = $this->modules->$slug;
                 }
 
-                if ( ! is_null($args) && ! empty($args->settings_help_tab)) {
-                    add_action('load-content_checklist_page_' . $args->settings_slug,
+                if ( ! is_null($args) && ! empty($args->settingsHelpTab)) {
+                    add_action('load-checklists_page_' . $args->settings_slug,
                         [$module_instance, 'action_settings_help_menu']);
                 }
 
@@ -147,9 +147,8 @@ class LegacyPlugin
     private function getModulesBasePath()
     {
         $defaultDirs = [
-            'modules-settings' => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
-            'settings'         => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
-            'checklists'       => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
+            'settings'   => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
+            'checklists' => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
         ];
 
         return apply_filters('publishpress_checklists_module_dirs', $defaultDirs);
@@ -159,24 +158,24 @@ class LegacyPlugin
      * Load all of the module options from the database
      * If a given option isn't yet set, then set it to the module's default (upgrades, etc.)
      */
-    public function load_module_options()
+    public function loadModulesOptions()
     {
-        foreach ($this->modules as $mod_name => $mod_data) {
-            $this->modules->$mod_name->options = get_option($this->optionsGroup . $mod_name . '_options',
+        foreach ($this->modules as $moduleName => $moduleData) {
+            $this->modules->$moduleName->options = get_option($this->optionsGroup . $moduleName . '_options',
                 new stdClass());
-            foreach ($mod_data->default_options as $default_key => $default_value) {
-                if ( ! isset($this->modules->$mod_name->options->$default_key)) {
-                    $this->modules->$mod_name->options->$default_key = $default_value;
+            foreach ($moduleData->default_options as $default_key => $default_value) {
+                if ( ! isset($this->modules->$moduleName->options->$default_key)) {
+                    $this->modules->$moduleName->options->$default_key = $default_value;
                 }
             }
-            $this->$mod_name->module = $this->modules->$mod_name;
+            $this->$moduleName->module = $this->modules->$moduleName;
         }
 
         do_action('publishpress_checklists_module_options_loaded');
     }
 
     /**
-     * Register a new module with Multiple Authors
+     * Register a new module.
      */
     public function register_module($name, $args = [])
     {
@@ -215,7 +214,7 @@ class LegacyPlugin
         $args['options_group_name'] = $this->optionsGroup . $name . '_options';
 
         if ( ! isset($args['settings_slug'])) {
-            $args['settings_slug'] = 'ppma-' . $args['slug'] . '-settings';
+            $args['settings_slug'] = 'ppch-' . $args['slug'] . '-settings';
         }
 
         if (empty($args['post_type_support'])) {
@@ -238,9 +237,9 @@ class LegacyPlugin
         // Upgrade if need be but don't run the upgrade if the plugin has never been used
         $previous_version = get_option($versionOption);
         if ($previous_version && version_compare($previous_version, PUBLISHPRESS_CHECKLISTS_VERSION, '<')) {
-            foreach ($this->modules as $mod_name => $mod_data) {
-                if (method_exists($this->$mod_name, 'upgrade')) {
-                    $this->$mod_name->upgrade($previous_version);
+            foreach ($this->modules as $moduleName => $moduleData) {
+                if (method_exists($this->$moduleName, 'upgrade')) {
+                    $this->$moduleName->upgrade($previous_version);
                 }
             }
         }
@@ -248,13 +247,13 @@ class LegacyPlugin
         update_option($versionOption, PUBLISHPRESS_CHECKLISTS_VERSION);
 
         // For each module that's been loaded, auto-load data if it's never been run before
-        foreach ($this->modules as $mod_name => $mod_data) {
+        foreach ($this->modules as $moduleName => $moduleData) {
             // If the module has never been loaded before, run the install method if there is one
-            if ( ! isset($mod_data->options->loaded_once) || ! $mod_data->options->loaded_once) {
-                if (method_exists($this->$mod_name, 'install')) {
-                    $this->$mod_name->install();
+            if ( ! isset($moduleData->options->loaded_once) || ! $moduleData->options->loaded_once) {
+                if (method_exists($this->$moduleName, 'install')) {
+                    $this->$moduleName->install();
                 }
-                $this->update_module_option($mod_name, 'loaded_once', true);
+                $this->update_module_option($moduleName, 'loaded_once', true);
             }
         }
     }
@@ -262,28 +261,28 @@ class LegacyPlugin
     /**
      * Update the $legacyPlugin object with new value and save to the database
      */
-    public function update_module_option($mod_name, $key, $value)
+    public function update_module_option($moduleName, $key, $value)
     {
-        if (false === $this->modules->$mod_name->options) {
-            $this->modules->$mod_name->options = new stdClass();
+        if (false === $this->modules->$moduleName->options) {
+            $this->modules->$moduleName->options = new stdClass();
         }
 
-        $this->modules->$mod_name->options->$key = $value;
-        $this->$mod_name->module                 = $this->modules->$mod_name;
+        $this->modules->$moduleName->options->$key = $value;
+        $this->$moduleName->module                 = $this->modules->$moduleName;
 
-        return update_option($this->optionsGroup . $mod_name . '_options', $this->modules->$mod_name->options);
+        return update_option($this->optionsGroup . $moduleName . '_options', $this->modules->$moduleName->options);
     }
 
-    public function update_all_module_options($mod_name, $new_options)
+    public function update_all_module_options($moduleName, $new_options)
     {
         if (is_array($new_options)) {
             $new_options = (object)$new_options;
         }
 
-        $this->modules->$mod_name->options = $new_options;
-        $this->$mod_name->module           = $this->modules->$mod_name;
+        $this->modules->$moduleName->options = $new_options;
+        $this->$moduleName->module           = $this->modules->$moduleName;
 
-        return update_option($this->optionsGroup . $mod_name . '_options', $this->modules->$mod_name->options);
+        return update_option($this->optionsGroup . $moduleName . '_options', $this->modules->$moduleName->options);
     }
 
     /**
@@ -324,7 +323,7 @@ class LegacyPlugin
      * @param string $icon_url
      * @param null   $position
      */
-    public function add_menu_page($page_title, $capability, $menuSlug, $function = '')
+    public function addMenuPage($page_title, $capability, $menuSlug, $function = '')
     {
         if ($this->addedMenuPage) {
             return;
@@ -351,7 +350,7 @@ class LegacyPlugin
      */
     public function isBlockEditorActive()
     {
-        if (! function_exists('is_plugin_active')) {
+        if ( ! function_exists('is_plugin_active')) {
             require_once ABSPATH . '/wp-admin/includes/plugin.php';
         }
 
@@ -445,7 +444,7 @@ class LegacyPlugin
         return is_plugin_active('classic-editor/classic-editor.php');
     }
 
-    public function filter_custom_menu_order($menu_ord)
+    public function setCustomMenuOrder($menu_ord)
     {
         global $submenu;
 
@@ -458,9 +457,7 @@ class LegacyPlugin
             // Get the index for the menus, removing the first submenu which was automatically created by WP.
             $relevantMenus = [
                 'edit-tags.php?taxonomy=author',
-                'edit.php?post_type=ppmacf_field',
-                'edit.php?post_type=ppmacf_layout',
-                'ppma-modules-settings',
+                'ppch-settings',
             ];
 
             foreach ($submenu_pp as $index => $item) {
@@ -488,10 +485,10 @@ class LegacyPlugin
             }
 
             // Settings
-            if (isset($relevantMenus['ppma-modules-settings'])) {
-                $new_submenu[] = $submenu_pp[$relevantMenus['ppma-modules-settings']];
+            if (isset($relevantMenus['ppch-settings'])) {
+                $new_submenu[] = $submenu_pp[$relevantMenus['ppch-settings']];
 
-                unset($submenu_pp[$relevantMenus['ppma-modules-settings']]);
+                unset($submenu_pp[$relevantMenus['ppch-settings']]);
             }
 
             $submenu[$menuSlug] = $new_submenu;
@@ -538,29 +535,29 @@ class LegacyPlugin
      */
     public function initAfter()
     {
-        foreach ($this->modules as $mod_name => $mod_data) {
-            if (isset($this->modules->$mod_name->options->post_types)) {
-                $this->modules->$mod_name->options->post_types = $this->helpers->clean_post_type_options($this->modules->$mod_name->options->post_types,
-                    $mod_data->post_type_support);
+        foreach ($this->modules as $moduleName => $moduleData) {
+            if (isset($this->modules->$moduleName->options->post_types)) {
+                $this->modules->$moduleName->options->post_types = $this->helpers->clearPostTypesOptions($this->modules->$moduleName->options->post_types,
+                    $moduleData->post_type_support);
             }
 
-            $this->$mod_name->module = $this->modules->$mod_name;
+            $this->$moduleName->module = $this->modules->$moduleName;
         }
     }
 
     /**
      * Get a module by one of its descriptive values
      */
-    public function get_module_by($key, $value)
+    public function getModuleBy($key, $value)
     {
         $module = false;
-        foreach ($this->modules as $mod_name => $mod_data) {
-            if ($key == 'name' && $value == $mod_name) {
-                $module = $this->modules->$mod_name;
+        foreach ($this->modules as $moduleName => $moduleData) {
+            if ($key == 'name' && $value == $moduleName) {
+                $module = $this->modules->$moduleName;
             } else {
-                foreach ($mod_data as $mod_data_key => $mod_data_value) {
+                foreach ($moduleData as $mod_data_key => $mod_data_value) {
                     if ($mod_data_key == $key && $mod_data_value == $value) {
-                        $module = $this->modules->$mod_name;
+                        $module = $this->modules->$moduleName;
                     }
                 }
             }

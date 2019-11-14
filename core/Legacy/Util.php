@@ -18,7 +18,7 @@ class Util
      *
      * @return string|null $post_type The post type we've found, or null if no post type
      */
-    public static function get_current_post_type()
+    public static function getCurrentPostType()
     {
         global $post, $typenow, $pagenow, $current_screen;
 
@@ -53,7 +53,7 @@ class Util
      *
      * @return array $post_types All of the post types that are 'on'
      */
-    public static function get_post_types_for_module($module)
+    public static function getPostTypesForModule($module)
     {
         $post_types = [];
 
@@ -76,7 +76,7 @@ class Util
      *
      * @return string
      */
-    public static function sanitize_module_name($name)
+    public static function sanitizeModuleName($name)
     {
         return str_replace('-', '_', $name);
     }
@@ -89,7 +89,7 @@ class Util
      * @param string $role A standard WP user role like 'administrator' or 'author'
      * @param array  $caps One or more user caps to add
      */
-    public static function add_caps_to_role($role, $caps)
+    public static function addCapsToRole($role, $caps)
     {
         // In some contexts, we don't want to add caps to roles
         if (apply_filters('publishpress_checklists_kill_add_caps_to_role', false, $role, $caps)) {
@@ -122,12 +122,5 @@ class Util
         }
 
         return $isEnabled;
-    }
-
-    public static function hasValidLicenseKeySet()
-    {
-        $container = Factory::getContainer();
-
-        return ! empty($container['LICENSE_KEY']) && $container['LICENSE_STATUS'] === \MA_Multiple_Authors::LICENSE_STATUS_VALID;
     }
 }

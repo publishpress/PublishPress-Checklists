@@ -32,7 +32,7 @@ interface Interface_required
     public function filter_settings_validate($new_options);
 
     /**
-     * Add the requirement to the list to be displayed in the metabox.
+     * Add the requirement to the list to be displayed in the meta box.
      *
      * @param array    $requirements
      * @param stdClass $post

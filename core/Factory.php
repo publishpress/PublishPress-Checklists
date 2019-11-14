@@ -47,6 +47,13 @@ abstract class Factory
         return $container['template_loader'];
     }
 
+    public static function getErrorHandler()
+    {
+        $container = self::getContainer();
+
+        return $container['error_handler'];
+    }
+
     /**
      * @return Container
      */

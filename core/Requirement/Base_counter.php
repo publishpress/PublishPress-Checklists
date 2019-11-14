@@ -14,14 +14,13 @@ defined('ABSPATH') or die('No direct script access allowed.');
 class Base_counter extends Base_simple implements Interface_required
 {
     /**
-     * @var string
-     */
-    protected $type = 'counter';
-
-    /**
      * The default value for the option related to the value.
      */
     const DEFAULT_OPTION_VALUE = 0;
+    /**
+     * @var string
+     */
+    protected $type = 'counter';
 
     /**
      * Injects the respective default options into the main add-on.
@@ -71,7 +70,7 @@ class Base_counter extends Base_simple implements Interface_required
     }
 
     /**
-     * Add the requirement to the list to be displayed in the metabox.
+     * Add the requirement to the list to be displayed in the meta box.
      *
      * @param array    $requirements
      * @param stdClass $post
@@ -172,11 +171,12 @@ class Base_counter extends Base_simple implements Interface_required
 
         // Register in the requirements list
         $requirements[$this->name] = [
-            'status' => $this->get_current_status($post, [$min_value, $max_value]),
-            'label'  => $label,
-            'value'  => [$min_value, $max_value],
-            'rule'   => $rule,
-            'type'   => $this->type,
+            'status'    => $this->get_current_status($post, [$min_value, $max_value]),
+            'label'     => $label,
+            'value'     => [$min_value, $max_value],
+            'rule'      => $rule,
+            'type'      => $this->type,
+            'is_custom' => false,
         ];
 
         return $requirements;

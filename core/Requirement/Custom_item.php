@@ -87,7 +87,7 @@ class Custom_item extends Base_simple implements Interface_required
     {
         $var_name = $this->name . '_title';
 
-        $name = 'publishpress_checklists_options[' . $var_name . '][' . $this->post_type . ']';
+        $name = 'publishpress_checklists_checklists_options[' . $var_name . '][' . $this->post_type . ']';
 
         $html = sprintf(
             '<input type="text" name="%s" value="%s" data-id="%s" class="pp-checklists-custom-item-title" />',
@@ -97,7 +97,7 @@ class Custom_item extends Base_simple implements Interface_required
         );
 
         $html .= sprintf(
-            '<input type="hidden" name="publishpress_checklists_options[custom_items][]" value="%s" />',
+            '<input type="hidden" name="publishpress_checklists_checklists_options[custom_items][]" value="%s" />',
             esc_attr($this->name)
         );
 
@@ -133,7 +133,7 @@ class Custom_item extends Base_simple implements Interface_required
     }
 
     /**
-     * Add the requirement to the list to be displayed in the metabox.
+     * Add the requirement to the list to be displayed in the meta box.
      *
      * @param array    $requirements
      * @param stdClass $post
@@ -197,16 +197,17 @@ class Custom_item extends Base_simple implements Interface_required
 
             foreach ($new_options['custom_items_remove'] as $id) {
                 $var_name = $id . '_title';
-                unset($this->module->options->{$var_name});
+                unset($new_options[$var_name]);
 
                 $var_name = $id . '_rule';
-                unset($this->module->options->{$var_name});
+                unset($new_options[$var_name]);
 
-                unset($this->module->options->{$id});
+                unset($new_options[$id]);
 
-                $index_remove = array_search($id, $this->module->options->custom_items);
+                $index_remove = array_search($id, $new_options['custom_items']);
                 if (false !== $index_remove) {
-                    unset($this->module->options->custom_items[$index_remove]);
+                    unset($new_options['custom_items'][$index_remove]);
+
                 }
             }
         }
