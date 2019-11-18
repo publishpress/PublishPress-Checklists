@@ -85,8 +85,6 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $defaultChecked = $legacyPlugin->isBlockEditorActive() ? 'off' : 'on';
-
             $this->module_url = $this->getModuleUrl(__FILE__);
 
             // Register the module with PublishPress
@@ -99,11 +97,6 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'slug'              => 'checklists',
                 'default_options'   => [
                     'enabled'                  => 'on',
-                    'post_types'               => [
-                        'post' => $defaultChecked,
-                    ],
-                    'show_warning_icon_submit' => 'no',
-                    'hide_publish_button'      => 'no',
                     'custom_items'             => [],
                 ],
                 'autoload'          => true,
@@ -496,11 +489,18 @@ if ( ! class_exists('PPCH_Checklists')) {
                         'publishpress-checklists') . '</a></span>';
             }
 
-            $supported_post_types = $this->getPostTypesForModule($this->module);
+            $supported_post_types = $this->getSelectedPostTypes();
 
             foreach ($supported_post_types as $post_type) {
                 add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
             }
+        }
+
+        protected function getSelectedPostTypes()
+        {
+            $legacyPlugin = Factory::getLegacyPlugin();
+
+            return $this->getPostTypesForModule($legacyPlugin->settings->module);
         }
 
         /**
@@ -532,9 +532,9 @@ if ( ! class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'              => $requirements,
-                        'msg_missed_optional'       => __('The following requirements are not completed yet. Are you sure you want to publish?',
+                        'msg_missed_optional'       => __('Are you sure you want to publish anyway?',
                             'publishpress-checklists'),
-                        'msg_missed_required'       => __('Please complete the following requirements before publishing:',
+                        'msg_missed_required'       => __('Please complete the following tasks before publishing:',
                             'publishpress-checklists'),
                         'msg_missed_important'      => __('Not required, but important: ',
                             'publishpress-checklists'),
@@ -585,7 +585,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             }
 
             if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-                || ! in_array($post->post_type, $this->getPostTypesForModule($this->module))
+                || ! in_array($post->post_type, $this->getSelectedPostTypes())
                 || $post->post_type == 'post' && ! current_user_can('edit_post', $id)
                 || $post->post_type == 'page' && ! current_user_can('edit_page', $id)) {
                 return $id;
@@ -656,9 +656,9 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'requirements' => $this->requirements,
                 'post_types'   => $post_types,
                 'lang'         => [
-                    'description'     => __('Description', 'publishpress-checklists'),
-                    'params'          => __('Parameters', 'publishpress-checklists'),
-                    'action'          => __('Action', 'publishpress-checklists'),
+                    'description'     => __('Task', 'publishpress-checklists'),
+                    'action'          => __('Disabled, Recommended or Required', 'publishpress-checklists'),
+                    'params'          => __('Options', 'publishpress-checklists'),
                     'add_custom_item' => __('Add custom item', 'publishpress-checklists'),
                 ],
             ]);
@@ -679,11 +679,11 @@ if ( ! class_exists('PPCH_Checklists')) {
                 $rules,
                 [
                     Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_ONLY_DISPLAY => __('Show a message in the sidebar while writing',
+                    Plugin::RULE_ONLY_DISPLAY => __('Recommended: show only in the sidebar',
                         'publishpress-checklists'),
-                    Plugin::RULE_WARNING      => __('Show a message on the screen before publishing',
+                    Plugin::RULE_WARNING      => __('Recommended: show in the sidebar and before publishing',
                         'publishpress-checklists'),
-                    Plugin::RULE_BLOCK        => __('Prevent publishing', 'publishpress-checklists'),
+                    Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
                 ]
             );
         }

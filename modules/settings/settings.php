@@ -50,6 +50,10 @@ if ( ! class_exists('PPCH_Settings')) {
          */
         public function __construct()
         {
+            $legacyPlugin = Factory::getLegacyPlugin();
+
+            $defaultChecked = $legacyPlugin->isBlockEditorActive() ? 'off' : 'on';
+
             // Register the module with PublishPress
             $this->module_url = $this->getModuleUrl(__FILE__);
             $args             = [
@@ -61,12 +65,15 @@ if ( ! class_exists('PPCH_Settings')) {
                 'settings_slug'        => self::SETTINGS_SLUG,
                 'default_options'      => [
                     'enabled' => 'on',
+                    'post_types'               => [
+                        'post' => $defaultChecked,
+                    ],
+                    'show_warning_icon_submit' => Base_requirement::VALUE_YES,
+                    'hide_publish_button'      => Base_requirement::VALUE_NO,
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
             ];
-
-            $legacyPlugin = Factory::getLegacyPlugin();
 
             $this->module = $legacyPlugin->register_module('settings', $args);
         }
@@ -672,7 +679,7 @@ if ( ! class_exists('PPCH_Settings')) {
             echo '<label for="' . $id . '">';
             echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[hide_publish_button]" '
                  . checked($value, 'yes', false) . ' />';
-            echo '&nbsp;&nbsp;&nbsp;' . __('This will hide the Publish button if the checklist is not complete',
+            echo '&nbsp;&nbsp;&nbsp;' . __('This will hide the Publish button if "Recommended" and "Required" tasks are not complete.',
                     'publishpress-checklists');
             echo '</label>';
         }
