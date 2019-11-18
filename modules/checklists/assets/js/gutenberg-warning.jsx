@@ -33,7 +33,7 @@ class PPChecklistsWarning extends Component {
                 initialOpen="true"
             >
                 <div class="pp-checklists-failed-requirements-warning">
-                    <p>{__('The following requirements are not completed yet. Are you sure you want to publish', 'publishpress-checklists')}</p>
+                    <p>{__('Are you sure you want to publish anyway?', 'publishpress-checklists')}</p>
                     <ul>
                         {this.state.requirements.map((item, i) => <li><span
                             className="dashicons dashicons-no"></span><span>{item}</span></li>)}
@@ -45,7 +45,7 @@ class PPChecklistsWarning extends Component {
 }
 
 registerPlugin('pp-checklists-warning', {
-    icon: 'admin-site',
+    icon: 'warning',
     render: () => (<PPChecklistsWarning/>)
 });
 
