@@ -216,7 +216,7 @@ msgid "Show warning icon:"
 msgstr ""
 
 #: modules/checklist/checklist.php:468
-msgid "Hide Publish button:"
+msgid "Publish button:"
 msgstr ""
 
 #: modules/checklist/checklist.php:481
@@ -228,7 +228,7 @@ msgid "This will display a warning icon in the \"Publish\" box"
 msgstr ""
 
 #: modules/checklist/checklist.php:541
-msgid "This will hide the Publish button if the checklist is not complete"
+msgid "This will hide the Publish button if required tasks are not complete"
 msgstr ""
 
 #: modules/checklist/checklist.php:585
