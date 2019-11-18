@@ -38,7 +38,7 @@ msgid "Show a pop-up message"
 msgstr ""
 
 #: library/Plugin.php:140
-msgid "Prevent publishing"
+msgid "Required"
 msgstr ""
 
 #: library/Requirement/Base_counter.php:252
@@ -253,12 +253,11 @@ msgstr ""
 
 #: modules/checklist/checklist.php:816
 msgid ""
-"The following requirements are not completed yet. Are you sure you want to "
-"publish?"
+"The following tasks are not completed yet. Are you sure you want to publish?"
 msgstr ""
 
 #: modules/checklist/checklist.php:818
-msgid "Please complete the following requirements before publishing:"
+msgid "Please complete the following tasks before publishing:"
 msgstr ""
 
 #: modules/checklist/checklist.php:820
@@ -266,7 +265,7 @@ msgid "Not required, but important: "
 msgstr ""
 
 #: modules/checklist/checklist.php:824
-msgid "One or more items in the checklist are not completed"
+msgid "One or more tasks in the checklist are not completed"
 msgstr ""
 
 #: modules/checklist/checklist.php:840
@@ -274,7 +273,7 @@ msgid "To use the checklist"
 msgstr ""
 
 #: modules/checklist/checklist.php:841
-msgid "please choose some requirements"
+msgid "please choose some tasks"
 msgstr ""
 
 #: modules/checklist/checklist.php:842
@@ -369,7 +368,7 @@ msgid "More information"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "PublishPress Content Checklist"
+msgid "PublishPress Checklists"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
