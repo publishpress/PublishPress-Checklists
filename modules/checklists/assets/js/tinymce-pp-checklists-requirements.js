@@ -35,6 +35,6 @@ if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined') {
         'use strict';
 
         // We trigger an event to make sure the editor is available.
-        $(document).trigger(PP_Content_Checklist.EVENT_TINYMCE_LOADED, tinymce);
+        $(document).trigger(PP_Checklists.EVENT_TINYMCE_LOADED, tinymce);
     })(jQuery, document, tinymce);
 }

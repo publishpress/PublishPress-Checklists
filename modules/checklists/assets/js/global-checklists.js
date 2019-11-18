@@ -27,11 +27,11 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function ($, objectL10n_checklist_admin) {
+(function ($, objectL10n_checklists_global_checklist) {
     'use strict';
 
     $(function () {
-        show_post_type_requirements(objectL10n_checklist_admin.first_post_type);
+        show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
 
         // Set the event for the post type filter
         $('#pp-checklists-post-type-filter a').on('click', function (event) {
@@ -106,7 +106,7 @@
             var post_type = $('#pp-checklists-post-type-filter a.pp-selected').attr('href').substring(1);
 
             if (post_type === '' || post_type === false || post_type === null || typeof post_type === undefined) {
-                post_type = objectL10n_checklist_admin.first_post_type;
+                post_type = objectL10n_checklists_global_checklist.first_post_type;
             }
 
             return post_type;
@@ -199,7 +199,7 @@
                 .attr('data-id', id)
                 .appendTo($td);
 
-            $.each(objectL10n_checklist_admin.rules, function (value, label) {
+            $.each(objectL10n_checklists_global_checklist.rules, function (value, label) {
                 $option = $('<option>')
                     .attr('value', value)
                     .text(label)
@@ -244,4 +244,4 @@
         return text.trim();
     }
 
-})(jQuery, objectL10n_checklist_admin);
+})(jQuery, objectL10n_checklists_global_checklist);

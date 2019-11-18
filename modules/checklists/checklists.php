@@ -456,8 +456,8 @@ if ( ! class_exists('PPCH_Checklists')) {
             reset($postTypes);
 
             wp_localize_script(
-                'pp-checklists-admin',
-                'objectL10n_checklist_admin',
+                'pp-checklists-global-checklists',
+                'objectL10n_checklists_global_checklist',
                 [
                     'rules'           => $rules,
                     'first_post_type' => current($postTypes),
