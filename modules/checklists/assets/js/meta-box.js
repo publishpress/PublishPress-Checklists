@@ -315,7 +315,7 @@
                 }
             }
 
-            wp.hooks.doAction('pp-checklists.update-failed-requirements', list_unchecked.warning);
+            wp.hooks.doAction('pp-checklists.update-failed-requirements', list_unchecked.warning.concat(list_unchecked.block));
 
             this.state.is_publishing = false;
         },
