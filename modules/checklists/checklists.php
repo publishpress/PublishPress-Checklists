@@ -120,6 +120,16 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             $legacyOptions = get_option('publishpress_checklist_options');
             if ( ! empty($legacyOptions)) {
+                $settingsOptions                           = new stdClass();
+                $settingsOptions->enabled                  = 'on';
+                $settingsOptions->loaded_once              = 1;
+                $settingsOptions->post_types               = isset($legacyOptions->post_types) ? $legacyOptions->post_types : ['post' => 'on'];
+                $settingsOptions->show_warning_icon_submit = isset($legacyOptions->show_warning_icon_submit) ? $legacyOptions->show_warning_icon_submit : Base_requirement::VALUE_YES;
+                $settingsOptions->hide_publish_button      = isset($legacyOptions->hide_publish_button) ? $legacyOptions->hide_publish_button : Base_requirement::VALUE_NO;
+
+                unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit, $legacyOptions->hide_publish_button);
+
+                update_option('publishpress_checklists_settings_options', $settingsOptions);
                 update_option('publishpress_checklists_checklists_options', $legacyOptions);
                 delete_option('publishpress_checklist_options');
             }
@@ -420,7 +430,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                 ['pp-remodal'], PUBLISHPRESS_CHECKLISTS_VERSION, 'all');
 
             wp_enqueue_style(
-                'pp-checklists-admin',
+                'pp-checklists-global-checklists',
                 $this->module_url . 'assets/css/admin.css',
                 ['pp-remodal', 'pp-remodal-default-theme'],
                 PUBLISHPRESS_CHECKLISTS_VERSION,
@@ -428,7 +438,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             );
 
             wp_enqueue_script(
-                'pp-checklists-admin',
+                'pp-checklists-global-checklists',
                 plugins_url('/modules/checklists/assets/js/global-checklists.js', PUBLISHPRESS_CHECKLISTS_FILE),
                 ['jquery', 'pp-remodal'],
                 PUBLISHPRESS_CHECKLISTS_VERSION,
