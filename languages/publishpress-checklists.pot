@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2019-11-07 12:28-0300\n"
+"POT-Creation-Date: 2019-12-02 16:01-0300\n"
 "PO-Revision-Date: 2019-11-07 12:27-0300\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -16,363 +16,372 @@ msgstr ""
 "X-Poedit-WPHeader: publishpress-checklists.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
 
-#: library/Legacy/LegacyPlugin.php:205 modules/checklists/checklists.php:724
+#: core/Legacy/LegacyPlugin.php:197 modules/checklists/checklists.php:488
 msgid "Configure"
 msgstr ""
 
-#: library/Legacy/LegacyPlugin.php:208
+#: core/Legacy/LegacyPlugin.php:200
 msgid "Please correct your form errors below and try again."
 msgstr ""
 
-#: library/Legacy/LegacyPlugin.php:210 modules/settings/settings.php:330
+#: core/Legacy/LegacyPlugin.php:202 modules/settings/settings.php:438
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: library/Legacy/LegacyPlugin.php:211
+#: core/Legacy/LegacyPlugin.php:203
 msgid "You do not have necessary permissions to complete this action."
 msgstr ""
 
-#: library/Legacy/LegacyPlugin.php:213
+#: core/Legacy/LegacyPlugin.php:205
 msgid "Post does not exist"
 msgstr ""
 
-#: library/Legacy/LegacyPlugin.php:342
-msgid "Authors"
+#: core/Legacy/LegacyPlugin.php:334 modules/checklists/checklists.php:92
+#: modules/checklists/checklists.php:612 modules/checklists/checklists.php:629
+#: modules/checklists/checklists.php:630 modules/checklists/checklists.php:638
+#: modules/checklists/checklists.php:639
+msgid "Checklists"
 msgstr ""
 
-#: library/Legacy/Module.php:53 modules/checklists/checklists.php:220
+#: core/Legacy/Module.php:74 modules/checklists/checklists.php:226
 msgid "Post"
 msgstr ""
 
-#: library/Legacy/Module.php:54 modules/checklists/checklists.php:221
+#: core/Legacy/Module.php:75 modules/checklists/checklists.php:227
 msgid "Page"
 msgstr ""
 
-#: library/Plugin.php:80
-msgid "Disabled"
+#. Plugin Name of the plugin/theme
+#: core/Legacy/Module.php:246
+msgid "PublishPress Checklists"
 msgstr ""
 
-#: library/Plugin.php:81
-msgid "Show a message in the sidebar while writing"
+#: core/Legacy/Module.php:249
+#, php-format
+msgid "If you like %s please leave us a %s rating. Thank you!"
 msgstr ""
 
-#: library/Plugin.php:83
-msgid "Show a message on the screen before publishing"
-msgstr ""
-
-#: library/Plugin.php:85
-msgid "Prevent publishing"
-msgstr ""
-
-#: library/Requirement/Base_counter.php:252
+#: core/Requirement/Base_counter.php:252
 #, php-format
 msgid "Min %s Max %s"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:35
+#: core/Requirement/Categories_count.php:35
 msgid "Number of categories"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:36
+#: core/Requirement/Categories_count.php:36
 #, php-format
 msgid "Minimum of %s category"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:37
+#: core/Requirement/Categories_count.php:37
 #, php-format
 msgid "Minimum of %s categories"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:38
+#: core/Requirement/Categories_count.php:38
 #, php-format
 msgid "Maximum of %s category"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:39
+#: core/Requirement/Categories_count.php:39
 #, php-format
 msgid "Maximum of %s categories"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:40
+#: core/Requirement/Categories_count.php:40
 #, php-format
 msgid "%s category"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:41
+#: core/Requirement/Categories_count.php:41
 #, php-format
 msgid "%s categories"
 msgstr ""
 
-#: library/Requirement/Categories_count.php:42
+#: core/Requirement/Categories_count.php:42
 #, php-format
 msgid "Between %s and %s categories"
 msgstr ""
 
-#: library/Requirement/Custom_item.php:52
-#: library/Requirement/Custom_item.php:53
+#: core/Requirement/Custom_item.php:52 core/Requirement/Custom_item.php:53
 msgid "Custom"
 msgstr ""
 
-#: library/Requirement/Featured_image.php:30
-#: library/Requirement/Featured_image.php:31
+#: core/Requirement/Featured_image.php:30
+#: core/Requirement/Featured_image.php:31
 msgid "Featured image"
 msgstr ""
 
-#: library/Requirement/Filled_excerpt.php:30
-#: library/Requirement/Filled_excerpt.php:31
+#: core/Requirement/Filled_excerpt.php:30
+#: core/Requirement/Filled_excerpt.php:31
 msgid "Excerpt has text"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:35
+#: core/Requirement/Tags_count.php:35
 msgid "Number of tags"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:36
+#: core/Requirement/Tags_count.php:36
 #, php-format
 msgid "Minimum of %s tag"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:37
+#: core/Requirement/Tags_count.php:37
 #, php-format
 msgid "Minimum of %s tags"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:38
+#: core/Requirement/Tags_count.php:38
 #, php-format
 msgid "Maximum of %s tag"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:39
+#: core/Requirement/Tags_count.php:39
 #, php-format
 msgid "Maximum of %s tags"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:40
+#: core/Requirement/Tags_count.php:40
 #, php-format
 msgid "%s tag"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:41
+#: core/Requirement/Tags_count.php:41
 #, php-format
 msgid "%s tags"
 msgstr ""
 
-#: library/Requirement/Tags_count.php:42
+#: core/Requirement/Tags_count.php:42
 #, php-format
 msgid "Between %s and %s tags"
 msgstr ""
 
-#: library/Requirement/Taxonomies_count.php:43
+#: core/Requirement/Taxonomies_count.php:43
 msgid "Number of "
 msgstr ""
 
-#: library/Requirement/Taxonomies_count.php:44
-#: library/Requirement/Taxonomies_count.php:45
+#: core/Requirement/Taxonomies_count.php:44
+#: core/Requirement/Taxonomies_count.php:45
 #, php-format
 msgid "Minimum of %s "
 msgstr ""
 
-#: library/Requirement/Taxonomies_count.php:46
-#: library/Requirement/Taxonomies_count.php:47
+#: core/Requirement/Taxonomies_count.php:46
+#: core/Requirement/Taxonomies_count.php:47
 #, php-format
 msgid "Maximum of %s "
 msgstr ""
 
-#: library/Requirement/Taxonomies_count.php:48
-#: library/Requirement/Taxonomies_count.php:49
+#: core/Requirement/Taxonomies_count.php:48
+#: core/Requirement/Taxonomies_count.php:49
 #, php-format
 msgid "%s "
 msgstr ""
 
-#: library/Requirement/Taxonomies_count.php:50
+#: core/Requirement/Taxonomies_count.php:50
 #, php-format
 msgid "Between %s and %s "
 msgstr ""
 
-#: library/Requirement/Words_count.php:31
+#: core/Requirement/Words_count.php:31
 msgid "Number of words"
 msgstr ""
 
-#: library/Requirement/Words_count.php:32
+#: core/Requirement/Words_count.php:32
 #, php-format
 msgid "Minimum of %s word"
 msgstr ""
 
-#: library/Requirement/Words_count.php:33
+#: core/Requirement/Words_count.php:33
 #, php-format
 msgid "Minimum of %s words"
 msgstr ""
 
-#: library/Requirement/Words_count.php:34
+#: core/Requirement/Words_count.php:34
 #, php-format
 msgid "Maximum of %s word"
 msgstr ""
 
-#: library/Requirement/Words_count.php:35
+#: core/Requirement/Words_count.php:35
 #, php-format
 msgid "Maximum of %s words"
 msgstr ""
 
-#: library/Requirement/Words_count.php:36
+#: core/Requirement/Words_count.php:36
 #, php-format
 msgid "%s word"
 msgstr ""
 
-#: library/Requirement/Words_count.php:37
+#: core/Requirement/Words_count.php:37
 #, php-format
 msgid "%s words"
 msgstr ""
 
-#: library/Requirement/Words_count.php:38
+#: core/Requirement/Words_count.php:38
 #, php-format
 msgid "Between %s and %s words"
 msgstr ""
 
-#: modules/checklists/checklists.php:93 modules/checklists/checklists.php:718
-#: modules/checklists/checklists.php:872 modules/checklists/checklists.php:887
-#: modules/checklists/checklists.php:888
-msgid "Checklists"
+#: modules/checklists/checklists.php:93
+msgid "Define tasks that must be complete before content is published."
 msgstr ""
 
-#: modules/checklists/checklists.php:94 modules/checklists/checklists.php:96
-msgid "Define tasks that must be complete before content is published"
+#: modules/checklists/checklists.php:482
+msgid "Checklist"
 msgstr ""
 
-#: modules/checklists/checklists.php:406
-msgid "General:"
+#: modules/checklists/checklists.php:535
+msgid "Are you sure you want to publish anyway?"
 msgstr ""
 
-#: modules/checklists/checklists.php:413
-msgid "Add to these post types:"
+#: modules/checklists/checklists.php:537
+msgid "Please complete the following tasks before publishing:"
 msgstr ""
 
-#: modules/checklists/checklists.php:421
-msgid "Show warning icon:"
-msgstr ""
-
-#: modules/checklists/checklists.php:429
-msgid "Hide Publish button:"
-msgstr ""
-
-#: modules/checklists/checklists.php:442
-msgid "Requirements per Post Type:"
-msgstr ""
-
-#: modules/checklists/checklists.php:483
-msgid "This will display a warning icon in the \"Publish\" box"
-msgstr ""
-
-#: modules/checklists/checklists.php:502
-msgid "This will hide the Publish button if the checklist is not complete"
-msgstr ""
-
-#: modules/checklists/checklists.php:523
-msgid "Description"
-msgstr ""
-
-#: modules/checklists/checklists.php:524
-msgid "Parameters"
-msgstr ""
-
-#: modules/checklists/checklists.php:525
-msgid "Action"
-msgstr ""
-
-#: modules/checklists/checklists.php:526
-msgid "Add custom item"
-msgstr ""
-
-#: modules/checklists/checklists.php:762
-msgid ""
-"The following requirements are not completed yet. Are you sure you want to "
-"publish?"
-msgstr ""
-
-#: modules/checklists/checklists.php:764
-msgid "Please complete the following requirements before publishing:"
-msgstr ""
-
-#: modules/checklists/checklists.php:766
+#: modules/checklists/checklists.php:539
 msgid "Not required, but important: "
 msgstr ""
 
-#: modules/checklists/checklists.php:770
+#: modules/checklists/checklists.php:543
 msgid "One or more items in the checklist are not completed"
 msgstr ""
 
-#: modules/checklists/checklists.php:788
+#: modules/checklists/checklists.php:561
 msgid "To use the checklist"
 msgstr ""
 
-#: modules/checklists/checklists.php:789
+#: modules/checklists/checklists.php:562
 msgid "please choose some requirements"
 msgstr ""
 
-#: modules/checklists/checklists.php:790
+#: modules/checklists/checklists.php:563 modules/checklists/checklists.php:686
 msgid "Required"
 msgstr ""
 
-#: modules/checklists/checklists.php:791
+#: modules/checklists/checklists.php:564
 msgid "Don't publish"
 msgstr ""
 
-#: modules/checklists/checklists.php:792
+#: modules/checklists/checklists.php:565
 msgid "Yes, publish"
 msgstr ""
 
-#: modules/modules-settings/modules-settings.php:52
-msgid "Authors Settings"
+#: modules/checklists/checklists.php:659
+msgid "Task"
 msgstr ""
 
-#: modules/modules-settings/modules-settings.php:221
-msgid "Features"
+#: modules/checklists/checklists.php:660
+msgid "Disabled, Recommended or Required"
 msgstr ""
 
-#: modules/modules-settings/modules-settings.php:222
-msgid "Feel free to select only the features you need."
+#: modules/checklists/checklists.php:661
+msgid "Options"
 msgstr ""
 
-#: modules/modules-settings/modules-settings.php:228
-msgid "Enabled features"
+#: modules/checklists/checklists.php:662
+msgid "Add custom item"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-#: modules/settings/settings.php:59
-msgid "PublishPress Checklists"
+#: modules/checklists/checklists.php:681
+msgid "Disabled"
 msgstr ""
 
-#: modules/settings/settings.php:102
-msgid "PublishPress Settings"
+#: modules/checklists/checklists.php:682
+msgid "Recommended: show only in the sidebar"
 msgstr ""
 
-#: modules/settings/settings.php:103
+#: modules/checklists/checklists.php:684
+msgid "Recommended: show in the sidebar and before publishing"
+msgstr ""
+
+#: modules/checklists/templates/footer.php:23
+msgid "About"
+msgstr ""
+
+#: modules/checklists/templates/footer.php:28
+msgid "Documentation"
+msgstr ""
+
+#: modules/checklists/templates/footer.php:33
+msgid "Contact"
+msgstr ""
+
+#: modules/checklists/templates/global-checklists.php:44
+msgid "Save Changes"
+msgstr ""
+
+#: modules/settings/settings.php:60 modules/settings/settings.php:107
+msgid "Checklists Settings"
+msgstr ""
+
+#: modules/settings/settings.php:108
 msgid "Settings"
 msgstr ""
 
-#: modules/settings/settings.php:216
+#: modules/settings/settings.php:273
+msgid "Features"
+msgstr ""
+
+#: modules/settings/settings.php:274
+msgid "Feel free to select only the features you need."
+msgstr ""
+
+#: modules/settings/settings.php:280
+msgid "Enabled features"
+msgstr ""
+
+#: modules/settings/settings.php:325
 msgid "There are no PublishPress modules registered"
 msgstr ""
 
-#: modules/settings/settings.php:283
+#: modules/settings/settings.php:391
 msgid "Posts"
 msgstr ""
 
-#: modules/settings/settings.php:284
+#: modules/settings/settings.php:392
 msgid "Pages"
 msgstr ""
 
-#: modules/settings/settings.php:306
+#: modules/settings/settings.php:414
 #, php-format
 msgid ""
 "Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
 "loaded file."
+msgstr ""
+
+#: modules/settings/settings.php:609
+msgid "General:"
+msgstr ""
+
+#: modules/settings/settings.php:616
+msgid "Add to these post types:"
+msgstr ""
+
+#: modules/settings/settings.php:624
+msgid "Show warning icon:"
+msgstr ""
+
+#: modules/settings/settings.php:632
+msgid "Hide Publish button:"
+msgstr ""
+
+#: modules/settings/settings.php:663
+msgid "This will display a warning icon in the \"Publish\" box"
+msgstr ""
+
+#: modules/settings/settings.php:682
+msgid ""
+"This will hide the Publish button if \"Recommended\" and \"Required\" tasks "
+"are not complete."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -380,7 +389,7 @@ msgid "https://publishpress.com/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Add a content checklist for posts"
+msgid "Add support for checklists in WordPress"
 msgstr ""
 
 #. Author of the plugin/theme
