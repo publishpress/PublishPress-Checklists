@@ -61,10 +61,10 @@ class TemplateLoader
         $located = '';
 
         $paths = [
-            STYLESHEETPATH . '/' . PUBLISHPRESS_CHECKLISTS_RELATIVE_PATH . '/' . $moduleName,
-            TEMPLATEPATH . '/' . PUBLISHPRESS_CHECKLISTS_RELATIVE_PATH . '/' . $moduleName,
-            ABSPATH . WPINC . '/theme-compat/' . PUBLISHPRESS_CHECKLISTS_RELATIVE_PATH . '/' . $moduleName,
-            PUBLISHPRESS_CHECKLISTS_MODULES_PATH . '/' . $moduleName . '/templates',
+            STYLESHEETPATH . '/' . PPCH_RELATIVE_PATH . '/' . $moduleName,
+            TEMPLATEPATH . '/' . PPCH_RELATIVE_PATH . '/' . $moduleName,
+            ABSPATH . WPINC . '/theme-compat/' . PPCH_RELATIVE_PATH . '/' . $moduleName,
+            PPCH_MODULES_PATH . '/' . $moduleName . '/templates',
         ];
 
         $paths = apply_filters('publishpress_checklists_template_paths', $paths);

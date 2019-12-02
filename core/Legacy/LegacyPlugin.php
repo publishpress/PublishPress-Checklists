@@ -147,8 +147,8 @@ class LegacyPlugin
     private function getModulesBasePath()
     {
         $defaultDirs = [
-            'settings'   => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
-            'checklists' => PUBLISHPRESS_CHECKLISTS_MODULES_PATH,
+            'settings'   => PPCH_MODULES_PATH,
+            'checklists' => PPCH_MODULES_PATH,
         ];
 
         return apply_filters('publishpress_checklists_module_dirs', $defaultDirs);
@@ -236,7 +236,7 @@ class LegacyPlugin
 
         // Upgrade if need be but don't run the upgrade if the plugin has never been used
         $previous_version = get_option($versionOption);
-        if ($previous_version && version_compare($previous_version, PUBLISHPRESS_CHECKLISTS_VERSION, '<')) {
+        if ($previous_version && version_compare($previous_version, PPCH_VERSION, '<')) {
             foreach ($this->modules as $moduleName => $moduleData) {
                 if (method_exists($this->$moduleName, 'upgrade')) {
                     $this->$moduleName->upgrade($previous_version);
@@ -244,7 +244,7 @@ class LegacyPlugin
             }
         }
 
-        update_option($versionOption, PUBLISHPRESS_CHECKLISTS_VERSION);
+        update_option($versionOption, PPCH_VERSION);
 
         // For each module that's been loaded, auto-load data if it's never been run before
         foreach ($this->modules as $moduleName => $moduleData) {

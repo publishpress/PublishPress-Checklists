@@ -206,7 +206,7 @@ class Module
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <img src="<?php echo plugin_dir_url(PUBLISHPRESS_CHECKLISTS_FILE) . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>" alt=""
+            <img src="<?php echo plugin_dir_url(PPCH_FILE) . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>" alt=""
                  class="logo-header"/>
 
             <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
@@ -245,7 +245,7 @@ class Module
             'current_module' => $current_module,
             'plugin_name'    => __('PublishPress Checklists', 'publishpress-checklists'),
             'plugin_slug'    => 'publishpress-checklists',
-            'plugin_url'     => plugin_dir_url(PUBLISHPRESS_CHECKLISTS_FILE),
+            'plugin_url'     => plugin_dir_url(PPCH_FILE),
             'rating_message' => __('If you like %s please leave us a %s rating. Thank you!', 'publishpress-checklists'),
         ]);
     }

@@ -396,7 +396,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             if (is_admin()) {
                 $plugin_array['pp_checklists_requirements'] =
-                    plugin_dir_url(PUBLISHPRESS_CHECKLISTS_FILE)
+                    plugin_dir_url(PPCH_FILE)
                     . 'modules/checklists/assets/js/tinymce-pp-checklists-requirements.js';
             }
 
@@ -412,34 +412,34 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'pp-checklists-requirements',
                 $this->module_url . 'assets/css/global-checklists.css',
                 false,
-                PUBLISHPRESS_CHECKLISTS_VERSION,
+                PPCH_VERSION,
                 'all'
             );
 
             wp_register_style('pp-remodal', $this->module_url . 'assets/css/remodal.css', false,
-                PUBLISHPRESS_CHECKLISTS_VERSION,
+                PPCH_VERSION,
                 'all');
             wp_register_style('pp-remodal-default-theme', $this->module_url . 'assets/css/remodal-default-theme.css',
-                ['pp-remodal'], PUBLISHPRESS_CHECKLISTS_VERSION, 'all');
+                ['pp-remodal'], PPCH_VERSION, 'all');
 
             wp_enqueue_style(
                 'pp-checklists-global-checklists',
                 $this->module_url . 'assets/css/admin.css',
                 ['pp-remodal', 'pp-remodal-default-theme'],
-                PUBLISHPRESS_CHECKLISTS_VERSION,
+                PPCH_VERSION,
                 'all'
             );
 
             wp_enqueue_script(
                 'pp-checklists-global-checklists',
-                plugins_url('/modules/checklists/assets/js/global-checklists.js', PUBLISHPRESS_CHECKLISTS_FILE),
+                plugins_url('/modules/checklists/assets/js/global-checklists.js', PPCH_FILE),
                 ['jquery', 'pp-remodal'],
-                PUBLISHPRESS_CHECKLISTS_VERSION,
+                PPCH_VERSION,
                 true
             );
 
             wp_register_script('pp-remodal', $this->module_url . 'assets/js/remodal.min.js', ['jquery'],
-                PUBLISHPRESS_CHECKLISTS_VERSION, true);
+                PPCH_VERSION, true);
 
             $rules = apply_filters('publishpress_checklists_rules_list', []);
 
@@ -521,9 +521,9 @@ if ( ! class_exists('PPCH_Checklists')) {
             if ( ! empty($requirements)) {
                 wp_enqueue_script(
                     'pp-checklists-requirements',
-                    plugins_url('/modules/checklists/assets/js/meta-box.js', PUBLISHPRESS_CHECKLISTS_FILE),
+                    plugins_url('/modules/checklists/assets/js/meta-box.js', PPCH_FILE),
                     ['jquery', 'word-count'],
-                    PUBLISHPRESS_CHECKLISTS_VERSION,
+                    PPCH_VERSION,
                     true
                 );
 
@@ -592,9 +592,9 @@ if ( ! class_exists('PPCH_Checklists')) {
             }
 
             // Check if we have data coming from custom items
-            if (isset($_POST['_PUBLISHPRESS_CHECKLISTS_custom_item'])) {
-                if ( ! empty($_POST['_PUBLISHPRESS_CHECKLISTS_custom_item'])) {
-                    foreach ($_POST['_PUBLISHPRESS_CHECKLISTS_custom_item'] as $item_id => $value) {
+            if (isset($_POST['_PPCH_custom_item'])) {
+                if ( ! empty($_POST['_PPCH_custom_item'])) {
+                    foreach ($_POST['_PPCH_custom_item'] as $item_id => $value) {
                         update_post_meta($id, self::POST_META_PREFIX . $item_id, $value);
                     }
                 }
@@ -696,7 +696,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             // Required thing to build Gutenberg Blocks
             wp_enqueue_script(
                 'pp-checklists-requirements-gutenberg',
-                plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PUBLISHPRESS_CHECKLISTS_FILE),
+                plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PPCH_FILE),
                 [
                     'wp-blocks',
                     'wp-i18n',
@@ -705,7 +705,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                     'react',
                     'react-dom',
                 ],
-                PUBLISHPRESS_CHECKLISTS_VERSION,
+                PPCH_VERSION,
                 true
             );
         }

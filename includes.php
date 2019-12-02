@@ -11,15 +11,15 @@
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-if ( ! defined('PUBLISHPRESS_CHECKLISTS_LOADED')) {
-    define('PUBLISHPRESS_CHECKLISTS_PATH_BASE', plugin_dir_path(__FILE__));
-    define('PUBLISHPRESS_CHECKLISTS_VERSION', '2.0.0');
-    define('PUBLISHPRESS_CHECKLISTS_FILE', 'publishpress-checklists/publishpress-checklists.php');
-    define('PUBLISHPRESS_CHECKLISTS_MODULES_PATH', PUBLISHPRESS_CHECKLISTS_PATH_BASE . '/modules');
-    define('PUBLISHPRESS_CHECKLISTS_RELATIVE_PATH', 'publishpress-checklists');
-    define('PUBLISHPRESS_CHECKLISTS_LOADED', 1);
+if ( ! defined('PPCH_LOADED')) {
+    define('PPCH_PATH_BASE', plugin_dir_path(__FILE__));
+    define('PPCH_VERSION', '2.0.0');
+    define('PPCH_FILE', 'publishpress-checklists/publishpress-checklists.php');
+    define('PPCH_MODULES_PATH', PPCH_PATH_BASE . '/modules');
+    define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
+    define('PPCH_LOADED', 1);
 
-    if (file_exists(PUBLISHPRESS_CHECKLISTS_PATH_BASE . '/vendor/auto   load.php')) {
-        require_once PUBLISHPRESS_CHECKLISTS_PATH_BASE . '/vendor/autoload.php';
+    if (file_exists(PPCH_PATH_BASE . '/vendor/autoload.php')) {
+        require_once PPCH_PATH_BASE . '/vendor/autoload.php';
     }
 }

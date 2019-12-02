@@ -20,7 +20,7 @@
                         data-type="<?php echo $req['type']; ?>">
 
                     <?php if ($req['is_custom']) : ?>
-                        <input type="hidden" name="_PUBLISHPRESS_CHECKLISTS_custom_item[<?php echo $req['id']; ?>]"
+                        <input type="hidden" name="_PPCH_custom_item[<?php echo $req['id']; ?>]"
                                value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                     <?php endif; ?>
 

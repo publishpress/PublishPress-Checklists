@@ -22,7 +22,7 @@
 
 require_once __DIR__ . '/includes.php';
 
-if (defined('PUBLISHPRESS_CHECKLISTS_LOADED')) {
-    $plugin = new PublishPress\Checklists\Core\Plugin;
+if (defined('PPCH_LOADED')) {
+    $plugin = new \PublishPress\Checklists\Core\Plugin();
     $plugin->init();
 }

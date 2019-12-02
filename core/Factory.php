@@ -13,7 +13,7 @@ use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-if ( ! defined('PUBLISHPRESS_CHECKLISTS_LOADED')) {
+if ( ! defined('PPCH_LOADED')) {
     require_once __DIR__ . '/../includes.php';
 }
 

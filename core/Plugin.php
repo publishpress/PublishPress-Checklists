@@ -59,6 +59,6 @@ class Plugin
     public function loadTextDomain()
     {
         load_plugin_textdomain('publishpress-checklists', false,
-            PUBLISHPRESS_CHECKLISTS_RELATIVE_PATH . '/languages/');
+            PPCH_RELATIVE_PATH . '/languages/');
     }
 }

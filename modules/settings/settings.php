@@ -125,7 +125,7 @@ if ( ! class_exists('PPCH_Settings')) {
         public function action_admin_print_styles()
         {
             if ($this->isWhitelistedSettingsView()) {
-                wp_enqueue_style('publishpress-settings-css', $this->module_url . 'lib/settings.css', false, PUBLISHPRESS_CHECKLISTS_VERSION);
+                wp_enqueue_style('publishpress-settings-css', $this->module_url . 'lib/settings.css', false, PPCH_VERSION);
             }
 
             if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
