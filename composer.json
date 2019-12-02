@@ -1,6 +1,7 @@
 {
   "name": "publishpress/publishpress-checklists",
   "type": "wordpress-plugin",
+  "description": "",
   "license": "GPL-2",
   "authors": [
     {
