@@ -1,6 +1,6 @@
 # Contributing
 Hey, that's awesome! Thanks for your interest and for taking the time to contribute.
-The following is a set of guidelines for contributing to PublishPress plugin. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to PublishPress Checklists plugin. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## How can I contribute?
 
@@ -8,7 +8,7 @@ The following is a set of guidelines for contributing to PublishPress plugin. Us
 
 A bug is a demonstrable problem caused by code in the repository.
 
-Before creating bug reports, please check our [bug list](https://github.com/publishpress/PublishPress/issues?utf8=✓&q=is%3Aissue+is%3Aopen+), as the bug might be already be known.
+Before creating bug reports, please check our [bug list](https://github.com/publishpress/PublishPress-Checklists/issues?utf8=✓&q=is%3Aissue+is%3Aopen+), as the bug might be already be known.
 
 **Note:** If you find a **closed** issue that seems the same as the one you're experiencing, check if you have the most recent release. If you have, please open a new issue including a link to the original one in its body.
 
@@ -24,7 +24,7 @@ Before creating bug reports, please check our [bug list](https://github.com/publ
 
 Enhancements can be minor improvements to existing functionality or even completely new features.
 
-Before creating enhancement suggestions, please check our [issues list](https://github.com/publishpress/PublishPress/issues), as the enhancement might be already known.
+Before creating enhancement suggestions, please check our [issues list](https://github.com/publishpress/PublishPress-Checklists/issues), as the enhancement might be already known.
 
 #### How do I submit a good enhancement suggestion?
 
@@ -33,7 +33,7 @@ Before creating enhancement suggestions, please check our [issues list](https://
 - Provide **examples** to demonstrate the steps
 - Describe the **expected behavior**
 - Describe the **current behavior**
-- Explain **why this enhancement would be useful** to you and other PublishPress users
+- Explain **why this enhancement would be useful** to you and other PublishPress Checklists users
 
 ### Submitting Pull Requests
 
@@ -43,4 +43,4 @@ Before creating enhancement suggestions, please check our [issues list](https://
 - Create a **new branch for each issue** you are trying to solve. Make sure it starts off our `development` branch and is updated
 - Create **a pull request for each problem** you are fixing. You can mention multiple issues, but they have to be related somehow. Different problems have to be fixed on different pull requests
 - **Do not submit to the master branch**. Always submit pull requests to the `development` or other branch
-- Fill in the [required template](https://github.com/publishpress/PublishPress/blob/development/.github/PULL_REQUEST_TEMPLATE.md)
+- Fill in the [required template](https://github.com/publishpress/PublishPress-checklists/blob/development/.github/PULL_REQUEST_TEMPLATE.md)
