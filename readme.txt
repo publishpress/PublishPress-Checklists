@@ -45,219 +45,137 @@ There're two ways to install PublishPress plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [1.4.7] - 2019-07-21 =
+= [2.0.0] - 2019-12-03 =
+* Fixed: Fixed the word counter for the Text tab in the Classic Editor;
+* Changed: Renamed from "PublishPress Content Checklist" to "PublishPress Checklists";
+* Changed: Refactored to be a standalone plugin, not requiring PublishPress anymore;
+* Changed: Plugin name and text domain changed from "publishpress-content-checklist" to "publishpress-checklists";
+* Changed: Namespace changed from "PublishPress\Addon\Content_checklist" to "PublishPress\Checklists\". The requirements' namespace changed from "PublishPress\Addon\Content_checklist\Requirement" to "PublishPress\Checklists\Core\Requirement";
+* Changed: JavaScript object changed from "PP_Content_Checklist" to "PP_Checklists";
+* Changed: New admin menu added with the checklists options and settings page;
+* Changed: The checklists options section was removed from the settings page to an specific menu item;
 
-* Fixed: A JS error was preventing to block the post save action when displaying a popup with missed requirements on Classic Editor
+= [1.4.7] - 2019-07-21 =
+* Fixed: A JS error was preventing to block the post save action when displaying a popup with missed requirements on Classic Editor;
 
 = [1.4.6] - 2019-06-20 =
-
-* Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled;
-* Change minimum required version of PublishPress to 1.20.0;
+* Fixed: Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled;
+* Changed: Change minimum required version of PublishPress to 1.20.0;
 
 = [1.4.5] - 2019-02-22 =
-
-* Fixed the pre-publishing check to avoid blocking save when not publishing;
+* Fixed: Fixed the pre-publishing check to avoid blocking save when not publishing;
 
 = [1.4.4] - 2019-02-12 =
-
-* Fixed JS error that was preventing the Preview button to work properly in the classic editor;
+* Fixed: Fixed JS error that was preventing the Preview button to work properly in the classic editor;
 
 = [1.4.3] - 2019-02-11 =
-
-* Changed the label for checklist options in the settings panel;
-* Fixed translation to PT-BR (thanks to Dionizio Bach);
-* Fixed bug when word-count script was not loaded;
-* Fixed JS error if an editor is not found;
+* Fixed: Fixed translation to PT-BR (thanks to Dionizio Bach);
+* Fixed: Fixed bug when word-count script was not loaded;
+* Fixed: Fixed JS error if an editor is not found;
+* Changed: Changed the label for checklist options in the settings panel;
 
 = [1.4.2] - 2019-01-30 =
-
-* Removed license key field from the settings tab;
-* Fixed the checklist for the block editor;
+* Fixed: Fixed the checklist for the block editor;
+* Changed: Removed license key field from the settings tab;
 
 = [1.4.1] - 2019-01-24 =
-
-* Disable post types by default, if Gutenberg is installed;
+* Changed: Disable post types by default, if Gutenberg is installed;
 
 = [1.4.0] - 2019-01-14 =
-
-* Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
-* Fixed the assets loading to load tinymce-pp-checklists-requirements.js only in the admin;
-* Added better support for custom post types and custom taxonomies which use WordPress default UI;
-* Fixed conflict between custom taxonomies and tags in the checklist while counting items;
-* Update POT file and fixed translations loading the text domain;
-* Updated PT-BT language files;
+* Fixed: Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
+* Fixed: Fixed the assets loading to load tinymce-pp-checklists-requirements.js only in the admin;
+* Fixed: Fixed conflict between custom taxonomies and tags in the checklist while counting items;
+* Added: Added better support for custom post types and custom taxonomies which use WordPress default UI;
+* Changed: Update POT file and fixed translations loading the text domain;
+* Changed: Updated PT-BT language files;
 
 = [1.3.8] - 2018-04-18 =
-
-*Fixed:*
-
-* Fixed wrong reference to a legacy EDD library's include file;
-* Fixed PHP warning about undefined property and constant;
+* Fixed: Fixed wrong reference to a legacy EDD library's include file;
+* Fixed: Fixed PHP warning about undefined property and constant;
 
 = [1.3.7] - 2018-02-21 =
-
-*Fixed:*
-
-* Fixed support for custom post types;
+* Fixed: Fixed support for custom post types;
 
 = [1.3.6] - 2018-02-07 =
-
-*Fixed:*
-
-* Fixed error about class EDD_SL_Plugin_Updater being loaded twice;
+* Fixed: Fixed error about class EDD_SL_Plugin_Updater being loaded twice;
 
 = [1.3.5] - 2018-02-06 =
-
-*Fixed:*
-
-* Fixed saving action for custom items on the checklist;
-* Fixed license validation and automatic update;
+* Fixed: Fixed saving action for custom items on the checklist;
+* Fixed: Fixed license validation and automatic update;
 
 = [1.3.4] - 2018-01-26 =
-
-*Changed:*
-
-* Changed plugin headers, fixing author and text domain;
+* Changed: Changed plugin headers, fixing author and text domain;
 
 = [1.3.3] - 2018-01-26 =
-
-*Fixed:*
-
-* Fixed JS error when the checklist is empty (no requirements are selected);
-* Fixed compatibility with PHP 5.4 (we will soon require min 5.6);
-* Fixed custom requirements;
-* Fixed the requirement of tags;
-* Fixed PHP Fatal error on some PHP on the featured image requirement;
-* Fixed category count in the checklist;
-
-*Added:*
-
-* Added action to load plugins' script files;
-
-*Changed:*
-
-* Rebranded to PublishPress;
+* Fixed: Fixed JS error when the checklist is empty (no requirements are selected);
+* Fixed: Fixed compatibility with PHP 5.4 (we will soon require min 5.6);
+* Fixed: Fixed custom requirements;
+* Fixed: Fixed the requirement of tags;
+* Fixed: Fixed PHP Fatal error on some PHP on the featured image requirement;
+* Fixed: Fixed category count in the checklist;
+* Added: Added action to load plugins' script files;
+* Changed: Rebranded to PublishPress;
 
 = [1.3.2] - 2017-08-31 =
-
-*Fixed:*
-
-* Fixed EDD integration and updates;
-
-*Changed:*
-
-* Removed Freemius integration;
+* Fixed: Fixed EDD integration and updates;
+* Changed: Removed Freemius integration;
 
 = [1.3.1] - 2017-07-13 =
-
-*Fixed:*
-
-* Fixed support for custom post types allowing to use custom items as requirements;
+* Fixed: Fixed support for custom post types allowing to use custom items as requirements;
 
 = [1.3.0] - 2017-07-12 =
-
-*Added:*
-
-* Added support for setting specific requirements for each post type, instead of global only;
-
-*Fixed:*
-
-* Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
-* Fixed PHP warning in the settings page about undefined index in array;
-* Fixed the menu slug in the Freemius integration;
-
-*Changed:*
-
-* Changed the required minimun version of PublishPress to 1.6.0;
-* Imprived extensibility for add-ons;
+* Fixed: Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
+* Fixed: Fixed PHP warning in the settings page about undefined index in array;
+* Fixed: Fixed the menu slug in the Freemius integration;
+* Added: Added support for setting specific requirements for each post type, instead of global only;
+* Changed: Changed the required minimum version of PublishPress to 1.6.0;
+* Changed: Improved extensibility for add-ons;
 
 = [1.2.1] - 2017-06-21 =
-
-*Added:*
-
-* Added pt-BR translations
-
-*Fixed:*
-
-* Fixed PHP warnings after install and activate
-* Fixed PHP warnings about wrong index type
-* Fixed the license and update checker
-
-*Changed:*
-
-* Removed English language files
-* Updated Tested Up to 4.8
+* Fixed: Fixed PHP warnings after install and activate
+* Fixed: Fixed PHP warnings about wrong index type
+* Fixed: Fixed the license and update checker
+* Added: Added pt-BR translations
+* Changed: Removed English language files
+* Changed: Updated Tested Up to 4.8
 
 = [1.2.0] - 2017-06-06 =
-
-*Added:*
-
-* Added the option to hide the Publish button if the checklist is not completed
-* Added the option to add custom items for the checklist
-* Added POT file and English PO files
-
-*Fixed:*
-
-* Fixes the mask for numeric input fields in the settings tab on Firefox
-* Fixes the license key validation
-* Fixes the update system
-
-*Changed:*
-
-* The warning icon in the publish box now appears even for published content
+* Fixed: Fixes the mask for numeric input fields in the settings tab on Firefox
+* Fixed: Fixes the license key validation
+* Fixed: Fixes the update system
+* Added: Added the option to hide the Publish button if the checklist is not completed
+* Added: Added the option to add custom items for the checklist
+* Added: Added POT file and English PO files
+* Changed: The warning icon in the publish box now appears even for published content
 
 = [1.1.2] - 2017-05-23 =
-
-*Fixed:*
-
-* Fixes the word count feature
-
-*Changed:*
-
-* Displays empty value in the max fields when max is less than min
-* Improves the min and max fields for value equal 0. Displays empty fields.
+* Fixed: Fixes the word count feature
+* Changed: Displays empty value in the max fields when max is less than min
+* Changed: Improves the min and max fields for value equal 0. Displays empty fields.
 
 = [1.1.1] - 2017-05-18 =
-
-*Fixed:*
-
-* Removed .DS_Store file from the package
-* Fixed the "Hello Dolly" message in the Freemius opt-in dialog
-* Increased the minimum WordPress version to 4.6
-
-*Changed:*
-
-* Improved settings merging the checkbox and the action list for each requirement
-* Changed order for Categories and Tags to stay together in the list
-* Changed code to use correct language domain
+* Fixed: Removed .DS_Store file from the package
+* Fixed: Fixed the "Hello Dolly" message in the Freemius opt-in dialog
+* Fixed: Increased the minimum WordPress version to 4.6
+* Changed: Improved settings merging the checkbox and the action list for each requirement
+* Changed: Changed order for Categories and Tags to stay together in the list
+* Changed: Changed code to use correct language domain
 
 = [1.1.0] - 2017-05-11 =
-
-*Added:*
-
-* Added "Excerpt has text" as requirement
-* Added option to set "max" value for the number of categories, tags and words - now you can have min, max or an interval for each requirement.
-
-*Changed:*
-
-* Improved the JavaScript code for better readbility
+* Added: Added "Excerpt has text" as requirement
+* Added: Added option to set "max" value for the number of categories, tags and words - now you can have min, max or an interval for each requirement.
+* Changed: Improved the JavaScript code for better readbility
 
 = [1.0.1] - 2017-05-03 =
-
-*Fixed:*
-
-* Fixed the name of plugin's main file
-* Fixed WordPress-EDD-License-Integration library in the vendor dir
+* Fixed: Fixed the name of plugin's main file
+* Fixed: Fixed WordPress-EDD-License-Integration library in the vendor dir
 
 = [1.0.0] - 2017-04-27 =
-
-*Added:*
-
-* Added requirement for minimum number of words
-* Added requirement for featured image
-* Added requirement for minimum number of tags
-* Added requirement for minimum number of categories
-* Added Freemius integration for feedback and contact form
-* Added option to display a warning icon in the publish box
-* Added checklist to the post form
-* Added option to select specific post types
+* Added: Added requirement for minimum number of words
+* Added: Added requirement for featured image
+* Added: Added requirement for minimum number of tags
+* Added: Added requirement for minimum number of categories
+* Added: Added Freemius integration for feedback and contact form
+* Added: Added option to display a warning icon in the publish box
+* Added: Added checklist to the post form
+* Added: Added option to select specific post types
