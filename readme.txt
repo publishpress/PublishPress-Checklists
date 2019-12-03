@@ -3,7 +3,7 @@ Contributors: publishpress, andergmartins, stevejburge, pressshack
 Author: PublishPress, PressShack
 Author URI: https://publishpress.com
 Tags: publishpress, checklist
-Requires at least: 4.6
+Requires at least: 4.7.0
 Requires PHP: 5.4
 Tested up to: 5.3
 Stable tag: 2.0.0

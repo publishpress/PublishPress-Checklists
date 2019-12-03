@@ -396,7 +396,7 @@ if ( ! class_exists('PPCH_Checklists')) {
          * @since 0.7
          *
          */
-        protected function get_link($args = [])
+        protected function get_admin_link($args = [])
         {
             $args['page']   = 'ppch-settings';
             $args['module'] = 'ppch-settings';
@@ -502,7 +502,7 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             if (current_user_can('manage_options')) {
                 // Make the meta box title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
-                $url = $this->get_link();
+                $url = $this->get_admin_link();
 
                 $title .= ' <span class="postbox-title-action"><a href="' . esc_url($url) . '" class="edit-box open-box">' . __('Configure',
                         'publishpress-checklists') . '</a></span>';
@@ -574,7 +574,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             $templateLoader->load('checklists', 'meta-box', [
                 'metadata_taxonomy' => self::METADATA_TAXONOMY,
                 'requirements'      => $requirements,
-                'configure_link'    => $this->get_link(),
+                'configure_link'    => $this->get_admin_link(),
                 'nonce'             => wp_create_nonce(__FILE__),
                 'lang'              => [
                     'to_use_checklists' => __('To use the checklist', 'publishpress-checklists'),
