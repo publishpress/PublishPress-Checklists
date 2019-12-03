@@ -49,6 +49,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
         const POST_META_PREFIX = 'pp_checklist_custom_item_';
 
+        const FLAG_OPTIONS_MIGRATED_2_0_0 = 'publishpress_checklists_options_migrated_2_0_0';
+
         /**
          * @var string
          */
@@ -96,8 +98,8 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'icon_class'        => 'dashicons dashicons-feedback',
                 'slug'              => 'checklists',
                 'default_options'   => [
-                    'enabled'                  => 'on',
-                    'custom_items'             => [],
+                    'enabled'      => 'on',
+                    'custom_items' => [],
                 ],
                 'autoload'          => true,
             ];
@@ -111,20 +113,37 @@ if ( ! class_exists('PPCH_Checklists')) {
 
         public function migrateLegacyOptions()
         {
-            $legacyOptions = get_option('publishpress_checklist_options');
-            if ( ! empty($legacyOptions)) {
-                $settingsOptions                           = new stdClass();
-                $settingsOptions->enabled                  = 'on';
-                $settingsOptions->loaded_once              = 1;
-                $settingsOptions->post_types               = isset($legacyOptions->post_types) ? $legacyOptions->post_types : ['post' => 'on'];
-                $settingsOptions->show_warning_icon_submit = isset($legacyOptions->show_warning_icon_submit) ? $legacyOptions->show_warning_icon_submit : Base_requirement::VALUE_YES;
-                $settingsOptions->hide_publish_button      = isset($legacyOptions->hide_publish_button) ? $legacyOptions->hide_publish_button : Base_requirement::VALUE_NO;
+            if (wp_doing_ajax()) {
+                return;
+            }
 
-                unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit, $legacyOptions->hide_publish_button);
+            // Add a flag to avoid running multiple data migration at the same time.
+            $transient = 'ppch_updating_legacy_options';
 
-                update_option('publishpress_checklists_settings_options', $settingsOptions);
-                update_option('publishpress_checklists_checklists_options', $legacyOptions);
-                delete_option('publishpress_checklist_options');
+            if ((int)get_transient($transient) === 1) {
+                return;
+            }
+
+            set_transient($transient, 1, 10);
+
+            // Do the migration
+            if ( ! (bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
+                $legacyOptions = get_option('publishpress_checklist_options');
+                if ( ! empty($legacyOptions)) {
+                    $settingsOptions                           = new stdClass();
+                    $settingsOptions->enabled                  = 'on';
+                    $settingsOptions->loaded_once              = 1;
+                    $settingsOptions->post_types               = isset($legacyOptions->post_types) ? $legacyOptions->post_types : ['post' => 'on'];
+                    $settingsOptions->show_warning_icon_submit = isset($legacyOptions->show_warning_icon_submit) ? $legacyOptions->show_warning_icon_submit : Base_requirement::VALUE_YES;
+                    $settingsOptions->hide_publish_button      = isset($legacyOptions->hide_publish_button) ? $legacyOptions->hide_publish_button : Base_requirement::VALUE_NO;
+
+                    unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit, $legacyOptions->hide_publish_button);
+
+                    update_option('publishpress_checklists_settings_options', $settingsOptions);
+                    update_option('publishpress_checklists_checklists_options', $legacyOptions);
+                }
+
+                update_option(self::FLAG_OPTIONS_MIGRATED_2_0_0, true);
             }
         }
 
