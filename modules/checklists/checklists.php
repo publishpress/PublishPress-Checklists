@@ -51,6 +51,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
         const FLAG_OPTIONS_MIGRATED_2_0_0 = 'publishpress_checklists_options_migrated_2_0_0';
 
+        const FLAG_UPDATING_LEGACY_OPTION = 'ppch_updating_legacy_options';
+
         /**
          * @var string
          */
@@ -118,13 +120,11 @@ if ( ! class_exists('PPCH_Checklists')) {
             }
 
             // Add a flag to avoid running multiple data migration at the same time.
-            $transient = 'ppch_updating_legacy_options';
-
-            if ((int)get_transient($transient) === 1) {
+            if ((int)get_transient(self::FLAG_UPDATING_LEGACY_OPTION) === 1) {
                 return;
             }
 
-            set_transient($transient, 1, 10);
+            set_transient(self::FLAG_UPDATING_LEGACY_OPTION, 1, 10);
 
             // Do the migration
             if ( ! (bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
