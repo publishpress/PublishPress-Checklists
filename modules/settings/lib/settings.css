@@ -1,0 +1,295 @@
+/* @override http://localhost:8888/wpplugindev/wp-content/plugins/publishpress/css/settings.css?ver=0.6.4 */
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.clear-right {
+    clear: right;
+}
+
+.clear-both {
+    clear: both;
+}
+
+#modules-wrapper {
+    overflow: hidden;
+}
+
+#modules-wrapper:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+.publishpress-modules {
+    min-width: 340px;
+    max-width: 770px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.publishpress-modules .publishpress-module {
+    width: 210px;
+    min-height: 150px;
+    position: relative;
+    float: left;
+    border: 1px solid #e1e1e1;
+    padding: 14px;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.publishpress-modules .publishpress-module p {
+    font-size: 12px;
+    color: #3d3d3d;
+    line-height: 150%;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Verdana, "Bitstream Vera Sans", sans-serif;
+}
+
+.publishpress-modules .publishpress-module h4 {
+    color: #000000;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Verdana, "Bitstream Vera Sans", sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.1;
+    margin: 0;
+    padding: 0;
+}
+
+.publishpress-modules .publishpress-module .publishpress-module-actions {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    width: 210px;
+}
+
+.publishpress-modules .publishpress-module .button-primary {
+    color: #f1f1f1;
+    border: solid 1px #538312;
+    background: #64991e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#86C67C), to(#3D8B37));
+    background: -moz-linear-gradient(top, #86C67C, #3D8B37);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#86C67C', endColorstr='#3D8B37');
+}
+
+.publishpress-modules .publishpress-module .button-primary:hover {
+    color: #FFFFFF;
+    border-color: #3B5D0C;
+}
+
+.publishpress-modules .publishpress-module .button-primary.configure-publishpress-module {
+    color: #f1f1f1;
+    border: solid 1px #666;
+    background: #655997;
+    box-shadow: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BBB', endColorstr='#888');
+    text-shadow: none;
+}
+
+.publishpress-modules .publishpress-module .button-primary.configure-publishpress-module:hover {
+    color: #FFF;
+    border-color: #7569A7;
+    background: #7569A7;
+}
+
+.publishpress-checklists-admin a.cancel-settings-link {
+    margin-left: 10px;
+}
+
+.publishpress-checklists-admin .inline-edit-row fieldset label span.title {
+    width: 6em;
+}
+
+.publishpress-checklists-admin .inline-edit-row fieldset label span.input-text-wrap {
+    margin-left: 6em;
+}
+
+.publishpress-checklists-admin .explanation,
+.publishpress-checklists-admin .explanation p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.publishpress-checklists-admin .explanation {
+    margin-bottom: 1em;
+}
+
+.publishpress-checklists-admin .explanation p {
+    margin: 0.5em 0;
+}
+
+.publishpress-checklists-admin .tablenav {
+    display: none;
+}
+
+/* Display drag handles for the cursor on sortable list tables for our custom taxonomies */
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.term-static {
+    cursor: move;
+}
+
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td,
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper .row-actions {
+    visibility: hidden;
+}
+
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper {
+    border: 1px solid #DFDFDF;
+}
+
+.publishpress-checklists-admin table.wp-list-table tbody.ui-sortable tr.ui-sortable-helper td.column-name {
+    visibility: visible;
+    border-bottom: none;
+}
+
+/* Display disabled inputs with a very light gray background */
+.publishpress-checklists-admin input[disabled] {
+    background-color: #eee;
+}
+
+.publishpress-modules .publishpress-module input.button,
+.publishpress-modules .publishpress-module a.button {
+    font-weight: normal;
+    margin: 0;
+}
+
+.publishpress-modules .publishpress-module a.button-primary {
+    float: right;
+}
+
+.publishpress-modules .module-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+.credits {
+    color: #666666;
+    font-size: 11px;
+}
+
+.credits a {
+    color: #666666;
+}
+
+/* Module specific image styles */
+
+.button-inline-block {
+    display: inline-block;
+}
+
+h3.nav-tab-wrapper {
+    margin-top: 0;
+}
+
+.form-wrap .form-field {
+    margin: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.form-error p {
+    font-weight: bold;
+    color: #CC0000;
+}
+
+.form-wrap p.submit a {
+    font-style: normal;
+}
+
+.enable-disable-publishpress-module {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    padding-left: 5px !important;
+    color: gray !important;
+    text-shadow: none !important;
+}
+
+.enable-disable-publishpress-module.button-remove {
+    color: black !important;
+}
+
+#modules-wrapper {
+    padding-top: 20px;
+}
+
+#modules-wrapper .module-box {
+    padding: 10px;
+    line-height: 26px;
+    background: #fff;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    max-width: 265px;
+    border: 1px solid #e1e1e1;
+    position: relative;
+    float: left;
+    height: 100px;
+    min-width: 265px;
+}
+
+#modules-wrapper .module-box h4 {
+    max-width: 150px;
+    margin: 0;
+    position: absolute;
+    left: 35px;
+    top: 7px;
+}
+
+#modules-wrapper .module-box .enable-disable-publishpress-module {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    box-shadow: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BBB', endColorstr='#888');
+    text-shadow: none;
+    color: #f1f1f1;
+    border: solid 1px #bbb;
+    background: #b5b9bD;
+}
+
+#modules-wrapper .module-box.module-enabled .enable-disable-publishpress-module {
+    color: #f1f1f1;
+    border: solid 1px #666;
+    background: #655997;
+}
+
+#modules-wrapper .module-box .enable-disable-publishpress-module:hover {
+    color: #f1f1f1;
+    border: solid 1px #bbb;
+    background: #c5c9cD;
+}
+
+#modules-wrapper .module-box.module-enabled .enable-disable-publishpress-module:hover {
+    color: #fff;
+    border-color: #7569a7;
+    background: #7569a7;
+}
+
+#modules-wrapper .dashicons {
+    color: #b0b0b0;
+}
+
+
+/* Admin Menu Icon */
+#adminmenu .toplevel_page_ppch-settings .wp-menu-image img {
+    width: 16px;
+    height: 16px;
+}

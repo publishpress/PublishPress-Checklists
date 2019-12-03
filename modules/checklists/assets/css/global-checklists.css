@@ -1,0 +1,88 @@
+#pp_checklist_meta em {
+    color: #afafaf;
+}
+
+.pp-checklists-req.status-yes * {
+    color: #66bb6a;
+}
+
+.pp-checklists-req.status-no * {
+    color: #ef5350;
+    font-weight: bold;
+}
+
+.pp-checklists-small-input {
+    width: 50px;
+}
+
+.pp-checklists-medium-input {
+    width: 60px;
+}
+
+.pp-checklists-action-label {
+    margin-left: 25px;
+}
+
+.pp-checklists-modal-list {
+    text-align: center;
+}
+
+.pp-checklists-modal-list ul {
+    text-align: left;
+    list-style: square;
+    display: inline-block;
+}
+
+.pp-checklists-warning-icon {
+    font-size: 30px;
+    padding-top: 1px;
+    width: 30px;
+    height: 30px;
+    color: #ef5350;
+}
+
+.pp-checklists-requirements-settings {
+    width: 100%;
+    max-width: 900px;
+}
+
+.pp-checklists-requirements-settings th {
+    width: auto;
+    text-align: left;
+    height: 35px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.pp-checklists-requirements-settings td {
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.pp-checklists-custom-item {
+    cursor: pointer;
+}
+
+.pp-checklists-custom-item .dashicons {
+    border: 1px solid silver;
+    border-radius: 4px;
+}
+
+#pp-checklists-post-type-filter {
+    margin-bottom: 20px;
+}
+
+#pp-checklists-post-type-filter a {
+    padding: 8px 18px;
+    border: 1px solid silver;
+}
+
+#pp-checklists-post-type-filter a.pp-selected {
+    font-weight: bold;
+    background-color: #fff;
+}
+
+#pp-checklists-global #submit {
+    margin-top: 50px;
+}

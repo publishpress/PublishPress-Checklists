@@ -1,6 +1,7 @@
 {
-  "name": "publishpress/publishpress-content-checklist",
+  "name": "publishpress/publishpress-checklists",
   "type": "wordpress-plugin",
+  "description": "",
   "license": "GPL-2",
   "authors": [
     {
@@ -8,23 +9,21 @@
       "email": "help@publishpress.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/OSTraining/WordPress-EDD-License-Integration"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/OSTraining/EDD-License-handler"
-    }
-  ],
   "config": {
     "preferred-install": "dist"
   },
+  "autoload": {
+    "psr-4": {
+      "PublishPress\\Checklists\\Core\\": "core/"
+    }
+  },
   "require": {
     "pimple/pimple": "~3.0",
-    "alledia/wordpress-plugin-builder": "dev-development",
-    "publishpress/wordpress-edd-license-integration": "~2.1"
+    "alledia/wordpress-plugin-builder": "^2.4"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   },
   "minimum-stability": "stable"
 }
