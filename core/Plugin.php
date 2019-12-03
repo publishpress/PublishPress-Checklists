@@ -49,6 +49,7 @@ class Plugin
     public function init()
     {
         add_filter('plugins_loaded', [$this, 'loadTextDomain']);
+        add_filter('init', [$this, 'deactivateLegacyPlugin']);
 
         Factory::getLegacyPlugin();
     }
@@ -60,5 +61,24 @@ class Plugin
     {
         load_plugin_textdomain('publishpress-checklists', false,
             PPCH_RELATIVE_PATH . '/languages/');
+    }
+
+    public function deactivateLegacyPlugin()
+    {
+        try {
+            if ( ! function_exists('get_plugins')) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+
+            $all_plugins = get_plugins();
+
+            // Check if Content Checklist is installed. The folder changes sometimes.
+            foreach ($all_plugins as $pluginFile => $data) {
+                if (isset($data['TextDomain']) && 'publishpress-content-checklist' === $data['TextDomain'] && is_plugin_active($pluginFile)) {
+                    deactivate_plugins($pluginFile);
+                }
+            }
+        } catch (\Exception $e) {
+        }
     }
 }
