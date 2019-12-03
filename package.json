@@ -1,4 +1,17 @@
 {
+  "name": "publishpress-checklists",
+  "version": "2.0.0",
+  "description": "PublishPress Checklists",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/publishpress/PublishPress-Content-Checklist.git"
+  },
+  "author": "PublishPress",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/publishpress/PublishPress-Content-Checklist/issues"
+  },
+  "homepage": "https://github.com/publishpress/PublishPress-Content-Checklist#readme",
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@wordpress/babel-preset-default": "^3.0.2",
@@ -6,7 +19,7 @@
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-minify": "^0.5.0",
-    "cross-env": "^5.2.0",
+    "cross-env": "^5.2.1",
     "webpack": "4.29.5",
     "webpack-cli": "3.2.3"
   },
