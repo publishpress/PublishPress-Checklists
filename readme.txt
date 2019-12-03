@@ -1,5 +1,5 @@
 === PublishPress Checklists ===
-Contributors: publishpress, andergmartins, stevejburge, pressshack
+Contributors: publishpress, andergmartins, stevejburge, kevinb
 Author: PublishPress, PressShack
 Author URI: https://publishpress.com
 Tags: publishpress, checklist
