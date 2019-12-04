@@ -29,13 +29,17 @@ We will review and contact you as soon as possible.
 
 ## Development
 
-### React
+### Setup
 
-#### Setup
+Before starting developing you need to install some dependencies managed by composer and npm.
+Make sure you have composer and npm installed and working.
 
-```
+```shell script
+$ composer update
 $ npm install
-```
+``` 
+
+### React
 
 #### Compiling JSX files to JS
 
@@ -49,6 +53,20 @@ For building the package for production:
 
 ```
 $ npm run build 
+```
+
+### Building
+
+#### Changing the version number
+
+```shell script
+$ phing set-version
+```
+
+#### Building the package
+
+```shell script
+$ phing build
 ```
 
 ## License
