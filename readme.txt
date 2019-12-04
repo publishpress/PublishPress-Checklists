@@ -1,8 +1,9 @@
-=== PublishPress Checklists ===
-Contributors: publishpress, andergmartins, stevejburge, pressshack
-Author: PublishPress, PressShack
+=== PublishPress Checklists: Pre-Publishing Approval Task Checklist for WordPress Content===
+
+Contributors: publishpress, andergmartins, stevejburge, kevinb
+Author: PublishPress
 Author URI: https://publishpress.com
-Tags: publishpress, checklist
+Tags: checklist, requirement, approval, minimum, maximum
 Requires at least: 4.7.0
 Requires PHP: 5.4
 Tested up to: 5.3
@@ -10,13 +11,49 @@ Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Extend PublishPress implementing a list of requirements to publish posts.
+You can define tasks that must be complete before content is published. Do you get a red X or a green checkmark?
 
 == Description ==
-Extend PublishPress implementing a list of requirements to publish posts.
+PublishPress Checklists is the best way to make sure that your content is ready to go live. PublishPress Checklists enables you to choose pre-publishing requirements for your content. Using PublishPress Checklists, you can define tasks that must be complete before content is published.
+
+You can make sure your posts have a minimum or maximum number of words. You can ensure that all your posts have a featured image. You can force authors to use a specific number of Tags or Categories.
+
+Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
+
+Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. Here are the default tasks:
+
+* Check that the Excerpt has text
+* Require a maximum or minimum number of categories
+* Require a maximum or minimum number of tags
+* Require a maximum or minimum number of words
+* Require a featured image
+
+In addition to the default tasks, you can also create your own tasks. Click “Add custom item” to create as many tasks as you want. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
+
+You can also create different checklists for different post types.
+
+If you need more, there’s a [Pro version of PublishPress Checklists](https://publishpress.com/addons/content-checklist/).
+
+= I FOUND A BUG, OR WANT TO CONTRIBUTE CODE =
+Great! We’d love to hear from you! PublishPress Checklists [is available on Github](https://github.com/publishpress/PublishPress-Checklists), and we welcome contributions from everyone.
+
+= FAQ =
+
+
+= Where Can I Get Support? =
+
+You can ask for help via [the PublishPress contact form](https://publishpress.com/contact/).
+
+= Do I Need Coding Skills to Use PublishPress Checklists? =
+
+Not at all. You can set up everything your team needs without any coding knowledge. We made it super easy.
+
+= Where will PublishPress Checklists appear? =
+
+The checklists will appear when you create posts or pages. Look in the right sidebar on the screen and the checkbox will be inside a metabox. Gutenberg users will also see the checklist tasks in the Pre-publish area.
 
 == Installation ==
-There're two ways to install PublishPress plugin:
+There are two ways to install the PublishPress Checklists plugin:
 
 **Through your WordPress site's admin**
 
@@ -36,9 +73,8 @@ There're two ways to install PublishPress plugin:
 5. Activate the PublishPress Checklists plugin.
 
 == Usage ==
-- Make sure you have PublishPress plugin installed and active;
-- Go to PublishPress Settings page, click on "Checklist" tab and customize its options at will;
-- That's it.
+- Go to admin page, click on the "Checklist" menu and customize the options.
+- Go to write a new post and you'll see the prepublish checklist in your sidebar.
 
 == Changelog ==
 

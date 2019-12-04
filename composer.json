@@ -15,13 +15,15 @@
   "autoload": {
     "psr-4": {
       "PublishPress\\Checklists\\Core\\": "core/"
-    }
+    },
+    "files": [
+      "publishpress-checklists.php"
+    ]
   },
   "require": {
     "pimple/pimple": "~3.0",
     "alledia/wordpress-plugin-builder": "^2.4"
-  }
-  ,
+  },
   "require-dev": {
     "roave/security-advisories": "dev-master"
   },
