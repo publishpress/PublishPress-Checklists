@@ -48,8 +48,8 @@ class Plugin
      */
     public function init()
     {
-        add_filter('plugins_loaded', [$this, 'loadTextDomain']);
-        add_filter('init', [$this, 'deactivateLegacyPlugin']);
+        add_action('plugins_loaded', [$this, 'loadTextDomain']);
+        add_action('init', [$this, 'deactivateLegacyPlugin']);
 
         Factory::getLegacyPlugin();
     }
