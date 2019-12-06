@@ -29,10 +29,10 @@
  */
 
 use PublishPress\Checklists\Core\Factory;
-use PublishPress\Checklists\Core\Requirement\Base_requirement;
-use PublishPress\Checklists\Core\Requirement\Custom_item;
 use PublishPress\Checklists\Core\Legacy\Module;
 use PublishPress\Checklists\Core\Plugin;
+use PublishPress\Checklists\Core\Requirement\Base_requirement;
+use PublishPress\Checklists\Core\Requirement\Custom_item;
 
 if ( ! class_exists('PPCH_Checklists')) {
     /**
@@ -93,7 +93,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             // Register the module with PublishPress
             $args = [
-                'title'             => __('Checklists', 'publishpress-checklists'),
+                'title'             => apply_filters('publishpress_checklists_plugin_title',
+                    esc_html__('Checklists', 'publishpress-checklists')),
                 'short_description' => __('Define tasks that must be complete before content is published.',
                     'publishpress-checklists'),
                 'module_url'        => $this->module_url,
@@ -628,7 +629,8 @@ if ( ! class_exists('PPCH_Checklists')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             $legacyPlugin->addMenuPage(
-                esc_html__('Checklists', 'publishpress-checklists'),
+                apply_filters('publishpress_checklists_plugin_title',
+                    esc_html__('Checklists', 'publishpress-checklists')),
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
@@ -642,11 +644,14 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
+            $menuLabel = apply_filters('publishpress_checklists_plugin_title',
+                esc_html__('Checklists', 'publishpress-checklists'));
+
             // Main Menu
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists', 'publishpress-checklists'),
-                esc_html__('Checklists', 'publishpress-checklists'),
+                $menuLabel,
+                $menuLabel,
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
@@ -654,8 +659,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists', 'publishpress-checklists'),
-                esc_html__('Checklists', 'publishpress-checklists'),
+                $menuLabel,
+                $menuLabel,
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']

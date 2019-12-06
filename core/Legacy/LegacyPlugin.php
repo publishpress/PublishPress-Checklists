@@ -331,7 +331,8 @@ class LegacyPlugin
 
         add_menu_page(
             $page_title,
-            esc_html__('Checklists', 'publishpress-checklists'),
+            apply_filters('publishpress_checklists_plugin_title',
+                esc_html__('Checklists', 'publishpress-checklists')),
             $capability,
             $menuSlug,
             $function,
