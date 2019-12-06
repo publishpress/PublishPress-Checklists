@@ -57,7 +57,8 @@ if ( ! class_exists('PPCH_Settings')) {
             // Register the module with PublishPress
             $this->module_url = $this->getModuleUrl(__FILE__);
             $args             = [
-                'title'                => __('Checklists Settings', 'publishpress-checklists'),
+                'title'                => apply_filters('publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')),
                 'extended_description' => false,
                 'module_url'           => $this->module_url,
                 'icon_class'           => 'dashicons dashicons-admin-settings',
@@ -104,7 +105,8 @@ if ( ! class_exists('PPCH_Settings')) {
             // Main Menu
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists Settings', 'publishpress-checklists'),
+                apply_filters('publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')),
                 esc_html__('Settings', 'publishpress-checklists'),
                 apply_filters('publishpress_checklists_view_settings_cap', 'manage_options'),
                 self::MENU_SLUG,
