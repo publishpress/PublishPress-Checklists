@@ -218,7 +218,7 @@ class LegacyPlugin
         }
 
         if (empty($args['post_type_support'])) {
-            $args['post_type_support'] = 'pp_ma_' . $name;
+            $args['post_type_support'] = 'ppch_' . $name;
         }
 
         $this->modules->$name = (object)$args;
