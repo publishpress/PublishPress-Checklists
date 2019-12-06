@@ -30,6 +30,7 @@
 
 use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\Module;
+use PublishPress\Checklists\Core\Legacy\Util;
 use PublishPress\Checklists\Core\Plugin;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
@@ -416,7 +417,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             if (is_admin()) {
                 $plugin_array['pp_checklists_requirements'] =
-                    plugin_dir_url(PPCH_FILE)
+                    Util::pluginDirUrl()
                     . 'modules/checklists/assets/js/tinymce-pp-checklists-requirements.js';
             }
 
@@ -452,7 +453,7 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             wp_enqueue_script(
                 'pp-checklists-global-checklists',
-                plugins_url('/modules/checklists/assets/js/global-checklists.js', PPCH_FILE),
+                $this->module_url . 'assets/js/global-checklists.js',
                 ['jquery', 'pp-remodal'],
                 PPCH_VERSION,
                 true
@@ -541,7 +542,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             if ( ! empty($requirements)) {
                 wp_enqueue_script(
                     'pp-checklists-requirements',
-                    plugins_url('/modules/checklists/assets/js/meta-box.js', PPCH_FILE),
+                    $this->module_url . 'assets/js/meta-box.js',
                     ['jquery', 'word-count'],
                     PPCH_VERSION,
                     true

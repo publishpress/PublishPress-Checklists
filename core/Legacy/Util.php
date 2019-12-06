@@ -123,4 +123,19 @@ class Util
 
         return $isEnabled;
     }
+
+    /**
+     * This plugin can be added as dependency in the vendor folder, so the URL needs to be adapted, specially for assets.
+     */
+    public static function pluginDirUrl()
+    {
+        if (substr_count(PPCH_PATH_BASE, 'vendor' . DIRECTORY_SEPARATOR . 'publishpress') > 0) {
+            $relativePathIndex = strpos(PPCH_PATH_BASE, DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+            $relativePath = substr(PPCH_PATH_BASE, $relativePathIndex + 9);
+
+            return plugins_url() . '/' . $relativePath;
+        }
+
+        return plugin_dir_url(PPCH_FILE);
+    }
 }
