@@ -644,8 +644,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $menuLabel = apply_filters('publishpress_checklists_plugin_title',
-                esc_html__('Checklists', 'publishpress-checklists'));
+            $menuLabel = esc_html__('Checklists', 'publishpress-checklists');
 
             // Main Menu
             add_submenu_page(
