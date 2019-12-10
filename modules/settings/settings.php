@@ -551,18 +551,20 @@ if ( ! class_exists('PPCH_Settings')) {
              */
 
             add_settings_section(
-                $this->module->options_group_name . '_post_types',
+                $this->module->options_group_name . '_general',
                 __('General:', 'publishpress-checklists'),
                 '__return_false',
                 $this->module->options_group_name
             );
+
+            do_action('publishpress_checklists_register_settings_before');
 
             add_settings_field(
                 'post_types',
                 __('Add to these post types:', 'publishpress-checklists'),
                 [$this, 'settings_post_types_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
 
             add_settings_field(
@@ -570,7 +572,7 @@ if ( ! class_exists('PPCH_Settings')) {
                 __('Show warning icon:', 'publishpress-checklists'),
                 [$this, 'settings_show_warning_icon_submit_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
 
             add_settings_field(
@@ -578,8 +580,10 @@ if ( ! class_exists('PPCH_Settings')) {
                 __('Hide Publish button:', 'publishpress-checklists'),
                 [$this, 'settings_hide_publish_button_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
+
+            do_action('publishpress_checklists_register_settings_after');
         }
 
         /**
