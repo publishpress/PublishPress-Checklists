@@ -687,7 +687,9 @@ if ( ! class_exists('PPCH_Checklists')) {
                 ],
             ]);
 
-            $this->printDefaultFooter($this->module);
+            if (apply_filters('publishpress_checklist_display_branding', true)) {
+                $this->printDefaultFooter($this->module);
+            }
         }
 
         /**

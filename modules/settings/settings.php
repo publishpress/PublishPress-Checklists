@@ -534,7 +534,9 @@ if ( ! class_exists('PPCH_Settings')) {
                 'show_tabs'      => $show_tabs,
             ]);
 
-            $this->printDefaultFooter($this->module);
+            if (apply_filters('publishpress_checklist_display_branding', true)) {
+                $this->printDefaultFooter($this->module);
+            }
         }
 
         /**
