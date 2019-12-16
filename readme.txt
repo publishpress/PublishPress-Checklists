@@ -81,6 +81,13 @@ There are two ways to install the PublishPress Checklists plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.0.1] - UNRELEASED =
+
+* Fixed: Fixed the prefix of post types in the post_type_support variable.
+* Adjusted the plugin URL for assets when working as vendor dependency.
+* Added filters to allow using the plugin as base for the Pro plugin.
+* Fix the suffix of the settings section from _post_types, to _general.
+
 = [2.0.0] - 2019-12-03 =
 * Fixed: Fixed the word counter for the Text tab in the Classic Editor;
 * Changed: Renamed from "PublishPress Content Checklist" to "PublishPress Checklists";
