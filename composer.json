@@ -15,10 +15,7 @@
   "autoload": {
     "psr-4": {
       "PublishPress\\Checklists\\Core\\": "core/"
-    },
-    "files": [
-      "publishpress-checklists.php"
-    ]
+    }
   },
   "require": {
     "pimple/pimple": "~3.0",
