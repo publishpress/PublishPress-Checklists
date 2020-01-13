@@ -692,6 +692,10 @@
         function update () {
             var text, count;
 
+            if (typeof ppChecklists.requirements.words_count === 'undefined') {
+                return;
+            }
+
             if (typeof editor == 'undefined' || ! editor || editor.isHidden()) {
                 // For the text tab.
                 text = $content.val();
@@ -702,7 +706,7 @@
 
             count = counter.count(text);
 
-            if (lastCount == count) {
+            if (lastCount === count) {
                 return;
             }
 
