@@ -601,14 +601,25 @@
         $('[data-type^="taxonomy_counter_non_hierarchical_"]').each(function (index, elem) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_non_hierarchical_', ''),
-                    count = $('#' + taxonomy + ' .tagchecklist').children('li').length,
+                    count = 0,
                     min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
-                    max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
+                    max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]),
+                    obj = null;
 
-                $('#pp-checklists-req-' + taxonomy + '_count').trigger(
-                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
-                );
+                if (PP_Checklists.is_gutenberg_active()) {
+                    obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
+                } else {
+                    obj = $('#' + taxonomy + ' .tagchecklist').children('li').length;
+                }
+
+                if (typeof obj !== 'undefined') {
+                    count = obj.length;
+
+                    $('#pp-checklists-req-' + taxonomy + '_count').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    );
+                }
             });
         });
     }
@@ -689,14 +700,14 @@
         /**
          * Get the words count from TinyMCE and update the status of the requirement
          */
-        function update () {
+        function update() {
             var text, count;
 
             if (typeof ppChecklists.requirements.words_count === 'undefined') {
                 return;
             }
 
-            if (typeof editor == 'undefined' || ! editor || editor.isHidden()) {
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
                 // For the text tab.
                 text = $content.val();
             } else {
@@ -722,7 +733,7 @@
         }
 
         // For the editor.
-        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function(event, tinymce) {
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
