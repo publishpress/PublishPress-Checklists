@@ -83,10 +83,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [2.0.1] - UNRELEASED =
 
-* Fixed: Fixed the prefix of post types in the post_type_support variable.
-* Adjusted the plugin URL for assets when working as vendor dependency.
-* Added filters to allow using the plugin as base for the Pro plugin.
-* Fix the suffix of the settings section from _post_types, to _general.
+* Fixed: Fixed the prefix of post types in the post_type_support variable;
+* Fixed: Adjusted the plugin URL for assets when working as vendor dependency;
+* Fixed: Fix the suffix of the settings section from _post_types, to _general;
+* Fixed: Fixed an undefined index error when the index "type" is not defined;
+* Fixed: Fixed a JS error when you type in the editor and the word count requirement is set;
+* Fixed: Fixed the verification for custom taxonomies on Gutenberg;
+* Added: Added filters to allow using the plugin as base for the Pro plugin;
 
 = [2.0.0] - 2019-12-03 =
 * Fixed: Fixed the word counter for the Text tab in the Classic Editor;
