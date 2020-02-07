@@ -7,7 +7,7 @@ Tags: checklist, requirement, approval, minimum, maximum
 Requires at least: 4.7.0
 Requires PHP: 5.4
 Tested up to: 5.3
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,16 @@ There are two ways to install the PublishPress Checklists plugin:
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.0.1] - UNRELEASED =
+
+* Fixed: Fixed the prefix of post types in the post_type_support variable;
+* Fixed: Adjusted the plugin URL for assets when working as vendor dependency;
+* Fixed: Fix the suffix of the settings section from _post_types, to _general;
+* Fixed: Fixed an undefined index error when the index "type" is not defined;
+* Fixed: Fixed a JS error when you type in the editor and the word count requirement is set;
+* Fixed: Fixed the verification for custom taxonomies on Gutenberg;
+* Added: Added filters to allow using the plugin as base for the Pro plugin;
 
 = [2.0.0] - 2019-12-03 =
 * Fixed: Fixed the word counter for the Text tab in the Classic Editor;

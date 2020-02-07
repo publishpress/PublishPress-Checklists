@@ -57,7 +57,8 @@ if ( ! class_exists('PPCH_Settings')) {
             // Register the module with PublishPress
             $this->module_url = $this->getModuleUrl(__FILE__);
             $args             = [
-                'title'                => __('Checklists Settings', 'publishpress-checklists'),
+                'title'                => apply_filters('publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')),
                 'extended_description' => false,
                 'module_url'           => $this->module_url,
                 'icon_class'           => 'dashicons dashicons-admin-settings',
@@ -104,7 +105,8 @@ if ( ! class_exists('PPCH_Settings')) {
             // Main Menu
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists Settings', 'publishpress-checklists'),
+                apply_filters('publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')),
                 esc_html__('Settings', 'publishpress-checklists'),
                 apply_filters('publishpress_checklists_view_settings_cap', 'manage_options'),
                 self::MENU_SLUG,
@@ -145,64 +147,6 @@ if ( ! class_exists('PPCH_Settings')) {
 			<script type="text/javascript">
 				var ma_admin_url = '<?php echo get_admin_url(); ?>';
 			</script>
-			<?php
-        }
-
-        /**
-         *
-         */
-        public function print_default_header($current_module, $custom_text = null)
-        {
-            $display_text = '';
-
-            // If there's been a message, let's display it
-            if (isset($_GET['message'])) {
-                $message = $_GET['message'];
-            } elseif (isset($_REQUEST['message'])) {
-                $message = $_REQUEST['message'];
-            } elseif (isset($_POST['message'])) {
-                $message = $_POST['message'];
-            } else {
-                $message = false;
-            }
-
-            if ($message && isset($current_module->messages[$message])) {
-                $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html($current_module->messages[$message]) . '</p></div>';
-            }
-
-            // If there's been an error, let's display it
-            if (isset($_GET['error'])) {
-                $error = $_GET['error'];
-            } elseif (isset($_REQUEST['error'])) {
-                $error = $_REQUEST['error'];
-            } elseif (isset($_POST['error'])) {
-                $error = $_POST['error'];
-            } else {
-                $error = false;
-            }
-            if ($error && isset($current_module->messages[$error])) {
-                $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html($current_module->messages[$error]) . '</p></div>';
-            }
-            ?>
-
-			<div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
-				<header>
-                    <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
-
-					<?php echo !empty($display_text) ? $display_text : ''; ?>
-					<?php // We keep the H2 tag to keep notices tied to the header?>
-					<h2>
-
-						<?php if ($current_module->short_description && empty($custom_text)): ?>
-							<?php echo $current_module->short_description; ?>
-						<?php endif; ?>
-
-						<?php if (!empty($custom_text)) : ?>
-							<?php echo $custom_text; ?>
-						<?php endif; ?>
-					</h2>
-
-				</header>
 			<?php
         }
 
@@ -590,7 +534,9 @@ if ( ! class_exists('PPCH_Settings')) {
                 'show_tabs'      => $show_tabs,
             ]);
 
-            $this->printDefaultFooter($this->module);
+            if (apply_filters('publishpress_checklist_display_branding', true)) {
+                $this->printDefaultFooter($this->module);
+            }
         }
 
         /**
@@ -605,18 +551,20 @@ if ( ! class_exists('PPCH_Settings')) {
              */
 
             add_settings_section(
-                $this->module->options_group_name . '_post_types',
+                $this->module->options_group_name . '_general',
                 __('General:', 'publishpress-checklists'),
                 '__return_false',
                 $this->module->options_group_name
             );
+
+            do_action('publishpress_checklists_register_settings_before');
 
             add_settings_field(
                 'post_types',
                 __('Add to these post types:', 'publishpress-checklists'),
                 [$this, 'settings_post_types_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
 
             add_settings_field(
@@ -624,7 +572,7 @@ if ( ! class_exists('PPCH_Settings')) {
                 __('Show warning icon:', 'publishpress-checklists'),
                 [$this, 'settings_show_warning_icon_submit_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
 
             add_settings_field(
@@ -632,8 +580,10 @@ if ( ! class_exists('PPCH_Settings')) {
                 __('Hide Publish button:', 'publishpress-checklists'),
                 [$this, 'settings_hide_publish_button_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_post_types'
+                $this->module->options_group_name . '_general'
             );
+
+            do_action('publishpress_checklists_register_settings_after');
         }
 
         /**

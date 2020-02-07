@@ -162,6 +162,7 @@ class Custom_item extends Base_simple implements Interface_required
                 'rule'      => $rule,
                 'id'        => $this->name,
                 'is_custom' => true,
+                'type'      => $this->type,
             ];
         }
 

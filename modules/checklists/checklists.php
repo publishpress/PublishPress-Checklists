@@ -29,10 +29,11 @@
  */
 
 use PublishPress\Checklists\Core\Factory;
+use PublishPress\Checklists\Core\Legacy\Module;
+use PublishPress\Checklists\Core\Legacy\Util;
+use PublishPress\Checklists\Core\Plugin;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
-use PublishPress\Checklists\Core\Legacy\Module;
-use PublishPress\Checklists\Core\Plugin;
 
 if ( ! class_exists('PPCH_Checklists')) {
     /**
@@ -93,7 +94,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             // Register the module with PublishPress
             $args = [
-                'title'             => __('Checklists', 'publishpress-checklists'),
+                'title'             => apply_filters('publishpress_checklists_plugin_title',
+                    esc_html__('Checklists', 'publishpress-checklists')),
                 'short_description' => __('Define tasks that must be complete before content is published.',
                     'publishpress-checklists'),
                 'module_url'        => $this->module_url,
@@ -415,7 +417,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             if (is_admin()) {
                 $plugin_array['pp_checklists_requirements'] =
-                    plugin_dir_url(PPCH_FILE)
+                    Util::pluginDirUrl()
                     . 'modules/checklists/assets/js/tinymce-pp-checklists-requirements.js';
             }
 
@@ -451,7 +453,7 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             wp_enqueue_script(
                 'pp-checklists-global-checklists',
-                plugins_url('/modules/checklists/assets/js/global-checklists.js', PPCH_FILE),
+                $this->module_url . 'assets/js/global-checklists.js',
                 ['jquery', 'pp-remodal'],
                 PPCH_VERSION,
                 true
@@ -540,7 +542,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             if ( ! empty($requirements)) {
                 wp_enqueue_script(
                     'pp-checklists-requirements',
-                    plugins_url('/modules/checklists/assets/js/meta-box.js', PPCH_FILE),
+                    $this->module_url . 'assets/js/meta-box.js',
                     ['jquery', 'word-count'],
                     PPCH_VERSION,
                     true
@@ -628,7 +630,8 @@ if ( ! class_exists('PPCH_Checklists')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             $legacyPlugin->addMenuPage(
-                esc_html__('Checklists', 'publishpress-checklists'),
+                apply_filters('publishpress_checklists_plugin_title',
+                    esc_html__('Checklists', 'publishpress-checklists')),
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
@@ -642,11 +645,13 @@ if ( ! class_exists('PPCH_Checklists')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
+            $menuLabel = esc_html__('Checklists', 'publishpress-checklists');
+
             // Main Menu
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists', 'publishpress-checklists'),
-                esc_html__('Checklists', 'publishpress-checklists'),
+                $menuLabel,
+                $menuLabel,
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
@@ -654,8 +659,8 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                esc_html__('Checklists', 'publishpress-checklists'),
-                esc_html__('Checklists', 'publishpress-checklists'),
+                $menuLabel,
+                $menuLabel,
                 apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
@@ -682,7 +687,9 @@ if ( ! class_exists('PPCH_Checklists')) {
                 ],
             ]);
 
-            $this->printDefaultFooter($this->module);
+            if (apply_filters('publishpress_checklist_display_branding', true)) {
+                $this->printDefaultFooter($this->module);
+            }
         }
 
         /**

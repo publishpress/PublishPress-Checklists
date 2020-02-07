@@ -218,7 +218,7 @@ class LegacyPlugin
         }
 
         if (empty($args['post_type_support'])) {
-            $args['post_type_support'] = 'pp_ma_' . $name;
+            $args['post_type_support'] = 'ppch_' . $name;
         }
 
         $this->modules->$name = (object)$args;
@@ -331,7 +331,8 @@ class LegacyPlugin
 
         add_menu_page(
             $page_title,
-            esc_html__('Checklists', 'publishpress-checklists'),
+            apply_filters('publishpress_checklists_plugin_title',
+                esc_html__('Checklists', 'publishpress-checklists')),
             $capability,
             $menuSlug,
             $function,

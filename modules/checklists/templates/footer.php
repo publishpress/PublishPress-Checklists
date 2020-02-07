@@ -46,7 +46,7 @@
     </nav>
     <div class="pp-pressshack-logo">
         <a href="//publishpress.com" target="_blank" rel="noopener noreferrer">
-            <img src="<?php echo $context['plugin_url']; ?>/modules/checklists/assets/img/publishpress-logo.png">
+            <img src="<?php echo $context['plugin_url']; ?>modules/checklists/assets/img/publishpress-logo.png">
         </a>
     </div>
 </footer>
