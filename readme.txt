@@ -81,7 +81,7 @@ There are two ways to install the PublishPress Checklists plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.0.1] - UNRELEASED =
+= [2.0.1] - 2020-02-07 =
 
 * Fixed: Fixed the prefix of post types in the post_type_support variable;
 * Fixed: Adjusted the plugin URL for assets when working as vendor dependency;
