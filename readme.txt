@@ -81,6 +81,10 @@ There are two ways to install the PublishPress Checklists plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= UNRELEASED =
+
+* Fix Checklist for custom hierarquical taxonomies when using Gutenberg;
+
 = [2.0.1] - 2020-02-07 =
 
 * Fixed: Fixed the prefix of post types in the post_type_support variable;

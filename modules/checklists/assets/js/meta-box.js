@@ -583,14 +583,25 @@
         $('[data-type^="taxonomy_counter_hierarchical_"]').each(function (index, elem) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
-                    count = $('#' + taxonomy + 'checklist input:checked').length,
+                    count = 0,
                     min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
                     max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
 
-                $('#pp-checklists-req-' + taxonomy + '_count').trigger(
-                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
-                );
+                if (PP_Checklists.is_gutenberg_active()) {
+                    var obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
+                } else {
+                    var obj = $('#' + taxonomy + 'checklist input:checked');
+                }
+
+                if (typeof obj !== 'undefined') {
+                    count = obj.length;
+
+                    $('#pp-checklists-req-' + taxonomy + '_count').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    );
+                }
+
             });
         });
     }
