@@ -111,7 +111,9 @@ class Custom_item extends Base_simple implements Interface_required
      */
     public function get_setting_field_html($css_class = '')
     {
-        $html = sprintf(
+        $html = parent::get_setting_field_html($css_class);
+
+        $html .= sprintf(
             '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s"><span class="dashicons dashicons-trash" data-id="%1$s"></span></a>',
             esc_attr($this->name)
         );

@@ -669,7 +669,7 @@
     var lastCount = 0;
     if (PP_Checklists.is_gutenberg_active()) {
         /**
-         * For Gutemberg
+         * For Gutenberg
          */
         if ($('#pp-checklists-req-words_count').length > 0) {
             wp.data.subscribe(

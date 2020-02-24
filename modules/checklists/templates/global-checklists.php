@@ -10,9 +10,18 @@
     <table class="wp-list-table striped pp-checklists-requirements-settings" id="pp-checklists-requirements">
         <thead>
         <tr>
-            <th width="20%"><?php echo $context['lang']['description']; ?></th>
-            <th width="20%"><?php echo $context['lang']['action']; ?></th>
-            <th width="60%"><?php echo $context['lang']['params']; ?></th>
+            <th><?php echo $context['lang']['description']; ?></th>
+            <th><?php echo $context['lang']['action']; ?></th>
+            <?php
+            /**
+             * @param string $html
+             * @param $requirement
+             *
+             * @return string
+             */
+            do_action('publishpress_checklists_tasks_list_th');
+            ?>
+            <th><?php echo $context['lang']['params']; ?></th>
         </tr>
         </thead>
 
@@ -27,6 +36,15 @@
 
                     <td><?php echo $requirement->get_setting_title_html(); ?></td>
                     <td><?php echo $requirement->get_setting_action_list_html(); ?></td>
+                    <?php
+                    /**
+                     * @param string $html
+                     * @param $requirement
+                     *
+                     * @return string
+                     */
+                    do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
+                    ?>
                     <td><?php echo $requirement->get_setting_field_html(); ?></td>
                 </tr>
             <?php endforeach; ?>

@@ -27,6 +27,8 @@ class TemplateLoader
     public function load($moduleName, $templateName, $context = [], $return = false, $requireOnce = true)
     {
 
+        $context = apply_filters('publishpress_checklists_load_template_context', $context, $moduleName, $templateName);
+
         $templatePath = $this->locate($moduleName, $templateName);
 
         if ( ! empty($templatePath)) {
