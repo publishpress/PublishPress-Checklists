@@ -22,7 +22,6 @@
     "pimple/pimple": "~3.0"
   },
   "require-dev": {
-    "phing/phing": "*",
     "alledia/wordpress-plugin-builder": "^2.4",
     "roave/security-advisories": "dev-master"
   },
