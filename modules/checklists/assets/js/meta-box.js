@@ -221,6 +221,7 @@
         validate_requirements: function (event) {
             this.state.should_block = false;
 
+
             // Bypass all checks because the confirmation button was clicked.
             if (this.state.is_confirmed) {
                 this.state.is_confirmed = false;
@@ -276,25 +277,27 @@
             check_requirement_action('warning');
             check_requirement_action('block');
 
+            var lockName = 'pp-checklists';
+
             // Check if we have warnings to display
             if (list_unchecked.warning.length > 0 || list_unchecked.block.length > 0) {
                 var message = '';
 
                 // Check if we don't have any unchecked block req
                 if (0 === list_unchecked.block.length) {
-                    if (!PP_Checklists.is_gutenberg_active()) {
+                    if (PP_Checklists.is_gutenberg_active()) {
+                        wp.data.dispatch('core/editor').unlockPostSaving(lockName);
+                    } else {
                         // Only display a warning
                         message = ppChecklists.msg_missed_optional + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.warning.join('</li><li>') + '</li></ul></div>';
 
                         // Display the confirm
                         $('#pp-checklists-modal-confirm-content').html(message);
                         $('[data-remodal-id=pp-checklists-modal-confirm]').remodal().open();
-                    } else {
-                        wp.data.dispatch('core/editor').unlockPostSaving('pp-checklists');
                     }
                 } else {
                     if (PP_Checklists.is_gutenberg_active()) {
-                        wp.data.dispatch('core/editor').lockPostSaving('pp-checklists');
+                        wp.data.dispatch('core/editor').lockPostSaving(lockName);
                     } else {
                         message = ppChecklists.msg_missed_required + '<div class="pp-checklists-modal-list"><ul><li>' + list_unchecked.block.join('</li><li>') + '</li></ul></div>';
 
@@ -311,7 +314,7 @@
                 this.state.should_block = true;
             } else {
                 if (PP_Checklists.is_gutenberg_active()) {
-                    wp.data.dispatch('core/editor').unlockPostSaving('pp-checklists');
+                    wp.data.dispatch('core/editor').unlockPostSaving(lockName);
                 }
             }
 
@@ -437,7 +440,14 @@
 
     // Exposes and initialize the object
     window.PP_Checklists = PP_Checklists;
-    PP_Checklists.init();
+    // RankMath plugin breaks if we
+    if (typeof rankMath !== 'undefined') {
+        setTimeout(function() {
+            PP_Checklists.init();
+        }, 2500);
+    } else {
+        PP_Checklists.init();
+    }
 
     /*----------  Warning icon in submit button  ----------*/
 
