@@ -7,7 +7,7 @@ Tags: checklist, requirement, approval, minimum, maximum
 Requires at least: 4.7.0
 Requires PHP: 5.4
 Tested up to: 5.3
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,9 +81,12 @@ There are two ways to install the PublishPress Checklists plugin:
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [2.0.2] - 2020-03-16 =
 
-* Fix Checklist for custom hierarquical taxonomies when using Gutenberg;
+* Fixed: Fix Checklist for custom hierarquical taxonomies when using Gutenberg;
+* Fixed: Small improvements to the UI;
+* Fixed: Fix compatibility with Rank Math fixing error in Gutenberg;
+* Added: Added hooks to extend the interface for the Pro version;
 
 = [2.0.1] - 2020-02-07 =
 
