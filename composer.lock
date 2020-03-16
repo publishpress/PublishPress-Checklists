@@ -111,12 +111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/publishpress/WordPress-Version-Notices.git",
-                "reference": "f6793f8d957a9631acce2eba1ecb4a07bc34bb0d"
+                "reference": "8f359bd2d7f72f2ef27fca3758825b505e7e65dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/publishpress/WordPress-Version-Notices/zipball/f6793f8d957a9631acce2eba1ecb4a07bc34bb0d",
-                "reference": "f6793f8d957a9631acce2eba1ecb4a07bc34bb0d",
+                "url": "https://api.github.com/repos/publishpress/WordPress-Version-Notices/zipball/8f359bd2d7f72f2ef27fca3758825b505e7e65dd",
+                "reference": "8f359bd2d7f72f2ef27fca3758825b505e7e65dd",
                 "shasum": ""
             },
             "require": {
@@ -145,7 +145,7 @@
                 }
             ],
             "description": "Library for displaying version notices for Pro plugins in WordPress.",
-            "time": "2020-03-16T21:53:45+00:00"
+            "time": "2020-03-16T22:13:50+00:00"
         }
     ],
     "packages-dev": [
