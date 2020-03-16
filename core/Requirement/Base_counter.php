@@ -252,7 +252,12 @@ class Base_counter extends Base_simple implements Interface_required
             $max_value
         );
 
-        $html .= sprintf(__('<label class="pp-checklists-number">Min</label> %s<br><label class="pp-checklists-number">Max</label> %s', 'publishpress-checklists'), $min_field, $max_field);
+        $html .= '<div class="pp-checklists-number">';
+        $html .= '<label>Min</label>' . $min_field;
+        $html .= '</div>';
+        $html .= '<div class="pp-checklists-number">';
+        $html .= '<label>Max</label>' . $max_field;
+        $html .= '</div>';
 
         return $html;
     }

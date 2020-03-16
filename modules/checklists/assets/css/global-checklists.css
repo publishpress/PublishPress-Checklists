@@ -91,12 +91,12 @@
     margin-top: 50px;
 }
 
-label.pp-checklists-number {
+.pp-checklists-number label {
     min-width: 30px;
     display: inline-block;
 }
 
-input.pp-checklists-number {
+.pp-checklists-number input {
     min-width: 80px;
 }
 
@@ -104,4 +104,27 @@ input.pp-checklists-number {
     border: 1px solid silver;
     padding: 10px;
     line-height: 20px;
+}
+
+@media only screen and (max-width: 781px) {
+    #pp-checklists-global table th {
+        display: none;
+    }
+
+    .pp-checklists-requirements-settings td {
+        height: auto!important;
+    }
+
+    .pp-checklists-requirement-row td {
+        padding-left: 20px;
+    }
+
+    .pp-checklists-requirement-row td:first-child {
+        padding-left: 10px;
+    }
+
+    .pp-checklists-number {
+        display: inline-block;
+        margin-right: 10px;
+    }
 }
