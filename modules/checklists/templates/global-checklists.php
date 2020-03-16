@@ -53,7 +53,7 @@
     </table>
     <br>
     <div>
-        <a id="pp-checklists-add-button" href="javascript:void(0);">
+        <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
             <span class="dashicons dashicons-plus-alt"></span> <?php echo $context['lang']['add_custom_item']; ?>
         </a>
     </div>

@@ -43,6 +43,8 @@
 
 .pp-checklists-requirements-settings {
     width: 100%;
+    border: 1px solid silver;
+    background: #fff;
 }
 
 .pp-checklists-requirements-settings th {
@@ -51,12 +53,15 @@
     height: 35px;
     padding: 10px;
     box-sizing: border-box;
+    border-bottom: 1px solid silver;
+    font-weight: normal;
 }
 
 .pp-checklists-requirements-settings td {
-    height: 50px;
+    height: 80px;
     padding: 10px;
     box-sizing: border-box;
+    line-height: 32px;
 }
 
 .pp-checklists-custom-item {
@@ -84,4 +89,19 @@
 
 #pp-checklists-global #submit {
     margin-top: 50px;
+}
+
+label.pp-checklists-number {
+    min-width: 30px;
+    display: inline-block;
+}
+
+input.pp-checklists-number {
+    min-width: 80px;
+}
+
+#pp-checklists-add-button {
+    border: 1px solid silver;
+    padding: 10px;
+    line-height: 20px;
 }
