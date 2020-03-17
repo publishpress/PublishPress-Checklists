@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d86d4c1a4ea342752939b595590629b",
+    "content-hash": "072e29b44f26c4cd827a39713d7dd9a4",
     "packages": [
         {
             "name": "pimple/pimple",
@@ -107,7 +107,7 @@
         },
         {
             "name": "publishpress/wordpress-version-notices",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/publishpress/WordPress-Version-Notices.git",
@@ -473,7 +473,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "publishpress/wordpress-version-notices": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
