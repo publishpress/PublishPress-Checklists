@@ -119,7 +119,7 @@ class Base_requirement
      * evaluate the status and override this method.
      *
      * @param stdClass $post
-     * @param mixed    $option_value
+     * @param mixed $option_value
      *
      * @return mixed
      */
@@ -137,7 +137,7 @@ class Base_requirement
      */
     public function filter_requirement_instances($requirements)
     {
-        if ( ! empty($this->name)) {
+        if (!empty($this->name)) {
             $requirements[$this->name] = $this;
         }
 

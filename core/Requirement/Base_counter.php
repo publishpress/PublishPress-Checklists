@@ -190,6 +190,8 @@ class Base_counter extends Base_simple implements Interface_required
      */
     public function get_setting_field_html($css_class = '')
     {
+        $html = parent::get_setting_field_html($css_class);
+
         $post_type = esc_attr($this->post_type);
         $css_class = esc_attr($css_class);
 
@@ -250,7 +252,12 @@ class Base_counter extends Base_simple implements Interface_required
             $max_value
         );
 
-        $html = sprintf(__('Min %s Max %s', 'publishpress-checklists'), $min_field, $max_field);
+        $html .= '<div class="pp-checklists-number">';
+        $html .= '<label>Min</label>' . $min_field;
+        $html .= '</div>';
+        $html .= '<div class="pp-checklists-number">';
+        $html .= '<label>Max</label>' . $max_field;
+        $html .= '</div>';
 
         return $html;
     }

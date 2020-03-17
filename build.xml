@@ -2,5 +2,6 @@
 
 <project name="PublishPress Plugin Builder" default="build">
     <property name="version.constant" value="PPCH_VERSION"/>
-    <import file="vendor/alledia/wordpress-plugin-builder/build.xml"/>
+
+    <import file="${env.ALLEDIA_BUILDER_PATH}/build.xml"/>
 </project>
