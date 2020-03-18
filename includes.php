@@ -22,6 +22,4 @@ if ( ! defined('PPCH_LOADED')) {
     if (file_exists(PPCH_PATH_BASE . '/vendor/autoload.php')) {
         require_once PPCH_PATH_BASE . '/vendor/autoload.php';
     }
-
-
 }
