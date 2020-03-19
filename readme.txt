@@ -21,7 +21,7 @@ You can make sure your posts have a minimum or maximum number of words. You can 
 
 Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
 
-[Click here to read the Getting Started guide for PublishPress Checklists(https://publishpress.com/knowledge-base/checklists-started/).
+[Click here to read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
 
 = The Default Checklist Requirements =
 
@@ -52,7 +52,7 @@ It is also possible to create more powerful requirements using a custom plugin. 
 
 [Click here to see how to create custom requirements with our sample plugin](https://publishpress.com/knowledge-base/custom-requirements-plugin/).
 
-= Checklists for WooCommerce Products
+= Checklists for WooCommerce Products =
 
 The Pro version of PublishPress Checklists has support for WooCommerce. There are 18 requirements you can choose:
 
@@ -75,7 +75,7 @@ The Pro version of PublishPress Checklists has support for WooCommerce. There ar
 * Select some products for “Cross-sells”
 * Product image
 
-[Click here to read more about WooCommerce checklists(https://publishpress.com/knowledge-base/use-woocommerce-checklist-add-publishpress/).
+[Click here to read more about WooCommerce checklists](https://publishpress.com/knowledge-base/use-woocommerce-checklist-add-publishpress/).
 
 = Join PublishPress and get the Pro plugins =
 
