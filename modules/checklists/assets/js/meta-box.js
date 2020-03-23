@@ -178,9 +178,11 @@
                 if (checked) {
                     $icon.removeClass('dashicons-yes');
                     $item.removeClass('status-yes');
+                    $item.addClass('status-no');
                 } else {
                     $icon.addClass('dashicons-yes');
                     $item.addClass('status-yes');
+                    $item.removeClass('status-no');
                 }
 
                 $item.children('input[type="hidden"]').val($item.hasClass('status-yes') ? 'yes' : 'no');
