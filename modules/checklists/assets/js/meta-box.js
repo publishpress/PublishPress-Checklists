@@ -176,21 +176,11 @@
                     checked = $icon.hasClass('dashicons-yes');
 
                 if (checked) {
-                    $icon
-                        .removeClass('dashicons-yes')
-                        .addClass('dashicons-no');
-
-                    $item
-                        .removeClass('status-yes')
-                        .addClass('status-no');
+                    $icon.removeClass('dashicons-yes');
+                    $item.removeClass('status-yes');
                 } else {
-                    $icon
-                        .removeClass('dashicons-no')
-                        .addClass('dashicons-yes');
-
-                    $item
-                        .removeClass('status-no')
-                        .addClass('status-yes');
+                    $icon.addClass('dashicons-yes');
+                    $item.addClass('status-yes');
                 }
 
                 $item.children('input[type="hidden"]').val($item.hasClass('status-yes') ? 'yes' : 'no');
