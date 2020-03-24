@@ -175,6 +175,8 @@
                     $icon = $item.children('.dashicons'),
                     checked = $icon.hasClass('dashicons-yes');
 
+                $icon.removeClass('dashicons-no');
+
                 if (checked) {
                     $icon.removeClass('dashicons-yes');
                     $item.removeClass('status-yes');
