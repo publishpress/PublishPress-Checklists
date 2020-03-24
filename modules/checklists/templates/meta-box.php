@@ -7,9 +7,13 @@
     <ul id="pp-checklists-req-box">
         <?php if (empty($context['requirements'])) : ?>
             <p>
-                <em><?php echo $context['lang']['to_use_checklists']; ?> <a
-                            href="<?php echo $context['configure_link']; ?>"
-                            class=""><?php echo $context['lang']['please_choose_req']; ?></a></em>
+                <?php
+                $message = sprintf($context['lang']['empty_checklist_message'],
+                    '<a href="' . $context['configure_link'] . '">',
+                '</a>'
+                );
+                ?>
+                <em><?php echo $message; ?></em>
             </p>
         <?php else : ?>
             <?php foreach ($context['requirements'] as $key => $req) : ?>

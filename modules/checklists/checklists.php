@@ -580,8 +580,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'configure_link'    => $this->get_admin_link(),
                 'nonce'             => wp_create_nonce(__FILE__),
                 'lang'              => [
-                    'to_use_checklists' => __('To use the checklist', 'publishpress-checklists'),
-                    'please_choose_req' => __('please choose some requirements', 'publishpress-checklists'),
+                    'empty_checklist_message' => __('You don\'t have to complete any %sChecklist tasks%s.', 'publishpress-checklists'),
                     'required'          => __('Required', 'publishpress-checklists'),
                     'dont_publish'      => __('Don\'t publish', 'publishpress-checklists'),
                     'yes_publish'       => __('Yes, publish', 'publishpress-checklists'),
