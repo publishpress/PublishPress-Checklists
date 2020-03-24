@@ -28,7 +28,11 @@
                                value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                     <?php endif; ?>
 
-                    <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
+                    <?php if ($req['is_custom']) : ?>
+                        <span class="dashicons <?php echo $req['status'] ? 'dashicons-' : ''; ?>"></span>
+                    <?php else: ?>
+                        <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
+                    <?php endif; ?>
                     <span class="status-label"><?php echo $req['label']; ?></span>
 
                     <span>
