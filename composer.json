@@ -14,7 +14,8 @@
   },
   "autoload": {
     "psr-4": {
-      "PublishPress\\Checklists\\Core\\": "core/"
+      "PublishPress\\Checklists\\Core\\": "core/",
+      "PublishPress\\Checklists\\Permalinks\\": "modules/permalinks/lib"
     }
   },
   "require": {

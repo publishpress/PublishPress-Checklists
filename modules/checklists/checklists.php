@@ -319,6 +319,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',
                 ],
             ];
+
             foreach ($supports_map as $supports => $requirements) {
                 foreach ($requirements as $requirement) {
                     if (post_type_supports($post_type, $supports)) {
