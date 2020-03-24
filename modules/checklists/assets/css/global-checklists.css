@@ -83,6 +83,9 @@
 #pp-checklists-post-type-filter a {
     padding: 8px 18px;
     border: 1px solid silver;
+    display: inline-block;
+    margin-right: 2px;
+    margin-bottom: 4px;
 }
 
 #pp-checklists-post-type-filter a.pp-selected {
