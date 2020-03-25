@@ -29,7 +29,7 @@
                     <?php endif; ?>
 
                     <?php if ($req['is_custom']) : ?>
-                        <span class="dashicons <?php echo $req['status'] ? 'dashicons-' : ''; ?>"></span>
+                        <span class="dashicons <?php echo $req['status'] ? 'dashicons-yes' : ''; ?>"></span>
                     <?php else: ?>
                         <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
                     <?php endif; ?>
