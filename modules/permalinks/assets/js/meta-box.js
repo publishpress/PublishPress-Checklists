@@ -75,7 +75,12 @@
                     }
 
                     if (typeof slug === 'undefined' || slug === '') {
-                        slug = $('#post-body #titlewrap input').val();
+                        /* Only for the title, we ignore some chars like space, !, ? knowing those will be automatically
+                         * replaced by WP when creating the slug from the title. This makes it more intuitive while
+                         * adding a title for a new post without marking the permalink as invalid before it is really
+                         * created by WP.
+                         */
+                        slug = $('#post-body #titlewrap input').val().replace(/[\s!\?]/g, '').toLocaleLowerCase();
                     }
                 }
 
