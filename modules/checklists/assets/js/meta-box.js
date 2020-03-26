@@ -301,19 +301,19 @@
                         if (PP_Checklists.is_gutenberg_active()) {
                             wp.data.dispatch('core/editor').lockPostSaving(gutenbergLockName);
                         } else {
-                            if (isPublishingThePost) {
-                                message = ppChecklists.msg_missed_required_publishing;
-                            } else {
+                            if (isUpdatingPublishedPost) {
                                 message = ppChecklists.msg_missed_required_updating;
+                            } else {
+                                message = ppChecklists.msg_missed_required_publishing;
                             }
 
                             message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.block.join('</li><li>') + '</li></ul></div>';
 
                             if (uncheckedItems.warning.length > 0) {
-                                if (isPublishingThePost) {
-                                    message += ppChecklists.msg_missed_important_publishing;
-                                } else {
+                                if (isUpdatingPublishedPost) {
                                     message += ppChecklists.msg_missed_important_updating;
+                                } else {
+                                    message += ppChecklists.msg_missed_important_publishing;
                                 }
 
                                 message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.warning.join('</li><li>') + '</li></ul></div>';
@@ -328,10 +328,10 @@
                             wp.data.dispatch('core/editor').unlockPostSaving(gutenbergLockName);
                         } else {
                             // Only display a warning
-                            if (isPublishingThePost) {
-                                message = ppChecklists.msg_missed_optional_publishing;
-                            } else {
+                            if (isUpdatingPublishedPost) {
                                 message = ppChecklists.msg_missed_optional_updating;
+                            } else {
+                                message = ppChecklists.msg_missed_optional_publishing;
                             }
 
                             message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.warning.join('</li><li>') + '</li></ul></div>';
