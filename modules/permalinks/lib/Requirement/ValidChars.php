@@ -30,7 +30,7 @@ class ValidChars extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Standard characters in permalink', 'publishpress-checklists'));
+        $this->lang['label_settings'] = esc_html(__('Latin characters in permalink', 'publishpress-checklists'));
     }
 
     /**

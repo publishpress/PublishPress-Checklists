@@ -35,7 +35,7 @@ use PublishPress\Checklists\Core\Plugin;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
 
-if ( ! class_exists('PPCH_Checklists')) {
+if (!class_exists('PPCH_Checklists')) {
     /**
      * class PPCH_Checklists
      */
@@ -129,9 +129,9 @@ if ( ! class_exists('PPCH_Checklists')) {
             set_transient(self::FLAG_UPDATING_LEGACY_OPTION, 1, 10);
 
             // Do the migration
-            if ( ! (bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
+            if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
                 $legacyOptions = get_option('publishpress_checklist_options');
-                if ( ! empty($legacyOptions)) {
+                if (!empty($legacyOptions)) {
                     $settingsOptions                           = new stdClass();
                     $settingsOptions->enabled                  = 'on';
                     $settingsOptions->loaded_once              = 1;
@@ -172,7 +172,7 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             $req_classes = apply_filters('publishpress_checklists_post_type_requirements', [], $post_type);
 
-            if ( ! isset($this->requirements[$post_type])) {
+            if (!isset($this->requirements[$post_type])) {
                 $this->requirements[$post_type] = [];
             }
 
@@ -192,7 +192,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                         if (isset($wp_taxonomies[$params['taxonomy']])) {
                             $taxonomy = $wp_taxonomies[$params['taxonomy']];
 
-                            if ( ! $taxonomy->show_ui) {
+                            if (!$taxonomy->show_ui) {
                                 continue;
                             }
 
@@ -209,7 +209,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                     // Instantiate the class
                     $instance = new $class_name($this->module, $post_type);
 
-                    if ( ! is_null($params) && method_exists($instance, 'set_params')) {
+                    if (!is_null($params) && method_exists($instance, 'set_params')) {
                         $instance->set_params($params);
                     }
 
@@ -220,7 +220,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             }
 
             // Instantiate custom items
-            if (isset($this->module->options->custom_items) && ! empty($this->module->options->custom_items)) {
+            if (isset($this->module->options->custom_items) && !empty($this->module->options->custom_items)) {
                 foreach ($this->module->options->custom_items as $id) {
                     $id = trim((string)$id);
 
@@ -276,7 +276,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         /**
          * Set the requirements list for the given post type
          *
-         * @param array  $requirements
+         * @param array $requirements
          * @param string $post_type
          *
          * @return array
@@ -328,7 +328,7 @@ if ( ! class_exists('PPCH_Checklists')) {
                 }
             }
 
-            if ( ! empty($classes)) {
+            if (!empty($classes)) {
                 $requirements = array_merge($requirements, $classes);
             }
 
@@ -540,7 +540,7 @@ if ( ! class_exists('PPCH_Checklists')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             // Add the scripts
-            if ( ! empty($requirements)) {
+            if (!empty($requirements)) {
                 wp_enqueue_script(
                     'pp-checklists-requirements',
                     $this->module_url . 'assets/js/meta-box.js',
@@ -553,18 +553,24 @@ if ( ! class_exists('PPCH_Checklists')) {
                     'pp-checklists-requirements',
                     'ppChecklists',
                     [
-                        'requirements'              => $requirements,
-                        'msg_missed_optional'       => __('Are you sure you want to publish anyway?',
+                        'requirements'                    => $requirements,
+                        'msg_missed_optional_publishing'  => __('Are you sure you want to publish anyway?',
                             'publishpress-checklists'),
-                        'msg_missed_required'       => __('Please complete the following tasks before publishing:',
+                        'msg_missed_optional_updating'    => __('Are you sure you want to update the published post anyway?',
                             'publishpress-checklists'),
-                        'msg_missed_important'      => __('Not required, but important: ',
+                        'msg_missed_required_publishing'  => __('Please complete the following tasks before publishing:',
                             'publishpress-checklists'),
-                        'show_warning_icon_submit'  => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
-                        'hide_publish_button'       => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->hide_publish_button,
-                        'title_warning_icon'        => __('One or more items in the checklist are not completed'),
-                        'gutenberg_warning_css'     => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-warning.css'),
-                        'gutenberg_hide_submit_css' => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'),
+                        'msg_missed_required_updating'    => __('Please complete the following tasks before updating the published post:',
+                            'publishpress-checklists'),
+                        'msg_missed_important_publishing' => __('Not required, but important: ',
+                            'publishpress-checklists'),
+                        'msg_missed_important_updating'   => __('Not required, but important: ',
+                            'publishpress-checklists'),
+                        'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
+                        'hide_publish_button'             => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->hide_publish_button,
+                        'title_warning_icon'              => __('One or more items in the checklist are not completed'),
+                        'gutenberg_warning_css'           => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-warning.css'),
+                        'gutenberg_hide_submit_css'       => @file_get_contents(__DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'),
                     ]
                 );
 
@@ -580,10 +586,12 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'configure_link'    => $this->get_admin_link(),
                 'nonce'             => wp_create_nonce(__FILE__),
                 'lang'              => [
-                    'empty_checklist_message' => __('You don\'t have to complete any %sChecklist tasks%s.', 'publishpress-checklists'),
-                    'required'          => __('Required', 'publishpress-checklists'),
-                    'dont_publish'      => __('Don\'t publish', 'publishpress-checklists'),
-                    'yes_publish'       => __('Yes, publish', 'publishpress-checklists'),
+                    'empty_checklist_message' => __('You don\'t have to complete any %sChecklist tasks%s.',
+                        'publishpress-checklists'),
+                    'required'                => __('Required', 'publishpress-checklists'),
+                    'ok'                      => __('Ok', 'publishpress-checklists'),
+                    'no'                      => __('No', 'publishpress-checklists'),
+                    'yes'                     => __('Yes', 'publishpress-checklists'),
 
                 ],
             ]);
@@ -592,7 +600,7 @@ if ( ! class_exists('PPCH_Checklists')) {
         /**
          * Save the state of custom items.
          *
-         * @param int    $id   Unique ID for the post being saved
+         * @param int $id Unique ID for the post being saved
          * @param object $post Post object
          */
         public function save_post_meta_box($id, $post)
@@ -600,21 +608,21 @@ if ( ! class_exists('PPCH_Checklists')) {
 
             // Authentication checks: make sure data came from our meta box and that the current user is allowed to edit the post
             // TODO: switch to using check_admin_referrer? See core (e.g. edit.php) for usage
-            if ( ! isset($_POST[self::METADATA_TAXONOMY . "_nonce"])
-                 || ! wp_verify_nonce($_POST[self::METADATA_TAXONOMY . "_nonce"], __FILE__)) {
+            if (!isset($_POST[self::METADATA_TAXONOMY . "_nonce"])
+                || !wp_verify_nonce($_POST[self::METADATA_TAXONOMY . "_nonce"], __FILE__)) {
                 return $id;
             }
 
             if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-                || ! in_array($post->post_type, $this->getSelectedPostTypes())
-                || $post->post_type == 'post' && ! current_user_can('edit_post', $id)
-                || $post->post_type == 'page' && ! current_user_can('edit_page', $id)) {
+                || !in_array($post->post_type, $this->getSelectedPostTypes())
+                || $post->post_type == 'post' && !current_user_can('edit_post', $id)
+                || $post->post_type == 'page' && !current_user_can('edit_page', $id)) {
                 return $id;
             }
 
             // Check if we have data coming from custom items
             if (isset($_POST['_PPCH_custom_item'])) {
-                if ( ! empty($_POST['_PPCH_custom_item'])) {
+                if (!empty($_POST['_PPCH_custom_item'])) {
                     foreach ($_POST['_PPCH_custom_item'] as $item_id => $value) {
                         update_post_meta($id, self::POST_META_PREFIX . $item_id, $value);
                     }
@@ -724,10 +732,10 @@ if ( ! class_exists('PPCH_Checklists')) {
                 'pp-checklists-requirements-gutenberg',
                 plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PPCH_FILE),
                 [
-                    'wp-blocks',
                     'wp-i18n',
                     'wp-element',
                     'wp-hooks',
+                    'wp-edit-post',
                     'react',
                     'react-dom',
                 ],
@@ -741,15 +749,15 @@ if ( ! class_exists('PPCH_Checklists')) {
          */
         public function save_global_checklist()
         {
-            if ( ! isset($_GET['page']) || $_GET['page'] !== self::MENU_SLUG) {
+            if (!isset($_GET['page']) || $_GET['page'] !== self::MENU_SLUG) {
                 return;
             }
 
-            if ( ! isset($_POST['publishpress_checklists_checklists_options']) || empty($_POST['publishpress_checklists_checklists_options'])) {
+            if (!isset($_POST['publishpress_checklists_checklists_options']) || empty($_POST['publishpress_checklists_checklists_options'])) {
                 return;
             }
 
-            if ( ! wp_verify_nonce($_POST['_wpnonce'], 'ppch-global-checklists')) {
+            if (!wp_verify_nonce($_POST['_wpnonce'], 'ppch-global-checklists')) {
                 return;
             }
 
@@ -785,7 +793,7 @@ if ( ! class_exists('PPCH_Checklists')) {
          */
         protected function instantiate_custom_items_to_validate_settings($new_options)
         {
-            if (isset($new_options['custom_items']) && ! empty($new_options['custom_items'])) {
+            if (isset($new_options['custom_items']) && !empty($new_options['custom_items'])) {
                 foreach ($new_options['custom_items'] as $id) {
                     if (isset($new_options[$id . '_title'])) {
                         foreach ($new_options[$id . '_title'] as $post_type => $title) {
