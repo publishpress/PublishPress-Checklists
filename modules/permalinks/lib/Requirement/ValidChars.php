@@ -88,7 +88,7 @@ class ValidChars extends Base_simple
     {
         $slug = $post->post_name;
 
-        return preg_match('/^[a-zA-Z0-9\-_]+$/', $slug) === 1;
+        return preg_match('/^[a-z0-9\-_]+$/', $slug) === 1;
     }
 
     /**

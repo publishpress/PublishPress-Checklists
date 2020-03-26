@@ -37,7 +37,7 @@
                 return false;
             }
 
-            var exp = /[^a-zA-Z0-9_\-]+/g;
+            var exp = /[^a-z0-9_\-]+/g;
 
             return !exp.test(text);
         }
