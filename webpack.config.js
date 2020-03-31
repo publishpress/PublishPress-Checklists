@@ -1,6 +1,6 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-var path = require('path');
+let path = require('path');
 
 module.exports = {
     mode: NODE_ENV,

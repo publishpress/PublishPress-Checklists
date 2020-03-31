@@ -70,14 +70,13 @@ class Module
      */
     public function getAllPostTypes()
     {
-        $allowedPostTypes = [
-            'post' => __('Post'),
-            'page' => __('Page'),
-        ];
+        $allowedPostTypes = [];
         $customPostTypes  = $this->getSupportedPostTypesForModule();
 
-        foreach ($customPostTypes as $customPostType => $args) {
-            $allowedPostTypes[$customPostType] = $args->label;
+        if (!empty($customPostTypes)) {
+            foreach ($customPostTypes as $customPostType => $args) {
+                $allowedPostTypes[$customPostType] = $args->label;
+            }
         }
 
         return $allowedPostTypes;
@@ -262,15 +261,23 @@ class Module
     public function getSupportedPostTypesForModule($module = null)
     {
         $postTypeArgs = [
-            '_builtin' => false,
-            'public'   => true,
+            'show_ui'   => true,
         ];
         $postTypeArgs = apply_filters('publishpress_checklists_supported_module_post_types_args', $postTypeArgs,
             $module);
 
         $postTypes = get_post_types($postTypeArgs, 'objects');
 
-        return apply_filters('publishpress_checklists_supported_module_post_types', $postTypes);
+        // Remove ignored post types
+        $validPostTypes = [];
+        foreach ($postTypes as $slug => $postType) {
+            // Ignore: Media, Block, Custom Field, Custom Layout, Notification Workflow
+            if (!in_array($slug, ['attachment', 'wp_block', 'ppmacf_field', 'ppmacf_layout', 'psppnotif_workflow'])) {
+                $validPostTypes[$slug] = $postType;
+            }
+        }
+
+        return apply_filters('publishpress_checklists_supported_module_post_types', $validPostTypes);
     }
 
     /**
@@ -297,11 +304,6 @@ class Module
         if (empty($this->post_types)) {
             // Apply filters to the list of requirements
             $this->post_types = apply_filters('publishpress_checklists_post_types', []);
-
-            // Try a more readable name
-            foreach ($this->post_types as $type => $label) {
-                $this->post_types[$type] = esc_html__(ucfirst($label));
-            }
         }
 
         return $this->post_types;

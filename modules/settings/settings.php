@@ -331,10 +331,7 @@ if ( ! class_exists('PPCH_Settings')) {
         public function helper_option_custom_post_type($module, $post_types = [])
         {
             if (empty($post_types)) {
-                $post_types = [
-                    'post' => __('Posts'),
-                    'page' => __('Pages'),
-                ];
+                $post_types = [];
                 $custom_post_types = $this->getSupportedPostTypesForModule();
                 if (count($custom_post_types)) {
                     foreach ($custom_post_types as $custom_post_type => $args) {

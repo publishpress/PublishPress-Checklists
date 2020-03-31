@@ -243,19 +243,9 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function filter_post_types($post_types)
         {
-            $allowed_post_types = [
-                'post' => __('Post'),
-                'page' => __('Page'),
-            ];
+            $selected_post_types = $this->getSelectedPostTypes();
 
-            $args = [
-                '_builtin' => false,
-                'public'   => true,
-            ];
-
-            $list = get_post_types($args);
-
-            return array_merge($post_types, $allowed_post_types, $list);
+            return array_merge($post_types, $selected_post_types);
         }
 
         protected function getPostTypeTaxonomies($post_type)
@@ -513,16 +503,25 @@ if (!class_exists('PPCH_Checklists')) {
 
             $supported_post_types = $this->getSelectedPostTypes();
 
-            foreach ($supported_post_types as $post_type) {
+            foreach ($supported_post_types as $post_type => $label) {
                 add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
             }
         }
 
         protected function getSelectedPostTypes()
         {
-            $legacyPlugin = Factory::getLegacyPlugin();
+            $legacyPlugin  = Factory::getLegacyPlugin();
+            $postTypeSlugs = $this->getPostTypesForModule($legacyPlugin->settings->module);
+            $postTypes     = [];
 
-            return $this->getPostTypesForModule($legacyPlugin->settings->module);
+            foreach ($postTypeSlugs as $slug) {
+                $postType = get_post_type_object($slug);
+                if (is_object($postType)) {
+                    $postTypes[$slug] = $postType->label;
+                }
+            }
+
+            return $postTypes;
         }
 
         /**
@@ -614,7 +613,7 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-                || !in_array($post->post_type, $this->getSelectedPostTypes())
+                || !array_key_exists($post->post_type, $this->getSelectedPostTypes())
                 || $post->post_type == 'post' && !current_user_can('edit_post', $id)
                 || $post->post_type == 'page' && !current_user_can('edit_page', $id)) {
                 return $id;
