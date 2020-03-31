@@ -65,6 +65,12 @@
                             slug = edits.slug;
                         } else {
                             slug = editor.getCurrentPost().slug;
+
+                            if (slug === '') {
+                                if (typeof edits.title !== 'undefined') {
+                                    slug = edits.title.replace(/[\s!\?]/g, '').toLocaleLowerCase();
+                                }
+                            }
                         }
                     }
                 } else {
