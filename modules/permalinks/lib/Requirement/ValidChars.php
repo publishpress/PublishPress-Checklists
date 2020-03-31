@@ -57,6 +57,10 @@ class ValidChars extends Base_simple
      */
     public function filter_requirements_list($requirements, $post)
     {
+        if ($post->post_type !== $this->post_type) {
+            return $requirements;
+        }
+
         if (!$this->is_enabled()) {
             return $requirements;
         }
