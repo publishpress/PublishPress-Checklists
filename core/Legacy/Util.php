@@ -124,13 +124,37 @@ class Util
         return $isEnabled;
     }
 
+    private static function getDirectorySeparator()
+    {
+        if (defined('DIRECTORY_SEPARATOR')) {
+            $directorySeparator = DIRECTORY_SEPARATOR;
+        } else {
+            $isWindows = false;
+            if (defined('PHP_OS')) {
+                $winOSValues = [
+                    'Windows',
+                    'WINNT',
+                    'WIN32'
+                ];
+
+                $isWindows = in_array(PHP_OS, $winOSValues);
+            }
+
+            $directorySeparator = $isWindows ? '\\' : '/';
+        }
+
+        return $directorySeparator;
+    }
+
     /**
      * This plugin can be added as dependency in the vendor folder, so the URL needs to be adapted, specially for assets.
      */
     public static function pluginDirUrl()
     {
-        if (substr_count(PPCH_PATH_BASE, 'vendor' . DIRECTORY_SEPARATOR . 'publishpress') > 0) {
-            $relativePathIndex = strpos(PPCH_PATH_BASE, DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+        $directorySeparator = self::getDirectorySeparator();
+
+        if (substr_count(PPCH_PATH_BASE, 'vendor' . $directorySeparator . 'publishpress') > 0) {
+            $relativePathIndex = strpos(PPCH_PATH_BASE, $directorySeparator . 'plugins' . $directorySeparator);
             $relativePath = substr(PPCH_PATH_BASE, $relativePathIndex + 9);
 
             return plugins_url() . '/' . $relativePath;
