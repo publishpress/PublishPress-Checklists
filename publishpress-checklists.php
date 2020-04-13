@@ -12,7 +12,7 @@
  * @publishpress-checklists
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Version: 2.1.0-beta.3
+ * Version: 2.1.0
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
@@ -38,6 +38,16 @@ if (is_admin() && !defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
                 ['base' => 'toplevel_page_ppch-checklists', 'id' => 'toplevel_page_ppch-checklists',],
                 ['base' => 'checklists_page_ppch-settings', 'id' => 'checklists_page_ppch-settings',],
             ]
+        ];
+
+        return $settings;
+    });
+
+    add_filter(\PPVersionNotices\Module\MenuLink\Module::SETTINGS_FILTER, function ($settings) {
+        $settings['publishpress-checklists'] = [
+            'parent' => 'ppch-checklists',
+            'label'  => 'Upgrade to Pro',
+            'link'   => 'https://publishpress.com/links/checklists-menu',
         ];
 
         return $settings;
