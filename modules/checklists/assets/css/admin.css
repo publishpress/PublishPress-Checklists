@@ -179,3 +179,32 @@
 .pressshack-admin-wrapper .pp-pressshack-logo img {
     width: 170px;
 }
+
+
+/* Warning icon */
+body.ppch-show-warning-icon .editor-post-publish-button,
+body.ppch-show-warning-icon .editor-post-publish-button__button {
+    margin-left: 40px !important;
+    position: relative;
+    overflow: visible;
+}
+
+body.ppch-show-warning-icon .editor-post-publish-button::before,
+body.ppch-show-warning-icon .editor-post-publish-button__button::before {
+    position: absolute;
+    top: 0;
+    left: -36px;
+    line-height: 30px;
+    content: "!";
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    font-size: 23px;
+    text-shadow: none;
+}

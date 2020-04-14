@@ -504,15 +504,13 @@
     // Show warning icon close to the submit button
     if (ppChecklists.show_warning_icon_submit) {
         if (PP_Checklists.is_gutenberg_active()) {
-            var styleTagId = 'ppChecklistsWarningIcon';
-
             // For Gutenberg, we don't inject an element, but change the style of the submit button.
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
                 if (has_unchecked.length > 0) {
-                    PP_Checklists.add_style_tag(styleTagId, ppChecklists.gutenberg_warning_css);
+                    $('body').addClass('ppch-show-warning-icon');
                 } else {
-                    PP_Checklists.remove_style_tag(styleTagId);
+                    $('body').removeClass('ppch-show-warning-icon');
                 }
             });
         } else {

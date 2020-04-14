@@ -606,12 +606,6 @@ if (!class_exists('PPCH_Checklists')) {
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => __('One or more items in the checklist are not completed'),
-                        'gutenberg_warning_css'           => @file_get_contents(
-                            __DIR__ . '/assets/css/admin-gutenberg-warning.css'
-                        ),
-                        'gutenberg_hide_submit_css'       => @file_get_contents(
-                            __DIR__ . '/assets/css/admin-gutenberg-hide-submit.css'
-                        ),
                     ]
                 );
 
