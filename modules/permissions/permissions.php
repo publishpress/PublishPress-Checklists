@@ -73,7 +73,7 @@ class PPCH_Permissions extends Module
                 'enabled' => 'on',
             ],
             'options_page'    => false,
-            'autoload'        => false,
+            'autoload'        => true,
         ];
 
         // Apply a filter to the default options

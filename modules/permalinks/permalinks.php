@@ -70,6 +70,7 @@ class PPCH_Permalinks extends Module
                 'enabled' => 'on',
             ],
             'options_page'      => false,
+            'autoload'          => true,
         ];
 
         // Apply a filter to the default options
