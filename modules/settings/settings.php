@@ -52,13 +52,13 @@ if ( ! class_exists('PPCH_Settings')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $defaultChecked = $legacyPlugin->isBlockEditorActive() ? 'off' : 'on';
-
             // Register the module with PublishPress
             $this->module_url = $this->getModuleUrl(__FILE__);
             $args             = [
-                'title'                => apply_filters('publishpress_checklists_settings_title',
-                    esc_html__('Checklists Settings', 'publishpress-checklists')),
+                'title'                => apply_filters(
+                    'publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')
+                ),
                 'extended_description' => false,
                 'module_url'           => $this->module_url,
                 'icon_class'           => 'dashicons dashicons-admin-settings',
@@ -67,7 +67,7 @@ if ( ! class_exists('PPCH_Settings')) {
                 'default_options'      => [
                     'enabled' => 'on',
                     'post_types'               => [
-                        'post' => $defaultChecked,
+                        'post' => 'on',
                     ],
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'hide_publish_button'      => Base_requirement::VALUE_NO,
