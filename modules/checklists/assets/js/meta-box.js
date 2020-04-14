@@ -503,34 +503,14 @@
 
     // Show warning icon close to the submit button
     if (ppChecklists.show_warning_icon_submit) {
-        if (PP_Checklists.is_gutenberg_active()) {
-            // For Gutenberg, we don't inject an element, but change the style of the submit button.
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-                if (has_unchecked.length > 0) {
-                    $('body').addClass('ppch-show-warning-icon');
-                } else {
-                    $('body').removeClass('ppch-show-warning-icon');
-                }
-            });
-        } else {
-            var $icon = $('<span>')
-                .addClass('dashicons dashicons-warning pp-checklists-warning-icon')
-                .hide()
-                .prependTo($('#publishing-action'))
-                .attr('title', ppChecklists.title_warning_icon);
-
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-                if (has_unchecked.length > 0) {
-                    // Not ok
-                    $icon.show();
-                } else {
-                    // Ok
-                    $icon.hide();
-                }
-            });
-        }
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
+            if (has_unchecked.length > 0) {
+                $('body').addClass('ppch-show-publishing-warning-icon');
+            } else {
+                $('body').removeClass('ppch-show-publishing-warning-icon');
+            }
+        });
     }
 
     /*----------  Featured Image  ----------*/
