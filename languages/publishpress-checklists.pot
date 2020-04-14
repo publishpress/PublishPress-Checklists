@@ -370,10 +370,6 @@ msgstr ""
 msgid "Show warning icon:"
 msgstr ""
 
-#: modules/settings/settings.php:632
-msgid "Hide Publish button:"
-msgstr ""
-
 #: modules/settings/settings.php:663
 msgid "This will display a warning icon in the \"Publish\" box"
 msgstr ""

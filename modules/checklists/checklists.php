@@ -143,9 +143,8 @@ if (!class_exists('PPCH_Checklists')) {
                     $settingsOptions->loaded_once              = 1;
                     $settingsOptions->post_types               = isset($legacyOptions->post_types) ? $legacyOptions->post_types : ['post' => 'on'];
                     $settingsOptions->show_warning_icon_submit = isset($legacyOptions->show_warning_icon_submit) ? $legacyOptions->show_warning_icon_submit : Base_requirement::VALUE_YES;
-                    $settingsOptions->hide_publish_button      = isset($legacyOptions->hide_publish_button) ? $legacyOptions->hide_publish_button : Base_requirement::VALUE_NO;
 
-                    unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit, $legacyOptions->hide_publish_button);
+                    unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit);
 
                     update_option('publishpress_checklists_settings_options', $settingsOptions);
                     update_option('publishpress_checklists_checklists_options', $legacyOptions);
@@ -606,7 +605,6 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
-                        'hide_publish_button'             => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->hide_publish_button,
                         'title_warning_icon'              => __('One or more items in the checklist are not completed'),
                         'gutenberg_warning_css'           => @file_get_contents(
                             __DIR__ . '/assets/css/admin-gutenberg-warning.css'

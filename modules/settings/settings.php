@@ -70,7 +70,6 @@ if (!class_exists('PPCH_Settings')) {
                         'post' => 'on',
                     ],
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
-                    'hide_publish_button'      => Base_requirement::VALUE_NO,
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -489,10 +488,6 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
 
-            if (!isset($new_options['hide_publish_button'])) {
-                $new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
-            }
-
             return $new_options;
         }
 
@@ -621,14 +616,6 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
-            add_settings_field(
-                'hide_publish_button',
-                __('Hide Publish button:', 'publishpress-checklists'),
-                [$this, 'settings_hide_publish_button_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
-
             do_action('publishpress_checklists_register_settings_after');
         }
 
@@ -664,27 +651,6 @@ if (!class_exists('PPCH_Settings')) {
         }
 
         /**
-         * Displays the field for the option of hide the submit button if the
-         * checklist is not complete.
-         *
-         * @param array
-         */
-        public function settings_hide_publish_button_option($args = [])
-        {
-            $id    = $this->module->options_group_name . '_hide_publish_button';
-            $value = isset($this->module->options->hide_publish_button) ? $this->module->options->hide_publish_button : 'no';
-
-            echo '<label for="' . $id . '">';
-            echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[hide_publish_button]" '
-                . checked($value, 'yes', false) . ' />';
-            echo '&nbsp;&nbsp;&nbsp;' . __(
-                    'This will hide the Publish button if "Recommended" and "Required" tasks are not complete.',
-                    'publishpress-checklists'
-                );
-            echo '</label>';
-        }
-
-        /**
          * Validate data entered by the user
          *
          * @param array $new_options New values that have been entered by the user
@@ -712,11 +678,6 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
-
-            if (!isset ($new_options['hide_publish_button'])) {
-                $new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
-            }
-            $new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             return $new_options;
         }

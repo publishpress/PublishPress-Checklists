@@ -535,37 +535,6 @@
         }
     }
 
-    /*----------  Hide submit button  ----------*/
-
-    // Hide the submit button
-    if (ppChecklists.hide_publish_button) {
-        if (PP_Checklists.is_gutenberg_active()) {
-            var styleTagId = 'ppChecklistsHideSubmit';
-
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-                if (has_unchecked.length > 0) {
-                    PP_Checklists.add_style_tag(styleTagId, ppChecklists.gutenberg_hide_submit_css);
-                } else {
-                    PP_Checklists.remove_style_tag(styleTagId);
-                }
-            });
-        } else {
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var has_unchecked = $('#pp-checklists-req-box').children('.status-no'),
-                    $button = $('#publish');
-
-                if (has_unchecked.length > 0) {
-                    // Not ok
-                    $button.hide();
-                } else {
-                    // Ok
-                    $button.show();
-                }
-            });
-        }
-    }
-
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
