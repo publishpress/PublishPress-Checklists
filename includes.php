@@ -11,7 +11,7 @@
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-if ( ! defined('PPCH_LOADED')) {
+if (!defined('PPCH_LOADED')) {
     define('PPCH_PATH_BASE', plugin_dir_path(__FILE__));
     define('PPCH_VERSION', '2.1.0');
     define('PPCH_FILE', __DIR__ . '/publishpress-checklists.php');

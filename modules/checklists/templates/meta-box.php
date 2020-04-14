@@ -8,9 +8,10 @@
         <?php if (empty($context['requirements'])) : ?>
             <p>
                 <?php
-                $message = sprintf($context['lang']['empty_checklist_message'],
+                $message = sprintf(
+                    $context['lang']['empty_checklist_message'],
                     '<a href="' . $context['configure_link'] . '">',
-                '</a>'
+                    '</a>'
                 );
                 ?>
                 <em><?php echo $message; ?></em>

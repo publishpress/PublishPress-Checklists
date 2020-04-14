@@ -124,8 +124,10 @@ class LegacyPlugin
                 }
 
                 if (!is_null($args) && !empty($args->settingsHelpTab)) {
-                    add_action('load-checklists_page_' . $args->settings_slug,
-                        [$module_instance, 'action_settings_help_menu']);
+                    add_action(
+                        'load-checklists_page_' . $args->settings_slug,
+                        [$module_instance, 'action_settings_help_menu']
+                    );
                 }
 
                 $this->loadedModules[] = $slug;
@@ -163,8 +165,10 @@ class LegacyPlugin
     public function loadModulesOptions()
     {
         foreach ($this->modules as $moduleName => $moduleData) {
-            $this->modules->$moduleName->options = get_option($this->optionsGroup . $moduleName . '_options',
-                new stdClass());
+            $this->modules->$moduleName->options = get_option(
+                $this->optionsGroup . $moduleName . '_options',
+                new stdClass()
+            );
             foreach ($moduleData->default_options as $default_key => $default_value) {
                 if (!isset($this->modules->$moduleName->options->$default_key)) {
                     $this->modules->$moduleName->options->$default_key = $default_value;
@@ -199,11 +203,15 @@ class LegacyPlugin
             'configure_link_text'  => __('Configure', 'publishpress-checklists'),
             // These messages are applied to modules and can be overridden if custom messages are needed
             'messages'             => [
-                'form-error'          => __('Please correct your form errors below and try again.',
-                    'publishpress-checklists'),
+                'form-error'          => __(
+                    'Please correct your form errors below and try again.',
+                    'publishpress-checklists'
+                ),
                 'nonce-failed'        => __('Cheatin&#8217; uh?', 'publishpress-checklists'),
-                'invalid-permissions' => __('You do not have necessary permissions to complete this action.',
-                    'publishpress-checklists'),
+                'invalid-permissions' => __(
+                    'You do not have necessary permissions to complete this action.',
+                    'publishpress-checklists'
+                ),
                 'missing-post'        => __('Post does not exist', 'publishpress-checklists'),
             ],
             'autoload'             => false, // autoloading a module will remove the ability to enable or disable it
@@ -333,8 +341,10 @@ class LegacyPlugin
 
         add_menu_page(
             $page_title,
-            apply_filters('publishpress_checklists_plugin_title',
-                esc_html__('Checklists', 'publishpress-checklists')),
+            apply_filters(
+                'publishpress_checklists_plugin_title',
+                esc_html__('Checklists', 'publishpress-checklists')
+            ),
             $capability,
             $menuSlug,
             $function,
@@ -419,7 +429,8 @@ class LegacyPlugin
 
         // Returns true if at least one condition is true.
         return count(
-                array_filter($conditions,
+                array_filter(
+                    $conditions,
                     function ($c) {
                         return (bool)$c;
                     }
@@ -540,8 +551,10 @@ class LegacyPlugin
     {
         foreach ($this->modules as $moduleName => $moduleData) {
             if (isset($this->modules->$moduleName->options->post_types)) {
-                $this->modules->$moduleName->options->post_types = $this->helpers->clearPostTypesOptions($this->modules->$moduleName->options->post_types,
-                    $moduleData->post_type_support);
+                $this->modules->$moduleName->options->post_types = $this->helpers->clearPostTypesOptions(
+                    $this->modules->$moduleName->options->post_types,
+                    $moduleData->post_type_support
+                );
             }
 
             $this->$moduleName->module = $this->modules->$moduleName;

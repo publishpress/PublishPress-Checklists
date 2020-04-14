@@ -1,8 +1,9 @@
 <?php
 
+use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 use PublishPress\Checklists\Core\Legacy\Module;
-use PublishPress\Checklists\Core\Factory;
+use PublishPress\Checklists\Permalinks\Requirement\ValidChars;
 
 /**
  * @package     PublishPress\Checklists
@@ -84,7 +85,6 @@ class PPCH_Permalinks extends Module
      */
     public function init()
     {
-
     }
 
     /**
@@ -104,7 +104,6 @@ class PPCH_Permalinks extends Module
      */
     public function install()
     {
-
     }
 
     /**
@@ -114,7 +113,6 @@ class PPCH_Permalinks extends Module
      */
     public function upgrade($previous_version)
     {
-
     }
 
     /**
@@ -127,7 +125,7 @@ class PPCH_Permalinks extends Module
      */
     public function filterPostTypeRequirements($requirements, $postType)
     {
-        $requirements[] = \PublishPress\Checklists\Permalinks\Requirement\ValidChars::class;
+        $requirements[] = ValidChars::class;
 
         return $requirements;
     }

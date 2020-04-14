@@ -11,7 +11,6 @@ namespace PublishPress\Checklists\Permalinks\Requirement;
 
 
 use PublishPress\Checklists\Core\Requirement\Base_simple;
-use PublishPress\Checklists\Core\Factory;
 use stdClass;
 
 class ValidChars extends Base_simple
@@ -81,21 +80,6 @@ class ValidChars extends Base_simple
     }
 
     /**
-     * Returns the current status of the requirement.
-     *
-     * @param stdClass $post
-     * @param mixed $option_value
-     *
-     * @return mixed
-     */
-    public function get_current_status($post, $option_value)
-    {
-        $slug = $post->post_name;
-
-        return preg_match('/^[a-z0-9\-_]+$/', $slug) === 1;
-    }
-
-    /**
      * Returns the value of the given option. The option name should
      * be in the short form, without the name of the requirement as
      * the prefix.
@@ -113,5 +97,20 @@ class ValidChars extends Base_simple
         }
 
         return null;
+    }
+
+    /**
+     * Returns the current status of the requirement.
+     *
+     * @param stdClass $post
+     * @param mixed $option_value
+     *
+     * @return mixed
+     */
+    public function get_current_status($post, $option_value)
+    {
+        $slug = $post->post_name;
+
+        return preg_match('/^[a-z0-9\-_]+$/', $slug) === 1;
     }
 }

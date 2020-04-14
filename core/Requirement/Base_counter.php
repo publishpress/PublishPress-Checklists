@@ -72,7 +72,7 @@ class Base_counter extends Base_simple implements Interface_required
     /**
      * Add the requirement to the list to be displayed in the meta box.
      *
-     * @param array    $requirements
+     * @param array $requirements
      * @param stdClass $post
      *
      * @return array
@@ -91,7 +91,7 @@ class Base_counter extends Base_simple implements Interface_required
         $enabled = $this->is_enabled();
 
         // If not enabled, bypass the method
-        if ( ! $enabled) {
+        if (!$enabled) {
             return $requirements;
         }
 
@@ -132,23 +132,31 @@ class Base_counter extends Base_simple implements Interface_required
         // Both same value = exact
         if ($min_value == $max_value) {
             $label = sprintf(
-                _n($this->lang['label_exact_singular'], $this->lang['label_exact_plural'], $min_value,
-                    'publishpress-checklists'),
+                _n(
+                    $this->lang['label_exact_singular'],
+                    $this->lang['label_exact_plural'],
+                    $min_value,
+                    'publishpress-checklists'
+                ),
                 $min_value
             );
         }
 
         // Min not empty, max empty or < min = only min
-        if ( ! empty($min_value) && ($max_value < $min_value)) {
+        if (!empty($min_value) && ($max_value < $min_value)) {
             $label = sprintf(
-                _n($this->lang['label_min_singular'], $this->lang['label_min_plural'], $min_value,
-                    'publishpress-checklists'),
+                _n(
+                    $this->lang['label_min_singular'],
+                    $this->lang['label_min_plural'],
+                    $min_value,
+                    'publishpress-checklists'
+                ),
                 $min_value
             );
         }
 
         // Min not empty, max not empty and > min = both min and max
-        if ( ! empty($min_value) && ($max_value > $min_value)) {
+        if (!empty($min_value) && ($max_value > $min_value)) {
             $label = sprintf(
                 __($this->lang['label_between'], 'publishpress-checklists'),
                 $min_value,
@@ -159,8 +167,12 @@ class Base_counter extends Base_simple implements Interface_required
         // Min empty, max not empty and > min = only max
         if (empty($min_value) && ($max_value > $min_value)) {
             $label = sprintf(
-                _n($this->lang['label_max_singular'], $this->lang['label_max_plural'], $max_value,
-                    'publishpress-checklists'),
+                _n(
+                    $this->lang['label_max_singular'],
+                    $this->lang['label_max_plural'],
+                    $max_value,
+                    'publishpress-checklists'
+                ),
                 $max_value
             );
         }

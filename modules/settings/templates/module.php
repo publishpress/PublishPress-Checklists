@@ -1,4 +1,4 @@
-<?php if ( ! empty($context['url'])) : ?>
+<?php if (!empty($context['url'])) : ?>
 <a href="<?php echo $context['url']; ?>">
     <?php endif; ?>
 
@@ -6,7 +6,7 @@
             class="publishpress-module module-enabled <?php echo $context['has_config_link'] ? 'has-configure-link' : ''; ?>"
             id="<?php echo $context['url']; ?>">
 
-        <?php if ( ! empty($context['icon_class'])) : ?>
+        <?php if (!empty($context['icon_class'])) : ?>
             <span class="<?php echo $context['icon_class']; ?> float-right module-icon"></span>
         <?php endif; ?>
 
@@ -19,6 +19,6 @@
         </form>
     </div>
 
-    <?php if ( ! empty($context['url'])) : ?>
+    <?php if (!empty($context['url'])) : ?>
 </a>
 <?php endif; ?>

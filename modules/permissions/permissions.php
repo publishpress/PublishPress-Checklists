@@ -1,8 +1,8 @@
 <?php
 
+use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 use PublishPress\Checklists\Core\Legacy\Module;
-use PublishPress\Checklists\Core\Factory;
 
 /**
  * @package     PublishPress\Checklists
@@ -161,8 +161,11 @@ class PPCH_Permissions extends Module
         $rolesSelect = '<select class="pp-checklists-can-ignore" name="publishpress_checklists_checklists_options[' . $requirement->name . '_can_ignore][' . $postType . '][]" multiple="multiple" class="user-roles-list">';
         $rolesSelect .= '<option value=""></option>';
         foreach ($userRoles as $slug => $role) {
-            $rolesSelect .= '<option value="' . $slug . '" ' . selected(true, in_array($slug, $selected),
-                    false) . '>' . $role['name'] . '</option>';
+            $rolesSelect .= '<option value="' . $slug . '" ' . selected(
+                    true,
+                    in_array($slug, $selected),
+                    false
+                ) . '>' . $role['name'] . '</option>';
         }
         $rolesSelect .= '</select>';
 

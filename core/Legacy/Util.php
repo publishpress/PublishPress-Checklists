@@ -9,8 +9,6 @@
 
 namespace PublishPress\Checklists\Core\Legacy;
 
-use PublishPress\Checklists\Core\Factory;
-
 class Util
 {
     /**
@@ -29,13 +27,13 @@ class Util
             $post_type = $post->post_type;
         } elseif ($typenow) {
             $post_type = $typenow;
-        } elseif ($current_screen && ! empty($current_screen->post_type)) {
+        } elseif ($current_screen && !empty($current_screen->post_type)) {
             $post_type = $current_screen->post_type;
         } elseif (isset($_REQUEST['post_type'])) {
             $post_type = sanitize_key($_REQUEST['post_type']);
         } elseif ('post.php' == $pagenow
-                  && $post_id
-                  && ! empty(get_post($post_id)->post_type)) {
+            && $post_id
+            && !empty(get_post($post_id)->post_type)) {
             $post_type = get_post($post_id)->post_type;
         } elseif ('edit.php' == $pagenow && empty($_REQUEST['post_type'])) {
             $post_type = 'post';
@@ -55,24 +53,24 @@ class Util
      */
     public static function getPostTypesForModule($module)
     {
-        $post_types = [];
+        $selectedPostTypes = [];
 
         if (isset($module->options->post_types) && is_array($module->options->post_types)) {
             foreach ($module->options->post_types as $post_type => $value) {
                 if ('on' == $value) {
-                    $post_types[] = $post_type;
+                    $selectedPostTypes[] = $post_type;
                 }
             }
         }
 
-        return $post_types;
+        return $selectedPostTypes;
     }
 
     /**
      * Sanitizes the module name, making sure we always have only
      * valid chars, replacing - with _.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return string
      */
@@ -84,10 +82,10 @@ class Util
     /**
      * Adds an array of capabilities to a role.
      *
+     * @param string $role A standard WP user role like 'administrator' or 'author'
+     * @param array $caps One or more user caps to add
      * @since 1.9.8
      *
-     * @param string $role A standard WP user role like 'administrator' or 'author'
-     * @param array  $caps One or more user caps to add
      */
     public static function addCapsToRole($role, $caps)
     {
@@ -115,13 +113,30 @@ class Util
         $isEnabled = defined('GUTENBERG_VERSION');
 
         // Is WordPress 5?
-        if ( ! $isEnabled) {
+        if (!$isEnabled) {
             $wpVersion = get_bloginfo('version');
 
             $isEnabled = version_compare($wpVersion, '5.0', '>=');
         }
 
         return $isEnabled;
+    }
+
+    /**
+     * This plugin can be added as dependency in the vendor folder, so the URL needs to be adapted, specially for assets.
+     */
+    public static function pluginDirUrl()
+    {
+        $directorySeparator = self::getDirectorySeparator();
+
+        if (substr_count(PPCH_PATH_BASE, 'vendor' . $directorySeparator . 'publishpress') > 0) {
+            $relativePathIndex = strpos(PPCH_PATH_BASE, $directorySeparator . 'plugins' . $directorySeparator);
+            $relativePath      = substr(PPCH_PATH_BASE, $relativePathIndex + 9);
+
+            return plugins_url() . '/' . $relativePath;
+        }
+
+        return plugin_dir_url(PPCH_FILE);
     }
 
     private static function getDirectorySeparator()
@@ -144,22 +159,5 @@ class Util
         }
 
         return $directorySeparator;
-    }
-
-    /**
-     * This plugin can be added as dependency in the vendor folder, so the URL needs to be adapted, specially for assets.
-     */
-    public static function pluginDirUrl()
-    {
-        $directorySeparator = self::getDirectorySeparator();
-
-        if (substr_count(PPCH_PATH_BASE, 'vendor' . $directorySeparator . 'publishpress') > 0) {
-            $relativePathIndex = strpos(PPCH_PATH_BASE, $directorySeparator . 'plugins' . $directorySeparator);
-            $relativePath = substr(PPCH_PATH_BASE, $relativePathIndex + 9);
-
-            return plugins_url() . '/' . $relativePath;
-        }
-
-        return plugin_dir_url(PPCH_FILE);
     }
 }
