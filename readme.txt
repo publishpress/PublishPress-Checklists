@@ -112,16 +112,20 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.1.0] - 2020-04-13 =
+= [2.1.0] - 2020-04-30 =
 
 * Added: Add permalink validation rule for the checklists - #115;
 * Added: Add option to select user roles to skip specific requirements - #131;
+* Added: Add a menu link to upgrade to the Pro plan;
 * Changed: Improve UI for custom items in the checklist, removing the "X" icon - #126;
+* Removed: Remove the option to hide the Publish Button due to conflicts with Gutenberg;
 * Fixed: Fixed the tabs for post types in the Checklists admin page. If you have too many post types the second line of tabs was overlaying the first line - #132;
 * Fixed: Fixed the checklist warning popup when you are updating a published post and has unchecked required tasks in the checklist, for the classic editor - #124;
 * Fixed: Fixed the list of available post types for the checklists to display any post type that has the show_ui = true. Non public post types are now recognized - #127;
 * Fixed: Fixed the list of post types in the Checklists page hiding the tabs of post types that are not selected in the settings - #136;
 * Fixed: Fixed the error displayed on Windows servers when the constant DIRECTORY_SEPARATOR is not defined;
+* Fixed: Fixed empty checklists on fresh installs due to no post type being selected. Posts is selected by default now - #140;
+* Fixed: Fix warning icon on Gutenberg moving it from the side to over the publish button - #138;
 
 = [2.0.2] - 2020-03-16 =
 
