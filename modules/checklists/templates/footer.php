@@ -20,13 +20,17 @@
         <ul>
             <li>
                 <a href="//publishpress.com" target="_blank" rel="noopener noreferrer"
-                   title="About <?php echo $context['plugin_name']; ?>"><?php echo __('About',
-                        'publishpress-checklists'); ?></a>
+                   title="About <?php echo $context['plugin_name']; ?>"><?php echo __(
+                        'About',
+                        'publishpress-checklists'
+                    ); ?></a>
             </li>
             <li>
                 <a href="//publishpress.com/documentation/" target="_blank" rel="noopener noreferrer"
-                   title="<?php echo $context['plugin_name']; ?> Documentation"><?php echo __('Documentation',
-                        'publishpress-checklists'); ?></a>
+                   title="<?php echo $context['plugin_name']; ?> Documentation"><?php echo __(
+                        'Documentation',
+                        'publishpress-checklists'
+                    ); ?></a>
             </li>
             <li>
                 <a href="//publishpress.com/contact" target="_blank" rel="noopener noreferrer"

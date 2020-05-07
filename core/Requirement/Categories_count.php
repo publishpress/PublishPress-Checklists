@@ -46,7 +46,7 @@ class Categories_count extends Base_counter
      * Returns the current status of the requirement.
      *
      * @param stdClass $post
-     * @param mixed    $option_value
+     * @param mixed $option_value
      *
      * @return mixed
      */

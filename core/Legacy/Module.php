@@ -40,7 +40,7 @@ class Module
      * For every post type that doesn't explicitly have the 'on' value, turn it 'off'
      * If add_post_type_support() has been used anywhere (legacy support), inherit the state
      *
-     * @param array  $modulePostTypes Current state of post type options for the module
+     * @param array $modulePostTypes Current state of post type options for the module
      * @param string $postTypeSupport What the feature is called for post_type_support (e.g. 'ppma_calendar')
      *
      * @return array $normalizedPostTypeOptions The setting for each post type, normalized based on rules
@@ -52,8 +52,10 @@ class Module
         $normalizedPostTypeOptions = [];
         $allPostTypes              = array_keys($this->getAllPostTypes());
         foreach ($allPostTypes as $postType) {
-            if ((isset($modulePostTypes[$postType]) && $modulePostTypes[$postType] == 'on') || post_type_supports($postType,
-                    $postTypeSupport)) {
+            if ((isset($modulePostTypes[$postType]) && $modulePostTypes[$postType] == 'on') || post_type_supports(
+                    $postType,
+                    $postTypeSupport
+                )) {
                 $normalizedPostTypeOptions[$postType] = 'on';
             } else {
                 $normalizedPostTypeOptions[$postType] = 'off';
@@ -70,17 +72,50 @@ class Module
      */
     public function getAllPostTypes()
     {
-        $allowedPostTypes = [
-            'post' => __('Post'),
-            'page' => __('Page'),
-        ];
+        $allowedPostTypes = [];
         $customPostTypes  = $this->getSupportedPostTypesForModule();
 
-        foreach ($customPostTypes as $customPostType => $args) {
-            $allowedPostTypes[$customPostType] = $args->label;
+        if (!empty($customPostTypes)) {
+            foreach ($customPostTypes as $customPostType => $args) {
+                $allowedPostTypes[$customPostType] = $args->label;
+            }
         }
 
         return $allowedPostTypes;
+    }
+
+    /**
+     * Get all of the possible post types that can be used with a given module
+     *
+     * @param object $module The full module
+     *
+     * @return array $postTypes An array of post type objects
+     *
+     * @since 0.7.2
+     */
+    public function getSupportedPostTypesForModule($module = null)
+    {
+        $postTypeArgs = [
+            'show_ui' => true,
+        ];
+        $postTypeArgs = apply_filters(
+            'publishpress_checklists_supported_module_post_types_args',
+            $postTypeArgs,
+            $module
+        );
+
+        $postTypes = get_post_types($postTypeArgs, 'objects');
+
+        // Remove ignored post types
+        $validPostTypes = [];
+        foreach ($postTypes as $slug => $postType) {
+            // Ignore: Media, Block, Custom Field, Custom Layout, Notification Workflow
+            if (!in_array($slug, ['attachment', 'wp_block', 'ppmacf_field', 'ppmacf_layout', 'psppnotif_workflow'])) {
+                $validPostTypes[$slug] = $postType;
+            }
+        }
+
+        return apply_filters('publishpress_checklists_supported_module_post_types', $validPostTypes);
     }
 
     /**
@@ -99,7 +134,7 @@ class Module
         global $pagenow;
 
         // All of the settings views are based on admin.php and a $_GET['page'] parameter
-        if ($pagenow != 'admin.php' || ! isset($_GET['page'])) {
+        if ($pagenow != 'admin.php' || !isset($_GET['page'])) {
             return false;
         }
 
@@ -108,7 +143,7 @@ class Module
                 return true;
             }
 
-            if ( ! isset($_GET['module']) || $_GET['module'] === 'ppch-settings') {
+            if (!isset($_GET['module']) || $_GET['module'] === 'ppch-settings') {
                 if (in_array($module_name, ['editorial_comments', 'notifications', 'dashboard'])) {
                     return true;
                 }
@@ -149,7 +184,7 @@ class Module
     {
         $screen = get_current_screen();
 
-        if ( ! method_exists($screen, 'add_help_tab')) {
+        if (!method_exists($screen, 'add_help_tab')) {
             return;
         }
 
@@ -186,7 +221,9 @@ class Module
         }
 
         if ($message && isset($current_module->messages[$message])) {
-            $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html($current_module->messages[$message]) . '</p></div>';
+            $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html(
+                    $current_module->messages[$message]
+                ) . '</p></div>';
         }
 
         // If there's been an error, let's display it
@@ -200,18 +237,21 @@ class Module
             $error = false;
         }
         if ($error && isset($current_module->messages[$error])) {
-            $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html($current_module->messages[$error]) . '</p></div>';
+            $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html(
+                    $current_module->messages[$error]
+                ) . '</p></div>';
         }
         ?>
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <img src="<?php echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>" alt=""
+            <img src="<?php echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>"
+                 alt=""
                  class="logo-header"/>
 
             <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
 
-            <?php echo ! empty($display_text) ? $display_text : ''; ?>
+            <?php echo !empty($display_text) ? $display_text : ''; ?>
             <?php // We keep the H2 tag to keep notices tied to the header
             ?>
             <h2>
@@ -220,7 +260,7 @@ class Module
                     <?php echo $current_module->short_description; ?>
                 <?php endif; ?>
 
-                <?php if ( ! empty($custom_text)) : ?>
+                <?php if (!empty($custom_text)) : ?>
                     <?php echo $custom_text; ?>
                 <?php endif; ?>
             </h2>
@@ -233,7 +273,7 @@ class Module
      * Echo or returns the default footer
      *
      * @param object $current_module
-     * @param bool   $echo
+     * @param bool $echo
      *
      * @return string
      */
@@ -241,36 +281,20 @@ class Module
     {
         $templateLoader = Factory::getTemplateLoader();
 
-        $templateLoader->load('checklists', 'footer', [
-            'current_module' => $current_module,
-            'plugin_name'    => __('PublishPress Checklists', 'publishpress-checklists'),
-            'plugin_slug'    => 'publishpress-checklists',
-            'plugin_url'     => Util::pluginDirUrl(),
-            'rating_message' => __('If you like %s please leave us a %s rating. Thank you!', 'publishpress-checklists'),
-        ]);
-    }
-
-    /**
-     * Get all of the possible post types that can be used with a given module
-     *
-     * @param object $module The full module
-     *
-     * @return array $postTypes An array of post type objects
-     *
-     * @since 0.7.2
-     */
-    public function getSupportedPostTypesForModule($module = null)
-    {
-        $postTypeArgs = [
-            '_builtin' => false,
-            'public'   => true,
-        ];
-        $postTypeArgs = apply_filters('publishpress_checklists_supported_module_post_types_args', $postTypeArgs,
-            $module);
-
-        $postTypes = get_post_types($postTypeArgs, 'objects');
-
-        return apply_filters('publishpress_checklists_supported_module_post_types', $postTypes);
+        $templateLoader->load(
+            'checklists',
+            'footer',
+            [
+                'current_module' => $current_module,
+                'plugin_name'    => __('PublishPress Checklists', 'publishpress-checklists'),
+                'plugin_slug'    => 'publishpress-checklists',
+                'plugin_url'     => Util::pluginDirUrl(),
+                'rating_message' => __(
+                    'If you like %s please leave us a %s rating. Thank you!',
+                    'publishpress-checklists'
+                ),
+            ]
+        );
     }
 
     /**
@@ -297,11 +321,6 @@ class Module
         if (empty($this->post_types)) {
             // Apply filters to the list of requirements
             $this->post_types = apply_filters('publishpress_checklists_post_types', []);
-
-            // Try a more readable name
-            foreach ($this->post_types as $type => $label) {
-                $this->post_types[$type] = esc_html__(ucfirst($label));
-            }
         }
 
         return $this->post_types;

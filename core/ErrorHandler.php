@@ -14,8 +14,8 @@ class ErrorHandler
 {
     public function add($errorMessage, $errorData = null)
     {
-        if ( ! empty($errorData)) {
-            if ( ! is_string($errorData)) {
+        if (!empty($errorData)) {
+            if (!is_string($errorData)) {
                 $errorData = print_r($errorData, true);
             }
 

@@ -19,10 +19,10 @@ class LegacyPlugin
     /**
      * @var stdClass
      */
-    public $modules;
-    public $defaultMenuSlug = 'ppch-checklists';
-    private $optionsGroup = 'publishpress_checklists_';
-    private $addedMenuPage = false;
+    public  $modules;
+    public  $defaultMenuSlug = 'ppch-checklists';
+    private $optionsGroup    = 'publishpress_checklists_';
+    private $addedMenuPage   = false;
 
     public function __construct()
     {
@@ -81,7 +81,7 @@ class LegacyPlugin
     private function loadModules()
     {
         // We use the WP_List_Table API for some of the table gen
-        if ( ! class_exists('WP_List_Table')) {
+        if (!class_exists('WP_List_Table')) {
             require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
         }
 
@@ -123,9 +123,11 @@ class LegacyPlugin
                     $args = $this->modules->$slug;
                 }
 
-                if ( ! is_null($args) && ! empty($args->settingsHelpTab)) {
-                    add_action('load-checklists_page_' . $args->settings_slug,
-                        [$module_instance, 'action_settings_help_menu']);
+                if (!is_null($args) && !empty($args->settingsHelpTab)) {
+                    add_action(
+                        'load-checklists_page_' . $args->settings_slug,
+                        [$module_instance, 'action_settings_help_menu']
+                    );
                 }
 
                 $this->loadedModules[] = $slug;
@@ -147,8 +149,10 @@ class LegacyPlugin
     private function getModulesBasePath()
     {
         $defaultDirs = [
-            'settings'   => PPCH_MODULES_PATH,
-            'checklists' => PPCH_MODULES_PATH,
+            'settings'    => PPCH_MODULES_PATH,
+            'checklists'  => PPCH_MODULES_PATH,
+            'permalinks'  => PPCH_MODULES_PATH,
+            'permissions' => PPCH_MODULES_PATH,
         ];
 
         return apply_filters('publishpress_checklists_module_dirs', $defaultDirs);
@@ -161,10 +165,12 @@ class LegacyPlugin
     public function loadModulesOptions()
     {
         foreach ($this->modules as $moduleName => $moduleData) {
-            $this->modules->$moduleName->options = get_option($this->optionsGroup . $moduleName . '_options',
-                new stdClass());
+            $this->modules->$moduleName->options = get_option(
+                $this->optionsGroup . $moduleName . '_options',
+                new stdClass()
+            );
             foreach ($moduleData->default_options as $default_key => $default_value) {
-                if ( ! isset($this->modules->$moduleName->options->$default_key)) {
+                if (!isset($this->modules->$moduleName->options->$default_key)) {
                     $this->modules->$moduleName->options->$default_key = $default_value;
                 }
             }
@@ -180,7 +186,7 @@ class LegacyPlugin
     public function register_module($name, $args = [])
     {
         // A title and name is required for every module
-        if ( ! isset($args['title'], $name)) {
+        if (!isset($args['title'], $name)) {
             return false;
         }
 
@@ -197,11 +203,15 @@ class LegacyPlugin
             'configure_link_text'  => __('Configure', 'publishpress-checklists'),
             // These messages are applied to modules and can be overridden if custom messages are needed
             'messages'             => [
-                'form-error'          => __('Please correct your form errors below and try again.',
-                    'publishpress-checklists'),
+                'form-error'          => __(
+                    'Please correct your form errors below and try again.',
+                    'publishpress-checklists'
+                ),
                 'nonce-failed'        => __('Cheatin&#8217; uh?', 'publishpress-checklists'),
-                'invalid-permissions' => __('You do not have necessary permissions to complete this action.',
-                    'publishpress-checklists'),
+                'invalid-permissions' => __(
+                    'You do not have necessary permissions to complete this action.',
+                    'publishpress-checklists'
+                ),
                 'missing-post'        => __('Post does not exist', 'publishpress-checklists'),
             ],
             'autoload'             => false, // autoloading a module will remove the ability to enable or disable it
@@ -213,7 +223,7 @@ class LegacyPlugin
         $args['name']               = $name;
         $args['options_group_name'] = $this->optionsGroup . $name . '_options';
 
-        if ( ! isset($args['settings_slug'])) {
+        if (!isset($args['settings_slug'])) {
             $args['settings_slug'] = 'ppch-' . $args['slug'] . '-settings';
         }
 
@@ -249,7 +259,7 @@ class LegacyPlugin
         // For each module that's been loaded, auto-load data if it's never been run before
         foreach ($this->modules as $moduleName => $moduleData) {
             // If the module has never been loaded before, run the install method if there is one
-            if ( ! isset($moduleData->options->loaded_once) || ! $moduleData->options->loaded_once) {
+            if (!isset($moduleData->options->loaded_once) || !$moduleData->options->loaded_once) {
                 if (method_exists($this->$moduleName, 'install')) {
                     $this->$moduleName->install();
                 }
@@ -321,7 +331,7 @@ class LegacyPlugin
      * @param        $menuSlug
      * @param string $function
      * @param string $icon_url
-     * @param null   $position
+     * @param null $position
      */
     public function addMenuPage($page_title, $capability, $menuSlug, $function = '')
     {
@@ -331,8 +341,10 @@ class LegacyPlugin
 
         add_menu_page(
             $page_title,
-            apply_filters('publishpress_checklists_plugin_title',
-                esc_html__('Checklists', 'publishpress-checklists')),
+            apply_filters(
+                'publishpress_checklists_plugin_title',
+                esc_html__('Checklists', 'publishpress-checklists')
+            ),
             $capability,
             $menuSlug,
             $function,
@@ -351,7 +363,7 @@ class LegacyPlugin
      */
     public function isBlockEditorActive()
     {
-        if ( ! function_exists('is_plugin_active')) {
+        if (!function_exists('is_plugin_active')) {
             require_once ABSPATH . '/wp-admin/includes/plugin.php';
         }
 
@@ -373,7 +385,7 @@ class LegacyPlugin
             $postType = get_post_type();
         }
 
-        if ( ! isset($postType) || empty($postType)) {
+        if (!isset($postType) || empty($postType)) {
             $postType = 'post';
         }
 
@@ -396,33 +408,34 @@ class LegacyPlugin
          */
         // phpcs:ignore WordPress.VIP.SuperGlobalInputUsage.AccessDetected, WordPress.Security.NonceVerification.NoNonceVerification
         $conditions[] = $this->isWp5()
-                        && ! $pluginsState['classic-editor']
-                        && ! $pluginsState['gutenberg-ramp']
-                        && apply_filters('use_block_editor_for_post_type', true, $postType, PHP_INT_MAX);
+            && !$pluginsState['classic-editor']
+            && !$pluginsState['gutenberg-ramp']
+            && apply_filters('use_block_editor_for_post_type', true, $postType, PHP_INT_MAX);
 
         $conditions[] = $this->isWp5()
-                        && $pluginsState['classic-editor']
-                        && (get_option('classic-editor-replace') === 'block'
-                            && ! isset($_GET['classic-editor__forget']));
+            && $pluginsState['classic-editor']
+            && (get_option('classic-editor-replace') === 'block'
+                && !isset($_GET['classic-editor__forget']));
 
         $conditions[] = $this->isWp5()
-                        && $pluginsState['classic-editor']
-                        && (get_option('classic-editor-replace') === 'classic'
-                            && isset($_GET['classic-editor__forget']));
+            && $pluginsState['classic-editor']
+            && (get_option('classic-editor-replace') === 'classic'
+                && isset($_GET['classic-editor__forget']));
 
         /**
          * < 5.0 but Gutenberg plugin is active.
          */
-        $conditions[] = ! $this->isWp5() && ($pluginsState['gutenberg'] || $pluginsState['gutenberg-ramp']);
+        $conditions[] = !$this->isWp5() && ($pluginsState['gutenberg'] || $pluginsState['gutenberg-ramp']);
 
         // Returns true if at least one condition is true.
         return count(
-                   array_filter($conditions,
-                       function ($c) {
-                           return (bool)$c;
-                       }
-                   )
-               ) > 0;
+                array_filter(
+                    $conditions,
+                    function ($c) {
+                        return (bool)$c;
+                    }
+                )
+            ) > 0;
     }
 
     /**
@@ -478,7 +491,7 @@ class LegacyPlugin
             if (count($submenu_pp) > 2) {
                 // Add the additional items
                 foreach ($submenu_pp as $index => $item) {
-                    if ( ! in_array($index, $relevantMenus)) {
+                    if (!in_array($index, $relevantMenus)) {
                         $new_submenu[] = $item;
                         unset($submenu_pp[$index]);
                     }
@@ -538,8 +551,10 @@ class LegacyPlugin
     {
         foreach ($this->modules as $moduleName => $moduleData) {
             if (isset($this->modules->$moduleName->options->post_types)) {
-                $this->modules->$moduleName->options->post_types = $this->helpers->clearPostTypesOptions($this->modules->$moduleName->options->post_types,
-                    $moduleData->post_type_support);
+                $this->modules->$moduleName->options->post_types = $this->helpers->clearPostTypesOptions(
+                    $this->modules->$moduleName->options->post_types,
+                    $moduleData->post_type_support
+                );
             }
 
             $this->$moduleName->module = $this->modules->$moduleName;

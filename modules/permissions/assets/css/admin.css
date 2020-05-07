@@ -1,0 +1,12 @@
+.pp-checklists-requirements-settings .select2-selection__choice {
+    line-height: 22px;
+}
+
+.pp-checklists-task-options .user-roles-list {
+    /*width: 400px;*/
+    /*min-width: 400px;*/
+}
+
+.pp-checklists-can-ignore {
+    min-width: 250px;
+}

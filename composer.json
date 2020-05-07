@@ -14,7 +14,8 @@
   },
   "autoload": {
     "psr-4": {
-      "PublishPress\\Checklists\\Core\\": "core/"
+      "PublishPress\\Checklists\\Core\\": "core/",
+      "PublishPress\\Checklists\\Permalinks\\": "modules/permalinks/lib"
     }
   },
   "require": {
@@ -24,7 +25,15 @@
   },
   "require-dev": {
     "alledia/wordpress-plugin-builder": "^2.4",
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-master",
+    "lucatume/wp-browser": "^2.4",
+    "codeception/module-asserts": "^1.2",
+    "codeception/module-phpbrowser": "^1.0",
+    "codeception/module-webdriver": "^1.0",
+    "codeception/module-db": "^1.0",
+    "codeception/module-filesystem": "^1.0",
+    "codeception/module-cli": "^1.0",
+    "codeception/util-universalframework": "^1.0"
   },
   "minimum-stability": "stable"
 }

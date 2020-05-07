@@ -64,7 +64,7 @@ class Base_simple extends Base_requirement implements Interface_required
     /**
      * Add the requirement to the list to be displayed in the meta box.
      *
-     * @param array    $requirements
+     * @param array $requirements
      * @param stdClass $post
      *
      * @return array
@@ -85,11 +85,11 @@ class Base_simple extends Base_requirement implements Interface_required
         // Register in the requirements list
         if ($enabled) {
             $requirements[$this->name] = [
-                'status' => $this->get_current_status($post, $enabled),
-                'label'  => $this->lang['label'],
-                'value'  => $enabled,
-                'rule'   => $rule,
-                'type'   => $this->type,
+                'status'    => $this->get_current_status($post, $enabled),
+                'label'     => $this->lang['label'],
+                'value'     => $enabled,
+                'rule'      => $rule,
+                'type'      => $this->type,
                 'is_custom' => false,
             ];
         }

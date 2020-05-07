@@ -7,9 +7,14 @@
     <ul id="pp-checklists-req-box">
         <?php if (empty($context['requirements'])) : ?>
             <p>
-                <em><?php echo $context['lang']['to_use_checklists']; ?> <a
-                            href="<?php echo $context['configure_link']; ?>"
-                            class=""><?php echo $context['lang']['please_choose_req']; ?></a></em>
+                <?php
+                $message = sprintf(
+                    $context['lang']['empty_checklist_message'],
+                    '<a href="' . $context['configure_link'] . '">',
+                    '</a>'
+                );
+                ?>
+                <em><?php echo $message; ?></em>
             </p>
         <?php else : ?>
             <?php foreach ($context['requirements'] as $key => $req) : ?>
@@ -24,7 +29,11 @@
                                value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                     <?php endif; ?>
 
-                    <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
+                    <?php if ($req['is_custom']) : ?>
+                        <span class="dashicons <?php echo $req['status'] ? 'dashicons-yes' : ''; ?>"></span>
+                    <?php else: ?>
+                        <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
+                    <?php endif; ?>
                     <span class="status-label"><?php echo $req['label']; ?></span>
 
                     <span>
@@ -48,14 +57,14 @@
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
     <div id="pp-checklists-modal-alert-content"></div>
     <br>
-    <button data-remodal-action="cancel" class="remodal-cancel"><?php echo $context['lang']['dont_publish']; ?></button>
+    <button data-remodal-action="cancel" class="remodal-cancel"><?php echo $context['lang']['ok']; ?></button>
 </div>
 
 <div class="remodal" data-remodal-id="pp-checklists-modal-confirm"
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
     <div id="pp-checklists-modal-confirm-content"></div>
     <br>
-    <button data-remodal-action="cancel" class="remodal-cancel"><?php echo $context['lang']['dont_publish']; ?></button>
+    <button data-remodal-action="cancel" class="remodal-cancel"><?php echo $context['lang']['no']; ?></button>
     <button data-remodal-action="confirm"
-            class="remodal-confirm"><?php echo $context['lang']['yes_publish']; ?></button>
+            class="remodal-confirm"><?php echo $context['lang']['yes']; ?></button>
 </div>

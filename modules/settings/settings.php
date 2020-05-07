@@ -28,12 +28,12 @@
  * along with PublishPress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\Module;
 use PublishPress\Checklists\Core\Legacy\Util;
-use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 
-if ( ! class_exists('PPCH_Settings')) {
+if (!class_exists('PPCH_Settings')) {
     class PPCH_Settings extends Module
     {
         const SETTINGS_SLUG = 'ppch-settings';
@@ -52,25 +52,24 @@ if ( ! class_exists('PPCH_Settings')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $defaultChecked = $legacyPlugin->isBlockEditorActive() ? 'off' : 'on';
-
             // Register the module with PublishPress
             $this->module_url = $this->getModuleUrl(__FILE__);
             $args             = [
-                'title'                => apply_filters('publishpress_checklists_settings_title',
-                    esc_html__('Checklists Settings', 'publishpress-checklists')),
+                'title'                => apply_filters(
+                    'publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')
+                ),
                 'extended_description' => false,
                 'module_url'           => $this->module_url,
                 'icon_class'           => 'dashicons dashicons-admin-settings',
                 'slug'                 => 'settings',
                 'settings_slug'        => self::SETTINGS_SLUG,
                 'default_options'      => [
-                    'enabled' => 'on',
+                    'enabled'                  => 'on',
                     'post_types'               => [
-                        'post' => $defaultChecked,
+                        'post' => 'on',
                     ],
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
-                    'hide_publish_button'      => Base_requirement::VALUE_NO,
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -105,8 +104,10 @@ if ( ! class_exists('PPCH_Settings')) {
             // Main Menu
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),
-                apply_filters('publishpress_checklists_settings_title',
-                    esc_html__('Checklists Settings', 'publishpress-checklists')),
+                apply_filters(
+                    'publishpress_checklists_settings_title',
+                    esc_html__('Checklists Settings', 'publishpress-checklists')
+                ),
                 esc_html__('Settings', 'publishpress-checklists'),
                 apply_filters('publishpress_checklists_view_settings_cap', 'manage_options'),
                 self::MENU_SLUG,
@@ -127,7 +128,12 @@ if ( ! class_exists('PPCH_Settings')) {
         public function action_admin_print_styles()
         {
             if ($this->isWhitelistedSettingsView()) {
-                wp_enqueue_style('publishpress-settings-css', $this->module_url . 'lib/settings.css', false, PPCH_VERSION);
+                wp_enqueue_style(
+                    'publishpress-settings-css',
+                    $this->module_url . 'lib/settings.css',
+                    false,
+                    PPCH_VERSION
+                );
             }
 
             if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
@@ -144,10 +150,10 @@ if ( ! class_exists('PPCH_Settings')) {
         public function action_admin_print_scripts()
         {
             ?>
-			<script type="text/javascript">
-				var ma_admin_url = '<?php echo get_admin_url(); ?>';
-			</script>
-			<?php
+            <script type="text/javascript">
+                var ma_admin_url = '<?php echo get_admin_url(); ?>';
+            </script>
+            <?php
         }
 
         /**
@@ -167,11 +173,11 @@ if ( ! class_exists('PPCH_Settings')) {
                  * @return array
                  */
                 $tabs = apply_filters('publishpress_checklists_settings_tabs', []);
-                if ( ! empty($tabs)) {
+                if (!empty($tabs)) {
                     echo '<ul id="publishpress-checklists-settings-tabs" class="nav-tab-wrapper">';
                     $i = 0;
                     foreach ($tabs as $tabLink => $tabLabel) {
-                        echo '<li class="nav-tab ' . ($i === 0 ? 'nav-tab-active': '') . '">';
+                        echo '<li class="nav-tab ' . ($i === 0 ? 'nav-tab-active' : '') . '">';
                         echo '<a href="' . $tabLink . '">' . $tabLabel . '</a>';
                         echo '</li>';
                         $i++;
@@ -189,7 +195,7 @@ if ( ! class_exists('PPCH_Settings')) {
 
                     if ($mod_data->autoload
                         || $mod_data->slug === $this->module->slug
-                        || ! isset($mod_data->general_options)
+                        || !isset($mod_data->general_options)
                         || $mod_data->options->enabled != 'on') {
                         continue;
                     }
@@ -197,7 +203,9 @@ if ( ! class_exists('PPCH_Settings')) {
                     echo sprintf('<h3>%s</h3>', $mod_data->title);
                     echo sprintf('<p>%s</p>', $mod_data->short_description);
 
-                    echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr($mod_data->name) . '" />';
+                    echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr(
+                            $mod_data->name
+                        ) . '" />';
 
                     $legacyPlugin->$slug->print_configure_view();
                 }
@@ -206,7 +214,7 @@ if ( ! class_exists('PPCH_Settings')) {
                 $featuresCount = 0;
 
                 foreach ($legacyPlugin->modules as $mod_name => $mod_data) {
-                    if ( ! $mod_data->autoload && $mod_data->slug !== $this->module->slug) {
+                    if (!$mod_data->autoload && $mod_data->slug !== $this->module->slug) {
                         $featuresCount++;
                     }
                 }
@@ -215,14 +223,18 @@ if ( ! class_exists('PPCH_Settings')) {
                 <?php if ($featuresCount > 0) : ?>
                     <div id="modules-wrapper">
                         <h3><?php echo __('Features', 'publishpress-checklists'); ?></h3>
-                        <p><?php echo __('Feel free to select only the features you need.',
-                                'publishpress-checklists'); ?></p>
+                        <p><?php echo __(
+                                'Feel free to select only the features you need.',
+                                'publishpress-checklists'
+                            ); ?></p>
 
                         <table class="form-table">
                             <tbody>
                             <tr>
-                                <th scope="row"><?php echo __('Enabled features',
-                                        'publishpress-checklists'); ?></th>
+                                <th scope="row"><?php echo __(
+                                        'Enabled features',
+                                        'publishpress-checklists'
+                                    ); ?></th>
                                 <td>
                                     <?php foreach ($legacyPlugin->modules as $mod_name => $mod_data) : ?>
 
@@ -232,7 +244,9 @@ if ( ! class_exists('PPCH_Settings')) {
 
                                         <label for="feature-<?php echo esc_attr($mod_data->slug); ?>">
                                             <input id="feature-<?php echo esc_attr($mod_data->slug); ?>"
-                                                   name="publishpress_checklists_settings_options[features][<?php echo esc_attr($mod_data->slug); ?>]" <?php echo ($mod_data->options->enabled == 'on') ? "checked=\"checked\"" : ""; ?>
+                                                   name="publishpress_checklists_settings_options[features][<?php echo esc_attr(
+                                                       $mod_data->slug
+                                                   ); ?>]" <?php echo ($mod_data->options->enabled == 'on') ? "checked=\"checked\"" : ""; ?>
                                                    type="checkbox">
                                             &nbsp;&nbsp;&nbsp;<?php echo $mod_data->title; ?>
                                         </label>
@@ -243,7 +257,9 @@ if ( ! class_exists('PPCH_Settings')) {
                             </tbody>
                         </table>
 
-                        <?php echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr($this->module->name) . '" />'; ?>
+                        <?php echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr(
+                                $this->module->name
+                            ) . '" />'; ?>
                     </div>
                 <?php endif; ?>
 
@@ -255,10 +271,10 @@ if ( ! class_exists('PPCH_Settings')) {
             <?php
 
             ?>
-			<div class="publishpress-modules">
-				<?php $this->print_modules(); ?>
-			</div>
-			<?php
+            <div class="publishpress-modules">
+                <?php $this->print_modules(); ?>
+            </div>
+            <?php
         }
 
         public function print_modules()
@@ -266,7 +282,10 @@ if ( ! class_exists('PPCH_Settings')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             if (empty($legacyPlugin->modules)) {
-                echo '<div class="message error">' . __('There are no PublishPress modules registered', 'publishpress-checklists') . '</div>';
+                echo '<div class="message error">' . __(
+                        'There are no PublishPress modules registered',
+                        'publishpress-checklists'
+                    ) . '</div>';
             } else {
                 foreach ($legacyPlugin->modules as $mod_name => $mod_data) {
                     $add_menu = isset($mod_data->add_menu) && $mod_data->add_menu === true;
@@ -286,15 +305,21 @@ if ( ! class_exists('PPCH_Settings')) {
 
                         $templateLoader = Factory::getTemplateLoader();
 
-                        $templateLoader->load('settings', 'module', [
-                            'has_config_link' => isset($mod_data->configure_page_cb) && !empty($mod_data->configure_page_cb),
-                            'slug'            => $mod_data->slug,
-                            'icon_class'      => isset($mod_data->icon_class) ? $mod_data->icon_class : false,
-                            'form_action'     => get_admin_url(null, 'options.php'),
-                            'title'           => $mod_data->title,
-                            'description'     => wp_kses($mod_data->short_description, 'a'),
-                            'url'             => $url,
-                        ], false, false);
+                        $templateLoader->load(
+                            'settings',
+                            'module',
+                            [
+                                'has_config_link' => isset($mod_data->configure_page_cb) && !empty($mod_data->configure_page_cb),
+                                'slug'            => $mod_data->slug,
+                                'icon_class'      => isset($mod_data->icon_class) ? $mod_data->icon_class : false,
+                                'form_action'     => get_admin_url(null, 'options.php'),
+                                'title'           => $mod_data->title,
+                                'description'     => wp_kses($mod_data->short_description, 'a'),
+                                'url'             => $url,
+                            ],
+                            false,
+                            false
+                        );
                     }
                 }
             }
@@ -306,35 +331,32 @@ if ( ! class_exists('PPCH_Settings')) {
          * @param string $field The form field for which to check for an error
          * @param string $description Unlocalized string to display if there was no error with the given field
          *
-         *@since 0.7
+         * @since 0.7
          *
          */
         public function helper_print_error_or_description($field, $description)
         {
             if (isset($_REQUEST['form-errors'][$field])): ?>
-				<div class="form-error">
-					<p><?php echo esc_html($_REQUEST['form-errors'][$field]); ?></p>
-				</div>
-			<?php else: ?>
-				<p class="description"><?php echo esc_html($description); ?></p>
-			<?php endif;
+                <div class="form-error">
+                    <p><?php echo esc_html($_REQUEST['form-errors'][$field]); ?></p>
+                </div>
+            <?php else: ?>
+                <p class="description"><?php echo esc_html($description); ?></p>
+            <?php endif;
         }
 
         /**
          * Generate an option field to turn post type support on/off for a given module
          *
-         * @param object $module      PublishPress module we're generating the option field for
-         * @param array  $post_types  If empty, we consider all post types
+         * @param object $module PublishPress module we're generating the option field for
+         * @param array $post_types If empty, we consider all post types
          *
          * @since 0.7
          */
         public function helper_option_custom_post_type($module, $post_types = [])
         {
             if (empty($post_types)) {
-                $post_types = [
-                    'post' => __('Posts'),
-                    'page' => __('Pages'),
-                ];
+                $post_types        = [];
                 $custom_post_types = $this->getSupportedPostTypesForModule();
                 if (count($custom_post_types)) {
                     foreach ($custom_post_types as $custom_post_type => $args) {
@@ -355,7 +377,14 @@ if ( ! class_exists('PPCH_Settings')) {
                 echo ' type="checkbox" value="on" />&nbsp;&nbsp;&nbsp;' . esc_html($title) . '</label>';
                 // Leave a note to the admin as a reminder that add_post_type_support has been used somewhere in their code
                 if (post_type_supports($post_type, $module->post_type_support)) {
-                    echo '&nbsp&nbsp;&nbsp;<span class="description">' . sprintf(__('Disabled because add_post_type_support(\'%1$s\', \'%2$s\') is included in a loaded file.', 'publishpress-checklists'), $post_type, $module->post_type_support) . '</span>';
+                    echo '&nbsp&nbsp;&nbsp;<span class="description">' . sprintf(
+                            __(
+                                'Disabled because add_post_type_support(\'%1$s\', \'%2$s\') is included in a loaded file.',
+                                'publishpress-checklists'
+                            ),
+                            $post_type,
+                            $module->post_type_support
+                        ) . '</span>';
                 }
                 echo '<br />';
             }
@@ -369,7 +398,8 @@ if ( ! class_exists('PPCH_Settings')) {
          */
         public function helper_settings_validate_and_save()
         {
-            if (!isset($_POST['action'], $_POST['_wpnonce'], $_POST['option_page'], $_POST['_wp_http_referer'], $_POST['submit']) || !is_admin()) {
+            if (!isset($_POST['action'], $_POST['_wpnonce'], $_POST['option_page'], $_POST['_wp_http_referer'], $_POST['submit']) || !is_admin(
+                )) {
                 return false;
             }
 
@@ -378,11 +408,14 @@ if ( ! class_exists('PPCH_Settings')) {
                 return false;
             }
 
-            if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['_wpnonce'], 'edit-publishpress-settings')) {
+            if (!current_user_can('manage_options') || !wp_verify_nonce(
+                    $_POST['_wpnonce'],
+                    'edit-publishpress-settings'
+                )) {
                 wp_die(__('Cheatin&#8217; uh?'));
             }
 
-            if ( ! isset($_POST['publishpress_checklists_settings_options'])) {
+            if (!isset($_POST['publishpress_checklists_settings_options'])) {
                 return true;
             }
 
@@ -421,7 +454,11 @@ if ( ! class_exists('PPCH_Settings')) {
                 }
 
                 // New way to validate settings
-                $new_options = apply_filters('publishpress_checklists_validate_module_settings', $new_options, $module_name);
+                $new_options = apply_filters(
+                    'publishpress_checklists_validate_module_settings',
+                    $new_options,
+                    $module_name
+                );
 
                 // Cast our object and save the data.
                 $new_options = (object)array_merge((array)$legacyPlugin->$module_name->module->options, $new_options);
@@ -451,10 +488,6 @@ if ( ! class_exists('PPCH_Settings')) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
 
-            if (!isset($new_options['hide_publish_button'])) {
-                $new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
-            }
-
             return $new_options;
         }
 
@@ -462,7 +495,7 @@ if ( ! class_exists('PPCH_Settings')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $module_settings_slug = isset($_GET['module']) && ! empty($_GET['module']) ? $_GET['module'] : PPCH_Settings::SETTINGS_SLUG;
+            $module_settings_slug = isset($_GET['module']) && !empty($_GET['module']) ? $_GET['module'] : PPCH_Settings::SETTINGS_SLUG;
             $requested_module     = $legacyPlugin->getModuleBy('settings_slug', $module_settings_slug);
             $display_text         = '';
 
@@ -477,7 +510,9 @@ if ( ! class_exists('PPCH_Settings')) {
                 $message = false;
             }
             if ($message && isset($requested_module->messages[$message])) {
-                $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html($requested_module->messages[$message]) . '</p></div>';
+                $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html(
+                        $requested_module->messages[$message]
+                    ) . '</p></div>';
             }
 
             // If there's been an error, let's display it
@@ -491,7 +526,9 @@ if ( ! class_exists('PPCH_Settings')) {
                 $error = false;
             }
             if ($error && isset($requested_module->messages[$error])) {
-                $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html($requested_module->messages[$error]) . '</p></div>';
+                $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html(
+                        $requested_module->messages[$error]
+                    ) . '</p></div>';
             }
 
             $this->printDefaultHeader($requested_module);
@@ -502,7 +539,7 @@ if ( ! class_exists('PPCH_Settings')) {
 
             $module_output = '';
 
-            if ( ! empty($configure_callback)) {
+            if (!empty($configure_callback)) {
                 $requested_module_name = $requested_module->name;
 
                 $legacyPlugin->$requested_module_name->$configure_callback();
@@ -514,7 +551,7 @@ if ( ! class_exists('PPCH_Settings')) {
              */
             $show_tabs = false;
             foreach ($legacyPlugin->modules as $module) {
-                if ( ! empty($module->options_page) && $module->options->enabled == 'on') {
+                if (!empty($module->options_page) && $module->options->enabled == 'on') {
                     $show_tabs = true;
                 }
             }
@@ -523,16 +560,20 @@ if ( ! class_exists('PPCH_Settings')) {
 
             $templateLoader = Factory::getTemplateLoader();
 
-            $templateLoader->load('settings', 'settings', [
-                'modules'        => (array)$legacyPlugin->modules,
-                'settings_slug'  => $module_settings_slug,
-                'slug'           => PPCH_Settings::SETTINGS_SLUG,
-                'module_output'  => $module_output,
-                'sidebar_output' => '',
-                'text'           => $display_text,
-                'show_sidebar'   => false,
-                'show_tabs'      => $show_tabs,
-            ]);
+            $templateLoader->load(
+                'settings',
+                'settings',
+                [
+                    'modules'        => (array)$legacyPlugin->modules,
+                    'settings_slug'  => $module_settings_slug,
+                    'slug'           => PPCH_Settings::SETTINGS_SLUG,
+                    'module_output'  => $module_output,
+                    'sidebar_output' => '',
+                    'text'           => $display_text,
+                    'show_sidebar'   => false,
+                    'show_tabs'      => $show_tabs,
+                ]
+            );
 
             if (apply_filters('publishpress_checklist_display_branding', true)) {
                 $this->printDefaultFooter($this->module);
@@ -575,14 +616,6 @@ if ( ! class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
-            add_settings_field(
-                'hide_publish_button',
-                __('Hide Publish button:', 'publishpress-checklists'),
-                [$this, 'settings_hide_publish_button_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
-
             do_action('publishpress_checklists_register_settings_after');
         }
 
@@ -609,35 +642,18 @@ if ( ! class_exists('PPCH_Settings')) {
 
             echo '<label for="' . $id . '">';
             echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[show_warning_icon_submit]" '
-                 . checked($value, 'yes', false) . ' />';
-            echo '&nbsp;&nbsp;&nbsp;' . __('This will display a warning icon in the "Publish" box',
-                    'publishpress-checklists');
-            echo '</label>';
-        }
-
-        /**
-         * Displays the field for the option of hide the submit button if the
-         * checklist is not complete.
-         *
-         * @param array
-         */
-        public function settings_hide_publish_button_option($args = [])
-        {
-            $id    = $this->module->options_group_name . '_hide_publish_button';
-            $value = isset($this->module->options->hide_publish_button) ? $this->module->options->hide_publish_button : 'no';
-
-            echo '<label for="' . $id . '">';
-            echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[hide_publish_button]" '
-                 . checked($value, 'yes', false) . ' />';
-            echo '&nbsp;&nbsp;&nbsp;' . __('This will hide the Publish button if "Recommended" and "Required" tasks are not complete.',
-                    'publishpress-checklists');
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . __(
+                    'This will display a warning icon in the "Publish" box',
+                    'publishpress-checklists'
+                );
             echo '</label>';
         }
 
         /**
          * Validate data entered by the user
          *
-         * @param array  $new_options New values that have been entered by the user
+         * @param array $new_options New values that have been entered by the user
          * @param string $module_name The name of the module
          *
          * @return array $new_options Form values after they've been sanitized
@@ -649,7 +665,7 @@ if ( ! class_exists('PPCH_Settings')) {
             }
 
             // Whitelist validation for the post type options
-            if ( ! isset($new_options['post_types'])) {
+            if (!isset($new_options['post_types'])) {
                 $new_options['post_types'] = [];
             }
 
@@ -658,15 +674,10 @@ if ( ! class_exists('PPCH_Settings')) {
                 $this->module->post_type_support
             );
 
-            if ( ! isset ($new_options['show_warning_icon_submit'])) {
+            if (!isset ($new_options['show_warning_icon_submit'])) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
-
-            if ( ! isset ($new_options['hide_publish_button'])) {
-                $new_options['hide_publish_button'] = Base_requirement::VALUE_NO;
-            }
-            $new_options['hide_publish_button'] = Base_requirement::VALUE_YES === $new_options['hide_publish_button'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             return $new_options;
         }

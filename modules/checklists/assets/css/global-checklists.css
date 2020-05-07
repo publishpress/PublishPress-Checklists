@@ -4,6 +4,7 @@
 
 .pp-checklists-req.status-yes * {
     color: #66bb6a;
+    font-weight: normal;
 }
 
 .pp-checklists-req.status-no * {
@@ -66,6 +67,8 @@
 
 .pp-checklists-custom-item {
     cursor: pointer;
+    color: #ef5350;
+    font-weight: bold;
 }
 
 .pp-checklists-custom-item .dashicons {
@@ -80,6 +83,9 @@
 #pp-checklists-post-type-filter a {
     padding: 8px 18px;
     border: 1px solid silver;
+    display: inline-block;
+    margin-right: 2px;
+    margin-bottom: 4px;
 }
 
 #pp-checklists-post-type-filter a.pp-selected {
@@ -106,13 +112,22 @@
     line-height: 20px;
 }
 
+
+.pp-checklists-req .status-label {
+    padding-left: 3px;
+}
+
+.pp-checklists-req.pp-checklists-custom-item .status-label {
+    padding-left: 1px;
+}
+
 @media only screen and (max-width: 781px) {
     #pp-checklists-global table th {
         display: none;
     }
 
     .pp-checklists-requirements-settings td {
-        height: auto!important;
+        height: auto !important;
     }
 
     .pp-checklists-requirement-row td {

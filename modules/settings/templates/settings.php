@@ -4,7 +4,7 @@
             <?php if ($context['show_tabs']) : ?>
                 <h2 class="nav-tab-wrapper">
                     <?php foreach ($context['modules'] as $module) : ?>
-                        <?php if ( ! empty($context['module']['options_page']) && $context['module']->options->enabled === 'on') : ?>
+                        <?php if (!empty($context['module']['options_page']) && $context['module']->options->enabled === 'on') : ?>
                             <a
                                     href="?page=<?php echo $context['slug']; ?>&module=<?php echo $context['module']->settings_slug; ?>"
                                     class="nav-tab <?php echo ($context['settings_slug'] == $context['module']->settings_slug) ? 'nav-tab-active' : ''; ?>">

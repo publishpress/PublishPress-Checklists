@@ -35,7 +35,7 @@ class Filled_excerpt extends Base_simple
      * Returns the current status of the requirement.
      *
      * @param stdClass $post
-     * @param mixed    $option_value
+     * @param mixed $option_value
      *
      * @return mixed
      */
@@ -43,6 +43,6 @@ class Filled_excerpt extends Base_simple
     {
         $excerpt = trim(get_the_excerpt($post));
 
-        return ! empty($excerpt);
+        return !empty($excerpt);
     }
 }

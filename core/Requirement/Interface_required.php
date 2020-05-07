@@ -34,7 +34,7 @@ interface Interface_required
     /**
      * Add the requirement to the list to be displayed in the meta box.
      *
-     * @param array    $requirements
+     * @param array $requirements
      * @param stdClass $post
      *
      * @return array
@@ -48,7 +48,7 @@ interface Interface_required
      * evaluate the status and override this method.
      *
      * @param stdClass $post
-     * @param mixed    $option_value
+     * @param mixed $option_value
      *
      * @return mixed
      */

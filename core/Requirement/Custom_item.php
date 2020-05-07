@@ -39,7 +39,6 @@ class Custom_item extends Base_simple implements Interface_required
         $this->is_custom = true;
 
         parent::__construct($module, $post_type);
-
     }
 
     /**
@@ -51,31 +50,6 @@ class Custom_item extends Base_simple implements Interface_required
     {
         $this->lang['label']          = __('Custom', 'publishpress-checklists');
         $this->lang['label_settings'] = __('Custom', 'publishpress-checklists');
-    }
-
-    /**
-     * Returns the title of this custom item.
-     *
-     * @return string
-     */
-    public function get_title()
-    {
-        if ( ! empty($this->title)) {
-            return $this->title;
-        }
-
-        $title    = '';
-        $var_name = $this->name . '_title';
-
-        if (isset($this->module->options->{$var_name}[$this->post_type])) {
-            $title = stripslashes($this->module->options->{$var_name}[$this->post_type]);
-        }
-
-        $this->title = $title;
-
-        // echo '<pre>'; echo $var_name; print_r($this->module->options); die;
-
-        return $this->title;
     }
 
     /**
@@ -105,6 +79,31 @@ class Custom_item extends Base_simple implements Interface_required
     }
 
     /**
+     * Returns the title of this custom item.
+     *
+     * @return string
+     */
+    public function get_title()
+    {
+        if (!empty($this->title)) {
+            return $this->title;
+        }
+
+        $title    = '';
+        $var_name = $this->name . '_title';
+
+        if (isset($this->module->options->{$var_name}[$this->post_type])) {
+            $title = stripslashes($this->module->options->{$var_name}[$this->post_type]);
+        }
+
+        $this->title = $title;
+
+        // echo '<pre>'; echo $var_name; print_r($this->module->options); die;
+
+        return $this->title;
+    }
+
+    /**
      * Get the HTML for the setting field for the specific post type.
      *
      * @return string
@@ -122,22 +121,9 @@ class Custom_item extends Base_simple implements Interface_required
     }
 
     /**
-     * Returns the current status of the requirement.
-     *
-     * @param stdClass $post
-     * @param mixed    $option_value
-     *
-     * @return mixed
-     */
-    public function get_current_status($post, $option_value)
-    {
-        return self::VALUE_YES === get_post_meta($post->ID, PPCH_Checklists::POST_META_PREFIX . $this->name, true);
-    }
-
-    /**
      * Add the requirement to the list to be displayed in the meta box.
      *
-     * @param array    $requirements
+     * @param array $requirements
      * @param stdClass $post
      *
      * @return array
@@ -172,6 +158,19 @@ class Custom_item extends Base_simple implements Interface_required
     }
 
     /**
+     * Returns the current status of the requirement.
+     *
+     * @param stdClass $post
+     * @param mixed $option_value
+     *
+     * @return mixed
+     */
+    public function get_current_status($post, $option_value)
+    {
+        return self::VALUE_YES === get_post_meta($post->ID, PPCH_Checklists::POST_META_PREFIX . $this->name, true);
+    }
+
+    /**
      * Validates the option group, making sure the values are sanitized.
      *
      * @param array $new_options
@@ -182,7 +181,6 @@ class Custom_item extends Base_simple implements Interface_required
     {
         if (isset($new_options[$this->name . '_title'][$this->post_type])
             && empty($new_options[$this->name . '_title'][$this->post_type])) {
-
             // Look for empty title
             $index = array_search($this->name, $new_options['custom_items']);
             if (false !== $index) {
@@ -196,8 +194,7 @@ class Custom_item extends Base_simple implements Interface_required
 
         // Check if we need to remove items
         if (isset($new_options['custom_items_remove'])
-            && ! empty($new_options['custom_items_remove'])) {
-
+            && !empty($new_options['custom_items_remove'])) {
             foreach ($new_options['custom_items_remove'] as $id) {
                 $var_name = $id . '_title';
                 unset($new_options[$var_name]);
@@ -210,7 +207,6 @@ class Custom_item extends Base_simple implements Interface_required
                 $index_remove = array_search($id, $new_options['custom_items']);
                 if (false !== $index_remove) {
                     unset($new_options['custom_items'][$index_remove]);
-
                 }
             }
         }

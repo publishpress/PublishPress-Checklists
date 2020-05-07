@@ -13,7 +13,7 @@ use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-if ( ! defined('PPCH_LOADED')) {
+if (!defined('PPCH_LOADED')) {
     require_once __DIR__ . '/../includes.php';
 }
 
@@ -38,6 +38,21 @@ abstract class Factory
     }
 
     /**
+     * @return Container
+     */
+    public static function getContainer()
+    {
+        if (static::$container === null) {
+            $services = new Services();
+
+            static::$container = new Container();
+            static::$container->register($services);
+        }
+
+        return static::$container;
+    }
+
+    /**
      * @return TemplateLoader
      */
     public static function getTemplateLoader()
@@ -52,21 +67,5 @@ abstract class Factory
         $container = self::getContainer();
 
         return $container['error_handler'];
-    }
-
-    /**
-     * @return Container
-     */
-    public static function getContainer()
-    {
-        if (static::$container === null) {
-
-            $services = new Services();
-
-            static::$container = new Container();
-            static::$container->register($services);
-        }
-
-        return static::$container;
     }
 }

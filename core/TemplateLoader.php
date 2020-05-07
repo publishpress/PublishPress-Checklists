@@ -17,21 +17,20 @@ class TemplateLoader
      *
      * @param       $moduleName
      * @param       $templateName
-     * @param bool  $requireOnce
+     * @param bool $requireOnce
      * @param array $context
      *
-     * @param bool  $return
+     * @param bool $return
      *
      * @return false|string
      */
     public function load($moduleName, $templateName, $context = [], $return = false, $requireOnce = true)
     {
-
         $context = apply_filters('publishpress_checklists_load_template_context', $context, $moduleName, $templateName);
 
         $templatePath = $this->locate($moduleName, $templateName);
 
-        if ( ! empty($templatePath)) {
+        if (!empty($templatePath)) {
             if ($return) {
                 ob_start();
             }

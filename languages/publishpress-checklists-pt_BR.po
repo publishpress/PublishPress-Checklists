@@ -374,10 +374,6 @@ msgstr "Adicionar a estes tipos de post:"
 msgid "Show warning icon:"
 msgstr "Mostrar ícone de aviso:"
 
-#: modules/settings/settings.php:632
-msgid "Hide Publish button:"
-msgstr "Ocultar ícone de publicação:"
-
 #: modules/settings/settings.php:663
 msgid "This will display a warning icon in the \"Publish\" box"
 msgstr "Isso mostrará um ícone de aviso na caixa de publicação"
