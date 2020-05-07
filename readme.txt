@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.1.0] - 2020-04-30 =
+= [2.1.0] - 2020-05-07 =
 
 * Added: Add permalink validation rule for the checklists - #115;
 * Added: Add option to select user roles to skip specific requirements - #131;
