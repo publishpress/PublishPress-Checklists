@@ -1,0 +1,36 @@
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+        - tad\WPBrowser\Extension\Copier
+    commands:
+        - Codeception\Command\GenerateWPUnit
+        - Codeception\Command\GenerateWPRestApi
+        - Codeception\Command\GenerateWPRestController
+        - Codeception\Command\GenerateWPRestPostTypeController
+        - Codeception\Command\GenerateWPAjax
+        - Codeception\Command\GenerateWPCanonical
+        - Codeception\Command\GenerateWPXMLRPC
+    config:
+        tad\WPBrowser\Extension\Copier:
+            files:
+                publishpress-checklists.php: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/publishpress-checklists.php"
+                assets: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/assets"
+                core: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/core"
+                languages: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/languages"
+                modules: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/modules"
+                includes.php: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/includes.php"
+                vendor: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/vendor"
+
+params:
+    - .env.testing
+settings:
+    shuffle: true
+    lint: true
+    report_useless_tests: true
