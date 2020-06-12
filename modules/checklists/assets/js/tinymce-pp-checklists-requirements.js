@@ -30,7 +30,7 @@
 // Based on the TinyMCE words count display found at /wp-admin/js/post.js
 // Ignored if Gutenberg is in use.
 
-if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined') {
+if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined' && typeof PP_Checklists !== 'undefined') {
     (function ($, document, tinymce) {
         'use strict';
 
