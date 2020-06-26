@@ -30,11 +30,11 @@
 // Based on the TinyMCE words count display found at /wp-admin/js/post.js
 // Ignored if Gutenberg is in use.
 
-if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined' && typeof PP_Checklists !== 'undefined') {
-    (function ($, document, tinymce) {
-        'use strict';
+(function ($, document, tinymce) {
+    'use strict';
 
+    if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined' && typeof PP_Checklists !== 'undefined') {
         // We trigger an event to make sure the editor is available.
         $(document).trigger(PP_Checklists.EVENT_TINYMCE_LOADED, tinymce);
-    })(jQuery, document, tinymce);
-}
+    }
+})(jQuery, document, tinymce);

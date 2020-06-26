@@ -422,71 +422,82 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function add_admin_scripts()
         {
-            wp_enqueue_style(
-                'pp-checklists-requirements',
-                $this->module_url . 'assets/css/global-checklists.css',
-                false,
-                PPCH_VERSION,
-                'all'
-            );
+            $screen = get_current_screen();
 
-            wp_register_style(
-                'pp-remodal',
-                $this->module_url . 'assets/css/remodal.css',
-                false,
-                PPCH_VERSION,
-                'all'
-            );
-            wp_register_style(
-                'pp-remodal-default-theme',
-                $this->module_url . 'assets/css/remodal-default-theme.css',
-                ['pp-remodal'],
-                PPCH_VERSION,
-                'all'
-            );
+            // Post edit pages, for displaying the checklists metabox.
+            if (!is_null($screen) && $screen->base === 'post') {
+                $supported_post_types = $this->getSelectedPostTypes();
 
-            wp_enqueue_style(
-                'pp-checklists-global-checklists',
-                $this->module_url . 'assets/css/admin.css',
-                ['pp-remodal', 'pp-remodal-default-theme'],
-                PPCH_VERSION,
-                'all'
-            );
+                if (array_key_exists($screen->post_type, $supported_post_types)) {
+                    wp_enqueue_style(
+                        'pp-checklists-requirements',
+                        $this->module_url . 'assets/css/post-editor-checklists.css',
+                        false,
+                        PPCH_VERSION,
+                        'all'
+                    );
 
-            wp_enqueue_script(
-                'pp-checklists-global-checklists',
-                $this->module_url . 'assets/js/global-checklists.js',
-                ['jquery', 'pp-remodal'],
-                PPCH_VERSION,
-                true
-            );
+                    wp_register_style(
+                        'pp-remodal',
+                        $this->module_url . 'assets/css/remodal.css',
+                        false,
+                        PPCH_VERSION,
+                        'all'
+                    );
+                    wp_register_style(
+                        'pp-remodal-default-theme',
+                        $this->module_url . 'assets/css/remodal-default-theme.css',
+                        ['pp-remodal'],
+                        PPCH_VERSION,
+                        'all'
+                    );
 
-            wp_register_script(
-                'pp-remodal',
-                $this->module_url . 'assets/js/remodal.min.js',
-                ['jquery'],
-                PPCH_VERSION,
-                true
-            );
+                    wp_register_script(
+                        'pp-remodal',
+                        $this->module_url . 'assets/js/remodal.min.js',
+                        ['jquery'],
+                        PPCH_VERSION,
+                        true
+                    );
 
-            $rules = apply_filters('publishpress_checklists_rules_list', []);
+                    wp_enqueue_style('pp-remodal-default-theme');
+                    wp_enqueue_script('pp-remodal');
+                }
+            } elseif (!is_null($screen) && $screen->base === 'toplevel_page_ppch-checklists') {
+                // Admin pages
+                wp_enqueue_style(
+                    'pp-checklists-global-checklists',
+                    $this->module_url . 'assets/css/admin-pages.css',
+                    ['pp-remodal', 'pp-remodal-default-theme'],
+                    PPCH_VERSION,
+                    'all'
+                );
 
-            // Get all the keys of post types, to select the first one for the JS script
-            $postTypes = array_keys($this->get_post_types());
-            // Make sure we are on the first item
-            reset($postTypes);
+                wp_enqueue_script(
+                    'pp-checklists-global-checklists',
+                    $this->module_url . 'assets/js/global-checklists.js',
+                    ['jquery', 'pp-remodal'],
+                    PPCH_VERSION,
+                    true
+                );
 
-            wp_localize_script(
-                'pp-checklists-global-checklists',
-                'objectL10n_checklists_global_checklist',
-                [
-                    'rules'           => $rules,
-                    'first_post_type' => current($postTypes),
-                ]
-            );
 
-            wp_enqueue_style('pp-remodal-default-theme');
-            wp_enqueue_script('pp-remodal');
+                $rules = apply_filters('publishpress_checklists_rules_list', []);
+
+                // Get all the keys of post types, to select the first one for the JS script
+                $postTypes = array_keys($this->get_post_types());
+                // Make sure we are on the first item
+                reset($postTypes);
+
+                wp_localize_script(
+                    'pp-checklists-global-checklists',
+                    'objectL10n_checklists_global_checklist',
+                    [
+                        'rules'           => $rules,
+                        'first_post_type' => current($postTypes),
+                    ]
+                );
+            }
         }
 
         /*
@@ -770,21 +781,29 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function enqueue_block_editor_assets()
         {
-            // Required thing to build Gutenberg Blocks
-            wp_enqueue_script(
-                'pp-checklists-requirements-gutenberg',
-                plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PPCH_FILE),
-                [
-                    'wp-i18n',
-                    'wp-element',
-                    'wp-hooks',
-                    'wp-edit-post',
-                    'react',
-                    'react-dom',
-                ],
-                PPCH_VERSION,
-                true
-            );
+            $screen = get_current_screen();
+
+            if (!is_null($screen)) {
+                $supported_post_types = $this->getSelectedPostTypes();
+
+                if ($screen->base === 'post' && array_key_exists($screen->post_type, $supported_post_types)) {
+                    // Required thing to build Gutenberg Blocks
+                    wp_enqueue_script(
+                        'pp-checklists-requirements-gutenberg',
+                        plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PPCH_FILE),
+                        [
+                            'wp-i18n',
+                            'wp-element',
+                            'wp-hooks',
+                            'wp-edit-post',
+                            'react',
+                            'react-dom',
+                        ],
+                        PPCH_VERSION,
+                        true
+                    );
+                }
+            }
         }
 
         /**
