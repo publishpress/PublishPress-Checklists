@@ -27,15 +27,15 @@ class Filled_excerpt extends Base_counter
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Excerpt has text', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Excerpt has text', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %s text', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %s texts', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %s text', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %s texts', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%s text', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%s texts', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %s and %s texts', 'publishpress-checklists');
+        $this->lang['label']                = __('Excerpt has text', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Excerpt has text', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %s excerpt text', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %s excerpt texts', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %s excerpt text', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %s excerpt texts', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%s excerpt text', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%s excerpt texts', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %s and %s excerpt texts', 'publishpress-checklists');
     }
 
     /**

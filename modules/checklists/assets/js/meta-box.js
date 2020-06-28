@@ -672,6 +672,36 @@
         });
     }
 
+    /*----------  Title Count  ----------*/
+
+    if ($('#pp-checklists-req-title_count').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var count = 0,
+                min_value = parseInt(ppChecklists.requirements.title_count.value[0]),
+                max_value = parseInt(ppChecklists.requirements.title_count.value[1]);
+    
+            if (PP_Checklists.is_gutenberg_active()) {
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var obj = PP_Checklists.getEditor().getEditedPostAttribute('title');
+            } else {
+                if ($('#title').length === 0) {
+                    return;
+                }
+
+                var obj = $('#title').val();
+            }
+    
+            if (typeof obj !== 'undefined') {
+                count = obj.length;
+    
+                $('#pp-checklists-req-title_count').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                );
+            }
+        });
+    }
+
     /*----------  Word Count ----------*/
     var lastCount = 0;
     if (PP_Checklists.is_gutenberg_active()) {

@@ -299,6 +299,9 @@ if (!class_exists('PPCH_Checklists')) {
 
             // Check the "supports" for the post type.
             $supports_map = [
+                'title'    => [
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Title_count',
+                ],
                 'editor'    => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Words_count',
                 ],
