@@ -37,7 +37,7 @@ class Internal_Links extends Base_counter {
 	}
 
 	/**
-	 * Turn all URLs to clickable links and extract internal links adter.
+	 * Turn all URLs to clickable links and extract internal links after.
 	 *
 	 * @param string $content
 	 * @param array $protocols http/https, ftp, mail, twitter
@@ -116,7 +116,7 @@ class Internal_Links extends Base_counter {
 			$image_extension = array( 'gif', 'jpg', 'jpeg', 'png', 'svg' );
 			foreach ( $match[0] as $k => $e ) {
 				$current_link      = $match[1][ $k ];
-				$current_extension = strtolower( pathinfo( $current_link, PATHINFO_EXTENSION ) ); // Using strtolower to overcome
+				$current_extension = strtolower( pathinfo( $current_link, PATHINFO_EXTENSION ) ); // Using strtolower to overcome case issue
 				//skip if link is image
 				if ( in_array( $current_extension, $image_extension ) ) {
 					continue;
@@ -125,6 +125,7 @@ class Internal_Links extends Base_counter {
 				if ( strpos( $current_link, $website ) == false ) {
 					continue;
 				}
+				//add valid link to array
 				$internal_links[] = $current_link;
 			}
 		}
