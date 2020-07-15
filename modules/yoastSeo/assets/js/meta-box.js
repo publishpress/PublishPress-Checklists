@@ -50,8 +50,6 @@
 
                 var readabilityScore = Number($('#yoast_wpseo_content_score').val());
 
-                if (typeof readabilityScore !== 'undefined') {
-
                     if (readabilityScore >= '71') {
                         readabilityAnalysisPass = true;
                     }
@@ -61,7 +59,6 @@
                         readabilityAnalysisPass
                     );
 
-                }
             });
 
         }
@@ -84,8 +81,6 @@
 
                 var seoScore = Number($('#yoast_wpseo_linkdex').val());
 
-                if (typeof seoScore !== 'undefined') {
-
                     if (seoScore >= '71') {
                         seoAnalysisPass = true;
                     }
@@ -95,7 +90,6 @@
                         seoAnalysisPass
                     );
 
-                }
             });
 
         }
