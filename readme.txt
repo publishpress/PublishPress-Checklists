@@ -112,6 +112,17 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.2.0] - UNRELEASED =
+
+* Added: Add support to Yoast SEO readability and SEO analysis pass task in the checklists - #86;
+* Added: Add new task for checking the limit of chars in the excerpt test - #150;
+* Added: Add new task for checking the number of internal links in the text - #52;
+* Fixed: Remove not used transient for checking data migration;
+* Fixed: JS error message related to missed PP_Checklists object;
+* Fixed: Enqueue scripts only when required - #106;
+* Changed: Updated the PHP min requirement from 5.4 to 5.6;
+* Changed: Updated the WordPress tested up to version to 5.4;
+
 = [2.1.0] - 2020-05-07 =
 
 * Added: Add permalink validation rule for the checklists - #115;
