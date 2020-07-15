@@ -35,15 +35,15 @@
         /**
          *
          * Yoast Readability Analysis
+         * 
+         * - "yoast_wpseo_content_score" ==> Yoast seo input for readability score
+         * - 71 to 100 ==> Yoast readability grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_readability_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var readabilityAnalysisPass = false;
 
-                /* "yoast_wpseo_content_score" ==> Yoast seo input for readability score
-                 * 71 - 100 ==> Yoast readability grade for pass/green color
-                 */
                 if ($('#yoast_wpseo_content_score').length === 0) {
                     return;
                 }
@@ -66,15 +66,15 @@
         /**
          *
          * Yoast Seo Analysis
+         * 
+         * - "yoast_wpseo_linkdex" ==> Yoast seo input for seo score
+         * - 71 to 100 ==> Yoast seo grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_seo_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var seoAnalysisPass = false;
 
-                /* "yoast_wpseo_linkdex" ==> Yoast seo input for seo score
-                 * 71 - 100 ==> Yoast seo grade for pass/green color
-                 */
                 if ($('#yoast_wpseo_linkdex').length === 0) {
                     return;
                 }
