@@ -470,7 +470,7 @@ if (!class_exists('PPCH_Checklists')) {
                 wp_enqueue_style(
                     'pp-checklists-global-checklists',
                     $this->module_url . 'assets/css/admin-pages.css',
-                    ['pp-remodal', 'pp-remodal-default-theme'],
+                    [],
                     PPCH_VERSION,
                     'all'
                 );
@@ -498,6 +498,15 @@ if (!class_exists('PPCH_Checklists')) {
                         'rules'           => $rules,
                         'first_post_type' => current($postTypes),
                     ]
+                );
+            } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
+                // Admin pages
+                wp_enqueue_style(
+                    'pp-checklists-global-checklists',
+                    $this->module_url . 'assets/css/admin-pages.css',
+                    [],
+                    PPCH_VERSION,
+                    'all'
                 );
             }
         }
