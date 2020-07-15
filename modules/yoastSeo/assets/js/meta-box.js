@@ -50,7 +50,7 @@
 
                 var readabilityScore = Number($('#yoast_wpseo_content_score').val());
 
-                    if (readabilityScore >= '71') {
+                    if (readabilityScore >= 71) {
                         readabilityAnalysisPass = true;
                     }
 
@@ -81,7 +81,7 @@
 
                 var seoScore = Number($('#yoast_wpseo_linkdex').val());
 
-                    if (seoScore >= '71') {
+                    if (seoScore >= 71) {
                         seoAnalysisPass = true;
                     }
 
