@@ -52,8 +52,6 @@ if (!class_exists('PPCH_Checklists')) {
 
         const FLAG_OPTIONS_MIGRATED_2_0_0 = 'publishpress_checklists_options_migrated_2_0_0';
 
-        const FLAG_UPDATING_LEGACY_OPTION = 'ppch_updating_legacy_options';
-
         /**
          * @var string
          */
