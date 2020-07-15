@@ -832,7 +832,6 @@
         if ($('#pp-checklists-req-internal_links').length > 0) {
             wp.data.subscribe(
                 function () {
-                    // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                     var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
                     if (typeof content == 'undefined') {
