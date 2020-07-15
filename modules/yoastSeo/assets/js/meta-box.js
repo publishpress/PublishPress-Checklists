@@ -41,18 +41,18 @@
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var readabilityAnalysisPass = false;
 
-                /* "yoast_wpseo_content_score" ==> Yoast seo input for readbility score
+                /* "yoast_wpseo_content_score" ==> Yoast seo input for readability score
                  * 71 - 100 ==> Yoast readability grade for pass/green color
                  */
                 if ($('#yoast_wpseo_content_score').length === 0) {
                     return;
                 }
 
-                var obj = $('#yoast_wpseo_content_score').val();
+                var readabilityScore = Number($('#yoast_wpseo_content_score').val());
 
-                if (typeof obj !== 'undefined') {
+                if (typeof readabilityScore !== 'undefined') {
 
-                    if (obj >= '71') {
+                    if (readabilityScore >= '71') {
                         readabilityAnalysisPass = true;
                     }
 
@@ -82,11 +82,11 @@
                     return;
                 }
 
-                var obj = $('#yoast_wpseo_linkdex').val();
+                var seoScore = Number($('#yoast_wpseo_linkdex').val());
 
-                if (typeof obj !== 'undefined') {
+                if (typeof seoScore !== 'undefined') {
 
-                    if (obj >= '71') {
+                    if (seoScore >= '71') {
                         seoAnalysisPass = true;
                     }
 

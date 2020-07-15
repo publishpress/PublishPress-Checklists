@@ -3,8 +3,8 @@
 use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 use PublishPress\Checklists\Core\Legacy\Module;
-use PublishPress\Checklists\Yoastseo\Requirement\ReadabilityAnalysis;
-use PublishPress\Checklists\Yoastseo\Requirement\SeoAnalysis;
+use PublishPress\Checklists\Yoastseo\Requirement\Readability_Analysis;
+use PublishPress\Checklists\Yoastseo\Requirement\Seo_Analysis;
 
 /**
  * @package     PublishPress\Checklists
@@ -48,7 +48,7 @@ class PPCH_Yoastseo extends Module
     private $pluginVersion;
 
     /**
-     * Construct the PPCH_WooCommerce class
+     * Construct the PPCH_Yoastseo class
      *
      * @todo: Fix to inject the dependencies in the constructor as params.
      */
@@ -62,8 +62,8 @@ class PPCH_Yoastseo extends Module
 
         // Register the module with PublishPress
         $args = [
-            'title' => __('Yoastseo', 'publishpress-checklists'),
-            'short_description' => __('Define tasks related to yoastseo', 'publishpress-checklists'),
+            'title' => __('Yoast SEO', 'publishpress-checklists'),
+            'short_description' => __('Define tasks related to Yoast SEO', 'publishpress-checklists'),
             'module_url' => $this->module_url,
             'icon_class' => 'dashicons dashicons-feedback',
             'slug' => $this->module_name,
@@ -127,8 +127,8 @@ class PPCH_Yoastseo extends Module
      */
     public function filterPostTypeRequirements($requirements, $postType)
     {
-        $requirements[] = ReadabilityAnalysis::class;
-        $requirements[] = SeoAnalysis::class;
+        $requirements[] = Readability_Analysis::class;
+        $requirements[] = Seo_Analysis::class;
 
         return $requirements;
     }

@@ -13,14 +13,14 @@ namespace PublishPress\Checklists\Yoastseo\Requirement;
 use PublishPress\Checklists\Core\Requirement\Base_simple;
 use stdClass;
 
-class ReadabilityAnalysis extends Base_simple
+class Seo_Analysis extends Base_simple
 {
     /**
      * The name of the requirement, in a slug format
      *
      * @var string
      */
-    public $name = 'yoast_readability_analysis';
+    public $name = 'yoast_seo_analysis';
 
     /**
      * Initialize the language strings for the instance
@@ -29,7 +29,7 @@ class ReadabilityAnalysis extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast Readability Analysis Pass', 'publishpress-checklists'));
+        $this->lang['label_settings'] = esc_html(__('Yoast Seo Analysis Pass', 'publishpress-checklists'));
     }
 
     /**
@@ -109,7 +109,7 @@ class ReadabilityAnalysis extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
+        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
 
         return $score >= '71';
     }
