@@ -29,7 +29,7 @@ class Seo_Analysis extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast Seo Analysis Pass', 'publishpress-checklists'));
+        $this->lang['label_settings'] = esc_html(__('Yoast seo analysis pass', 'publishpress-checklists'));
     }
 
     /**
