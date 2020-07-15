@@ -37,7 +37,7 @@
          * Yoast Readability Analysis
          *
          * - "yoast_wpseo_content_score" ==> Yoast SEO input for readability score
-         * - 71 to 100 ==> Yoast readability grade for pass/green color
+         * - 71 to 100 ==> Yoast SEO readability grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_readability_analysis').length > 0) {

@@ -29,7 +29,7 @@ class Readability_Analysis extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast readability analysis pass', 'publishpress-checklists'));
+        $this->lang['label_settings'] = esc_html(__('Yoast SEO readability analysis pass', 'publishpress-checklists'));
     }
 
     /**
