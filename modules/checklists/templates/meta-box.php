@@ -29,19 +29,21 @@
                                value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                     <?php endif; ?>
 
-                    <?php if ($req['is_custom']) : ?>
-                        <span class="dashicons <?php echo $req['status'] ? 'dashicons-yes' : ''; ?>"></span>
-                    <?php else: ?>
-                        <span class="dashicons dashicons-<?php echo $req['status'] ? 'yes' : 'no'; ?>"></span>
-                    <?php endif; ?>
-                    <span class="status-label"><?php echo $req['label']; ?></span>
-
-                    <span>
+                    <?php
+                    if ($req['is_custom']) :
+                        $icon_class = $req['status'] ? 'dashicons-yes' : '';
+                    else:
+                        $icon_class = $req['status'] ? 'dashicons-yes' : 'dashicons-no';
+                    endif;
+                    ?>
+                    <div class="status-icon dashicons <?php echo $icon_class; ?>"></div>
+                    <div class="status-label">
+                        <?php echo $req['label']; ?>
                         <?php if ($req['rule'] === 'block') : ?>
-                            *
+                            <span class="required">*</span>
                             <?php $show_required_legend = true; ?>
                         <?php endif; ?>
-                    </span>
+                    </div>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>

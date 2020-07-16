@@ -5,9 +5,9 @@ Author: PublishPress
 Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
-Requires PHP: 5.4
-Tested up to: 5.3
-Stable tag: 2.1.0
+Requires PHP: 5.6
+Tested up to: 5.4
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ Next to every post and page, writers see a checklist box, showing the tasks they
 
 Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. Here are the default tasks:
 
-* Check that the Excerpt has text
+* Require a maximum or minimum number of characters in Excerpt
 * Require a maximum or minimum number of categories
 * Require a maximum or minimum number of tags
 * Require a maximum or minimum number of words
@@ -56,7 +56,7 @@ It is also possible to create more powerful requirements using a custom plugin. 
 
 The Pro version of PublishPress Checklists has support for WooCommerce. There are 18 requirements you can choose:
 
-* Excerpt has text
+* Number of characters in Excerpt
 * Number of Product tags
 * Number of Product categories
 * Number of words
@@ -111,6 +111,18 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.2.0] - 2020-07-16 =
+
+* Added: Add support to Yoast SEO readability and SEO analysis pass task in the checklists - #86;
+* Added: Add new task for checking the limit of chars in the excerpt test - #150;
+* Added: Add new task for checking the number of internal links in the text - #52;
+* Fixed: Remove not used transient for checking data migration;
+* Fixed: JS error message related to missed PP_Checklists object;
+* Fixed: Enqueue scripts only when required - #106;
+* Changed: Updated the PHP min requirement from 5.4 to 5.6;
+* Changed: Updated the WordPress tested up to version to 5.4;
+* Changed: Updated the label and text for some tasks;
 
 = [2.1.0] - 2020-05-07 =
 

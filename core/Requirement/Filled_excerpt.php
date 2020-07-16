@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Filled_excerpt extends Base_simple
+class Filled_excerpt extends Base_counter
 {
     /**
      * The name of the requirement, in a slug format
@@ -27,8 +27,15 @@ class Filled_excerpt extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Excerpt has text', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Excerpt has text', 'publishpress-checklists');
+        $this->lang['label']                = __('Numbers of characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Numbers of characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d characters in excerpt', 'publishpress-checklists');
     }
 
     /**
@@ -41,8 +48,8 @@ class Filled_excerpt extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $excerpt = trim(get_the_excerpt($post));
+        $count = strlen(trim(get_the_excerpt($post)));
 
-        return !empty($excerpt);
+        return ($count >= $option_value[0]) && ($count <= $option_value[1]);
     }
 }

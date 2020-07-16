@@ -28,14 +28,14 @@ class Words_Count extends Base_counter
      */
     public function init_language()
     {
-        $this->lang['label_settings']       = __('Number of words', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %s word', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %s words', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %s word', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %s words', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%s word', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%s words', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %s and %s words', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Number of words in content', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d word in content', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d words in content', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d word in content', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d words in content', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d word in content', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d words in content', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d words in content', 'publishpress-checklists');
     }
 
     /**

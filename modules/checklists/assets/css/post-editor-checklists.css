@@ -1,0 +1,70 @@
+#pp_checklist_meta em {
+    color: #afafaf;
+}
+
+.pp-checklists-req .status-icon,
+.pp-checklists-req .status-label {
+    display: inline-block;
+}
+
+.pp-checklists-req .status-icon {
+    width: 10%;
+}
+
+.pp-checklists-req .status-label {
+    width: 88%;
+}
+
+.pp-checklists-req.status-yes * {
+    color: #66bb6a;
+    font-weight: normal;
+}
+
+.pp-checklists-req.status-no * {
+    color: #ef5350;
+    font-weight: bold;
+}
+
+/* Warning icon in the Publish button */
+body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
+body.ppch-show-publishing-warning-icon .editor-post-publish-button,
+body.ppch-show-publishing-warning-icon .editor-post-publish-button__button {
+    position: relative;
+    overflow: visible;
+}
+
+body.ppch-show-publishing-warning-icon #publishing-action:after, /* Classic Editor - the input can't have pseudo-elements since can't have child nodes */
+body.ppch-show-publishing-warning-icon .editor-post-publish-button:after,
+body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:after {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    line-height: 23px;
+    width: 23px;
+    height: 23px;
+    font-size: 18px;
+    content: "!";
+    background-color: #df0000;
+    color: #ffede8;
+    font-weight: bold;
+    border: 1px solid white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 50px;
+    text-shadow: none;
+    text-align: center;
+    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
+}
+
+body.ppch-show-publishing-warning-icon #publishing-action:hover:after,
+body.ppch-show-publishing-warning-icon .editor-post-publish-button:hover:after,
+body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover:after {
+    background: #ff0000;
+    font-size: 23px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    top: -11px;
+    right: -11px;
+}

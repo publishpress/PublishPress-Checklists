@@ -31,7 +31,7 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
     public $taxonomy;
 
     /**
-     * Initialize the language strings for the instance
+     * Initialize the language strings for the instancef
      *
      * @return void
      */
@@ -41,13 +41,13 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
         $singular_label = $this->taxonomy->labels->singular_name;
 
         $this->lang['label_settings']       = __('Number of ', 'publishpress-checklists') . $label;
-        $this->lang['label_min_singular']   = __('Minimum of %s ', 'publishpress-checklists') . $singular_label;
-        $this->lang['label_min_plural']     = __('Minimum of %s ', 'publishpress-checklists') . $label;
-        $this->lang['label_max_singular']   = __('Maximum of %s ', 'publishpress-checklists') . $singular_label;
-        $this->lang['label_max_plural']     = __('Maximum of %s ', 'publishpress-checklists') . $label;
-        $this->lang['label_exact_singular'] = __('%s ', 'publishpress-checklists') . $singular_label;
-        $this->lang['label_exact_plural']   = __('%s ', 'publishpress-checklists') . $label;
-        $this->lang['label_between']        = __('Between %s and %s ', 'publishpress-checklists') . $label;
+        $this->lang['label_min_singular']   = __('Minimum of %d ', 'publishpress-checklists') . $singular_label;
+        $this->lang['label_min_plural']     = __('Minimum of %d ', 'publishpress-checklists') . $label;
+        $this->lang['label_max_singular']   = __('Maximum of %d ', 'publishpress-checklists') . $singular_label;
+        $this->lang['label_max_plural']     = __('Maximum of %d ', 'publishpress-checklists') . $label;
+        $this->lang['label_exact_singular'] = __('%d ', 'publishpress-checklists') . $singular_label;
+        $this->lang['label_exact_plural']   = __('%d ', 'publishpress-checklists') . $label;
+        $this->lang['label_between']        = __('Between %d and %d ', 'publishpress-checklists') . $label;
     }
 
     /**

@@ -441,6 +441,52 @@
         },
 
         /**
+         * Check for internal link from content and return result as array
+         *
+         *  - remove image inside tags so we don't count them as link
+         *  - remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
+         *  - check for every valid link and return array
+         *  - loop array and return only valid internal links excluding other images url
+         *
+         * @param  {String} content
+         * @param  {Array} links
+         * @param  {String} website
+         *
+         * @return {Array}
+         */
+        extract_internal_links: function (content, links = [], website = window.location.host) {
+            var link;
+            if (content) {
+
+                //remove image inside tags so we don't count them as link
+                content = content.replace(/<img[^>]*>/g, "");
+
+                //remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
+                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+
+                //check for every valid link and return array
+                content = content.match(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi);
+
+                //loop array and return only valid internal links excluding other images url
+                if (content) {
+                    for (link of content) {
+                        //skip if link is image
+                        if (link.match(/\.(jpeg|jpg|gif|png|svg)$/)) continue;
+                        //skip if link has different host than current website
+                        if (link.indexOf(website) < 0) continue;
+                        //add valid link to array
+                        links.push(link);
+                    }
+                }
+
+
+            }
+
+            return links;
+
+        },
+
+        /**
          * Returns true if the Gutenberg editor is active on the page.
          *
          * @returns {boolean}
@@ -646,8 +692,10 @@
 
     if ($('#pp-checklists-req-filled_excerpt').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_excerpt = false;
-
+            var count = 0,
+                min_value = parseInt(ppChecklists.requirements.filled_excerpt.value[0]),
+                max_value = parseInt(ppChecklists.requirements.filled_excerpt.value[1]);
+    
             if (PP_Checklists.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                 var obj = PP_Checklists.getEditor().getEditedPostAttribute('excerpt');
@@ -658,15 +706,43 @@
 
                 var obj = $('#excerpt').val();
             }
-
+    
             if (typeof obj !== 'undefined') {
-                if (obj.trim().length > 0) {
-                    has_excerpt = true;
-                }
-
+                count = obj.length;
+    
                 $('#pp-checklists-req-filled_excerpt').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    has_excerpt
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                );
+            }
+        });
+    }
+
+    /*----------  Title Count  ----------*/
+
+    if ($('#pp-checklists-req-title_count').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var count = 0,
+                min_value = parseInt(ppChecklists.requirements.title_count.value[0]),
+                max_value = parseInt(ppChecklists.requirements.title_count.value[1]);
+    
+            if (PP_Checklists.is_gutenberg_active()) {
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var obj = PP_Checklists.getEditor().getEditedPostAttribute('title');
+            } else {
+                if ($('#title').length === 0) {
+                    return;
+                }
+
+                var obj = $('#title').val();
+            }
+    
+            if (typeof obj !== 'undefined') {
+                count = obj.length;
+    
+                $('#pp-checklists-req-title_count').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
                 );
             }
         });
@@ -743,6 +819,110 @@
                 max = parseInt(ppChecklists.requirements.words_count.value[1]);
 
             $('#pp-checklists-req-words_count').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                PP_Checklists.check_valid_quantity(count, min, max)
+            );
+
+            lastCount = count;
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup', _.debounce(update, 500));
+        update();
+    }
+
+    /*----------  Internal Links ----------*/
+    var lastCount = 0;
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-internal_links').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var count = PP_Checklists.extract_internal_links(content).length;
+
+                    if (lastCount == count) {
+                        return;
+                    }
+
+
+                    var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
+                        max = parseInt(ppChecklists.requirements.internal_links.value[1]);
+
+                    $('#pp-checklists-req-internal_links').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        PP_Checklists.check_valid_quantity(count, min, max)
+                    );
+
+                    lastCount = count;
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var lastCount = 0;
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count;
+
+            if (typeof ppChecklists.requirements.internal_links === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            count = PP_Checklists.extract_internal_links(text).length;
+
+            if (lastCount === count) {
+                return;
+            }
+
+            var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
+                max = parseInt(ppChecklists.requirements.internal_links.value[1]);
+
+            $('#pp-checklists-req-internal_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                 PP_Checklists.check_valid_quantity(count, min, max)
             );
