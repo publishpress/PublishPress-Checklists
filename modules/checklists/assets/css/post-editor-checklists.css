@@ -2,6 +2,19 @@
     color: #afafaf;
 }
 
+.pp-checklists-req .status-icon,
+.pp-checklists-req .status-label {
+    display: inline-block;
+}
+
+.pp-checklists-req .status-icon {
+    width: 10%;
+}
+
+.pp-checklists-req .status-label {
+    width: 88%;
+}
+
 .pp-checklists-req.status-yes * {
     color: #66bb6a;
     font-weight: normal;
