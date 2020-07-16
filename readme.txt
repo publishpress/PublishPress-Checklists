@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.2.0] - UNRELEASED =
+= [2.2.0] - 2020-07-16 =
 
 * Added: Add support to Yoast SEO readability and SEO analysis pass task in the checklists - #86;
 * Added: Add new task for checking the limit of chars in the excerpt test - #150;
@@ -122,6 +122,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Enqueue scripts only when required - #106;
 * Changed: Updated the PHP min requirement from 5.4 to 5.6;
 * Changed: Updated the WordPress tested up to version to 5.4;
+* Changed: Updated the label and text for some tasks;
 
 = [2.1.0] - 2020-05-07 =
 
