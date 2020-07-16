@@ -630,13 +630,15 @@ if (!class_exists('PPCH_Checklists')) {
             // Render the box
             $templateLoader = Factory::getTemplateLoader();
 
+            $checklistsLink = add_query_arg(['page' => 'ppch-checklists'], get_admin_url(null, 'admin.php'));
+
             $templateLoader->load(
                 'checklists',
                 'meta-box',
                 [
                     'metadata_taxonomy' => self::METADATA_TAXONOMY,
                     'requirements'      => $requirements,
-                    'configure_link'    => $this->get_admin_link(),
+                    'configure_link'    => $checklistsLink,
                     'nonce'             => wp_create_nonce(__FILE__),
                     'lang'              => [
                         'empty_checklist_message' => __(
