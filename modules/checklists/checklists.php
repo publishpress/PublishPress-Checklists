@@ -297,7 +297,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             // Check the "supports" for the post type.
             $supports_map = [
-                'title'    => [
+                'title'     => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Title_count',
                 ],
                 'editor'    => [
@@ -478,7 +478,7 @@ if (!class_exists('PPCH_Checklists')) {
                 wp_enqueue_script(
                     'pp-checklists-global-checklists',
                     $this->module_url . 'assets/js/global-checklists.js',
-                    ['jquery', 'pp-remodal'],
+                    ['jquery'],
                     PPCH_VERSION,
                     true
                 );
