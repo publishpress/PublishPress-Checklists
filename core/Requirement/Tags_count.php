@@ -33,13 +33,13 @@ class Tags_Count extends Base_counter
     public function init_language()
     {
         $this->lang['label_settings']       = __('Number of tags', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %s tag', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %s tags', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %s tag', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %s tags', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%s tag', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%s tags', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %s and %s tags', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d tag', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d tags', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d tag', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d tags', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d tag', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d tags', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d tags', 'publishpress-checklists');
     }
 
     /**

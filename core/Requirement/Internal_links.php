@@ -26,14 +26,14 @@ class Internal_Links extends Base_counter {
 	 * @return void
 	 */
 	public function init_language() {
-		$this->lang['label_settings']       = __( 'Internal links', 'publishpress-checklists' );
-		$this->lang['label_min_singular']   = __( 'Minimum of %s internal link', 'publishpress-checklists' );
-		$this->lang['label_min_plural']     = __( 'Minimum of %s internal links', 'publishpress-checklists' );
-		$this->lang['label_max_singular']   = __( 'Maximum of %s internal link', 'publishpress-checklists' );
-		$this->lang['label_max_plural']     = __( 'Maximum of %s internal links', 'publishpress-checklists' );
-		$this->lang['label_exact_singular'] = __( '%s internal link', 'publishpress-checklists' );
-		$this->lang['label_exact_plural']   = __( '%s internal links', 'publishpress-checklists' );
-		$this->lang['label_between']        = __( 'Between %s and %s internal links', 'publishpress-checklists' );
+		$this->lang['label_settings']       = __( 'Number of internal links in content', 'publishpress-checklists' );
+		$this->lang['label_min_singular']   = __( 'Minimum of %d internal link in content', 'publishpress-checklists' );
+		$this->lang['label_min_plural']     = __( 'Minimum of %d internal links in content', 'publishpress-checklists' );
+		$this->lang['label_max_singular']   = __( 'Maximum of %d internal link in content', 'publishpress-checklists' );
+		$this->lang['label_max_plural']     = __( 'Maximum of %d internal links in content', 'publishpress-checklists' );
+		$this->lang['label_exact_singular'] = __( '%d internal link in content', 'publishpress-checklists' );
+		$this->lang['label_exact_plural']   = __( '%d internal links in content', 'publishpress-checklists' );
+		$this->lang['label_between']        = __( 'Between %d and %d internal links in content', 'publishpress-checklists' );
 	}
 
 	/**

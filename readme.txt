@@ -27,7 +27,7 @@ Next to every post and page, writers see a checklist box, showing the tasks they
 
 Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. Here are the default tasks:
 
-* Check that the Excerpt has text
+* Require a maximum or minimum number of characters in Excerpt
 * Require a maximum or minimum number of categories
 * Require a maximum or minimum number of tags
 * Require a maximum or minimum number of words
@@ -56,7 +56,7 @@ It is also possible to create more powerful requirements using a custom plugin. 
 
 The Pro version of PublishPress Checklists has support for WooCommerce. There are 18 requirements you can choose:
 
-* Excerpt has text
+* Number of characters in Excerpt
 * Number of Product tags
 * Number of Product categories
 * Number of words

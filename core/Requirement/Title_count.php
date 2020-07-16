@@ -28,15 +28,15 @@ class Title_Count extends Base_counter
      */
     public function init_language()
     {
-        $this->lang['label']                = __('Title count', 'publishpress-checklists');
-        $this->lang['label_settings']       = __('Title count', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %s title text', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %s title texts', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %s title text', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %s title texts', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%s title text', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%s title texts', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %s and %s title texts', 'publishpress-checklists');
+        $this->lang['label']                = __('Number of characters in title', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Number of characters in title', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d character in title', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d characters in title', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d character in title', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d characters in title', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d character in title', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d characters in title', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d characters in title', 'publishpress-checklists');
     }
 
     /**

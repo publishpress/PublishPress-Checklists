@@ -27,15 +27,15 @@ class Filled_excerpt extends Base_counter
      */
     public function init_language()
     {
-        $this->lang['label']                = __('Excerpt has text', 'publishpress-checklists');
-        $this->lang['label_settings']       = __('Excerpt has text', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %s excerpt text', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %s excerpt texts', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %s excerpt text', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %s excerpt texts', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%s excerpt text', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%s excerpt texts', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %s and %s excerpt texts', 'publishpress-checklists');
+        $this->lang['label']                = __('Numbers of characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Numbers of characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d character in excerpt', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d characters in excerpt', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d characters in excerpt', 'publishpress-checklists');
     }
 
     /**
