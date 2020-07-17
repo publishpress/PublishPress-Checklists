@@ -18,16 +18,6 @@
     width: 100%;
 }
 
-.pp-checklists-failed-requirements-warning p {
-    font-weight: bold;
-}
-
-.pp-checklists-failed-requirements-warning ul {
-    list-style-type: none;
-    color: #ef5350;
-    font-weight: bold;
-}
-
 .pressshack-admin-wrapper a:link,
 .pressshack-admin-wrapper a:visited,
 .pressshack-admin-wrapper a:active,
