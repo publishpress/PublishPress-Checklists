@@ -98,7 +98,7 @@ msgstr "Imagem destacada"
 #: core/Requirement/Filled_excerpt.php:30
 #: core/Requirement/Filled_excerpt.php:31
 msgid "Numbers of characters in excerpt"
-msgstr "Números de caracteres no excerto"
+msgstr "Números de caracteres no resumo"
 
 #: core/Requirement/Filled_excerpt.php:32
 #, php-format
@@ -108,32 +108,32 @@ msgstr "Mínimo de %d categorias"
 #: core/Requirement/Filled_excerpt.php:33
 #, php-format
 msgid "Minimum of %d characters in excerpt"
-msgstr "Mínimo de %d caracteres no excerto"
+msgstr "Mínimo de %d caracteres no resumo"
 
 #: core/Requirement/Filled_excerpt.php:34
 #, php-format
 msgid "Maximum of %d character in excerpt"
-msgstr "Máximo de %d caracteres no excerto"
+msgstr "Máximo de %d caracteres no resumo"
 
 #: core/Requirement/Filled_excerpt.php:35
 #, php-format
 msgid "Maximum of %d characters in excerpt"
-msgstr "Máximo de %d caracteres no excerto"
+msgstr "Máximo de %d caracteres no resumo"
 
 #: core/Requirement/Filled_excerpt.php:36
 #, php-format
 msgid "%d character in excerpt"
-msgstr "%d caracter no excerto"
+msgstr "%d caracter no resumo"
 
 #: core/Requirement/Filled_excerpt.php:37
 #, php-format
 msgid "%d characters in excerpt"
-msgstr "%d caracteres no excerto"
+msgstr "%d caracteres no resumo"
 
 #: core/Requirement/Filled_excerpt.php:38
 #, php-format
 msgid "Between %d and %d characters in excerpt"
-msgstr "Entre %d e %d caracteres no excerto"
+msgstr "Entre %d e %d caracteres no resumo"
 
 #: core/Requirement/Internal_links.php:29
 msgid "Number of internal links in content"
