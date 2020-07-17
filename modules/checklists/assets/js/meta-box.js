@@ -695,7 +695,7 @@
             var count = 0,
                 min_value = parseInt(ppChecklists.requirements.filled_excerpt.value[0]),
                 max_value = parseInt(ppChecklists.requirements.filled_excerpt.value[1]);
-    
+
             if (PP_Checklists.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                 var obj = PP_Checklists.getEditor().getEditedPostAttribute('excerpt');
@@ -706,10 +706,10 @@
 
                 var obj = $('#excerpt').val();
             }
-    
+
             if (typeof obj !== 'undefined') {
                 count = obj.length;
-    
+
                 $('#pp-checklists-req-filled_excerpt').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                     PP_Checklists.check_valid_quantity(count, min_value, max_value)
@@ -725,7 +725,7 @@
             var count = 0,
                 min_value = parseInt(ppChecklists.requirements.title_count.value[0]),
                 max_value = parseInt(ppChecklists.requirements.title_count.value[1]);
-    
+
             if (PP_Checklists.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                 var obj = PP_Checklists.getEditor().getEditedPostAttribute('title');
@@ -736,10 +736,10 @@
 
                 var obj = $('#title').val();
             }
-    
+
             if (typeof obj !== 'undefined') {
                 count = obj.length;
-    
+
                 $('#pp-checklists-req-title_count').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                     PP_Checklists.check_valid_quantity(count, min_value, max_value)

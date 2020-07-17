@@ -5,24 +5,40 @@ const {PluginPrePublishPanel} = wp.editPost;
 const {registerPlugin} = wp.plugins;
 const {hooks} = wp;
 
-class PPChecklistsWarning extends Component {
-    constructor () {
-        super();
+String.prototype.stripTags = function () {
+    return this.replace(/(<([^>]+)>)/ig, "");
+};
 
-        this.updateFailedRequirements = this.updateFailedRequirements.bind(this);
+class PPChecklistsWarning extends Component {
+    isMounted = false;
+
+    componentDidMount() {
+        this.isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this.isMounted = false;
+    }
+
+    constructor() {
+        super();
 
         this.state = {
             requirements: {}
         };
 
+        this.updateFailedRequirements = this.updateFailedRequirements.bind(this);
+
         hooks.addAction('pp-checklists.update-failed-requirements', 'publishpress/checklists', this.updateFailedRequirements, 10);
     };
 
-    updateFailedRequirements (failedRequirements) {
-        this.setState({requirements: failedRequirements});
+    updateFailedRequirements(failedRequirements) {
+        if (this.isMounted) {
+            this.setState({requirements: failedRequirements});
+        }
     };
 
-    render () {
+    render() {
         if (typeof this.state.requirements.block === "undefined" ||
             (this.state.requirements.block.length === 0 && this.state.requirements.warning.length === 0)) {
             return (null);
@@ -33,21 +49,27 @@ class PPChecklistsWarning extends Component {
             messageBlock = (<div>
                 <p>{__('Please complete the following tasks before publishing:', 'publishpress-checklists')}</p>
                 <ul>
-                    {this.state.requirements.block.map((item, i) => <li><span
-                        className="dashicons dashicons-no"></span><span>{item}</span></li>)}
+                    {this.state.requirements.block.map(
+                        (item, i) => <li key={i}>
+                            <span className="dashicons dashicons-no"></span><span>{item.stripTags()}</span></li>
+                    )}
                 </ul>
             </div>);
         }
 
         let messageWarning = (null);
         if (this.state.requirements.warning.length > 0) {
-            let message = this.state.requirements.block.length > 0 ? __('Not required, but important:', 'publishpress-checklists') : __('Are you sure you want to publish anyway?', 'publishpress-checklists');
+            let message = this.state.requirements.block.length > 0 ?
+                __('Not required, but important:', 'publishpress-checklists') : __('Are you sure you want to publish anyway?', 'publishpress-checklists');
 
             messageWarning = (<div>
                 <p>{message}</p>
                 <ul>
-                    {this.state.requirements.warning.map((item, i) => <li><span
-                        className="dashicons dashicons-no"></span><span>{item}</span></li>)}
+                    {this.state.requirements.warning.map(
+                        (item, i) => <li key={i}>
+                            <span className="dashicons dashicons-no"></span><span>{item.stripTags()}</span>
+                        </li>
+                    )}
                 </ul>
             </div>);
         }
@@ -58,7 +80,7 @@ class PPChecklistsWarning extends Component {
                 title={__('Checklist')}
                 initialOpen="true"
             >
-                <div class="pp-checklists-failed-requirements-warning">
+                <div className="pp-checklists-failed-requirements-warning">
                     {messageBlock}
                     {messageWarning}
                 </div>
