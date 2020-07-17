@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.2.0] - 2020-07-16 =
+= [2.2.0] - UNRELEASED =
 
 * Added: Add support to Yoast SEO readability and SEO analysis pass task in the checklists - #86;
 * Added: Add new task for checking the limit of chars in the excerpt test - #150;
