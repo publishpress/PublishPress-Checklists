@@ -120,6 +120,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Remove not used transient for checking data migration;
 * Fixed: JS error message related to missed PP_Checklists object;
 * Fixed: Enqueue scripts only when required - #106;
+* Fixed: Fixed translation support adding French and British English translations;
 * Changed: Updated the PHP min requirement from 5.4 to 5.6;
 * Changed: Updated the WordPress tested up to version to 5.4;
 * Changed: Updated the label and text for some tasks;
