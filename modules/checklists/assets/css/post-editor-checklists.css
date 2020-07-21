@@ -68,3 +68,13 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover
     top: -11px;
     right: -11px;
 }
+
+.pp-checklists-failed-requirements-warning p {
+    font-weight: bold;
+}
+
+.pp-checklists-failed-requirements-warning ul {
+    list-style-type: none;
+    color: #ef5350;
+    font-weight: bold;
+}
