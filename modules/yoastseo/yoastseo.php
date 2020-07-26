@@ -95,8 +95,11 @@ class PPCH_Yoastseo extends Module
      */
     public function actionLoadAddons()
     {
+        if ( class_exists('WPSEO_Options') || is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) {
+        //Only load module options if Yoast SEO plugin exist
         add_filter('publishpress_checklists_post_type_requirements', [$this, 'filterPostTypeRequirements'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+        }
     }
 
     /**
