@@ -90,14 +90,25 @@ class PPCH_Yoastseo extends Module
     }
 
     /**
-     * Action triggered before load requirements. We use this
-     * to load the filters.
-     */
-    public function actionLoadAddons()
-    {
-        add_filter('publishpress_checklists_post_type_requirements', [$this, 'filterPostTypeRequirements'], 10, 2);
-        add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
-    }
+	 * Check if YoastSEO plugin is activated
+	 */
+	private function isYoastSEOActivated() {
+		return class_exists( 'WPSEO_Options' ) || is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' );
+	}
+
+	/**
+	 * Action triggered before load requirements. We use this
+	 * to load the filters.
+	 */
+	public function actionLoadAddons() {
+		if ( $this->isYoastSEOActivated() ) {
+			add_filter( 'publishpress_checklists_post_type_requirements', [
+				$this,
+				'filterPostTypeRequirements'
+			], 10, 2 );
+			add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
+		}
+	}
 
     /**
      * Load default editorial metadata the first time the module is loaded
