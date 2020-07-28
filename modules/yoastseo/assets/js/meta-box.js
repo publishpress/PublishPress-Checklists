@@ -50,14 +50,14 @@
 
                 var readabilityScore = Number($('#yoast_wpseo_content_score').val());
 
-                    if (readabilityScore >= 71) {
-                        readabilityAnalysisPass = true;
-                    }
+                if (readabilityScore >= 71) {
+                    readabilityAnalysisPass = true;
+                }
 
-                    $('#pp-checklists-req-yoast_readability_analysis').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        readabilityAnalysisPass
-                    );
+                $('#pp-checklists-req-yoast_readability_analysis').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    readabilityAnalysisPass
+                );
 
             });
 
@@ -81,14 +81,14 @@
 
                 var seoScore = Number($('#yoast_wpseo_linkdex').val());
 
-                    if (seoScore >= 71) {
-                        seoAnalysisPass = true;
-                    }
+                if (seoScore >= 71) {
+                    seoAnalysisPass = true;
+                }
 
-                    $('#pp-checklists-req-yoast_seo_analysis').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        seoAnalysisPass
-                    );
+                $('#pp-checklists-req-yoast_seo_analysis').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    seoAnalysisPass
+                );
 
             });
 

@@ -16,7 +16,7 @@ use PublishPress\Checklists\Core\Factory;
  */
 class Module
 {
-    public $options;
+    public    $options;
     protected $debug = false;
 
     /**

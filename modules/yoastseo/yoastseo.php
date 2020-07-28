@@ -54,24 +54,24 @@ class PPCH_Yoastseo extends Module
      */
     public function __construct()
     {
-        $this->legacyPlugin = Factory::getLegacyPlugin();
-        $this->pluginFile = PPCH_FILE;
+        $this->legacyPlugin  = Factory::getLegacyPlugin();
+        $this->pluginFile    = PPCH_FILE;
         $this->pluginVersion = PPCH_VERSION;
 
         $this->module_url = $this->getModuleUrl(__FILE__);
 
         // Register the module with PublishPress
         $args = [
-            'title' => __('Yoast SEO', 'publishpress-checklists'),
+            'title'             => __('Yoast SEO', 'publishpress-checklists'),
             'short_description' => __('Define tasks related to Yoast SEO', 'publishpress-checklists'),
-            'module_url' => $this->module_url,
-            'icon_class' => 'dashicons dashicons-feedback',
-            'slug' => $this->module_name,
-            'default_options' => [
+            'module_url'        => $this->module_url,
+            'icon_class'        => 'dashicons dashicons-feedback',
+            'slug'              => $this->module_name,
+            'default_options'   => [
                 'enabled' => 'on',
             ],
-            'options_page' => false,
-            'autoload' => true,
+            'options_page'      => false,
+            'autoload'          => true,
         ];
 
         // Apply a filter to the default options
@@ -90,25 +90,34 @@ class PPCH_Yoastseo extends Module
     }
 
     /**
-	 * Check if YoastSEO plugin is activated
-	 */
-	private function isYoastSEOActivated() {
-		return class_exists( 'WPSEO_Options' ) || is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' );
-	}
+     * Action triggered before load requirements. We use this
+     * to load the filters.
+     */
+    public function actionLoadAddons()
+    {
+        if ($this->isYoastSEOActivated()) {
+            add_filter(
+                'publishpress_checklists_post_type_requirements',
+                [
+                    $this,
+                    'filterPostTypeRequirements'
+                ],
+                10,
+                2
+            );
+            add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+        }
+    }
 
-	/**
-	 * Action triggered before load requirements. We use this
-	 * to load the filters.
-	 */
-	public function actionLoadAddons() {
-		if ( $this->isYoastSEOActivated() ) {
-			add_filter( 'publishpress_checklists_post_type_requirements', [
-				$this,
-				'filterPostTypeRequirements'
-			], 10, 2 );
-			add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
-		}
-	}
+    /**
+     * Check if YoastSEO plugin is activated
+     */
+    private function isYoastSEOActivated()
+    {
+        return class_exists('WPSEO_Options') || is_plugin_active('wordpress-seo/wp-seo.php') || is_plugin_active(
+                'wordpress-seo-premium/wp-seo-premium.php'
+            );
+    }
 
     /**
      * Load default editorial metadata the first time the module is loaded

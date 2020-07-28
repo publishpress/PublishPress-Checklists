@@ -68,12 +68,12 @@ class Readability_Analysis extends Base_simple
 
         // Register in the requirements list
         $requirements[$this->name] = [
-            'status' => $this->get_current_status($post, $value),
-            'label' => $this->lang['label_settings'],
-            'value' => $value,
-            'rule' => $this->get_option_rule(),
+            'status'    => $this->get_current_status($post, $value),
+            'label'     => $this->lang['label_settings'],
+            'value'     => $value,
+            'rule'      => $this->get_option_rule(),
             'is_custom' => false,
-            'type' => $this->type,
+            'type'      => $this->type,
         ];
 
         return $requirements;
