@@ -487,6 +487,29 @@
         },
 
         /**
+         * Return rank for an seo score
+         *
+         * @param  {Float} score
+         * @param  {String} rank
+         *
+         * @return {String}
+         */
+        check_yoast_seo_rank: function (score, rank = '') {
+
+            if (1 <= score && score <= 40) {
+                rank = 'bad';
+            } else if (41 <= score && score <= 70) {
+                rank = 'ok';
+            } else if (71 <= score && score <= 100) {
+                rank = 'good';
+            } else {
+                rank = '';
+            }
+            return rank;
+
+        },
+
+        /**
          * Returns true if the Gutenberg editor is active on the page.
          *
          * @returns {boolean}
@@ -806,7 +829,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = counter.count(text);
@@ -910,7 +933,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = PP_Checklists.extract_internal_links(text).length;

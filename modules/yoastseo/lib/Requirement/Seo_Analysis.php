@@ -9,12 +9,63 @@
 
 namespace PublishPress\Checklists\Yoastseo\Requirement;
 
-
-use PublishPress\Checklists\Core\Requirement\Base_simple;
+use PublishPress\Checklists\Core\Requirement\Base_dropdown;
 use stdClass;
 
-class Seo_Analysis extends Base_simple
+class Seo_Analysis extends Base_dropdown
 {
+    /**
+     * Constant used for determining a bad SEO rating.
+     *
+     * @var string
+     */
+    const BAD = 'bad';
+
+    /**
+     * Constant used for determining an OK SEO rating.
+     *
+     * @var string
+     */
+    const OK = 'ok';
+
+    /**
+     * Constant used for determining a good SEO rating.
+     *
+     * @var string
+     */
+    const GOOD = 'good';
+
+    /**
+     * All possible ranks.
+     *
+     * @var array
+     */
+    protected static $ranks = [
+        self::BAD,
+        self::OK,
+        self::GOOD,
+    ];
+
+    /**
+     * Holds the translation from seo score slug to actual score range.
+     *
+     * @var array
+     */
+    protected static $ranges = [
+        self::BAD  => [
+            'start' => 1,
+            'end'   => 40,
+        ],
+        self::OK   => [
+            'start' => 41,
+            'end'   => 70,
+        ],
+        self::GOOD => [
+            'start' => 71,
+            'end'   => 100,
+        ],
+    ];
+
     /**
      * The name of the requirement, in a slug format
      *
@@ -29,21 +80,7 @@ class Seo_Analysis extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast SEO analysis pass', 'publishpress-checklists'));
-    }
-
-    /**
-     * Validates the option group, making sure the values are sanitized.
-     *
-     * @param array $new_options
-     *
-     * @return array
-     */
-    public function filter_settings_validate($new_options)
-    {
-        $new_options = parent::filter_settings_validate($new_options);
-
-        return $new_options;
+        $this->lang['label_settings'] = esc_html(__('Yoast SEO analysis', 'publishpress-checklists'));
     }
 
     /**
@@ -60,16 +97,27 @@ class Seo_Analysis extends Base_simple
             return $requirements;
         }
 
-        if (!$this->is_enabled()) {
+        if (! $this->is_enabled()) {
             return $requirements;
         }
 
-        $value = $this->get_option($this->name);
+        // Option names
+        $option_name_dropdown = $this->name . '_dropdown';
+
+        // Check value is empty, to skip
+        if (empty($option_name_dropdown)) {
+            return $requirements;
+        }
+
+        // Get the value
+        $value = $this->get_option($option_name_dropdown);
+
+        $label = $this->get_drop_down_labels()[ $value ];
 
         // Register in the requirements list
-        $requirements[$this->name] = [
+        $requirements[ $this->name ] = [
             'status'    => $this->get_current_status($post, $value),
-            'label'     => $this->lang['label_settings'],
+            'label'     => $label,
             'value'     => $value,
             'rule'      => $this->get_option_rule(),
             'is_custom' => false,
@@ -92,11 +140,39 @@ class Seo_Analysis extends Base_simple
     {
         $options = $this->module->options;
 
-        if (isset($options->{$option_name}) && isset($options->{$option_name}[$this->post_type])) {
-            return $options->{$option_name}[$this->post_type];
+        if (isset($options->{$option_name}) && isset($options->{$option_name}[ $this->post_type ])) {
+            return $options->{$option_name}[ $this->post_type ];
         }
 
         return null;
+    }
+
+    /**
+     * Gets the drop down labels for the seo score.
+     *
+     * @return string The seo rank label.
+     */
+    public function get_drop_down_labels()
+    {
+        $labels = [
+            self::BAD  => sprintf(
+            /* translators: %s expands to the seo score */
+                __('Seo: %s', 'publishpress-checklists'),
+                __('Needs improvement', 'publishpress-checklists')
+            ),
+            self::OK   => sprintf(
+            /* translators: %s expands to the seo score */
+                __('Seo: %s', 'publishpress-checklists'),
+                __('OK', 'publishpress-checklists')
+            ),
+            self::GOOD => sprintf(
+            /* translators: %s expands to the seo score */
+                __('Seo: %s', 'publishpress-checklists'),
+                __('Good', 'publishpress-checklists')
+            ),
+        ];
+
+        return $labels;
     }
 
     /**
@@ -109,8 +185,31 @@ class Seo_Analysis extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
+        $score = (int) get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
+        $rank  = $this->from_numeric_score($score);
 
-        return $score >= '71';
+        return $rank == $option_value;
+    }
+
+    /**
+     * Returns a rank for a specific numeric score.
+     *
+     * @param int $score The score to determine a rank for.
+     *
+     * @return self
+     */
+    public static function from_numeric_score($score)
+    {
+        // Set up the default value.
+        $rank = self::BAD;
+
+        foreach (self::$ranges as $rank_index => $range) {
+            if ($range['start'] <= $score && $score <= $range['end']) {
+                $rank = $rank_index;
+                break;
+            }
+        }
+
+        return $rank;
     }
 }

@@ -37,20 +37,21 @@
          * Yoast Readability Analysis
          *
          * - "yoast_wpseo_content_score" ==> Yoast SEO input for readability score
-         * - 71 to 100 ==> Yoast SEO readability grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_readability_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var readabilityAnalysisPass = false;
+                var readabilityAnalysisPass = false,
+                    option_value = ppChecklists.requirements.yoast_readability_analysis.value;
 
                 if ($('#yoast_wpseo_content_score').length === 0) {
                     return;
                 }
 
-                var readabilityScore = Number($('#yoast_wpseo_content_score').val());
+                var score = Number($('#yoast_wpseo_content_score').val());
+                var rank = PP_Checklists.check_yoast_seo_rank(score);
 
-                if (readabilityScore >= 71) {
+                if (rank == option_value) {
                     readabilityAnalysisPass = true;
                 }
 
@@ -68,20 +69,21 @@
          * Yoast Seo Analysis
          *
          * - "yoast_wpseo_linkdex" ==> Yoast SEO input for seo score
-         * - 71 to 100 ==> Yoast SEO grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_seo_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var seoAnalysisPass = false;
+                var seoAnalysisPass = false,
+                    option_value = ppChecklists.requirements.yoast_seo_analysis.value;
 
                 if ($('#yoast_wpseo_linkdex').length === 0) {
                     return;
                 }
 
-                var seoScore = Number($('#yoast_wpseo_linkdex').val());
+                var score = Number($('#yoast_wpseo_linkdex').val());
+                var rank = PP_Checklists.check_yoast_seo_rank(score);
 
-                if (seoScore >= 71) {
+                if (rank == option_value) {
                     seoAnalysisPass = true;
                 }
 
