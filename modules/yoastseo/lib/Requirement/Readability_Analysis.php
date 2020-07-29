@@ -99,7 +99,7 @@ class Readability_Analysis extends Base_dropdown
             return $requirements;
         }
 
-        if (! $this->is_enabled()) {
+        if (!$this->is_enabled()) {
             return $requirements;
         }
 
@@ -117,7 +117,7 @@ class Readability_Analysis extends Base_dropdown
         $label = $this->get_drop_down_labels()[$value];
 
         // Register in the requirements list
-        $requirements[ $this->name ] = [
+        $requirements[$this->name] = [
             'status'    => $this->get_current_status($post, $value),
             'label'     => $label,
             'value'     => $value,
@@ -187,8 +187,8 @@ class Readability_Analysis extends Base_dropdown
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int) get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
-        $rank  = $this->from_numeric_score($score);
+        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
+        $rank  = $this->rank_from_numeric_score($score);
 
         return $rank == $option_value;
     }
@@ -200,9 +200,9 @@ class Readability_Analysis extends Base_dropdown
      *
      * @return self
      */
-    public static function from_numeric_score($score)
+    public static function rank_from_numeric_score($score)
     {
-        // Set up the default value.
+        // Set up the default rank.
         $rank = self::BAD;
 
         foreach (self::$ranges as $rank_index => $range) {
