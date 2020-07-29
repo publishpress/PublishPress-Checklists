@@ -114,7 +114,7 @@ class Readability_Analysis extends Base_dropdown
         // Get the value
         $value = $this->get_option($option_name_dropdown);
 
-        $label = $this->get_drop_down_labels()[ $value ];
+        $label = $this->get_drop_down_labels()[$value];
 
         // Register in the requirements list
         $requirements[ $this->name ] = [
@@ -142,8 +142,8 @@ class Readability_Analysis extends Base_dropdown
     {
         $options = $this->module->options;
 
-        if (isset($options->{$option_name}) && isset($options->{$option_name}[ $this->post_type ])) {
-            return $options->{$option_name}[ $this->post_type ];
+        if (isset($options->{$option_name}) && isset($options->{$option_name}[$this->post_type])) {
+            return $options->{$option_name}[$this->post_type];
         }
 
         return null;

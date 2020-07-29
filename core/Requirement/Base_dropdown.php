@@ -50,8 +50,8 @@ class Base_dropdown extends Base_simple implements Interface_required
 
         // Get the value
         $option_value = '';
-        if (isset($this->module->options->{$option_name_dropdown}[ $this->post_type ])) {
-            $option_value = $this->module->options->{$option_name_dropdown}[ $this->post_type ];
+        if (isset($this->module->options->{$option_name_dropdown}[$this->post_type])) {
+            $option_value = $this->module->options->{$option_name_dropdown}[$this->post_type];
         }
 
 
@@ -95,7 +95,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         // Get the value
         $option_value = '';
         if (isset($this->module->options->{$option_name_dropdown}[ $post_type ])) {
-            $option_value = $this->module->options->{$option_name_dropdown}[ $post_type ];
+            $option_value = $this->module->options->{$option_name_dropdown}[$post_type];
         }
 
         $id   = "{$post_type}-{$this->module->slug}-{$option_name_dropdown}";
