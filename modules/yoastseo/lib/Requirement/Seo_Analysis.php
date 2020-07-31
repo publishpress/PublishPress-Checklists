@@ -111,22 +111,6 @@ class Seo_Analysis extends Base_dropdown
     }
 
     /**
-     * Gets settings drop down labels for the seo score.
-     *
-     * @return string The seo rank label.
-     */
-    public function get_settings_drop_down_labels()
-    {
-        $labels = [
-            self::OK   => __('OK', 'publishpress-checklists'),
-            self::GOOD => __('Good', 'publishpress-checklists'),
-        ];
-
-        return $labels;
-    }
-
-
-    /**
      * Gets the requirement drop down labels for the seo score.
      *
      * @return string The seo rank label.
@@ -159,8 +143,23 @@ class Seo_Analysis extends Base_dropdown
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
+        $score = (int) get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
 
         return $score >= $option_value;
+    }
+
+    /**
+     * Gets settings drop down labels for the seo score.
+     *
+     * @return string The seo rank label.
+     */
+    public function get_setting_drop_down_labels()
+    {
+        $labels = [
+            self::OK   => __('OK', 'publishpress-checklists'),
+            self::GOOD => __('Good', 'publishpress-checklists'),
+        ];
+
+        return $labels;
     }
 }

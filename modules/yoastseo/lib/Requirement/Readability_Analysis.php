@@ -112,21 +112,6 @@ class Readability_Analysis extends Base_dropdown
     }
 
     /**
-     * Gets settings drop down labels for the readability score.
-     *
-     * @return string The readability rank label.
-     */
-    public function get_settings_drop_down_labels()
-    {
-        $labels = [
-            self::OK   => __('OK', 'publishpress-checklists'),
-            self::GOOD => __('Good', 'publishpress-checklists'),
-        ];
-
-        return $labels;
-    }
-
-    /**
      * Gets the requirement drop down labels for the readability score.
      *
      * @return string The readability rank label.
@@ -134,17 +119,17 @@ class Readability_Analysis extends Base_dropdown
     public function get_requirement_drop_down_labels()
     {
         $labels = [
-          self::OK   => sprintf(
-          /* translators: %s expands to the readability score */
-              __('Readability: %s', 'publishpress-checklists'),
-              __('OK', 'publishpress-checklists')
-          ),
-          self::GOOD => sprintf(
-          /* translators: %s expands to the readability score */
-              __('Readability: %s', 'publishpress-checklists'),
-              __('Good', 'publishpress-checklists')
-          ),
-      ];
+            self::OK   => sprintf(
+            /* translators: %s expands to the readability score */
+                __('Readability: %s', 'publishpress-checklists'),
+                __('OK', 'publishpress-checklists')
+            ),
+            self::GOOD => sprintf(
+            /* translators: %s expands to the readability score */
+                __('Readability: %s', 'publishpress-checklists'),
+                __('Good', 'publishpress-checklists')
+            ),
+        ];
 
         return $labels;
     }
@@ -159,8 +144,23 @@ class Readability_Analysis extends Base_dropdown
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
+        $score = (int) get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
 
         return $score >= $option_value;
+    }
+
+    /**
+     * Gets settings drop down labels for the readability score.
+     *
+     * @return string The readability rank label.
+     */
+    public function get_setting_drop_down_labels()
+    {
+        $labels = [
+            self::OK   => __('OK', 'publishpress-checklists'),
+            self::GOOD => __('Good', 'publishpress-checklists'),
+        ];
+
+        return $labels;
     }
 }

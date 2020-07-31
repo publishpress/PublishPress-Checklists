@@ -108,7 +108,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         );
 
         $labels = [];
-        $labels = $this->get_settings_drop_down_labels();
+        $labels = $this->get_setting_drop_down_labels();
 
         foreach ($labels as $value => $label) {
             $selected = selected($value, $option_value, false);
