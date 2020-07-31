@@ -14,57 +14,20 @@ use stdClass;
 
 class Seo_Analysis extends Base_dropdown
 {
-    /**
-     * Constant used for determining a bad SEO rating.
-     *
-     * @var string
-     */
-    const BAD = 'bad';
 
     /**
      * Constant used for determining an OK SEO rating.
      *
      * @var string
      */
-    const OK = 'ok';
+    const OK = '41';
 
     /**
      * Constant used for determining a good SEO rating.
      *
      * @var string
      */
-    const GOOD = 'good';
-
-    /**
-     * All possible ranks.
-     *
-     * @var array
-     */
-    protected static $ranks = [
-        self::BAD,
-        self::OK,
-        self::GOOD,
-    ];
-
-    /**
-     * Holds the translation from seo score slug to actual score range.
-     *
-     * @var array
-     */
-    protected static $ranges = [
-        self::BAD  => [
-            'start' => 1,
-            'end'   => 40,
-        ],
-        self::OK   => [
-            'start' => 41,
-            'end'   => 70,
-        ],
-        self::GOOD => [
-            'start' => 71,
-            'end'   => 100,
-        ],
-    ];
+    const GOOD = '71';
 
     /**
      * The name of the requirement, in a slug format
@@ -80,7 +43,7 @@ class Seo_Analysis extends Base_dropdown
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast SEO analysis', 'publishpress-checklists'));
+        $this->lang['label_settings'] = esc_html(__('Minimum Yoast SEO analysis score', 'publishpress-checklists'));
     }
 
     /**
@@ -97,7 +60,7 @@ class Seo_Analysis extends Base_dropdown
             return $requirements;
         }
 
-        if (!$this->is_enabled()) {
+        if (! $this->is_enabled()) {
             return $requirements;
         }
 
@@ -112,7 +75,7 @@ class Seo_Analysis extends Base_dropdown
         // Get the value
         $value = $this->get_option($option_name_dropdown);
 
-        $label = $this->get_drop_down_labels()[$value];
+        $label = $this->get_requirement_drop_down_labels()[$value];
 
         // Register in the requirements list
         $requirements[$this->name] = [
@@ -148,18 +111,29 @@ class Seo_Analysis extends Base_dropdown
     }
 
     /**
-     * Gets the drop down labels for the seo score.
+     * Gets settings drop down labels for the seo score.
      *
      * @return string The seo rank label.
      */
-    public function get_drop_down_labels()
+    public function get_settings_drop_down_labels()
     {
         $labels = [
-            self::BAD  => sprintf(
-            /* translators: %s expands to the seo score */
-                __('Seo: %s', 'publishpress-checklists'),
-                __('Needs improvement', 'publishpress-checklists')
-            ),
+            self::OK   => __('OK', 'publishpress-checklists'),
+            self::GOOD => __('Good', 'publishpress-checklists'),
+        ];
+
+        return $labels;
+    }
+
+
+    /**
+     * Gets the requirement drop down labels for the seo score.
+     *
+     * @return string The seo rank label.
+     */
+    public function get_requirement_drop_down_labels()
+    {
+        $labels = [
             self::OK   => sprintf(
             /* translators: %s expands to the seo score */
                 __('Seo: %s', 'publishpress-checklists'),
@@ -186,30 +160,7 @@ class Seo_Analysis extends Base_dropdown
     public function get_current_status($post, $option_value)
     {
         $score = (int)get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
-        $rank  = $this->rank_from_numeric_score($score);
 
-        return $rank == $option_value;
-    }
-
-    /**
-     * Returns a rank for a specific numeric score.
-     *
-     * @param int $score The score to determine a rank for.
-     *
-     * @return self
-     */
-    public static function rank_from_numeric_score($score)
-    {
-        // Set up the default value.
-        $rank = self::BAD;
-
-        foreach (self::$ranges as $rank_index => $range) {
-            if ($range['start'] <= $score && $score <= $range['end']) {
-                $rank = $rank_index;
-                break;
-            }
-        }
-
-        return $rank;
+        return $score >= $option_value;
     }
 }
