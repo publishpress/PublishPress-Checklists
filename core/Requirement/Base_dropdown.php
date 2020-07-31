@@ -41,7 +41,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         $enabled = $this->is_enabled();
 
         // If not enabled, bypass the method
-        if (! $enabled) {
+        if (!$enabled) {
             return $requirements;
         }
 
