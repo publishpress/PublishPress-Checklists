@@ -396,7 +396,7 @@ msgid "Options"
 msgstr ""
 
 #: modules/checklists/checklists.php:754
-msgid "Add custom item"
+msgid "Add custom task"
 msgstr ""
 
 #: modules/checklists/checklists.php:776
