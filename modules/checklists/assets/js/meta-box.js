@@ -487,25 +487,34 @@
         },
 
         /**
-         * Return rank for an seo score
+         * Check for images without alt text from content and return result as array
          *
-         * @param  {Float} score
-         * @param  {String} rank
+         * @param  {String} content
+         * @param  {Array} missing_alt
          *
-         * @return {String}
+         * @return {Array}
          */
-        check_yoast_seo_rank: function (score, rank = '') {
+        missing_alt_images: function (content, missing_alt = []) {
+            var img,
+                alt,
+                regex = /<img[^>]+src="?([^"\s]+)"?[^>]*>/g;
 
-            if (1 <= score && score <= 40) {
-                rank = 'bad';
-            } else if (41 <= score && score <= 70) {
-                rank = 'ok';
-            } else if (71 <= score && score <= 100) {
-                rank = 'good';
-            } else {
-                rank = '';
+            if (content) {
+
+                while (img = regex.exec(content)) {
+                    alt = $('<div>' + img + '</div>').find('img:first').attr('alt');
+
+                    if (!alt) {
+                        missing_alt.push(img);
+                    } else if (!alt.replace(/\s/g, '').length) {
+                        missing_alt.push(img);
+                    }
+                }
+
+
             }
-            return rank;
+
+            return missing_alt;
 
         },
 
@@ -556,7 +565,7 @@
 
 
     };
-
+    //horlami
     // Exposes and initialize the object
     window.PP_Checklists = PP_Checklists;
     // RankMath plugin breaks if we
@@ -829,7 +838,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({ format: 'raw' });
+                text = editor.getContent({format: 'raw'});
             }
 
             count = counter.count(text);
@@ -933,7 +942,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({ format: 'raw' });
+                text = editor.getContent({format: 'raw'});
             }
 
             count = PP_Checklists.extract_internal_links(text).length;
@@ -977,6 +986,99 @@
         });
 
         $content.on('input keyup', _.debounce(update, 500));
+        update();
+    }
+
+    /*----------  Image alt ----------*/
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-image_alt').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var no_missing_alt = false;
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var count = PP_Checklists.missing_alt_images(content).length;
+
+                    if (count == 0) {
+                        no_missing_alt = true;
+                    }
+
+                    $('#pp-checklists-req-image_alt').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        no_missing_alt
+                    );
+
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count, no_missing_alt = false;
+            if (typeof ppChecklists.requirements.image_alt === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            var count = PP_Checklists.missing_alt_images(text).length;
+
+            if (count == 0) {
+                no_missing_alt = true;
+            }
+
+            $('#pp-checklists-req-image_alt').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                no_missing_alt
+            );
+
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup change', _.debounce(update, 500));
         update();
     }
 
