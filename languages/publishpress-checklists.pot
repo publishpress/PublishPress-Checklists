@@ -515,7 +515,7 @@ msgid "https://publishpress.com/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Add support for checklists in WordPress"
+msgid "With PublishPress Checklists you can define tasks that users must complete before content is published."
 msgstr ""
 
 #. Author of the plugin/theme
