@@ -69,6 +69,6 @@ class Image_Alt extends Base_simple
     {
         $count = count($this->missing_alt_images($post->post_content));
 
-        return ($count == 0);
+        return $count == 0;
     }
 }

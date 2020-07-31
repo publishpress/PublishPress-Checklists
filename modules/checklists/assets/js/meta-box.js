@@ -1044,13 +1044,10 @@
             }
 
             var count = PP_Checklists.missing_alt_images(text).length;
-            console.log(count);
 
             if (count == 0) {
                 no_missing_alt = true;
             }
-            console.log(no_missing_alt);
-            console.log(text);
 
             $('#pp-checklists-req-image_alt').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
