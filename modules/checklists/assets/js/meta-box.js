@@ -838,7 +838,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({ format: 'raw' });
+                text = editor.getContent({format: 'raw'});
             }
 
             count = counter.count(text);
@@ -942,7 +942,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({ format: 'raw' });
+                text = editor.getContent({format: 'raw'});
             }
 
             count = PP_Checklists.extract_internal_links(text).length;
@@ -1040,7 +1040,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({ format: 'raw' });
+                text = editor.getContent({format: 'raw'});
             }
 
             var count = PP_Checklists.missing_alt_images(text).length;
