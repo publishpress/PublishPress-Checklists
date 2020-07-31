@@ -41,7 +41,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         $enabled = $this->is_enabled();
 
         // If not enabled, bypass the method
-        if (!$enabled) {
+        if (! $enabled) {
             return $requirements;
         }
 
@@ -65,7 +65,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         $rule = $this->get_option_rule();
 
         // Register in the requirements list
-        $requirements[ $this->name ] = [
+        $requirements[$this->name] = [
             'status'    => $this->get_current_status($post, $option_value),
             'label'     => $this->lang['label_settings'],
             'value'     => $option_value,
@@ -94,7 +94,7 @@ class Base_dropdown extends Base_simple implements Interface_required
 
         // Get the value
         $option_value = '';
-        if (isset($this->module->options->{$option_name_dropdown}[ $post_type ])) {
+        if (isset($this->module->options->{$option_name_dropdown}[$post_type])) {
             $option_value = $this->module->options->{$option_name_dropdown}[$post_type];
         }
 
@@ -108,7 +108,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         );
 
         $labels = [];
-        $labels = $this->get_drop_down_labels();
+        $labels = $this->get_settings_drop_down_labels();
 
         foreach ($labels as $value => $label) {
             $selected = selected($value, $option_value, false);

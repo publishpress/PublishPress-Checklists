@@ -49,9 +49,8 @@
                 }
 
                 var score = Number($('#yoast_wpseo_content_score').val());
-                var rank = PP_Checklists.check_yoast_seo_rank(score);
 
-                if (rank == option_value) {
+                if (score >= option_value) {
                     readabilityAnalysisPass = true;
                 }
 
@@ -81,9 +80,8 @@
                 }
 
                 var score = Number($('#yoast_wpseo_linkdex').val());
-                var rank = PP_Checklists.check_yoast_seo_rank(score);
 
-                if (rank == option_value) {
+                if (score >= option_value) {
                     seoAnalysisPass = true;
                 }
 
