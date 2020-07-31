@@ -60,7 +60,7 @@ class Seo_Analysis extends Base_dropdown
             return $requirements;
         }
 
-        if (! $this->is_enabled()) {
+        if (!$this->is_enabled()) {
             return $requirements;
         }
 
