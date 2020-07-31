@@ -159,7 +159,7 @@ class Seo_Analysis extends Base_dropdown
      */
     public function get_current_status($post, $option_value)
     {
-        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
+        $score = (int)get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
 
         return $score >= $option_value;
     }
