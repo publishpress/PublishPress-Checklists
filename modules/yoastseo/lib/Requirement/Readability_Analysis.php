@@ -18,14 +18,14 @@ class Readability_Analysis extends Base_dropdown
     /**
      * Constant used for determining an OK SEO rating.
      *
-     * @var string
+     * @var integer
      */
     const OK = '41';
 
     /**
      * Constant used for determining a good SEO rating.
      *
-     * @var string
+     * @var integer
      */
     const GOOD = '71';
 
@@ -114,7 +114,7 @@ class Readability_Analysis extends Base_dropdown
     /**
      * Gets the requirement drop down labels for the readability score.
      *
-     * @return string The readability rank label.
+     * @return array The readability rank label.
      */
     public function get_requirement_drop_down_labels()
     {
@@ -152,7 +152,7 @@ class Readability_Analysis extends Base_dropdown
     /**
      * Gets settings drop down labels for the readability score.
      *
-     * @return string The readability rank label.
+     * @return array The readability rank label.
      */
     public function get_setting_drop_down_labels()
     {

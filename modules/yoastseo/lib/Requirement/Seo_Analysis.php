@@ -18,14 +18,14 @@ class Seo_Analysis extends Base_dropdown
     /**
      * Constant used for determining an OK SEO rating.
      *
-     * @var string
+     * @var integer
      */
     const OK = '41';
 
     /**
      * Constant used for determining a good SEO rating.
      *
-     * @var string
+     * @var integer
      */
     const GOOD = '71';
 
@@ -113,7 +113,7 @@ class Seo_Analysis extends Base_dropdown
     /**
      * Gets the requirement drop down labels for the seo score.
      *
-     * @return string The seo rank label.
+     * @return array The seo rank label.
      */
     public function get_requirement_drop_down_labels()
     {
@@ -151,7 +151,7 @@ class Seo_Analysis extends Base_dropdown
     /**
      * Gets settings drop down labels for the seo score.
      *
-     * @return string The seo rank label.
+     * @return array The seo rank label.
      */
     public function get_setting_drop_down_labels()
     {
