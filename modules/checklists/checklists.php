@@ -303,6 +303,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'editor'    => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Words_count',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Internal_links',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt',
                 ],
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
