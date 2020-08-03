@@ -705,7 +705,7 @@
                 if (PP_Checklists.is_gutenberg_active()) {
                     obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
                 } else {
-                    obj = $('#' + taxonomy + ' .tagchecklist').children('li').length;
+                    obj = $('#' + taxonomy + ' .tagchecklist').children('li');
                 }
 
                 if (typeof obj !== 'undefined') {
