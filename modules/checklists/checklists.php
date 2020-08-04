@@ -754,7 +754,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'description'     => __('Task', 'publishpress-checklists'),
                         'action'          => __('Disabled, Recommended or Required', 'publishpress-checklists'),
                         'params'          => __('Options', 'publishpress-checklists'),
-                        'add_custom_item' => __('Add custom item', 'publishpress-checklists'),
+                        'add_custom_item' => __('Add custom task', 'publishpress-checklists'),
                     ],
                 ]
             );

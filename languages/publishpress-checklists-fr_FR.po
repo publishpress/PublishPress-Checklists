@@ -293,7 +293,7 @@ msgid "Disabled"
 msgstr "Désactivé"
 
 #: modules/checklists/checklists.php:756
-msgid "Add custom item"
+msgid "Add custom task"
 msgstr "Ajouter un élément personnalisé"
 
 #: modules/checklists/checklists.php:755
