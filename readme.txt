@@ -117,8 +117,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Hide Yoast SEO tasks if Yoast's plugin is not activated, #164;
 * Changed: Updated translation strings;
 * Changed: Changed the algorithm of the Yoast SEO readability and SEO analysis verification, considering the selected score as the minimum score, #169;
+* Changed: Change the label of the "Add custom item" button to "Add custom task", #181;
 * Added: Added new task for checking if all the images in the post has an "alt" attribute, #164;
 * Fixed: Fixed the verification for custom taxonomies in the post editor page, #114;
+* Fixed: Fixed style for unchecked custom tasks, #184;
 
 = [2.2.0] - 2020-07-21 =
 
