@@ -98,7 +98,7 @@ class Base_multiple extends Base_simple implements Interface_required
             $option_value = $this->module->options->{$option_name_multiple}[$post_type];
         }
 
-        $id = "{$post_type}-{$this->module->slug}-{$option_name_multiple}";
+        $id   = "{$post_type}-{$this->module->slug}-{$option_name_multiple}";
         $name = "{$this->module->options_group_name}[{$option_name_multiple}][{$post_type}][]";
         $html = sprintf(
             '<select id="%s" name="%s" multiple="multiple">',
