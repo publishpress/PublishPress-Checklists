@@ -35,7 +35,7 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         $option_name = $this->name;
-        $options = $this->module->options;
+        $options     = $this->module->options;
 
         // The enabled status
         $enabled = $this->is_enabled();
