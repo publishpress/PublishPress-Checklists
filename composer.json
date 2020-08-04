@@ -16,7 +16,8 @@
     "psr-4": {
       "PublishPress\\Checklists\\Core\\": "core/",
       "PublishPress\\Checklists\\Permalinks\\": "modules/permalinks/lib",
-      "PublishPress\\Checklists\\Yoastseo\\": "modules/yoastseo/lib"
+      "PublishPress\\Checklists\\Yoastseo\\": "modules/yoastseo/lib",
+      "PublishPress\\Checklists\\Customs\\": "modules/customs/lib"
     }
   },
   "require": {

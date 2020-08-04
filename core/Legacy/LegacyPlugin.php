@@ -153,6 +153,7 @@ class LegacyPlugin
             'checklists'  => PPCH_MODULES_PATH,
             'permalinks'  => PPCH_MODULES_PATH,
             'yoastseo'    => PPCH_MODULES_PATH,
+            'customs'     => PPCH_MODULES_PATH,
             'permissions' => PPCH_MODULES_PATH,
         ];
 
