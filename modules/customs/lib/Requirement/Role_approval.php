@@ -63,8 +63,8 @@ class Role_Approval extends Base_multiple
         // Get the value
         $value = $this->get_option($option_name_multiple);
 
-        //set custom to false if user is not permitted to prevent any validation
-        if ($this->isUserPermitted()) {
+        //set custom to false if user role is not permitted to prevent any validation
+        if ($this->isUserRolePermitted()) {
             $is_custom = true;
         } else {
             $is_custom = false;
@@ -108,9 +108,9 @@ class Role_Approval extends Base_multiple
     }
 
     /**
-     * Check if user is permitted to approve post
+     * Check if user role is permitted to approve post
      */
-    private function isUserPermitted()
+    private function isUserRolePermitted()
     {
 
         // Option name
@@ -152,7 +152,7 @@ class Role_Approval extends Base_multiple
         //Permitted role list
         $permitted_role = $this->arrayToSentence($option_value);
 
-        if ($this->isUserPermitted()) {
+        if ($this->isUserRolePermitted()) {
             $label = esc_html(__('Approve post', 'publishpress-checklists'));
         } elseif (self::VALUE_YES === get_post_meta($post_id, PPCH_Checklists::POST_META_PREFIX . $this->name . '_' . $post_id, true)) {
             $label = esc_html(__('Approved', 'publishpress-checklists'));
