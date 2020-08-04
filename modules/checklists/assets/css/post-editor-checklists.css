@@ -78,3 +78,26 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover
     color: #ef5350;
     font-weight: bold;
 }
+
+.pp-checklists-custom-item {
+    cursor: pointer;
+    color: #ef5350;
+    font-weight: bold;
+}
+
+.pp-checklists-req.pp-checklists-custom-item .status-icon {
+    border: 1px solid silver;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 20px;
+    margin-left: 3px;
+}
+
+.pp-checklists-req.pp-checklists-custom-item .status-icon.dashicons-yes:before {
+    margin-left: -2px;
+    font-weight: bold;
+}
+
+.pp-checklists-req.pp-checklists-custom-item .status-label {
+    padding-left: 1px;
+}

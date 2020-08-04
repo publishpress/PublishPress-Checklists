@@ -225,17 +225,6 @@
     line-height: 32px;
 }
 
-.pp-checklists-custom-item {
-    cursor: pointer;
-    color: #ef5350;
-    font-weight: bold;
-}
-
-.pp-checklists-custom-item .dashicons {
-    border: 1px solid silver;
-    border-radius: 4px;
-}
-
 #pp-checklists-post-type-filter {
     margin-bottom: 20px;
 }
@@ -275,10 +264,6 @@
 
 .pp-checklists-req .status-label {
     padding-left: 3px;
-}
-
-.pp-checklists-req.pp-checklists-custom-item .status-label {
-    padding-left: 1px;
 }
 
 @media only screen and (max-width: 781px) {
