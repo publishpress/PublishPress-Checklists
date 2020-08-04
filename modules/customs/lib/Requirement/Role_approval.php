@@ -71,7 +71,7 @@ class Role_Approval extends Base_multiple
         }
 
         //set unique requirement id per post
-        $requirment_id = $this->name . '_' . $post->ID;
+        $requirement_id = $this->name . '_' . $post->ID;
 
         // Register in the requirements list
         $requirements[$this->name] = [
@@ -79,7 +79,7 @@ class Role_Approval extends Base_multiple
             'label'     => $this->get_requirement_drop_down_label($post->ID),
             'value'     => $value,
             'rule'      => $this->get_option_rule(),
-            'id'        => $requirment_id,
+            'id'        => $requirement_id,
             'is_custom' => $is_custom,
             'type'      => $this->type,
         ];
