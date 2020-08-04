@@ -25,7 +25,7 @@
     "publishpress/wordpress-version-notices": "^1.0"
   },
   "require-dev": {
-    "alledia/wordpress-plugin-builder": "^2.4",
+    "publishpress/publishpress-plugin-builder": "^1.2",
     "roave/security-advisories": "dev-master",
     "lucatume/wp-browser": "^2.4",
     "codeception/module-asserts": "^1.2",
