@@ -75,13 +75,13 @@ class Role_Approval extends Base_multiple
 
         // Register in the requirements list
         $requirements[$this->name] = [
-            'status' => $this->get_current_status($post, $value),
-            'label' => $this->get_requirement_drop_down_label($post->ID),
-            'value' => $value,
-            'rule' => $this->get_option_rule(),
-            'id' => $requirment_id,
+            'status'    => $this->get_current_status($post, $value),
+            'label'     => $this->get_requirement_drop_down_label($post->ID),
+            'value'     => $value,
+            'rule'      => $this->get_option_rule(),
+            'id'        => $requirment_id,
             'is_custom' => $is_custom,
-            'type' => $this->type,
+            'type'      => $this->type,
         ];
 
         return $requirements;

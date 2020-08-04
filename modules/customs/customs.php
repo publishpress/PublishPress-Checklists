@@ -61,16 +61,16 @@ class PPCH_Customs extends Module
 
         // Register the module with PublishPress
         $args = [
-            'title' => __('Custom items', 'publishpress-checklists'),
+            'title'             => __('Custom items', 'publishpress-checklists'),
             'short_description' => __('Define tasks related to Custom items', 'publishpress-checklists'),
-            'module_url' => $this->module_url,
-            'icon_class' => 'dashicons dashicons-feedback',
-            'slug' => $this->module_name,
-            'default_options' => [
-                'enabled' => 'on',
+            'module_url'        => $this->module_url,
+            'icon_class'        => 'dashicons dashicons-feedback',
+            'slug'              => $this->module_name,
+            'default_options'   => [
+                'enabled'   => 'on',
             ],
-            'options_page' => false,
-            'autoload' => true,
+            'options_page'      => false,
+            'autoload'          => true,
         ];
 
         // Apply a filter to the default options
