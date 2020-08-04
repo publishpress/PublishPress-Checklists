@@ -106,12 +106,11 @@ class Base_multiple extends Base_simple implements Interface_required
             $name
         );
 
-        $labels = [];
         $labels = $this->get_setting_drop_down_labels();
 
         foreach ($labels as $value => $label) {
             $selected = selected(true, in_array($value, $option_value), false);
-            $html .= $this->generate_option($value, $label, $selected);
+            $html     .= $this->generate_option($value, $label, $selected);
         }
 
         $html .= '</select>';
