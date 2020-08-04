@@ -44,7 +44,7 @@ If you choose the “Required” option, it will be impossible to publish withou
 
 = Creating New Checklist Requirements =
 
-You can create new requirements for your checklists by clicking the “Add custom item” link. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
+You can create new requirements for your checklists by clicking the “Add custom task” link. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
 
 [Click here to see how to create custom requirements](https://publishpress.com/knowledge-base/custom-requirements-checklist/).
 
