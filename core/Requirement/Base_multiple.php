@@ -100,7 +100,12 @@ class Base_multiple extends Base_simple implements Interface_required
 
         $id   = "{$post_type}-{$this->module->slug}-{$option_name_multiple}";
         $name = "{$this->module->options_group_name}[{$option_name_multiple}][{$post_type}][]";
-        $html = sprintf(
+
+        if (isset($this->lang['label_option_title'])) {
+            $html .= $this->lang['label_option_title'].'<br />';
+        }
+
+        $html .= sprintf(
             '<select id="%s" name="%s" multiple="multiple">',
             $id,
             $name
