@@ -15,6 +15,9 @@ class RoboFile extends \PublishPressBuilder\PackageBuilderTasks
         $this->appendToFileToIgnore(
             [
                 'webpack.config.js',
+                'vendor/pimple/pimple/.gitignore',
+                'vendor/pimple/pimple/.php_cs.dist',
+                'vendor/psr/container/.gitignore',
                 'vendor/publishpress/wordpress-version-notices/.gitignore',
                 'vendor/publishpress/wordpress-version-notices/README.md',
                 'vendor/publishpress/wordpress-version-notices/bin',
