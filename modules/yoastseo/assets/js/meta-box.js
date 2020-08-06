@@ -37,27 +37,27 @@
          * Yoast Readability Analysis
          *
          * - "yoast_wpseo_content_score" ==> Yoast SEO input for readability score
-         * - 71 to 100 ==> Yoast SEO readability grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_readability_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var readabilityAnalysisPass = false;
+                var readabilityAnalysisPass = false,
+                    option_value = ppChecklists.requirements.yoast_readability_analysis.value;
 
                 if ($('#yoast_wpseo_content_score').length === 0) {
                     return;
                 }
 
-                var readabilityScore = Number($('#yoast_wpseo_content_score').val());
+                var score = Number($('#yoast_wpseo_content_score').val());
 
-                    if (readabilityScore >= 71) {
-                        readabilityAnalysisPass = true;
-                    }
+                if (score >= option_value) {
+                    readabilityAnalysisPass = true;
+                }
 
-                    $('#pp-checklists-req-yoast_readability_analysis').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        readabilityAnalysisPass
-                    );
+                $('#pp-checklists-req-yoast_readability_analysis').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    readabilityAnalysisPass
+                );
 
             });
 
@@ -68,27 +68,27 @@
          * Yoast Seo Analysis
          *
          * - "yoast_wpseo_linkdex" ==> Yoast SEO input for seo score
-         * - 71 to 100 ==> Yoast SEO grade for pass/green color
          *
          */
         if ($('#pp-checklists-req-yoast_seo_analysis').length > 0) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var seoAnalysisPass = false;
+                var seoAnalysisPass = false,
+                    option_value = ppChecklists.requirements.yoast_seo_analysis.value;
 
                 if ($('#yoast_wpseo_linkdex').length === 0) {
                     return;
                 }
 
-                var seoScore = Number($('#yoast_wpseo_linkdex').val());
+                var score = Number($('#yoast_wpseo_linkdex').val());
 
-                    if (seoScore >= 71) {
-                        seoAnalysisPass = true;
-                    }
+                if (score >= option_value) {
+                    seoAnalysisPass = true;
+                }
 
-                    $('#pp-checklists-req-yoast_seo_analysis').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        seoAnalysisPass
-                    );
+                $('#pp-checklists-req-yoast_seo_analysis').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    seoAnalysisPass
+                );
 
             });
 

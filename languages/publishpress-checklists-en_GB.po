@@ -140,8 +140,8 @@ msgid "Disabled"
 msgstr "Disabled"
 
 #: modules/checklists/checklists.php:739
-msgid "Add custom item"
-msgstr "Add custom item"
+msgid "Add custom task"
+msgstr "Add custom task"
 
 #: modules/checklists/checklists.php:738
 msgid "Options"

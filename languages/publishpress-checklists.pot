@@ -3,27 +3,26 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2020-07-16 14:09-0300\n"
+"POT-Creation-Date: 2020-08-04 15:40-0300\n"
 "PO-Revision-Date: 2019-11-07 12:27-0300\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: publishpress-checklists.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;"
+"esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
 
-#: core/Legacy/LegacyPlugin.php:204 modules/checklists/checklists.php:541
+#: core/Legacy/LegacyPlugin.php:204 modules/checklists/checklists.php:542
 msgid "Configure"
 msgstr ""
 
@@ -43,8 +42,8 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:347 modules/checklists/checklists.php:97
-#: modules/checklists/checklists.php:698 modules/checklists/checklists.php:713
+#: core/Legacy/LegacyPlugin.php:347 modules/checklists/checklists.php:97 modules/checklists/checklists.php:701
+#: modules/checklists/checklists.php:716
 msgid "Checklists"
 msgstr ""
 
@@ -101,13 +100,11 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: core/Requirement/Featured_image.php:30
-#: core/Requirement/Featured_image.php:31
+#: core/Requirement/Featured_image.php:30 core/Requirement/Featured_image.php:31
 msgid "Featured image"
 msgstr ""
 
-#: core/Requirement/Filled_excerpt.php:30
-#: core/Requirement/Filled_excerpt.php:31
+#: core/Requirement/Filled_excerpt.php:30 core/Requirement/Filled_excerpt.php:31
 msgid "Numbers of characters in excerpt"
 msgstr ""
 
@@ -146,41 +143,45 @@ msgstr ""
 msgid "Between %d and %d characters in excerpt"
 msgstr ""
 
-#: core/Requirement/Internal_links.php:29
-msgid "Number of internal links in content"
-msgstr ""
-
-#: core/Requirement/Internal_links.php:30
-#, php-format
-msgid "Minimum of %d internal link in content"
+#: core/Requirement/Image_alt.php:31 core/Requirement/Image_alt.php:32
+msgid "Alt text for all images"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:31
-#, php-format
-msgid "Minimum of %d internal links in content"
+msgid "Number of internal links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:32
 #, php-format
-msgid "Maximum of %d internal link in content"
+msgid "Minimum of %d internal link in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:33
 #, php-format
-msgid "Maximum of %d internal links in content"
+msgid "Minimum of %d internal links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:34
 #, php-format
-msgid "%d internal link in content"
+msgid "Maximum of %d internal link in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:35
 #, php-format
-msgid "%d internal links in content"
+msgid "Maximum of %d internal links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:36
+#, php-format
+msgid "%d internal link in content"
+msgstr ""
+
+#: core/Requirement/Internal_links.php:37
+#, php-format
+msgid "%d internal links in content"
+msgstr ""
+
+#: core/Requirement/Internal_links.php:39
 #, php-format
 msgid "Between %d and %d internal links in content"
 msgstr ""
@@ -228,20 +229,17 @@ msgstr ""
 msgid "Number of "
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:44
-#: core/Requirement/Taxonomies_count.php:45
+#: core/Requirement/Taxonomies_count.php:44 core/Requirement/Taxonomies_count.php:45
 #, php-format
 msgid "Minimum of %d "
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:46
-#: core/Requirement/Taxonomies_count.php:47
+#: core/Requirement/Taxonomies_count.php:46 core/Requirement/Taxonomies_count.php:47
 #, php-format
 msgid "Maximum of %d "
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:48
-#: core/Requirement/Taxonomies_count.php:49
+#: core/Requirement/Taxonomies_count.php:48 core/Requirement/Taxonomies_count.php:49
 #, php-format
 msgid "%d "
 msgstr ""
@@ -333,81 +331,80 @@ msgstr ""
 msgid "Define tasks that must be complete before content is published."
 msgstr ""
 
-#: modules/checklists/checklists.php:532
+#: modules/checklists/checklists.php:533
 msgid "Checklist"
 msgstr ""
 
-#: modules/checklists/checklists.php:599
+#: modules/checklists/checklists.php:600
 msgid "Are you sure you want to publish anyway?"
 msgstr ""
 
-#: modules/checklists/checklists.php:603
+#: modules/checklists/checklists.php:604
 msgid "Are you sure you want to update the published post anyway?"
 msgstr ""
 
-#: modules/checklists/checklists.php:607
+#: modules/checklists/checklists.php:608
 msgid "Please complete the following tasks before publishing:"
 msgstr ""
 
-#: modules/checklists/checklists.php:611
-msgid ""
-"Please complete the following tasks before updating the published post:"
+#: modules/checklists/checklists.php:612
+msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 
-#: modules/checklists/checklists.php:615 modules/checklists/checklists.php:619
+#: modules/checklists/checklists.php:616 modules/checklists/checklists.php:620
 msgid "Not required, but important: "
 msgstr ""
 
-#: modules/checklists/checklists.php:623
+#: modules/checklists/checklists.php:624
 msgid "One or more items in the checklist are not completed"
 msgstr ""
 
-#: modules/checklists/checklists.php:643
+#: modules/checklists/checklists.php:646
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr ""
 
-#: modules/checklists/checklists.php:646 modules/checklists/checklists.php:785
+#: modules/checklists/checklists.php:649 modules/checklists/checklists.php:788
 msgid "Required"
 msgstr ""
 
-#: modules/checklists/checklists.php:647
+#: modules/checklists/checklists.php:650
 msgid "Ok"
 msgstr ""
 
-#: modules/checklists/checklists.php:648
+#: modules/checklists/checklists.php:651
 msgid "No"
 msgstr ""
 
-#: modules/checklists/checklists.php:649
+#: modules/checklists/checklists.php:652
 msgid "Yes"
 msgstr ""
 
-#: modules/checklists/checklists.php:751
+#: modules/checklists/checklists.php:754
 msgid "Task"
 msgstr ""
 
-#: modules/checklists/checklists.php:752
+#: modules/checklists/checklists.php:755
 msgid "Disabled, Recommended or Required"
 msgstr ""
 
-#: modules/checklists/checklists.php:753
+#: modules/checklists/checklists.php:756
 msgid "Options"
 msgstr ""
 
-#: modules/checklists/checklists.php:754
-msgid "Add custom item"
+#: modules/checklists/checklists.php:757
+msgid "Add custom task"
 msgstr ""
 
-#: modules/checklists/checklists.php:776
+#: modules/checklists/checklists.php:779
 msgid "Disabled"
 msgstr ""
 
-#: modules/checklists/checklists.php:778
+#: modules/checklists/checklists.php:781
 msgid "Recommended: show only in the sidebar"
 msgstr ""
 
-#: modules/checklists/checklists.php:782
+#: modules/checklists/checklists.php:785
 msgid "Recommended: show in the sidebar and before publishing"
 msgstr ""
 
@@ -473,9 +470,7 @@ msgstr ""
 
 #: modules/settings/settings.php:382
 #, php-format
-msgid ""
-"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
-"loaded file."
+msgid "Disabled because add_post_type_support('%1$s', '%2$s') is included in a loaded file."
 msgstr ""
 
 #: modules/settings/settings.php:596
@@ -494,12 +489,37 @@ msgstr ""
 msgid "This will display a warning icon in the \"Publish\" box"
 msgstr ""
 
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:32
-msgid "Yoast SEO readability analysis pass"
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:47
+msgid "Minimum Yoast SEO readability score"
 msgstr ""
 
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:32
-msgid "Yoast SEO analysis pass"
+#. translators: %s expands to the readability score
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
+msgid "Readability: %s"
+msgstr ""
+
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:125
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:160
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:124 modules/yoastseo/lib/Requirement/Seo_Analysis.php:159
+msgid "OK"
+msgstr ""
+
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:130
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:161
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:129 modules/yoastseo/lib/Requirement/Seo_Analysis.php:160
+msgid "Good"
+msgstr ""
+
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:46
+msgid "Minimum Yoast SEO analysis score"
+msgstr ""
+
+#. translators: %s expands to the seo score
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123 modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
+msgid "Seo: %s"
 msgstr ""
 
 #: modules/yoastseo/yoastseo.php:65

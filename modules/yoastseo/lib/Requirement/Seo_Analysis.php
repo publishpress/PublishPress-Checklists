@@ -9,12 +9,26 @@
 
 namespace PublishPress\Checklists\Yoastseo\Requirement;
 
-
-use PublishPress\Checklists\Core\Requirement\Base_simple;
+use PublishPress\Checklists\Core\Requirement\Base_dropdown;
 use stdClass;
 
-class Seo_Analysis extends Base_simple
+class Seo_Analysis extends Base_dropdown
 {
+
+    /**
+     * Constant used for determining an OK SEO rating.
+     *
+     * @var integer
+     */
+    const OK = '41';
+
+    /**
+     * Constant used for determining a good SEO rating.
+     *
+     * @var integer
+     */
+    const GOOD = '71';
+
     /**
      * The name of the requirement, in a slug format
      *
@@ -29,21 +43,7 @@ class Seo_Analysis extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label_settings'] = esc_html(__('Yoast SEO analysis pass', 'publishpress-checklists'));
-    }
-
-    /**
-     * Validates the option group, making sure the values are sanitized.
-     *
-     * @param array $new_options
-     *
-     * @return array
-     */
-    public function filter_settings_validate($new_options)
-    {
-        $new_options = parent::filter_settings_validate($new_options);
-
-        return $new_options;
+        $this->lang['label_settings'] = esc_html(__('Minimum Yoast SEO analysis score', 'publishpress-checklists'));
     }
 
     /**
@@ -64,16 +64,27 @@ class Seo_Analysis extends Base_simple
             return $requirements;
         }
 
-        $value = $this->get_option($this->name);
+        // Option names
+        $option_name_dropdown = $this->name . '_dropdown';
+
+        // Check value is empty, to skip
+        if (empty($option_name_dropdown)) {
+            return $requirements;
+        }
+
+        // Get the value
+        $value = $this->get_option($option_name_dropdown);
+
+        $label = $this->get_requirement_drop_down_labels()[$value];
 
         // Register in the requirements list
         $requirements[$this->name] = [
-            'status' => $this->get_current_status($post, $value),
-            'label' => $this->lang['label_settings'],
-            'value' => $value,
-            'rule' => $this->get_option_rule(),
+            'status'    => $this->get_current_status($post, $value),
+            'label'     => $label,
+            'value'     => $value,
+            'rule'      => $this->get_option_rule(),
             'is_custom' => false,
-            'type' => $this->type,
+            'type'      => $this->type,
         ];
 
         return $requirements;
@@ -100,6 +111,29 @@ class Seo_Analysis extends Base_simple
     }
 
     /**
+     * Gets the requirement drop down labels for the seo score.
+     *
+     * @return array The seo rank label.
+     */
+    public function get_requirement_drop_down_labels()
+    {
+        $labels = [
+            self::OK   => sprintf(
+            /* translators: %s expands to the seo score */
+                __('Seo: %s', 'publishpress-checklists'),
+                __('OK', 'publishpress-checklists')
+            ),
+            self::GOOD => sprintf(
+            /* translators: %s expands to the seo score */
+                __('Seo: %s', 'publishpress-checklists'),
+                __('Good', 'publishpress-checklists')
+            ),
+        ];
+
+        return $labels;
+    }
+
+    /**
      * Returns the current status of the requirement.
      *
      * @param stdClass $post
@@ -111,6 +145,21 @@ class Seo_Analysis extends Base_simple
     {
         $score = (int)get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
 
-        return $score >= '71';
+        return $score >= $option_value;
+    }
+
+    /**
+     * Gets settings drop down labels for the seo score.
+     *
+     * @return array The seo rank label.
+     */
+    public function get_setting_drop_down_labels()
+    {
+        $labels = [
+            self::OK   => __('OK', 'publishpress-checklists'),
+            self::GOOD => __('Good', 'publishpress-checklists'),
+        ];
+
+        return $labels;
     }
 }

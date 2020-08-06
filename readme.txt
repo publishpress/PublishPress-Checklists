@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.4
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,7 @@ If you choose the “Required” option, it will be impossible to publish withou
 
 = Creating New Checklist Requirements =
 
-You can create new requirements for your checklists by clicking the “Add custom item” link. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
+You can create new requirements for your checklists by clicking the “Add custom task” link. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
 
 [Click here to see how to create custom requirements](https://publishpress.com/knowledge-base/custom-requirements-checklist/).
 
@@ -111,6 +111,17 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.3.0] - 2020-08-06 =
+
+* Added: Added new task for checking if all the images in the post has an "alt" attribute, #164;
+* Fixed: Fixed the verification for custom taxonomies in the post editor page, #114;
+* Fixed: Fixed style for unchecked custom tasks, #184;
+* Fixed: Updated language files;
+* Changed: Hide Yoast SEO tasks if Yoast's plugin is not activated, #164;
+* Changed: Updated translation strings;
+* Changed: Changed the algorithm of the Yoast SEO readability and SEO analysis verification, considering the selected score as the minimum score, #169;
+* Changed: Change the label of the "Add custom item" button to "Add custom task", #181;
 
 = [2.2.0] - 2020-07-21 =
 
