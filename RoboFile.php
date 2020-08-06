@@ -11,6 +11,7 @@ class RoboFile extends \PublishPressBuilder\PackageBuilderTasks
     {
         parent::__construct();
 
+        $this->setVersionConstantName('PPCH_VERSION');
         $this->appendToFileToIgnore(
             [
                 'webpack.config.js',
