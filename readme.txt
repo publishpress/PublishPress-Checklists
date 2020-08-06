@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.3.0] - UNRELEASED =
+= [2.3.0] - 2020-08-06 =
 
 * Changed: Hide Yoast SEO tasks if Yoast's plugin is not activated, #164;
 * Changed: Updated translation strings;
