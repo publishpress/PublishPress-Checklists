@@ -1,7 +1,7 @@
 ---
 name: Release the Pro version (team only)
 about: Describes default checklist for releasing the Pro plugin;
-title: Release v[VERSION]
+title: Release Pro v[VERSION]
 labels: release
 assignees: ''
 
