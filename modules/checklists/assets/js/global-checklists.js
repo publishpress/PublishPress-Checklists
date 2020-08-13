@@ -94,7 +94,7 @@
             $('#pp-checklists-requirements tr[data-post-type="' + post_type + '"]').show();
             // Mark the filter as selected
             $('#pp-checklists-post-type-filter a.pp-selected').removeClass('pp-selected');
-            $('#pp-checklists-post-type-filter a[href=#' + post_type + ']').addClass('pp-selected');
+            $('#pp-checklists-post-type-filter a[href="#' + post_type + '"]').addClass('pp-selected');
         }
 
         /**
