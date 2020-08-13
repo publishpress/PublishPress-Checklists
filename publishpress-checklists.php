@@ -12,7 +12,7 @@
  * @publishpress-checklists
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Version: 2.3.0-hotfix-191
+ * Version: 2.3.1-beta.1
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
