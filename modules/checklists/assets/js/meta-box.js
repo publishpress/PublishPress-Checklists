@@ -524,7 +524,9 @@
          * @returns {boolean}
          */
         is_gutenberg_active: function () {
-            return typeof wp !== 'undefined' && typeof wp.blocks !== 'undefined';
+            return typeof wp !== 'undefined'
+                && typeof wp.blocks !== 'undefined'
+                && typeof wp.plugins !== 'undefined';
         },
 
         /**
