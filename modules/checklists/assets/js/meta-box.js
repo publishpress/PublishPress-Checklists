@@ -289,12 +289,12 @@
 
             if (isPublishingThePost || isUpdatingPublishedPost) {
                 var showBlockMessage = uncheckedItems.block.length > 0,
-                    showWarning = uncheckedItems.warning.length > 0;
+                    showWarning = uncheckedItems.warning.length > 0,
+                    gutenbergLockName = 'pp-checklists';
 
                 if (showWarning || showBlockMessage) {
                     this.state.should_block = true;
 
-                    var gutenbergLockName = 'pp-checklists';
                     var message = '';
 
                     if (showBlockMessage) {

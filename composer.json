@@ -19,11 +19,6 @@
       "PublishPress\\Checklists\\Yoastseo\\": "modules/yoastseo/lib"
     }
   },
-  "require": {
-    "php": ">=5.6.20",
-    "pimple/pimple": "~3.0",
-    "publishpress/wordpress-version-notices": "^1.0"
-  },
   "repositories": [
     {
       "type": "git",
@@ -34,6 +29,11 @@
       "url": "https://github.com/publishpress/wp-browser"
     }
   ],
+  "require": {
+    "php": ">=5.6.20",
+    "pimple/pimple": "~3.0",
+    "publishpress/wordpress-version-notices": "^1.0"
+  },
   "require-dev": {
     "publishpress/publishpress-plugin-builder": "^1.2",
     "publishpress/wp-browser": "2.6.5.2",
