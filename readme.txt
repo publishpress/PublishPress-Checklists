@@ -112,6 +112,13 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.3.1] - 2020-08-14 =
+
+* Fixed: Fixed compatibility with WP 5.5;
+* Fixed: Fixed Gutenberg and Classic Editor detection, #203, #202;
+* Fixed: Fixed invalid selector in jQuery, #197;
+* Fixed: Fixed the publishing button that was stuck sometimes making impossible to publish a post, #191;
+
 = [2.3.0] - 2020-08-06 =
 
 * Added: Added new task for checking if all the images in the post has an "alt" attribute, #164;
