@@ -622,6 +622,7 @@ if (!class_exists('PPCH_Checklists')) {
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => __('One or more items in the checklist are not completed'),
+                        'is_gutenberg_active'             => $this->is_gutenberg_active(),
                     ]
                 );
 
@@ -654,6 +655,36 @@ if (!class_exists('PPCH_Checklists')) {
                     ],
                 ]
             );
+        }
+
+        private function is_gutenberg_active()
+        {
+            $gutenberg    = false;
+            $block_editor = false;
+
+            if ( has_filter( 'replace_editor', 'gutenberg_init' ) ) {
+                // Gutenberg is installed and activated.
+                $gutenberg = true;
+            }
+
+            if ( version_compare( $GLOBALS['wp_version'], '5.0-beta', '>' ) ) {
+                // Block editor.
+                $block_editor = true;
+            }
+
+            if ( ! $gutenberg && ! $block_editor ) {
+                return false;
+            }
+
+            include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+            if ( ! is_plugin_active( 'classic-editor/classic-editor.php' ) ) {
+                return true;
+            }
+
+            $use_block_editor = ( get_option( 'classic-editor-replace' ) === 'no-replace' );
+
+            return $use_block_editor;
         }
 
         /**
