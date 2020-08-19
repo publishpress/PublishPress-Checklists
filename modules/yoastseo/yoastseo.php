@@ -105,7 +105,7 @@ class PPCH_Yoastseo extends Module
                 10,
                 2
             );
-            add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+            add_action('publishpress_checklists_enqueue_scripts', [$this, 'enqueueScripts']);
         }
     }
 
