@@ -497,19 +497,19 @@ msgstr ""
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
 #, php-format
-msgid "Readability: %s"
+msgid "Readability analysis: %s"
 msgstr ""
 
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:125
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:160
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:124 modules/yoastseo/lib/Requirement/Seo_Analysis.php:159
-msgid "OK"
+msgid "OK (yellow)"
 msgstr ""
 
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:130
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:161
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:129 modules/yoastseo/lib/Requirement/Seo_Analysis.php:160
-msgid "Good"
+msgid "Good (green)"
 msgstr ""
 
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:46
@@ -519,7 +519,7 @@ msgstr ""
 #. translators: %s expands to the seo score
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123 modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
 #, php-format
-msgid "Seo: %s"
+msgid "SEO analysis: %s"
 msgstr ""
 
 #: modules/yoastseo/yoastseo.php:65
