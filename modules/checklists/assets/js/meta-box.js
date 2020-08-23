@@ -487,6 +487,52 @@
         },
 
         /**
+         * Check for external link from content and return result as array
+         *
+         *  - remove image inside tags so we don't count them as link
+         *  - remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
+         *  - check for every valid link and return array
+         *  - loop array and return only valid external links excluding other images url
+         *
+         * @param  {String} content
+         * @param  {Array} links
+         * @param  {String} website
+         *
+         * @return {Array}
+         */
+        extract_external_links: function (content, links = [], website = window.location.host) {
+            var link;
+            if (content) {
+
+                //remove image inside tags so we don't count them as link
+                content = content.replace(/<img[^>]*>/g, "");
+
+                //remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
+                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+
+                //check for every valid link and return array
+                content = content.match(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi);
+
+                //loop array and return only valid external links excluding other images url
+                if (content) {
+                    for (link of content) {
+                        //skip if link is image
+                        if (link.match(/\.(jpeg|jpg|gif|png|svg)$/)) continue;
+                        //skip if link point to the current website host
+                        if (link.indexOf(website) > 0) continue;
+                        //add valid link to array
+                        links.push(link);
+                    }
+                }
+
+
+            }
+
+            return links;
+
+        },
+
+        /**
          * Check for images without alt text from content and return result as array
          *
          * @param  {String} content
@@ -838,7 +884,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = counter.count(text);
@@ -942,7 +988,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = PP_Checklists.extract_internal_links(text).length;
@@ -955,6 +1001,111 @@
                 max = parseInt(ppChecklists.requirements.internal_links.value[1]);
 
             $('#pp-checklists-req-internal_links').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                PP_Checklists.check_valid_quantity(count, min, max)
+            );
+
+            lastCount = count;
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup', _.debounce(update, 500));
+        update();
+    }
+
+
+    /*----------  External Links ----------*/
+    var lastCount = 0;
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-external_links').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var count = PP_Checklists.extract_external_links(content).length;
+
+                    if (lastCount == count) {
+                        return;
+                    }
+
+
+                    var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+                        max = parseInt(ppChecklists.requirements.external_links.value[1]);
+
+                    $('#pp-checklists-req-external_links').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        PP_Checklists.check_valid_quantity(count, min, max)
+                    );
+
+                    lastCount = count;
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var lastCount = 0;
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count;
+
+            if (typeof ppChecklists.requirements.external_links === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({ format: 'raw' });
+            }
+
+            count = PP_Checklists.extract_external_links(text).length;
+
+            if (lastCount === count) {
+                return;
+            }
+
+            var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+                max = parseInt(ppChecklists.requirements.external_links.value[1]);
+
+            $('#pp-checklists-req-external_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                 PP_Checklists.check_valid_quantity(count, min, max)
             );
@@ -1040,7 +1191,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             var count = PP_Checklists.missing_alt_images(text).length;
