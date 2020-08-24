@@ -58,7 +58,7 @@ class Validate_links extends Base_simple
             $content = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", "", $content);
 
             //match all links inside content
-            preg_match_all($re, $str, $links);
+            preg_match_all('~\b(?:https?://)?(?:(?i:[a-z]+\.)+)[^\s,]+\b~', $content, $links);
 
             $links = $links[0];
 
