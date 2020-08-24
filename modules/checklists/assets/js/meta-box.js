@@ -1134,7 +1134,7 @@
         if ($('#pp-checklists-req-validate_links').length > 0) {
             wp.data.subscribe(
                 function () {
-                    var no_missing_alt = false;
+                    var no_invalid_link = false;
                     var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
                     if (typeof content == 'undefined') {
@@ -1144,12 +1144,12 @@
                     var count = PP_Checklists.validate_links_format(content).length;
 
                     if (count == 0) {
-                        no_missing_alt = true;
+                        no_invalid_link = true;
                     }
 
                     $('#pp-checklists-req-validate_links').trigger(
                         PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        no_missing_alt
+                        no_invalid_link
                     );
 
                 }
@@ -1166,7 +1166,7 @@
          * Get the words count from TinyMCE and update the status of the requirement
          */
         function update() {
-            var text, count, no_missing_alt = false;
+            var text, count, no_invalid_link = false;
             if (typeof ppChecklists.requirements.validate_links === 'undefined') {
                 return;
             }
@@ -1182,12 +1182,12 @@
             var count = PP_Checklists.validate_links_format(text).length;
 
             if (count == 0) {
-                no_missing_alt = true;
+                no_invalid_link = true;
             }
 
             $('#pp-checklists-req-validate_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                no_missing_alt
+                no_invalid_link
             );
 
         }
