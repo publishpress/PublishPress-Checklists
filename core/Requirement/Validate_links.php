@@ -44,6 +44,16 @@ class Validate_links extends Base_simple
     private function validate_links_format($content, $invalid_links = array())
     {
         if ($content) {
+
+            //remove element inside <a href></a> to avoid double counting for one
+            //link in case of <a href="Link">Link</a>
+            $content = preg_replace("'\<a.*?href=\"(.*?)\".*?\>(.*?)\<\/a\>'si",'$1',$content);
+            $content = preg_replace("'\<a.*?href=\'(.*?)\'.*?\>(.*?)\<\/a\>'si",'$1',$content);
+
+            //strip html tags to avoid counting their link attribute as link
+            //like in <img src="" alt="site.com" />
+            $content = strip_tags($content);
+
             //remove any possible email from content so we don't count them as link
             $content = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", "", $content);
 

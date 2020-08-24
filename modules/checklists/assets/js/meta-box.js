@@ -534,6 +534,15 @@
 
             if (content) {
 
+                //remove element inside <a href></a> to avoid double counting for
+                //one link in case of <a href="Link"> Link</a>
+                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+                content = content.replace(/<a .*? *href='([^\"\']+).*?<\/a>/g, "$1");
+
+                //strip html tags to avoid counting their link attribute as link
+                //like in <img src="" alt="site.com" />
+                content = content.replace(/(<([^>]+)>)/gi, "");
+
                 //remove any possible email from content so we don't count them as link
                 content = content.replace(email_regex, '');
 
