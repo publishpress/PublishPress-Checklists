@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Validate_Links extends Base_simple
+class Validate_links extends Base_simple
 {
 
     /**
