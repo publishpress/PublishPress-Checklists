@@ -530,7 +530,7 @@
             var link,
                 links,
                 email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
-                link_regex = /\b(?:https?:\/\/)?(?:([a-z]+\.)+)[^\s,]+\b/gi;
+                link_regex = /\b(?:https?:\/\/)?(?:([a-zA-Z0-9._-]+\.)+)[^\s,]+\b/gi;
 
             if (content) {
 
