@@ -152,9 +152,9 @@ if (!class_exists('PPCH_Settings')) {
             if($status == 'yes'){
             ?>
             <script type="text/javascript">
-                jQuery(document).ready( function($) {
-                    $('label.inline-edit-status').each(function (i) {
-			$(this).remove();
+                jQuery(document).ready(function($) {
+                    $('label.inline-edit-status').each(function () {
+			            $(this).remove();
                     });
                 });
             </script>
