@@ -239,9 +239,6 @@
                 required_rules = objectL10n_checklists_global_checklist.required_rules,
                 required_rules_notice = objectL10n_checklists_global_checklist.submit_error;
 
-            //remove previous notice
-            $(".checklists-save-error").remove();
-
             //select all row
             $(".pp-checklists-requirement-row").each(function () {
                 var requirement_id = $(this).attr('data-id');
