@@ -808,14 +808,7 @@ if (!class_exists('PPCH_Checklists')) {
                 $rules,
                 [
                     Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_ONLY_DISPLAY => __(
-                        'Recommended: show only in the sidebar',
-                        'publishpress-checklists'
-                    ),
-                    Plugin::RULE_WARNING      => __(
-                        'Recommended: show in the sidebar and before publishing',
-                        'publishpress-checklists'
-                    ),
+                    Plugin::RULE_WARNING      => __('Recommended', 'publishpress-checklists'),
                     Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
                 ]
             );
