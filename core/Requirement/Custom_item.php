@@ -48,11 +48,8 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     public function init_language()
     {
-        $this->lang['label']               = __('Custom', 'publishpress-checklists');
-        $this->lang['label_settings']      = __('Custom', 'publishpress-checklists');
-        $this->lang['label_option_title']  = __('Permitted roles', 'publishpress-checklists');
-        $this->lang['label_not_permitted'] = __('Sorry, this post needs the approval of a user in role %s', 'publishpress-checklists');
-        $this->lang['label_approved']      = __('Approved', 'publishpress-checklists');
+        $this->lang['label']          = __('Custom', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('Custom', 'publishpress-checklists');
     }
 
     /**
@@ -155,7 +152,7 @@ class Custom_item extends Base_multiple implements Interface_required
         if ($enabled) {
             $requirements[$this->name] = [
                 'status'    => $this->get_current_status($post, $enabled),
-                'label'     => $this->get_requirement_drop_down_label($post->ID),
+                'label'     => $this->get_title(),
                 'value'     => $enabled,
                 'rule'      => $rule,
                 'id'        => $this->name,
@@ -260,57 +257,6 @@ class Custom_item extends Base_multiple implements Interface_required
         }
 
         return false;
-    }
-
-    /**
-     * Gets the requirement drop down label.
-     * @param integer $post_id
-     *
-     * @return string
-     */
-    public function get_requirement_drop_down_label($post_id)
-    {
-        //Option name
-        $option_name_multiple = $this->name . '_multiple';
-
-        //Saved value
-        $option_value = isset($this->module->options->{$option_name_multiple}[$this->post_type]) ? $this->module->options->{$option_name_multiple}[$this->post_type] : array();
-
-        //Permitted role list
-        $permitted_role = $this->arrayToSentence($option_value);
-
-        if ($this->isUserRolePermitted()) {
-            $label = $this->get_title();
-        } elseif (self::VALUE_YES === get_post_meta($post_id, PPCH_Checklists::POST_META_PREFIX . $this->name, true)) {
-            $label = $this->lang['label_approved'];
-        } else {
-            $label = sprintf(__($this->lang['label_not_permitted'], 'publishpress-checklists'), $permitted_role);
-        }
-
-        return $label;
-    }
-
-    /**
-     * Form readable sentence from array list
-     * @param array $array
-     *
-     * @return string
-     */
-    private function arrayToSentence($array, $string = '')
-    {
-        if (is_array($array)) {
-            $items = array();
-
-            foreach ($array as $item) {
-                $items[] = $this->get_setting_drop_down_labels()[$item];
-            }
-
-            $last = array_pop($items);
-
-            $string = count($items) ? implode(", ", $items) . " " . __('or', 'publishpress-checklists') . " " . $last : $last;
-        }
-
-        return $string;
     }
 
     /**
