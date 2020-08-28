@@ -266,6 +266,10 @@
     padding-left: 3px;
 }
 
+#pp-checklists-global .checklists-save-error {
+    color:red;
+}
+
 @media only screen and (max-width: 781px) {
     #pp-checklists-global table th {
         display: none;
