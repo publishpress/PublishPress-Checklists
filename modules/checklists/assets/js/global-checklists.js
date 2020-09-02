@@ -155,6 +155,8 @@
                 $titleField = $('<input type="text" />'),
                 $idField = $('<input type="hidden" />'),
                 $actionField = $('<select>'),
+                $canIgnoreField = $('<select>'),
+                $optionsField = $('<select>'),
                 $option,
                 $a,
                 $icon,
@@ -206,10 +208,48 @@
                     .appendTo($actionField);
             });
 
+            // can_ignore cell
+            $td = $('<td>').appendTo($tr);
+            $canIgnoreField
+                .attr('class', 'pp-checklists-can-ignore')
+                .attr(
+                    'name',
+                    'publishpress_checklists_checklists_options[' + id + '_can_ignore][' + post_type + '][]'
+                )
+                .attr('multiple', 'multiple')
+                .appendTo($td);
+
+            $option = $('<option value=""></option>').appendTo($canIgnoreField);
+            $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .text(label)
+                    .appendTo($canIgnoreField);
+            });
+
+            // Options cell
+            $td = $('<td>').appendTo($tr);
+            $optionsField
+                .attr(
+                    'id',
+                    '' + post_type + '-checklists-' + id + '_multiple'
+                )
+                .attr(
+                    'name',
+                    'publishpress_checklists_checklists_options[' + id + '_multiple][' + post_type + '][]'
+                )
+                .attr('multiple', 'multiple')
+                .appendTo($td);
+
+            $option = $('<option value=""></option>').appendTo($optionsField);
+            $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .text(label)
+                    .appendTo($optionsField);
+            });
+
             // Params cell
-            $td = $('<td>')
-                .attr('data-id', id)
-                .appendTo($tr);
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')
                 .addClass('pp-checklists-remove-custom-item')
@@ -219,6 +259,9 @@
                 .addClass('dashicons dashicons-trash')
                 .attr('data-id', id)
                 .appendTo($a);
+
+            //re initialize select 2
+            $('#pp-checklists-global select').select2();
 
             $a.on('click', callback_remove_row);
         }

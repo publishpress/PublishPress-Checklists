@@ -266,13 +266,6 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     public function get_setting_drop_down_labels()
     {
-        $labels = [];
-
-        $userRoles = get_editable_roles();
-
-        foreach ($userRoles as $slug => $role) {
-            $labels[$slug] = $role['name'];
-        }
-        return $labels;
+        return PPCH_Checklists::get_editable_roles_labels();
     }
 }

@@ -146,6 +146,23 @@ if (!class_exists('PPCH_Checklists')) {
         }
 
         /**
+         * Extract labels and name from roles.
+         *
+         * @return array.
+         */
+        public static function get_editable_roles_labels()
+        {
+            $labels = [];
+
+            $userRoles = get_editable_roles();
+
+            foreach ($userRoles as $slug => $role) {
+                $labels[$slug] = $role['name'];
+            }
+            return $labels;
+        }
+
+        /**
          * Loads the requirements for each post type
          */
         protected function instantiate_requirement_classes()
@@ -486,6 +503,7 @@ if (!class_exists('PPCH_Checklists')) {
 
 
                 $rules = apply_filters('publishpress_checklists_rules_list', []);
+                $roles = self::get_editable_roles_labels();
 
                 // Get all the keys of post types, to select the first one for the JS script
                 $postTypes = array_keys($this->get_post_types());
@@ -497,6 +515,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'objectL10n_checklists_global_checklist',
                     [
                         'rules'           => $rules,
+                        'roles'           => $roles,
                         'first_post_type' => current($postTypes),
                     ]
                 );
