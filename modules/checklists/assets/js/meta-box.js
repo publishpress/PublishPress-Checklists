@@ -519,6 +519,49 @@
         },
 
         /**
+         * Check for links without http(s)
+         *
+         * @param  {String} content
+         * @param  {Array} invalid_links
+         *
+         * @return {Array}
+         */
+        validate_links_format: function (content, invalid_links = []) {
+            var link,
+                links,
+                email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
+                link_regex = /\b(?:https?:\/\/)?(?:([a-zA-Z0-9._-]+\.)+)[^\s,]+\b/gi;
+
+            if (content) {
+
+                //remove element inside <a href></a> to avoid double counting for
+                //one link in case of <a href="Link"> Link</a>
+                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+                content = content.replace(/<a .*? *href='([^\"\']+).*?<\/a>/g, "$1");
+
+                //strip html tags to avoid counting their link attribute as link
+                //like in <img src="" alt="site.com" />
+                content = content.replace(/(<([^>]+)>)/gi, "");
+
+                //remove any possible email from content so we don't count them as link
+                content = content.replace(email_regex, '');
+
+                while ((links = link_regex.exec(content)) !== null) {
+                    // The result can be accessed through the 'links'-variable.
+                    link = links[0];
+                    //skip if http or https is present in the link build up
+                    if (link.indexOf("http://") == 0 || link.indexOf("https://") == 0) continue;
+                    invalid_links.push(link);
+                }
+
+
+            }
+
+            return invalid_links;
+
+        },
+
+        /**
          * Returns true if the Gutenberg editor is active on the page.
          *
          * @returns {boolean}
@@ -1052,6 +1095,99 @@
             $('#pp-checklists-req-image_alt').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                 no_missing_alt
+            );
+
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup change', _.debounce(update, 500));
+        update();
+    }
+
+    /*----------  Validate Links ----------*/
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-validate_links').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var no_invalid_link = false;
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var count = PP_Checklists.validate_links_format(content).length;
+
+                    if (count == 0) {
+                        no_invalid_link = true;
+                    }
+
+                    $('#pp-checklists-req-validate_links').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        no_invalid_link
+                    );
+
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count, no_invalid_link = false;
+            if (typeof ppChecklists.requirements.validate_links === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            var count = PP_Checklists.validate_links_format(text).length;
+
+            if (count == 0) {
+                no_invalid_link = true;
+            }
+
+            $('#pp-checklists-req-validate_links').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                no_invalid_link
             );
 
         }
