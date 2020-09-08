@@ -501,35 +501,27 @@
          * @return {Array}
          */
         extract_external_links: function (content, links = [], website = window.location.host) {
-            var link;
+            var link,
+                match,
+                regex = /<a.*?href=["\']([^"\']+)["\'].*?\>(.*?)\<\/a\>/ig;
             if (content) {
 
-                //remove image inside tags so we don't count them as link
-                content = content.replace(/<img[^>]*>/g, "");
+                //check for external link and return array excluding other images url
+                while ((match = regex.exec(content)) !== null) {
+                    link = match[1];
 
-                //remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
-                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+                    //skip if link is image
+                    if (link.match(/\.(jpeg|jpg|gif|png|svg)$/)) continue;
+                    //skip if link point to the current website host
+                    if (link.indexOf(website) > 0) continue;
+                    //add valid link to array
+                    links.push(link);
 
-                //check for every valid link and return array
-                content = content.match(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi);
-
-                //loop array and return only valid external links excluding other images url
-                if (content) {
-                    for (link of content) {
-                        //skip if link is image
-                        if (link.match(/\.(jpeg|jpg|gif|png|svg)$/)) continue;
-                        //skip if link point to the current website host
-                        if (link.indexOf(website) > 0) continue;
-                        //add valid link to array
-                        links.push(link);
-                    }
                 }
-
 
             }
 
             return links;
-
         },
 
         /**

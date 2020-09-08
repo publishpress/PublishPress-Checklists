@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class External_links extends Base_counter
+class External_Links extends Base_counter
 {
 
     /**
@@ -54,27 +54,17 @@ class External_links extends Base_counter
     }
 
     /**
-     * Turn all URLs to clickable links and extract external links after.
+     * Extract external links from content.
      *
      * @param string $content
-     * @param array $protocols http/https, ftp, mail, twitter
-     * @param array $attributes
      * @param array $external_links
      * @param string $website
      *
      * @return array
      * @since  1.0.1
      */
-    public function extract_external_links(
-        $content,
-        $protocols = array(
-            'http',
-            'mail'
-        ),
-        array $attributes = array(),
-        $external_links = array(),
-        $website = ''
-    ) {
+    public function extract_external_links($content, $external_links = array(), $website = '')
+    {
         //website host
         if (!$website) {
             $website = parse_url(home_url())['host'];
@@ -83,88 +73,14 @@ class External_links extends Base_counter
         //remove images from content
         $content = preg_replace("/<img[^>]+\>/i", "", $content);
 
-        // Link attributes
-        $attr = '';
-        foreach ($attributes as $key => $val) {
-            $attr .= ' ' . $key . '="' . htmlentities($val) . '"';
-        }
-
-        $links = array();
-
-        // Extract existing links and tags
-        $content = preg_replace_callback(
-            '~(<a .*?>.*?</a>|<.*?>)~i',
-            function ($match) use (&$links) {
-                return '<' . array_push($links, $match[1]) . '>';
-            },
-            $content
-        );
-
-        // Extract text links for each protocol
-        foreach ((array)$protocols as $protocol) {
-            switch ($protocol) {
-                case 'http':
-                case 'https':
-                    $content = preg_replace_callback(
-                        '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-                        function ($match) use ($protocol, &$links, $attr) {
-                            if ($match[1]) {
-                                $protocol = $match[1];
-                            }
-                            $link = $match[2] ?: $match[3];
-
-                            return '<' . array_push($links, "<a $attr href=\"$protocol://$link\">$link</a>") . '>';
-                        },
-                        $content
-                    );
-                    break;
-                case 'mail':
-                    $content = preg_replace_callback(
-                        '~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~',
-                        function ($match) use (&$links, $attr) {
-                            return '<' . array_push(
-                                    $links,
-                                    "<a $attr href=\"mailto:{$match[1]}\">{$match[1]}</a>"
-                                ) . '>';
-                        },
-                        $content
-                    );
-                    break;
-                default:
-                    $content = preg_replace_callback(
-                        '~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i',
-                        function ($match) use ($protocol, &$links, $attr) {
-                            return '<' . array_push(
-                                    $links,
-                                    "<a $attr href=\"$protocol://{$match[1]}\">{$match[1]}</a>"
-                                ) . '>';
-                        },
-                        $content
-                    );
-                    break;
-            }
-        }
-
-        //Add links to content
-        $content = preg_replace_callback(
-            '/<(\d+)>/',
-            function ($match) use (&$links) {
-                return $links[$match[1] - 1];
-            },
-            $content
-        );
-
-        //extract links attributes
-        $content = preg_match_all("'\<a.*?href=\"(.*?)\".*?\>(.*?)\<\/a\>'si", $content, $match);
+        //extract links
+        $content = preg_match_all('/<a.*?href=["\']([^"\']+)["\'].*?\>(.*?)\<\/a\>/i', $content, $match);
 
         //loop array and return only valid external links excluding other images url
         if ($match) {
             $image_extension = array('gif', 'jpg', 'jpeg', 'png', 'svg');
-            foreach ($match[0] as $k => $e) {
-                $current_link      = $match[1][$k];
-                $current_extension = strtolower(
-                    pathinfo($current_link, PATHINFO_EXTENSION)
-                ); // Using strtolower to overcome case issue
+            foreach ($match[1] as $current_link) {
+                $current_extension = strtolower(pathinfo($current_link, PATHINFO_EXTENSION));
                 //skip if link is image
                 if (in_array($current_extension, $image_extension)) {
                     continue;
