@@ -256,7 +256,7 @@
                     //void submit and add to error if none of min and max field is set
                     if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
                         submit_form = false
-                        submit_error += "<div class='alert alert-danger alert-dismissible'><a href='javascript:void(0);' class='close' data-dismiss='alert' aria-label='close'>×</a> " + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + "</div>";
+                        submit_error += "<div class='alert alert-danger alert-dismissible'><a href='javascript:void(0);' class='close'>×</a> " + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + "</div>";
                     }
                 }
             });
