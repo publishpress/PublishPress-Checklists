@@ -239,6 +239,9 @@
                 required_rules = objectL10n_checklists_global_checklist.required_rules,
                 required_rules_notice = objectL10n_checklists_global_checklist.submit_error;
 
+            //remove previous notice
+            $(".checklists-save-error").remove();
+
             //select all row
             $(".pp-checklists-requirement-row").each(function () {
                 var requirement_id = $(this).attr('data-id');
@@ -253,7 +256,7 @@
                     //void submit and add to error if none of min and max field is set
                     if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
                         submit_form = false
-                        submit_error += "-" + required_rules_notice + ' "' + row_requirement_title + '"<br />';
+                        submit_error += "<div class='alert alert-danger alert-dismissible'><a href='javascript:void(0);' class='close' data-dismiss='alert' aria-label='close'>×</a> " + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + "</div>";
                     }
                 }
             });
@@ -265,8 +268,15 @@
             return submit_form;
         });
 
+        // Remove current notice on dismiss
+        $(document).on('click', '#pp-checklists-global .checklists-save-error .close', function (event) {
+            event.preventDefault();
+            //remove whole current notice
+            $(this).parent('.alert-dismissible').remove();
+        });
+
         // Remove notice on any number input changed
-        $('.pp-checklists-number').on('change input paste', function () {
+        $(document).on('change input paste', '.pp-checklists-number', function () {
             //remove previous notice
             $(".checklists-save-error").remove();
         });
