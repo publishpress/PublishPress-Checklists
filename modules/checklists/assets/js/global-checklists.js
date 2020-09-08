@@ -240,7 +240,7 @@
                 required_rules_notice = objectL10n_checklists_global_checklist.submit_error;
 
             //remove previous notice
-            $(".checklists-save-error").remove();
+            $(".checklists-save-notice").remove();
 
             //select all row
             $(".pp-checklists-requirement-row").each(function () {
@@ -262,14 +262,14 @@
             });
 
             if (!submit_form) {
-                $("#pp-checklists-global #submit").after('<div class="checklists-save-error">' + submit_error + '</div>');
+                $("#pp-checklists-global #submit").after('<div class="checklists-save-notice">' + submit_error + '</div>');
             }
 
             return submit_form;
         });
 
         // Remove current notice on dismiss
-        $(document).on('click', '#pp-checklists-global .checklists-save-error .close', function (event) {
+        $(document).on('click', '#pp-checklists-global .checklists-save-notice .close', function (event) {
             event.preventDefault();
             //remove whole current notice
             $(this).parent('.alert-dismissible').remove();
@@ -278,7 +278,7 @@
         // Remove notice on any number input changed
         $(document).on('change input paste', '.pp-checklists-number', function () {
             //remove previous notice
-            $(".checklists-save-error").remove();
+            $(".checklists-save-notice").remove();
         });
 
     });
