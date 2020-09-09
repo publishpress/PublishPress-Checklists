@@ -511,6 +511,12 @@ if (!class_exists('PPCH_Checklists')) {
                 // Make sure we are on the first item
                 reset($postTypes);
 
+                //required rules for option validation
+                $ruquired_rules = array(
+                    Plugin::RULE_WARNING,
+                    Plugin::RULE_BLOCK
+                );
+
                 wp_localize_script(
                     'pp-checklists-global-checklists',
                     'objectL10n_checklists_global_checklist',
@@ -518,6 +524,8 @@ if (!class_exists('PPCH_Checklists')) {
                         'rules'           => $rules,
                         'roles'           => $roles,
                         'first_post_type' => current($postTypes),
+                        'required_rules'  => $ruquired_rules,
+                        'submit_error'    => __('Please make sure to complete the settings for', 'publishpress-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
