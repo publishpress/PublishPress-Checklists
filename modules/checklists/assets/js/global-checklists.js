@@ -314,7 +314,7 @@
             });
 
             if (!submit_form) {
-                $("#pp-checklists-global #submit").after('<div class="checklists-save-notice">' + submit_error + '</div>');
+                $("#pp-checklists-global #submit").before('<div class="checklists-save-notice">' + submit_error + '</div>');
             }
 
             return submit_form;
