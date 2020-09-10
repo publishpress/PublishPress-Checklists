@@ -275,12 +275,13 @@
 
         $('.pp-checklists-remove-custom-item').on('click', callback_remove_row);
 
-        /*----------  Base_counter option validation  ----------*/
+        /*----------  Form validation  ----------*/
         $("#pp-checklists-global").submit(function () {
             var submit_form = true,
                 submit_error = '',
                 required_rules = objectL10n_checklists_global_checklist.required_rules,
-                required_rules_notice = objectL10n_checklists_global_checklist.submit_error;
+                required_rules_notice = objectL10n_checklists_global_checklist.submit_error,
+                custom_task_error_displayed = false;
 
             //remove previous notice
             $(".checklists-save-notice").remove();
@@ -299,8 +300,16 @@
                     //void submit and add to error if none of min and max field is set
                     if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
                         submit_form = false
-                        submit_error += "<div class='alert alert-danger alert-dismissible'><a href='javascript:void(0);' class='close'>×</a> " + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + "</div>";
+                        submit_error += '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a>' + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + '.</div>';
                     }
+                }
+            });
+
+            $('.pp-checklists-custom-item-title').each(function () {
+                if ($(this).val().trim() === '' && !custom_task_error_displayed) {
+                    submit_form = false;
+                    submit_error += '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a> ' + objectL10n_checklists_global_checklist.custom_item_error + '</div>';
+                    custom_task_error_displayed = true;
                 }
             });
 

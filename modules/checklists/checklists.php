@@ -527,6 +527,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'first_post_type' => current($postTypes),
                         'required_rules'  => $ruquired_rules,
                         'submit_error'    => __('Please make sure to complete the settings for', 'publishpress-checklists'),
+                        'custom_item_error' => __('Please make sure to add a name for all the custom tasks.', 'publishpress-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
