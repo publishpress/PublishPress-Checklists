@@ -260,7 +260,7 @@
                 .attr('data-id', id)
                 .appendTo($a);
 
-            //re initialize select 2
+            // Re-initialize select 2
             $('#pp-checklists-global select').select2();
 
             $a.on('click', callback_remove_row);

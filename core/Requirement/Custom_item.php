@@ -142,11 +142,7 @@ class Custom_item extends Base_multiple implements Interface_required
         $enabled = $this->is_enabled();
 
         //set custom to false if user role is not permitted to prevent any validation
-        if ($this->isUserRolePermitted()) {
-            $is_custom = true;
-        } else {
-            $is_custom = false;
-        }
+        $is_custom = $this->isUserRolePermitted();
 
         // Register in the requirements list
         if ($enabled) {
