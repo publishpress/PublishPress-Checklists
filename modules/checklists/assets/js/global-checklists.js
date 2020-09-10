@@ -274,6 +274,56 @@
         });
 
         $('.pp-checklists-remove-custom-item').on('click', callback_remove_row);
+
+        /*----------  Base_counter option validation  ----------*/
+        $("#pp-checklists-global").submit(function () {
+            var submit_form = true,
+                submit_error = '',
+                required_rules = objectL10n_checklists_global_checklist.required_rules,
+                required_rules_notice = objectL10n_checklists_global_checklist.submit_error;
+
+            //remove previous notice
+            $(".checklists-save-notice").remove();
+
+            //select all row
+            $(".pp-checklists-requirement-row").each(function () {
+                var requirement_id = $(this).attr('data-id');
+                var row_requirement_title = $(this).find("td:first-child").text();
+                var requirement_rule = $(this).find('#post-checklists-' + requirement_id + '_rule option:selected').val();
+                var min_field = $(this).find('#post-checklists-' + requirement_id + '_min');
+                var max_field = $(this).find('#post-checklists-' + requirement_id + '_max');
+
+                //check if selected rule require validation and option is Base_counter
+                if ($.inArray(requirement_rule, required_rules) !== -1 && (min_field.length > 0 || max_field.length > 0)) {
+
+                    //void submit and add to error if none of min and max field is set
+                    if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
+                        submit_form = false
+                        submit_error += "<div class='alert alert-danger alert-dismissible'><a href='javascript:void(0);' class='close'>×</a> " + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + "</div>";
+                    }
+                }
+            });
+
+            if (!submit_form) {
+                $("#pp-checklists-global #submit").after('<div class="checklists-save-notice">' + submit_error + '</div>');
+            }
+
+            return submit_form;
+        });
+
+        // Remove current notice on dismiss
+        $(document).on('click', '#pp-checklists-global .checklists-save-notice .close', function (event) {
+            event.preventDefault();
+            //remove whole current notice
+            $(this).parent('.alert-dismissible').remove();
+        });
+
+        // Remove notice on any number input changed
+        $(document).on('change input paste', '.pp-checklists-number', function () {
+            //remove previous notice
+            $(".checklists-save-notice").remove();
+        });
+
     });
 
     function uidGen (len) {
