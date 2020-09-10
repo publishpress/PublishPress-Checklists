@@ -522,12 +522,20 @@ if (!class_exists('PPCH_Checklists')) {
                     'pp-checklists-global-checklists',
                     'objectL10n_checklists_global_checklist',
                     [
-                        'rules'           => $rules,
-                        'roles'           => $roles,
-                        'first_post_type' => current($postTypes),
-                        'required_rules'  => $ruquired_rules,
-                        'submit_error'    => __('Please make sure to complete the settings for', 'publishpress-checklists'),
-                        'custom_item_error' => __('Please make sure to add a name for all the custom tasks.', 'publishpress-checklists'),
+                        'rules'             => $rules,
+                        'roles'             => $roles,
+                        'first_post_type'   => current($postTypes),
+                        'required_rules'    => $ruquired_rules,
+                        'submit_error'      => __(
+                            'Please make sure to complete the settings for',
+                            'publishpress-checklists'
+                        ),
+                        'custom_item_error' => __(
+                            'Please make sure to add a name for all the custom tasks.',
+                            'publishpress-checklists'
+                        ),
+                        'editable_by'       => __('Editable by:', 'publishpress-checklists'),
+                        'remove'            => __('Remove', 'publishpress-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
@@ -692,27 +700,27 @@ if (!class_exists('PPCH_Checklists')) {
             $gutenberg    = false;
             $block_editor = false;
 
-            if ( has_filter( 'replace_editor', 'gutenberg_init' ) ) {
+            if (has_filter('replace_editor', 'gutenberg_init')) {
                 // Gutenberg is installed and activated.
                 $gutenberg = true;
             }
 
-            if ( version_compare( $GLOBALS['wp_version'], '5.0-beta', '>' ) ) {
+            if (version_compare($GLOBALS['wp_version'], '5.0-beta', '>')) {
                 // Block editor.
                 $block_editor = true;
             }
 
-            if ( ! $gutenberg && ! $block_editor ) {
+            if (!$gutenberg && !$block_editor) {
                 return false;
             }
 
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-            if ( ! is_plugin_active( 'classic-editor/classic-editor.php' ) ) {
+            if (!is_plugin_active('classic-editor/classic-editor.php')) {
                 return true;
             }
 
-            $use_block_editor = ( get_option( 'classic-editor-replace' ) === 'no-replace' );
+            $use_block_editor = (get_option('classic-editor-replace') === 'no-replace');
 
             return $use_block_editor;
         }

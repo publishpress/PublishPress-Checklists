@@ -113,8 +113,9 @@ class Custom_item extends Base_multiple implements Interface_required
         $html = parent::get_setting_field_html($css_class);
 
         $html .= sprintf(
-            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s"><span class="dashicons dashicons-trash" data-id="%1$s"></span></a>',
-            esc_attr($this->name)
+            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s" title="%2$s"><span class="dashicons dashicons-no" data-id="%1$s"></span></a>',
+            esc_attr($this->name),
+            __('Remove', 'publishpress-checklists')
         );
 
         return $html;
@@ -237,7 +238,6 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     private function isUserRolePermitted()
     {
-
         // Option name
         $option_name_multiple = $this->name . '_multiple';
 

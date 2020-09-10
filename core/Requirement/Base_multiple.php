@@ -105,6 +105,8 @@ class Base_multiple extends Base_simple implements Interface_required
             $html .= $this->lang['label_option_title'].'<br />';
         }
 
+        $html .= '<label class="pp-checklists-editable-by-label">' . __('Editable by:', 'publishpress-checklists') . '</label>';
+
         $html .= sprintf(
             '<select id="%s" name="%s" multiple="multiple">',
             $id,

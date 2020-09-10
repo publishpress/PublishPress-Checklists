@@ -311,6 +311,21 @@
     line-height: 1.2;
 }
 
+.pp-checklists-task-params {
+    position: relative;
+}
+
+.pp-checklists-editable-by-label {
+    margin-top: 11px;
+    display: inline-block;
+}
+
+.pp-checklists-remove-custom-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 @media only screen and (max-width: 781px) {
     #pp-checklists-global table th {
         display: none;

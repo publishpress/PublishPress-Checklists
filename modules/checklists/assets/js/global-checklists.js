@@ -228,7 +228,9 @@
             });
 
             // Options cell
-            $td = $('<td>').appendTo($tr);
+            $td = $('<td>')
+              .addClass('pp-checklists-task-params')
+              .appendTo($tr);
             $optionsField
                 .attr(
                     'id',
@@ -249,16 +251,22 @@
                     .appendTo($optionsField);
             });
 
-            // Params cell
+            var $label = $('<label>')
+              .addClass('pp-checklists-editable-by-label')
+              .text(objectL10n_checklists_global_checklist.editable_by);
+            $optionsField.before($label);
+
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')
                 .addClass('pp-checklists-remove-custom-item')
+                .attr('title', objectL10n_checklists_global_checklist.remove);
                 .attr('data-id', id)
                 .appendTo($td);
             $icon = $('<span>')
-                .addClass('dashicons dashicons-trash')
+                .addClass('dashicons dashicons-no')
                 .attr('data-id', id)
                 .appendTo($a);
+
 
             // Re-initialize select 2
             $('#pp-checklists-global select').select2();

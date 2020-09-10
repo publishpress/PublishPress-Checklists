@@ -45,7 +45,9 @@
                      */
                     do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
                     ?>
-                    <td><?php echo $requirement->get_setting_field_html(); ?></td>
+                    <td class="pp-checklists-task-params">
+                        <?php echo $requirement->get_setting_field_html(); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php endforeach; ?>
