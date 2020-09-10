@@ -234,11 +234,11 @@
             $optionsField
                 .attr(
                     'id',
-                    '' + post_type + '-checklists-' + id + '_multiple'
+                    '' + post_type + '-checklists-' + id + '_editableby'
                 )
                 .attr(
                     'name',
-                    'publishpress_checklists_checklists_options[' + id + '_multiple][' + post_type + '][]'
+                    'publishpress_checklists_checklists_options[' + id + '_editableby][' + post_type + '][]'
                 )
                 .attr('multiple', 'multiple')
                 .appendTo($td);
@@ -259,7 +259,7 @@
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')
                 .addClass('pp-checklists-remove-custom-item')
-                .attr('title', objectL10n_checklists_global_checklist.remove);
+                .attr('title', objectL10n_checklists_global_checklist.remove)
                 .attr('data-id', id)
                 .appendTo($td);
             $icon = $('<span>')

@@ -18,6 +18,8 @@ class Base_multiple extends Base_simple implements Interface_required
      */
     protected $type = 'multiple';
 
+    protected $field_name = 'multiple';
+
 
     /**
      * Add the requirement to the list to be displayed in the meta box.
@@ -46,7 +48,7 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         // Option names
-        $option_name_multiple = $this->name . '_multiple';
+        $option_name_multiple = $this->name . '_' .$this->field_name;
 
         // Get the value
         $option_value = array();
@@ -90,7 +92,7 @@ class Base_multiple extends Base_simple implements Interface_required
         $css_class = esc_attr($css_class);
 
         // Option name
-        $option_name_multiple = $this->name . '_multiple';
+        $option_name_multiple = $this->name . '_' . $this->field_name;
 
         // Get the value
         $option_value = array();
