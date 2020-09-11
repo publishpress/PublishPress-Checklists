@@ -28,8 +28,8 @@ class Validate_links extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Validate links format', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Validate links format', 'publishpress-checklists');
+        $this->lang['label']          = __('All links use a valid format', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('All links use a valid format', 'publishpress-checklists');
     }
 
     /**
