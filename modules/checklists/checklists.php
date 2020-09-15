@@ -189,6 +189,10 @@ if (!class_exists('PPCH_Checklists')) {
                 $this->requirements[$post_type] = [];
             }
 
+            $requirementInstances         = [];
+            $unsortedRequirementInstances = [];
+            $positionMap = [];
+
             foreach ($req_classes as $class_name) {
                 $params = null;
 
@@ -226,11 +230,27 @@ if (!class_exists('PPCH_Checklists')) {
                         $instance->set_params($params);
                     }
 
-                    $this->requirements[$post_type][] = $instance;
+                    $unsortedRequirementInstances[] = $instance;
+
+                    if (isset($instance->position) && !empty($instance->position)) {
+                        $positionMap[] = $instance->position;
+                    } else {
+                        $positionMap[] = 10000 + count($unsortedRequirementInstances);
+                    }
                 } else {
                     Factory::getErrorHandler()->add('PublishPress Checklist Requirement Class not found', $class_name);
                 }
             }
+
+            // Sort the requirements
+            $positionMap = array_flip($positionMap);
+            ksort($positionMap, SORT_NUMERIC);
+
+            foreach ($positionMap as $position => $arrayIndex) {
+                $requirementInstances[] = $unsortedRequirementInstances[$arrayIndex];
+            }
+
+            $this->requirements[$post_type] = $requirementInstances;
 
             // Instantiate custom items
             if (isset($this->module->options->custom_items) && !empty($this->module->options->custom_items)) {
