@@ -22,6 +22,11 @@ class Validate_links extends Base_simple
     public $name = 'validate_links';
 
     /**
+     * @var int
+     */
+    public $position = 8;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

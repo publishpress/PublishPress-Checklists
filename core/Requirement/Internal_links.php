@@ -22,6 +22,11 @@ class Internal_Links extends Base_counter
     public $name = 'internal_links';
 
     /**
+     * @var int
+     */
+    public $position = 6;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void
