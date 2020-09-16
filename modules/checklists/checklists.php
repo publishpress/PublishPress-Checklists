@@ -332,6 +332,8 @@ if (!class_exists('PPCH_Checklists')) {
                 }
             }
 
+            $classes[] = '\\PublishPress\\Checklists\\Core\\Requirement\\Approved_by';
+
             // Check the "supports" for the post type.
             $supports_map = [
                 'title'     => [
@@ -363,9 +365,6 @@ if (!class_exists('PPCH_Checklists')) {
             if (!empty($classes)) {
                 $requirements = array_merge($requirements, $classes);
             }
-
-            // Make sure we have only unique values.
-            $requirements = array_unique($requirements);
 
             return $requirements;
         }

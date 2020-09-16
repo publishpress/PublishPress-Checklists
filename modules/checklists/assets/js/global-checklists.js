@@ -234,11 +234,11 @@
             $optionsField
                 .attr(
                     'id',
-                    '' + post_type + '-checklists-' + id + '_editableby'
+                    '' + post_type + '-checklists-' + id + '_editable_by'
                 )
                 .attr(
                     'name',
-                    'publishpress_checklists_checklists_options[' + id + '_editableby][' + post_type + '][]'
+                    'publishpress_checklists_checklists_options[' + id + '_editable_by][' + post_type + '][]'
                 )
                 .attr('multiple', 'multiple')
                 .appendTo($td);

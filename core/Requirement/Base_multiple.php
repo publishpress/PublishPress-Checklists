@@ -36,9 +36,6 @@ class Base_multiple extends Base_simple implements Interface_required
             return $requirements;
         }
 
-        $option_name = $this->name;
-        $options     = $this->module->options;
-
         // The enabled status
         $enabled = $this->is_enabled();
 
@@ -56,12 +53,10 @@ class Base_multiple extends Base_simple implements Interface_required
             $option_value = $this->module->options->{$option_name_multiple}[$this->post_type];
         }
 
-
         // Check value is empty, to skip
         if (empty($option_name_multiple)) {
             return $requirements;
         }
-
 
         // The rule
         $rule = $this->get_option_rule();
@@ -107,7 +102,9 @@ class Base_multiple extends Base_simple implements Interface_required
             $html .= $this->lang['label_option_title'].'<br />';
         }
 
-        $html .= '<label class="pp-checklists-editable-by-label">' . __('Editable by:', 'publishpress-checklists') . '</label>';
+        if (isset($this->lang['label_option_title'])) {
+            $html .= '<label class="pp-checklists-editable-by-label">' . $this->lang['label_option_title'] . '</label>';
+        }
 
         $html .= sprintf(
             '<select id="%s" name="%s" multiple="multiple">',
