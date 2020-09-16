@@ -553,7 +553,7 @@ if (!class_exists('PPCH_Checklists')) {
                             'Please make sure to add a name for all the custom tasks.',
                             'publishpress-checklists'
                         ),
-                        'editable_by'       => __('Editable by:', 'publishpress-checklists'),
+                        'editable_by'       => __('Editable by', 'publishpress-checklists'),
                         'remove'            => __('Remove', 'publishpress-checklists'),
                     ]
                 );
