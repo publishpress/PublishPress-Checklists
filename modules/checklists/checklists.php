@@ -533,8 +533,9 @@ if (!class_exists('PPCH_Checklists')) {
 
                 //required rules for option validation
                 $ruquired_rules = array(
+                    Plugin::RULE_ONLY_DISPLAY,
                     Plugin::RULE_WARNING,
-                    Plugin::RULE_BLOCK
+                    Plugin::RULE_BLOCK,
                 );
 
                 wp_localize_script(
