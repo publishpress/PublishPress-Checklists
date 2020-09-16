@@ -121,7 +121,7 @@ class Approved_by extends Base_multiple implements Interface_required
     private function isUserRolePermitted()
     {
         // Option name
-        $option_name_multiple = $this->name . $this->field_name;
+        $option_name_multiple = $this->name . '_' . $this->field_name;
 
         if (!isset($this->module->options->{$option_name_multiple}[$this->post_type])) {
             return true;
