@@ -574,7 +574,7 @@
                 // Extract links from the href attribute.
                 links = content.match(/\s?href\s*=\s*["']((?!mailto)[^"']+)[\s"']/gi);
 
-                if (links.length === 0) {
+                if (!links || links.length === 0) {
                     return invalid_links;
                 }
 
