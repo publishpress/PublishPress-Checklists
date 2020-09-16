@@ -571,28 +571,22 @@
                 link_regex = /\b(?:https?:\/\/)?(?:([a-zA-Z0-9._-]+\.)+)[^\s,]+\b/gi;
 
             if (content) {
+                // Extract links from the href attribute.
+                links = content.match(/\s?href\s*=\s*["']((?!mailto)[^"']+)[\s"']/gi);
 
-                //remove element inside <a href></a> to avoid double counting for
-                //one link in case of <a href="Link"> Link</a>
-                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
-                content = content.replace(/<a .*? *href='([^\"\']+).*?<\/a>/g, "$1");
-
-                //strip html tags to avoid counting their link attribute as link
-                //like in <img src="" alt="site.com" />
-                content = content.replace(/(<([^>]+)>)/gi, "");
-
-                //remove any possible email from content so we don't count them as link
-                content = content.replace(email_regex, '');
-
-                while ((links = link_regex.exec(content)) !== null) {
-                    // The result can be accessed through the 'links'-variable.
-                    link = links[0];
-                    //skip if http or https is present in the link build up
-                    if (link.indexOf("http://") == 0 || link.indexOf("https://") == 0) continue;
-                    invalid_links.push(link);
+                if (links.length === 0) {
+                    return invalid_links;
                 }
 
+                for (var i = 0; i < links.length; i++) {
+                    link = links[i].trim();
 
+                    link = link.replace(/^\s?href\s*=\s*["']/i, '').replace(/[\s"']+$/, '');
+
+                    if (!link.match(/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/)) {
+                        invalid_links.push(link);
+                    }
+                }
             }
 
             return invalid_links;
@@ -1277,18 +1271,13 @@
         if ($('#pp-checklists-req-validate_links').length > 0) {
             wp.data.subscribe(
                 function () {
-                    var no_invalid_link = false;
                     var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
                     if (typeof content == 'undefined') {
                         return;
                     }
 
-                    var count = PP_Checklists.validate_links_format(content).length;
-
-                    if (count == 0) {
-                        no_invalid_link = true;
-                    }
+                    var no_invalid_link = PP_Checklists.validate_links_format(content).length === 0;
 
                     $('#pp-checklists-req-validate_links').trigger(
                         PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
