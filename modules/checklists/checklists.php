@@ -384,6 +384,8 @@ if (!class_exists('PPCH_Checklists')) {
             do_action('publishpress_checklists_load_requirements');
 
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
+
+            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
         }
 
         /**
@@ -837,17 +839,27 @@ if (!class_exists('PPCH_Checklists')) {
                 $rules,
                 [
                     Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_ONLY_DISPLAY => __(
-                        'Recommended: show only in the sidebar',
-                        'publishpress-checklists'
-                    ),
-                    Plugin::RULE_WARNING      => __(
-                        'Recommended: show in the sidebar and before publishing',
-                        'publishpress-checklists'
-                    ),
+                    Plugin::RULE_WARNING      => __('Recommended', 'publishpress-checklists'),
                     Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
                 ]
             );
+        }
+
+        /**
+         * Recognize RULE_ONLY_DISPLAY rule as RULE_WARNING
+         *
+         * @param $requirements
+         *
+         * @return $requirements
+         */
+        public function filterRequirementsRule($requirements)
+        {
+
+            foreach ($requirements as $requirement => $requirementData) {
+                $requirements[$requirement]['rule'] = $requirementData['rule'] === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $requirementData['rule'];
+            }
+
+            return $requirements;
         }
 
         /**
