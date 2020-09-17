@@ -196,6 +196,8 @@ class Base_requirement
         }
 
         foreach ($rules as $rule => $label) {
+            //Recognize RULE_ONLY_DISPLAY value as RULE_WARNING
+            $value = $value === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $value;
             $html .= sprintf(
                 '<option value="%s" %s>%s</option>',
                 $rule,
