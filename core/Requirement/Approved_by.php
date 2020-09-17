@@ -82,6 +82,11 @@ class Approved_by extends Base_multiple implements Interface_required
 
         $requirements = parent::filter_requirements_list($requirements, $post);
 
+        // If not enabled, bypass the method
+        if (!$this->is_enabled()) {
+            return $requirements;
+        }
+
         // Option names
         $option_name_multiple = $this->name . '_' . $this->field_name;
 
