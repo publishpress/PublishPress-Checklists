@@ -365,6 +365,8 @@ if (!class_exists('PPCH_Checklists')) {
             do_action('publishpress_checklists_load_requirements');
 
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
+
+            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000, 3);
         }
 
         /**
@@ -812,6 +814,24 @@ if (!class_exists('PPCH_Checklists')) {
                     Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
                 ]
             );
+        }
+
+        /**
+         * Recognize RULE_ONLY_DISPLAY rule as RULE_WARNING
+         *
+         * @param $requirements
+         * @param $post
+         *
+         * @return $requirements
+         */
+        public function filterRequirementsRule($requirements, $post)
+        {
+
+            foreach ($requirements as $requirement => $requirementData) {
+                $requirements[$requirement]['rule'] = $requirementData['rule'] === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $requirementData['rule'];
+            }
+
+            return $requirements;
         }
 
         /**
