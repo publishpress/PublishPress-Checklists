@@ -366,7 +366,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
 
-            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000, 3);
+            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
         }
 
         /**
@@ -820,11 +820,10 @@ if (!class_exists('PPCH_Checklists')) {
          * Recognize RULE_ONLY_DISPLAY rule as RULE_WARNING
          *
          * @param $requirements
-         * @param $post
          *
          * @return $requirements
          */
-        public function filterRequirementsRule($requirements, $post)
+        public function filterRequirementsRule($requirements)
         {
 
             foreach ($requirements as $requirement => $requirementData) {
