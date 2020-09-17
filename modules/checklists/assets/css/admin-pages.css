@@ -317,7 +317,7 @@
 
 .pp-checklists-editable-by-label {
     margin-top: 11px;
-    display: inline-block;
+    display: block;
 }
 
 .pp-checklists-remove-custom-item {
