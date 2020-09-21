@@ -115,7 +115,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [2.4.0] - 2020-09-21 =
 
 * Added: Added a new task for validating links in the content, #200;
-* Added: Added a new task for checking the number of internal links, #201;
+* Added: Added a new task for checking the number of external links, #201;
 * Added: Added form validation for required fields in the checklists page, #175;
 * Added: Added a new task for requiring approval for specific roles, #104;
 * Added: Added new field for custom tasks to select which role can check/uncheck the box, #104;
