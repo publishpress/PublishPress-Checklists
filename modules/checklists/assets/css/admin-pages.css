@@ -313,6 +313,11 @@
 
 .pp-checklists-task-params {
     position: relative;
+    padding-right: 40px !important;
+}
+
+.pp-checklists-task-params select {
+    width: 100%;
 }
 
 .pp-checklists-editable-by-label {
@@ -320,10 +325,24 @@
     display: block;
 }
 
+.pp-checklists-field-description {
+    margin-left: 10px;
+}
+
+.pp-checklists-field-description,
+.pp-checklists-editable-by-description {
+    font-style: italic;
+    color: gray;
+}
+
 .pp-checklists-remove-custom-item {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.pp-checklists-requirement-row td {
+    vertical-align: top;
 }
 
 @media only screen and (max-width: 781px) {

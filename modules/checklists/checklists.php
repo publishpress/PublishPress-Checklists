@@ -191,7 +191,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             $requirementInstances         = [];
             $unsortedRequirementInstances = [];
-            $positionMap = [];
+            $positionMap                  = [];
 
             foreach ($req_classes as $class_name) {
                 $params = null;
@@ -556,8 +556,9 @@ if (!class_exists('PPCH_Checklists')) {
                             'Please make sure to add a name for all the custom tasks.',
                             'publishpress-checklists'
                         ),
-                        'editable_by'       => __('Editable by', 'publishpress-checklists'),
+                        'editable_by'       => __('Which roles can mark this task as complete?', 'publishpress-checklists'),
                         'remove'            => __('Remove', 'publishpress-checklists'),
+                        'enter_name'        => __('Enter name of custom task', 'publishpres-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
@@ -867,9 +868,9 @@ if (!class_exists('PPCH_Checklists')) {
             return array_merge(
                 $rules,
                 [
-                    Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_WARNING      => __('Recommended', 'publishpress-checklists'),
-                    Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
+                    Plugin::RULE_DISABLED => __('Disabled', 'publishpress-checklists'),
+                    Plugin::RULE_WARNING  => __('Recommended', 'publishpress-checklists'),
+                    Plugin::RULE_BLOCK    => __('Required', 'publishpress-checklists'),
                 ]
             );
         }
@@ -883,7 +884,6 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function filterRequirementsRule($requirements)
         {
-
             foreach ($requirements as $requirement => $requirementData) {
                 $requirements[$requirement]['rule'] = $requirementData['rule'] === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $requirementData['rule'];
             }

@@ -189,6 +189,7 @@
                 .addClass('pp-checklists-custom-item-title')
                 .focus()
                 .attr('data-id', id)
+                .attr('placeholder', objectL10n_checklists_global_checklist.enter_name)
                 .appendTo($td);
 
             // Action cell
@@ -251,10 +252,10 @@
                     .appendTo($optionsField);
             });
 
-            var $label = $('<label>')
-              .addClass('pp-checklists-editable-by-label')
+            var $label = $('<p>')
+              .addClass('pp-checklists-editable-by-description')
               .text(objectL10n_checklists_global_checklist.editable_by);
-            $optionsField.before($label);
+            $optionsField.after($label);
 
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')

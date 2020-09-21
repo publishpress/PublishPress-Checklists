@@ -117,6 +117,10 @@ class Base_multiple extends Base_simple implements Interface_required
 
         $html .= '</select>';
 
+        if (isset($this->lang['label_option_description'])) {
+            $html .= '<p class="pp-checklists-editable-by-description">' . $this->lang['label_option_description'] . '</p>';
+        }
+
         return $html;
     }
 

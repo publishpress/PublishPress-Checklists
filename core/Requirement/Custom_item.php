@@ -51,7 +51,7 @@ class Custom_item extends Base_multiple implements Interface_required
     {
         $this->lang['label']          = __('Custom', 'publishpress-checklists');
         $this->lang['label_settings'] = __('Custom', 'publishpress-checklists');
-        $this->lang['label_option_title'] = __('Editable by', 'publishpress-checklists');
+        $this->lang['label_option_description'] = __('Which roles can mark this task as complete?', 'publishpress-checklists');
     }
 
     /**
