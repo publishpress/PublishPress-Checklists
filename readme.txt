@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.4.0] - 2020-09-21 =
+= [2.4.0] - 2020-09-22 =
 
 * Added: Added a new task for validating links in the content, #200;
 * Added: Added a new task for checking the number of external links, #201;
