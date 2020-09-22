@@ -18,6 +18,8 @@ class Base_multiple extends Base_simple implements Interface_required
      */
     protected $type = 'multiple';
 
+    protected $field_name = 'multiple';
+
 
     /**
      * Add the requirement to the list to be displayed in the meta box.
@@ -34,9 +36,6 @@ class Base_multiple extends Base_simple implements Interface_required
             return $requirements;
         }
 
-        $option_name = $this->name;
-        $options     = $this->module->options;
-
         // The enabled status
         $enabled = $this->is_enabled();
 
@@ -46,7 +45,7 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         // Option names
-        $option_name_multiple = $this->name . '_multiple';
+        $option_name_multiple = $this->name . '_' .$this->field_name;
 
         // Get the value
         $option_value = array();
@@ -54,12 +53,10 @@ class Base_multiple extends Base_simple implements Interface_required
             $option_value = $this->module->options->{$option_name_multiple}[$this->post_type];
         }
 
-
         // Check value is empty, to skip
         if (empty($option_name_multiple)) {
             return $requirements;
         }
-
 
         // The rule
         $rule = $this->get_option_rule();
@@ -90,7 +87,7 @@ class Base_multiple extends Base_simple implements Interface_required
         $css_class = esc_attr($css_class);
 
         // Option name
-        $option_name_multiple = $this->name . '_multiple';
+        $option_name_multiple = $this->name . '_' . $this->field_name;
 
         // Get the value
         $option_value = array();
@@ -102,7 +99,7 @@ class Base_multiple extends Base_simple implements Interface_required
         $name = "{$this->module->options_group_name}[{$option_name_multiple}][{$post_type}][]";
 
         if (isset($this->lang['label_option_title'])) {
-            $html .= $this->lang['label_option_title'].'<br />';
+            $html .= '<label class="pp-checklists-editable-by-label">' . $this->lang['label_option_title'] . '</label>';
         }
 
         $html .= sprintf(
@@ -119,6 +116,10 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         $html .= '</select>';
+
+        if (isset($this->lang['label_option_description'])) {
+            $html .= '<p class="pp-checklists-editable-by-description">' . $this->lang['label_option_description'] . '</p>';
+        }
 
         return $html;
     }

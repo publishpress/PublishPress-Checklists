@@ -23,6 +23,11 @@ class ValidChars extends Base_simple
     public $name = 'permalink_valid_chars';
 
     /**
+     * @var int
+     */
+    public $position = 11;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

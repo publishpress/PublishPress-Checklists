@@ -22,6 +22,11 @@ class Words_Count extends Base_counter
     public $name = 'words_count';
 
     /**
+     * @var int
+     */
+    public $position = 2;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

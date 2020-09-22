@@ -22,6 +22,11 @@ class External_Links extends Base_counter
     public $name = 'external_links';
 
     /**
+     * @var int
+     */
+    public $position = 7;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

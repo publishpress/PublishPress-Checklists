@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.5
-Stable tag: 2.3.2
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,16 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.4.0] - 2020-09-22 =
+
+* Added: Added a new task for validating links in the content, #200;
+* Added: Added a new task for checking the number of external links, #201;
+* Added: Added form validation for required fields in the checklists page, #175;
+* Added: Added a new task for requiring approval for specific roles, #104;
+* Added: Added new field for custom tasks to select which role can check/uncheck the box, #104;
+* Changed: Changed the order of tasks in the settings page, #223;
+* Removed: The option "Recommended: show only in the sidebar" were removed and current settings fallback to "Recommended: show in the sidebar and before publishing", which was renamed to just: "Recommended", #195.
 
 = [2.3.2] - 2020-08-20 =
 
