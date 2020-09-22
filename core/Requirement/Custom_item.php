@@ -13,7 +13,7 @@ use PPCH_Checklists;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Custom_item extends Base_simple implements Interface_required
+class Custom_item extends Base_multiple implements Interface_required
 {
     const VALUE_YES = 'yes';
 
@@ -37,6 +37,7 @@ class Custom_item extends Base_simple implements Interface_required
     {
         $this->name      = trim((string)$name);
         $this->is_custom = true;
+        $this->field_name = 'editable_by';
 
         parent::__construct($module, $post_type);
     }
@@ -50,6 +51,7 @@ class Custom_item extends Base_simple implements Interface_required
     {
         $this->lang['label']          = __('Custom', 'publishpress-checklists');
         $this->lang['label_settings'] = __('Custom', 'publishpress-checklists');
+        $this->lang['label_option_description'] = __('Which roles can mark this task as complete?', 'publishpress-checklists');
     }
 
     /**
@@ -110,11 +112,12 @@ class Custom_item extends Base_simple implements Interface_required
      */
     public function get_setting_field_html($css_class = '')
     {
-        $html = parent::get_setting_field_html($css_class);
+        $html = parent::get_setting_field_html(esc_attr($css_class));
 
         $html .= sprintf(
-            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s"><span class="dashicons dashicons-trash" data-id="%1$s"></span></a>',
-            esc_attr($this->name)
+            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s" title="%2$s"><span class="dashicons dashicons-no" data-id="%1$s"></span></a>',
+            esc_attr($this->name),
+            __('Remove', 'publishpress-checklists')
         );
 
         return $html;
@@ -141,6 +144,9 @@ class Custom_item extends Base_simple implements Interface_required
         // Enabled
         $enabled = $this->is_enabled();
 
+        //set custom to false if user role is not permitted to prevent any validation
+        $is_custom = $this->isUserRolePermitted();
+
         // Register in the requirements list
         if ($enabled) {
             $requirements[$this->name] = [
@@ -149,7 +155,7 @@ class Custom_item extends Base_simple implements Interface_required
                 'value'     => $enabled,
                 'rule'      => $rule,
                 'id'        => $this->name,
-                'is_custom' => true,
+                'is_custom' => $is_custom,
                 'type'      => $this->type,
             ];
         }
@@ -179,12 +185,22 @@ class Custom_item extends Base_simple implements Interface_required
      */
     public function filter_settings_validate($new_options)
     {
+        // Make sure to remove the options that were cleaned up
+        foreach ($new_options as $key => $value) {
+            if (preg_match('/_' . $this->field_name . '/', $key)) {
+                if (!isset($_POST['publishpress_checklists_checklists_options'][$key])) {
+                    unset($new_options[$key]);
+                }
+            }
+        }
+
         if (isset($new_options[$this->name . '_title'][$this->post_type])
             && empty($new_options[$this->name . '_title'][$this->post_type])) {
             // Look for empty title
             $index = array_search($this->name, $new_options['custom_items']);
             if (false !== $index) {
                 unset(
+                    $new_options[$this->name . '_editable_by'][$this->post_type],
                     $new_options[$this->name . '_title'][$this->post_type],
                     $new_options[$this->name . '_rule'][$this->post_type],
                     $new_options['custom_items'][$index]
@@ -196,6 +212,9 @@ class Custom_item extends Base_simple implements Interface_required
         if (isset($new_options['custom_items_remove'])
             && !empty($new_options['custom_items_remove'])) {
             foreach ($new_options['custom_items_remove'] as $id) {
+                $var_name = $id . '_editable_by';
+                unset($new_options[$var_name]);
+
                 $var_name = $id . '_title';
                 unset($new_options[$var_name]);
 
@@ -214,5 +233,51 @@ class Custom_item extends Base_simple implements Interface_required
         unset($new_options['custom_items_remove']);
 
         return $new_options;
+    }
+
+    /**
+     * Check if user role is permitted to validate this task
+     */
+    private function isUserRolePermitted()
+    {
+        // Option name
+        $option_name_multiple = $this->name . '_editable_by';
+
+        //Saved value
+        $option_value = isset($this->module->options->{$option_name_multiple}[$this->post_type]) ? $this->module->options->{$option_name_multiple}[$this->post_type] : array();
+
+        if (!isset($this->module->options->{$option_name_multiple}[$this->post_type])) {
+            return true;
+        }
+
+        if (array_intersect($option_value, wp_get_current_user()->roles)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Gets settings drop down labels.
+     *
+     * @return array.
+     */
+    public function get_setting_drop_down_labels()
+    {
+        return PPCH_Checklists::get_editable_roles_labels();
+    }
+
+    /**
+     * Generates an <option> element.
+     *
+     * @param string $value The option's value.
+     * @param string $label The option's label.
+     * @param string $selected HTML selected attribute for an option.
+     *
+     * @return string The generated <option> element.
+     */
+    protected function generate_option($value, $label, $selected = '')
+    {
+        return '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
     }
 }

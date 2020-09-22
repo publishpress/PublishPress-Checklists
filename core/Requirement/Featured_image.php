@@ -21,6 +21,11 @@ class Featured_image extends Base_simple
     public $name = 'featured_image';
 
     /**
+     * @var int
+     */
+    public $position = 10;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

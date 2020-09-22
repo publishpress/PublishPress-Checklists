@@ -155,6 +155,8 @@
                 $titleField = $('<input type="text" />'),
                 $idField = $('<input type="hidden" />'),
                 $actionField = $('<select>'),
+                $canIgnoreField = $('<select>'),
+                $optionsField = $('<select>'),
                 $option,
                 $a,
                 $icon,
@@ -187,6 +189,7 @@
                 .addClass('pp-checklists-custom-item-title')
                 .focus()
                 .attr('data-id', id)
+                .attr('placeholder', objectL10n_checklists_global_checklist.enter_name)
                 .appendTo($td);
 
             // Action cell
@@ -206,19 +209,68 @@
                     .appendTo($actionField);
             });
 
-            // Params cell
+            // can_ignore cell
+            $td = $('<td>').appendTo($tr);
+            $canIgnoreField
+                .attr('class', 'pp-checklists-can-ignore')
+                .attr(
+                    'name',
+                    'publishpress_checklists_checklists_options[' + id + '_can_ignore][' + post_type + '][]'
+                )
+                .attr('multiple', 'multiple')
+                .appendTo($td);
+
+            $option = $('<option value=""></option>').appendTo($canIgnoreField);
+            $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .text(label)
+                    .appendTo($canIgnoreField);
+            });
+
+            // Options cell
             $td = $('<td>')
-                .attr('data-id', id)
-                .appendTo($tr);
+              .addClass('pp-checklists-task-params')
+              .appendTo($tr);
+            $optionsField
+                .attr(
+                    'id',
+                    '' + post_type + '-checklists-' + id + '_editable_by'
+                )
+                .attr(
+                    'name',
+                    'publishpress_checklists_checklists_options[' + id + '_editable_by][' + post_type + '][]'
+                )
+                .attr('multiple', 'multiple')
+                .appendTo($td);
+
+            $option = $('<option value=""></option>').appendTo($optionsField);
+            $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .text(label)
+                    .appendTo($optionsField);
+            });
+
+            var $label = $('<p>')
+              .addClass('pp-checklists-editable-by-description')
+              .text(objectL10n_checklists_global_checklist.editable_by);
+            $optionsField.after($label);
+
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')
                 .addClass('pp-checklists-remove-custom-item')
+                .attr('title', objectL10n_checklists_global_checklist.remove)
                 .attr('data-id', id)
                 .appendTo($td);
             $icon = $('<span>')
-                .addClass('dashicons dashicons-trash')
+                .addClass('dashicons dashicons-no')
                 .attr('data-id', id)
                 .appendTo($a);
+
+
+            // Re-initialize select 2
+            $('#pp-checklists-global select').select2();
 
             $a.on('click', callback_remove_row);
         }
@@ -231,6 +283,65 @@
         });
 
         $('.pp-checklists-remove-custom-item').on('click', callback_remove_row);
+
+        /*----------  Form validation  ----------*/
+        $("#pp-checklists-global").submit(function () {
+            var submit_form = true,
+                submit_error = '',
+                required_rules = objectL10n_checklists_global_checklist.required_rules,
+                required_rules_notice = objectL10n_checklists_global_checklist.submit_error,
+                custom_task_error_displayed = false;
+
+            //remove previous notice
+            $(".checklists-save-notice").remove();
+
+            //select all row
+            $(".pp-checklists-requirement-row").each(function () {
+                var requirement_id = $(this).attr('data-id');
+                var row_requirement_title = $(this).find("td:first-child").text();
+                var requirement_rule = $(this).find('#post-checklists-' + requirement_id + '_rule option:selected').val();
+                var min_field = $(this).find('#post-checklists-' + requirement_id + '_min');
+                var max_field = $(this).find('#post-checklists-' + requirement_id + '_max');
+
+                //check if selected rule require validation and option is Base_counter
+                if ($.inArray(requirement_rule, required_rules) !== -1 && (min_field.length > 0 || max_field.length > 0)) {
+
+                    //void submit and add to error if none of min and max field is set
+                    if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
+                        submit_form = false
+                        submit_error += '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a>' + required_rules_notice + ' "<strong>' + row_requirement_title + '</strong>"' + '.</div>';
+                    }
+                }
+            });
+
+            $('.pp-checklists-custom-item-title').each(function () {
+                if ($(this).val().trim() === '' && !custom_task_error_displayed) {
+                    submit_form = false;
+                    submit_error += '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a> ' + objectL10n_checklists_global_checklist.custom_item_error + '</div>';
+                    custom_task_error_displayed = true;
+                }
+            });
+
+            if (!submit_form) {
+                $("#pp-checklists-global #submit").before('<div class="checklists-save-notice">' + submit_error + '</div>');
+            }
+
+            return submit_form;
+        });
+
+        // Remove current notice on dismiss
+        $(document).on('click', '#pp-checklists-global .checklists-save-notice .close', function (event) {
+            event.preventDefault();
+            //remove whole current notice
+            $(this).parent('.alert-dismissible').remove();
+        });
+
+        // Remove notice on any number input changed
+        $(document).on('change input paste', '.pp-checklists-number', function () {
+            //remove previous notice
+            $(".checklists-save-notice").remove();
+        });
+
     });
 
     function uidGen (len) {

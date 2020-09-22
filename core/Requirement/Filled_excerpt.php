@@ -21,6 +21,11 @@ class Filled_excerpt extends Base_counter
     public $name = 'filled_excerpt';
 
     /**
+     * @var int
+     */
+    public $position = 5;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

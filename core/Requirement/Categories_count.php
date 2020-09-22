@@ -26,6 +26,11 @@ class Categories_count extends Base_counter
     public $name = 'categories_count';
 
     /**
+     * @var int
+     */
+    public $position = 3;
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

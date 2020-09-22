@@ -146,6 +146,23 @@ if (!class_exists('PPCH_Checklists')) {
         }
 
         /**
+         * Extract labels and name from roles.
+         *
+         * @return array.
+         */
+        public static function get_editable_roles_labels()
+        {
+            $labels = [];
+
+            $userRoles = get_editable_roles();
+
+            foreach ($userRoles as $slug => $role) {
+                $labels[$slug] = $role['name'];
+            }
+            return $labels;
+        }
+
+        /**
          * Loads the requirements for each post type
          */
         protected function instantiate_requirement_classes()
@@ -171,6 +188,10 @@ if (!class_exists('PPCH_Checklists')) {
             if (!isset($this->requirements[$post_type])) {
                 $this->requirements[$post_type] = [];
             }
+
+            $requirementInstances         = [];
+            $unsortedRequirementInstances = [];
+            $positionMap                  = [];
 
             foreach ($req_classes as $class_name) {
                 $params = null;
@@ -209,11 +230,27 @@ if (!class_exists('PPCH_Checklists')) {
                         $instance->set_params($params);
                     }
 
-                    $this->requirements[$post_type][] = $instance;
+                    $unsortedRequirementInstances[] = $instance;
+
+                    if (isset($instance->position) && !empty($instance->position)) {
+                        $positionMap[] = $instance->position;
+                    } else {
+                        $positionMap[] = 10000 + count($unsortedRequirementInstances);
+                    }
                 } else {
                     Factory::getErrorHandler()->add('PublishPress Checklist Requirement Class not found', $class_name);
                 }
             }
+
+            // Sort the requirements
+            $positionMap = array_flip($positionMap);
+            ksort($positionMap, SORT_NUMERIC);
+
+            foreach ($positionMap as $position => $arrayIndex) {
+                $requirementInstances[] = $unsortedRequirementInstances[$arrayIndex];
+            }
+
+            $this->requirements[$post_type] = $requirementInstances;
 
             // Instantiate custom items
             if (isset($this->module->options->custom_items) && !empty($this->module->options->custom_items)) {
@@ -295,6 +332,8 @@ if (!class_exists('PPCH_Checklists')) {
                 }
             }
 
+            $classes[] = '\\PublishPress\\Checklists\\Core\\Requirement\\Approved_by';
+
             // Check the "supports" for the post type.
             $supports_map = [
                 'title'     => [
@@ -303,7 +342,9 @@ if (!class_exists('PPCH_Checklists')) {
                 'editor'    => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Words_count',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Internal_links',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\External_links',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Validate_links',
                 ],
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
@@ -324,9 +365,6 @@ if (!class_exists('PPCH_Checklists')) {
             if (!empty($classes)) {
                 $requirements = array_merge($requirements, $classes);
             }
-
-            // Make sure we have only unique values.
-            $requirements = array_unique($requirements);
 
             return $requirements;
         }
@@ -365,6 +403,8 @@ if (!class_exists('PPCH_Checklists')) {
             do_action('publishpress_checklists_load_requirements');
 
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
+
+            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
         }
 
         /**
@@ -486,18 +526,39 @@ if (!class_exists('PPCH_Checklists')) {
 
 
                 $rules = apply_filters('publishpress_checklists_rules_list', []);
+                $roles = self::get_editable_roles_labels();
 
                 // Get all the keys of post types, to select the first one for the JS script
                 $postTypes = array_keys($this->get_post_types());
                 // Make sure we are on the first item
                 reset($postTypes);
 
+                //required rules for option validation
+                $ruquired_rules = array(
+                    Plugin::RULE_ONLY_DISPLAY,
+                    Plugin::RULE_WARNING,
+                    Plugin::RULE_BLOCK,
+                );
+
                 wp_localize_script(
                     'pp-checklists-global-checklists',
                     'objectL10n_checklists_global_checklist',
                     [
-                        'rules'           => $rules,
-                        'first_post_type' => current($postTypes),
+                        'rules'             => $rules,
+                        'roles'             => $roles,
+                        'first_post_type'   => current($postTypes),
+                        'required_rules'    => $ruquired_rules,
+                        'submit_error'      => __(
+                            'Please make sure to complete the settings for',
+                            'publishpress-checklists'
+                        ),
+                        'custom_item_error' => __(
+                            'Please make sure to add a name for all the custom tasks.',
+                            'publishpress-checklists'
+                        ),
+                        'editable_by'       => __('Which roles can mark this task as complete?', 'publishpress-checklists'),
+                        'remove'            => __('Remove', 'publishpress-checklists'),
+                        'enter_name'        => __('Enter name of custom task', 'publishpres-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
@@ -662,27 +723,27 @@ if (!class_exists('PPCH_Checklists')) {
             $gutenberg    = false;
             $block_editor = false;
 
-            if ( has_filter( 'replace_editor', 'gutenberg_init' ) ) {
+            if (has_filter('replace_editor', 'gutenberg_init')) {
                 // Gutenberg is installed and activated.
                 $gutenberg = true;
             }
 
-            if ( version_compare( $GLOBALS['wp_version'], '5.0-beta', '>' ) ) {
+            if (version_compare($GLOBALS['wp_version'], '5.0-beta', '>')) {
                 // Block editor.
                 $block_editor = true;
             }
 
-            if ( ! $gutenberg && ! $block_editor ) {
+            if (!$gutenberg && !$block_editor) {
                 return false;
             }
 
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-            if ( ! is_plugin_active( 'classic-editor/classic-editor.php' ) ) {
+            if (!is_plugin_active('classic-editor/classic-editor.php')) {
                 return true;
             }
 
-            $use_block_editor = ( get_option( 'classic-editor-replace' ) === 'no-replace' );
+            $use_block_editor = (get_option('classic-editor-replace') === 'no-replace');
 
             return $use_block_editor;
         }
@@ -807,18 +868,27 @@ if (!class_exists('PPCH_Checklists')) {
             return array_merge(
                 $rules,
                 [
-                    Plugin::RULE_DISABLED     => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_ONLY_DISPLAY => __(
-                        'Recommended: show only in the sidebar',
-                        'publishpress-checklists'
-                    ),
-                    Plugin::RULE_WARNING      => __(
-                        'Recommended: show in the sidebar and before publishing',
-                        'publishpress-checklists'
-                    ),
-                    Plugin::RULE_BLOCK        => __('Required', 'publishpress-checklists'),
+                    Plugin::RULE_DISABLED => __('Disabled', 'publishpress-checklists'),
+                    Plugin::RULE_WARNING  => __('Recommended', 'publishpress-checklists'),
+                    Plugin::RULE_BLOCK    => __('Required', 'publishpress-checklists'),
                 ]
             );
+        }
+
+        /**
+         * Recognize RULE_ONLY_DISPLAY rule as RULE_WARNING
+         *
+         * @param $requirements
+         *
+         * @return $requirements
+         */
+        public function filterRequirementsRule($requirements)
+        {
+            foreach ($requirements as $requirement => $requirementData) {
+                $requirements[$requirement]['rule'] = $requirementData['rule'] === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $requirementData['rule'];
+            }
+
+            return $requirements;
         }
 
         /**

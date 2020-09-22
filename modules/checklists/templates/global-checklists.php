@@ -45,7 +45,9 @@
                      */
                     do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
                     ?>
-                    <td><?php echo $requirement->get_setting_field_html(); ?></td>
+                    <td class="pp-checklists-task-params">
+                        <?php echo $requirement->get_setting_field_html(); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php endforeach; ?>
@@ -56,6 +58,7 @@
         <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
             <span class="dashicons dashicons-plus-alt"></span> <?php echo $context['lang']['add_custom_item']; ?>
         </a>
+        <span class="pp-checklists-field-description">Custom tasks do not complete automatically. Users must check the box to show they have completed the task.</span>
     </div>
 
     <input type="submit" name="submit" id="submit" class="button button-primary"

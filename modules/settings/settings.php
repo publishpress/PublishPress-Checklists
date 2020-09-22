@@ -88,6 +88,7 @@ if (!class_exists('PPCH_Settings')) {
 
             add_action('publishpress_checklists_admin_submenu', [$this, 'action_admin_submenu'], 990);
 
+            add_action('admin_head-edit.php', [$this, 'remove_quick_edit_status_row']);
             add_action('admin_print_styles', [$this, 'action_admin_print_styles']);
             add_action('admin_print_scripts', [$this, 'action_admin_print_scripts']);
             add_action('admin_enqueue_scripts', [$this, 'action_admin_enqueue_scripts']);
@@ -139,6 +140,25 @@ if (!class_exists('PPCH_Settings')) {
             if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
                 wp_enqueue_script('jquery-ui-core');
                 wp_enqueue_script('jquery-ui-tabs');
+            }
+        }
+
+        /**
+         * Remove the status field row in quick edit.
+         */
+        public function remove_quick_edit_status_row()
+        {
+            $status = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
+            if($status == 'yes'){
+            ?>
+            <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $('label.inline-edit-status').each(function () {
+			            $(this).remove();
+                    });
+                });
+            </script>
+            <?php
             }
         }
 
@@ -488,6 +508,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset ($new_options['disable_quick_edit_publish'])) {
+                $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
+            }
+
             return $new_options;
         }
 
@@ -616,6 +640,14 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
+            add_settings_field(
+                'disable_quick_edit_publish',
+                __('Disable quick edit publish:', 'publishpress-checklists'),
+                [$this, 'settings_disable_quick_edit_publish_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
             do_action('publishpress_checklists_register_settings_after');
         }
 
@@ -645,6 +677,27 @@ if (!class_exists('PPCH_Settings')) {
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . __(
                     'This will display a warning icon in the "Publish" box',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
+        }
+
+        /**
+         * Displays the checkbox to enable or disable status row
+         * in quick edit
+         *
+         * @param array
+         */
+        public function settings_disable_quick_edit_publish_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_disable_quick_edit_publish';
+            $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
+
+            echo '<label for="' . $id . '">';
+            echo '<input type="checkbox" value="yes" id="' . $id . '" name="' . $this->module->options_group_name . '[disable_quick_edit_publish]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . __(
+                    'This will disable status row in quick edit',
                     'publishpress-checklists'
                 );
             echo '</label>';

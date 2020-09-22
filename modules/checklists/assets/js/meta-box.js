@@ -487,6 +487,44 @@
         },
 
         /**
+         * Check for external link from content and return result as array
+         *
+         *  - remove image inside tags so we don't count them as link
+         *  - remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
+         *  - check for every valid link and return array
+         *  - loop array and return only valid external links excluding other images url
+         *
+         * @param  {String} content
+         * @param  {Array} links
+         * @param  {String} website
+         *
+         * @return {Array}
+         */
+        extract_external_links: function (content, links = [], website = window.location.host) {
+            var link,
+                match,
+                regex = /<a.*?href=["\']([^"\']+)["\'].*?\>(.*?)\<\/a\>/ig;
+            if (content) {
+
+                //check for external link and return array excluding other images url
+                while ((match = regex.exec(content)) !== null) {
+                    link = match[1];
+
+                    //skip if link is image
+                    if (link.match(/\.(jpeg|jpg|gif|png|svg)$/)) continue;
+                    //skip if link point to the current website host
+                    if (link.indexOf(website) > 0) continue;
+                    //add valid link to array
+                    links.push(link);
+
+                }
+
+            }
+
+            return links;
+        },
+
+        /**
          * Check for images without alt text from content and return result as array
          *
          * @param  {String} content
@@ -515,6 +553,43 @@
             }
 
             return missing_alt;
+
+        },
+
+        /**
+         * Check for links without http(s)
+         *
+         * @param  {String} content
+         * @param  {Array} invalid_links
+         *
+         * @return {Array}
+         */
+        validate_links_format: function (content, invalid_links = []) {
+            var link,
+                links,
+                email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
+                link_regex = /\b(?:https?:\/\/)?(?:([a-zA-Z0-9._-]+\.)+)[^\s,]+\b/gi;
+
+            if (content) {
+                // Extract links from the href attribute.
+                links = content.match(/\s?href\s*=\s*["']((?!mailto)[^"']+)[\s"']/gi);
+
+                if (!links || links.length === 0) {
+                    return invalid_links;
+                }
+
+                for (var i = 0; i < links.length; i++) {
+                    link = links[i].trim();
+
+                    link = link.replace(/^\s?href\s*=\s*["']/i, '').replace(/[\s"']+$/, '');
+
+                    if (!link.match(/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/)) {
+                        invalid_links.push(link);
+                    }
+                }
+            }
+
+            return invalid_links;
 
         },
 
@@ -990,6 +1065,111 @@
     }
 
 
+    /*----------  External Links ----------*/
+    var lastCount = 0;
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-external_links').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var count = PP_Checklists.extract_external_links(content).length;
+
+                    if (lastCount == count) {
+                        return;
+                    }
+
+
+                    var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+                        max = parseInt(ppChecklists.requirements.external_links.value[1]);
+
+                    $('#pp-checklists-req-external_links').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        PP_Checklists.check_valid_quantity(count, min, max)
+                    );
+
+                    lastCount = count;
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var lastCount = 0;
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count;
+
+            if (typeof ppChecklists.requirements.external_links === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            count = PP_Checklists.extract_external_links(text).length;
+
+            if (lastCount === count) {
+                return;
+            }
+
+            var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+                max = parseInt(ppChecklists.requirements.external_links.value[1]);
+
+            $('#pp-checklists-req-external_links').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                PP_Checklists.check_valid_quantity(count, min, max)
+            );
+
+            lastCount = count;
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup', _.debounce(update, 500));
+        update();
+    }
+
+
     /*----------  Image alt ----------*/
     if (PP_Checklists.is_gutenberg_active()) {
         /**
@@ -1052,6 +1232,94 @@
             $('#pp-checklists-req-image_alt').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                 no_missing_alt
+            );
+
+        }
+
+        // For the editor.
+        $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+            editor = tinymce.editors['content'];
+
+            if (typeof editor !== 'undefined') {
+
+                editor.onInit.add(function () {
+                    /**
+                     * Bind the words count update triggers.
+                     *
+                     * When a node change in the main TinyMCE editor has been triggered.
+                     * When a key has been released in the plain text content editor.
+                     */
+
+                    if (editor.id !== 'content') {
+                        return;
+                    }
+
+                    editor.on('nodechange keyup', _.debounce(update, 500));
+                });
+            }
+        });
+
+        $content.on('input keyup change', _.debounce(update, 500));
+        update();
+    }
+
+    /*----------  Validate Links ----------*/
+    if (PP_Checklists.is_gutenberg_active()) {
+        /**
+         * For Gutenberg
+         */
+        if ($('#pp-checklists-req-validate_links').length > 0) {
+            wp.data.subscribe(
+                function () {
+                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+                    if (typeof content == 'undefined') {
+                        return;
+                    }
+
+                    var no_invalid_link = PP_Checklists.validate_links_format(content).length === 0;
+
+                    $('#pp-checklists-req-validate_links').trigger(
+                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                        no_invalid_link
+                    );
+
+                }
+            );
+        }
+    } else {
+        /**
+         * For the Classic Editor
+         */
+        var $content = $('#content');
+        var editor;
+
+        /**
+         * Get the words count from TinyMCE and update the status of the requirement
+         */
+        function update() {
+            var text, count, no_invalid_link = false;
+            if (typeof ppChecklists.requirements.validate_links === 'undefined') {
+                return;
+            }
+
+            if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+                // For the text tab.
+                text = $content.val();
+            } else {
+                // For the editor tab.
+                text = editor.getContent({format: 'raw'});
+            }
+
+            var count = PP_Checklists.validate_links_format(text).length;
+
+            if (count == 0) {
+                no_invalid_link = true;
+            }
+
+            $('#pp-checklists-req-validate_links').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                no_invalid_link
             );
 
         }
