@@ -12,7 +12,7 @@
  * @publishpress-checklists
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Version: 2.4.0
+ * Version: 2.4.0-hotfix-224-doaction-undefined
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
