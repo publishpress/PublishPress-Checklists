@@ -3,7 +3,7 @@ name: PHPLint
 on: [push]
 
 jobs:
-  build:
+  phplint:
 
     runs-on: ubuntu-latest
 
