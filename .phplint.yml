@@ -1,0 +1,12 @@
+path: ./
+jobs: 10
+cache: dist/phplint.cache
+extensions:
+  - php
+exclude:
+  - vendor
+  - assets_wp
+  - bin
+  - dist
+  - node_modules
+warning: false

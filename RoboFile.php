@@ -14,6 +14,7 @@ class RoboFile extends \PublishPressBuilder\PackageBuilderTasks
         $this->setVersionConstantName('PPCH_VERSION');
         $this->appendToFileToIgnore(
             [
+                '.phplint.yml',
                 'webpack.config.js',
                 'vendor/pimple/pimple/.gitignore',
                 'vendor/pimple/pimple/.php_cs.dist',
