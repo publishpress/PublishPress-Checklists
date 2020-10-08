@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.5
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.4.1] - 2020-10-07 =
+= [2.4.1] - 2020-10-08 =
 
 * Fixed: Fix JS error Uncaught TypeError: Cannot read property 'doAction' of undefined, #224;
 * Fixed: Fix broken menu item if the user doesn't have permissions to see the menu, #226;
