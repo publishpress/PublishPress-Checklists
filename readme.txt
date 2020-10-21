@@ -112,6 +112,10 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.4.2] - UNRELEASED =
+
+* Fixed: Remove unexistent dependencies for met-box.js, #231;
+
 = [2.4.1] - 2020-10-08 =
 
 * Fixed: Fix JS error Uncaught TypeError: Cannot read property 'doAction' of undefined, #224;
