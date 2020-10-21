@@ -647,12 +647,7 @@ if (!class_exists('PPCH_Checklists')) {
                 wp_enqueue_script(
                     'pp-checklists-requirements',
                     $this->module_url . 'assets/js/meta-box.js',
-                    [
-                        'jquery',
-                        'word-count',
-                        'wp-hooks',
-                        'wp-data'
-                    ],
+                    ['jquery', 'word-count'],
                     PPCH_VERSION,
                     true
                 );
