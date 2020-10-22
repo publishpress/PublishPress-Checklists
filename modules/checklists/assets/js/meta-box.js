@@ -300,6 +300,7 @@
                     if (showBlockMessage) {
                         if (PP_Checklists.is_gutenberg_active()) {
                             wp.data.dispatch('core/editor').lockPostSaving(gutenbergLockName);
+                            wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                         } else {
                             if (isUpdatingPublishedPost) {
                                 message = ppChecklists.msg_missed_required_updating;
@@ -326,6 +327,7 @@
                     } else if (showWarning) {
                         if (PP_Checklists.is_gutenberg_active()) {
                             wp.data.dispatch('core/editor').unlockPostSaving(gutenbergLockName);
+                            wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                         } else {
                             // Only display a warning
                             if (isUpdatingPublishedPost) {
@@ -345,14 +347,11 @@
                             $('[data-remodal-id=pp-checklists-modal-confirm]').remodal().open();
                         }
                     }
-
-                    wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                 } else {
                     if (PP_Checklists.is_gutenberg_active()) {
                         wp.data.dispatch('core/editor').unlockPostSaving(gutenbergLockName);
+                        wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                     }
-
-                    wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
 
                     this.state.is_publishing = false;
                     this.state.is_validating = false;
