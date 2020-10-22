@@ -113,7 +113,7 @@
         }
 
         /**
-         * Method to remove custom item fromt the requirements list, identified
+         * Method to remove custom item from the requirements list, identified
          * by the temporary ID/
          *
          * @param  {string} id
