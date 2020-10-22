@@ -112,7 +112,7 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.4.2] - UNRELEASED =
+= [2.4.2] - 2020-10-22 =
 
 * Fixed: Remove unexistent dependencies for met-box.js, #231;
 
