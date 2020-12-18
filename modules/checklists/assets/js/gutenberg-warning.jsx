@@ -47,7 +47,7 @@ class PPChecklistsWarning extends Component {
         let messageBlock = (null);
         if (this.state.requirements.block.length > 0) {
             messageBlock = (<div>
-                <p>{__('Please complete the following tasks before publishing:', 'publishpress-checklists')}</p>
+                <p>{ppChecklists.msg_missed_required_publishing}</p>
                 <ul>
                     {this.state.requirements.block.map(
                         (item, i) => <li key={i}>
@@ -60,7 +60,7 @@ class PPChecklistsWarning extends Component {
         let messageWarning = (null);
         if (this.state.requirements.warning.length > 0) {
             let message = this.state.requirements.block.length > 0 ?
-                __('Not required, but important:', 'publishpress-checklists') : __('Are you sure you want to publish anyway?', 'publishpress-checklists');
+                ppChecklists.msg_missed_important_publishing : ppChecklists.msg_missed_optional_publishing;
 
             messageWarning = (<div>
                 <p>{message}</p>
@@ -77,7 +77,7 @@ class PPChecklistsWarning extends Component {
         return (<Fragment>
             <PluginPrePublishPanel
                 name="publishpress-checklists-pre-publishing-panel"
-                title={__('Checklist')}
+                title={ppChecklists.label_checklist}
                 initialOpen="true"
             >
                 <div className="pp-checklists-failed-requirements-warning">

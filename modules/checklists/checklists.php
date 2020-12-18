@@ -657,6 +657,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'                    => $requirements,
+                        'label_checklist' => __('Checklist', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => __(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
