@@ -115,6 +115,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = UNRELEASED =
 
 * Fixed: Fixed some strings that were not being translated;
+* Added: Added Italian translation. Huge thanks to Simone Bianchelli for sharing the translation files;
+
 = [2.4.2] - 2020-10-22 =
 
 * Fixed: Remove unexistent dependencies for met-box.js, #231;
