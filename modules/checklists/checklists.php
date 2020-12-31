@@ -739,12 +739,23 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
             if (!is_plugin_active('classic-editor/classic-editor.php')) {
                 return true;
             }
 
-            $use_block_editor = (get_option('classic-editor-replace') === 'no-replace');
+            // Classic Editor is installed
+
+            $replaceOption = get_option('classic-editor-replace');
+
+            $use_block_editor = $replaceOption === 'no-replace' || $replaceOption === 'block';
+
+            if (!$use_block_editor && isset($_GET['classic-editor__forget'])) {
+                $use_block_editor = true;
+            }
+
+            if (isset($_GET['classic-editor'])) {
+                $use_block_editor = false;
+            }
 
             return $use_block_editor;
         }
