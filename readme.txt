@@ -116,7 +116,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Fixed: Fixed some strings that were not being translated;
 * Fixed: Fixed detection of the Block Editor when the Classic Editor plugin is installed and the user can select which editor to use, #239;
-* Added: Added Italian translation. Huge thanks to Simone Bianchelli for sharing the translation files;
+* Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
 
 = [2.4.2] - 2020-10-22 =
 
