@@ -31,7 +31,8 @@
   ],
   "require": {
     "php": ">=5.6.20",
-    "pimple/pimple": "~3.0",
+    "pimple/pimple": "3.2.3.*",
+    "symfony/polyfill-ctype": "1.19.*",
     "publishpress/wordpress-version-notices": "^1.0"
   },
   "require-dev": {
