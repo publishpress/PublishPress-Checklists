@@ -112,8 +112,10 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= UNRELEASED =
+= [2.4.3] - 2021-01-21 =
 
+* Fixed: Fixed support to PHP 5.6, #240;
+* Fixed: Fixed some class names to match the filename, #241;
 * Fixed: Fixed some strings that were not being translated;
 * Fixed: Fixed detection of the Block Editor when the Classic Editor plugin is installed and the user can select which editor to use, #239;
 * Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
