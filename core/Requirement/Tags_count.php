@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Tags_Count extends Base_counter
+class Tags_count extends Base_counter
 {
     /**
      * The priority for the action to load the requirement
