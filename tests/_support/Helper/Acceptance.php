@@ -6,5 +6,22 @@ namespace Helper;
 
 class Acceptance extends \Codeception\Module
 {
+    protected $adminLogin;
 
+    protected $adminPassword = 'secret';
+
+    public function loginAsTheAdmin(\AcceptanceTester $I)
+    {
+        $userId = $I->factory()->user->create(
+            [
+                'role'       => 'administrator',
+                'user_pass'  => $this->adminPassword,
+            ]
+        );
+
+        $user = get_user_by('ID', $userId);
+
+        $this->adminLogin = $user->user_login;
+        $I->loginAs($this->adminLogin, $this->adminPassword);
+    }
 }

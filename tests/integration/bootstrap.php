@@ -1,3 +1,2 @@
 <?php
-
-define('ABSPATH', $_ENV['WP_ROOT_FOLDER'] . '/');
+define('TESTS_ROOT_PATH', realpath(__DIR__ . '/../'));

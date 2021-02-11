@@ -26,6 +26,7 @@ extensions:
                 languages: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/languages"
                 modules: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/modules"
                 includes.php: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/includes.php"
+                readme.txt: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/readme.txt"
                 vendor: "%WP_ROOT_FOLDER%/wp-content/plugins/publishpress-checklists/vendor"
 
 params:
