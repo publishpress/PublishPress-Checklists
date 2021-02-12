@@ -555,6 +555,25 @@
 
         },
 
+        extract_links_from_content: function(content) {
+            let linksIterator = content.matchAll(/(?:<a[^>]+href=['"])([^'"]+)(?:['"][^>]*>)/gi);
+
+            let linkResult = linksIterator.next();
+            let linksList = [];
+
+            while (!linkResult.done) {
+                linksList.push(linkResult.value[1]);
+
+                linkResult = linksIterator.next();
+            }
+
+            return linksList;
+        },
+
+        is_valid_link: function(link) {
+            return link.match(/^(?:https?:\/\/(?:www\.)?[-a-​zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=]*)|tel:\+?[0-9\-]+)$/);
+        },
+
         /**
          * Check for links without http(s)
          *
@@ -564,32 +583,20 @@
          * @return {Array}
          */
         validate_links_format: function (content, invalid_links = []) {
-            var link,
-                links,
-                email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
-                link_regex = /\b(?:https?:\/\/)?(?:([a-zA-Z0-9._-]+\.)+)[^\s,]+\b/gi;
+            if (!content) {
+                return [];
+            }
 
-            if (content) {
-                // Extract links from the href attribute.
-                links = content.match(/\s?href\s*=\s*["']((?!mailto)[^"']+)[\s"']/gi);
+            // Extract links from the href attribute.
+            let linksList = PP_Checklists.extract_links_from_content(content);
 
-                if (!links || links.length === 0) {
-                    return invalid_links;
-                }
-
-                for (var i = 0; i < links.length; i++) {
-                    link = links[i].trim();
-
-                    link = link.replace(/^\s?href\s*=\s*["']/i, '').replace(/[\s"']+$/, '');
-
-                    if (!link.match(/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/)) {
-                        invalid_links.push(link);
-                    }
+            for (let i = 0; i < linksList.length; i++) {
+                if (!PP_Checklists.is_valid_link(linksList[i])) {
+                    invalid_links.push(linksList[i]);
                 }
             }
 
             return invalid_links;
-
         },
 
         /**
