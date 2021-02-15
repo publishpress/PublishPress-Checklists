@@ -12,7 +12,7 @@
  * @publishpress-checklists
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Version: 2.4.3-rc.2-feature-246-tel-links-validation
+ * Version: 2.4.3-rc.2-feature-246-tel-links-validation.2
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
