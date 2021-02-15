@@ -19,6 +19,6 @@ class HyperlinkValidator
      */
     public function isValidLink($link)
     {
-        return (bool)preg_match('/^(?:https?:\/\/(?:www\.)?[-a-​zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=]*)|tel:\+?[0-9\-]+)$/', $link);
+        return (bool)preg_match('/^(?:https?:\/\/(?:www\.)?[-a-​zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_]+)$/i', $link);
     }
 }

@@ -4,7 +4,7 @@ namespace PublishPress\Checklists\Core\Utils;
 
 
 use Codeception\Example;
-use UnitTester;
+use WpunitTester;
 
 class HyperlinkValidatorCest
 {
@@ -24,8 +24,14 @@ class HyperlinkValidatorCest
      * @example ["htt//invalidlink.com/"]
      * @example ["http:/invalidlink.com"]
      * @example ["skype://test"]
+     * @example ["mailto"]
+     * @example ["mailto:"]
+     * @example ["mailto::test@example.com"]
+     * @example ["mailto:testexample.com?subject=Mail from Our Site"]
+     * @example ["mailt:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News"]
+     * @example ["mailtosomeone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here"]
      */
-    public function isValidLinkWithInvalidLinkReturnsFalse(UnitTester $I, Example $example)
+    public function isValidLinkWithInvalidLinkReturnsFalse(WpunitTester $I, Example $example)
     {
         $validator = new HyperlinkValidator();
 
@@ -46,8 +52,12 @@ class HyperlinkValidatorCest
      * @example ["tel:205-555-1212"]
      * @example ["tel:+1-205-555-1212"]
      * @example ["tel:12055551212"]
+     * @example ["mailto:test@example.com"]
+     * @example ["mailto:test@example.com?subject=Mail from Our Site"]
+     * @example ["mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News"]
+     * @example ["mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here"]
      */
-    public function isValidLinkWithValidLinkReturnsTrue(UnitTester $I, Example $example)
+    public function isValidLinkWithValidLinkReturnsTrue(WpunitTester $I, Example $example)
     {
         $validator = new HyperlinkValidator();
 

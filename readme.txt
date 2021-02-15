@@ -112,6 +112,10 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= UNRELEASED =
+
+* Fixed: Fixed link validation for "tel:" and "mailto:" links, #246f
+
 = [2.4.3] - 2021-01-21 =
 
 * Fixed: Fixed support to PHP 5.6, #240;

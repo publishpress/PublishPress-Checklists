@@ -4,12 +4,12 @@ namespace PublishPress\Checklists\Core\Utils;
 
 
 use Codeception\Example;
-use UnitTester;
+use WpunitTester;
 
 class HyperlinkExtractorCest
 {
 
-    public function extractLinksFromHyperlinksInTextWithNoHyperlinksReturnEmptyArray(UnitTester $I)
+    public function extractLinksFromHyperlinksInTextWithNoHyperlinksReturnEmptyArray(WpunitTester $I)
     {
         $extractor = new HyperlinkExtractor();
 
@@ -21,7 +21,7 @@ class HyperlinkExtractorCest
         $I->assertEmpty($actual);
     }
 
-    public function extractLinksFromHyperlinksInTextWithHyperlinksReturnArrayWithAllTheLinks(UnitTester $I)
+    public function extractLinksFromHyperlinksInTextWithHyperlinksReturnArrayWithAllTheLinks(WpunitTester $I)
     {
         $extractor = new HyperlinkExtractor();
 
@@ -40,6 +40,11 @@ class HyperlinkExtractorCest
                     <a href="htt//invalidlink.com/">augue</a>. Interdum <a href="http:/invalidlink.com">et malesuada</a>
                     fames ac ante ipsum primis in <a href="skype://test">faucibus. Phasellus ac sapien et sapien
                     tincidunt fringilla non quis purus.
+                    Emails:
+                        <a href="mailto:test@example.com">Simple email</a>
+                        <a href="mailto:test@example.com?subject=Mail from Our Site">Email and Subject email</a>
+                        <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News">Email and CC/BCC</a>
+                        <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here">Email and Body</a>
                  '
         );
 
@@ -54,6 +59,10 @@ class HyperlinkExtractorCest
             'htt//invalidlink.com/',
             'http:/invalidlink.com',
             'skype://test',
+            'mailto:test@example.com',
+            'mailto:test@example.com?subject=Mail from Our Site',
+            'mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News',
+            'mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here',
         ];
 
         $I->assertIsArray($actual);
