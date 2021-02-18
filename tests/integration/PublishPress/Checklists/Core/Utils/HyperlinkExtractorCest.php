@@ -45,6 +45,8 @@ class HyperlinkExtractorCest
                         <a href="mailto:test@example.com?subject=Mail from Our Site">Email and Subject email</a>
                         <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News">Email and CC/BCC</a>
                         <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here">Email and Body</a>
+                    Testing * char <a href="https://www.facebook.com/TestingTheLink/?__tn__=-UC*A">here</a>.
+                    Testing &amp; char <a href="https://www.facebook.com/TestingTheLink/?a=235&amp;b=1">here</a>.
                  '
         );
 
@@ -63,6 +65,8 @@ class HyperlinkExtractorCest
             'mailto:test@example.com?subject=Mail from Our Site',
             'mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News',
             'mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here',
+            'https://www.facebook.com/TestingTheLink/?__tn__=-UC*A',
+            'https://www.facebook.com/TestingTheLink/?a=235&amp;b=1',
         ];
 
         $I->assertIsArray($actual);

@@ -46,7 +46,9 @@ class HyperlinkValidatorCest
      * @example ["https://www.validlink.com"]
      * @example ["https://www.validlink.com/?arg1=3"]
      * @example ["https://validlink.com/?arg1=3&arg2=new"]
-     * * @example ["https://validlink.com/?arg1=3&amp;arg2=new"]
+     * @example ["https://validlink.com/?arg1=3&amp;arg2=new"]
+     * @example ["https://www.facebook.com/TestingTheLink/?__tn__=-UC*A"]
+     * @example ["https://www.facebook.com/TestingTheLink/?a=235&amp;b=1"]
      * @example ["tel:+5544999993820"]
      * @example ["tel:+55-44-99999-3820"]
      * @example ["tel:205-555-1212"]
@@ -56,6 +58,7 @@ class HyperlinkValidatorCest
      * @example ["mailto:test@example.com?subject=Mail from Our Site"]
      * @example ["mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News"]
      * @example ["mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here"]
+     * @example ["mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&amp;subject=Big%20News&body=Body-goes-here"]
      */
     public function isValidLinkWithValidLinkReturnsTrue(WpunitTester $I, Example $example)
     {
