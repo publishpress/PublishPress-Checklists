@@ -268,7 +268,7 @@
             }.bind(this);
 
             var checkRequirementAction = function (actionType) {
-                var $elems = $('.pp-checklists-req.' + actionType);
+                var $elems = $('.pp-checklists-req.pp-checklists-' + actionType);
 
                 for (var i = 0; i < $elems.length; i++) {
                     checkRequirement($($elems[i]), uncheckedItems[actionType]);

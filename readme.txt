@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.6
-Stable tag: 2.4.2
+Tested up to: 5.7
+Stable tag: 2.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,23 +21,31 @@ You can make sure your posts have a minimum or maximum number of words. You can 
 
 Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
 
-[Click here to read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
+[Read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
 
-= The Default Checklist Requirements =
+= The Available Checklist Requirements =
 
 Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. Here are the default tasks:
 
-* Require a maximum or minimum number of characters in Excerpt
+* Require a maximum or minimum number of characters in the Title
+* Require a maximum or minimum number of words in the body text
 * Require a maximum or minimum number of categories
 * Require a maximum or minimum number of tags
-* Require a maximum or minimum number of words
+* Require a maximum or minimum number of taxonomy terms
+* Require a maximum or minimum number of characters in the Excerpt
+* Require a maximum or minimum number of internal links in the body
+* Require a maximum or minimum number of external links in the body
 * Require a featured image
+* Require ALT text for all images
+* Make sure that all links use a valid format
+* Control the characters in the permalink
+* Require that posts are approved by users in a specific role
+* Require that posts pass the Yoast SEO checks
 
-You can configure each requirement, depending on whether you want to require writers to complete the tasks. Here are the four options:
+You can configure each requirement, depending on whether you want to require writers to complete the tasks. Here are the three options:
 
 * Disabled
-* Recommended: show only in the sidebar
-* Recommended: show in the sidebar and before publishing
+* Recommended
 * Required
 
 If you choose the “Required” option, it will be impossible to publish without completing the task.
@@ -50,11 +58,9 @@ You can create new requirements for your checklists by clicking the “Add custo
 
 It is also possible to create more powerful requirements using a custom plugin. We have created a sample plugin to show how to do this. The sample plugin will automatically check that your site’s authors have included a specific word in their main content. If this new requirement is enabled, it will automatically search the text of your content to make sure it contains the word you choose.
 
-[Click here to see how to create custom requirements with our sample plugin](https://publishpress.com/knowledge-base/custom-requirements-plugin/).
-
 = Checklists for WooCommerce Products =
 
-The Pro version of PublishPress Checklists has support for WooCommerce. There are 18 requirements you can choose:
+The Pro version of PublishPress Checklists has support for WooCommerce. There are all the requirements you can choose:
 
 * Number of characters in Excerpt
 * Number of Product tags
@@ -114,15 +120,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = UNRELEASED =
 
-* Fixed: Fixed link validation for "tel:" and "mailto:" links, #246f
-
-= [2.4.3] - 2021-01-21 =
+= [2.4.3] - 2021-03-30 =
 
 * Fixed: Fixed support to PHP 5.6, #240;
 * Fixed: Fixed some class names to match the filename, #241;
 * Fixed: Fixed some strings that were not being translated;
 * Fixed: Fixed detection of the Block Editor when the Classic Editor plugin is installed and the user can select which editor to use, #239;
 * Fixed: Fixed a CSS conflict with the class "warning" and some themes, #243;
+* Fixed: Fixed pre-publishing panel and warning when required items are unchecked, #252;
+* Fixed: Fixed link validation for "tel:" and "mailto:" links, #246
 * Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
 
 = [2.4.2] - 2020-10-22 =
