@@ -14,7 +14,7 @@ class MenuCest
         $I->wantTo('see the main menu item: Checklists');
         $I->amOnAdminPage('/');
         $I->seeElement('.wp-has-submenu.menu-top.toplevel_page_ppch-checklists.menu-top-last');
-        $I->seeElement(Locator::contains('.wp-menu-name', 'Checklists'));
+        $I->seeElementInDOM(Locator::contains('.wp-menu-name', 'Checklists'));
     }
 
     public function tryToSeeTheSubmenuForChecklists(\AcceptanceTester $I)

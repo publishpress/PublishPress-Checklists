@@ -25,7 +25,7 @@ modules:
             fullPageScreenshots: true
             capabilities:
                 chromeOptions:
-                    args: [ "--disable-gpu", "--no-sandbox", "--proxy-server='direct://'", "--proxy-bypass-list=*" ]
+                    args: [ "--headless", "--disable-gpu", "--no-sandbox", "--proxy-server='direct://'", "--proxy-bypass-list=*" ]
             headers:
                 X_TEST_REQUEST: 1
                 X_WPBROWSER_REQUEST: 1

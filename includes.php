@@ -19,7 +19,7 @@ if (!defined('PPCH_LOADED')) {
     define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
     define('PPCH_LOADED', 1);
 
-    if (file_exists(PPCH_PATH_BASE . '/vendor/autoload.php')) {
+    if (file_exists(PPCH_PATH_BASE . '/vendor/autoload.php') && !class_exists('composerRequire268738d24a0d425d84d7297c2840e1ce')) {
         require_once PPCH_PATH_BASE . '/vendor/autoload.php';
     }
 }
