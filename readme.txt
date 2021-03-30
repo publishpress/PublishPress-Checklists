@@ -126,6 +126,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Fixed detection of the Block Editor when the Classic Editor plugin is installed and the user can select which editor to use, #239;
 * Fixed: Fixed a CSS conflict with the class "warning" and some themes, #243;
 * Fixed: Fixed pre-publishing panel and warning when required items are unchecked, #252;
+* Fixed: Fixed link validation for "tel:" and "mailto:" links, #246
 * Fixed: Fixed WPBakery compatibility, #237;
 * Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
 

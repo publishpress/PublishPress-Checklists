@@ -9,7 +9,11 @@
 
 namespace PublishPress\Checklists\Core\Requirement;
 
+use PublishPress\Checklists\Core\Utils\HyperlinkExtractor;
+use PublishPress\Checklists\Core\Utils\HyperlinkValidator;
+
 defined('ABSPATH') or die('No direct script access allowed.');
+
 
 class Validate_links extends Base_simple
 {
@@ -27,6 +31,24 @@ class Validate_links extends Base_simple
     public $position = 8;
 
     /**
+     * @var HyperlinkExtractor
+     */
+    private $hyperlinkExtractor;
+
+    /**
+     * @var HyperlinkValidator
+     */
+    private $hyperlinkValidator;
+
+    public function __construct($module, $post_type)
+    {
+        parent::__construct($module, $post_type);
+
+        $this->hyperlinkExtractor = new HyperlinkExtractor();
+        $this->hyperlinkValidator = new HyperlinkValidator();
+    }
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void
@@ -38,47 +60,32 @@ class Validate_links extends Base_simple
     }
 
     /**
-     * Check for links without http(s)
+     * Check for invalid links in a text.
      *
      * @param string $content
-     * @param array $invalid_links
      *
-     * @return array
+     * @return bool
      * @since  1.0.1
      */
-    private function validate_links_format($content, $invalid_links = array())
+    private function has_no_invalid_links($content)
     {
-        if ($content) {
+        if (empty($content)) {
+            return true;
+        }
 
-            //remove element inside <a href></a> to avoid double counting for one
-            //link in case of <a href="Link">Link</a>
-            $content = preg_replace("'\<a.*?href=\"(.*?)\".*?\>(.*?)\<\/a\>'si",'$1',$content);
-            $content = preg_replace("'\<a.*?href=\'(.*?)\'.*?\>(.*?)\<\/a\>'si",'$1',$content);
+        $links = $this->hyperlinkExtractor->extractLinksFromHyperlinksInText($content);
 
-            //strip html tags to avoid counting their link attribute as link
-            //like in <img src="" alt="site.com" />
-            $content = strip_tags($content);
+        if (empty($links)) {
+            return true;
+        }
 
-            //remove any possible email from content so we don't count them as link
-            $content = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", "", $content);
-
-            //match all links inside content
-            preg_match_all('~\b(?:https?://)?(?:(?i:[a-zA-Z0-9._-]+\.)+)[^\s,]+\b~', $content, $links);
-
-            $links = $links[0];
-
-            foreach ($links as $link) {
-                //skip if http or https is present in the link build up
-                if (strpos($link, 'http://') !== false || strpos($link, 'https://') !== false) {
-                    continue;
-                }
-
-                //add invalid link to array
-                $invalid_links[] = $link;
+        foreach ($links as $link) {
+            if (!$this->hyperlinkValidator->isValidLink($link)) {
+                return false;
             }
         }
 
-        return $invalid_links;
+        return true;
     }
 
     /**
@@ -91,8 +98,6 @@ class Validate_links extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $count = count($this->validate_links_format($post->post_content));
-
-        return $count == 0;
+        return $this->has_no_invalid_links($post->post_content);
     }
 }
