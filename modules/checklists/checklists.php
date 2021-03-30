@@ -734,6 +734,11 @@ if (!class_exists('PPCH_Checklists')) {
                 $block_editor = true;
             }
 
+            // WPBakery compatibility
+            if (get_option('wpb_js_gutenberg_disable')) {
+                $block_editor = false;
+            }
+
             if (!$gutenberg && !$block_editor) {
                 return false;
             }
