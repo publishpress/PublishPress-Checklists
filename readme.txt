@@ -36,8 +36,6 @@ Each task on your pre-publish checklist can be configured to meet your site’s 
 * Require a maximum or minimum number of internal links in the body
 * Require a maximum or minimum number of external links in the body
 * Require a featured image
-* Require a maximum or minimum width value for the featured image
-* Require a maximum or minimum height value for the featured image
 * Require ALT text for all images
 * Make sure that all links use a valid format
 * Control the characters in the permalink
