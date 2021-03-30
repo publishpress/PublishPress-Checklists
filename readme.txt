@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.5
-Stable tag: 2.4.2
+Tested up to: 5.7
+Stable tag: 2.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,16 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.4.3] - 2021-03-30 =
+
+* Fixed: Fixed support to PHP 5.6, #240;
+* Fixed: Fixed some class names to match the filename, #241;
+* Fixed: Fixed some strings that were not being translated;
+* Fixed: Fixed detection of the Block Editor when the Classic Editor plugin is installed and the user can select which editor to use, #239;
+* Fixed: Fixed a CSS conflict with the class "warning" and some themes, #243;
+* Fixed: Fixed pre-publishing panel and warning when required items are unchecked, #252;
+* Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
 
 = [2.4.2] - 2020-10-22 =
 

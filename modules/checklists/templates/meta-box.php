@@ -20,7 +20,7 @@
             <?php foreach ($context['requirements'] as $key => $req) : ?>
                 <li
                         id="pp-checklists-req-<?php echo $key; ?>"
-                        class="pp-checklists-req <?php echo $req['rule']; ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
+                        class="pp-checklists-req pp-checklists-<?php echo $req['rule']; ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
                         data-id="<?php echo $key; ?>"
                         data-type="<?php echo $req['type']; ?>">
 

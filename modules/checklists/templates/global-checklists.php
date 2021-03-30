@@ -58,9 +58,9 @@
         <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
             <span class="dashicons dashicons-plus-alt"></span> <?php echo $context['lang']['add_custom_item']; ?>
         </a>
-        <span class="pp-checklists-field-description">Custom tasks do not complete automatically. Users must check the box to show they have completed the task.</span>
+        <span class="pp-checklists-field-description"><?php echo __('Custom tasks do not complete automatically. Users must check the box to show they have completed the task.', 'publishpress-checklists'); ?></span>
     </div>
 
     <input type="submit" name="submit" id="submit" class="button button-primary"
-           value="<?php echo __('Save Changes', 'pubslihpress-checklists'); ?>">
+           value="<?php echo __('Save Changes', 'publishpress-checklists'); ?>">
 </form>

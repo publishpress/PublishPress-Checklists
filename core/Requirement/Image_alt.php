@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Image_Alt extends Base_simple
+class Image_alt extends Base_simple
 {
 
     /**

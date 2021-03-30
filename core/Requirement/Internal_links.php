@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Internal_Links extends Base_counter
+class Internal_links extends Base_counter
 {
 
     /**

@@ -11,7 +11,7 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Title_Count extends Base_counter
+class Title_count extends Base_counter
 {
 
     /**
