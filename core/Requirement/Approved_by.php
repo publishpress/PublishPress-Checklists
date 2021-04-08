@@ -29,7 +29,7 @@ class Approved_by extends Base_multiple implements Interface_required
     /**
      * @var int
      */
-    public $position = 13;
+    public $position = 130;
 
     /**
      * Initialize the language strings for the instance

@@ -21,7 +21,7 @@ class Title_count extends Base_counter
      */
     public $name = 'title_count';
 
-    public $position = 1;
+    public $position = 10;
 
     /**
      * Initialize the language strings for the instance
