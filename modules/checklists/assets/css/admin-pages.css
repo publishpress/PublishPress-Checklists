@@ -341,6 +341,10 @@
     right: 10px;
 }
 
+.pp-checklists-requirement-row{
+    cursor: move;
+}
+
 .pp-checklists-requirement-row td {
     vertical-align: top;
 }

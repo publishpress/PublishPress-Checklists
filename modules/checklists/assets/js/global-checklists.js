@@ -33,6 +33,10 @@
     $(function () {
         show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
 
+        $('#pp-checklists-requirements tbody').sortable({
+            items : ' > tr'
+        });
+
         // Set the event for the post type filter
         $('#pp-checklists-post-type-filter a').on('click', function (event) {
             event.preventDefault();

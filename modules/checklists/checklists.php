@@ -849,15 +849,38 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
 
+            wp_enqueue_script( 'jquery-ui-sortable' );
+
             $templateLoader = Factory::getTemplateLoader();
 
             $this->printDefaultHeader($this->module);
+
+            $options = (array)get_option('publishpress_checklists_checklists_options');
+            //var_dump($options);
+
+            $requirement_rule_array = [];
+            $new_requirements_array = [];
+            foreach ($this->requirements as $post_type => $requirements ) {
+                $index = 0;
+                foreach ($requirements as $requirement) {
+                    $requirement_rule_array[$requirement->name . '_rule'] = $index++;
+                }
+
+                $new_arr = array_intersect_key( $options, $requirement_rule_array );
+
+                $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
+
+                $new_requirements_array[$post_type] = [];
+                foreach ($requirement_rule_array as $req_index) {
+                    $new_requirements_array[$post_type][] = $this->requirements[$post_type][$req_index];
+                };
+            }
 
             $templateLoader->load(
                 'checklists',
                 'global-checklists',
                 [
-                    'requirements' => $this->requirements,
+                    'requirements' => $new_requirements_array,
                     'post_types'   => $post_types,
                     'lang'         => [
                         'description'     => __('Task', 'publishpress-checklists'),
@@ -968,7 +991,11 @@ if (!class_exists('PPCH_Checklists')) {
                 $options = [];
             }
 
-            $options = array_merge($options, $new_options);
+            $new_option_keys = array_keys( $new_options );
+
+            $sorted_options = array_merge(array_flip($new_option_keys), $options);
+
+            $options = array_merge($sorted_options, $new_options);
 
             $options = apply_filters('publishpress_checklists_validate_requirement_settings', $options);
 
