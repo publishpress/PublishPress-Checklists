@@ -28,7 +28,7 @@ class Tags_count extends Base_counter
     /**
      * @var int
      */
-    public $position = 4;
+    public $position = 40;
 
     /**
      * Initialize the language strings for the instance
