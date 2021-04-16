@@ -640,6 +640,23 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
+            $options = (array)get_option('publishpress_checklists_checklists_options');
+
+            $requirement_rule_array = [];
+            $new_requirements_array = [];
+            $index = 0;
+            foreach ($requirements as $requirement_key => $p_requirements ) {
+                $requirement_rule_array[$requirement_key . '_rule'] = $requirement_key;
+            }
+
+            $new_arr = array_intersect_key( $options, $requirement_rule_array );
+
+            $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
+
+            foreach ($requirement_rule_array as $req_index) {
+                $new_requirements_array[$req_index] = $requirements[$req_index];
+            };
+
             $legacyPlugin = Factory::getLegacyPlugin();
 
             // Add the scripts
@@ -656,7 +673,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'pp-checklists-requirements',
                     'ppChecklists',
                     [
-                        'requirements'                    => $requirements,
+                        'requirements'                    => $new_requirements_array,
                         'label_checklist' => __('Checklist', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => __(
                             'Are you sure you want to publish anyway?',
@@ -701,7 +718,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'meta-box',
                 [
                     'metadata_taxonomy' => self::METADATA_TAXONOMY,
-                    'requirements'      => $requirements,
+                    'requirements'      => $new_requirements_array,
                     'configure_link'    => $checklistsLink,
                     'nonce'             => wp_create_nonce(__FILE__),
                     'lang'              => [
@@ -856,7 +873,6 @@ if (!class_exists('PPCH_Checklists')) {
             $this->printDefaultHeader($this->module);
 
             $options = (array)get_option('publishpress_checklists_checklists_options');
-            //var_dump($options);
 
             $requirement_rule_array = [];
             $new_requirements_array = [];
