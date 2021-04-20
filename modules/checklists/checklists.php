@@ -851,8 +851,6 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
 
-            wp_enqueue_script( 'jquery-ui-sortable' );
-
             $templateLoader = Factory::getTemplateLoader();
 
             $this->printDefaultHeader($this->module);
@@ -867,7 +865,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'checklists',
                 'global-checklists',
                 [
-                    'requirements' => $new_requirements_array,
+                    'requirements' => $this->requirements,
                     'post_types'   => $post_types,
                     'lang'         => [
                         'description'     => __('Task', 'publishpress-checklists'),
@@ -978,11 +976,7 @@ if (!class_exists('PPCH_Checklists')) {
                 $options = [];
             }
 
-            $new_option_keys = array_keys( $new_options );
-
-            $sorted_options = array_merge(array_flip($new_option_keys), $options);
-
-            $options = array_merge($sorted_options, $new_options);
+            $options = array_merge($options, $new_options);
 
             $options = apply_filters('publishpress_checklists_validate_requirement_settings', $options);
 
