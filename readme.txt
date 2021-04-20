@@ -118,6 +118,11 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.5.0] - UNRELEASED =
+* Added: Added drag-and-drop support for sorting the checklists requirements, #172;
+* Fixed: Fixed default position of items in the checklist;
+* Changed: Added support for displaying unit text in the checklist requirements settings page;
+
 = [2.4.4] - 2021-03-31 =
 
 * Fixed: Fixed link validation for "tel:" and "mailto:" links, #246
