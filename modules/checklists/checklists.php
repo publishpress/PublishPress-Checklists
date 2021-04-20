@@ -556,7 +556,10 @@ if (!class_exists('PPCH_Checklists')) {
                             'Please make sure to add a name for all the custom tasks.',
                             'publishpress-checklists'
                         ),
-                        'editable_by'       => __('Which roles can mark this task as complete?', 'publishpress-checklists'),
+                        'editable_by'       => __(
+                            'Which roles can mark this task as complete?',
+                            'publishpress-checklists'
+                        ),
                         'remove'            => __('Remove', 'publishpress-checklists'),
                         'enter_name'        => __('Enter name of custom task', 'publishpres-checklists'),
                     ]
@@ -640,7 +643,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
-            $new_requirements_array = $this->rearrange_requirement_array( $requirements );
+            $new_requirements_array = $this->rearrange_requirement_array($requirements);
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
@@ -659,7 +662,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'                    => $new_requirements_array,
-                        'label_checklist' => __('Checklist', 'publishpress-checklists'),
+                        'label_checklist'                 => __('Checklist', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => __(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
@@ -851,7 +854,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
 
-            wp_enqueue_script( 'jquery-ui-sortable' );
+            wp_enqueue_script('jquery-ui-sortable');
 
             $templateLoader = Factory::getTemplateLoader();
 
@@ -859,8 +862,8 @@ if (!class_exists('PPCH_Checklists')) {
 
             $new_requirements_array = array();
 
-            foreach ($this->requirements as $post_type => $requirements ) {
-                $new_requirements_array[$post_type] = $this->rearrange_requirement_array( $requirements, false );
+            foreach ($this->requirements as $post_type => $requirements) {
+                $new_requirements_array[$post_type] = $this->rearrange_requirement_array($requirements, false);
             }
 
             $templateLoader->load(
@@ -978,7 +981,7 @@ if (!class_exists('PPCH_Checklists')) {
                 $options = [];
             }
 
-            $new_option_keys = array_keys( $new_options );
+            $new_option_keys = array_keys($new_options);
 
             $sorted_options = array_merge(array_flip($new_option_keys), $options);
 
@@ -1019,15 +1022,15 @@ if (!class_exists('PPCH_Checklists')) {
          * @param array $requirements
          * @param boolean $is_on_metabox
          */
-        protected function rearrange_requirement_array( $requirements, $is_on_metabox = true )
+        protected function rearrange_requirement_array($requirements, $is_on_metabox = true)
         {
             $options = (array)get_option('publishpress_checklists_checklists_options');
 
             $requirement_rule_array = [];
             $new_requirements_array = [];
 
-            if ( $is_on_metabox ) {
-                foreach ($requirements as $requirement_key => $p_requirements ) {
+            if ($is_on_metabox) {
+                foreach ($requirements as $requirement_key => $p_requirements) {
                     $requirement_rule_array[$requirement_key . '_rule'] = $requirement_key;
                 }
             } else {
@@ -1035,19 +1038,19 @@ if (!class_exists('PPCH_Checklists')) {
                 foreach ($requirements as $requirement) {
                     $requirement_rule_array[$requirement->name . '_rule'] = $index++;
                 }
-            }            
+            }
 
-            $new_arr = array_intersect_key( $options, $requirement_rule_array );
+            $new_arr = array_intersect_key($options, $requirement_rule_array);
 
-            $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
+            $requirement_rule_array = array_merge(array_flip(array_keys($new_arr)), $requirement_rule_array);
 
             $index = 0;
             foreach ($requirement_rule_array as $req_index) {
-                $new_index = ( $is_on_metabox ) ? $req_index : $index++;
+                $new_index                          = ($is_on_metabox) ? $req_index : $index++;
                 $new_requirements_array[$new_index] = $requirements[$req_index];
             };
 
-            return $new_requirements_array;            
+            return $new_requirements_array;
         }
     }
 }
