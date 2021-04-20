@@ -640,22 +640,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
-            $options = (array)get_option('publishpress_checklists_checklists_options');
-
-            $requirement_rule_array = [];
-            $new_requirements_array = [];
-            $index = 0;
-            foreach ($requirements as $requirement_key => $p_requirements ) {
-                $requirement_rule_array[$requirement_key . '_rule'] = $requirement_key;
-            }
-
-            $new_arr = array_intersect_key( $options, $requirement_rule_array );
-
-            $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
-
-            foreach ($requirement_rule_array as $req_index) {
-                $new_requirements_array[$req_index] = $requirements[$req_index];
-            };
+            $new_requirements_array = $this->rearrange_requirement_array( $requirements );
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
@@ -872,24 +857,10 @@ if (!class_exists('PPCH_Checklists')) {
 
             $this->printDefaultHeader($this->module);
 
-            $options = (array)get_option('publishpress_checklists_checklists_options');
+            $new_requirements_array = array();
 
-            $requirement_rule_array = [];
-            $new_requirements_array = [];
             foreach ($this->requirements as $post_type => $requirements ) {
-                $index = 0;
-                foreach ($requirements as $requirement) {
-                    $requirement_rule_array[$requirement->name . '_rule'] = $index++;
-                }
-
-                $new_arr = array_intersect_key( $options, $requirement_rule_array );
-
-                $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
-
-                $new_requirements_array[$post_type] = [];
-                foreach ($requirement_rule_array as $req_index) {
-                    $new_requirements_array[$post_type][] = $this->requirements[$post_type][$req_index];
-                };
+                $new_requirements_array[$post_type] = $this->rearrange_requirement_array( $requirements, false );
             }
 
             $templateLoader->load(
@@ -1040,6 +1011,43 @@ if (!class_exists('PPCH_Checklists')) {
                     }
                 }
             }
+        }
+
+        /**
+         * Rearrange the requirements array by custom order
+         *
+         * @param array $requirements
+         * @param boolean $is_on_metabox
+         */
+        protected function rearrange_requirement_array( $requirements, $is_on_metabox = true )
+        {
+            $options = (array)get_option('publishpress_checklists_checklists_options');
+
+            $requirement_rule_array = [];
+            $new_requirements_array = [];
+
+            if ( $is_on_metabox ) {
+                foreach ($requirements as $requirement_key => $p_requirements ) {
+                    $requirement_rule_array[$requirement_key . '_rule'] = $requirement_key;
+                }
+            } else {
+                $index = 0;
+                foreach ($requirements as $requirement) {
+                    $requirement_rule_array[$requirement->name . '_rule'] = $index++;
+                }
+            }            
+
+            $new_arr = array_intersect_key( $options, $requirement_rule_array );
+
+            $requirement_rule_array = array_merge(array_flip(array_keys( $new_arr) ), $requirement_rule_array);
+
+            $index = 0;
+            foreach ($requirement_rule_array as $req_index) {
+                $new_index = ( $is_on_metabox ) ? $req_index : $index++;
+                $new_requirements_array[$new_index] = $requirements[$req_index];
+            };
+
+            return $new_requirements_array;            
         }
     }
 }
