@@ -556,7 +556,10 @@ if (!class_exists('PPCH_Checklists')) {
                             'Please make sure to add a name for all the custom tasks.',
                             'publishpress-checklists'
                         ),
-                        'editable_by'       => __('Which roles can mark this task as complete?', 'publishpress-checklists'),
+                        'editable_by'       => __(
+                            'Which roles can mark this task as complete?',
+                            'publishpress-checklists'
+                        ),
                         'remove'            => __('Remove', 'publishpress-checklists'),
                         'enter_name'        => __('Enter name of custom task', 'publishpres-checklists'),
                     ]
@@ -640,6 +643,8 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
+            $new_requirements_array = $this->rearrange_requirement_array($requirements);
+
             $legacyPlugin = Factory::getLegacyPlugin();
 
             // Add the scripts
@@ -656,8 +661,8 @@ if (!class_exists('PPCH_Checklists')) {
                     'pp-checklists-requirements',
                     'ppChecklists',
                     [
-                        'requirements'                    => $requirements,
-                        'label_checklist' => __('Checklist', 'publishpress-checklists'),
+                        'requirements'                    => $new_requirements_array,
+                        'label_checklist'                 => __('Checklist', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => __(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
@@ -701,7 +706,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'meta-box',
                 [
                     'metadata_taxonomy' => self::METADATA_TAXONOMY,
-                    'requirements'      => $requirements,
+                    'requirements'      => $new_requirements_array,
                     'configure_link'    => $checklistsLink,
                     'nonce'             => wp_create_nonce(__FILE__),
                     'lang'              => [
@@ -849,15 +854,23 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $post_types = $this->get_post_types();
 
+            wp_enqueue_script('jquery-ui-sortable');
+
             $templateLoader = Factory::getTemplateLoader();
 
             $this->printDefaultHeader($this->module);
+
+            $new_requirements_array = array();
+
+            foreach ($this->requirements as $post_type => $requirements) {
+                $new_requirements_array[$post_type] = $this->rearrange_requirement_array($requirements, false);
+            }
 
             $templateLoader->load(
                 'checklists',
                 'global-checklists',
                 [
-                    'requirements' => $this->requirements,
+                    'requirements' => $new_requirements_array,
                     'post_types'   => $post_types,
                     'lang'         => [
                         'description'     => __('Task', 'publishpress-checklists'),
@@ -968,7 +981,11 @@ if (!class_exists('PPCH_Checklists')) {
                 $options = [];
             }
 
-            $options = array_merge($options, $new_options);
+            $new_option_keys = array_keys($new_options);
+
+            $sorted_options = array_merge(array_flip($new_option_keys), $options);
+
+            $options = array_merge($sorted_options, $new_options);
 
             $options = apply_filters('publishpress_checklists_validate_requirement_settings', $options);
 
@@ -997,6 +1014,43 @@ if (!class_exists('PPCH_Checklists')) {
                     }
                 }
             }
+        }
+
+        /**
+         * Rearrange the requirements array by custom order
+         *
+         * @param array $requirements
+         * @param boolean $is_on_metabox
+         */
+        protected function rearrange_requirement_array($requirements, $is_on_metabox = true)
+        {
+            $options = (array)get_option('publishpress_checklists_checklists_options');
+
+            $requirement_rule_array = [];
+            $new_requirements_array = [];
+
+            if ($is_on_metabox) {
+                foreach ($requirements as $requirement_key => $p_requirements) {
+                    $requirement_rule_array[$requirement_key . '_rule'] = $requirement_key;
+                }
+            } else {
+                $index = 0;
+                foreach ($requirements as $requirement) {
+                    $requirement_rule_array[$requirement->name . '_rule'] = $index++;
+                }
+            }
+
+            $new_arr = array_intersect_key($options, $requirement_rule_array);
+
+            $requirement_rule_array = array_merge(array_flip(array_keys($new_arr)), $requirement_rule_array);
+
+            $index = 0;
+            foreach ($requirement_rule_array as $req_index) {
+                $new_index                          = ($is_on_metabox) ? $req_index : $index++;
+                $new_requirements_array[$new_index] = $requirements[$req_index];
+            };
+
+            return $new_requirements_array;
         }
     }
 }

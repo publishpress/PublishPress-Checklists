@@ -17,10 +17,16 @@ class Base_counter extends Base_simple implements Interface_required
      * The default value for the option related to the value.
      */
     const DEFAULT_OPTION_VALUE = 0;
+
     /**
      * @var string
      */
     protected $type = 'counter';
+
+    /**
+     * @var string
+     */
+    protected $unitText;
 
     /**
      * Injects the respective default options into the main add-on.
@@ -195,6 +201,11 @@ class Base_counter extends Base_simple implements Interface_required
         return $requirements;
     }
 
+    protected function setUnitText($unit)
+    {
+        $this->unitText = $unit;
+    }
+
     /**
      * Get the HTML for the setting field for the specific post type.
      *
@@ -264,11 +275,22 @@ class Base_counter extends Base_simple implements Interface_required
             $max_value
         );
 
+
         $html .= '<div class="pp-checklists-number">';
         $html .= '<label>Min</label>' . $min_field;
+
+        if (!empty($this->unitText)) {
+            $html .= '<span class="pp-checklists-unit">' . $this->unitText . '</span>';
+        }
+
         $html .= '</div>';
         $html .= '<div class="pp-checklists-number">';
         $html .= '<label>Max</label>' . $max_field;
+
+        if (!empty($this->unitText)) {
+            $html .= '<span class="pp-checklists-unit">' . $this->unitText . '</span>';
+        }
+
         $html .= '</div>';
 
         return $html;
