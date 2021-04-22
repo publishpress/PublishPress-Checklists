@@ -17,30 +17,37 @@ You can define tasks that must be complete before content is published. Do you g
 
 [PublishPress Checklists](https://publishpress.com/authors/) is the best plugin to make sure your content is ready to go live. With PublishPress Checklists, you can choose pre-publishing requirements for your content. Using PublishPress Checklists, you define tasks that must be completed before content is published.
 
-You can make sure your posts have a minimum or maximum number of words. You can ensure that all your posts have a featured image. You can force authors to use a specific number of Tags or Categories.
+Let's show you a few possible options for your posts:
+
+* Ensure your posts have a minimum or maximum number of words.
+* Require your posts have a featured image.
+* Check for any broken links.
+* Force authors to use a specific number of Tags or Categories.
+* Require posts to be approved by a user in a specific role.
 
 Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
 
 [Read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
 
-= The Available Checklist Requirements =
+= You Can Set These Requirements for Authors =
 
 Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. Here are the default tasks:
 
-* Require a maximum or minimum number of characters in the Title
-* Require a maximum or minimum number of words in the body text
-* Require a maximum or minimum number of categories
-* Require a maximum or minimum number of tags
-* Require a maximum or minimum number of taxonomy terms
-* Require a maximum or minimum number of characters in the Excerpt
-* Require a maximum or minimum number of internal links in the body
-* Require a maximum or minimum number of external links in the body
-* Require a featured image
-* Require ALT text for all images
-* Make sure that all links use a valid format
-* Control the characters in the permalink
-* Require that posts are approved by users in a specific role
-* Require that posts pass the Yoast SEO checks
+* **Title**: Maximum or minimum number of characters
+* **Body text**: Maximum or minimum number of words
+* **Categories**: Maximum or minimum number of categories
+* **Tags**: Maximum or minimum number of tags
+* **Taxonomy terms**: Maximum or minimum number of terms
+* **Excerpt**: Maximum or minimum number of characters
+* **Internal links**: Maximum or minimum number of internal links
+* **External links**: Maximum or minimum number of external links
+* **Featured image**: Require a featured image
+* **Featured image size (Pro version)**: Require a maximum and minimum height and width for featured images
+* **ALT text**: Require ALT text for all images
+* **Broken links**: Check that all links use a valid format
+* **Permalink**: Control the characters in the URL
+* **User approval**: Require that posts are approved by users in a specific role
+* **Yoast SEO**: Require that posts get Yoast SEO approval
 
 You can configure each requirement, depending on whether you want to require writers to complete the tasks. Here are the three options:
 
@@ -50,7 +57,7 @@ You can configure each requirement, depending on whether you want to require wri
 
 If you choose the “Required” option, it will be impossible to publish without completing the task.
 
-= Creating New Checklist Requirements =
+= You Can Create New Checklist Requirements =
 
 You can create new requirements for your checklists by clicking the “Add custom task” link. For example, you can require authors to get a green Yoast sign, or force them to run a spell-check before publishing.
 
@@ -58,7 +65,7 @@ You can create new requirements for your checklists by clicking the “Add custo
 
 It is also possible to create more powerful requirements using a custom plugin. We have created a sample plugin to show how to do this. The sample plugin will automatically check that your site’s authors have included a specific word in their main content. If this new requirement is enabled, it will automatically search the text of your content to make sure it contains the word you choose.
 
-= Checklists for WooCommerce Products =
+= Pro Version: Checklists for WooCommerce Products =
 
 The Pro version of PublishPress Checklists has support for WooCommerce. There are all the requirements you can choose:
 
