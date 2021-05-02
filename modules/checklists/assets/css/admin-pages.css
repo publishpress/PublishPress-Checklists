@@ -349,6 +349,10 @@
     vertical-align: top;
 }
 
+.pp-checklists-statuses{
+    min-width: 250px;
+}
+
 @media only screen and (max-width: 781px) {
     #pp-checklists-global table th {
         display: none;

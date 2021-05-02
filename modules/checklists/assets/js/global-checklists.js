@@ -160,6 +160,7 @@
                 $idField = $('<input type="hidden" />'),
                 $actionField = $('<select>'),
                 $canIgnoreField = $('<select>'),
+                $statusesField = $('<select>'),
                 $optionsField = $('<select>'),
                 $option,
                 $a,
@@ -230,6 +231,26 @@
                     .attr('value', value)
                     .text(label)
                     .appendTo($canIgnoreField);
+            });
+
+            // Statuses cell
+            $td = $('<td>').appendTo($tr);
+            $statusesField
+                .attr('class', 'pp-checklists-statuses')
+                .attr(
+                    'name',
+                    'publishpress_checklists_checklists_options[' + id + '_statuses][' + post_type + '][]'
+                )
+                .attr('multiple', 'multiple')
+                .appendTo($td);
+
+            $option = $('<option value=""></option>').appendTo($statusesField);
+            $.each(objectL10n_checklists_global_checklist.statuses, function (value, label) {
+                $option = $('<option>')
+                    .attr('value', value)
+                    .attr('selected', 'selected')
+                    .text(label)
+                    .appendTo($statusesField);
             });
 
             // Options cell

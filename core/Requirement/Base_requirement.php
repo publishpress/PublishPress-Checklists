@@ -71,6 +71,11 @@ class Base_requirement
     protected $type = 'base';
 
     /**
+     * @var array
+     */
+    protected $post_statuses = [];
+
+    /**
      * The constructor. It adds the action to load the requirement.
      *
      * @param string $module
@@ -84,6 +89,13 @@ class Base_requirement
 
         $this->module    = $module;
         $this->post_type = $post_type;
+
+        if ( !function_exists('get_post_stati') ) {
+            require_once ABSPATH . 'wp-admin/includes/post.php';
+        }
+
+        $all_post_statuses = get_post_stati( array(), 'objects');
+        $this->post_statuses = array_keys( $all_post_statuses );
     }
 
     /**
@@ -219,5 +231,41 @@ class Base_requirement
     public function get_post_type()
     {
         return $this->post_type;
+    }
+
+    /**
+     * Returns the post status of this requirement
+     *
+     * @return string
+     */
+    public function get_setting_post_status_html()
+    {
+        $all_post_statuses = get_post_stati( array(), 'objects');
+
+        $option_name = $this->name . '_statuses';
+
+        $post_statuses = $this->module->options->{$option_name}[$this->post_type];
+
+        $id   = "{$this->post_type}-{$this->module->slug}-{$option_name}";
+        $name = "{$this->module->options_group_name}[{$option_name}][{$this->post_type}][]";
+
+        $html = sprintf(
+            '<select class="pp-checklists-statuses" id="%s" name="%s" multiple="multiple">',
+            $id,
+            $name
+        );
+
+        foreach ($all_post_statuses as $status_slug => $status ) {
+            $html .= sprintf(
+                '<option value="%s" %s>%s</option>',
+                $status_slug,
+                (in_array( $status_slug, $post_statuses )?'selected':''),
+                $status->label
+            );
+        }
+
+        $html .= '</select>';
+
+        return $html;
     }
 }

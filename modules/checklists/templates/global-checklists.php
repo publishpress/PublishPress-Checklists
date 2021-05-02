@@ -21,6 +21,7 @@
              */
             do_action('publishpress_checklists_tasks_list_th');
             ?>
+            <th><?php echo $context['lang']['post_status']; ?></th>
             <th><?php echo $context['lang']['params']; ?></th>
         </tr>
         </thead>
@@ -45,6 +46,9 @@
                      */
                     do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
                     ?>
+                    <td class="pp-checklists-post-status">
+                        <?php echo $requirement->get_setting_post_status_html(); ?>
+                    </td>
                     <td class="pp-checklists-task-params">
                         <?php echo $requirement->get_setting_field_html(); ?>
                     </td>

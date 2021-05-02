@@ -213,6 +213,15 @@
             setInterval(function () {
                 $(document).trigger(this.EVENT_TIC);
             }.bind(this), this.TIC_INTERVAL);
+
+            // Add config link to the metabox handle
+            if ( ppChecklists.config_link != '' ) {
+                $('#pp_checklist_meta .postbox-header').hover(function (event) {
+                    $(this).find('h2').append( ppChecklists.config_link );
+                }, function(){
+                    $('h2', this).find( 'span' ).remove();
+                });
+            }
         },
 
         /**

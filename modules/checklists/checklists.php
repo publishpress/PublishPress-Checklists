@@ -405,6 +405,8 @@ if (!class_exists('PPCH_Checklists')) {
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
 
             add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
+
+            add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsByStatus'], 1001, 2);
         }
 
         /**
@@ -528,6 +530,14 @@ if (!class_exists('PPCH_Checklists')) {
                 $rules = apply_filters('publishpress_checklists_rules_list', []);
                 $roles = self::get_editable_roles_labels();
 
+                $all_post_statuses = get_post_stati( array(), 'objects');
+                $post_statuses = [];
+
+                foreach ($all_post_statuses as $status_slug => $status) {
+                    $post_statuses[$status_slug] = $status->label;
+                }
+
+
                 // Get all the keys of post types, to select the first one for the JS script
                 $postTypes = array_keys($this->get_post_types());
                 // Make sure we are on the first item
@@ -546,6 +556,7 @@ if (!class_exists('PPCH_Checklists')) {
                     [
                         'rules'             => $rules,
                         'roles'             => $roles,
+                        'statuses'          => $post_statuses,
                         'first_post_type'   => current($postTypes),
                         'required_rules'    => $ruquired_rules,
                         'submit_error'      => __(
@@ -596,18 +607,6 @@ if (!class_exists('PPCH_Checklists')) {
 
             $title = __('Checklist', 'publishpress-checklists');
 
-            if (current_user_can('manage_options')) {
-                // Make the meta box title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
-                $url = $this->get_admin_link();
-
-                $title .= ' <span class="postbox-title-action"><a href="' . esc_url(
-                        $url
-                    ) . '" class="edit-box open-box">' . __(
-                        'Configure',
-                        'publishpress-checklists'
-                    ) . '</a></span>';
-            }
-
             $supported_post_types = $this->getSelectedPostTypes();
 
             foreach ($supported_post_types as $post_type => $label) {
@@ -643,12 +642,27 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
-            $new_requirements_array = $this->rearrange_requirement_array($requirements);
+            $new_requirements_array = $this->rearrange_requirement_array( $requirements );
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
+            $config_link = '';
+
             // Add the scripts
             if (!empty($requirements)) {
+
+                if (current_user_can('manage_options')) {
+                    // Make the meta box title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
+                    $url = $this->get_admin_link();
+
+                    $config_link = '<span class="postbox-title-action"><a href="' . esc_url(
+                            $url
+                        ) . '" class="edit-box open-box">' . __(
+                            'Configure',
+                            'publishpress-checklists'
+                        ) . '</a></span>';
+                }
+
                 wp_enqueue_script(
                     'pp-checklists-requirements',
                     $this->module_url . 'assets/js/meta-box.js',
@@ -690,6 +704,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => __('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
+                        'config_link'                     => $config_link
                     ]
                 );
 
@@ -875,6 +890,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'lang'         => [
                         'description'     => __('Task', 'publishpress-checklists'),
                         'action'          => __('Disabled, Recommended or Required', 'publishpress-checklists'),
+                        'post_status'     => __('Statuses', 'publishpres-checklists'),
                         'params'          => __('Options', 'publishpress-checklists'),
                         'add_custom_item' => __('Add custom task', 'publishpress-checklists'),
                     ],
@@ -1050,7 +1066,36 @@ if (!class_exists('PPCH_Checklists')) {
                 $new_requirements_array[$new_index] = $requirements[$req_index];
             };
 
-            return $new_requirements_array;
+            return $new_requirements_array;            
+        }
+
+        /**
+         * Filtering requirements by current post/page status.
+         * 
+         * @param array $requirements
+         * @param object $post
+         */
+        public function filterRequirementsByStatus($requirements, $post)
+        {
+            $options = get_option('publishpress_checklists_checklists_options');
+            $user    = wp_get_current_user();
+
+            foreach ($requirements as $requirement => $requirementData) {
+                $statusOptionName = $requirement . '_statuses';
+                if (isset($options->{$statusOptionName})) {
+                    $option = $options->{$statusOptionName};
+
+                    if (isset($option[$post->post_type])) {
+                        $statuses = $option[$post->post_type];
+
+                        if (!in_array($post->post_status, $statuses)) {
+                            unset($requirements[$requirement]);
+                        }
+                    }
+                }
+            }
+            
+            return $requirements;
         }
     }
 }
