@@ -38,6 +38,21 @@ class Image_alt extends Base_simple
     }
 
     /**
+     * Returns the current status of the requirement.
+     *
+     * @param stdClass $post
+     * @param mixed $option_value
+     *
+     * @return mixed
+     */
+    public function get_current_status($post, $option_value)
+    {
+        $count = count($this->missing_alt_images($post->post_content));
+
+        return $count == 0;
+    }
+
+    /**
      * Check for images without alt text from content and return result as array
      *
      * @param string $content
@@ -60,20 +75,5 @@ class Image_alt extends Base_simple
         }
 
         return $missing_alt;
-    }
-
-    /**
-     * Returns the current status of the requirement.
-     *
-     * @param stdClass $post
-     * @param mixed $option_value
-     *
-     * @return mixed
-     */
-    public function get_current_status($post, $option_value)
-    {
-        $count = count($this->missing_alt_images($post->post_content));
-
-        return $count == 0;
     }
 }

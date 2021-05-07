@@ -245,24 +245,34 @@ class Module
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <img src="<?php echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>"
+            <img src="<?php
+            echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>"
                  alt=""
                  class="logo-header"/>
 
-            <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
+            <h1 class="wp-heading-inline"><?php
+                echo $current_module->title; ?></h1>
 
-            <?php echo !empty($display_text) ? $display_text : ''; ?>
-            <?php // We keep the H2 tag to keep notices tied to the header
+            <?php
+            echo !empty($display_text) ? $display_text : ''; ?>
+            <?php
+            // We keep the H2 tag to keep notices tied to the header
             ?>
             <h2>
 
-                <?php if ($current_module->short_description && empty($custom_text)): ?>
-                    <?php echo $current_module->short_description; ?>
-                <?php endif; ?>
+                <?php
+                if ($current_module->short_description && empty($custom_text)): ?>
+                    <?php
+                    echo $current_module->short_description; ?>
+                <?php
+                endif; ?>
 
-                <?php if (!empty($custom_text)) : ?>
-                    <?php echo $custom_text; ?>
-                <?php endif; ?>
+                <?php
+                if (!empty($custom_text)) : ?>
+                    <?php
+                    echo $custom_text; ?>
+                <?php
+                endif; ?>
             </h2>
 
         </header>

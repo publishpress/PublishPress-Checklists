@@ -15,21 +15,18 @@ defined('ABSPATH') or die('No direct script access allowed.');
 
 class Approved_by extends Base_multiple implements Interface_required
 {
+    const POST_META_PREFIX = 'pp_checklist_custom_item';
     /**
      * The name of the requirement, in a slug format
      *
      * @var string
      */
     public $name = 'approved_by';
-
-    protected $field_name = 'roles';
-
-    const POST_META_PREFIX = 'pp_checklist_custom_item';
-
     /**
      * @var int
      */
     public $position = 130;
+    protected $field_name = 'roles';
 
     /**
      * Initialize the language strings for the instance
@@ -115,7 +112,7 @@ class Approved_by extends Base_multiple implements Interface_required
         $requirements[$this->name]['label'] = sprintf($this->lang['label'], $user_role_names);
         //set custom to false if user role is not permitted to prevent any validation
         $requirements[$this->name]['is_custom'] = $this->isUserRolePermitted();
-        $requirements[$this->name]['id'] = 'approved_by';
+        $requirements[$this->name]['id']        = 'approved_by';
 
         return $requirements;
     }

@@ -84,6 +84,7 @@ class Util
      *
      * @param string $role A standard WP user role like 'administrator' or 'author'
      * @param array $caps One or more user caps to add
+     *
      * @since 1.9.8
      *
      */

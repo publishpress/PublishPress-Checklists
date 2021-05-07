@@ -90,12 +90,12 @@ class Base_requirement
         $this->module    = $module;
         $this->post_type = $post_type;
 
-        if ( !function_exists('get_post_stati') ) {
+        if (!function_exists('get_post_stati')) {
             require_once ABSPATH . 'wp-admin/includes/post.php';
         }
 
-        $all_post_statuses = get_post_stati( array(), 'objects');
-        $this->post_statuses = array_keys( $all_post_statuses );
+        $all_post_statuses   = get_post_stati(array(), 'objects');
+        $this->post_statuses = array_keys($all_post_statuses);
     }
 
     /**
@@ -210,7 +210,7 @@ class Base_requirement
         foreach ($rules as $rule => $label) {
             //Recognize RULE_ONLY_DISPLAY value as RULE_WARNING
             $value = $value === Plugin::RULE_ONLY_DISPLAY ? Plugin::RULE_WARNING : $value;
-            $html .= sprintf(
+            $html  .= sprintf(
                 '<option value="%s" %s>%s</option>',
                 $rule,
                 selected($rule, $value, false),
@@ -240,7 +240,7 @@ class Base_requirement
      */
     public function get_setting_post_status_html()
     {
-        $all_post_statuses = get_post_stati( array(), 'objects');
+        $all_post_statuses = get_post_stati(array(), 'objects');
 
         $option_name = $this->name . '_statuses';
 
@@ -255,11 +255,11 @@ class Base_requirement
             $name
         );
 
-        foreach ($all_post_statuses as $status_slug => $status ) {
+        foreach ($all_post_statuses as $status_slug => $status) {
             $html .= sprintf(
                 '<option value="%s" %s>%s</option>',
                 $status_slug,
-                (in_array( $status_slug, $post_statuses )?'selected':''),
+                (in_array($status_slug, $post_statuses) ? 'selected' : ''),
                 $status->label
             );
         }

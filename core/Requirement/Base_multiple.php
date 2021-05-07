@@ -45,7 +45,7 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         // Option names
-        $option_name_multiple = $this->name . '_' .$this->field_name;
+        $option_name_multiple = $this->name . '_' . $this->field_name;
 
         // Get the value
         $option_value = array();

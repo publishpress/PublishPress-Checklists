@@ -60,6 +60,19 @@ class Validate_links extends Base_simple
     }
 
     /**
+     * Returns the current status of the requirement.
+     *
+     * @param stdClass $post
+     * @param mixed $option_value
+     *
+     * @return mixed
+     */
+    public function get_current_status($post, $option_value)
+    {
+        return $this->has_no_invalid_links($post->post_content);
+    }
+
+    /**
      * Check for invalid links in a text.
      *
      * @param string $content
@@ -86,18 +99,5 @@ class Validate_links extends Base_simple
         }
 
         return true;
-    }
-
-    /**
-     * Returns the current status of the requirement.
-     *
-     * @param stdClass $post
-     * @param mixed $option_value
-     *
-     * @return mixed
-     */
-    public function get_current_status($post, $option_value)
-    {
-        return $this->has_no_invalid_links($post->post_content);
     }
 }

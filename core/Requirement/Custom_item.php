@@ -35,8 +35,8 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     public function __construct($name, $module, $post_type)
     {
-        $this->name      = trim((string)$name);
-        $this->is_custom = true;
+        $this->name       = trim((string)$name);
+        $this->is_custom  = true;
         $this->field_name = 'editable_by';
 
         parent::__construct($module, $post_type);
@@ -49,9 +49,12 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Custom', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Custom', 'publishpress-checklists');
-        $this->lang['label_option_description'] = __('Which roles can mark this task as complete?', 'publishpress-checklists');
+        $this->lang['label']                    = __('Custom', 'publishpress-checklists');
+        $this->lang['label_settings']           = __('Custom', 'publishpress-checklists');
+        $this->lang['label_option_description'] = __(
+            'Which roles can mark this task as complete?',
+            'publishpress-checklists'
+        );
     }
 
     /**
@@ -164,6 +167,28 @@ class Custom_item extends Base_multiple implements Interface_required
     }
 
     /**
+     * Check if user role is permitted to validate this task
+     */
+    private function isUserRolePermitted()
+    {
+        // Option name
+        $option_name_multiple = $this->name . '_editable_by';
+
+        //Saved value
+        $option_value = isset($this->module->options->{$option_name_multiple}[$this->post_type]) ? $this->module->options->{$option_name_multiple}[$this->post_type] : array();
+
+        if (!isset($this->module->options->{$option_name_multiple}[$this->post_type])) {
+            return true;
+        }
+
+        if (array_intersect($option_value, wp_get_current_user()->roles)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the current status of the requirement.
      *
      * @param stdClass $post
@@ -233,28 +258,6 @@ class Custom_item extends Base_multiple implements Interface_required
         unset($new_options['custom_items_remove']);
 
         return $new_options;
-    }
-
-    /**
-     * Check if user role is permitted to validate this task
-     */
-    private function isUserRolePermitted()
-    {
-        // Option name
-        $option_name_multiple = $this->name . '_editable_by';
-
-        //Saved value
-        $option_value = isset($this->module->options->{$option_name_multiple}[$this->post_type]) ? $this->module->options->{$option_name_multiple}[$this->post_type] : array();
-
-        if (!isset($this->module->options->{$option_name_multiple}[$this->post_type])) {
-            return true;
-        }
-
-        if (array_intersect($option_value, wp_get_current_user()->roles)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

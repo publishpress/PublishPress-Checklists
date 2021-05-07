@@ -40,7 +40,10 @@ class External_links extends Base_counter
         $this->lang['label_max_plural']     = __('Maximum of %d external links in content', 'publishpress-checklists');
         $this->lang['label_exact_singular'] = __('%d external link in content', 'publishpress-checklists');
         $this->lang['label_exact_plural']   = __('%d external links in content', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %d and %d external links in content', 'publishpress-checklists');
+        $this->lang['label_between']        = __(
+            'Between %d and %d external links in content',
+            'publishpress-checklists'
+        );
     }
 
     /**

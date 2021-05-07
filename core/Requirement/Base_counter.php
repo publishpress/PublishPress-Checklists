@@ -201,11 +201,6 @@ class Base_counter extends Base_simple implements Interface_required
         return $requirements;
     }
 
-    protected function setUnitText($unit)
-    {
-        $this->unitText = $unit;
-    }
-
     /**
      * Get the HTML for the setting field for the specific post type.
      *
@@ -294,5 +289,10 @@ class Base_counter extends Base_simple implements Interface_required
         $html .= '</div>';
 
         return $html;
+    }
+
+    protected function setUnitText($unit)
+    {
+        $this->unitText = $unit;
     }
 }
