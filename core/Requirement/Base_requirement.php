@@ -244,7 +244,10 @@ class Base_requirement
 
         $option_name = $this->name . '_statuses';
 
-        $post_statuses = $this->module->options->{$option_name}[$this->post_type];
+        $post_statuses = [];
+        if (isset($this->module->options->{$option_name}) && isset($this->module->options->{$option_name}[$this->post_type])) {
+            $post_statuses = $this->module->options->{$option_name}[$this->post_type];
+        }
 
         $id   = "{$this->post_type}-{$this->module->slug}-{$option_name}";
         $name = "{$this->module->options_group_name}[{$option_name}][{$this->post_type}][]";
