@@ -12,14 +12,6 @@ String.prototype.stripTags = function () {
 class PPChecklistsWarning extends Component {
     isMounted = false;
 
-    componentDidMount() {
-        this.isMounted = true;
-    }
-
-    componentWillUnmount() {
-        this.isMounted = false;
-    }
-
     constructor() {
         super();
 
@@ -31,6 +23,14 @@ class PPChecklistsWarning extends Component {
 
         hooks.addAction('pp-checklists.update-failed-requirements', 'publishpress/checklists', this.updateFailedRequirements, 10);
     };
+
+    componentDidMount() {
+        this.isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this.isMounted = false;
+    }
 
     updateFailedRequirements(failedRequirements) {
         if (this.isMounted) {

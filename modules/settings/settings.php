@@ -149,16 +149,16 @@ if (!class_exists('PPCH_Settings')) {
         public function remove_quick_edit_status_row()
         {
             $status = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
-            if($status == 'yes'){
-            ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    $('label.inline-edit-status').each(function () {
-			            $(this).remove();
+            if ($status == 'yes') {
+                ?>
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        $('label.inline-edit-status').each(function () {
+                            $(this).remove();
+                        });
                     });
-                });
-            </script>
-            <?php
+                </script>
+                <?php
             }
         }
 
@@ -184,7 +184,8 @@ if (!class_exists('PPCH_Settings')) {
             $legacyPlugin = Factory::getLegacyPlugin();
             ?>
             <form class="basic-settings"
-                  action="<?php echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
+                  action="<?php
+                  echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
 
                 <?php
                 /**
@@ -206,8 +207,10 @@ if (!class_exists('PPCH_Settings')) {
                 }
                 ?>
 
-                <?php settings_fields($this->module->options_group_name); ?>
-                <?php do_settings_sections($this->module->options_group_name); ?>
+                <?php
+                settings_fields($this->module->options_group_name); ?>
+                <?php
+                do_settings_sections($this->module->options_group_name); ?>
 
                 <?php
                 foreach ($legacyPlugin->class_names as $slug => $class_name) {
@@ -240,10 +243,13 @@ if (!class_exists('PPCH_Settings')) {
                 }
                 ?>
 
-                <?php if ($featuresCount > 0) : ?>
+                <?php
+                if ($featuresCount > 0) : ?>
                     <div id="modules-wrapper">
-                        <h3><?php echo __('Features', 'publishpress-checklists'); ?></h3>
-                        <p><?php echo __(
+                        <h3><?php
+                            echo __('Features', 'publishpress-checklists'); ?></h3>
+                        <p><?php
+                            echo __(
                                 'Feel free to select only the features you need.',
                                 'publishpress-checklists'
                             ); ?></p>
@@ -251,37 +257,48 @@ if (!class_exists('PPCH_Settings')) {
                         <table class="form-table">
                             <tbody>
                             <tr>
-                                <th scope="row"><?php echo __(
+                                <th scope="row"><?php
+                                    echo __(
                                         'Enabled features',
                                         'publishpress-checklists'
                                     ); ?></th>
                                 <td>
-                                    <?php foreach ($legacyPlugin->modules as $mod_name => $mod_data) : ?>
+                                    <?php
+                                    foreach ($legacyPlugin->modules as $mod_name => $mod_data) : ?>
 
-                                        <?php if ($mod_data->autoload || $mod_data->slug === $this->module->slug) {
+                                        <?php
+                                        if ($mod_data->autoload || $mod_data->slug === $this->module->slug) {
                                             continue;
                                         } ?>
 
-                                        <label for="feature-<?php echo esc_attr($mod_data->slug); ?>">
-                                            <input id="feature-<?php echo esc_attr($mod_data->slug); ?>"
-                                                   name="publishpress_checklists_settings_options[features][<?php echo esc_attr(
+                                        <label for="feature-<?php
+                                        echo esc_attr($mod_data->slug); ?>">
+                                            <input id="feature-<?php
+                                            echo esc_attr($mod_data->slug); ?>"
+                                                   name="publishpress_checklists_settings_options[features][<?php
+                                                   echo esc_attr(
                                                        $mod_data->slug
-                                                   ); ?>]" <?php echo ($mod_data->options->enabled == 'on') ? "checked=\"checked\"" : ""; ?>
+                                                   ); ?>]" <?php
+                                            echo ($mod_data->options->enabled == 'on') ? "checked=\"checked\"" : ""; ?>
                                                    type="checkbox">
-                                            &nbsp;&nbsp;&nbsp;<?php echo $mod_data->title; ?>
+                                            &nbsp;&nbsp;&nbsp;<?php
+                                            echo $mod_data->title; ?>
                                         </label>
                                         <br>
-                                    <?php endforeach; ?>
+                                    <?php
+                                    endforeach; ?>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
 
-                        <?php echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr(
+                        <?php
+                        echo '<input name="checklists_module_name[]" type="hidden" value="' . esc_attr(
                                 $this->module->name
                             ) . '" />'; ?>
                     </div>
-                <?php endif; ?>
+                <?php
+                endif; ?>
 
                 <?php
                 wp_nonce_field('edit-publishpress-settings');
@@ -292,7 +309,8 @@ if (!class_exists('PPCH_Settings')) {
 
             ?>
             <div class="publishpress-modules">
-                <?php $this->print_modules(); ?>
+                <?php
+                $this->print_modules(); ?>
             </div>
             <?php
         }
@@ -358,11 +376,15 @@ if (!class_exists('PPCH_Settings')) {
         {
             if (isset($_REQUEST['form-errors'][$field])): ?>
                 <div class="form-error">
-                    <p><?php echo esc_html($_REQUEST['form-errors'][$field]); ?></p>
+                    <p><?php
+                        echo esc_html($_REQUEST['form-errors'][$field]); ?></p>
                 </div>
-            <?php else: ?>
-                <p class="description"><?php echo esc_html($description); ?></p>
-            <?php endif;
+            <?php
+            else: ?>
+                <p class="description"><?php
+                    echo esc_html($description); ?></p>
+            <?php
+            endif;
         }
 
         /**

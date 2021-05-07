@@ -215,11 +215,11 @@
             }.bind(this), this.TIC_INTERVAL);
 
             // Add config link to the metabox handle
-            if ( ppChecklists.config_link != '' ) {
+            if (ppChecklists.config_link != '') {
                 $('#pp_checklist_meta .postbox-header').hover(function (event) {
-                    $(this).find('h2').append( ppChecklists.config_link );
-                }, function(){
-                    $('h2', this).find( 'span' ).remove();
+                    $(this).find('h2').append(ppChecklists.config_link);
+                }, function () {
+                    $('h2', this).find('span').remove();
                 });
             }
         },
@@ -564,7 +564,7 @@
 
         },
 
-        extract_links_from_content: function(content) {
+        extract_links_from_content: function (content) {
             let linksIterator = content.matchAll(/(?:<a[^>]+href=['"])([^'"]+)(?:['"][^>]*>)/gi);
 
             let linkResult = linksIterator.next();
@@ -579,7 +579,7 @@
             return linksList;
         },
 
-        is_valid_link: function(link) {
+        is_valid_link: function (link) {
             return link.match(/^(?:https?:\/\/(?:www\.)?[-a-​zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=*]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_;*]+)$/i);
         },
 

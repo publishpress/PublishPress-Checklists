@@ -271,27 +271,27 @@
 }
 
 #pp-checklists-global .checklists-save-notice .alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible {
-  padding-right: 35px;
+    padding-right: 35px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  color: inherit;
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
 
 #pp-checklists-global .checklists-save-notice .close {
@@ -341,7 +341,7 @@
     right: 10px;
 }
 
-.pp-checklists-requirement-row{
+.pp-checklists-requirement-row {
     cursor: move;
 }
 
@@ -349,7 +349,7 @@
     vertical-align: top;
 }
 
-.pp-checklists-statuses{
+.pp-checklists-statuses {
     min-width: 250px;
 }
 

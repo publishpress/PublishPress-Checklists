@@ -34,7 +34,7 @@
         show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
 
         $('#pp-checklists-requirements tbody').sortable({
-            items : ' > tr'
+            items: ' > tr'
         });
 
         // Set the event for the post type filter
@@ -91,7 +91,7 @@
          *
          * @param  {string} post_type
          */
-        function show_post_type_requirements (post_type) {
+        function show_post_type_requirements(post_type) {
             // Hide the requirements which are not for the current post type
             $('#pp-checklists-requirements tr.pp-checklists-requirement-row').hide();
             // Display the correct requirements
@@ -106,7 +106,7 @@
          *
          * @return string
          */
-        function get_current_post_type () {
+        function get_current_post_type() {
             var post_type = $('#pp-checklists-post-type-filter a.pp-selected').attr('href').substring(1);
 
             if (post_type === '' || post_type === false || post_type === null || typeof post_type === undefined) {
@@ -122,7 +122,7 @@
          *
          * @param  {string} id
          */
-        function remove_row (id) {
+        function remove_row(id) {
             // Add a special hidden input to flag the delete action
             var $input = $('<input type="hidden" />')
                 .attr('name', 'publishpress_checklists_checklists_options[custom_items_remove][]')
@@ -138,7 +138,7 @@
          *
          * @param  {Event} event
          */
-        function callback_remove_row (event) {
+        function callback_remove_row(event) {
             var $target = $(event.target);
 
             remove_row($target.data('id'));
@@ -152,7 +152,7 @@
          *
          * @return {Element}
          */
-        function create_row (id, title, action, post_type) {
+        function create_row(id, title, action, post_type) {
             var $table = $('#pp-checklists-requirements'),
                 $tr = $('<tr>'),
                 $td = null,
@@ -255,8 +255,8 @@
 
             // Options cell
             $td = $('<td>')
-              .addClass('pp-checklists-task-params')
-              .appendTo($tr);
+                .addClass('pp-checklists-task-params')
+                .appendTo($tr);
             $optionsField
                 .attr(
                     'id',
@@ -278,8 +278,8 @@
             });
 
             var $label = $('<p>')
-              .addClass('pp-checklists-editable-by-description')
-              .text(objectL10n_checklists_global_checklist.editable_by);
+                .addClass('pp-checklists-editable-by-description')
+                .text(objectL10n_checklists_global_checklist.editable_by);
             $optionsField.after($label);
 
             $a = $('<a>')
@@ -369,7 +369,7 @@
 
     });
 
-    function uidGen (len) {
+    function uidGen(len) {
         var text = ' ',
             charset = 'abcdefghijklmnopqrstuvwxyz';
 

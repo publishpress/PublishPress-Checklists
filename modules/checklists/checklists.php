@@ -530,8 +530,8 @@ if (!class_exists('PPCH_Checklists')) {
                 $rules = apply_filters('publishpress_checklists_rules_list', []);
                 $roles = self::get_editable_roles_labels();
 
-                $all_post_statuses = get_post_stati( array(), 'objects');
-                $post_statuses = [];
+                $all_post_statuses = get_post_stati(array(), 'objects');
+                $post_statuses     = [];
 
                 foreach ($all_post_statuses as $status_slug => $status) {
                     $post_statuses[$status_slug] = $status->label;
@@ -642,7 +642,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Apply filters to the list of requirements
             $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
 
-            $new_requirements_array = $this->rearrange_requirement_array( $requirements );
+            $new_requirements_array = $this->rearrange_requirement_array($requirements);
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
@@ -650,7 +650,6 @@ if (!class_exists('PPCH_Checklists')) {
 
             // Add the scripts
             if (!empty($requirements)) {
-
                 if (current_user_can('manage_options')) {
                     // Make the meta box title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
                     $url = $this->get_admin_link();
@@ -1064,14 +1063,14 @@ if (!class_exists('PPCH_Checklists')) {
             foreach ($requirement_rule_array as $req_index) {
                 $new_index                          = ($is_on_metabox) ? $req_index : $index++;
                 $new_requirements_array[$new_index] = $requirements[$req_index];
-            };
+            }
 
-            return $new_requirements_array;            
+            return $new_requirements_array;
         }
 
         /**
          * Filtering requirements by current post/page status.
-         * 
+         *
          * @param array $requirements
          * @param object $post
          */
@@ -1094,7 +1093,7 @@ if (!class_exists('PPCH_Checklists')) {
                     }
                 }
             }
-            
+
             return $requirements;
         }
     }
