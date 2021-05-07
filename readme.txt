@@ -125,6 +125,10 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.6.0] - UNRELEASED =
+
+* Fixed: Fixed broken formatting for metabox, #165;
+
 = [2.5.0] - 2021-04-22 =
 
 * Added: Added drag-and-drop support for sorting the checklists requirements, #172;
