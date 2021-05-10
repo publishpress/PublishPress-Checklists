@@ -1372,4 +1372,25 @@
      * @deprecated
      */
     window.PP_Content_Checklist = PP_Checklists;
+
+    /**
+     * Reload the page after save on gutenberg.
+     */
+    if (PP_Checklists.is_gutenberg_active()) {
+
+        var is_saving_post = false;
+
+        wp.data.subscribe(function () {
+            var isSavingPost = wp.data.select('core/editor').isSavingPost();
+            var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+
+            if (isSavingPost && !isAutosavingPost) {
+                is_saving_post = true;
+            }
+
+            if ( !isSavingPost && !isAutosavingPost && is_saving_post ) {
+                window.location.href = window.location.href + '&refreshed=1';
+            }
+        });
+    }
 })(jQuery, window, document, new wp.utils.WordCounter());
