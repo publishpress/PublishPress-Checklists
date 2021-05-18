@@ -1404,10 +1404,6 @@
                 });
             }
 
-            if ( !isSavingPost && !isAutosavingPost && is_saving_post ) {
-
-                
-            }
         });
     }
 })(jQuery, window, document, new wp.utils.WordCounter());
