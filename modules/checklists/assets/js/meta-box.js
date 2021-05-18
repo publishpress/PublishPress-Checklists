@@ -1379,6 +1379,7 @@
     if (PP_Checklists.is_gutenberg_active()) {
 
         var is_saving_post = false;
+        var get_metabox_update_ajax;
 
         wp.data.subscribe(function () {
             var isSavingPost = wp.data.select('core/editor').isSavingPost();
@@ -1386,10 +1387,26 @@
 
             if (isSavingPost && !isAutosavingPost) {
                 is_saving_post = true;
+                if ( typeof get_metabox_update_ajax  != 'undefined') {
+                    get_metabox_update_ajax.abort();
+                }
+                
+                get_metabox_update_ajax = $.ajax({
+                    url:ajaxurl,
+                    type: 'POST',
+                    data:{
+                        action:'pp_checklist_metabox_update',
+                        post_id: $('#post_ID').val()
+                    },
+                    success: function(data){
+                        $('#pp_checklist_meta-meta-box').parent().html(data);
+                    }
+                });
             }
 
             if ( !isSavingPost && !isAutosavingPost && is_saving_post ) {
-                window.location.href = window.location.href + '&refreshed=1';
+
+                
             }
         });
     }
