@@ -407,6 +407,10 @@ if (!class_exists('PPCH_Checklists')) {
             add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
 
             add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsByStatus'], 1001, 2);
+
+            add_action('wp_ajax_pp_checklist_metabox_update', [$this, 'update_metabox']);
+
+            add_action('wp_ajax_nopriv_pp_checklist_metabox_update', [$this, 'update_metabox']);
         }
 
         /**
@@ -1095,6 +1099,29 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             return $requirements;
+        }
+
+        public function update_metabox()
+        {
+            $post_id = $_REQUEST['post_id'];
+            $post = get_post($post_id);
+
+            $requirements = [];
+
+            // Apply filters to the list of requirements
+            $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $post);
+
+            $new_requirements_array = $this->rearrange_requirement_array($requirements);
+
+            ob_start();
+            $this->display_meta_box( $post );
+
+            $result = ob_get_clean();
+            
+            wp_send_json( array(
+                'result' => $result,
+                'requirements' => $new_requirements_array
+            ) );
         }
     }
 }
