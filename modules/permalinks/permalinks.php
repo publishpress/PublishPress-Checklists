@@ -138,7 +138,7 @@ class PPCH_Permalinks extends Module
     {
         global $current_screen;
 
-        if ($current_screen->base === 'post') {
+        if ( ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) && $current_screen->base === 'post') {
             wp_enqueue_script(
                 'pp-checklists-permalinks',
                 plugins_url('/modules/permalinks/assets/js/meta-box.js', $this->pluginFile),

@@ -176,7 +176,7 @@
             }.bind(this));
 
             // Add event to the custom items
-            $('.pp-checklists-custom-item').click(function (event) {
+            $(document).on('click', '.pp-checklists-custom-item', function (event) {
                 var target = event.target;
 
                 if ('LI' !== target.nodeNAME) {
