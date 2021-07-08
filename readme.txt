@@ -125,18 +125,22 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.5.0] - 2021-04-22 =
+= [2.6.0] - UNRELEASED =
+
+* Fixed: Fixed broken formatting for metabox, #165;
+
+= [2.5.0] - 22 Apr 2021 =
 
 * Added: Added drag-and-drop support for sorting the checklists requirements, #172;
 * Fixed: Fixed default position of items in the checklist;
 * Changed: Added support for displaying unit text in the checklist requirements settings page;
 
-= [2.4.4] - 2021-03-31 =
+= [2.4.4] - 31 Mar 2021 =
 
 * Fixed: Fixed link validation for "tel:" and "mailto:" links, #246
 * Fixed: Fixed WPBakery compatibility, #237;
 
-= [2.4.3] - 2021-03-30 =
+= [2.4.3] - 30 Mar 2021 =
 
 * Fixed: Fixed support to PHP 5.6, #240;
 * Fixed: Fixed some class names to match the filename, #241;
@@ -146,16 +150,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Fixed pre-publishing panel and warning when required items are unchecked, #252;
 * Added: Added Italian translation. Huge thanks to Simone Bianchelli and Angelo Giammarresi for sharing the translation files;
 
-= [2.4.2] - 2020-10-22 =
+= [2.4.2] - 22 Oct 2020 =
 
 * Fixed: Remove unexistent dependencies for met-box.js, #231;
 
-= [2.4.1] - 2020-10-08 =
+= [2.4.1] - 08 Oct 2020 =
 
 * Fixed: Fix JS error Uncaught TypeError: Cannot read property 'doAction' of undefined, #224;
 * Fixed: Fix broken menu item if the user doesn't have permissions to see the menu, #226;
 
-= [2.4.0] - 2020-09-22 =
+= [2.4.0] - 22 Sep 2020 =
 
 * Added: Added a new task for validating links in the content, #200;
 * Added: Added a new task for checking the number of external links, #201;
@@ -165,18 +169,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Changed the order of tasks in the settings page, #223;
 * Removed: The option "Recommended: show only in the sidebar" were removed and current settings fallback to "Recommended: show in the sidebar and before publishing", which was renamed to just: "Recommended", #195.
 
-= [2.3.2] - 2020-08-20 =
+= [2.3.2] - 20 Aug 2020 =
 
 * Fixed: Fixed warnings related to missed dependencies for scripts when the post type is not selected to use checklists, #208;
 
-= [2.3.1] - 2020-08-14 =
+= [2.3.1] - 14 Aug 2020 =
 
 * Fixed: Fixed compatibility with WP 5.5;
 * Fixed: Fixed Gutenberg and Classic Editor detection, #203, #202;
 * Fixed: Fixed invalid selector in jQuery, #197;
 * Fixed: Fixed the publishing button that was stuck sometimes making impossible to publish a post, #191;
 
-= [2.3.0] - 2020-08-06 =
+= [2.3.0] - 06 Aug 2020 =
 
 * Added: Added new task for checking if all the images in the post has an "alt" attribute, #164;
 * Fixed: Fixed the verification for custom taxonomies in the post editor page, #114;
@@ -187,7 +191,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Changed the algorithm of the Yoast SEO readability and SEO analysis verification, considering the selected score as the minimum score, #169;
 * Changed: Change the label of the "Add custom item" button to "Add custom task", #181;
 
-= [2.2.0] - 2020-07-21 =
+= [2.2.0] - 21 Jul 2020 =
 
 * Added: Add support to Yoast SEO readability and SEO analysis pass task in the checklists - #86;
 * Added: Add new task for checking the limit of chars in the excerpt test - #150;
@@ -200,7 +204,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Updated the WordPress tested up to version to 5.4;
 * Changed: Updated the label and text for some tasks;
 
-= [2.1.0] - 2020-05-07 =
+= [2.1.0] - 07 May 2020 =
 
 * Added: Add permalink validation rule for the checklists - #115;
 * Added: Add option to select user roles to skip specific requirements - #131;
@@ -215,14 +219,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Fixed empty checklists on fresh installs due to no post type being selected. Posts is selected by default now - #140;
 * Fixed: Fix warning icon on Gutenberg moving it from the side to over the publish button - #138;
 
-= [2.0.2] - 2020-03-16 =
+= [2.0.2] - 16 Mar 2020 =
 
 * Fixed: Fix Checklist for custom hierarquical taxonomies when using Gutenberg;
 * Fixed: Small improvements to the UI;
 * Fixed: Fix compatibility with Rank Math fixing error in Gutenberg;
 * Added: Added hooks to extend the interface for the Pro version;
 
-= [2.0.1] - 2020-02-07 =
+= [2.0.1] - 07 Feb 2020 =
 
 * Fixed: Fixed the prefix of post types in the post_type_support variable;
 * Fixed: Adjusted the plugin URL for assets when working as vendor dependency;
@@ -232,7 +236,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Fixed the verification for custom taxonomies on Gutenberg;
 * Added: Added filters to allow using the plugin as base for the Pro plugin;
 
-= [2.0.0] - 2019-12-03 =
+= [2.0.0] - 03 Dec 2019 =
 * Fixed: Fixed the word counter for the Text tab in the Classic Editor;
 * Changed: Renamed from "PublishPress Content Checklist" to "PublishPress Checklists";
 * Changed: Refactored to be a standalone plugin, not requiring PublishPress anymore;
@@ -242,33 +246,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: New admin menu added with the checklists options and settings page;
 * Changed: The checklists options section was removed from the settings page to an specific menu item;
 
-= [1.4.7] - 2019-07-21 =
+= [1.4.7] - 21 Jul 2019 =
 * Fixed: A JS error was preventing to block the post save action when displaying a popup with missed requirements on Classic Editor;
 
-= [1.4.6] - 2019-06-20 =
+= [1.4.6] - 20 Jun 2019 =
 * Fixed: Avoid JS white screen on Gutenberg "New Post" access by Author with Multiple Authors plugin active and "Remove author from new posts" setting enabled;
 * Changed: Change minimum required version of PublishPress to 1.20.0;
 
-= [1.4.5] - 2019-02-22 =
+= [1.4.5] - 22 Feb 2019 =
 * Fixed: Fixed the pre-publishing check to avoid blocking save when not publishing;
 
-= [1.4.4] - 2019-02-12 =
+= [1.4.4] - 12 Feb 2019 =
 * Fixed: Fixed JS error that was preventing the Preview button to work properly in the classic editor;
 
-= [1.4.3] - 2019-02-11 =
+= [1.4.3] - 11 Feb 2019 =
 * Fixed: Fixed translation to PT-BR (thanks to Dionizio Bach);
 * Fixed: Fixed bug when word-count script was not loaded;
 * Fixed: Fixed JS error if an editor is not found;
 * Changed: Changed the label for checklist options in the settings panel;
 
-= [1.4.2] - 2019-01-30 =
+= [1.4.2] - 30 Jan 2019 =
 * Fixed: Fixed the checklist for the block editor;
 * Changed: Removed license key field from the settings tab;
 
-= [1.4.1] - 2019-01-24 =
+= [1.4.1] - 24 Jan 2019 =
 * Changed: Disable post types by default, if Gutenberg is installed;
 
-= [1.4.0] - 2019-01-14 =
+= [1.4.0] - 14 Jan 2019 =
 * Fixed: Fixed the TinyMCE plugin to count words to not load in the front-end when TinyMCE is initialized;
 * Fixed: Fixed the assets loading to load tinymce-pp-checklists-requirements.js only in the admin;
 * Fixed: Fixed conflict between custom taxonomies and tags in the checklist while counting items;
@@ -276,24 +280,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Update POT file and fixed translations loading the text domain;
 * Changed: Updated PT-BT language files;
 
-= [1.3.8] - 2018-04-18 =
+= [1.3.8] - 18 Apr 2018 =
 * Fixed: Fixed wrong reference to a legacy EDD library's include file;
 * Fixed: Fixed PHP warning about undefined property and constant;
 
-= [1.3.7] - 2018-02-21 =
+= [1.3.7] - 21 Feb 2018 =
 * Fixed: Fixed support for custom post types;
 
-= [1.3.6] - 2018-02-07 =
+= [1.3.6] - 07 Feb 2018 =
 * Fixed: Fixed error about class EDD_SL_Plugin_Updater being loaded twice;
 
-= [1.3.5] - 2018-02-06 =
+= [1.3.5] - 06 Feb 2018 =
 * Fixed: Fixed saving action for custom items on the checklist;
 * Fixed: Fixed license validation and automatic update;
 
-= [1.3.4] - 2018-01-26 =
+= [1.3.4] - 26 Jan 2018 =
 * Changed: Changed plugin headers, fixing author and text domain;
 
-= [1.3.3] - 2018-01-26 =
+= [1.3.3] - 26 Jan 2018 =
 * Fixed: Fixed JS error when the checklist is empty (no requirements are selected);
 * Fixed: Fixed compatibility with PHP 5.4 (we will soon require min 5.6);
 * Fixed: Fixed custom requirements;
@@ -303,14 +307,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added: Added action to load plugins' script files;
 * Changed: Rebranded to PublishPress;
 
-= [1.3.2] - 2017-08-31 =
+= [1.3.2] - 31 Aug 2017 =
 * Fixed: Fixed EDD integration and updates;
 * Changed: Removed Freemius integration;
 
-= [1.3.1] - 2017-07-13 =
+= [1.3.1] - 13 Jul 2017 =
 * Fixed: Fixed support for custom post types allowing to use custom items as requirements;
 
-= [1.3.0] - 2017-07-12 =
+= [1.3.0] - 12 Jul 2017 =
 * Fixed: Fixed the delete button for custom items in the settings. It was remocing wrong items, in an odd pattern;
 * Fixed: Fixed PHP warning in the settings page about undefined index in array;
 * Fixed: Fixed the menu slug in the Freemius integration;
@@ -318,7 +322,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Changed the required minimum version of PublishPress to 1.6.0;
 * Changed: Improved extensibility for add-ons;
 
-= [1.2.1] - 2017-06-21 =
+= [1.2.1] - 21 Jun 2017 =
 * Fixed: Fixed PHP warnings after install and activate
 * Fixed: Fixed PHP warnings about wrong index type
 * Fixed: Fixed the license and update checker
@@ -326,7 +330,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Removed English language files
 * Changed: Updated Tested Up to 4.8
 
-= [1.2.0] - 2017-06-06 =
+= [1.2.0] - 06 Jun 2017 =
 * Fixed: Fixes the mask for numeric input fields in the settings tab on Firefox
 * Fixed: Fixes the license key validation
 * Fixed: Fixes the update system
@@ -335,12 +339,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added: Added POT file and English PO files
 * Changed: The warning icon in the publish box now appears even for published content
 
-= [1.1.2] - 2017-05-23 =
+= [1.1.2] - 23 May 2017 =
 * Fixed: Fixes the word count feature
 * Changed: Displays empty value in the max fields when max is less than min
 * Changed: Improves the min and max fields for value equal 0. Displays empty fields.
 
-= [1.1.1] - 2017-05-18 =
+= [1.1.1] - 18 May 2017 =
 * Fixed: Removed .DS_Store file from the package
 * Fixed: Fixed the "Hello Dolly" message in the Freemius opt-in dialog
 * Fixed: Increased the minimum WordPress version to 4.6
@@ -348,16 +352,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Changed order for Categories and Tags to stay together in the list
 * Changed: Changed code to use correct language domain
 
-= [1.1.0] - 2017-05-11 =
+= [1.1.0] - 11 May 2017 =
 * Added: Added "Excerpt has text" as requirement
 * Added: Added option to set "max" value for the number of categories, tags and words - now you can have min, max or an interval for each requirement.
-* Changed: Improved the JavaScript code for better readbility
+* Changed: Improved the JavaScript code for better readability
 
-= [1.0.1] - 2017-05-03 =
+= [1.0.1] - 03 May 2017 =
 * Fixed: Fixed the name of plugin's main file
 * Fixed: Fixed WordPress-EDD-License-Integration library in the vendor dir
 
-= [1.0.0] - 2017-04-27 =
+= [1.0.0] - 27 Apr 2017 =
 * Added: Added requirement for minimum number of words
 * Added: Added requirement for featured image
 * Added: Added requirement for minimum number of tags
