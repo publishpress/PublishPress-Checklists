@@ -188,7 +188,7 @@
                 }
             }.bind(this));
 
-            // On clicking the confimation button in the modal window
+            // On clicking the confirmation button in the modal window
             this.elems.document.on(this.EVENT_TOGGLE_CUSTOM_ITEM, function (event, item) {
                 var $item = $(item),
                     $icon = $item.children('.dashicons'),
