@@ -239,20 +239,11 @@ class Ppch_Modules_Reviews {
 
 		if ( ! isset( $triggers ) ) {
 
-			$open_message = __( 'Hey, I noticed you recently hit %d popup views on your site – that’s awesome!. I would very much appreciate if you could quickly give it a 5-star rating on WordPress, just to help us spread the word.', 'publishpress-checklists' );
 			$time_message = __( "Hey, you've been using PublishPress Checklists for %s on your site - I hope that its been helpful. I would very much appreciate if you could quickly give it a 5-star rating on WordPress, just to help us spread the word.", 'publishpress-checklists' );
 
 			$triggers = apply_filters( 'ppch_reviews_triggers', array(
 				'time_installed' => array(
 					'triggers' => array(
-                        'one_minute'     => array(
-							'message'    => sprintf( $time_message, __( '1 minute', 'publishpress-checklists' ) ),
-							'conditions' => array(
-								strtotime( self::installed_on() . ' +1 minute' ) < time(),
-							),
-							'link'       => 'https://wordpress.org/support/plugin/publishpress-checklists/reviews/?rate=5#rate-response',
-							'pri'        => 5,
-						),
                         'one_week'     => array(
 							'message'    => sprintf( $time_message, __( '1 week', 'publishpress-checklists' ) ),
 							'conditions' => array(
@@ -280,37 +271,6 @@ class Ppch_Modules_Reviews {
 
 					),
 					'pri'      => 10,
-				),
-				'open_count'     => array(
-					'triggers' => array(
-						'50_opens'  => array(
-							'message'    => sprintf( $open_message, 50 ),
-							'conditions' => array(
-								get_option( 'ppch_total_open_count', 0 ) > 50,
-							),
-							'link'       => 'https://wordpress.org/support/plugin/publishpress-checklists/reviews/?rate=5#rate-response',
-							'pri'        => 10,
-						),
-						'100_opens' => array(
-							'message'    => sprintf( $open_message, 100 ),
-							'conditions' => array(
-								get_option( 'ppch_total_open_count', 0 ) > 100,
-
-							),
-							'link'       => 'https://wordpress.org/support/plugin/publishpress-checklists/reviews/?rate=5#rate-response',
-							'pri'        => 20,
-						),
-						'500_opens' => array(
-							'message'    => sprintf( $open_message, 500 ),
-							'conditions' => array(
-								get_option( 'ppch_total_open_count', 0 ) > 500,
-							),
-							'link'       => 'https://wordpress.org/support/plugin/publishpress-checklists/reviews/?rate=5#rate-response',
-							'pri'        => 30,
-						),
-
-					),
-					'pri'      => 50,
 				),
 			) );
 
