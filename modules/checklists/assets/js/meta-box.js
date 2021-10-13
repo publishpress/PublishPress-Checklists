@@ -1357,6 +1357,15 @@
         update();
     }
 
+    /*----------  Configure link for Checklist metabox  ----------*/
+    if (ppChecklists.user_can_manage_options == 1 && $('#pp_checklist_meta').length) {
+        var ppChecklistMetaboxLabel = $('#pp_checklist_meta').find('h2.hndle').val();
+        $('#pp_checklist_meta').find('h2.hndle').append(
+            ppChecklistMetaboxLabel +
+            '<span class="postbox-title-action"><a href="' + ppChecklists.configure_url +  '" class="edit-box open-box">' + ppChecklists.label_configure + '</a></span>'
+        );
+    }
+
     /**
      *
      * @type {Object}
