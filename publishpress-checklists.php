@@ -86,6 +86,3 @@ if (defined('PPCH_LOADED')) {
     $plugin = new Plugin();
     $plugin->init();
 }
-
-// Ask for review
-require_once __DIR__ . '/modules/reviews/review-request.php';
