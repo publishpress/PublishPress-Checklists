@@ -44,7 +44,7 @@
     "codeception/module-phpbrowser": "^1.0",
     "codeception/module-db": "^1.0",
     "codeception/util-universalframework": "^1.0",
-    "overtrue/phplint": "^2.1"
+    "overtrue/phplint": "^2.4"
   },
   "minimum-stability": "stable"
 }
