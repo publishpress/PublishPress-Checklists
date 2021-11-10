@@ -672,6 +672,18 @@
         });
     }
 
+    // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
+    if (PP_Checklists.is_gutenberg_active()) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
+            if (has_unchecked.length > 0) {
+                wp.data.dispatch( 'core/editor' ).lockPostSaving( 'ppcPublishButton' );
+            } else {
+                wp.data.dispatch( 'core/editor' ).unlockPostSaving( 'ppcPublishButton' );
+            }
+        });
+    }
+
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
