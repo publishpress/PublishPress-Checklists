@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.8
-Stable tag: 2.5.0
+Tested up to: 5.8.2
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,7 @@ Next to every post and page, writers see a checklist box, showing the tasks they
 
 ## You Can Set These Checklist Requirements
 
-Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values. 
+Each task on your pre-publish checklist can be configured to meet your site’s needs. You can also set maximum and minimum values.
 
 [Read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
 
@@ -108,7 +108,7 @@ Join PublishPress and you'll get access to these Pro plugins:
 * [PublishPress Permissions Pro](https://publishpress.com/permissions)  is the plugin for advanced WordPress permissions.
 * [PublishPress Pro](https://publishpress.com/publishpress) is the plugin for managing and scheduling WordPress content.
 * [PublishPress Revisions Pro](https://publishpress.com/revisions) allows you to update your published pages with teamwork and precision.
-* [PublishPress Series Pro](https://publishpress.com/series) enables you to group content together into a series 
+* [PublishPress Series Pro](https://publishpress.com/series) enables you to group content together into a series
 
 Together, these plugins are a suite of powerful publishing tools for WordPress. If you need to create a professional workflow in WordPress, with moderation, revisions, permissions and more... then you should try PublishPress.
 
@@ -123,8 +123,8 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 == Screenshots ==
 
 1. Create your own checklists: Next to every post and page, writers see a checklist box, showing the tasks they need to complete.
-2. Custom checklist rules: In addition to the default rules, PublishPress Checklists allows you to create your own rules. 
-3. Configure your requirements: Each item on the checklist can be configured to meet your site’s needs. You can decide whether items are recommended, required or ignored. 
+2. Custom checklist rules: In addition to the default rules, PublishPress Checklists allows you to create your own rules.
+3. Configure your requirements: Each item on the checklist can be configured to meet your site’s needs. You can decide whether items are recommended, required or ignored.
 4. Feedback before publishing: If the writers don’t complete all the requirements, PublishPress Checklists will show them a message explaining what they need to do.
 5. WooCommerce products checklist: This feature in Checklists Pro allows you to create requirements for WooCommerce products.
 
@@ -159,7 +159,7 @@ With the PublishPress Checklists plugin, you can require a maximum and minimum n
 
 With the PublishPress Checklists plugin, you can require a maximum and minimum number of categories for your WordPress posts. If the correct number of categories aren't added, you can choose to show a warning, or prevent the post from being published. Having the correct number of categories is important for your site's SEO.  By default, Categories are only available on WordPress Posts. However, with the "TaxoPress" plugin you can add Categories to other post types and so you will be able to use the tutorial for those post types too.
 
-* Go to Checklists > Settings. 
+* Go to Checklists > Settings.
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * You can enter choices for “Min” and “Max”.
@@ -169,7 +169,7 @@ With the PublishPress Checklists plugin, you can require a maximum and minimum n
 
 = Can I set the maximum and minimum number of tags? =
 
-With the PublishPress Checklists plugin, you can require a maximum and minimum number of tags for your WordPress posts. This feature also supports taxonomy terms from other plugins or custom post types. If the correct number of tags aren't added, you can choose to show a warning, or prevent the post from being published. Having the correct number of tags is important for your site's SEO. 
+With the PublishPress Checklists plugin, you can require a maximum and minimum number of tags for your WordPress posts. This feature also supports taxonomy terms from other plugins or custom post types. If the correct number of tags aren't added, you can choose to show a warning, or prevent the post from being published. Having the correct number of tags is important for your site's SEO.
 
 * Go to Checklists > Settings. If you are using a custom post type or plugin, any available taxonomies will show as options.
 * You can choose from “Disabled, Recommended, or Required” options.
@@ -183,7 +183,7 @@ With the PublishPress Checklists plugin, you can require a maximum and minimum n
 
 With the PublishPress Checklists plugin, you can require a maximum and minimum number of characters for the Excerpts in your WordPress content. If the Excerpt isn't the correct length, you can choose to show a warning, or prevent the post from being published. The Excerpt field is a very useful feature in WordPress. The Excerpt is an optional summary or description of the main content.
 
-* Go to Checklists > Settings. 
+* Go to Checklists > Settings.
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * You can enter choices for “Min” and “Max”.
@@ -207,7 +207,7 @@ With the PublishPress Checklists plugin, you can require a maximum and minimum n
 
 With the PublishPress Checklists plugin, you can require a maximum and minimum number of external links in your WordPress content. If the content does not have the correct number of external links, you can choose to show a warning, or prevent the post from being published. We define “external links” as any "a href" link to URL on another website. Many sites want to prevent a large number of external links because it can harm their site's search engine optimization.
 
-* Go to Checklists > Settings. 
+* Go to Checklists > Settings.
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * You can enter choices for “Min” and “Max”.
@@ -220,12 +220,12 @@ With the PublishPress Checklists plugin, you can require a maximum and minimum n
 
 With the PublishPress Checklists plugin, you can ensure that all the links in your content (both external and internal) use a valid link format. This feature won't check the destination URL, but it will check the link format to make sure you haven't used URLs such as htpps// or .nt.
 
-* Go to Checklists > Settings. 
+* Go to Checklists > Settings.
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * If you enable this link validation option, it will be visible when you edit content. If you have broken links in your content, this task will be marked in red in the sidebar. If you do not have broken links, this task will be marked in green in the sidebar.
 
-The Checklists plugin uses these regular expressions to check for broken links. You will find this code in this file: /core/Utils/HyperlinkValidator.php. 
+The Checklists plugin uses these regular expressions to check for broken links. You will find this code in this file: /core/Utils/HyperlinkValidator.php.
 
 [Read about validating links](https://publishpress.com/knowledge-base/all-links-use-a-valid-format/)
 
@@ -233,7 +233,7 @@ The Checklists plugin uses these regular expressions to check for broken links. 
 
 With the PublishPress Checklists plugin, you can require that all the images have ALT text in your WordPress content. If an image is missing the ALT text, you can choose to show a warning, or prevent the post from being published. ALT text (short for “alternative text”) is useful because it describes images to visitors who are unable to see them. Visually impaired users often use screen readers that can read ALT text to better understand an on-page image.
 
-* Go to Checklists > Settings. 
+* Go to Checklists > Settings.
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * You can enter choices for “Min” and “Max”.
@@ -271,7 +271,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 * You can choose from “Disabled, Recommended, or Required” options.
 * You can choose “Who can ignore this task?“
 * You can enter choices for both options. Choose either “OK” (yellow/orange) or “Good” (green).
-* If you enable the Yoast SEO option, they will be visible when you edit content. If you don't meet the minimum requirements, the checklist items will be shown in red. 
+* If you enable the Yoast SEO option, they will be visible when you edit content. If you don't meet the minimum requirements, the checklist items will be shown in red.
 
 [Read about requiring approval by Yoast SEO](https://publishpress.com/knowledge-base/yoast-seo-tasks/)
 
@@ -280,6 +280,10 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.6.1] - 2021-11-10 =
+ * Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
+ * Fixed: Preferences Panel box is broken
 
 = [2.5.0] - 2021-04-22 =
 
