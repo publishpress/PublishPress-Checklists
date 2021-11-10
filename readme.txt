@@ -283,6 +283,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [2.6.1] - 2021-11-10 =
  * Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
+ * Fixed: Preferences Panel box is broken
 
 = [2.5.0] - 2021-04-22 =
 
