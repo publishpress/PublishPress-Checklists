@@ -1,12 +1,14 @@
 path: ./
 jobs: 10
-cache: dist/phplint.cache
+cache: build/phplint.cache
 extensions:
   - php
 exclude:
   - vendor
   - assets_wp
   - bin
-  - dist
+  - build
   - node_modules
+  - tests/_output
+  - tests/_support/_generated
 warning: false

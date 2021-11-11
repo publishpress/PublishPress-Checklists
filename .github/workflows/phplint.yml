@@ -16,6 +16,8 @@ jobs:
       with:
         php-version: '7.4'
         extensions: intl
+      env:
+        COMPOSER_TOKEN: ${{ secrets.COMPOSER_TOKEN }}
 
     - name: Update the composer.lock file
       run: composer update --lock
