@@ -86,29 +86,6 @@ class PPCH_Reviews extends Module
      */
     public function init()
     {
-        add_filter('publishpress-checklists_wp_reviews_allow_display_notice', [$this, 'shouldDisplayBanner']);
-
         $this->reviewController->init();
-    }
-
-    public function shouldDisplayBanner($shouldDisplay)
-    {
-        global $pagenow;
-
-        if (! is_admin() || ! current_user_can('edit_posts')) {
-            return false;
-        }
-
-        if ($pagenow === 'admin.php' && isset($_GET['page'])) {
-            if ($_GET['page'] === 'ppch-checklists') {
-                return true;
-            }
-
-            if ($_GET['page'] === 'pp-settings') {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
