@@ -286,6 +286,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
 * Fixed: Preferences Panel box is broken
 * Fixed: Changed ID of span where full slug is picked up from with Classic Editor
+* Fixed: Border width for buttons
+* Added: Ask for plugin review support
 
 = [2.5.0] - 2021-04-22 =
 
