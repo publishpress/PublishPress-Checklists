@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.8.2
-Stable tag: 2.6.1
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -281,9 +281,13 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.6.1] - 2021-11-10 =
- * Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
- * Fixed: Preferences Panel box is broken
+= [2.5.1] - 2021-11-11 =
+
+* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
+* Fixed: Preferences Panel box is broken
+* Fixed: Changed ID of span where full slug is picked up from with Classic Editor
+* Fixed: Border width for buttons
+* Added: Ask for plugin review support
 
 = [2.5.0] - 2021-04-22 =
 
