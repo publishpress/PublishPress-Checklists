@@ -281,9 +281,11 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.6.1] - 2021-11-10 =
- * Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
- * Fixed: Preferences Panel box is broken
+= [2.5.1] - 2021-11-11 =
+
+* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
+* Fixed: Preferences Panel box is broken
+* Fixed: Changed ID of span where full slug is picked up from
 
 = [2.5.0] - 2021-04-22 =
 
