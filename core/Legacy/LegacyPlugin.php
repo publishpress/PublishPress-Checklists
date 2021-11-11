@@ -154,6 +154,7 @@ class LegacyPlugin
             'permalinks'  => PPCH_MODULES_PATH,
             'yoastseo'    => PPCH_MODULES_PATH,
             'permissions' => PPCH_MODULES_PATH,
+            'reviews'     => PPCH_MODULES_PATH,
         ];
 
         return apply_filters('publishpress_checklists_module_dirs', $defaultDirs);

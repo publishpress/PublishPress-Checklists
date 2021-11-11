@@ -188,7 +188,7 @@
                 }
             }.bind(this));
 
-            // On clicking the confimation button in the modal window
+            // On clicking the confirmation button in the modal window
             this.elems.document.on(this.EVENT_TOGGLE_CUSTOM_ITEM, function (event, item) {
                 var $item = $(item),
                     $icon = $item.children('.dashicons'),
@@ -668,6 +668,18 @@
                 $('body').addClass('ppch-show-publishing-warning-icon');
             } else {
                 $('body').removeClass('ppch-show-publishing-warning-icon');
+            }
+        });
+    }
+
+    // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
+    if (PP_Checklists.is_gutenberg_active()) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
+            if (has_unchecked.length > 0) {
+                wp.data.dispatch( 'core/editor' ).lockPostSaving( 'ppcPublishButton' );
+            } else {
+                wp.data.dispatch( 'core/editor' ).unlockPostSaving( 'ppcPublishButton' );
             }
         });
     }
@@ -1355,6 +1367,15 @@
 
         $content.on('input keyup change', _.debounce(update, 500));
         update();
+    }
+
+    /*----------  Configure link for Checklist metabox  ----------*/
+    if (ppChecklists.user_can_manage_options == 1 && $('#pp_checklist_meta').length) {
+        var ppChecklistMetaboxLabel = $('#pp_checklist_meta').find('h2.hndle').val();
+        $('#pp_checklist_meta').find('h2.hndle').append(
+            ppChecklistMetaboxLabel +
+            '<span class="postbox-title-action"><a href="' + ppChecklists.configure_url +  '" class="edit-box open-box">' + ppChecklists.label_configure + '</a></span>'
+        );
     }
 
     /**

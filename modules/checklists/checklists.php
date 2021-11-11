@@ -596,18 +596,6 @@ if (!class_exists('PPCH_Checklists')) {
 
             $title = __('Checklist', 'publishpress-checklists');
 
-            if (current_user_can('manage_options')) {
-                // Make the meta box title include a link to edit the Editorial Metadata terms. Logic similar to how Core dashboard widgets work.
-                $url = $this->get_admin_link();
-
-                $title .= ' <span class="postbox-title-action"><a href="' . esc_url(
-                        $url
-                    ) . '" class="edit-box open-box">' . __(
-                        'Configure',
-                        'publishpress-checklists'
-                    ) . '</a></span>';
-            }
-
             $supported_post_types = $this->getSelectedPostTypes();
 
             foreach ($supported_post_types as $post_type => $label) {
@@ -663,6 +651,7 @@ if (!class_exists('PPCH_Checklists')) {
                     [
                         'requirements'                    => $new_requirements_array,
                         'label_checklist'                 => __('Checklist', 'publishpress-checklists'),
+                        'label_configure'                 => __('Configure', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => __(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
@@ -690,6 +679,8 @@ if (!class_exists('PPCH_Checklists')) {
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => __('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
+                        'user_can_manage_options'         => current_user_can( 'manage_options' ),
+                        'configure_url'                   => esc_url( $this->get_admin_link() ),
                     ]
                 );
 
