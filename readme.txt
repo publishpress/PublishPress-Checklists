@@ -284,6 +284,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [2.5.2] - 2021-11-11 =
 
 * Fixed: Missing logo image for ask-for-review banner
+* Added: Ask-for-review banner in other admin pages
 
 = [2.5.1] - 2021-11-11 =
 
