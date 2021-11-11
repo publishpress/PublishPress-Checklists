@@ -77,7 +77,7 @@
                     slug = $('#editable-post-name input').val();
 
                     if (typeof slug === 'undefined' || slug === '') {
-                        slug = $('#edit-slug-box #editable-post-name').text();
+                        slug = $('#edit-slug-box #editable-post-name-full').text();
                     }
 
                     if (typeof slug === 'undefined' || slug === '') {
