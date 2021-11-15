@@ -644,7 +644,6 @@
             return wp.data.select('core/editor');
         }
 
-
     };
 
     // Exposes and initialize the object
@@ -673,10 +672,10 @@
     }
 
     // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
-    if (PP_Checklists.is_gutenberg_active()) {
+    if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-            if (has_unchecked.length > 0) {
+            var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
+            if (has_unchecked_block.length > 0) {
                 wp.data.dispatch( 'core/editor' ).lockPostSaving( 'ppcPublishButton' );
             } else {
                 wp.data.dispatch( 'core/editor' ).unlockPostSaving( 'ppcPublishButton' );
