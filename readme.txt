@@ -283,7 +283,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [2.5.3] - 2021-11-15 =
 
-* Fixed: Can't update existing posts if requirements changed
+* Fixed: Can't update published posts if requirements changed
 
 = [2.5.2] - 2021-11-11 =
 
