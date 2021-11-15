@@ -284,6 +284,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [2.5.3] - 2021-11-15 =
 
 * Fixed: Can't update published posts if requirements changed
+* Added: WordPress Reviews version 1.1.12
 
 = [2.5.2] - 2021-11-11 =
 
