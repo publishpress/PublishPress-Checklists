@@ -672,6 +672,7 @@
     }
 
     // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
+    // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
     if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
             var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
