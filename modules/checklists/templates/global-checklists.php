@@ -1,11 +1,13 @@
 <form method="post" id="pp-checklists-global">
     <?php wp_nonce_field('ppch-global-checklists'); ?>
 
-    <div id="pp-checklists-post-type-filter">
+    <ul id="pp-checklists-post-type-filter" class="nav-tab-wrapper">
         <?php foreach ($context['post_types'] as $post_type_key => $post_type_label) : ?>
-            <a href="#<?php echo $post_type_key; ?>"><?php echo $post_type_label; ?></a>
+            <li class="nav-tab post-type-<?php echo $post_type_key; ?>">
+                <a href="#<?php echo $post_type_key; ?>"><?php echo $post_type_label; ?></a>
+            </li>
         <?php endforeach; ?>
-    </div>
+    </ul>
 
     <table class="wp-list-table striped pp-checklists-requirements-settings" id="pp-checklists-requirements">
         <thead>
