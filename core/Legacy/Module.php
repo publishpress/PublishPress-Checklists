@@ -245,10 +245,6 @@ class Module
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <img src="<?php echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>"
-                 alt=""
-                 class="logo-header"/>
-
             <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
 
             <?php echo !empty($display_text) ? $display_text : ''; ?>
