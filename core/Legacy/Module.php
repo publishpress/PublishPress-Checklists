@@ -211,11 +211,11 @@ class Module
 
         // If there's been a message, let's display it
         if (isset($_GET['message'])) {
-            $message = $_GET['message'];
+            $message = sanitize_text_field($_GET['message']);
         } elseif (isset($_REQUEST['message'])) {
-            $message = $_REQUEST['message'];
+            $message = sanitize_text_field($_REQUEST['message']);
         } elseif (isset($_POST['message'])) {
-            $message = $_POST['message'];
+            $message = sanitize_text_field($_POST['message']);
         } else {
             $message = false;
         }
@@ -228,11 +228,11 @@ class Module
 
         // If there's been an error, let's display it
         if (isset($_GET['error'])) {
-            $error = $_GET['error'];
+            $error = sanitize_text_field($_GET['error']);
         } elseif (isset($_REQUEST['error'])) {
-            $error = $_REQUEST['error'];
+            $error = sanitize_text_field($_REQUEST['error']);
         } elseif (isset($_POST['error'])) {
-            $error = $_POST['error'];
+            $error = sanitize_text_field($_POST['error']);
         } else {
             $error = false;
         }
