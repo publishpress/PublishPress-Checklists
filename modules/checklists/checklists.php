@@ -125,6 +125,10 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
+            if (!current_user_can('manage_options')) {
+                return;
+            }
+
             // Do the migration
             if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
                 $legacyOptions = get_option('publishpress_checklist_options');
@@ -956,6 +960,10 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             if (!wp_verify_nonce($_POST['_wpnonce'], 'ppch-global-checklists')) {
+                return;
+            }
+
+            if (!current_user_can('manage_options')) {
                 return;
             }
 
