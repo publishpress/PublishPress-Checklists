@@ -6,22 +6,22 @@
                     <?php foreach ($context['modules'] as $module) : ?>
                         <?php if (!empty($context['module']['options_page']) && $context['module']->options->enabled === 'on') : ?>
                             <a
-                                    href="?page=<?php echo $context['slug']; ?>&module=<?php echo $context['module']->settings_slug; ?>"
+                                    href="?page=<?php echo esc_attr($context['slug']); ?>&module=<?php echo esc_attr($context['module']->settings_slug); ?>"
                                     class="nav-tab <?php echo ($context['settings_slug'] == $context['module']->settings_slug) ? 'nav-tab-active' : ''; ?>">
 
-                                <?php echo $context['module']->title; ?>
+                                <?php echo esc_html($context['module']->title); ?>
                             </a>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </h2>
             <?php endif; ?>
 
-            <div class="ppch-settings"><?php echo $context['module_output']; ?></div>
+            <div class="ppch-settings"><?php echo esc_html($context['module_output']); ?></div>
         </div>
 
         <?php if ($context['show_sidebar']) : ?>
             <div class="allex-col-1-4">
-                <?php echo $context['sidebar_output']; ?>
+                <?php echo esc_html($context['sidebar_output']); ?>
             </div>
         <?php endif; ?>
     </div>
