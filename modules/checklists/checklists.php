@@ -153,14 +153,14 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             // Do 2.6.0 migration
-            if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_6_0) && function_exists( 'get_role' )) {
+            if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_6_0) && function_exists('get_role')) {
                 //add newly introduced checklist role for roles with manage_options 
                 $all_roles = $wp_roles->roles;
                 if(is_array($all_roles) && !empty($all_roles)) {
                     foreach ($all_roles as $role => $details) {
                         $role = get_role($role);
                         if ($role->has_cap('manage_options')) {
-                            $role->add_cap( 'manage_checklists' );
+                            $role->add_cap('manage_checklists');
                         }
                     }
                 }
