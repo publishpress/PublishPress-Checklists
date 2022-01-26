@@ -52,6 +52,8 @@ if (!class_exists('PPCH_Checklists')) {
 
         const FLAG_OPTIONS_MIGRATED_2_0_0 = 'publishpress_checklists_options_migrated_2_0_0';
 
+        const FLAG_OPTIONS_MIGRATED_2_6_0 = 'publishpress_checklists_options_migrated_2_6_0';
+
         /**
          * @var string
          */
@@ -117,10 +119,16 @@ if (!class_exists('PPCH_Checklists')) {
             );
 
             $this->module = $legacyPlugin->register_module($this->module_name, $args);
+
+            //add checklist capability
+            add_filter('publishpress_checklists_manage_checklist_cap', [$this, 'checklists_manage_capability']);
+
         }
 
         public function migrateLegacyOptions()
         {
+            global $wp_roles;
+
             if (wp_doing_ajax()) {
                 return;
             }
@@ -142,6 +150,22 @@ if (!class_exists('PPCH_Checklists')) {
                 }
 
                 update_option(self::FLAG_OPTIONS_MIGRATED_2_0_0, true);
+            }
+
+            // Do 2.6.0 migration
+            if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_6_0) && function_exists('get_role')) {
+                //add newly introduced checklist role for roles with manage_options 
+                $all_roles = $wp_roles->roles;
+                if(is_array($all_roles) && !empty($all_roles)) {
+                    foreach ($all_roles as $role => $details) {
+                        $role = get_role($role);
+                        if ($role->has_cap('manage_options')) {
+                            $role->add_cap('manage_checklists');
+                        }
+                    }
+                }
+
+                update_option(self::FLAG_OPTIONS_MIGRATED_2_6_0, true);
             }
         }
 
@@ -1043,5 +1067,16 @@ if (!class_exists('PPCH_Checklists')) {
 
             return $new_requirements_array;
         }
+
+
+        /**
+         * Add checklist capability
+         *
+         */
+        public function checklists_manage_capability($capability)
+        {
+            return 'manage_checklists';
+        }
+        
     }
 }

@@ -281,6 +281,10 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.6.0] - [===UNRELEASED===] =
+
+* Added: Permission to access Checklists screen #173
+
 = [2.5.3] - 2021-11-15 =
 
 * Fixed: Can't update published posts if requirements changed
