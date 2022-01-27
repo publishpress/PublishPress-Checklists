@@ -432,7 +432,7 @@ if (!class_exists('PPCH_Settings')) {
                     $_POST['_wpnonce'],
                     'edit-publishpress-settings'
                 )) {
-                wp_die(esc_html__('Cheatin&#8217; uh?'));
+                wp_die(esc_html__('Cheatin&#8217; uh?', 'publishpress-checklists'));
             }
 
             if (!isset($_POST['publishpress_checklists_settings_options'])) {
