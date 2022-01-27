@@ -133,6 +133,14 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
+            $manageChecklistsCap = apply_filters(
+                'publishpress_checklists_manage_checklist_cap',
+                'manage_options'
+            );
+            if (!current_user_can($manageChecklistsCap)) {
+                return;
+            }
+
             // Do the migration
             if (!(bool)get_option(self::FLAG_OPTIONS_MIGRATED_2_0_0)) {
                 $legacyOptions = get_option('publishpress_checklist_options');
@@ -980,6 +988,14 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             if (!wp_verify_nonce($_POST['_wpnonce'], 'ppch-global-checklists')) {
+                return;
+            }
+
+            $manageChecklistsCap = apply_filters(
+                'publishpress_checklists_manage_checklist_cap',
+                'manage_options'
+            );
+            if (!current_user_can($manageChecklistsCap)) {
                 return;
             }
 
