@@ -1000,6 +1000,7 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_options = $_POST['publishpress_checklists_checklists_options'];
 
             //sanitize checklists options
