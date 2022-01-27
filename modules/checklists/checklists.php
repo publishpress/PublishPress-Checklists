@@ -772,7 +772,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Authentication checks: make sure data came from our meta box and that the current user is allowed to edit the post
             // TODO: switch to using check_admin_referrer? See core (e.g. edit.php) for usage
             if (!isset($_POST[self::METADATA_TAXONOMY . "_nonce"])
-                || !wp_verify_nonce(sanitize_text_field($_POST[self::METADATA_TAXONOMY . "_nonce"]), __FILE__)) {
+                || !wp_verify_nonce(sanitize_key($_POST[self::METADATA_TAXONOMY . "_nonce"]), __FILE__)) {
                 return $id;
             }
 
@@ -956,7 +956,7 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
-            if (!wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']), 'ppch-global-checklists')) {
+            if (!wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'ppch-global-checklists')) {
                 return;
             }
 
