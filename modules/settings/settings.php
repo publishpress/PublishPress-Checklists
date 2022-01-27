@@ -461,7 +461,8 @@ if (!class_exists('PPCH_Settings')) {
             foreach ($modules as $moduleSlug) {
                 $module_name = sanitize_key(Util::sanitizeModuleName($moduleSlug));
 
-                $new_options = (isset($_POST[$legacyPlugin->$module_name->module->options_group_name])) ? sanitize_text_field($_POST[$legacyPlugin->$module_name->module->options_group_name]) : [];
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                $new_options = (isset($_POST[$legacyPlugin->$module_name->module->options_group_name])) ? $this->sanitize_module_options($_POST[$legacyPlugin->$module_name->module->options_group_name]) : [];
 
                 /**
                  * Legacy way to validate the settings. Hook to the filter
@@ -496,6 +497,50 @@ if (!class_exists('PPCH_Settings')) {
             wp_safe_redirect($goback);
 
             exit;
+        }
+
+
+        /**
+         * Sanitize module options.
+         *
+         * @param mixed $module_options
+         * 
+         * @return mixed $sanitized_options
+         */
+        protected function sanitize_module_options($module_options)
+        {
+
+            if($this->is_associative_array($module_options)){
+               $sanitized_options = array_combine(
+                    array_map('sanitize_key', array_keys($module_options)), 
+                    array_map('sanitize_text_field', array_values($module_options))
+                );
+            }elseif(is_array($module_options)){
+                $sanitized_options = array_map('sanitize_text_field', $module_options);
+            }else{
+                $sanitized_options = sanitize_text_field($module_options);
+            }
+
+            return $sanitized_options;
+        }
+
+        /**
+         * Check if array is an associative array.
+         *
+         * @param array $array
+         * 
+         * @return bool
+         */
+        protected function is_associative_array($array)
+        {
+            if(!is_array($array)){
+                return false;
+            }
+
+            if (array() === $array) {
+                return false;
+            }
+            return array_keys($array) !== range(0, count($array) - 1);
         }
 
         public function validate_module_settings($new_options)
