@@ -429,7 +429,7 @@ if (!class_exists('PPCH_Settings')) {
             }
 
             if (!current_user_can('manage_options') || !wp_verify_nonce(
-                sanitize_text_field($_POST['_wpnonce']),
+                sanitize_key($_POST['_wpnonce']),
                     'edit-publishpress-settings'
                 )) {
                 wp_die(__('Cheatin&#8217; uh?'));
