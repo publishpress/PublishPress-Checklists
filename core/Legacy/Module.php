@@ -245,19 +245,19 @@ class Module
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
+            <h1 class="wp-heading-inline"><?php echo esc_html($current_module->title); ?></h1>
 
-            <?php echo !empty($display_text) ? $display_text : ''; ?>
+            <?php echo !empty($display_text) ? esc_html($display_text) : ''; ?>
             <?php // We keep the H2 tag to keep notices tied to the header
             ?>
             <h2>
 
                 <?php if ($current_module->short_description && empty($custom_text)): ?>
-                    <?php echo $current_module->short_description; ?>
+                    <?php echo esc_html($current_module->short_description); ?>
                 <?php endif; ?>
 
                 <?php if (!empty($custom_text)) : ?>
-                    <?php echo $custom_text; ?>
+                    <?php echo esc_html($custom_text); ?>
                 <?php endif; ?>
             </h2>
 
