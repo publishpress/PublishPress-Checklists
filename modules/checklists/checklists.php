@@ -964,7 +964,7 @@ if (!class_exists('PPCH_Checklists')) {
             $new_options = $_POST['publishpress_checklists_checklists_options'];
 
             //sanitize checklists options
-            $this->sanitize_checklists_options($new_options);
+            $new_options = $this->sanitize_checklists_options($new_options);
 
             // Instantiate custom items so they are able to process the settings validations
             $this->instantiate_custom_items_to_validate_settings($new_options);
@@ -1015,6 +1015,8 @@ if (!class_exists('PPCH_Checklists')) {
          * Sanitize checklists options.
          *
          * @param array $new_options
+         * 
+         * @return array $new_options
          */
         protected function sanitize_checklists_options($new_options)
         {
