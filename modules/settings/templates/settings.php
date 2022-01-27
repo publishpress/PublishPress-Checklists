@@ -4,9 +4,17 @@
             <?php if ($context['show_tabs']) : ?>
                 <h2 class="nav-tab-wrapper">
                     <?php foreach ($context['modules'] as $module) : ?>
-                        <?php if (!empty($context['module']['options_page']) && $context['module']->options->enabled === 'on') : ?>
+                        <?php if (!empty($context['module']['options_page']) && $context['module']->options->enabled === 'on') : 
+                            $module_link = add_query_arg(
+                                [
+                                    'page'      => esc_attr($context['slug']),
+                                    'module'    => esc_attr($context['module']->settings_slug)
+                                ],
+                                admin_url('admin.php')
+                            );
+                            ?>
                             <a
-                                    href="?page=<?php echo esc_attr($context['slug']); ?>&module=<?php echo esc_attr($context['module']->settings_slug); ?>"
+                                    href="<?php echo esc_url($module_link); ?>"
                                     class="nav-tab <?php echo ($context['settings_slug'] == $context['module']->settings_slug) ? 'nav-tab-active' : ''; ?>">
 
                                 <?php echo esc_html($context['module']->title); ?>
