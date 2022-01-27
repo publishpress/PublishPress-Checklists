@@ -125,7 +125,11 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
-            if (!current_user_can('manage_options')) {
+            $manageChecklistsCap = apply_filters(
+                'publishpress_checklists_manage_checklist_cap',
+                'manage_options'
+            );
+            if (!current_user_can($manageChecklistsCap)) {
                 return;
             }
 
@@ -963,7 +967,11 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
-            if (!current_user_can('manage_options')) {
+            $manageChecklistsCap = apply_filters(
+                'publishpress_checklists_manage_checklist_cap',
+                'manage_options'
+            );
+            if (!current_user_can($manageChecklistsCap)) {
                 return;
             }
 
