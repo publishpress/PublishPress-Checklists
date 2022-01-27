@@ -9,7 +9,7 @@
         ?>
 
         <a
-                href="//wordpress.org/support/plugin/<?php echo esc_attr($context['plugin_slug']); ?>/reviews/#new-post"
+                href="<?php echo esc_url("//wordpress.org/support/plugin/{$context['plugin_slug']}/reviews/#new-post"); ?>"
                 target="_blank"
                 rel="noopener noreferrer">
             <?php echo sprintf($context['rating_message'], $plugin_name_markup, $rating_stars_markup); ?>
