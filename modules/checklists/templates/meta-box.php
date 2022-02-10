@@ -14,7 +14,7 @@
                     '</a>'
                 );
                 ?>
-                <em><?php echo esc_html($message); ?></em>
+                <em><?php echo $message;// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></em>
             </p>
         <?php else : ?>
             <?php foreach ($context['requirements'] as $key => $req) : ?>

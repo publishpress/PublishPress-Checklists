@@ -98,7 +98,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'publishpress_checklists_plugin_title',
                     esc_html__('Checklists', 'publishpress-checklists')
                 ),
-                'short_description' => __(
+                'short_description' => esc_html__(
                     'Define tasks that must be complete before content is published.',
                     'publishpress-checklists'
                 ),
@@ -580,20 +580,20 @@ if (!class_exists('PPCH_Checklists')) {
                         'roles'             => $roles,
                         'first_post_type'   => current($postTypes),
                         'required_rules'    => $ruquired_rules,
-                        'submit_error'      => __(
+                        'submit_error'      => esc_html__(
                             'Please make sure to complete the settings for',
                             'publishpress-checklists'
                         ),
-                        'custom_item_error' => __(
+                        'custom_item_error' => esc_html__(
                             'Please make sure to add a name for all the custom tasks.',
                             'publishpress-checklists'
                         ),
-                        'editable_by'       => __(
+                        'editable_by'       => esc_html__(
                             'Which roles can mark this task as complete?',
                             'publishpress-checklists'
                         ),
-                        'remove'            => __('Remove', 'publishpress-checklists'),
-                        'enter_name'        => __('Enter name of custom task', 'publishpres-checklists'),
+                        'remove'            => esc_html__('Remove', 'publishpress-checklists'),
+                        'enter_name'        => esc_html__('Enter name of custom task', 'publishpres-checklists'),
                     ]
                 );
             } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
@@ -626,7 +626,7 @@ if (!class_exists('PPCH_Checklists')) {
              */
 
 
-            $title = __('Checklist', 'publishpress-checklists');
+            $title = esc_html__('Checklist', 'publishpress-checklists');
 
             $supported_post_types = $this->getSelectedPostTypes();
 
@@ -682,34 +682,34 @@ if (!class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'                    => $new_requirements_array,
-                        'label_checklist'                 => __('Checklist', 'publishpress-checklists'),
-                        'label_configure'                 => __('Configure', 'publishpress-checklists'),
-                        'msg_missed_optional_publishing'  => __(
+                        'label_checklist'                 => esc_html__('Checklist', 'publishpress-checklists'),
+                        'label_configure'                 => esc_html__('Configure', 'publishpress-checklists'),
+                        'msg_missed_optional_publishing'  => esc_html__(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
                         ),
-                        'msg_missed_optional_updating'    => __(
+                        'msg_missed_optional_updating'    => esc_html__(
                             'Are you sure you want to update the published post anyway?',
                             'publishpress-checklists'
                         ),
-                        'msg_missed_required_publishing'  => __(
+                        'msg_missed_required_publishing'  => esc_html__(
                             'Please complete the following tasks before publishing:',
                             'publishpress-checklists'
                         ),
-                        'msg_missed_required_updating'    => __(
+                        'msg_missed_required_updating'    => esc_html__(
                             'Please complete the following tasks before updating the published post:',
                             'publishpress-checklists'
                         ),
-                        'msg_missed_important_publishing' => __(
+                        'msg_missed_important_publishing' => esc_html__(
                             'Not required, but important: ',
                             'publishpress-checklists'
                         ),
-                        'msg_missed_important_updating'   => __(
+                        'msg_missed_important_updating'   => esc_html__(
                             'Not required, but important: ',
                             'publishpress-checklists'
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
-                        'title_warning_icon'              => __('One or more items in the checklist are not completed'),
+                        'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
                         'user_can_manage_options'         => current_user_can( 'manage_options' ),
                         'configure_url'                   => esc_url( $this->get_admin_link() ),
@@ -733,14 +733,14 @@ if (!class_exists('PPCH_Checklists')) {
                     'configure_link'    => $checklistsLink,
                     'nonce'             => wp_create_nonce(__FILE__),
                     'lang'              => [
-                        'empty_checklist_message' => __(
+                        'empty_checklist_message' => esc_html__(
                             'You don\'t have to complete any %sChecklist tasks%s.',
                             'publishpress-checklists'
                         ),
-                        'required'                => __('Required', 'publishpress-checklists'),
-                        'ok'                      => __('Ok', 'publishpress-checklists'),
-                        'no'                      => __('No', 'publishpress-checklists'),
-                        'yes'                     => __('Yes', 'publishpress-checklists'),
+                        'required'                => esc_html__('Required', 'publishpress-checklists'),
+                        'ok'                      => esc_html__('Ok', 'publishpress-checklists'),
+                        'no'                      => esc_html__('No', 'publishpress-checklists'),
+                        'yes'                     => esc_html__('Yes', 'publishpress-checklists'),
 
                     ],
                 ]
@@ -897,10 +897,10 @@ if (!class_exists('PPCH_Checklists')) {
                     'requirements' => $new_requirements_array,
                     'post_types'   => $post_types,
                     'lang'         => [
-                        'description'     => __('Task', 'publishpress-checklists'),
-                        'action'          => __('Disabled, Recommended or Required', 'publishpress-checklists'),
-                        'params'          => __('Options', 'publishpress-checklists'),
-                        'add_custom_item' => __('Add custom task', 'publishpress-checklists'),
+                        'description'     => esc_html__('Task', 'publishpress-checklists'),
+                        'action'          => esc_html__('Disabled, Recommended or Required', 'publishpress-checklists'),
+                        'params'          => esc_html__('Options', 'publishpress-checklists'),
+                        'add_custom_item' => esc_html__('Add custom task', 'publishpress-checklists'),
                     ],
                 ]
             );
@@ -922,9 +922,9 @@ if (!class_exists('PPCH_Checklists')) {
             return array_merge(
                 $rules,
                 [
-                    Plugin::RULE_DISABLED => __('Disabled', 'publishpress-checklists'),
-                    Plugin::RULE_WARNING  => __('Recommended', 'publishpress-checklists'),
-                    Plugin::RULE_BLOCK    => __('Required', 'publishpress-checklists'),
+                    Plugin::RULE_DISABLED => esc_html__('Disabled', 'publishpress-checklists'),
+                    Plugin::RULE_WARNING  => esc_html__('Recommended', 'publishpress-checklists'),
+                    Plugin::RULE_BLOCK    => esc_html__('Required', 'publishpress-checklists'),
                 ]
             );
         }
