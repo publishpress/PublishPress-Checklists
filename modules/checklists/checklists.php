@@ -1067,7 +1067,7 @@ if (!class_exists('PPCH_Checklists')) {
                 //option value is an array of keys => $value pair
                 $sanitized_value = [];
                 foreach($option_value as $option_value_key => $option_value_value){
-                    $sanitized_value[sanitize_key($option_value_key)] = sanitize_text_field($option_value_value);
+                    $sanitized_value[sanitize_key($option_value_key)] = is_array($option_value_value) ? array_map('sanitize_text_field', $option_value_value) : sanitize_text_field($option_value_value);
                 }
                 
                 //unset original option sanitize_key can potentially change key value if they are manipulated ?
