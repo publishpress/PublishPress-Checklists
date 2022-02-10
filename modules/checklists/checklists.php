@@ -566,7 +566,7 @@ if (!class_exists('PPCH_Checklists')) {
                 reset($postTypes);
 
                 //required rules for option validation
-                $ruquired_rules = array(
+                $required_rules = array(
                     Plugin::RULE_ONLY_DISPLAY,
                     Plugin::RULE_WARNING,
                     Plugin::RULE_BLOCK,
@@ -579,7 +579,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'rules'             => $rules,
                         'roles'             => $roles,
                         'first_post_type'   => current($postTypes),
-                        'required_rules'    => $ruquired_rules,
+                        'required_rules'    => $required_rules,
                         'submit_error'      => __(
                             'Please make sure to complete the settings for',
                             'publishpress-checklists'
