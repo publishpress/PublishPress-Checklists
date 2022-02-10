@@ -804,7 +804,7 @@ if (!class_exists('PPCH_Checklists')) {
             // Authentication checks: make sure data came from our meta box and that the current user is allowed to edit the post
             // TODO: switch to using check_admin_referrer? See core (e.g. edit.php) for usage
             if (!isset($_POST[self::METADATA_TAXONOMY . "_nonce"])
-                || !wp_verify_nonce($_POST[self::METADATA_TAXONOMY . "_nonce"], __FILE__)) {
+                || !wp_verify_nonce(sanitize_key($_POST[self::METADATA_TAXONOMY . "_nonce"]), __FILE__)) {
                 return $id;
             }
 
@@ -818,8 +818,9 @@ if (!class_exists('PPCH_Checklists')) {
             // Check if we have data coming from custom items
             if (isset($_POST['_PPCH_custom_item'])) {
                 if (!empty($_POST['_PPCH_custom_item'])) {
+                    // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
                     foreach ($_POST['_PPCH_custom_item'] as $item_id => $value) {
-                        update_post_meta($id, self::POST_META_PREFIX . $item_id, $value);
+                        update_post_meta($id, self::POST_META_PREFIX . sanitize_key($item_id), sanitize_text_field($value));
                     }
                 }
             }
@@ -987,7 +988,7 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
-            if (!wp_verify_nonce($_POST['_wpnonce'], 'ppch-global-checklists')) {
+            if (!wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'ppch-global-checklists')) {
                 return;
             }
 
@@ -999,8 +1000,11 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_options = $_POST['publishpress_checklists_checklists_options'];
 
+            //sanitize checklists options
+            $new_options = $this->sanitize_checklists_options($new_options);
 
             // Instantiate custom items so they are able to process the settings validations
             $this->instantiate_custom_items_to_validate_settings($new_options);
@@ -1047,6 +1051,35 @@ if (!class_exists('PPCH_Checklists')) {
             }
         }
 
+        /**
+         * Sanitize checklists options.
+         *
+         * @param array $new_options
+         * 
+         * @return array $new_options
+         */
+        protected function sanitize_checklists_options($new_options)
+        {
+            foreach ($new_options as $option_key => $option_value) {
+                //sanitize original key
+                $sanitized_key = sanitize_key($option_key);
+
+                //option value is an array of keys => $value pair
+                $sanitized_value = [];
+                foreach($option_value as $option_value_key => $option_value_value){
+                    $sanitized_value[sanitize_key($option_value_key)] = sanitize_text_field($option_value_value);
+                }
+                
+                //unset original option sanitize_key can potentially change key value if they are manipulated ?
+                unset($new_options[$option_key]);
+
+                //add santized options
+                $new_options[$sanitized_key] = $sanitized_value;
+            }
+
+            return $new_options;
+        }
+        
         /**
          * Rearrange the requirements array by custom order
          *

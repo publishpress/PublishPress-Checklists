@@ -358,7 +358,7 @@ if (!class_exists('PPCH_Settings')) {
         {
             if (isset($_REQUEST['form-errors'][$field])): ?>
                 <div class="form-error">
-                    <p><?php echo esc_html($_REQUEST['form-errors'][$field]); ?></p>
+                    <p><?php echo esc_html(sanitize_text_field($_REQUEST['form-errors'][$field])); ?></p>
                 </div>
             <?php else: ?>
                 <p class="description"><?php echo esc_html($description); ?></p>
@@ -429,7 +429,7 @@ if (!class_exists('PPCH_Settings')) {
             }
 
             if (!current_user_can('manage_options') || !wp_verify_nonce(
-                    $_POST['_wpnonce'],
+                sanitize_key($_POST['_wpnonce']),
                     'edit-publishpress-settings'
                 )) {
                 wp_die(esc_html__('Cheatin&#8217; uh?', 'publishpress-checklists'));
@@ -442,7 +442,7 @@ if (!class_exists('PPCH_Settings')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             if (isset($_POST['publishpress_checklists_settings_options']['features'])) {
-                $enabledFeatures = $_POST['publishpress_checklists_settings_options']['features'];
+                $enabledFeatures = sanitize_text_field($_POST['publishpress_checklists_settings_options']['features']);
 
                 // Run through all the modules updating their statuses
                 foreach ($legacyPlugin->modules as $mod_data) {
@@ -461,7 +461,8 @@ if (!class_exists('PPCH_Settings')) {
             foreach ($modules as $moduleSlug) {
                 $module_name = sanitize_key(Util::sanitizeModuleName($moduleSlug));
 
-                $new_options = (isset($_POST[$legacyPlugin->$module_name->module->options_group_name])) ? $_POST[$legacyPlugin->$module_name->module->options_group_name] : [];
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                $new_options = (isset($_POST[$legacyPlugin->$module_name->module->options_group_name])) ? $this->sanitize_module_options($_POST[$legacyPlugin->$module_name->module->options_group_name]) : [];
 
                 /**
                  * Legacy way to validate the settings. Hook to the filter
@@ -498,6 +499,51 @@ if (!class_exists('PPCH_Settings')) {
             exit;
         }
 
+
+        /**
+         * Sanitize module options.
+         *
+         * @param mixed $module_options
+         * 
+         * @return mixed $sanitized_options
+         */
+        protected function sanitize_module_options($module_options)
+        {
+
+            if($this->is_associative_array($module_options)){
+               $sanitized_options = array_combine(
+                    array_map('sanitize_key', array_keys($module_options)), 
+                    array_map('sanitize_text_field', array_values($module_options))
+                );
+            }elseif(is_array($module_options)){
+                $sanitized_options = array_map('sanitize_text_field', $module_options);
+            }else{
+                $sanitized_options = sanitize_text_field($module_options);
+            }
+
+            return $sanitized_options;
+        }
+
+        /**
+         * Check if array is an associative array.
+         *
+         * @param array $array
+         * 
+         * @return bool
+         */
+        protected function is_associative_array($array)
+        {
+            if(!is_array($array)){
+                return false;
+            }
+
+            if (array() === $array) {
+                return false;
+            }
+            return array_keys($array) !== range(0, count($array) - 1);
+        }
+        
+
         public function validate_module_settings($new_options)
         {
             if (!isset($new_options['enabled'])) {
@@ -519,17 +565,17 @@ if (!class_exists('PPCH_Settings')) {
         {
             $legacyPlugin = Factory::getLegacyPlugin();
 
-            $module_settings_slug = isset($_GET['module']) && !empty($_GET['module']) ? $_GET['module'] : PPCH_Settings::SETTINGS_SLUG;
+            $module_settings_slug = isset($_GET['module']) && !empty($_GET['module']) ? sanitize_text_field($_GET['module']) : PPCH_Settings::SETTINGS_SLUG;
             $requested_module     = $legacyPlugin->getModuleBy('settings_slug', $module_settings_slug);
             $display_text         = '';
 
             // If there's been a message, let's display it
             if (isset($_GET['message'])) {
-                $message = $_GET['message'];
+                $message = sanitize_text_field($_GET['message']);
             } elseif (isset($_REQUEST['message'])) {
-                $message = $_REQUEST['message'];
+                $message = sanitize_text_field($_REQUEST['message']);
             } elseif (isset($_POST['message'])) {
-                $message = $_POST['message'];
+                $message = sanitize_text_field($_POST['message']);
             } else {
                 $message = false;
             }
@@ -541,11 +587,11 @@ if (!class_exists('PPCH_Settings')) {
 
             // If there's been an error, let's display it
             if (isset($_GET['error'])) {
-                $error = $_GET['error'];
+                $error = sanitize_text_field($_GET['error']);
             } elseif (isset($_REQUEST['error'])) {
-                $error = $_REQUEST['error'];
+                $error = sanitize_text_field($_REQUEST['error']);
             } elseif (isset($_POST['error'])) {
-                $error = $_POST['error'];
+                $error = sanitize_text_field($_POST['error']);
             } else {
                 $error = false;
             }
