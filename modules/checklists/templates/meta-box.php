@@ -9,8 +9,8 @@
             <p>
                 <?php
                 $message = sprintf(
-                    $context['lang']['empty_checklist_message'],
-                    '<a href="' . $context['configure_link'] . '">',
+                    esc_html($context['lang']['empty_checklist_message']),
+                    '<a href="' . esc_url($context['configure_link']) . '">',
                     '</a>'
                 );
                 ?>
