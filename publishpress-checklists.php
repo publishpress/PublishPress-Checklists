@@ -61,7 +61,7 @@ if (is_admin() && !defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
 
                 $manageChecklistsCap = apply_filters(
                     'publishpress_checklists_manage_checklist_cap',
-                    'manage_options'
+                    'manage_checklists'
                 );
                 if (current_user_can($manageChecklistsCap)) {
                     add_filter(

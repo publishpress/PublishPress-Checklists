@@ -120,9 +120,6 @@ if (!class_exists('PPCH_Checklists')) {
 
             $this->module = $legacyPlugin->register_module($this->module_name, $args);
 
-            //add checklist capability
-            add_filter('publishpress_checklists_manage_checklist_cap', [$this, 'checklists_manage_capability']);
-
         }
 
         public function migrateLegacyOptions()
@@ -133,11 +130,7 @@ if (!class_exists('PPCH_Checklists')) {
                 return;
             }
 
-            $manageChecklistsCap = apply_filters(
-                'publishpress_checklists_manage_checklist_cap',
-                'manage_options'
-            );
-            if (!current_user_can($manageChecklistsCap)) {
+            if (!current_user_can('manage_options')) {
                 return;
             }
 
@@ -838,7 +831,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'publishpress_checklists_plugin_title',
                     esc_html__('Checklists', 'publishpress-checklists')
                 ),
-                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
+                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_checklists'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
             );
@@ -858,7 +851,7 @@ if (!class_exists('PPCH_Checklists')) {
                 $legacyPlugin->getMenuSlug(),
                 $menuLabel,
                 $menuLabel,
-                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
+                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_checklists'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
             );
@@ -867,7 +860,7 @@ if (!class_exists('PPCH_Checklists')) {
                 $legacyPlugin->getMenuSlug(),
                 $menuLabel,
                 $menuLabel,
-                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_options'),
+                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_checklists'),
                 self::MENU_SLUG,
                 [$this, 'options_page_controller']
             );
@@ -994,7 +987,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             $manageChecklistsCap = apply_filters(
                 'publishpress_checklists_manage_checklist_cap',
-                'manage_options'
+                'manage_checklists'
             );
             if (!current_user_can($manageChecklistsCap)) {
                 return;
@@ -1115,16 +1108,6 @@ if (!class_exists('PPCH_Checklists')) {
             };
 
             return $new_requirements_array;
-        }
-
-
-        /**
-         * Add checklist capability
-         *
-         */
-        public function checklists_manage_capability($capability)
-        {
-            return 'manage_checklists';
         }
         
     }
