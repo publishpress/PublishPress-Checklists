@@ -566,7 +566,7 @@ if (!class_exists('PPCH_Checklists')) {
                 reset($postTypes);
 
                 //required rules for option validation
-                $ruquired_rules = array(
+                $required_rules = array(
                     Plugin::RULE_ONLY_DISPLAY,
                     Plugin::RULE_WARNING,
                     Plugin::RULE_BLOCK,
@@ -579,7 +579,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'rules'             => $rules,
                         'roles'             => $roles,
                         'first_post_type'   => current($postTypes),
-                        'required_rules'    => $ruquired_rules,
+                        'required_rules'    => $required_rules,
                         'submit_error'      => esc_html__(
                             'Please make sure to complete the settings for',
                             'publishpress-checklists'
@@ -1067,7 +1067,7 @@ if (!class_exists('PPCH_Checklists')) {
                 //option value is an array of keys => $value pair
                 $sanitized_value = [];
                 foreach($option_value as $option_value_key => $option_value_value){
-                    $sanitized_value[sanitize_key($option_value_key)] = sanitize_text_field($option_value_value);
+                    $sanitized_value[sanitize_key($option_value_key)] = is_array($option_value_value) ? array_map('sanitize_text_field', $option_value_value) : sanitize_text_field($option_value_value);
                 }
                 
                 //unset original option sanitize_key can potentially change key value if they are manipulated ?
