@@ -509,16 +509,16 @@ if (!class_exists('PPCH_Settings')) {
          */
         protected function sanitize_module_options($module_options)
         {
+            $sanitized_options = [];
 
-            if($this->is_associative_array($module_options)){
-               $sanitized_options = array_combine(
-                    array_map('sanitize_key', array_keys($module_options)), 
-                    array_map('sanitize_text_field', array_values($module_options))
-                );
-            }elseif(is_array($module_options)){
-                $sanitized_options = array_map('sanitize_text_field', $module_options);
-            }else{
-                $sanitized_options = sanitize_text_field($module_options);
+            foreach ($module_options as $key => $value) {
+                $key = sanitize_text_field($key);
+
+                if (is_array($value)) {
+                    $sanitized_options[$key] = $this->sanitize_module_options($value);
+                } else {
+                    $sanitized_options[$key] = sanitize_text_field($value);
+                }
             }
 
             return $sanitized_options;
