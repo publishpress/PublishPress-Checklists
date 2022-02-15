@@ -283,25 +283,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 = [2.6.0] - [===UNRELEASED===] =
 
-* Added: Permission to access Checklists screen #173
+* Added: Added capability "manage_checklists" to access Checklists screen, #173;
+* Fixed: Fix tabs layout in the settings page, #317;
+* Removed: Remove the icon from the admin heading;
+* Fixed: Updated the Reviews library, fixing compatibility with our other plugins;
+* Fixed: Add capability check before saving global checklists options (we already had a nonce check in place), #325;
+* Fixed: Improved output escaping in the admin interface, #326;
+* Fixed: Improved input sanitization, #324;
 
 = [2.5.3] - 2021-11-15 =
 
-* Fixed: Can't update published posts if requirements changed
-* Added: WordPress Reviews version 1.1.12
+* Fixed: Can't update published posts if requirements changed;
+* Added: WordPress Reviews version 1.1.12;
 
 = [2.5.2] - 2021-11-11 =
 
-* Fixed: Missing logo image for ask-for-review banner
-* Added: Ask-for-review banner in other admin pages
+* Fixed: Missing logo image for ask-for-review banner;
+* Added: Ask-for-review banner in other admin pages;
 
 = [2.5.1] - 2021-11-11 =
 
-* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
-* Fixed: Preferences Panel box is broken
-* Fixed: Changed ID of span where full slug is picked up from with Classic Editor
-* Fixed: Border width for buttons
-* Added: Ask for plugin review support
+* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled;
+* Fixed: Preferences Panel box is broken;
+* Fixed: Changed ID of span where full slug is picked up from with Classic Editor;
+* Fixed: Border width for buttons;
+* Added: Ask for plugin review support;
 
 = [2.5.0] - 2021-04-22 =
 
