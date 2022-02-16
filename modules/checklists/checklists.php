@@ -847,14 +847,16 @@ if (!class_exists('PPCH_Checklists')) {
             $menuLabel = esc_html__('Checklists', 'publishpress-checklists');
 
             // Main Menu
-            add_submenu_page(
-                $legacyPlugin->getMenuSlug(),
-                $menuLabel,
-                $menuLabel,
-                apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_checklists'),
-                self::MENU_SLUG,
-                [$this, 'options_page_controller']
-            );
+            if (defined('PHP_VERSION') && version_compare(PHP_VERSION, '8', '<')) {
+                add_submenu_page(
+                    $legacyPlugin->getMenuSlug(),
+                    $menuLabel,
+                    $menuLabel,
+                    apply_filters('publishpress_checklists_manage_checklist_cap', 'manage_checklists'),
+                    self::MENU_SLUG,
+                    [$this, 'options_page_controller']
+                );
+            }
 
             add_submenu_page(
                 $legacyPlugin->getMenuSlug(),

@@ -281,7 +281,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.6.0] - [===UNRELEASED===] =
+= [2.7.0] - 16 Feb 2022 =
 
 * Added: Added capability "manage_checklists" to access Checklists screen, #173;
 * Fixed: Fix tabs layout in the settings page, #317;
@@ -290,6 +290,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Add capability check before saving global checklists options (we already had a nonce check in place), #325;
 * Fixed: Improved output escaping in the admin interface, #326;
 * Fixed: Improved input sanitization, #324;
+* Fixed: Fixed duplicated admin menu on PHP 8, #316;
+
+= [2.6.0] = SKIPPED
+
+Skipped version, for syncing the version number with the Pro plugin.
 
 = [2.5.3] - 2021-11-15 =
 
