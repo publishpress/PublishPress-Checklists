@@ -284,8 +284,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [2.7.0] - 16 Feb 2022 =
 
 * Added: Added capability "manage_checklists" to access Checklists screen, #173;
-* Fixed: Fix tabs layout in the settings page, #317;
 * Removed: Remove the icon from the admin heading;
+* Fixed: Fix tabs layout in the settings page, #317;
 * Fixed: Updated the Reviews library, fixing compatibility with our other plugins;
 * Fixed: Add capability check before saving global checklists options (we already had a nonce check in place), #325;
 * Fixed: Improved output escaping in the admin interface, #326;
