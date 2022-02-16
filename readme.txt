@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.8.2
-Stable tag: 2.5.3
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -281,23 +281,38 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.7.0] - 16 Feb 2022 =
+
+* Added: Added capability "manage_checklists" to access Checklists screen, #173;
+* Removed: Remove the icon from the admin heading;
+* Fixed: Fix tabs layout in the settings page, #317;
+* Fixed: Updated the Reviews library, fixing compatibility with our other plugins;
+* Fixed: Add capability check before saving global checklists options (we already had a nonce check in place), #325;
+* Fixed: Improved output escaping in the admin interface, #326;
+* Fixed: Improved input sanitization, #324;
+* Fixed: Fixed duplicated admin menu on PHP 8, #316;
+
+= [2.6.0] = SKIPPED
+
+Skipped version, for syncing the version number with the Pro plugin.
+
 = [2.5.3] - 2021-11-15 =
 
-* Fixed: Can't update published posts if requirements changed
-* Added: WordPress Reviews version 1.1.12
+* Fixed: Can't update published posts if requirements changed;
+* Added: WordPress Reviews version 1.1.12;
 
 = [2.5.2] - 2021-11-11 =
 
-* Fixed: Missing logo image for ask-for-review banner
-* Added: Ask-for-review banner in other admin pages
+* Fixed: Missing logo image for ask-for-review banner;
+* Added: Ask-for-review banner in other admin pages;
 
 = [2.5.1] - 2021-11-11 =
 
-* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled
-* Fixed: Preferences Panel box is broken
-* Fixed: Changed ID of span where full slug is picked up from with Classic Editor
-* Fixed: Border width for buttons
-* Added: Ask for plugin review support
+* Fixed: Skip the comply of requirements when "Include pre-publish checklist" is disabled;
+* Fixed: Preferences Panel box is broken;
+* Fixed: Changed ID of span where full slug is picked up from with Classic Editor;
+* Fixed: Border width for buttons;
+* Added: Ask for plugin review support;
 
 = [2.5.0] - 2021-04-22 =
 

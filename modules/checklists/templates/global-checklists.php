@@ -1,17 +1,19 @@
 <form method="post" id="pp-checklists-global">
     <?php wp_nonce_field('ppch-global-checklists'); ?>
 
-    <div id="pp-checklists-post-type-filter">
+    <ul id="pp-checklists-post-type-filter" class="nav-tab-wrapper">
         <?php foreach ($context['post_types'] as $post_type_key => $post_type_label) : ?>
-            <a href="#<?php echo $post_type_key; ?>"><?php echo $post_type_label; ?></a>
+            <li class="nav-tab post-type-<?php echo esc_attr($post_type_key); ?>">
+                <a href="#<?php echo esc_attr($post_type_key); ?>"><?php echo esc_html($post_type_label); ?></a>
+            </li>
         <?php endforeach; ?>
-    </div>
+    </ul>
 
     <table class="wp-list-table striped pp-checklists-requirements-settings" id="pp-checklists-requirements">
         <thead>
         <tr>
-            <th><?php echo $context['lang']['description']; ?></th>
-            <th><?php echo $context['lang']['action']; ?></th>
+            <th><?php echo esc_html($context['lang']['description']); ?></th>
+            <th><?php echo esc_html($context['lang']['action']); ?></th>
             <?php
             /**
              * @param string $html
@@ -21,7 +23,7 @@
              */
             do_action('publishpress_checklists_tasks_list_th');
             ?>
-            <th><?php echo $context['lang']['params']; ?></th>
+            <th><?php echo esc_html($context['lang']['params']); ?></th>
         </tr>
         </thead>
 
@@ -31,8 +33,8 @@
             <?php foreach ($post_type_requirements as $requirement) : ?>
                 <tr
                         class="pp-checklists-requirement-row"
-                        data-id="<?php echo $requirement->name; ?>"
-                        data-post-type="<?php echo $post_type; ?>">
+                        data-id="<?php echo esc_attr($requirement->name); ?>"
+                        data-post-type="<?php echo esc_attr($post_type); ?>">
 
                     <td><?php echo $requirement->get_setting_title_html(); ?></td>
                     <td><?php echo $requirement->get_setting_action_list_html(); ?></td>
@@ -56,11 +58,11 @@
     <br>
     <div>
         <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
-            <span class="dashicons dashicons-plus-alt"></span> <?php echo $context['lang']['add_custom_item']; ?>
+            <span class="dashicons dashicons-plus-alt"></span> <?php echo esc_html($context['lang']['add_custom_item']); ?>
         </a>
-        <span class="pp-checklists-field-description"><?php echo __('Custom tasks do not complete automatically. Users must check the box to show they have completed the task.', 'publishpress-checklists'); ?></span>
+        <span class="pp-checklists-field-description"><?php echo esc_html__('Custom tasks do not complete automatically. Users must check the box to show they have completed the task.', 'publishpress-checklists'); ?></span>
     </div>
 
     <input type="submit" name="submit" id="submit" class="button button-primary"
-           value="<?php echo __('Save Changes', 'publishpress-checklists'); ?>">
+           value="<?php echo esc_attr__('Save Changes', 'publishpress-checklists'); ?>">
 </form>

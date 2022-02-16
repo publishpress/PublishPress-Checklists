@@ -211,11 +211,11 @@ class Module
 
         // If there's been a message, let's display it
         if (isset($_GET['message'])) {
-            $message = $_GET['message'];
+            $message = sanitize_text_field($_GET['message']);
         } elseif (isset($_REQUEST['message'])) {
-            $message = $_REQUEST['message'];
+            $message = sanitize_text_field($_REQUEST['message']);
         } elseif (isset($_POST['message'])) {
-            $message = $_POST['message'];
+            $message = sanitize_text_field($_POST['message']);
         } else {
             $message = false;
         }
@@ -228,11 +228,11 @@ class Module
 
         // If there's been an error, let's display it
         if (isset($_GET['error'])) {
-            $error = $_GET['error'];
+            $error = sanitize_text_field($_GET['error']);
         } elseif (isset($_REQUEST['error'])) {
-            $error = $_REQUEST['error'];
+            $error = sanitize_text_field($_REQUEST['error']);
         } elseif (isset($_POST['error'])) {
-            $error = $_POST['error'];
+            $error = sanitize_text_field($_POST['error']);
         } else {
             $error = false;
         }
@@ -245,23 +245,19 @@ class Module
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
         <header>
-            <img src="<?php echo Util::pluginDirUrl() . 'modules/checklists/assets/img/publishpress-logo-icon.png'; ?>"
-                 alt=""
-                 class="logo-header"/>
+            <h1 class="wp-heading-inline"><?php echo esc_html($current_module->title); ?></h1>
 
-            <h1 class="wp-heading-inline"><?php echo $current_module->title; ?></h1>
-
-            <?php echo !empty($display_text) ? $display_text : ''; ?>
+            <?php echo !empty($display_text) ? esc_html($display_text) : ''; ?>
             <?php // We keep the H2 tag to keep notices tied to the header
             ?>
             <h2>
 
                 <?php if ($current_module->short_description && empty($custom_text)): ?>
-                    <?php echo $current_module->short_description; ?>
+                    <?php echo esc_html($current_module->short_description); ?>
                 <?php endif; ?>
 
                 <?php if (!empty($custom_text)) : ?>
-                    <?php echo $custom_text; ?>
+                    <?php echo esc_html($custom_text); ?>
                 <?php endif; ?>
             </h2>
 

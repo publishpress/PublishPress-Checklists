@@ -12,7 +12,7 @@
  * @publishpress-checklists
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Version: 2.5.3
+ * Version: 2.7.0
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
@@ -61,7 +61,7 @@ if (is_admin() && !defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
 
                 $manageChecklistsCap = apply_filters(
                     'publishpress_checklists_manage_checklist_cap',
-                    'manage_options'
+                    'manage_checklists'
                 );
                 if (current_user_can($manageChecklistsCap)) {
                     add_filter(
