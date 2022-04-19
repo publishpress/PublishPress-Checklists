@@ -132,6 +132,7 @@ class Util
         if (substr_count(PPCH_PATH_BASE, 'vendor' . $directorySeparator . 'publishpress') > 0) {
             $relativePathIndex = strpos(PPCH_PATH_BASE, $directorySeparator . 'plugins' . $directorySeparator);
             $relativePath      = substr(PPCH_PATH_BASE, $relativePathIndex + 9);
+            $relativePath      = str_replace('\\', '/', $relativePath);
 
             return plugins_url() . '/' . $relativePath;
         }
