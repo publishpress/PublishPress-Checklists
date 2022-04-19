@@ -388,7 +388,7 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             if (!empty($classes)) {
-                $requirements = array_merge($requirements, $classes);
+                $requirements = $classes;
             }
 
             return $requirements;
