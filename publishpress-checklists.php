@@ -82,7 +82,7 @@ if (is_admin() && !defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
     );
 }
 
-if (defined('PPCH_LOADED')) {
+if (is_admin() && defined('PPCH_LOADED')) {
     $plugin = new Plugin();
     $plugin->init();
 }
