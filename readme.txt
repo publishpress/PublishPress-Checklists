@@ -281,6 +281,16 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.7.1] - 20 Apr 2022 =
+
+* Fixed: Fix incorrect text in settings, #344;
+* Fixed: Allow links with # as valid URL check, #352;
+* Fixed: Hide task not supported for post type, #199;
+* Fixed: Fix bad footer image URL on Windows for the Pro plugin, #342;
+* Fixed: Only load the checklists and resources in relevant pages, #129;
+* Fixed: Fix method call is provided 2 parameters, but the method signature uses 1 parameters error, #179;
+* Updated: Spanish and Italian translations, #348;
+
 = [2.7.0] - 16 Feb 2022 =
 
 * Added: Added capability "manage_checklists" to access Checklists screen, #173;
