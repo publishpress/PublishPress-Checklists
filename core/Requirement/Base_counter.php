@@ -57,7 +57,7 @@ class Base_counter extends Base_simple implements Interface_required
      */
     public function filter_settings_validate($new_options)
     {
-        $new_options = parent::filter_settings_validate($new_options, $this->post_type);
+        $new_options = parent::filter_settings_validate($new_options);
 
         $index = $this->name . '_value';
         if (isset($new_options[$index][$this->post_type])) {
