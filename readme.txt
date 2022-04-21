@@ -1,6 +1,6 @@
 === PublishPress Checklists: Pre-Publishing Approval Task Checklist for WordPress Content ===
 
-Contributors: publishpress, kevinB, stevejburge, andergmartins
+Contributors: publishpress, kevinB, stevejburge, andergmartins, ojopaul
 Author: PublishPress
 Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
