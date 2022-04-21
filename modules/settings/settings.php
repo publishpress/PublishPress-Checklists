@@ -688,7 +688,7 @@ if (!class_exists('PPCH_Settings')) {
 
             add_settings_field(
                 'disable_quick_edit_publish',
-                __('Disable quick edit publish:', 'publishpress-checklists'),
+                __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_publish_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
@@ -743,7 +743,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'This will disable status row in quick edit',
+                    'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements."',
                     'publishpress-checklists'
                 );
             echo '</label>';

@@ -1,13 +1,13 @@
 === PublishPress Checklists: Pre-Publishing Approval Task Checklist for WordPress Content ===
 
-Contributors: publishpress, kevinB, stevejburge, andergmartins
+Contributors: publishpress, kevinB, stevejburge, andergmartins, ojopaul
 Author: PublishPress
 Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 5.8.2
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -280,6 +280,16 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.7.1] - 20 Apr 2022 =
+
+* Fixed: Fix incorrect text in settings, #344;
+* Fixed: Allow links with # as valid URL check, #352;
+* Fixed: Hide task not supported for post type, #199;
+* Fixed: Fix bad footer image URL on Windows for the Pro plugin, #342;
+* Fixed: Only load the checklists and resources in relevant pages, #129;
+* Fixed: Fix method call is provided 2 parameters, but the method signature uses 1 parameters error, #179;
+* Updated: Spanish and Italian translations, #348;
 
 = [2.7.0] - 16 Feb 2022 =
 
