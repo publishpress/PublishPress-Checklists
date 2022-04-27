@@ -739,7 +739,7 @@ if (!class_exists('PPCH_Settings')) {
             $id    = $this->module->options_group_name . '_disable_quick_edit_publish';
             $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
 
-            echo '<label for="' . $id . '">';
+            echo '<label for="' . esc_attr($id) . '">';
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(

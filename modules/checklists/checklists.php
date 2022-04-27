@@ -1025,6 +1025,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             // Reload the module's options after saving.
             wp_redirect($_SERVER['HTTP_REFERER']);
+            exit();
         }
 
         /**
