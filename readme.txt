@@ -281,6 +281,11 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.7.2] - 27 Apr 2022 =
+
+* Fixed: Fix Yoast SEO word count breaks in Pending Review, #345;
+* Fixed: Run the WordPress VIP scans on Checklists, #354;
+
 = [2.7.1] - 20 Apr 2022 =
 
 * Fixed: Fix incorrect text in settings, #344;
