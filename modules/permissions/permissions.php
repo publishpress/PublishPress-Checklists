@@ -140,7 +140,7 @@ class PPCH_Permissions extends Module
 
     public function actionTasksListTh($postType)
     {
-        echo '<th>' . __('Who can ignore the task?', 'publishpress-checklists') . '</th>';
+        echo '<th>' . esc_html__('Who can ignore the task?', 'publishpress-checklists') . '</th>';
     }
 
     public function actionTasksListTd($requirement, $postType)
@@ -158,17 +158,18 @@ class PPCH_Permissions extends Module
 
         $userRoles = get_editable_roles();
 
-        $rolesSelect = '<select class="pp-checklists-can-ignore" name="publishpress_checklists_checklists_options[' . $requirement->name . '_can_ignore][' . $postType . '][]" multiple="multiple" class="user-roles-list">';
+        $rolesSelect = '<select class="pp-checklists-can-ignore" name="'. esc_attr('publishpress_checklists_checklists_options[' . $requirement->name . '_can_ignore][' . $postType . '][]') .'" multiple="multiple" class="user-roles-list">';
         $rolesSelect .= '<option value=""></option>';
         foreach ($userRoles as $slug => $role) {
-            $rolesSelect .= '<option value="' . $slug . '" ' . selected(
+            $rolesSelect .= '<option value="' . esc_attr($slug) . '" ' . selected(
                     true,
                     in_array($slug, $selected),
                     false
-                ) . '>' . $role['name'] . '</option>';
+                ) . '>' . esc_html($role['name']) . '</option>';
         }
         $rolesSelect .= '</select>';
-
+        
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo '<td>' . $rolesSelect . '</td>';
     }
 
