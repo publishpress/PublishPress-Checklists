@@ -224,6 +224,14 @@
         },
 
         /**
+         * Check if the current post status is pending
+         * @return {Boolean} True if pending.
+         */
+        is_pending: function () {
+            return 'pending' === this.elems.original_post_status.val();
+        },
+
+        /**
          * Validates the requirements and show the warning, blocking or not the
          * submission, according to the config. Returns false if the submission
          * should be blocked.
@@ -673,7 +681,7 @@
 
     // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
     // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
-    if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true) {
+    if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
             var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
             if (has_unchecked_block.length > 0) {
