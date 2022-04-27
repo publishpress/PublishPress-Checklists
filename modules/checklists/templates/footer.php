@@ -12,7 +12,7 @@
                 href="<?php echo esc_url("//wordpress.org/support/plugin/{$context['plugin_slug']}/reviews/#new-post"); ?>"
                 target="_blank"
                 rel="noopener noreferrer">
-            <?php echo sprintf($context['rating_message'], $plugin_name_markup, $rating_stars_markup); ?>
+            <?php echo sprintf($context['rating_message'], $plugin_name_markup, $rating_stars_markup);// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
         </a>
     </div>
     <hr>

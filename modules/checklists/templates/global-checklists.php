@@ -36,8 +36,17 @@
                         data-id="<?php echo esc_attr($requirement->name); ?>"
                         data-post-type="<?php echo esc_attr($post_type); ?>">
 
-                    <td><?php echo $requirement->get_setting_title_html(); ?></td>
-                    <td><?php echo $requirement->get_setting_action_list_html(); ?></td>
+                    <td>
+                        <?php 
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $requirement->get_setting_title_html(); 
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $requirement->get_setting_action_list_html(); ?>
+                    </td>
                     <?php
                     /**
                      * @param string $html
@@ -48,7 +57,10 @@
                     do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
                     ?>
                     <td class="pp-checklists-task-params">
-                        <?php echo $requirement->get_setting_field_html(); ?>
+                        <?php 
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $requirement->get_setting_field_html(); 
+                        ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
