@@ -149,6 +149,11 @@
             if (!this.is_gutenberg_active()) {
                 // Hook to the submit button
                 $('form#post').submit(function (event) {
+                    //do not trigger for preview action
+                    if ($('input#wp-preview').val() === 'dopreview') {
+                        return true;
+                    }
+                    
                     // Reset the should_block state
                     this.state.should_block = false;
 
