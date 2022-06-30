@@ -689,7 +689,7 @@
     $(window).on("load", function () {
         if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) {
             if ($('.components-panel .yoast').length > 0) {
-                //this feature currently class with yoast seo
+                //this feature currently clash with yoast seo
                 return;
             }
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
