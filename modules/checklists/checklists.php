@@ -531,7 +531,7 @@ if (!class_exists('PPCH_Checklists')) {
                     wp_enqueue_style('pp-remodal-default-theme');
                     wp_enqueue_script('pp-remodal');
                 }
-            } elseif (!is_null($screen) && $screen->base === 'toplevel_page_ppch-checklists') {
+            } elseif (isset($_GET['page']) && $_GET['page'] === 'ppch-checklists') {
                 // Admin pages
                 wp_enqueue_style(
                     'pp-checklists-global-checklists',
@@ -589,7 +589,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'enter_name'        => esc_html__('Enter name of custom task', 'publishpres-checklists'),
                     ]
                 );
-            } elseif (!is_null($screen) && $screen->base === 'checklists_page_ppch-settings') {
+            } elseif (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
                 // Admin pages
                 wp_enqueue_style(
                     'pp-checklists-global-checklists',
