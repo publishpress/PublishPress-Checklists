@@ -490,7 +490,7 @@ class LegacyPlugin
             }
 
             // Check if we have other menu items, except settings and add-ons. They will be added to the end.
-            if (count($submenu_pp) > 2) {
+            if (count($submenu_pp) > 1) {
                 // Add the additional items
                 foreach ($submenu_pp as $index => $item) {
                     if (!in_array($index, $relevantMenus)) {
