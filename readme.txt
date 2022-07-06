@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.8.2
-Stable tag: 2.7.1
+Tested up to: 6.0
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -280,6 +280,19 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.7.3] - 05 Jul 2022 =
+
+* Fixed: Missing checklists settings menu in PHP 8.0 and Multisite, #387
+* Fixed: Settings footer breaks for language other than English, #388
+* Fixed: Missing translation for Min and Max, #389
+* Added: Include new Free / Pro library, #377
+* Fixed: Issue with Yoast SEO and post_content, #391
+* Fixed: Clicking the Preview button will trigger the publishing pop-up, #378
+* Fixed: Extra calls slowing down website, #385
+* Fixed: Warning: Undefined array key "page", caused by "helper_settings_validate_and_save" function, #369
+* Update: Most important buttons should be yellow only, #382
+* Fixed: Issue with PHP 5.6, #386
 
 = [2.7.2] - 27 Apr 2022 =
 

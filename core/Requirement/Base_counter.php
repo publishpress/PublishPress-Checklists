@@ -277,7 +277,7 @@ class Base_counter extends Base_simple implements Interface_required
 
 
         $html .= '<div class="pp-checklists-number">';
-        $html .= '<label>Min</label>' . $min_field;
+        $html .= '<label>'. esc_html__('Min', 'publishpress-checklists') .'</label>' . $min_field;
 
         if (!empty($this->unitText)) {
             $html .= '<span class="pp-checklists-unit">' . $this->unitText . '</span>';
@@ -285,7 +285,7 @@ class Base_counter extends Base_simple implements Interface_required
 
         $html .= '</div>';
         $html .= '<div class="pp-checklists-number">';
-        $html .= '<label>Max</label>' . $max_field;
+        $html .= '<label>'. esc_html__('Max', 'publishpress-checklists') .'</label>' . $max_field;
 
         if (!empty($this->unitText)) {
             $html .= '<span class="pp-checklists-unit">' . $this->unitText . '</span>';

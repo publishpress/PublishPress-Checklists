@@ -423,8 +423,10 @@ if (!class_exists('PPCH_Settings')) {
                 return false;
             }
 
-            if ($_POST['action'] != 'update'
-                || $_GET['page'] != 'ppch-settings') {
+            if ($_POST['action'] != 'update' 
+                || !isset($_GET['page'])
+                || (isset($_GET['page']) && $_GET['page'] != 'ppch-settings')
+                ) {
                 return false;
             }
 
