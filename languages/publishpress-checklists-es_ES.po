@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing Approval Task Checklist for WordPress Content - Stable (latest release)\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-24 18:21+0100\n"
+"PO-Revision-Date: 2022-07-07 16:55-0500\n"
 "Last-Translator: \n"
-"Language-Team: Angelo Giammarresi - info@wocmultimedia.com\n"
+"Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,11 +14,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: core/Requirement/Base_counter.php:288
+msgid "Max"
+msgstr "Máximo"
+
+#: core/Requirement/Base_counter.php:280
+msgid "Min"
+msgstr "Mínimo"
+
+#: modules/settings/settings.php:747
+msgid "If the \"Status\" option is enabled, it can be used to avoid using the Checklists requirements.\""
+msgstr "Si la opción «Estado» está activada, puede utilizarse para evitar el uso de los requisitos de las listas de control."
+
+#: modules/settings/settings.php:693
+msgid "Disable the \"Status\" option when using \"Quick Edit\":"
+msgstr "Desactiva la opción «Estado» cuando utilices la «Edición rápida»:"
+
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
 msgstr "Valoraciones"
 
-#: modules/checklists/templates/global-checklists.php:63
+#: modules/checklists/templates/global-checklists.php:75
 msgid "Custom tasks do not complete automatically. Users must check the box to show they have completed the task."
 msgstr "Las tareas personalizadas no se completan automáticamente. Los usuarios deben marcar la caja para indicar que han completado la tarea."
 
@@ -37,14 +53,6 @@ msgstr "Por favor asegúrate de añadirle un nombre a todas las tareas personali
 #: modules/checklists/checklists.php:576
 msgid "Please make sure to complete the settings for"
 msgstr "Por favor, asegúrate de completar los ajustes de"
-
-#: modules/settings/settings.php:745
-msgid "This will disable status row in quick edit"
-msgstr "Esto desactivará la fila de estado en la edición rápida"
-
-#: modules/settings/settings.php:691
-msgid "Disable quick edit publish:"
-msgstr "Desactiva la edición de publicación rápida:"
 
 #: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:588
 msgid "Remove"
@@ -499,27 +507,27 @@ msgstr "Documentación"
 msgid "About"
 msgstr "Acerca de"
 
-#: modules/checklists/templates/global-checklists.php:67
+#: modules/checklists/templates/global-checklists.php:79
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: modules/settings/settings.php:724
+#: modules/settings/settings.php:726
 msgid "This will display a warning icon in the \"Publish\" box"
 msgstr "Esto mostrará un icono de advertencia en la caja «Publicar»"
 
-#: modules/settings/settings.php:683
+#: modules/settings/settings.php:685
 msgid "Show warning icon:"
 msgstr "Mostrar el icono de advertencia:"
 
-#: modules/settings/settings.php:675
+#: modules/settings/settings.php:677
 msgid "Add to these post types:"
 msgstr "Añadir a estos tipos de contenido:"
 
-#: modules/settings/settings.php:666
+#: modules/settings/settings.php:668
 msgid "General:"
 msgstr "General:"
 
-#: core/Legacy/LegacyPlugin.php:212 modules/settings/settings.php:435
+#: core/Legacy/LegacyPlugin.php:212 modules/settings/settings.php:437
 msgid "Cheatin&#8217; uh?"
 msgstr "Haciendo trampas, ¿eh?"
 
