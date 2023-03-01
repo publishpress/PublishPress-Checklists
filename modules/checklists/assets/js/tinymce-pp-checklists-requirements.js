@@ -33,8 +33,9 @@
 (function ($, document, tinymce) {
     'use strict';
 
-    if (typeof wp !== 'undefined' && typeof wp.blocks === 'undefined' && typeof PP_Checklists !== 'undefined') {
-        // We trigger an event to make sure the editor is available.
-        $(document).trigger(PP_Checklists.EVENT_TINYMCE_LOADED, tinymce);
-    }
+  if (typeof wp !== 'undefined' && typeof PP_Checklists !== 'undefined' && !PP_Checklists.is_gutenberg_active()) {
+    // We trigger an event to make sure the editor is available.
+    $(document).trigger(PP_Checklists.EVENT_TINYMCE_LOADED, tinymce);
+  }
+  
 })(jQuery, document, tinymce);
