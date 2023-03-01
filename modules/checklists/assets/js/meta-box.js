@@ -237,6 +237,14 @@
         },
 
         /**
+         * Check if the current post status is draft
+         * @return {Boolean} True if draft.
+         */
+        is_draft: function () {
+            return 'draft' === this.elems.original_post_status.val() || 'auto-draft' === this.elems.original_post_status.val();
+        },
+
+        /**
          * Validates the requirements and show the warning, blocking or not the
          * submission, according to the config. Returns false if the submission
          * should be blocked.
@@ -688,7 +696,7 @@
     // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
     $(window).on("load", function () {
         if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) {
-            if ($('.components-panel .yoast').length > 0) {
+            if ($('.components-panel .yoast').length > 0 || $('.components-panel .yoast-seo-sidebar-panel').length > 0) {
                 //this feature currently clash with yoast seo
                 return;
             }
