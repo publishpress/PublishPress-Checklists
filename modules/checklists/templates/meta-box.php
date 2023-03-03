@@ -38,7 +38,7 @@
                     ?>
                     <div class="status-icon dashicons <?php echo esc_attr($icon_class); ?>"></div>
                     <div class="status-label">
-                        <?php echo esc_html($req['label']); ?>
+                        <?php echo wp_kses_post($req['label']); ?>
                         <?php if ($req['rule'] === 'block') : ?>
                             <span class="required">*</span>
                             <?php $show_required_legend = true; ?>
