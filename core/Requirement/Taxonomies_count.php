@@ -83,5 +83,7 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
         $subgroup = $this->taxonomy->hierarchical ? 'hierarchical' : 'non_hierarchical';
 
         $this->type = 'taxonomy_counter_' . $subgroup . '_' . $this->taxonomy->name;
+
+        $this->extra = $this->taxonomy->rest_base;
     }
 }

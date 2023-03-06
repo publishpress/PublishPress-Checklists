@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 6.1
-Stable tag: 2.7.3
+Stable tag: 2.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -280,6 +280,19 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.7.4] - 06 Mar 2022 =
+
+* Fixed: Image alt tag function not working in Classic Editor, #471
+* Fixed: Gutenberg Editor error when using Taxonomy Categories, #407
+* Fixed: Internal link checker not working in Classic Editor, #278
+* Fixed: Rank Math meta field missing when checklists is enabled, #470
+* Fixed: Support for Rank Math and Classic Editor, #293
+* Update: Use wp_kses_post filter instead esc_html to enable allowed tags in metabox label, #478
+* Fixed: Submit Lock Affecting Content Update with Yoast, #423
+* Update: German translation, #262
+* Update: PRO_Checklists_ES-FR-IT_TranslationUpdate_October2022, #415
+* Update: TRANSLATION UPDATES French-Spansh-Italian, #406
 
 = [2.7.3] - 05 Jul 2022 =
 
