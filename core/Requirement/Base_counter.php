@@ -26,6 +26,11 @@ class Base_counter extends Base_simple implements Interface_required
     /**
      * @var string
      */
+    protected $extra = '';
+
+    /**
+     * @var string
+     */
     protected $unitText;
 
     /**
@@ -196,6 +201,7 @@ class Base_counter extends Base_simple implements Interface_required
             'type'      => $this->type,
             'is_custom' => false,
             'type'      => $this->type,
+            'extra'     => $this->extra,
         ];
 
         return $requirements;

@@ -22,7 +22,8 @@
                         id="pp-checklists-req-<?php echo esc_attr($key); ?>"
                         class="pp-checklists-req pp-checklists-<?php echo esc_attr($req['rule']); ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
                         data-id="<?php echo esc_attr($key); ?>"
-                        data-type="<?php echo esc_attr($req['type']); ?>">
+                        data-type="<?php echo esc_attr($req['type']); ?>"
+                        data-extra="<?php echo isset($req['extra']) ? esc_attr($req['extra']) : ''; ?>">
 
                     <?php if ($req['is_custom']) : ?>
                         <input type="hidden" name="_PPCH_custom_item[<?php echo esc_attr($req['id']); ?>]"
