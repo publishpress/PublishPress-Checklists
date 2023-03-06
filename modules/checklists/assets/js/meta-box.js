@@ -788,14 +788,19 @@
         $('[data-type^="taxonomy_counter_hierarchical_"]').each(function (index, elem) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var taxonomy = $(elem).data('type').replace('taxonomy_counter_hierarchical_', ''),
+                    taxonomy_rest_base = $(elem).data('extra'),
                     count = 0,
                     min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
                     max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
-
-                if (PP_Checklists.is_gutenberg_active()) {
-                    var obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
+                var obj = '';
+              if (PP_Checklists.is_gutenberg_active()) {
+                if (taxonomy_rest_base && taxonomy_rest_base !== '' && taxonomy_rest_base !== 'false') {
+                  obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy_rest_base);
                 } else {
-                    var obj = $('#' + taxonomy + 'checklist input:checked');
+                  obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
+                }
+              } else {
+                    obj = $('#' + taxonomy + 'checklist input:checked');
                 }
 
                 if (typeof obj !== 'undefined') {
