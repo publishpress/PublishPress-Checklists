@@ -4,9 +4,9 @@ Contributors: publishpress, kevinB, stevejburge, andergmartins, ojopaul
 Author: PublishPress
 Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
-Requires at least: 4.7
-Requires PHP: 5.6
-Tested up to: 6.1
+Requires at least: 5.5
+Requires PHP: 7.2.5
+Tested up to: 6.2
 Stable tag: 2.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -280,6 +280,14 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.8.0] - UNRELEASED =
+
+* Changed: Replaced Pimple library with a prefixed version of the library to avoid conflicts with other plugins;
+* Changed: Replaced Psr/Container library with a prefixed version of the library to avoid conflicts with other plugins;
+* Changed: Change min PHP version to 7.2.5. If not compatible, the plugin will not execute;
+* Changed: Change min WP version to 5.5. If not compatible, the plugin will not execute;
+* Changed: Updated internal libraries to latest versions;
 
 = [2.7.4] - 06 Mar 2022 =
 

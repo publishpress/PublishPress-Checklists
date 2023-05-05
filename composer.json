@@ -12,13 +12,6 @@
   "config": {
     "preferred-install": "dist"
   },
-  "autoload": {
-    "psr-4": {
-      "PublishPress\\Checklists\\Core\\": "core/",
-      "PublishPress\\Checklists\\Permalinks\\": "modules/permalinks/lib",
-      "PublishPress\\Checklists\\Yoastseo\\": "modules/yoastseo/lib"
-    }
-  },
   "repositories": [
     {
       "type": "git",
@@ -31,12 +24,12 @@
   ],
   "require": {
     "php": ">=5.6.20",
-    "pimple/pimple": "3.2.3.*",
-    "psr/container": "1.0.*",
-    "symfony/polyfill-ctype": "1.19.*",
-    "publishpress/wordpress-version-notices": "^1.0",
+    "publishpress/pimple-pimple": "3.5.0.*",
+    "publishpress/vendor-locator-checklists": "^1.0",
+    "publishpress/wordpress-version-notices": "^2.1",
     "publishpress/wordpress-reviews":  "^1.1",
-    "publishpress/publishpress-instance-protection": "^1.0"
+    "publishpress/instance-protection": "^2.0",
+    "symfony/polyfill-ctype": "1.19.*"
   },
   "require-dev": {
     "publishpress/publishpress-plugin-builder": "^1.3",
