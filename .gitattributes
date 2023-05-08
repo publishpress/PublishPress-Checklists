@@ -12,3 +12,4 @@ package.json export-ignore
 package-lock.json export-ignore
 RoboFile.php export-ignore
 webpack.config.js export-ignore
+.gitattributes export-ignore
