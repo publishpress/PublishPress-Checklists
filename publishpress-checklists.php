@@ -129,7 +129,9 @@ if (!defined('PPCH_LOADED')) {
                     }
                 }
             );
+        }
 
+        if (is_admin()) {
             if (! class_exists('PublishPress\\Checklists\\Core\\Autoloader')) {
                 require_once __DIR__ . '/core/Autoloader.php';
             }
