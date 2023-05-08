@@ -30,10 +30,7 @@ class Autoloader
      */
     public static function autoload($class)
     {
-        // base directory for the namespace prefix
-        $base_dir = __DIR__ . '/../';
-
-        $relative_path = '';
+        $class_path = '';
         $relative_class = '';
 
         foreach (self::$namespaces as $prefix => $path) {
@@ -45,18 +42,18 @@ class Autoloader
                 continue;
             }
 
-            $relative_path = $path;
+            $class_path = $path;
             $relative_class = substr($class, $len);
             break;
         }
 
         // no, move to the next registered autoloader
-        if (empty($relative_path)) {
+        if (empty($class_path)) {
             return;
         }
 
         // replace the namespace prefix with the base directory, replace namespace separators with directory separators
-        $file = $base_dir . $relative_path . str_replace('\\', '/', $relative_class) . '.php';
+        $file = $class_path . str_replace('\\', '/', $relative_class) . '.php';
 
         // if the file exists, require it
         if (file_exists($file)) {

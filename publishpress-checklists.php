@@ -130,10 +130,14 @@ if (!defined('PPCH_LOADED')) {
                 }
             );
 
+            if (! class_exists('PublishPress\\Checklists\\Core\\Autoloader')) {
+                require_once __DIR__ . '/core/Autoloader.php';
+            }
+
             Autoloader::register();
-            Autoloader::addNamespace('PublishPress\\Checklists\\Core\\', '/core/');
-            Autoloader::addNamespace('PublishPress\\Checklists\\Permalinks\\', '/modules/permalinks/lib/');
-            Autoloader::addNamespace('PublishPress\\Checklists\\Yoastseo\\', '/modules/yoastseo/lib/');
+            Autoloader::addNamespace('PublishPress\\Checklists\\Core\\', __DIR__ . '/core/');
+            Autoloader::addNamespace('PublishPress\\Checklists\\Permalinks\\', __DIR__ . '/modules/permalinks/lib/');
+            Autoloader::addNamespace('PublishPress\\Checklists\\Yoastseo\\', __DIR__ . '/modules/yoastseo/lib/');
 
             $plugin = new Plugin();
             $plugin->init();
