@@ -5,7 +5,7 @@
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
- * Version: 2.7.4
+ * Version: 2.7.5
  * Text Domain: publishpress-checklists
  * Domain Path: /languages
  * Requires at least: 5.5
@@ -68,7 +68,7 @@ if (!defined('PPCH_LOADED')) {
 
     add_action('plugins_loaded', function () {
         define('PPCH_PATH_BASE', plugin_dir_path(__FILE__));
-        define('PPCH_VERSION', '2.7.4');
+        define('PPCH_VERSION', '2.7.5');
         define('PPCH_FILE', __DIR__ . '/publishpress-checklists.php');
         define('PPCH_MODULES_PATH', PPCH_PATH_BASE . '/modules');
         define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
