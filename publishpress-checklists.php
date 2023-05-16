@@ -56,6 +56,8 @@ if (class_exists('PublishPressInstanceProtection\\Config')) {
 }
 
 if (!defined('PPCH_LOADED')) {
+    define('PPCH_LOADED', 1);
+
     //composer autoload
     $autoloadPath = __DIR__ . '/vendor/autoload.php';
     if (file_exists($autoloadPath)) {
@@ -72,7 +74,6 @@ if (!defined('PPCH_LOADED')) {
         define('PPCH_FILE', __DIR__ . '/publishpress-checklists.php');
         define('PPCH_MODULES_PATH', PPCH_PATH_BASE . '/modules');
         define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
-        define('PPCH_LOADED', 1);
 
         if (is_admin() && ! defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
             $includesPath = __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'publishpress' . DIRECTORY_SEPARATOR
