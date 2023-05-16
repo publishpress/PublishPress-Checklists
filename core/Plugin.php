@@ -50,8 +50,9 @@ class Plugin
      */
     public function init()
     {
-        add_action('plugins_loaded', [$this, 'loadTextDomain']);
         add_action('init', [$this, 'deactivateLegacyPlugin']);
+
+        $this->loadTextDomain();
 
         Factory::getLegacyPlugin();
     }
