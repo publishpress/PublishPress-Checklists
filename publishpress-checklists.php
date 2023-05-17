@@ -83,53 +83,48 @@ if (!defined('PPCH_LOADED')) {
                 require_once $includesPath;
             }
 
-            add_action(
-                'plugins_loaded',
-                function () {
-                    if (current_user_can('install_plugins')) {
-                        add_filter(
-                            \PPVersionNotices\Module\TopNotice\Module::SETTINGS_FILTER,
-                            function ($settings) {
-                                $settings['publishpress-checklists'] = [
-                                    'message' => 'You\'re using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s',
-                                    'link' => 'https://publishpress.com/links/checklists-banner',
-                                    'screens' => [
-                                        [
-                                            'base' => 'toplevel_page_ppch-checklists',
-                                            'id' => 'toplevel_page_ppch-checklists',
-                                        ],
-                                        [
-                                            'base' => 'checklists_page_ppch-settings',
-                                            'id' => 'checklists_page_ppch-settings',
-                                        ],
-                                    ]
-                                ];
+            if (current_user_can('install_plugins')) {
+                add_filter(
+                    \PPVersionNotices\Module\TopNotice\Module::SETTINGS_FILTER,
+                    function ($settings) {
+                        $settings['publishpress-checklists'] = [
+                            'message' => 'You\'re using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s',
+                            'link' => 'https://publishpress.com/links/checklists-banner',
+                            'screens' => [
+                                [
+                                    'base' => 'toplevel_page_ppch-checklists',
+                                    'id' => 'toplevel_page_ppch-checklists',
+                                ],
+                                [
+                                    'base' => 'checklists_page_ppch-settings',
+                                    'id' => 'checklists_page_ppch-settings',
+                                ],
+                            ]
+                        ];
 
-                                return $settings;
-                            }
-                        );
-
-                        $manageChecklistsCap = apply_filters(
-                            'publishpress_checklists_manage_checklist_cap',
-                            'manage_checklists'
-                        );
-                        if (current_user_can($manageChecklistsCap)) {
-                            add_filter(
-                                Module::SETTINGS_FILTER,
-                                function ($settings) {
-                                    $settings['publishpress-checklists'] = [
-                                        'parent' => 'ppch-checklists',
-                                        'label' => 'Upgrade to Pro',
-                                        'link' => 'https://publishpress.com/links/checklists-menu',
-                                    ];
-
-                                    return $settings;
-                                }
-                            );
-                        }
+                        return $settings;
                     }
+                );
+
+                $manageChecklistsCap = apply_filters(
+                    'publishpress_checklists_manage_checklist_cap',
+                    'manage_checklists'
+                );
+                if (current_user_can($manageChecklistsCap)) {
+                    add_filter(
+                        Module::SETTINGS_FILTER,
+                        function ($settings) {
+                            $settings['publishpress-checklists'] = [
+                                'parent' => 'ppch-checklists',
+                                'label' => 'Upgrade to Pro',
+                                'link' => 'https://publishpress.com/links/checklists-menu',
+                            ];
+
+                            return $settings;
+                        }
+                    );
                 }
-            );
+            }
         }
 
         if (is_admin()) {
