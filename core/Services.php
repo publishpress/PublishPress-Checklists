@@ -9,8 +9,8 @@
 
 namespace PublishPress\Checklists\Core;
 
-use Pimple\Container as Pimple;
-use Pimple\ServiceProviderInterface;
+use PublishPress\Pimple\Container as PimpleContainer;
+use PublishPress\Pimple\ServiceProviderInterface;
 use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 
 defined('ABSPATH') or die('No direct script access allowed.');
@@ -26,28 +26,28 @@ class Services implements ServiceProviderInterface
      * This method should only be used to configure services and parameters.
      * It should not get services.
      *
-     * @param Pimple $container A container instance
+     * @param PimpleContainer $pimple A container instance
      *
      * @since 1.3.5
      *
      */
-    public function register(Pimple $container)
+    public function register(PimpleContainer $pimple)
     {
-        $container['legacy_plugin'] = function ($c) {
+        $pimple['legacy_plugin'] = function ($c) {
             return new LegacyPlugin();
         };
 
-        $container['module'] = function ($c) {
+        $pimple['module'] = function ($c) {
             $legacyPlugin = $c['legacy_plugin'];
 
             return $legacyPlugin->checklists;
         };
 
-        $container['template_loader'] = function ($c) {
+        $pimple['template_loader'] = function ($c) {
             return new TemplateLoader();
         };
 
-        $container['error_handler'] = function ($c) {
+        $pimple['error_handler'] = function ($c) {
             return new ErrorHandler();
         };
     }
