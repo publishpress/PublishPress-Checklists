@@ -27,6 +27,8 @@ Let's show you a few possible options for your posts:
 
 Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
 
+## PublishPress Checklists Pro ##
+
 > <strong>Checklists Pro</strong><br />
 > This plugin is the free version of the Checklists Pro plugin that comes with all the features you need to set standards for your WordPress content. <a href="https://publishpress.com/checklists"  title="Checklists Pro">Click here to purchase the best premium WordPress checklists plugin now!</a>
 
@@ -95,28 +97,29 @@ The Pro version of PublishPress Checklists has support for WooCommerce. There ar
 
 [Click here to read more about WooCommerce checklists](https://publishpress.com/knowledge-base/use-woocommerce-checklist-add-publishpress/).
 
-## Join PublishPress and get the Pro plugins
+## Join PublishPress and get the Pro plugins ## 
 
 The Pro versions of the PublishPress plugins are well worth your investment. The Pro versions have extra features and faster support. [Click here to join PublishPress](https://publishpress.com/pricing/).
 
-Join PublishPress and you'll get access to these Pro plugins:
+Join PublishPress and you'll get access to these nince Pro plugins:
 
 * [PublishPress Authors Pro](https://publishpress.com/authors) allows you to add multiple authors and guest authors to WordPress posts.
 * [PublishPress Blocks Pro](https://publishpress.com/blocks) has everything you need to build professional websites with the WordPress block editor.
 * [PublishPress Capabilities Pro](https://publishpress.com/capabilities) is the plugin to manage your WordPress user roles, permissions, and capabilities.
 * [PublishPress Checklists Pro](https://publishpress.com/checklists) enables you to define tasks that must be completed before content is published.
+* [PublishPress Future Pro](https://publishpress.com/future) is the plugin for scheduling changes to your posts.
 * [PublishPress Permissions Pro](https://publishpress.com/permissions)  is the plugin for advanced WordPress permissions.
-* [PublishPress Pro](https://publishpress.com/publishpress) is the plugin for managing and scheduling WordPress content.
+* [PublishPress Planner Pro](https://publishpress.com/publishpress) is the plugin for managing and scheduling WordPress content.
 * [PublishPress Revisions Pro](https://publishpress.com/revisions) allows you to update your published pages with teamwork and precision.
 * [PublishPress Series Pro](https://publishpress.com/series) enables you to group content together into a series
 
 Together, these plugins are a suite of powerful publishing tools for WordPress. If you need to create a professional workflow in WordPress, with moderation, revisions, permissions and more... then you should try PublishPress.
 
-=  Bug Reports =
+## Bug Reports ## 
 
 Bug reports for PublishPress Checklists are welcomed in our [repository on GitHub](https://github.com/publishpress/publishpress-checklists). Please note that GitHub is not a support forum, and that issues that aren’t properly qualified as bugs will be closed.
 
-= Follow the PublishPress team =
+## Follow the PublishPress team ## 
 
 Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitter](https://www.twitter.com/publishpresscom) and [YouTube](https://www.youtube.com/publishpress)
 
@@ -281,7 +284,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.8.0] - 16 May 2022 =
+= [2.8.0] - 18 May 2022 =
 
 * Changed: Replaced Pimple library with a prefixed version of the library to avoid conflicts with other plugins;
 * Changed: Replaced Psr/Container library with a prefixed version of the library to avoid conflicts with other plugins;
