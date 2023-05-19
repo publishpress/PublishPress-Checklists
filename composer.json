@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=5.6.20",
+    "php": ">=7.2.5",
     "publishpress/pimple-pimple": "3.5.0.*",
     "publishpress/vendor-locator-checklists": "^1.0",
     "publishpress/wordpress-version-notices": "^2.1",
