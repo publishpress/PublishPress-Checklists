@@ -29,6 +29,6 @@ To release the Free plugin please make sure to check all the checkboxes below.
 
 ### Post-release Checklist
 
-- [ ] Follow the action's result on the [repository actions page](https://github.com/publishpress/publishpress-series/actions).
-- [ ] Go to the [WordPress.org plugin page](https://wordpress.org/plugins/organize-series/) double check the information confirming the release finished successfully.
+- [ ] Follow the action's result on the [repository actions page](https://github.com/publishpress/publishpress-checklists/actions).
+- [ ] Go to the [WordPress.org plugin page](https://wordpress.org/plugins/publishpress-checklists/) double check the information confirming the release finished successfully.
 - [ ] Make a final test updating the plugin in a staging site.
