@@ -41,7 +41,8 @@ if ($invalid_php_version || $invalid_wp_version) {
     return;
 }
 
-$includeFileRelativePath = '/publishpress/publishpress-instance-protection/include.php';
+$includeFileRelativePath = '/publishpress/instance-protection/include.php';
+
 if (file_exists(__DIR__ . '/lib/vendor' . $includeFileRelativePath)) {
     require_once __DIR__ . '/lib/vendor' . $includeFileRelativePath;
 } else if (defined('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH') && file_exists(PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . $includeFileRelativePath)) {
