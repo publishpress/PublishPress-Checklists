@@ -65,7 +65,7 @@ class Plugin
         load_plugin_textdomain(
             'publishpress-checklists',
             false,
-            PPCH_RELATIVE_PATH . '/languages/'
+            plugin_basename(plugin_dir_path(PPCH_FILE)) . '/languages/'
         );
     }
 
