@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.2
-Stable tag: 2.8.0
+Stable tag: 2.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -283,6 +283,11 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.9.0] - [UNRELEASED] =
+
+* Changed: Updated internal libraries to latest versions;
+* Changed: Move dependencies to lib/vendor;
 
 = [2.8.0] - 18 May 2022 =
 

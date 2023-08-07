@@ -1,0 +1,20 @@
+{
+  "name": "publishpress/vendor-locator-checklists",
+  "type": "library",
+  "license": "GPL-2.0-or-later",
+  "description": "",
+  "authors": [
+    {
+      "name": "PublishPress",
+      "email": "help@publishpress.com",
+      "homepage": "https://publishpress.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "files": [
+      "./includes.php"
+    ]
+  }
+}

@@ -5,7 +5,7 @@
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
- * Version: 2.8.0
+ * Version: 2.9.0
  * Text Domain: publishpress-checklists
  * Domain Path: /languages
  * Requires at least: 5.5
@@ -33,6 +33,7 @@ global $wp_version;
 $min_php_version = '7.2.5';
 $min_wp_version  = '5.5';
 
+// If the PHP or WP version is not compatible, terminate the plugin execution.
 $invalid_php_version = version_compare(phpversion(), $min_php_version, '<');
 $invalid_wp_version = version_compare($wp_version, $min_wp_version, '<');
 
@@ -41,10 +42,10 @@ if ($invalid_php_version || $invalid_wp_version) {
 }
 
 $includeFileRelativePath = '/publishpress/publishpress-instance-protection/include.php';
-if (file_exists(__DIR__ . '/vendor' . $includeFileRelativePath)) {
-    require_once __DIR__ . '/vendor' . $includeFileRelativePath;
-} else if (defined('PP_AUTHORS_VENDOR_PATH') && file_exists(PP_AUTHORS_VENDOR_PATH . $includeFileRelativePath)) {
-    require_once PP_AUTHORS_VENDOR_PATH . $includeFileRelativePath;
+if (file_exists(__DIR__ . '/lib/vendor' . $includeFileRelativePath)) {
+    require_once __DIR__ . '/lib/vendor' . $includeFileRelativePath;
+} else if (defined('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH') && file_exists(PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . $includeFileRelativePath)) {
+    require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . $includeFileRelativePath;
 }
 
 if (class_exists('PublishPressInstanceProtection\\Config')) {
@@ -56,11 +57,16 @@ if (class_exists('PublishPressInstanceProtection\\Config')) {
 }
 
 if (!defined('PPCH_LOADED')) {
+    if (! defined('PPCH_LIB_VENDOR_PATH')) {
+        define('PPCH_LIB_VENDOR_PATH', __DIR__ . '/lib/vendor');
+    }
 
-    //composer autoload
-    $autoloadPath = __DIR__ . '/vendor/autoload.php';
-    if (file_exists($autoloadPath)) {
-        require_once $autoloadPath;
+    $autoloadFilePath = PPCH_LIB_VENDOR_PATH . '/autoload.php';
+    if (! class_exists('ComposerAutoloaderInitPPChecklists')
+        && is_file($autoloadFilePath)
+        && is_readable($autoloadFilePath)
+    ) {
+        require_once $autoloadFilePath;
     }
 
     require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . '/publishpress/psr-container/lib/include.php';
@@ -77,7 +83,7 @@ if (!defined('PPCH_LOADED')) {
             define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
 
             if (is_admin() && ! defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
-                $includesPath = __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'publishpress' . DIRECTORY_SEPARATOR
+                $includesPath = __DIR__ . DIRECTORY_SEPARATOR . 'lib'  . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'publishpress' . DIRECTORY_SEPARATOR
                 . 'wordpress-version-notices' . DIRECTORY_SEPARATOR . 'includes.php';
 
                 if (file_exists($includesPath)) {
