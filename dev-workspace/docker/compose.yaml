@@ -1,8 +1,8 @@
-name: devworkspace_future_free
+name: devworkspace_checklists_free
 services:
     terminal:
         build: ./docker
-        image: publishpress/dev-workspace-terminal:checklists-free
+        image: publishpress/dev-workspace-terminal:checklists-free-2.0
         command: ["zsh"]
         stdin_open: true
         tty: true
