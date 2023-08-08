@@ -70,10 +70,6 @@ if (!defined('PPCH_LOADED')) {
         require_once $autoloadFilePath;
     }
 
-    require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . '/publishpress/psr-container/lib/include.php';
-    require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . '/publishpress/pimple-pimple/lib/include.php';
-    require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . '/publishpress/wordpress-version-notices/src/include.php';
-
     add_action('plugins_loaded', function () {
         if (!defined('PPCH_LOADED')) {
             define('PPCH_LOADED', 1);
