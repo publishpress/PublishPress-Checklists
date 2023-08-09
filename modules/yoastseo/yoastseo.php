@@ -19,6 +19,7 @@ use PublishPress\Checklists\Yoastseo\Requirement\Seo_Analysis;
  *
  * @todo Refactor this module and all the modules system to use DI.
  */
+#[\AllowDynamicProperties]
 class PPCH_Yoastseo extends Module
 {
     const SETTINGS_SLUG = 'pp-yoastseo';

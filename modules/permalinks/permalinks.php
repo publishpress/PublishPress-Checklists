@@ -18,6 +18,7 @@ use PublishPress\Checklists\Permalinks\Requirement\ValidChars;
  *
  * @todo Refactor this module and all the modules system to use DI.
  */
+#[\AllowDynamicProperties]
 class PPCH_Permalinks extends Module
 {
     const SETTINGS_SLUG = 'pp-permalinks';
