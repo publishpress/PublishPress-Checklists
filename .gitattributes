@@ -9,10 +9,10 @@
 .rsync-filters-pre-build export-ignore
 RoboFile.php export-ignore
 assets_wp export-ignore
-assets_wp export-ignore
 codeception.dist.yml export-ignore
 dev-workspace export-ignore
 package-lock.json export-ignore
 package.json export-ignore
 tests export-ignore
 webpack.config.js export-ignore
+CONTRIBUTING.md export-ignore

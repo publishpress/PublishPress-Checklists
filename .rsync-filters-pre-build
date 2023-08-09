@@ -61,3 +61,5 @@
 - vendor/publishpress/wordpress-version-notices/codeception.dist.yml
 - vendor/publishpress/wordpress-version-notices/codeception.yml
 - vendor/publishpress/wordpress-version-notices/tests
+- CONTRIBUTING.md
+- assets_wp
