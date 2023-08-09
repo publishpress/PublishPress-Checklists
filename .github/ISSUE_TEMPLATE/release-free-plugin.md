@@ -1,7 +1,7 @@
 ---
 name: Release the Free version (team only)
 about: Describes default checklist for the plugin's release process.
-title: Release v[VERSION]
+title: Release PublishPress Checklists v[VERSION]
 labels: release
 assignees: ''
 ---
