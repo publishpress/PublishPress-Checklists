@@ -284,7 +284,8 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.9.0] - [UNRELEASED] =
+
+= [2.9.0] - 09 Aug 2023 =
 
 * Changed: Updated internal libraries to latest versions;
 * Changed: Move dependencies to lib/vendor;
@@ -294,7 +295,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Deprecated constant `PUBLISHPRESS_CHECKLISTS_VENDOR_PATH` in favor of `PPCH_LIB_VENDOR_PATH`;
 * Fixed: Fix compatibility with Composer-based installations, using prefixed libraries;
 
-= [2.8.0] - 18 May 2022 =
+= [2.8.0] - 18 May 2023 =
 
 * Changed: Replaced Pimple library with a prefixed version of the library to avoid conflicts with other plugins;
 * Changed: Replaced Psr/Container library with a prefixed version of the library to avoid conflicts with other plugins;
@@ -302,7 +303,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Changed: Change min WP version to 5.5. If not compatible, the plugin will not execute;
 * Changed: Updated internal libraries to latest versions;
 
-= [2.7.4] - 06 Mar 2022 =
+= [2.7.4] - 06 Mar 2023 =
 
 * Fixed: Image alt tag function not working in Classic Editor, #471
 * Fixed: Gutenberg Editor error when using Taxonomy Categories, #407
