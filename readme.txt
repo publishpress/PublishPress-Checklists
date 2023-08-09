@@ -288,6 +288,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Changed: Updated internal libraries to latest versions;
 * Changed: Move dependencies to lib/vendor;
+* Changed: Internal dependencies moved from `vendor` to `lib/vendor`;
+* Changed: Updated internal libraries to the latest versions;
+* Changed: Removed the `vendor-locator-checklists` library. Internal vendor is now on a fixed path, `lib/vendor`;
+* Changed: Deprecated constant `PUBLISHPRESS_CHECKLISTS_VENDOR_PATH` in favor of `PPCH_LIB_VENDOR_PATH`;
+* Fixed: Fix compatibility with Composer-based installations, using prefixed libraries;
 
 = [2.8.0] - 18 May 2022 =
 

@@ -246,46 +246,6 @@
             "install-path": "../publishpress/psr-container"
         },
         {
-            "name": "publishpress/vendor-locator-checklists",
-            "version": "1.0.0",
-            "version_normalized": "1.0.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/publishpress/vendor-locator-checklists.git",
-                "reference": "411839d24a85e84948b5229788e713b6dfb1dba5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/publishpress/vendor-locator-checklists/zipball/411839d24a85e84948b5229788e713b6dfb1dba5",
-                "reference": "411839d24a85e84948b5229788e713b6dfb1dba5",
-                "shasum": ""
-            },
-            "time": "2023-05-05T15:07:14+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "./includes.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "PublishPress",
-                    "email": "help@publishpress.com",
-                    "homepage": "https://publishpress.com",
-                    "role": "Developer"
-                }
-            ],
-            "support": {
-                "source": "https://github.com/publishpress/vendor-locator-checklists/tree/1.0.0"
-            },
-            "install-path": "../publishpress/vendor-locator-checklists"
-        },
-        {
             "name": "publishpress/wordpress-reviews",
             "version": "v1.1.19",
             "version_normalized": "1.1.19.0",

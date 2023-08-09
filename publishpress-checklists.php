@@ -45,8 +45,8 @@ $includeFileRelativePath = '/publishpress/instance-protection/include.php';
 
 if (file_exists(__DIR__ . '/lib/vendor' . $includeFileRelativePath)) {
     require_once __DIR__ . '/lib/vendor' . $includeFileRelativePath;
-} else if (defined('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH') && file_exists(PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . $includeFileRelativePath)) {
-    require_once PUBLISHPRESS_CHECKLISTS_VENDOR_PATH . $includeFileRelativePath;
+} else if (defined('PPCH_LIB_VENDOR_PATH') && file_exists(PPCH_LIB_VENDOR_PATH . $includeFileRelativePath)) {
+    require_once PPCH_LIB_VENDOR_PATH . $includeFileRelativePath;
 }
 
 if (class_exists('PublishPressInstanceProtection\\Config')) {
@@ -60,6 +60,13 @@ if (class_exists('PublishPressInstanceProtection\\Config')) {
 if (!defined('PPCH_LOADED')) {
     if (! defined('PPCH_LIB_VENDOR_PATH')) {
         define('PPCH_LIB_VENDOR_PATH', __DIR__ . '/lib/vendor');
+    }
+
+    if (! defined('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH')) {
+        /**
+         * @deprecated 2.9.0 Use PPCH_LIB_VENDOR_PATH instead.
+         */
+        define('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH', PPCH_LIB_VENDOR_PATH);
     }
 
     $autoloadFilePath = PPCH_LIB_VENDOR_PATH . '/autoload.php';
