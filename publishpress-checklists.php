@@ -152,5 +152,5 @@ if (!defined('PPCH_LOADED')) {
                 $plugin->init();
             }
         }
-    }, -10);
+    }, 5);
 }
