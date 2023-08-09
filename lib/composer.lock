@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "929600a775865182e73929ed120239ef",
+    "content-hash": "2e48c386b663c5a93d18e45aa122b141",
     "packages": [
         {
             "name": "publishpress/instance-protection",
@@ -243,43 +243,6 @@
             "time": "2023-05-30T18:17:45+00:00"
         },
         {
-            "name": "publishpress/vendor-locator-checklists",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/publishpress/vendor-locator-checklists.git",
-                "reference": "411839d24a85e84948b5229788e713b6dfb1dba5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/publishpress/vendor-locator-checklists/zipball/411839d24a85e84948b5229788e713b6dfb1dba5",
-                "reference": "411839d24a85e84948b5229788e713b6dfb1dba5",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "./includes.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "PublishPress",
-                    "email": "help@publishpress.com",
-                    "homepage": "https://publishpress.com",
-                    "role": "Developer"
-                }
-            ],
-            "support": {
-                "source": "https://github.com/publishpress/vendor-locator-checklists/tree/1.0.0"
-            },
-            "time": "2023-05-05T15:07:14+00:00"
-        },
-        {
             "name": "publishpress/wordpress-reviews",
             "version": "v1.1.19",
             "source": {
@@ -424,5 +387,5 @@
         "php": ">=7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
