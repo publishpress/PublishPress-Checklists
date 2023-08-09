@@ -37,7 +37,11 @@
     "build": "ppbuild build",
     "build:dir": "ppbuild build-dir",
     "build:clean": "ppbuild clean",
-    "get-version": "ppbuild version"
+    "get-version": "ppbuild version",
+    "check:longpath": "longpath .",
+    "pre-autoload-dump": "composer dumpautoload --working-dir=./lib",
+    "pre-update-cmd": "composer update --working-dir=./lib",
+    "pre-install-cmd": "composer install --working-dir=./lib"
   },
   "minimum-stability": "stable",
   "extra": {
