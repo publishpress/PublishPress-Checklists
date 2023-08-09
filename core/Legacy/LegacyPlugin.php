@@ -14,6 +14,7 @@ use stdClass;
 /**
  * Legacy plugin class, porting the PublishPress dependencies.
  */
+#[\AllowDynamicProperties]
 class LegacyPlugin
 {
     /**

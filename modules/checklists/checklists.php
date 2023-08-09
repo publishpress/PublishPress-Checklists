@@ -39,6 +39,7 @@ if (!class_exists('PPCH_Checklists')) {
     /**
      * class PPCH_Checklists
      */
+    #[\AllowDynamicProperties]
     class PPCH_Checklists extends Module
     {
 

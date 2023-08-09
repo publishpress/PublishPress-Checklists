@@ -34,6 +34,7 @@ use PublishPress\Checklists\Core\Legacy\Util;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 
 if (!class_exists('PPCH_Settings')) {
+    #[\AllowDynamicProperties]
     class PPCH_Settings extends Module
     {
         const SETTINGS_SLUG = 'ppch-settings';
