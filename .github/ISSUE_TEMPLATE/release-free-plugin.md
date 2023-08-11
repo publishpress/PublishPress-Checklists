@@ -1,43 +1,43 @@
 ---
-name: Release the Free version (team only)
-about: Describes the default checklist for the plugin's release process.
-title: Release PublishPress Revisions v[VERSION]
+name: Release the Free Version (Team Only)
+about: Default checklist for the plugin's release process.
+title: Release PublishPress Checklists v[VERSION]
 labels: release
 assignees: ''
 ---
 
-To release the Free plugin please make sure to check all the checkboxes below.
+To release the Free plugin, ensure you complete all the tasks below.
 
 ### Pre-release Checklist
-- [ ] Create the release branch as `release-<version>` based on the development branch.
-- [ ] Review and merge all the relevant Pull Requests into the release branch.
+- [ ] Create a release branch named `release-<version>` from the development branch.
+- [ ] Review and merge all relevant Pull Requests into the release branch.
 - [ ] Start a dev-workspace session.
-- [ ] Run `composer update` (updating the root and lib vendors).
-- [ ] Double-check the updated packages, and if any library used on production was updated mention that in the changelog.
-- [ ] Check Github's Dependabot warnings or pull requests, looking for any relevant report. Remove any false-positive first. Fix and commit the fix for the issues you find.
-- [ ] If applied, build JS files to production running `composer build:js` and commit the changes.
-- [ ] Run WP VIP scan to make sure no warnings or errors > 5 exists: `composer check:phpcs`.
-- [ ] Update the `.pot` file, and mention this on the changelog.
-- [ ] For minor and patch releases, implement backward compatibility for changes like: renamed or moved classes, namespaces, functions, constants, hooks or global variables. Add the proper deprecated comments and mention that in the changelog. Major releases can remove old deprecated API or code, making sure to always mention that in the changelog.
-- [ ] Update the changelog - make sure all the changes are there with a user-friendly description and that the release date is correct.
-- [ ] Update the version number to the next stable version in the main plugin file and `readme.txt` file, following [Semantic Versioning](https://semver.org/). Commit the changes to the release branch.
-- [ ] Make sure there is no uncommitted changes.
-- [ ] Build the zip package, running `composer build`. It should create a new package in the `./dist` dir.
-- [ ] Send the new package to the team for testing.
+- [ ] Execute `composer update` to update the root and lib vendors.
+- [ ] Review the updated packages. Mention any production library updates in the changelog.
+- [ ] Inspect GitHub's Dependabot warnings or Pull Requests for relevant issues. Resolve any false positives first, then fix and commit the remaining issues.
+- [ ] If necessary, build JS files for production using `composer build:js` and commit the changes.
+- [ ] Run a WP VIP scan with `composer check:phpcs` to ensure no warnings or errors greater than 5 exist.
+- [ ] Update the `.pot` file and include a note in the changelog.
+- [ ] Especially for minor and patch releases, maintain backward compatibility for changes like renamed or moved classes, namespaces, functions, etc. Include deprecation comments and mention this in the changelog. Major releases may remove deprecated code, but always note this in the changelog.
+- [ ] Revise the changelog to include all changes with user-friendly descriptions and ensure the release date is accurate.
+- [ ] Update the version number in the main plugin file and `readme.txt`, adhering to specifications from our [tech documentation]([https://semver.org/](https://rambleventures.slab.com/posts/version-numbers-58nmrk4b]), and commit to the release branch.
+- [ ] Confirm there are no uncommitted changes.
+- [ ] Build the zip package with `composer build`, creating a new package in the `./dist` directory.
+- [ ] Distribute the new package to the team for testing.
 
 ### Release Checklist
-- [ ] Create a Pull Request and merge the release branch it into the `master` branch.
+- [ ] Create and merge a Pull Request for the release branch into the `master` branch.
 - [ ] Merge the `main` branch into the `development` branch.
-- [ ] Create the GitHub release (make sure it is based on the `main` branch and correct tag).
+- [ ] Establish the GitHub release on the `main` branch with the correct tag.
 
 #### WP SVN Deployment
-- [ ] Enter the local copy of SVN repo for the plugin.
+- [ ] Navigate to the local copy of the SVN repo for the plugin.
 - [ ] Update your working copy using `svn update`.
-- [ ] Cleanup the `trunk` directory running `rm -rf trunk/*`.
-- [ ] Unzip the built package and move files to the `trunk` folder.
-- [ ] Remove any eventual file that shouldn't be released in the package (if you find anything, make sure to create an issue to fix the `.rsync-filter-post-build` file).
-- [ ] Look for new files `svn status | grep \?` and add them using `svn add <each_file_path>`.
-- [ ] Look for removed files `svn status | grep !` and remove them `svn rm <each_file_path>`.
-- [ ] Create the new tag `svn cp trunk tags/<version>`.
-- [ ] Commit the changes `svn ci -m 'Releasing <version>'`.
-- [ ] Wait until WordPress updates the version number and make the final test updating the plugin in a staging site.
+- [ ] Clear the `trunk` directory with `rm -rf trunk/*`.
+- [ ] Unzip the built package and transfer files to the `trunk` folder.
+- [ ] Remove any extraneous files (if found, create an issue to amend the `.rsync-filter-post-build` file). Keep only files really used on production.
+- [ ] Find new files with `svn status | grep \?` and add them using `svn add <each_file_path>`.
+- [ ] Identify removed files with `svn status | grep !` and delete them using `svn rm <each_file_path>`.
+- [ ] Create the new tag using `svn cp trunk tags/<version>`.
+- [ ] Commit the changes with `svn ci -m 'Releasing <version>'`.
+- [ ] Await WordPress's version number update and perform a final test by updating the plugin on a staging site.
