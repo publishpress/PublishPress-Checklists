@@ -2,7 +2,7 @@ name: devworkspace_checklists_free
 services:
     terminal:
         build: .
-        image: publishpress/dev-workspace-terminal:checklists-free-2.0
+        image: publishpress/dev-workspace-terminal:checklists-free-2
         command: ["zsh"]
         stdin_open: true
         tty: true
