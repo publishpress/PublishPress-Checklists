@@ -145,22 +145,27 @@ if (!class_exists('PPCH_Settings')) {
         }
 
         /**
-         * Remove the status field row in quick edit.
+         * Remove the status field row in quick edit for enabled post types.
          */
         public function remove_quick_edit_status_row()
         {
+
             $status = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
-            if($status == 'yes'){
-            ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    $('label.inline-edit-status').each(function () {
-			            $(this).remove();
-                    });
-                });
-            </script>
-            <?php
-            }
+            if ($status == 'yes') :
+                $post_type = (!empty($_GET['post_type'])) ? sanitize_text_field($_GET['post_type']) : 'post';
+                $post_types = array_keys($this->get_post_types());
+                if (in_array($post_type, $post_types)) :
+                    ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            $('label.inline-edit-status').each(function () {
+                                $(this).remove();
+                            });
+                        });
+                    </script>
+                    <?php
+                endif;
+            endif;
         }
 
         /**
