@@ -161,7 +161,7 @@ if (!class_exists('PPCH_Checklists')) {
                 if(is_array($all_roles) && !empty($all_roles)) {
                     foreach ($all_roles as $role => $details) {
                         $role = get_role($role);
-                        if ($role->has_cap('manage_options')) {
+                        if ($role->has_cap('manage_options') || $role->name === 'administrator') {
                             $role->add_cap('manage_checklists');
                         }
                     }
