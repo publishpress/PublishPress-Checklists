@@ -629,7 +629,13 @@
          * @returns {boolean}
          */
         is_gutenberg_active: function () {
-            return ppChecklists.is_gutenberg_active == 1;
+
+            let gutenbergActive = false;
+            if (typeof wp.data !== 'undefined' && typeof wp.data.select('core') !== 'undefined' && typeof wp.data.select('core/edit-post') !== 'undefined' && typeof wp.data.select('core/editor') !== 'undefined') {
+                gutenbergActive = true;
+            }
+
+            return ppChecklists.is_gutenberg_active == 1 && gutenbergActive;
         },
 
         /**
