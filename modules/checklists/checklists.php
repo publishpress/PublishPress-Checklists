@@ -1025,7 +1025,12 @@ if (!class_exists('PPCH_Checklists')) {
             update_option('publishpress_checklists_checklists_options', $options);
 
             // Reload the module's options after saving.
-            wp_redirect($_SERVER['HTTP_REFERER']);
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $redirect_url = $_SERVER['HTTP_REFERER'];
+            } else {
+                $redirect_url = admin_url('admin.php?page=' . self::MENU_SLUG);
+            }
+            wp_redirect($redirect_url);
             exit();
         }
 
