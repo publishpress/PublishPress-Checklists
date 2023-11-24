@@ -144,6 +144,10 @@
 
                 // Trigger the publish button
                 this.elems.publish_button.trigger('click');
+
+                // For some reason, adding this again after the click is trigged solved the acf conflict issue https://github.com/publishpress/PublishPress-Checklists/issues/506
+                this.state.is_confirmed = true;
+                
             }.bind(this));
 
             if (!this.is_gutenberg_active()) {
