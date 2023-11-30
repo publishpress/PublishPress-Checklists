@@ -708,7 +708,7 @@ if (!class_exists('PPCH_Settings')) {
 
             add_settings_field(
                 'disable_published_block_feature',
-                __('Disable published post block feature:', 'publishpress-checklists'),
+                __('Disable blocking of updates for published posts:', 'publishpress-checklists'),
                 [$this, 'settings_disable_published_block_feature_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
@@ -742,7 +742,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_warning_icon_submit]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'This will display a warning icon in the "Publish" box',
+                    'This will display a warning icon in the "Publish" box.',
                     'publishpress-checklists'
                 );
             echo '</label>';
@@ -763,7 +763,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements."',
+                    'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
                     'publishpress-checklists'
                 );
             echo '</label>';
@@ -783,7 +783,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_published_block_feature]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'This setting should only be used if you\'re having conflict with other plugins due to published post block feature."',
+                    'If Checklists requirements are not met and the plugin blocks updates for published posts, this can cause conflicts with other plugins.',
                     'publishpress-checklists'
                 );
             echo '</label>';

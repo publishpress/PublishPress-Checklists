@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2023-11-30 08:02+0000\n"
+"POT-Creation-Date: 2023-11-30 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -210,7 +210,7 @@ msgid "Define tasks that must be complete before content is published."
 msgstr ""
 
 #: modules/settings/settings.php:711
-msgid "Disable published post block feature:"
+msgid "Disable blocking of updates for published posts:"
 msgstr ""
 
 #: modules/settings/settings.php:703
@@ -272,10 +272,16 @@ msgstr ""
 msgid "https://publishpress.com/"
 msgstr ""
 
+#: modules/settings/settings.php:785
+msgid ""
+"If Checklists requirements are not met and the plugin blocks updates for "
+"published posts, this can cause conflicts with other plugins."
+msgstr ""
+
 #: modules/settings/settings.php:765
 msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+"Checklists requirements."
 msgstr ""
 
 #: core/Legacy/Module.php:288
@@ -576,14 +582,8 @@ msgstr ""
 msgid "There are no PublishPress modules registered"
 msgstr ""
 
-#: modules/settings/settings.php:785
-msgid ""
-"This setting should only be used if you're having conflict with other "
-"plugins due to published post block feature.\""
-msgstr ""
-
 #: modules/settings/settings.php:744
-msgid "This will display a warning icon in the \"Publish\" box"
+msgid "This will display a warning icon in the \"Publish\" box."
 msgstr ""
 
 #: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:585
