@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2023-03-06 13:25+0000\n"
+"POT-Creation-Date: 2023-11-30 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -22,72 +22,58 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
-"\n"
 "Language: "
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
-#, php-format
 msgid "%d "
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:41
-#, php-format
 msgid "%d character in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:39
-#, php-format
 msgid "%d character in title"
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:42
-#, php-format
 msgid "%d characters in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:40
-#, php-format
 msgid "%d characters in title"
 msgstr ""
 
 #: core/Requirement/External_links.php:41
-#, php-format
 msgid "%d external link in content"
 msgstr ""
 
 #: core/Requirement/External_links.php:42
-#, php-format
 msgid "%d external links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:41
-#, php-format
 msgid "%d internal link in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:42
-#, php-format
 msgid "%d internal links in content"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:45
-#, php-format
 msgid "%d tag"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:46
-#, php-format
 msgid "%d tags"
 msgstr ""
 
 #: core/Requirement/Words_count.php:41
-#, php-format
 msgid "%d word in content"
 msgstr ""
 
 #: core/Requirement/Words_count.php:42
-#, php-format
 msgid "%d words in content"
 msgstr ""
 
@@ -105,7 +91,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: modules/checklists/checklists.php:898
+#: modules/checklists/checklists.php:900
 msgid "Add custom task"
 msgstr ""
 
@@ -113,7 +99,7 @@ msgstr ""
 msgid "Add support for checklists in WordPress"
 msgstr ""
 
-#: modules/settings/settings.php:677
+#: modules/settings/settings.php:687
 msgid "Add to these post types:"
 msgstr ""
 
@@ -135,46 +121,39 @@ msgstr ""
 msgid "Approved by a user in this role"
 msgstr ""
 
-#: modules/checklists/checklists.php:680
+#: modules/checklists/checklists.php:681
 msgid "Are you sure you want to publish anyway?"
 msgstr ""
 
-#: modules/checklists/checklists.php:684
+#: modules/checklists/checklists.php:685
 msgid "Are you sure you want to update the published post anyway?"
 msgstr ""
 
 #: core/Requirement/Taxonomies_count.php:50
-#, php-format
 msgid "Between %d and %d "
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:43
-#, php-format
 msgid "Between %d and %d characters in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:41
-#, php-format
 msgid "Between %d and %d characters in title"
 msgstr ""
 
 #: core/Requirement/External_links.php:43
-#, php-format
 msgid "Between %d and %d external links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:43
-#, php-format
 msgid "Between %d and %d internal links in content"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:47
-#, php-format
 msgid "Between %d and %d tags"
 msgstr ""
 
 #: core/Requirement/Words_count.php:43
-#, php-format
 msgid "Between %d and %d words in content"
 msgstr ""
 
@@ -183,24 +162,24 @@ msgstr ""
 msgid "Between %s and %s categories"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:212 modules/settings/settings.php:437
+#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:443
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: modules/checklists/checklists.php:622 modules/checklists/checklists.php:678
+#: modules/checklists/checklists.php:623 modules/checklists/checklists.php:679
 msgid "Checklist"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:348 modules/checklists/checklists.php:99
-#: modules/checklists/checklists.php:832 modules/checklists/checklists.php:847
+#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:100
+#: modules/checklists/checklists.php:834 modules/checklists/checklists.php:849
 msgid "Checklists"
 msgstr ""
 
-#: modules/settings/settings.php:60 modules/settings/settings.php:110
+#: modules/settings/settings.php:61 modules/settings/settings.php:111
 msgid "Checklists Settings"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:205 modules/checklists/checklists.php:679
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:680
 msgid "Configure"
 msgstr ""
 
@@ -218,34 +197,38 @@ msgid ""
 "they have completed the task."
 msgstr ""
 
-#: modules/permalinks/permalinks.php:65
+#: modules/permalinks/permalinks.php:66
 msgid "Define tasks related to permalinks"
 msgstr ""
 
-#: modules/yoastseo/yoastseo.php:66
+#: modules/yoastseo/yoastseo.php:67
 msgid "Define tasks related to Yoast SEO"
 msgstr ""
 
-#: modules/checklists/checklists.php:101
+#: modules/checklists/checklists.php:102
 msgid "Define tasks that must be complete before content is published."
 msgstr ""
 
-#: modules/settings/settings.php:693
+#: modules/settings/settings.php:711
+msgid "Disable blocking of updates for published posts:"
+msgstr ""
+
+#: modules/settings/settings.php:703
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 
-#: modules/checklists/checklists.php:920
+#: modules/checklists/checklists.php:922
 msgid "Disabled"
 msgstr ""
 
-#: modules/settings/settings.php:401
+#: modules/settings/settings.php:407
 #, php-format
 msgid ""
 "Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
 "loaded file."
 msgstr ""
 
-#: modules/checklists/checklists.php:896
+#: modules/checklists/checklists.php:898
 msgid "Disabled, Recommended or Required"
 msgstr ""
 
@@ -253,7 +236,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: modules/settings/settings.php:254
+#: modules/settings/settings.php:260
 msgid "Enabled features"
 msgstr ""
 
@@ -262,15 +245,15 @@ msgstr ""
 msgid "Featured image"
 msgstr ""
 
-#: modules/settings/settings.php:245
+#: modules/settings/settings.php:251
 msgid "Features"
 msgstr ""
 
-#: modules/settings/settings.php:246
+#: modules/settings/settings.php:252
 msgid "Feel free to select only the features you need."
 msgstr ""
 
-#: modules/settings/settings.php:668
+#: modules/settings/settings.php:678
 msgid "General:"
 msgstr ""
 
@@ -289,10 +272,16 @@ msgstr ""
 msgid "https://publishpress.com/"
 msgstr ""
 
-#: modules/settings/settings.php:747
+#: modules/settings/settings.php:785
+msgid ""
+"If Checklists requirements are not met and the plugin blocks updates for "
+"published posts, this can cause conflicts with other plugins."
+msgstr ""
+
+#: modules/settings/settings.php:765
 msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+"Checklists requirements."
 msgstr ""
 
 #: core/Legacy/Module.php:288
@@ -310,67 +299,54 @@ msgstr ""
 
 #: core/Requirement/Taxonomies_count.php:46
 #: core/Requirement/Taxonomies_count.php:47
-#, php-format
 msgid "Maximum of %d "
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:39
-#, php-format
 msgid "Maximum of %d character in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:37
-#, php-format
 msgid "Maximum of %d character in title"
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:40
-#, php-format
 msgid "Maximum of %d characters in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:38
-#, php-format
 msgid "Maximum of %d characters in title"
 msgstr ""
 
 #: core/Requirement/External_links.php:39
-#, php-format
 msgid "Maximum of %d external link in content"
 msgstr ""
 
 #: core/Requirement/External_links.php:40
-#, php-format
 msgid "Maximum of %d external links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:39
-#, php-format
 msgid "Maximum of %d internal link in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:40
-#, php-format
 msgid "Maximum of %d internal links in content"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:43
-#, php-format
 msgid "Maximum of %d tag"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:44
-#, php-format
 msgid "Maximum of %d tags"
 msgstr ""
 
 #: core/Requirement/Words_count.php:39
-#, php-format
 msgid "Maximum of %d word in content"
 msgstr ""
 
 #: core/Requirement/Words_count.php:40
-#, php-format
 msgid "Maximum of %d words in content"
 msgstr ""
 
@@ -390,67 +366,54 @@ msgstr ""
 
 #: core/Requirement/Taxonomies_count.php:44
 #: core/Requirement/Taxonomies_count.php:45
-#, php-format
 msgid "Minimum of %d "
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:37
-#, php-format
 msgid "Minimum of %d character in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:35
-#, php-format
 msgid "Minimum of %d character in title"
 msgstr ""
 
 #: core/Requirement/Filled_excerpt.php:38
-#, php-format
 msgid "Minimum of %d characters in excerpt"
 msgstr ""
 
 #: core/Requirement/Title_count.php:36
-#, php-format
 msgid "Minimum of %d characters in title"
 msgstr ""
 
 #: core/Requirement/External_links.php:37
-#, php-format
 msgid "Minimum of %d external link in content"
 msgstr ""
 
 #: core/Requirement/External_links.php:38
-#, php-format
 msgid "Minimum of %d external links in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:37
-#, php-format
 msgid "Minimum of %d internal link in content"
 msgstr ""
 
 #: core/Requirement/Internal_links.php:38
-#, php-format
 msgid "Minimum of %d internal links in content"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:41
-#, php-format
 msgid "Minimum of %d tag"
 msgstr ""
 
 #: core/Requirement/Tags_count.php:42
-#, php-format
 msgid "Minimum of %d tags"
 msgstr ""
 
 #: core/Requirement/Words_count.php:37
-#, php-format
 msgid "Minimum of %d word in content"
 msgstr ""
 
 #: core/Requirement/Words_count.php:38
-#, php-format
 msgid "Minimum of %d words in content"
 msgstr ""
 
@@ -472,11 +435,11 @@ msgstr ""
 msgid "Minimum Yoast SEO readability score"
 msgstr ""
 
-#: modules/checklists/checklists.php:735
+#: modules/checklists/checklists.php:737
 msgid "No"
 msgstr ""
 
-#: modules/checklists/checklists.php:696 modules/checklists/checklists.php:700
+#: modules/checklists/checklists.php:697 modules/checklists/checklists.php:701
 msgid "Not required, but important: "
 msgstr ""
 
@@ -520,15 +483,15 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: modules/checklists/checklists.php:734
+#: modules/checklists/checklists.php:736
 msgid "Ok"
 msgstr ""
 
-#: modules/checklists/checklists.php:897
+#: modules/checklists/checklists.php:899
 msgid "Options"
 msgstr ""
 
-#: modules/permalinks/permalinks.php:64
+#: modules/permalinks/permalinks.php:65
 msgid "Permalinks"
 msgstr ""
 
@@ -536,27 +499,27 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: modules/checklists/checklists.php:688
+#: modules/checklists/checklists.php:689
 msgid "Please complete the following tasks before publishing:"
 msgstr ""
 
-#: modules/checklists/checklists.php:692
+#: modules/checklists/checklists.php:693
 msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:208
+#: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
 msgstr ""
 
-#: modules/checklists/checklists.php:580
+#: modules/checklists/checklists.php:581
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr ""
 
-#: modules/checklists/checklists.php:576
+#: modules/checklists/checklists.php:577
 msgid "Please make sure to complete the settings for"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:217
+#: core/Legacy/LegacyPlugin.php:218
 msgid "Post does not exist"
 msgstr ""
 
@@ -576,15 +539,15 @@ msgstr ""
 msgid "Readability: %s"
 msgstr ""
 
-#: modules/checklists/checklists.php:921
+#: modules/checklists/checklists.php:923
 msgid "Recommended"
 msgstr ""
 
-#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:588
+#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:589
 msgid "Remove"
 msgstr ""
 
-#: modules/checklists/checklists.php:733 modules/checklists/checklists.php:922
+#: modules/checklists/checklists.php:735 modules/checklists/checklists.php:924
 msgid "Required"
 msgstr ""
 
@@ -603,27 +566,27 @@ msgstr ""
 msgid "Seo: %s"
 msgstr ""
 
-#: modules/settings/settings.php:112
+#: modules/settings/settings.php:113
 msgid "Settings"
 msgstr ""
 
-#: modules/settings/settings.php:685
+#: modules/settings/settings.php:695
 msgid "Show warning icon:"
 msgstr ""
 
-#: modules/checklists/checklists.php:895
+#: modules/checklists/checklists.php:897
 msgid "Task"
 msgstr ""
 
-#: modules/settings/settings.php:305
+#: modules/settings/settings.php:311
 msgid "There are no PublishPress modules registered"
 msgstr ""
 
-#: modules/settings/settings.php:726
-msgid "This will display a warning icon in the \"Publish\" box"
+#: modules/settings/settings.php:744
+msgid "This will display a warning icon in the \"Publish\" box."
 msgstr ""
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:584
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:585
 msgid "Which roles can mark this task as complete?"
 msgstr ""
 
@@ -631,19 +594,19 @@ msgstr ""
 msgid "Who can ignore the task?"
 msgstr ""
 
-#: modules/checklists/checklists.php:736
+#: modules/checklists/checklists.php:738
 msgid "Yes"
 msgstr ""
 
-#: modules/yoastseo/yoastseo.php:65
+#: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:213
+#: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."
 msgstr ""
 
-#: modules/checklists/checklists.php:729
+#: modules/checklists/checklists.php:731
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr ""
