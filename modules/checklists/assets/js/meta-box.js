@@ -639,7 +639,7 @@
                 gutenbergActive = true;
             }
 
-            return ppChecklists.is_gutenberg_active == 1 && gutenbergActive;
+            return gutenbergActive;
         },
 
         /**
@@ -704,15 +704,11 @@
             }
         });
     }
-
+    
     // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
     // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
     $(window).on("load", function () {
-        if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) {
-            if ($('.components-panel .yoast').length > 0 || $('.components-panel .yoast-seo-sidebar-panel').length > 0) {
-                //this feature currently clash with yoast seo
-                return;
-            }
+        if (PP_Checklists.is_gutenberg_active() && ((PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) || !ppChecklists.disable_published_block_feature)) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
                 if (has_unchecked_block.length > 0) {
