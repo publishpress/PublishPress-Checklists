@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.3
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,6 +284,18 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+= [2.9.1] - 30 Nov 2023 =
+
+* Fixed: Checklist menu often missing on new installation, #524
+* Fixed: HyperlinkValidator fails with URLs containing text fragments, #485
+* Update: Block updates for posts with incomplete checklists, #303
+* Fixed: Conflict with ACF custom field when creating new post, #506
+* Fixed: Yoast SEO metabox error when creating new woocommerce product, #505
+* Fixed: Warning: Undefined array key "HTTP_REFERER" in checklists, #411
+* Update: Only disable Status in quick edit for checklists enabled post types, #536
+* Fixed: Featured Image Height and Width checks fail for Authors / Contributors, #486
+* Fixed: "Featured Image Size" requirement fails if you do not have the "edit_other_posts" capability, #523
 
 = [2.9.0] - 09 Aug 2023 =
 
