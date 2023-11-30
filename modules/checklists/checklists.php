@@ -161,7 +161,7 @@ if (!class_exists('PPCH_Checklists')) {
                 if(is_array($all_roles) && !empty($all_roles)) {
                     foreach ($all_roles as $role => $details) {
                         $role = get_role($role);
-                        if ($role->has_cap('manage_options')) {
+                        if ($role->has_cap('manage_options') || $role->name === 'administrator') {
                             $role->add_cap('manage_checklists');
                         }
                     }
@@ -703,6 +703,7 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
+                        'disable_published_block_feature' => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->disable_published_block_feature,
                         'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
                         'user_can_manage_options'         => current_user_can( 'manage_options' ),
@@ -1025,7 +1026,12 @@ if (!class_exists('PPCH_Checklists')) {
             update_option('publishpress_checklists_checklists_options', $options);
 
             // Reload the module's options after saving.
-            wp_redirect($_SERVER['HTTP_REFERER']);
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $redirect_url = $_SERVER['HTTP_REFERER'];
+            } else {
+                $redirect_url = admin_url('admin.php?page=' . self::MENU_SLUG);
+            }
+            wp_redirect($redirect_url);
             exit();
         }
 

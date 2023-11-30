@@ -16,3 +16,5 @@ node_modules
 builder.yml
 
 /lib/**/.git
+
+CONTRIBUTING.md

@@ -144,6 +144,10 @@
 
                 // Trigger the publish button
                 this.elems.publish_button.trigger('click');
+
+                // For some reason, adding this again after the click is trigged solved the acf conflict issue https://github.com/publishpress/PublishPress-Checklists/issues/506
+                this.state.is_confirmed = true;
+                
             }.bind(this));
 
             if (!this.is_gutenberg_active()) {
@@ -592,7 +596,10 @@
         },
 
         is_valid_link: function(link) {
-            return link.match(/^(?:(#[-a-​zA-Z0-9@:%._\+~#=]{0,256})|https?:\/\/(?:www\.)?[-a-​zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=*]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_;*]+)$/i);
+
+            const linkWithoutFragment = link.split('#')[0];
+
+            return linkWithoutFragment.match(/^(?:(#[-a-zA-Z0-9@:%._\+~#=]{0,256})|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=*]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_;*]+)$/i);
         },
 
         /**
@@ -626,7 +633,13 @@
          * @returns {boolean}
          */
         is_gutenberg_active: function () {
-            return ppChecklists.is_gutenberg_active == 1;
+
+            let gutenbergActive = false;
+            if (typeof wp.data !== 'undefined' && typeof wp.data.select('core') !== 'undefined' && typeof wp.data.select('core/edit-post') !== 'undefined' && typeof wp.data.select('core/editor') !== 'undefined') {
+                gutenbergActive = true;
+            }
+
+            return gutenbergActive;
         },
 
         /**
@@ -691,15 +704,11 @@
             }
         });
     }
-
+    
     // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
     // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
     $(window).on("load", function () {
-        if (PP_Checklists.is_gutenberg_active() && PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) {
-            if ($('.components-panel .yoast').length > 0 || $('.components-panel .yoast-seo-sidebar-panel').length > 0) {
-                //this feature currently clash with yoast seo
-                return;
-            }
+        if (PP_Checklists.is_gutenberg_active() && ((PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) || !ppChecklists.disable_published_block_feature)) {
             $(document).on(PP_Checklists.EVENT_TIC, function (event) {
                 var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
                 if (has_unchecked_block.length > 0) {
