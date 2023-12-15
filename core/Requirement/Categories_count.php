@@ -61,6 +61,6 @@ class Categories_count extends Base_counter
 
         $count = count($categories);
 
-        return ($count >= $option_value[0]) && ($count <= $option_value[1]);
+        return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }
 }

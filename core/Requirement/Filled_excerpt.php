@@ -55,6 +55,6 @@ class Filled_excerpt extends Base_counter
     {
         $count = strlen(trim(get_the_excerpt($post)));
 
-        return ($count >= $option_value[0]) && ($count <= $option_value[1]);
+        return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }
 }
