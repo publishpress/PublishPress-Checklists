@@ -20,7 +20,7 @@
             <?php foreach ($context['requirements'] as $key => $req) : ?>
                 <li
                         id="pp-checklists-req-<?php echo esc_attr($key); ?>"
-                        class="pp-checklists-req pp-checklists-<?php echo esc_attr($req['rule']); ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
+                        class="pp-checklists-req metabox-req pp-checklists-<?php echo esc_attr($req['rule']); ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
                         data-id="<?php echo esc_attr($key); ?>"
                         data-type="<?php echo esc_attr($req['type']); ?>"
                         data-extra="<?php echo isset($req['extra']) ? esc_attr($req['extra']) : ''; ?>">
@@ -45,6 +45,12 @@
                             <?php $show_required_legend = true; ?>
                         <?php endif; ?>
                     </div>
+
+                    <input type="hidden"
+                        name="ppch_item_<?php echo esc_attr($key); ?>" 
+                        class="ppch_item_requirement"
+                        id="ppch_item_<?php echo esc_attr($key); ?>"
+                        value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>

@@ -58,7 +58,7 @@ class Internal_links extends Base_counter
     {
         $count = count($this->extract_internal_links($post->post_content));
 
-        return ($count >= $option_value[0]) && ($count <= $option_value[1]);
+        return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }
 
     /**

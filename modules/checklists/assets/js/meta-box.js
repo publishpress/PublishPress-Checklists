@@ -175,6 +175,10 @@
 
                     if (isSidebarOpened) {
                         this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+                    } else {
+                        // We need this as validate requirement is not been triggered for publish post. I'll leave the condition for now till i study this very well.
+                        this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+
                     }
                 }.bind(this));
             }
@@ -209,10 +213,14 @@
                     $icon.removeClass('dashicons-yes');
                     $item.removeClass('status-yes');
                     $item.addClass('status-no');
+                    $item.find('.ppch_item_requirement').val('no');
+                    wp.hooks.doAction('pp-checklists.requirements-updated', $item);
                 } else {
                     $icon.addClass('dashicons-yes');
                     $item.addClass('status-yes');
                     $item.removeClass('status-no');
+                    $item.find('.ppch_item_requirement').val('yes');
+                    wp.hooks.doAction('pp-checklists.requirements-updated', $item);
                 }
 
                 $item.children('input[type="hidden"]').val($item.hasClass('status-yes') ? 'yes' : 'no');
@@ -293,7 +301,7 @@
             }.bind(this);
 
             var checkRequirementAction = function (actionType) {
-                var $elems = $('.pp-checklists-req.pp-checklists-' + actionType);
+                var $elems = $('.pp-checklists-req.metabox-req.pp-checklists-' + actionType);
 
                 for (var i = 0; i < $elems.length; i++) {
                     checkRequirement($($elems[i]), uncheckedItems[actionType]);
@@ -314,8 +322,7 @@
 
             if (isPublishingThePost || isUpdatingPublishedPost) {
                 var showBlockMessage = uncheckedItems.block.length > 0,
-                    showWarning = uncheckedItems.warning.length > 0,
-                    gutenbergLockName = 'pp-checklists';
+                    showWarning = uncheckedItems.warning.length > 0;
 
                 if (showWarning || showBlockMessage) {
                     this.state.should_block = true;
@@ -324,7 +331,6 @@
 
                     if (showBlockMessage) {
                         if (PP_Checklists.is_gutenberg_active()) {
-                            wp.data.dispatch('core/editor').lockPostSaving(gutenbergLockName);
                             wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                         } else {
                             if (isUpdatingPublishedPost) {
@@ -351,7 +357,6 @@
                         }
                     } else if (showWarning) {
                         if (PP_Checklists.is_gutenberg_active()) {
-                            wp.data.dispatch('core/editor').unlockPostSaving(gutenbergLockName);
                             wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                         } else {
                             // Only display a warning
@@ -374,7 +379,6 @@
                     }
                 } else {
                     if (PP_Checklists.is_gutenberg_active()) {
-                        wp.data.dispatch('core/editor').unlockPostSaving(gutenbergLockName);
                         wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
                     }
 
@@ -383,6 +387,9 @@
 
                     return;
                 }
+            } else {
+                // we only need the failed counts to be triggered for panel validation
+                wp.hooks.doAction('pp-checklists.update-failed-requirements', uncheckedItems);
             }
 
             this.state.is_publishing = false;
@@ -407,19 +414,22 @@
          */
         update_requirement_icon: function (is_completed, $element) {
             var $icon_element = $element.find('.dashicons');
-
             if (is_completed) {
                 // Ok
                 $icon_element.removeClass('dashicons-no');
                 $icon_element.addClass('dashicons-yes');
                 $icon_element.parent().removeClass('status-no');
                 $icon_element.parent().addClass('status-yes');
+                $element.find('.ppch_item_requirement').val('yes');
+                wp.hooks.doAction('pp-checklists.requirements-updated', $element);
             } else {
                 // Not ok
                 $icon_element.removeClass('dashicons-yes');
                 $icon_element.addClass('dashicons-no');
                 $icon_element.parent().removeClass('status-yes');
                 $icon_element.parent().addClass('status-no');
+                $element.find('.ppch_item_requirement').val('no');
+                wp.hooks.doAction('pp-checklists.requirements-updated', $element);
             }
         },
 
@@ -704,21 +714,6 @@
             }
         });
     }
-    
-    // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
-    // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
-    $(window).on("load", function () {
-        if (PP_Checklists.is_gutenberg_active() && ((PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) || !ppChecklists.disable_published_block_feature)) {
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
-                if (has_unchecked_block.length > 0) {
-                    wp.data.dispatch('core/editor').lockPostSaving('ppcPublishButton');
-                } else {
-                    wp.data.dispatch('core/editor').unlockPostSaving('ppcPublishButton');
-                }
-            });
-        }
-    });
 
     /*----------  Featured Image  ----------*/
 

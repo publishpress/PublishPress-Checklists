@@ -566,10 +566,6 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
             }
 
-            if (!isset ($new_options['disable_published_block_feature'])) {
-                $new_options['disable_published_block_feature'] = Base_requirement::VALUE_NO;
-            }
-
             return $new_options;
         }
 
@@ -706,14 +702,6 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
-            add_settings_field(
-                'disable_published_block_feature',
-                __('Disable blocking of updates for published posts:', 'publishpress-checklists'),
-                [$this, 'settings_disable_published_block_feature_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
-
             do_action('publishpress_checklists_register_settings_after');
         }
 
@@ -764,26 +752,6 @@ if (!class_exists('PPCH_Settings')) {
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
                     'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
-                    'publishpress-checklists'
-                );
-            echo '</label>';
-        }
-
-        /**
-         * Displays the checkbox to enable published post block feature
-         *
-         * @param array
-         */
-        public function settings_disable_published_block_feature_option($args = [])
-        {
-            $id    = $this->module->options_group_name . '_disable_published_block_feature';
-            $value = isset($this->module->options->disable_published_block_feature) ? $this->module->options->disable_published_block_feature : 'no';
-
-            echo '<label for="' . esc_attr($id) . '">';
-            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_published_block_feature]" '
-                . checked($value, 'yes', false) . ' />';
-            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'If Checklists requirements are not met and the plugin blocks updates for published posts, this can cause conflicts with other plugins.',
                     'publishpress-checklists'
                 );
             echo '</label>';

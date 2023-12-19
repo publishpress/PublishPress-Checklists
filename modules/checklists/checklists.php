@@ -661,6 +661,9 @@ if (!class_exists('PPCH_Checklists')) {
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
+
+            $checklistsLink = add_query_arg(['page' => 'ppch-checklists'], get_admin_url(null, 'admin.php'));
+
             // Add the scripts
             if (!empty($requirements)) {
                 wp_enqueue_script(
@@ -676,6 +679,11 @@ if (!class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'                    => $new_requirements_array,
+                        'configure_link'                   => $checklistsLink,
+                        'empty_checklist_message'         => esc_html__(
+                            'You don\'t have to complete any Checklist tasks.',
+                            'publishpress-checklists'
+                        ),
                         'label_checklist'                 => esc_html__('Checklist', 'publishpress-checklists'),
                         'label_configure'                 => esc_html__('Configure', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => esc_html__(
@@ -703,7 +711,6 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
-                        'disable_published_block_feature' => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->disable_published_block_feature,
                         'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
                         'user_can_manage_options'         => current_user_can( 'manage_options' ),
@@ -716,8 +723,6 @@ if (!class_exists('PPCH_Checklists')) {
 
             // Render the box
             $templateLoader = Factory::getTemplateLoader();
-
-            $checklistsLink = add_query_arg(['page' => 'ppch-checklists'], get_admin_url(null, 'admin.php'));
 
             $templateLoader->load(
                 'checklists',
@@ -957,6 +962,20 @@ if (!class_exists('PPCH_Checklists')) {
                     wp_enqueue_script(
                         'pp-checklists-requirements-gutenberg',
                         plugins_url('/modules/checklists/assets/js/gutenberg-warning.min.js', PPCH_FILE),
+                        [
+                            'wp-i18n',
+                            'wp-element',
+                            'wp-hooks',
+                            'wp-edit-post',
+                            'react',
+                            'react-dom',
+                        ],
+                        PPCH_VERSION,
+                        true
+                    );
+                    wp_enqueue_script(
+                        'pp-checklists-panel-gutenberg',
+                        plugins_url('/modules/checklists/assets/js/gutenberg-panel.min.js', PPCH_FILE),
                         [
                             'wp-i18n',
                             'wp-element',
