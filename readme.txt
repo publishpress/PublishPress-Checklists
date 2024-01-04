@@ -6,7 +6,7 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -97,7 +97,7 @@ The Pro version of PublishPress Checklists has support for WooCommerce. There ar
 
 [Click here to read more about WooCommerce checklists](https://publishpress.com/knowledge-base/use-woocommerce-checklist-add-publishpress/).
 
-## Join PublishPress and get the Pro plugins ## 
+## Join PublishPress and get the Pro plugins ##
 
 The Pro versions of the PublishPress plugins are well worth your investment. The Pro versions have extra features and faster support. [Click here to join PublishPress](https://publishpress.com/pricing/).
 
@@ -115,11 +115,11 @@ Join PublishPress and you'll get access to these nince Pro plugins:
 
 Together, these plugins are a suite of powerful publishing tools for WordPress. If you need to create a professional workflow in WordPress, with moderation, revisions, permissions and more... then you should try PublishPress.
 
-## Bug Reports ## 
+## Bug Reports ##
 
 Bug reports for PublishPress Checklists are welcomed in our [repository on GitHub](https://github.com/publishpress/publishpress-checklists). Please note that GitHub is not a support forum, and that issues that aren’t properly qualified as bugs will be closed.
 
-## Follow the PublishPress team ## 
+## Follow the PublishPress team ##
 
 Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitter](https://www.twitter.com/publishpresscom) and [YouTube](https://www.youtube.com/publishpress)
 
