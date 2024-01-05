@@ -18,6 +18,8 @@ class Base_dropdown extends Base_simple implements Interface_required
      */
     protected $type = 'dropdown';
 
+    protected $field_name = 'dropdown';
+
 
     /**
      * Add the requirement to the list to be displayed in the meta box.
@@ -46,7 +48,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         }
 
         // Option names
-        $option_name_dropdown = $this->name . '_dropdown';
+        $option_name_dropdown = $this->name . '_' .$this->field_name;
 
         // Get the value
         $option_value = '';
@@ -72,6 +74,7 @@ class Base_dropdown extends Base_simple implements Interface_required
             'rule'      => $rule,
             'type'      => $this->type,
             'is_custom' => false,
+            'require_button' => false,
         ];
 
         return $requirements;
@@ -90,7 +93,7 @@ class Base_dropdown extends Base_simple implements Interface_required
         $css_class = esc_attr($css_class);
 
         // Option name
-        $option_name_dropdown = $this->name . '_dropdown';
+        $option_name_dropdown = $this->name  . '_' .$this->field_name;
 
         // Get the value
         $option_value = '';

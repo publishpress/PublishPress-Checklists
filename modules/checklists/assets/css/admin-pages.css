@@ -18,6 +18,12 @@
     width: 100%;
 }
 
+textarea.pp-checklists-custom-item-title {
+    min-width: 200px;
+    min-height: 60px;
+    resize: none;
+}
+
 .pressshack-admin-wrapper a:link,
 .pressshack-admin-wrapper a:visited,
 .pressshack-admin-wrapper a:active,
@@ -183,13 +189,15 @@
     color: #ef5350;
 }
 
-.pp-checklists-requirements-settings {
+.pp-checklists-requirements-settings,
+.pp-custom-checklists-table {
     width: 100%;
     border: 1px solid silver;
     background: #fff;
 }
 
-.pp-checklists-requirements-settings th {
+.pp-checklists-requirements-settings th,
+.pp-custom-checklists-table th {
     width: auto;
     text-align: left;
     height: 35px;
@@ -199,7 +207,8 @@
     font-weight: normal;
 }
 
-.pp-checklists-requirements-settings td {
+.pp-checklists-requirements-settings td,
+.pp-custom-checklists-table td {
     height: 80px;
     padding: 10px;
     box-sizing: border-box;
@@ -223,12 +232,33 @@
     min-width: 80px;
 }
 
-#pp-checklists-add-button {
+.pp-checklists-task-params input.full-width {
+    width: 95%;
+}
+
+#pp-checklists-add-button,
+#pp-checklists-openai-promt-button {
     border: 1px solid silver;
     padding: 10px;
     line-height: 20px;
 }
 
+.pp-custom-checklists-table {
+    margin-top: 10px;
+}
+
+.pp-custom-checklists-table tr {
+    background-color: #f6f7f7;
+}
+
+.pp-custom-suggestion a {
+    color: #2271b1;
+}
+
+.pp-suggestion-description {
+    line-height: 1.4em;
+    color: gray;
+}
 
 .pp-checklists-req .status-label {
     padding-left: 3px;
@@ -322,7 +352,8 @@
         display: none;
     }
 
-    .pp-checklists-requirements-settings td {
+    .pp-checklists-requirements-settings td,
+    .pp-custom-checklists-table td {
         height: auto !important;
     }
 

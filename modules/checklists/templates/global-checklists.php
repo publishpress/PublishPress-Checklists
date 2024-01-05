@@ -67,13 +67,48 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <br>
-    <div>
-        <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
-            <span class="dashicons dashicons-plus-alt"></span> <?php echo esc_html($context['lang']['add_custom_item']); ?>
-        </a>
-        <span class="pp-checklists-field-description"><?php echo esc_html__('Custom tasks do not complete automatically. Users must check the box to show they have completed the task.', 'publishpress-checklists'); ?></span>
-    </div>
+
+    <table class="wp-list-table striped pp-custom-checklists-table">
+        <thead>
+            <tr>
+                <th><strong><?php esc_html_e('New Item', 'publishpress-checklists'); ?></strong></th>
+                <th><strong><?php esc_html_e('Description', 'publishpress-checklists'); ?></strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> 
+                    <a id="pp-checklists-add-button" href="javascript:void(0);" class="button button-secondary">
+                        <span class="dashicons dashicons-plus-alt"></span> <?php echo esc_html($context['lang']['add_custom_item']); ?>
+                    </a>
+                </td>
+                <td>
+                    <span class="pp-checklists-field-description">
+                        <?php echo esc_html__('Custom tasks do not complete automatically. Users must check the box to show they have completed the task.', 'publishpress-checklists'); ?>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a id="pp-checklists-openai-promt-button" href="javascript:void(0);" class="button button-secondary">
+                        <span class="dashicons dashicons-plus-alt"></span> <?php esc_html_e('Add OpenAI Prompt task', 'publishpress-checklists'); ?>
+                    </a>
+                </td>
+                <td>
+                    <span class="pp-checklists-field-description">
+                        
+                    </span>
+                    <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('The prompt should be in form of a question that ends with a question mark for efficient result.', 'publishpress-checklists'); ?></p>
+
+                    <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('The expected response is either Yes/No depending on if the content meet the prompt requirement. You can open support ticket for prompt suggestion or compability issue.', 'publishpress-checklists'); ?></p>
+
+                    <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('You can start by clicking on suggested prompt.', 'publishpress-checklists'); ?></strong></p>
+<!--  Return only Yes/No -->
+                    <p class="pp-checklists-field-description" style="margin-top: 0;"><a target="_blank" href="<?php echo esc_url(admin_url('admin.php?page=ppch-settings')); ?>"><?php echo esc_html__('OpenAI requires API key to work.', 'publishpress-checklists'); ?></a></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <input type="submit" name="submit" id="submit" class="button button-primary"
            value="<?php echo esc_attr__('Save Changes', 'publishpress-checklists'); ?>">
