@@ -23,9 +23,10 @@
                         class="pp-checklists-req metabox-req pp-checklists-<?php echo esc_attr($req['rule']); ?> status-<?php echo $req['status'] ? 'yes' : 'no'; ?> <?php echo $req['is_custom'] ? 'pp-checklists-custom-item' : ''; ?>"
                         data-id="<?php echo esc_attr($key); ?>"
                         data-type="<?php echo esc_attr($req['type']); ?>"
+                        data-source="<?php echo !empty($req['source']) ? esc_attr($req['source']) : ''; ?>"
                         data-extra="<?php echo isset($req['extra']) ? esc_attr($req['extra']) : ''; ?>">
 
-                    <?php if ($req['is_custom']) : ?>
+                    <?php if (!empty($req['is_custom']) || !empty($req['require_button'])) : ?>
                         <input type="hidden" name="_PPCH_custom_item[<?php echo esc_attr($req['id']); ?>]"
                                value="<?php echo $req['status'] ? 'yes' : 'no'; ?>"/>
                     <?php endif; ?>
@@ -45,6 +46,13 @@
                             <?php $show_required_legend = true; ?>
                         <?php endif; ?>
                     </div>
+                    <?php if (!empty($req['require_button'])) : ?>
+                        <button type="button" class="button button-secondary pp-checklists-check-item">
+                            <?php echo esc_html($context['lang']['check']); ?>
+                            <span class="spinner"></span>
+                        </button>
+                        <div class="request-response"></div>
+                    <?php endif; ?>
 
                     <input type="hidden"
                         name="ppch_item_<?php echo esc_attr($key); ?>" 

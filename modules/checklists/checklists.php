@@ -34,6 +34,7 @@ use PublishPress\Checklists\Core\Legacy\Util;
 use PublishPress\Checklists\Core\Plugin;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
+use PublishPress\Checklists\Core\Requirement\Openai_item;
 
 if (!class_exists('PPCH_Checklists')) {
     /**
@@ -109,6 +110,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'default_options'   => [
                     'enabled'      => 'on',
                     'custom_items' => [],
+                    'openai_items' => [],
                 ],
                 'autoload'          => true,
             ];
@@ -288,6 +290,19 @@ if (!class_exists('PPCH_Checklists')) {
                     if (isset($this->module->options->{$var_name}[$post_type])) {
                         $custom_item                      = new Custom_item($id, $this->module, $post_type);
                         $this->requirements[$post_type][] = $custom_item;
+                    }
+                }
+            }
+
+            if (isset($this->module->options->openai_items) && !empty($this->module->options->openai_items)) {
+                foreach ($this->module->options->openai_items as $id) {
+                    $id = trim((string)$id);
+
+                    // Check if there is a title set for this post type. If not, we do not instantiate
+                    $var_name = $id . '_title';
+                    if (isset($this->module->options->{$var_name}[$post_type])) {
+                        $openai_item                      = new Openai_item($id, $this->module, $post_type);
+                        $this->requirements[$post_type][] = $openai_item;
                     }
                 }
             }
@@ -587,7 +602,40 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'remove'            => esc_html__('Remove', 'publishpress-checklists'),
-                        'enter_name'        => esc_html__('Enter name of custom task', 'publishpres-checklists'),
+                        'custom_enter_name' => esc_html__('Enter name of custom task', 'publishpres-checklists'),
+                        'openai_enter_name' => esc_html__('Enter OpenAI task prompt', 'publishpres-checklists'),
+                        'suggestion_title' => esc_html__('Suggested Prompts', 'publishpres-checklists'),
+                        'openai_option_description' => esc_html__('What\'s the expected OpenAI response to mark the requirement as pass?', 'publishpress-checklists'),
+                        'openai_suggestions' => [
+                            'clear_content' => [
+                                'label' => esc_html__('Clear Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content clear and easy to read?', 'publishpres-checklists'),
+                            ],
+                            'friendly_tone' => [
+                                'label' => esc_html__('Friendly Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone friendly?', 'publishpres-checklists'),
+                            ],
+                            'professional_tone' => [
+                                'label' => esc_html__('Professional Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone professional?', 'publishpres-checklists'),
+                            ],
+                            'persuasive_tone' => [
+                                'label' => esc_html__('Persuasive Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone persuasive?', 'publishpres-checklists'),
+                            ],
+                            'empathetic_tone' => [
+                                'label' => esc_html__('Empathetic Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone empathetic?', 'publishpres-checklists'),
+                            ],
+                            'adventurous_tone' => [
+                                'label' => esc_html__('Adventurous Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone adventurous?', 'publishpres-checklists'),
+                            ],
+                            'promotional_tone' => [
+                                'label' => esc_html__('Promotional Tone Content', 'publishpres-checklists'),
+                                'prompt' => esc_html__('Is this content tone promotional?', 'publishpres-checklists'),
+                            ]
+                        ],
                     ]
                 );
             } elseif (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
@@ -679,7 +727,8 @@ if (!class_exists('PPCH_Checklists')) {
                     'ppChecklists',
                     [
                         'requirements'                    => $new_requirements_array,
-                        'configure_link'                   => $checklistsLink,
+                        'configure_link'                  => $checklistsLink,
+                        'nonce'                           => wp_create_nonce('pp-checklists-requirements'),
                         'empty_checklist_message'         => esc_html__(
                             'You don\'t have to complete any Checklist tasks.',
                             'publishpress-checklists'
@@ -738,6 +787,7 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'required'                => esc_html__('Required', 'publishpress-checklists'),
+                        'check'                   => esc_html__('Check Now', 'publishpress-checklists'),
                         'ok'                      => esc_html__('Ok', 'publishpress-checklists'),
                         'no'                      => esc_html__('No', 'publishpress-checklists'),
                         'yes'                     => esc_html__('Yes', 'publishpress-checklists'),
@@ -1067,6 +1117,17 @@ if (!class_exists('PPCH_Checklists')) {
                         foreach ($new_options[$id . '_title'] as $post_type => $title) {
                             $custom_item = new Custom_item($id, $this->module, $post_type);
                             $custom_item->init();
+                        }
+                    }
+                }
+            }
+            
+            if (isset($new_options['openai_items']) && !empty($new_options['openai_items'])) {
+                foreach ($new_options['openai_items'] as $id) {
+                    if (isset($new_options[$id . '_title'])) {
+                        foreach ($new_options[$id . '_title'] as $post_type => $title) {
+                            $openai_item = new Openai_item($id, $this->module, $post_type);
+                            $openai_item->init();
                         }
                     }
                 }

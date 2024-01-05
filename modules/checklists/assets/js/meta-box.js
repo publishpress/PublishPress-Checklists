@@ -201,6 +201,47 @@
                 }
             }.bind(this));
 
+            // Add event to the button custom items
+            this.elems.document.on('click', '.pp-checklists-req .pp-checklists-check-item', function (event) {
+                event.preventDefault();
+                var target = $(event.target);
+                var target_li = target.closest('li');
+                var global_this = this;
+
+                $('.pp-checklists-req').find('.request-response').html('');
+             
+                if (typeof target_li !== 'undefined') {
+                    target_li.find('.pp-checklists-check-item').prop('disabled', true);
+                    target_li.find('.spinner').addClass('is-active');
+
+                    var data = {
+                        action: "pp_checklists_" + target_li.attr('data-source') + "_requirement",
+                        requirement: ppChecklists.requirements[target_li.attr('data-id')],
+                        content: PP_Checklists.get_editor_content(),
+                        nonce: ppChecklists.nonce,
+                    };
+
+                    $.post(ajaxurl, data, function (response) {
+                        var response_content = response.content;
+                        var response_content = response_content.replace(/\n/g, '<br>');
+                        if (response.yes_no == 'yes') {
+                            $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').removeClass('dashicons-yes');
+                            global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
+                        } else if (response.yes_no == 'no') {
+                            $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').addClass('dashicons-yes');
+                            global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
+                        }
+                        target_li.find('.request-response').html('<div id="message" class="notice is-dismissible updated"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.pp-checklists-check-item').prop('disabled', false);
+                        target_li.find('.spinner').removeClass('is-active');
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        target_li.find('.request-response').html('<div id="message" class="notice is-dismissible updated"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.pp-checklists-check-item').prop('disabled', false);
+                        target_li.find('.spinner').removeClass('is-active');
+                    });
+                }
+            }.bind(this));
+
             // On clicking the confirmation button in the modal window
             this.elems.document.on(this.EVENT_TOGGLE_CUSTOM_ITEM, function (event, item) {
                 var $item = $(item),
@@ -650,6 +691,41 @@
             }
 
             return gutenbergActive;
+        },
+
+        /**
+         * Returns editor content.
+         *
+         * @returns {boolean}
+         */
+        get_editor_content: function () {
+            let data = '';
+  
+            try { // Gutenberg
+              data = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            } catch (error) {
+              try { // TinyMCE
+                let ed = tinyMCE.activeEditor;
+                if ('mce_fullscreen' == ed.id) {
+                  tinyMCE.get('content').setContent(ed.getContent({
+                    format: 'raw'
+                  }), {
+                    format: 'raw'
+                  });
+                }
+                tinyMCE.get('content').save();
+                data = jQuery('#content').val();
+              } catch (error) {
+                try { // Quick Tags
+                  data = jQuery('#content').val();
+                } catch (error) { }
+              }
+            }
+      
+            // Trim data
+            data = data.replace(/^\s+/, '').replace(/\s+$/, '');
+      
+            return data;
         },
 
         /**

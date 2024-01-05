@@ -8,6 +8,8 @@ import CheckListIcon from './CheckListIcon.jsx';
 
 class PPChecklistsPanel extends Component {
     isMounted = false;
+    oldStatus = '';
+    currentStatus = '';
 
     constructor(props) {
         super(props);
@@ -90,21 +92,56 @@ class PPChecklistsPanel extends Component {
      * Add a method to perform checks before updating
      */
     performChecksBeforePostUpdate = () => {
-        var editor = wp.data.dispatch('core/editor');
-        var notices = wp.data.dispatch('core/notices');
+        var editor   = wp.data.dispatch('core/editor');
+        var notices  = wp.data.dispatch('core/notices');
         var savePost = editor.savePost;
+        var editPost = editor.editPost;
+
+        if (!this.oldStatus || this.oldStatus == '') {
+            this.oldStatus = wp.data.select('core/editor').getCurrentPost()['status'];
+        }
+        
+        /**
+        * This is the best way to get edited post status. 
+        * For now, both getEditedPostAttribute('status') and 
+        * getCurrentPost()['status'] are not helpful because they don't usually return same
+        * status or valid status between when a post Publish button is used / Save draft is clicked
+        * for new and already published post.
+        */
+        editor.editPost = function (edits, options) {
+            if (typeof edits === 'object' && edits.status) {
+                // set status to be used later when preventing publish for posts that doesn't meet requirement.
+                this.currentStatus = edits.status;
+            }
+            editPost(edits, options);
+        }.bind(this);
 
         /**
          * Our less problematic solution till gutenberg Add a way 
          * for third parties to perform additional save validation 
-         * in https://github.com/WordPress/gutenberg/issues/13413
-         * is this issue as it also solves third party conflict with
+         * in this issue https://github.com/WordPress/gutenberg/issues/13413
+         * is this solution as it also solves third party conflict with
          * locking post (Rankmath, Yoast SEO etc)
          */
         editor.savePost = function () {
-            notices.removeNotices('publishpress-checklists-validation');
 
-            if (typeof this.state.failedRequirements.block === "undefined" || this.state.failedRequirements.block.length === 0) {
+            notices.removeNotices('publishpress-checklists-validation');
+            
+            var publishing_post = false;
+
+            if (this.currentStatus !== '') {
+                publishing_post = (this.currentStatus !== 'publish') ? false : true;
+            } else {
+                if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
+                    publishing_post = false;
+                } else if (wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
+                    publishing_post = true;
+                } else if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
+                    publishing_post = true;
+                }
+            }
+
+            if (!publishing_post || typeof this.state.failedRequirements.block === "undefined" || this.state.failedRequirements.block.length === 0) {
                 savePost();
             } else {
                 wp.data.dispatch('core/edit-post').closePublishSidebar();
@@ -113,6 +150,18 @@ class PPChecklistsPanel extends Component {
                     isDismissible: true
                 });
                 wp.data.dispatch('core/edit-post').openGeneralSidebar('publishpress-checklists-panel/checklists-sidebar');
+
+                /**
+                 * change status to draft or old status if failed to 
+                 * solve further save draft button not working. This is
+                 * because at this state, the status has been updated to publish 
+                 * and further click on "Save draft" from editor UI won't work
+                 * as that doesn't update the status to publish
+                 */
+                if (this.oldStatus !== '') {
+                    wp.data.dispatch('core/editor').editPost({status: this.oldStatus, pp_checklists_edit: true});
+                }
+
             }
         }.bind(this);
     };
@@ -146,9 +195,10 @@ class PPChecklistsPanel extends Component {
                                         key={`pp-checklists-req-panel-${key}`}
                                         className={`pp-checklists-req panel-req pp-checklists-${req.rule} status-${req.status ? 'yes' : 'no'} ${req.is_custom ? 'pp-checklists-custom-item' : ''
                                             }`}
-                                        data-id={key}
+                                        data-id={req.id}
                                         data-type={req.type}
                                         data-extra={req.extra || ''}
+                                        data-source={req.source || ''}
                                         onClick={() => {
                                             if (req.is_custom) {
                                                 const element = document.querySelector(`#pp-checklists-req-${req.id}` + ' .status-label');
@@ -158,7 +208,7 @@ class PPChecklistsPanel extends Component {
                                             }
                                         }}
                                     >
-                                        {req.is_custom ? (
+                                        {req.is_custom || req.require_button ? (
                                             <input type="hidden" name={`_PPCH_custom_item[${req.id}]`} value={req.status ? 'yes' : 'no'} />
                                         ) : null}
                                         <div className={`status-icon dashicons ${req.is_custom ? (req.status ? 'dashicons-yes' : '') : (req.status ? 'dashicons-yes' : 'dashicons-no')}`}></div>
@@ -166,6 +216,15 @@ class PPChecklistsPanel extends Component {
                                             {req.label}
                                             {req.rule === 'block' ? (
                                                 <span className="required">*</span>
+                                            ) : null}
+                                            {req.require_button ? (
+                                                <div>
+                                                    <button type="button" class="button button-secondary pp-checklists-check-item">
+                                                        {__("Check Now", "publishpress-checklists")}
+                                                        <span class="spinner"></span>
+                                                    </button>
+                                                    <div class="request-response"></div>
+                                                </div>
                                             ) : null}
                                         </div>
                                     </li>
