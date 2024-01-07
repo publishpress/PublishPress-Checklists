@@ -807,6 +807,45 @@
             );
         });
     }
+   
+    /*----------  Featured Image Alt  ----------*/
+    // Check if the featured image is set or not
+    if ($('#pp-checklists-req-featured_image_alt').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            var has_alt = false;
+            var meta_id = 0;
+            if (PP_Checklists.is_gutenberg_active()) {
+                meta_id = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
+            } else {
+                meta_id = $('#_thumbnail_id').val();
+            }
+            has_alt = ppChecklists.featured_image_alt[meta_id] ?? false;
+
+            if ($('#attachment-details-alt-text').length > 0) {
+                const callableFunc = function () {
+                    var current_alt = $('#attachment-details-alt-text').val();
+                    var previous_alt = ppChecklists.featured_image_alt[meta_id] ?? '';
+                    if (current_alt !== previous_alt) {
+                        ppChecklists.featured_image_alt[meta_id] = current_alt;
+                    }
+                };
+                $('#attachment-details-alt-text')
+                .ready(function () {
+                    $('.attachments-wrapper li').each(function () {
+                        if ($(this).attr('aria-checked') === 'true') {
+                        meta_id = $(this).attr('data-id');
+                        callableFunc();
+                        }
+                    });
+                })
+                .on('change', callableFunc);
+            }
+            $('#pp-checklists-req-featured_image_alt').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                has_alt
+            );
+        });
+    }
 
     /*---------- Tags Number  ----------*/
 
@@ -816,10 +855,16 @@
                 min_value = parseInt(ppChecklists.requirements.tags_count.value[0]),
                 max_value = parseInt(ppChecklists.requirements.tags_count.value[1]);
 
+            /**
+             * For Gutenberg
+             */
             if (PP_Checklists.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                 var obj = PP_Checklists.getEditor().getEditedPostAttribute('tags');
             } else {
+                /**
+                 * For the Classic Editor
+                 */
                 var obj = $('#post_tag.tagsdiv ul.tagchecklist').children('li');
             }
 

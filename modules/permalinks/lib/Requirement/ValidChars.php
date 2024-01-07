@@ -25,7 +25,7 @@ class ValidChars extends Base_simple
     /**
      * @var int
      */
-    public $position = 110;
+    public $position = 120;
 
     /**
      * Initialize the language strings for the instance
