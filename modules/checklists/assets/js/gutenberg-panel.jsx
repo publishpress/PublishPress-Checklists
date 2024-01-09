@@ -219,11 +219,11 @@ class PPChecklistsPanel extends Component {
                                             ) : null}
                                             {req.require_button ? (
                                                 <div>
-                                                    <button type="button" class="button button-secondary pp-checklists-check-item">
+                                                    <button type="button" className="button button-secondary pp-checklists-check-item">
                                                         {__("Check Now", "publishpress-checklists")}
-                                                        <span class="spinner"></span>
+                                                        <span className="spinner"></span>
                                                     </button>
-                                                    <div class="request-response"></div>
+                                                    <div className="request-response"></div>
                                                 </div>
                                             ) : null}
                                         </div>

@@ -340,20 +340,47 @@ class Openai_item extends Base_simple implements Interface_required
                         $response['content'] = sprintf(esc_html__('API Error: %1s.', 'publishpress-checklists'), $error_message);
                     } elseif (isset($body_data['choices'][0]['message']['content'])) {
                         // Extract the response content
-                        $response_content = $body_data['choices'][0]['message']['content'];
+                        $api_content = $body_data['choices'][0]['message']['content'];
 
                         // Extract Yes/No response
                         $yes_no_response = '';
-                        preg_match('/Yes\/No: (Yes|No)/', $response_content, $matches);
+                        preg_match('/Yes\/No: (Yes|No)/', $api_content, $matches);
                         if (isset($matches[1])) {
                             $yes_no_response = strtolower(trim($matches[1]));
                         }
 
-                        $response['content'] = $response_content;
+                        // Compatibility for rare cases where the api may not follow our requested format
+                        if (!in_array($yes_no_response, ['yes', 'no'])) {
+                            if (stripos($api_content, "Yes") === 0) {
+                                $yes_no_response = 'yes';
+                            } elseif (stripos($api_content, "Yes") === 0) {
+                                $yes_no_response = 'no';
+                            }
+                        }
 
                         if (in_array($yes_no_response, ['yes', 'no'])) {
                             $response['yes_no'] = $yes_no_response;
+                            $response_content = '<div class="ppch-yes-no-response">';
+                            $response_content .= strtoupper($yes_no_response);
+                            $response_content .= '. <a href="#" onclick="event.preventDefault(); var message = this.closest(\'.ppch-message\'); var fullResponse = message.querySelector(\'.ppch-full-response\'); var yesNoResponse = message.querySelector(\'.ppch-yes-no-response\'); if (fullResponse && yesNoResponse) { fullResponse.style.display = \'block\'; yesNoResponse.remove(); }">'. esc_html__('See Full Response.', 'publishpress-checklists') .'</a>';
+
+                            $response_content .= '</div>';
+                            $response_content .= '<div style="display: none;" class="ppch-full-response">';
+                            $response_content .= trim(str_ireplace(
+                                [
+                                    'Yes/No: Yes',
+                                    'Yes/No: No',
+                                    'Full Response:'
+                                ],
+                                '',
+                                stripslashes($api_content)
+                            ));
+                            $response_content .= '</div>';
+                        } else {
+                            $response_content = $api_content;
                         }
+
+                        $response['content'] = $response_content;
 
                     } else {
                         $response['content'] = esc_html__('Invalid response', 'publishpress-checklists');

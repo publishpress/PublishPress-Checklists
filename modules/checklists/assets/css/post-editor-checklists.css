@@ -125,6 +125,11 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     padding: 0 17px;
 }
 
+.pp-checklists-req .request-response #message {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .pp-checklists-custom-item {
     cursor: pointer;
     color: #ef5350;

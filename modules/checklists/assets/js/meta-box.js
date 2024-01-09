@@ -231,11 +231,11 @@
                             $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').addClass('dashicons-yes');
                             global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
                         }
-                        target_li.find('.request-response').html('<div id="message" class="notice is-dismissible updated"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
                         target_li.find('.pp-checklists-check-item').prop('disabled', false);
                         target_li.find('.spinner').removeClass('is-active');
                     }).fail(function (jqXHR, textStatus, errorThrown) {
-                        target_li.find('.request-response').html('<div id="message" class="notice is-dismissible updated"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
                         target_li.find('.pp-checklists-check-item').prop('disabled', false);
                         target_li.find('.spinner').removeClass('is-active');
                     });

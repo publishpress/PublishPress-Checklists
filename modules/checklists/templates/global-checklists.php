@@ -100,7 +100,7 @@
                     </span>
                     <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('The prompt should be in form of a question that ends with a question mark for efficient result.', 'publishpress-checklists'); ?></p>
 
-                    <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('The expected response is either Yes/No depending on if the content meet the prompt requirement. You can open support ticket for prompt suggestion or compability issue.', 'publishpress-checklists'); ?></p>
+                    <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('The expected response is either Yes/No depending on if the content meet the prompt requirement. You can open support ticket for prompt suggestion or compatibility issue.', 'publishpress-checklists'); ?></p>
 
                     <p class="pp-checklists-field-description" style="margin-top: 0;">* <?php echo esc_html__('You can start by clicking on suggested prompt.', 'publishpress-checklists'); ?></strong></p>
 <!--  Return only Yes/No -->
