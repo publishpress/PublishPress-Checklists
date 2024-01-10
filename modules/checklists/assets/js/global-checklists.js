@@ -121,11 +121,12 @@
          * by the temporary ID/
          *
          * @param  {string} id
+         * @param  {string} type
          */
-        function remove_row (id) {
+        function remove_row (id, type) {
             // Add a special hidden input to flag the delete action
             var $input = $('<input type="hidden" />')
-                .attr('name', 'publishpress_checklists_checklists_options[custom_items_remove][]')
+                .attr('name', 'publishpress_checklists_checklists_options[' + type + '_items_remove][]')
                 .val(id)
                 .appendTo($('#pp-checklists-requirements'));
 
@@ -141,7 +142,7 @@
         function callback_remove_row (event) {
             var $target = $(event.target);
 
-            remove_row($target.data('id'));
+            remove_row($target.data('id'), $target.data('type'));
         }
 
         /**
@@ -152,11 +153,11 @@
          *
          * @return {Element}
          */
-        function create_row (id, title, action, post_type) {
+        function create_row (id, title, action, post_type, type) {
             var $table = $('#pp-checklists-requirements'),
                 $tr = $('<tr>'),
                 $td = null,
-                $titleField = $('<input type="text" />'),
+                $titleField = type == 'openai' ? $('<textarea>') : $('<input type="text" />'),
                 $idField = $('<input type="hidden" />'),
                 $actionField = $('<select>'),
                 $canIgnoreField = $('<select>'),
@@ -164,12 +165,15 @@
                 $option,
                 $a,
                 $icon,
+                $suggestionItem = $('<div class="pp-custom-suggestion">'),
+                $suggestionsObject = objectL10n_checklists_global_checklist[type + '_suggestions'],
                 rule;
 
             $table.append($tr);
 
             $tr.addClass('pp-checklists-requirement-row')
                 .attr('data-id', id)
+                .attr('data-type', type)
                 .attr('data-post-type', post_type);
 
             $td = $('<td>').appendTo($tr);
@@ -178,7 +182,7 @@
             $idField
                 .attr(
                     'name',
-                    'publishpress_checklists_checklists_options[custom_items][]'
+                    'publishpress_checklists_checklists_options[' + type + '_items][]'
                 )
                 .val(id)
                 .appendTo($td);
@@ -193,8 +197,19 @@
                 .addClass('pp-checklists-custom-item-title')
                 .focus()
                 .attr('data-id', id)
-                .attr('placeholder', objectL10n_checklists_global_checklist.enter_name)
+                .attr('placeholder', objectL10n_checklists_global_checklist[type + '_enter_name'])
                 .appendTo($td);
+
+            // Suggestion
+            if (typeof $suggestionsObject !== 'undefined') {
+                $suggestionItem.append('<span class="suggestion-title">' + objectL10n_checklists_global_checklist.suggestion_title + ':</span> ');
+                for (var key in $suggestionsObject) {
+                    if ($suggestionsObject.hasOwnProperty(key)) {
+                        $suggestionItem.append('<span>&#x2022; <a href="javascript:void(0);" class="' + key + '" data-prompt="' + $suggestionsObject[key].prompt + '">' + $suggestionsObject[key].label + '</a></span> ');
+                    }
+                }
+                $suggestionItem.appendTo($td);
+            }
 
             // Action cell
             $td = $('<td>').appendTo($tr);
@@ -236,40 +251,45 @@
             $td = $('<td>')
               .addClass('pp-checklists-task-params')
               .appendTo($tr);
-            $optionsField
-                .attr(
-                    'id',
-                    '' + post_type + '-checklists-' + id + '_editable_by'
-                )
-                .attr(
-                    'name',
-                    'publishpress_checklists_checklists_options[' + id + '_editable_by][' + post_type + '][]'
-                )
-                .attr('multiple', 'multiple')
-                .appendTo($td);
 
-            $option = $('<option value=""></option>').appendTo($optionsField);
-            $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
-                $option = $('<option>')
-                    .attr('value', value)
-                    .text(label)
-                    .appendTo($optionsField);
-            });
+            if (type !== 'openai') {
+                $optionsField
+                    .attr(
+                        'id',
+                        '' + post_type + '-checklists-' + id + '_editable_by'
+                    )
+                    .attr(
+                        'name',
+                        'publishpress_checklists_checklists_options[' + id + '_editable_by][' + post_type + '][]'
+                    )
+                    .attr('multiple', 'multiple')
+                    .appendTo($td);
 
-            var $label = $('<p>')
-              .addClass('pp-checklists-editable-by-description')
-              .text(objectL10n_checklists_global_checklist.editable_by);
-            $optionsField.after($label);
+                $option = $('<option value=""></option>').appendTo($optionsField);
+                $.each(objectL10n_checklists_global_checklist.roles, function (value, label) {
+                    $option = $('<option>')
+                        .attr('value', value)
+                        .text(label)
+                        .appendTo($optionsField);
+                });
+
+                var $label = $('<p>')
+                .addClass('pp-checklists-editable-by-description')
+                .text(objectL10n_checklists_global_checklist.editable_by);
+                $optionsField.after($label);
+            }
 
             $a = $('<a>')
                 .attr('href', 'javascript:void(0);')
                 .addClass('pp-checklists-remove-custom-item')
                 .attr('title', objectL10n_checklists_global_checklist.remove)
                 .attr('data-id', id)
+                .attr('data-type', type)
                 .appendTo($td);
             $icon = $('<span>')
                 .addClass('dashicons dashicons-no')
                 .attr('data-id', id)
+                .attr('data-type', type)
                 .appendTo($a);
 
 
@@ -283,7 +303,18 @@
         $('#pp-checklists-add-button').on('click', function (event) {
             var newId = uidGen(15);
 
-            create_row(newId, '', '', get_current_post_type());
+            create_row(newId, '', '', get_current_post_type(), 'custom');
+        });
+
+        /*----------  OpenAI items  ----------*/
+        $('#pp-checklists-openai-promt-button').on('click', function (event) {
+            var newId = uidGen(15);
+
+            create_row(newId, '', '', get_current_post_type(), 'openai');
+        });
+        $(document).on('click', '.pp-custom-suggestion a', function (event) {
+            event.preventDefault();
+            $(this).closest('td').find('.pp-checklists-custom-item-title').val($(this).data('prompt'));
         });
 
         $('.pp-checklists-remove-custom-item').on('click', callback_remove_row);

@@ -71,6 +71,7 @@ if (!class_exists('PPCH_Settings')) {
                         'post' => 'on',
                     ],
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
+                    'openai_api_key'           => '',
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -702,6 +703,14 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
+            add_settings_field(
+                'openai_api_key',
+                __('OpenAI API Key:', 'publishpress-checklists'),
+                [$this, 'settings_openai_api_key_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
             do_action('publishpress_checklists_register_settings_after');
         }
 
@@ -752,6 +761,25 @@ if (!class_exists('PPCH_Settings')) {
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
                     'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
+        }
+
+        /**
+         * Displays the openai api key settings
+         *
+         * @param array
+         */
+        public function settings_openai_api_key_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_openai_api_key';
+            $value = isset($this->module->options->openai_api_key) ? $this->module->options->openai_api_key : '';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="text" value="'. esc_attr($value) .'" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[openai_api_key]" />';
+            echo '<br />' . esc_html__(
+                    'Enter OpenAI API Key to use OpenAI prompt in checklists tasks.',
                     'publishpress-checklists'
                 );
             echo '</label>';
