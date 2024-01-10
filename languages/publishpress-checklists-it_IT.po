@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-03-06 13:27+0000\n"
+"POT-Creation-Date: 2023-11-30 13:48+0000\n"
+"PO-Revision-Date: 2023-12-02 18:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Poedit 3.4\n"
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
@@ -69,10 +69,12 @@ msgid "%d words in content"
 msgstr "%d parole nel contenuto"
 
 #: core/Requirement/Categories_count.php:46
+#, php-format
 msgid "%s categories"
 msgstr "%s categorie"
 
 #: core/Requirement/Categories_count.php:45
+#, php-format
 msgid "%s category"
 msgstr "%s categoria"
 
@@ -80,7 +82,7 @@ msgstr "%s categoria"
 msgid "About"
 msgstr "Chi siamo"
 
-#: modules/checklists/checklists.php:898
+#: modules/checklists/checklists.php:900
 msgid "Add custom task"
 msgstr "Aggiungi attività personalizzata"
 
@@ -88,7 +90,7 @@ msgstr "Aggiungi attività personalizzata"
 msgid "Add support for checklists in WordPress"
 msgstr "Aggiunge il supporto alla liste di controllo in WordPress"
 
-#: modules/settings/settings.php:677
+#: modules/settings/settings.php:687
 msgid "Add to these post types:"
 msgstr "Aggiungi a questi tipi di articoli:"
 
@@ -102,6 +104,7 @@ msgid "Alt text for all images"
 msgstr "Testo alternativo per tutte le immagini"
 
 #: core/Requirement/Approved_by.php:41
+#, php-format
 msgid "Approved by %s"
 msgstr "Approvato da %s"
 
@@ -109,11 +112,11 @@ msgstr "Approvato da %s"
 msgid "Approved by a user in this role"
 msgstr "Approvato da un utente in questo ruolo"
 
-#: modules/checklists/checklists.php:680
+#: modules/checklists/checklists.php:681
 msgid "Are you sure you want to publish anyway?"
 msgstr "Sei certo di voler pubblicare comunque?"
 
-#: modules/checklists/checklists.php:684
+#: modules/checklists/checklists.php:685
 msgid "Are you sure you want to update the published post anyway?"
 msgstr "Se certo di voler aggiornare in qualsiasi caso l'articolo pubblicato?"
 
@@ -146,27 +149,28 @@ msgid "Between %d and %d words in content"
 msgstr "Tra %d e %d parole nel contenuto"
 
 #: core/Requirement/Categories_count.php:47
+#, php-format
 msgid "Between %s and %s categories"
 msgstr "Tra %s e %s categorie"
 
-#: core/Legacy/LegacyPlugin.php:212 modules/settings/settings.php:437
+#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:443
 msgid "Cheatin&#8217; uh?"
 msgstr "Si tenta di fare i furbi, eh?"
 
-#: modules/checklists/checklists.php:622 modules/checklists/checklists.php:678
+#: modules/checklists/checklists.php:623 modules/checklists/checklists.php:679
 msgid "Checklist"
 msgstr "Lista di controllo"
 
-#: core/Legacy/LegacyPlugin.php:348 modules/checklists/checklists.php:99
-#: modules/checklists/checklists.php:832 modules/checklists/checklists.php:847
+#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:100
+#: modules/checklists/checklists.php:834 modules/checklists/checklists.php:849
 msgid "Checklists"
 msgstr "Liste di controllo"
 
-#: modules/settings/settings.php:60 modules/settings/settings.php:110
+#: modules/settings/settings.php:61 modules/settings/settings.php:111
 msgid "Checklists Settings"
 msgstr "Impostazioni Liste di controllo"
 
-#: core/Legacy/LegacyPlugin.php:205 modules/checklists/checklists.php:679
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:680
 msgid "Configure"
 msgstr "Configura"
 
@@ -187,30 +191,35 @@ msgstr ""
 "devono spuntare questa casella di verifica per mostrare che hanno ultimato "
 "l'attività."
 
-#: modules/permalinks/permalinks.php:65
+#: modules/permalinks/permalinks.php:66
 msgid "Define tasks related to permalinks"
 msgstr "Definisci le attività relative ai permalink"
 
-#: modules/yoastseo/yoastseo.php:66
+#: modules/yoastseo/yoastseo.php:67
 msgid "Define tasks related to Yoast SEO"
 msgstr "Definisci le attività correlate a Yoast SEO"
 
-#: modules/checklists/checklists.php:101
+#: modules/checklists/checklists.php:102
 msgid "Define tasks that must be complete before content is published."
 msgstr ""
 "Definisci le attività che devono essere completate prima che il contenuto "
 "venga pubblicato."
 
-#: modules/settings/settings.php:693
+#: modules/settings/settings.php:711
+msgid "Disable blocking of updates for published posts:"
+msgstr "Disabilita il blocco degli aggiornamenti per gli articoli pubblicati:"
+
+#: modules/settings/settings.php:703
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 "Disabilita l'opzione \"Stato\" mentre stai usando la \"Modifica rapida\":"
 
-#: modules/checklists/checklists.php:920
+#: modules/checklists/checklists.php:922
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: modules/settings/settings.php:401
+#: modules/settings/settings.php:407
+#, php-format
 msgid ""
 "Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
 "loaded file."
@@ -218,7 +227,7 @@ msgstr ""
 "Disabilitato perché add_post_type_support('%1$s', '%2$s') è incluso in un "
 "file caricato."
 
-#: modules/checklists/checklists.php:896
+#: modules/checklists/checklists.php:898
 msgid "Disabled, Recommended or Required"
 msgstr "Disabilitato, Raccomandato o Richiesto"
 
@@ -226,7 +235,7 @@ msgstr "Disabilitato, Raccomandato o Richiesto"
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: modules/settings/settings.php:254
+#: modules/settings/settings.php:260
 msgid "Enabled features"
 msgstr "Funzionalità abilitate"
 
@@ -235,15 +244,15 @@ msgstr "Funzionalità abilitate"
 msgid "Featured image"
 msgstr "Immagine in evidenza"
 
-#: modules/settings/settings.php:245
+#: modules/settings/settings.php:251
 msgid "Features"
 msgstr "Funzionalità"
 
-#: modules/settings/settings.php:246
+#: modules/settings/settings.php:252
 msgid "Feel free to select only the features you need."
 msgstr "Puoi selezionare anche solo le funzionalità di cui hai bisogno."
 
-#: modules/settings/settings.php:668
+#: modules/settings/settings.php:678
 msgid "General:"
 msgstr "Generale:"
 
@@ -262,15 +271,25 @@ msgstr "https://publishpress.com"
 msgid "https://publishpress.com/"
 msgstr "https://publishpress.com/"
 
-#: modules/settings/settings.php:747
+#: modules/settings/settings.php:785
+msgid ""
+"If Checklists requirements are not met and the plugin blocks updates for "
+"published posts, this can cause conflicts with other plugins."
+msgstr ""
+"Se i requisiti delle liste di controllo non sono soddisfatti e il plugin "
+"blocca gli aggiornamenti degli articoli pubblicati, ciò può causare "
+"conflitti con altri plugin."
+
+#: modules/settings/settings.php:765
 msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+"Checklists requirements."
 msgstr ""
-"Se l'opzione \"Stato\" è attivata, può essere utilizzata per evitare di "
-"utilizzare i requisiti delle liste di controllo.\""
+"Se l'opzione \"Stato\" è abilitata, può essere utilizzata per evitare di "
+"utilizzare i requisiti delle liste di controllo."
 
 #: core/Legacy/Module.php:288
+#, php-format
 msgid "If you like %s please leave us a %s rating. Thank you!"
 msgstr "Se sei soddisfatto di %s, lasciaci una valutazione di %s!"
 
@@ -336,10 +355,12 @@ msgid "Maximum of %d words in content"
 msgstr "Massimo di %d parole nel contenuto"
 
 #: core/Requirement/Categories_count.php:44
+#, php-format
 msgid "Maximum of %s categories"
 msgstr "Massimo di %s categorie"
 
 #: core/Requirement/Categories_count.php:43
+#, php-format
 msgid "Maximum of %s category"
 msgstr "Massimo di %s categoria"
 
@@ -401,10 +422,12 @@ msgid "Minimum of %d words in content"
 msgstr "Minimo di %d parole nel contenuto"
 
 #: core/Requirement/Categories_count.php:42
+#, php-format
 msgid "Minimum of %s categories"
 msgstr "Minimo di %s categorie"
 
 #: core/Requirement/Categories_count.php:41
+#, php-format
 msgid "Minimum of %s category"
 msgstr "Minimo di %s categoria"
 
@@ -416,11 +439,11 @@ msgstr "Punteggio minimo di analisi Yoast SEO"
 msgid "Minimum Yoast SEO readability score"
 msgstr "Punteggio minimo di leggibilità Yoast SEO"
 
-#: modules/checklists/checklists.php:735
+#: modules/checklists/checklists.php:737
 msgid "No"
 msgstr "No"
 
-#: modules/checklists/checklists.php:696 modules/checklists/checklists.php:700
+#: modules/checklists/checklists.php:697 modules/checklists/checklists.php:701
 msgid "Not required, but important: "
 msgstr "Non richiesto, ma importante: "
 
@@ -464,15 +487,15 @@ msgstr "Numero di caratteri nel riassunto"
 msgid "OK"
 msgstr "OK"
 
-#: modules/checklists/checklists.php:734
+#: modules/checklists/checklists.php:736
 msgid "Ok"
 msgstr "Ok"
 
-#: modules/checklists/checklists.php:897
+#: modules/checklists/checklists.php:899
 msgid "Options"
 msgstr "Opzioni"
 
-#: modules/permalinks/permalinks.php:64
+#: modules/permalinks/permalinks.php:65
 msgid "Permalinks"
 msgstr "Permalink"
 
@@ -480,28 +503,28 @@ msgstr "Permalink"
 msgid "Permissions"
 msgstr "Autorizzazioni"
 
-#: modules/checklists/checklists.php:688
+#: modules/checklists/checklists.php:689
 msgid "Please complete the following tasks before publishing:"
 msgstr "Completare le seguenti attività prima della pubblicazione:"
 
-#: modules/checklists/checklists.php:692
+#: modules/checklists/checklists.php:693
 msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 "Completa le seguenti attività prima di aggiornare l'articolo pubblicato:"
 
-#: core/Legacy/LegacyPlugin.php:208
+#: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
 msgstr "Correggi gli errori nel modulo sottostante e riprova."
 
-#: modules/checklists/checklists.php:580
+#: modules/checklists/checklists.php:581
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr "Assicurati di aggiungere un nome per tutte le attività personalizzate."
 
-#: modules/checklists/checklists.php:576
+#: modules/checklists/checklists.php:577
 msgid "Please make sure to complete the settings for"
 msgstr "Assicurati di completare le impostazioni per"
 
-#: core/Legacy/LegacyPlugin.php:217
+#: core/Legacy/LegacyPlugin.php:218
 msgid "Post does not exist"
 msgstr "L'articolo non esiste"
 
@@ -517,18 +540,19 @@ msgstr "PublishPress Checklists"
 #. %s expands to the readability score
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
 msgid "Readability: %s"
 msgstr "Leggibilità: %s"
 
-#: modules/checklists/checklists.php:921
+#: modules/checklists/checklists.php:923
 msgid "Recommended"
 msgstr "Raccomandato"
 
-#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:588
+#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:589
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: modules/checklists/checklists.php:733 modules/checklists/checklists.php:922
+#: modules/checklists/checklists.php:735 modules/checklists/checklists.php:924
 msgid "Required"
 msgstr "Richiesto"
 
@@ -543,30 +567,31 @@ msgstr "Salva modifiche"
 #. %s expands to the seo score
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
 msgid "Seo: %s"
 msgstr "Seo: %s"
 
-#: modules/settings/settings.php:112
+#: modules/settings/settings.php:113
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: modules/settings/settings.php:685
+#: modules/settings/settings.php:695
 msgid "Show warning icon:"
 msgstr "Mostra l'icona di avviso:"
 
-#: modules/checklists/checklists.php:895
+#: modules/checklists/checklists.php:897
 msgid "Task"
 msgstr "Attività"
 
-#: modules/settings/settings.php:305
+#: modules/settings/settings.php:311
 msgid "There are no PublishPress modules registered"
 msgstr "Non ci sono moduli PublishPress registrati"
 
-#: modules/settings/settings.php:726
-msgid "This will display a warning icon in the \"Publish\" box"
-msgstr "Verrà visualizzata un'icona di avviso nella casella «Pubblica»"
+#: modules/settings/settings.php:744
+msgid "This will display a warning icon in the \"Publish\" box."
+msgstr "Questo visualizzerà una icona di attenzione nel box \"Pubblica\"."
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:584
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:585
 msgid "Which roles can mark this task as complete?"
 msgstr "Quali ruoli possono contrassegnare questa attività come completata?"
 
@@ -574,19 +599,20 @@ msgstr "Quali ruoli possono contrassegnare questa attività come completata?"
 msgid "Who can ignore the task?"
 msgstr "Chi può ignorare l'attività?"
 
-#: modules/checklists/checklists.php:736
+#: modules/checklists/checklists.php:738
 msgid "Yes"
 msgstr "Sì"
 
-#: modules/yoastseo/yoastseo.php:65
+#: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
 
-#: core/Legacy/LegacyPlugin.php:213
+#: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."
 msgstr ""
 "Non disponi delle autorizzazioni necessarie per completare questa azione."
 
-#: modules/checklists/checklists.php:729
+#: modules/checklists/checklists.php:731
+#, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr "Non è necessario completare nessuna %sattività di Checklist%s."

@@ -4,15 +4,8 @@
 
 .pp-checklists-req .status-icon,
 .pp-checklists-req .status-label {
-    display: inline-block;
-}
-
-.pp-checklists-req .status-icon {
-    width: 10%;
-}
-
-.pp-checklists-req .status-label {
-    width: 88%;
+    display: inline;
+    vertical-align: middle;
 }
 
 .pp-checklists-req.status-yes * {
@@ -27,15 +20,47 @@
 
 /* Warning icon in the Publish button */
 body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
-body.ppch-show-publishing-warning-icon .editor-post-publish-button,
-body.ppch-show-publishing-warning-icon .editor-post-publish-button__button {
+.pp-checklists-toolbar-icon {
     position: relative;
     overflow: visible;
 }
 
+.pp-checklists-toolbar-icon:after {
+    font-family: dashicons;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    line-height: 23px;
+    width: 23px;
+    height: 23px;
+    font-size: 18px;
+    content: "\f147";
+    background-color: #66bb6a;
+    color: #ffede8;
+    font-weight: bold;
+    border: 1px solid white;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 50px;
+    text-shadow: none;
+    text-align: center;
+    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
+}
+
+.pp-checklists-toolbar-icon:hover:after {
+    background: #66bb6a;
+    font-size: 23px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    top: -11px;
+    right: -11px;
+}
+
 body.ppch-show-publishing-warning-icon #publishing-action:after, /* Classic Editor - the input can't have pseudo-elements since can't have child nodes */
-body.ppch-show-publishing-warning-icon .editor-post-publish-button:after,
-body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
+    font-family: inherit;
     position: absolute;
     top: -10px;
     right: -10px;
@@ -58,8 +83,7 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:after
 }
 
 body.ppch-show-publishing-warning-icon #publishing-action:hover:after,
-body.ppch-show-publishing-warning-icon .editor-post-publish-button:hover:after,
-body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     background: #ff0000;
     font-size: 23px;
     width: 25px;
@@ -79,6 +103,33 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover
     font-weight: bold;
 }
 
+.pp-checklists-req.metabox-req,
+.pp-checklists-req.panel-req {
+    border: 1px solid #e0e0e0;
+    padding: 10px 2px 10px 5px;
+    display: block;
+}
+
+.pp-checklists-check-item {
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit-post-meta-boxes-area #pp_checklist_meta.postbox>.inside {
+    padding: 4px;
+}
+
+.edit-post-meta-boxes-area #poststuff #pp_checklist_meta.postbox h2.hndle {
+    padding: 0 17px;
+}
+
+.pp-checklists-req .request-response #message {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .pp-checklists-custom-item {
     cursor: pointer;
     color: #ef5350;
@@ -91,6 +142,7 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover
     box-sizing: border-box;
     width: 20px;
     margin-left: 3px;
+    display: inline-block;
 }
 
 .pp-checklists-req.pp-checklists-custom-item .status-icon.dashicons-yes:before {
@@ -100,4 +152,21 @@ body.ppch-show-publishing-warning-icon .editor-post-publish-button__button:hover
 
 .pp-checklists-req.pp-checklists-custom-item .status-label {
     padding-left: 1px;
+}
+
+#pp-checklists-sidebar-content .pp-checklists-req.pp-checklists-custom-item .status-label {
+    padding-left: 4px;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='Checklists'] {
+    padding: 6px 0;
+    background: transparent;
+}
+
+.pp-checklists-toolbar-icon {
+    padding: 10px 9px 8px;
+    background: #655997;
+    color: #ffffff;
+    border: 1px solid #a6b2be;
+    border-radius: 2px;
 }

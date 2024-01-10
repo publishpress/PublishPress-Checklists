@@ -200,7 +200,6 @@ class Base_counter extends Base_simple implements Interface_required
             'rule'      => $rule,
             'type'      => $this->type,
             'is_custom' => false,
-            'type'      => $this->type,
             'extra'     => $this->extra,
         ];
 

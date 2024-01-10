@@ -64,7 +64,7 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
 
         $count = count($terms);
 
-        return ($count >= $option_value[0]) && ($count <= $option_value[1]);
+        return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }
 
     /**

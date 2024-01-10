@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-03-06 13:26+0000\n"
+"POT-Creation-Date: 2023-11-30 13:48+0000\n"
+"PO-Revision-Date: 2023-12-02 19:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Poedit 3.4\n"
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
@@ -69,10 +69,12 @@ msgid "%d words in content"
 msgstr "%d mots dans le contenu"
 
 #: core/Requirement/Categories_count.php:46
+#, php-format
 msgid "%s categories"
 msgstr "%s catégories"
 
 #: core/Requirement/Categories_count.php:45
+#, php-format
 msgid "%s category"
 msgstr "%s catégorie"
 
@@ -80,7 +82,7 @@ msgstr "%s catégorie"
 msgid "About"
 msgstr "À propos"
 
-#: modules/checklists/checklists.php:898
+#: modules/checklists/checklists.php:900
 msgid "Add custom task"
 msgstr "Ajouter une tâche personnalisée"
 
@@ -88,7 +90,7 @@ msgstr "Ajouter une tâche personnalisée"
 msgid "Add support for checklists in WordPress"
 msgstr "Ajouter la prise en charge des listes de contrôle dans WordPress"
 
-#: modules/settings/settings.php:677
+#: modules/settings/settings.php:687
 msgid "Add to these post types:"
 msgstr "Ajouter à ces types de publication :"
 
@@ -102,6 +104,7 @@ msgid "Alt text for all images"
 msgstr "Texte alternatif pour toutes les images"
 
 #: core/Requirement/Approved_by.php:41
+#, php-format
 msgid "Approved by %s"
 msgstr "Approuvé par %s"
 
@@ -109,11 +112,11 @@ msgstr "Approuvé par %s"
 msgid "Approved by a user in this role"
 msgstr "Approuvé par un compte avec ce rôle"
 
-#: modules/checklists/checklists.php:680
+#: modules/checklists/checklists.php:681
 msgid "Are you sure you want to publish anyway?"
 msgstr "Confirmez-vous vouloir publier de toute façon ?"
 
-#: modules/checklists/checklists.php:684
+#: modules/checklists/checklists.php:685
 msgid "Are you sure you want to update the published post anyway?"
 msgstr ""
 "Confirmez-vous vouloir tout de même mettre à jour la publication publiée ?"
@@ -147,27 +150,28 @@ msgid "Between %d and %d words in content"
 msgstr "Entre %d et %d mots dans le contenu"
 
 #: core/Requirement/Categories_count.php:47
+#, php-format
 msgid "Between %s and %s categories"
 msgstr "Entre %s et %s catégories"
 
-#: core/Legacy/LegacyPlugin.php:212 modules/settings/settings.php:437
+#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:443
 msgid "Cheatin&#8217; uh?"
 msgstr "Une mauvaise manipulation ?"
 
-#: modules/checklists/checklists.php:622 modules/checklists/checklists.php:678
+#: modules/checklists/checklists.php:623 modules/checklists/checklists.php:679
 msgid "Checklist"
 msgstr "Liste de contrôle"
 
-#: core/Legacy/LegacyPlugin.php:348 modules/checklists/checklists.php:99
-#: modules/checklists/checklists.php:832 modules/checklists/checklists.php:847
+#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:100
+#: modules/checklists/checklists.php:834 modules/checklists/checklists.php:849
 msgid "Checklists"
 msgstr "Listes de contrôle"
 
-#: modules/settings/settings.php:60 modules/settings/settings.php:110
+#: modules/settings/settings.php:61 modules/settings/settings.php:111
 msgid "Checklists Settings"
 msgstr "Réglages des listes de contrôle"
 
-#: core/Legacy/LegacyPlugin.php:205 modules/checklists/checklists.php:679
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:680
 msgid "Configure"
 msgstr "Configurer"
 
@@ -188,30 +192,36 @@ msgstr ""
 "utilisateurs et les utilisatrices doivent cocher la case pour afficher "
 "qu’ils ont terminé la tâche."
 
-#: modules/permalinks/permalinks.php:65
+#: modules/permalinks/permalinks.php:66
 msgid "Define tasks related to permalinks"
 msgstr "Définir les tâches liées aux permaliens"
 
-#: modules/yoastseo/yoastseo.php:66
+#: modules/yoastseo/yoastseo.php:67
 msgid "Define tasks related to Yoast SEO"
 msgstr "Definissez les tâches liées à Yoast SEO"
 
-#: modules/checklists/checklists.php:101
+#: modules/checklists/checklists.php:102
 msgid "Define tasks that must be complete before content is published."
 msgstr ""
 "Définir les tâches qui doivent être accomplies avant que le contenu ne soit "
 "publié."
 
-#: modules/settings/settings.php:693
+#: modules/settings/settings.php:711
+msgid "Disable blocking of updates for published posts:"
+msgstr ""
+"Désactiver le blocage des mises à jour pour les publications publiées :"
+
+#: modules/settings/settings.php:703
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 "Désactivez l’option « État » lorsque vous utilisez « Modification rapide » :"
 
-#: modules/checklists/checklists.php:920
+#: modules/checklists/checklists.php:922
 msgid "Disabled"
 msgstr "Désactivée"
 
-#: modules/settings/settings.php:401
+#: modules/settings/settings.php:407
+#, php-format
 msgid ""
 "Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
 "loaded file."
@@ -219,7 +229,7 @@ msgstr ""
 "Désactivé parce que add_post_type_support(’%1$s’, ’%2$s’) est inclus dans un "
 "fichier chargé."
 
-#: modules/checklists/checklists.php:896
+#: modules/checklists/checklists.php:898
 msgid "Disabled, Recommended or Required"
 msgstr "Désactivée, recommandée ou nécessaire"
 
@@ -227,7 +237,7 @@ msgstr "Désactivée, recommandée ou nécessaire"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: modules/settings/settings.php:254
+#: modules/settings/settings.php:260
 msgid "Enabled features"
 msgstr "Activer les fonctionnalités"
 
@@ -236,17 +246,17 @@ msgstr "Activer les fonctionnalités"
 msgid "Featured image"
 msgstr "Image mise en avant"
 
-#: modules/settings/settings.php:245
+#: modules/settings/settings.php:251
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: modules/settings/settings.php:246
+#: modules/settings/settings.php:252
 msgid "Feel free to select only the features you need."
 msgstr ""
 "N’hésitez pas à sélectionner uniquement les fonctionnalités dont vous avez "
 "besoin."
 
-#: modules/settings/settings.php:668
+#: modules/settings/settings.php:678
 msgid "General:"
 msgstr "Général :"
 
@@ -265,15 +275,25 @@ msgstr "https://publishpress.com"
 msgid "https://publishpress.com/"
 msgstr "https://publishpress.com/"
 
-#: modules/settings/settings.php:747
+#: modules/settings/settings.php:785
+msgid ""
+"If Checklists requirements are not met and the plugin blocks updates for "
+"published posts, this can cause conflicts with other plugins."
+msgstr ""
+"Si les prérequis des listes de contrôle ne sont pas respectés et que "
+"l’extension bloque les mises à jour des publications publiées, cela peut "
+"entraîner des conflits avec d’autres extensions."
+
+#: modules/settings/settings.php:765
 msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+"Checklists requirements."
 msgstr ""
 "Si l’option « État » est activée, elle peut être utilisée pour éviter "
-"d’utiliser les prérequis des listes de contrôle. »"
+"d’avoir recours aux prérequis des listes de contrôle."
 
 #: core/Legacy/Module.php:288
+#, php-format
 msgid "If you like %s please leave us a %s rating. Thank you!"
 msgstr "Si vous appréciez %s, veuillez nous laisser une note de %s. Merci !"
 
@@ -339,10 +359,12 @@ msgid "Maximum of %d words in content"
 msgstr "Maximum de %d mots dans le contenu"
 
 #: core/Requirement/Categories_count.php:44
+#, php-format
 msgid "Maximum of %s categories"
 msgstr "Maximum de %s catégories"
 
 #: core/Requirement/Categories_count.php:43
+#, php-format
 msgid "Maximum of %s category"
 msgstr "Maximum de %s catégories"
 
@@ -404,10 +426,12 @@ msgid "Minimum of %d words in content"
 msgstr "Minimum de %d mots dans le contenu"
 
 #: core/Requirement/Categories_count.php:42
+#, php-format
 msgid "Minimum of %s categories"
 msgstr "Minimum de %s catégories"
 
 #: core/Requirement/Categories_count.php:41
+#, php-format
 msgid "Minimum of %s category"
 msgstr "Minimum de %s catégorie"
 
@@ -419,11 +443,11 @@ msgstr "Score minimum d’analyse Yoast SEO"
 msgid "Minimum Yoast SEO readability score"
 msgstr "Score minimum de lisibilité Yoast SEO"
 
-#: modules/checklists/checklists.php:735
+#: modules/checklists/checklists.php:737
 msgid "No"
 msgstr "Non"
 
-#: modules/checklists/checklists.php:696 modules/checklists/checklists.php:700
+#: modules/checklists/checklists.php:697 modules/checklists/checklists.php:701
 msgid "Not required, but important: "
 msgstr "Non nécessaire, mais importante : "
 
@@ -467,15 +491,15 @@ msgstr "Nombre de caractères dans l’extrait"
 msgid "OK"
 msgstr "OK"
 
-#: modules/checklists/checklists.php:734
+#: modules/checklists/checklists.php:736
 msgid "Ok"
 msgstr "Ok"
 
-#: modules/checklists/checklists.php:897
+#: modules/checklists/checklists.php:899
 msgid "Options"
 msgstr "Options"
 
-#: modules/permalinks/permalinks.php:64
+#: modules/permalinks/permalinks.php:65
 msgid "Permalinks"
 msgstr "Permaliens"
 
@@ -483,31 +507,31 @@ msgstr "Permaliens"
 msgid "Permissions"
 msgstr "Droits"
 
-#: modules/checklists/checklists.php:688
+#: modules/checklists/checklists.php:689
 msgid "Please complete the following tasks before publishing:"
 msgstr "Veuillez accomplir les tâches suivantes avant de publier :"
 
-#: modules/checklists/checklists.php:692
+#: modules/checklists/checklists.php:693
 msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 "Veuillez effectuer les tâches suivantes avant de mettre à jour la "
 "publication publiée :"
 
-#: core/Legacy/LegacyPlugin.php:208
+#: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
 msgstr ""
 "Veuillez corriger les erreurs de votre formulaire ci-dessous et réessayer."
 
-#: modules/checklists/checklists.php:580
+#: modules/checklists/checklists.php:581
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr ""
 "Veuillez vous assurer d’ajouter un nom pour toutes les tâches personnalisées."
 
-#: modules/checklists/checklists.php:576
+#: modules/checklists/checklists.php:577
 msgid "Please make sure to complete the settings for"
 msgstr "Veuillez vous assurez-vous d’effectuer tous les réglages pour"
 
-#: core/Legacy/LegacyPlugin.php:217
+#: core/Legacy/LegacyPlugin.php:218
 msgid "Post does not exist"
 msgstr "La publication n’existe pas"
 
@@ -523,18 +547,19 @@ msgstr "PublishPress Checklists"
 #. %s expands to the readability score
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
 msgid "Readability: %s"
 msgstr "Lisibilité : %s"
 
-#: modules/checklists/checklists.php:921
+#: modules/checklists/checklists.php:923
 msgid "Recommended"
 msgstr "Recommandée"
 
-#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:588
+#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:589
 msgid "Remove"
 msgstr "Retirer"
 
-#: modules/checklists/checklists.php:733 modules/checklists/checklists.php:922
+#: modules/checklists/checklists.php:735 modules/checklists/checklists.php:924
 msgid "Required"
 msgstr "Nécessaire"
 
@@ -549,30 +574,31 @@ msgstr "Enregistrer les modifications"
 #. %s expands to the seo score
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
 msgid "Seo: %s"
 msgstr "SEO : %s"
 
-#: modules/settings/settings.php:112
+#: modules/settings/settings.php:113
 msgid "Settings"
 msgstr "Réglages"
 
-#: modules/settings/settings.php:685
+#: modules/settings/settings.php:695
 msgid "Show warning icon:"
 msgstr "Afficher une icône d’avertissement :"
 
-#: modules/checklists/checklists.php:895
+#: modules/checklists/checklists.php:897
 msgid "Task"
 msgstr "Tâche"
 
-#: modules/settings/settings.php:305
+#: modules/settings/settings.php:311
 msgid "There are no PublishPress modules registered"
 msgstr "Il n’y a aucun module PublishPress enregistré"
 
-#: modules/settings/settings.php:726
-msgid "This will display a warning icon in the \"Publish\" box"
+#: modules/settings/settings.php:744
+msgid "This will display a warning icon in the \"Publish\" box."
 msgstr "Ceci affichera une icône d’avertissement dans la boîte « Publier »"
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:584
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:585
 msgid "Which roles can mark this task as complete?"
 msgstr "Quels rôles peuvent marquer cette tâche comme étant terminée ?"
 
@@ -580,18 +606,19 @@ msgstr "Quels rôles peuvent marquer cette tâche comme étant terminée ?"
 msgid "Who can ignore the task?"
 msgstr "Qui peut ignorer la tâche ?"
 
-#: modules/checklists/checklists.php:736
+#: modules/checklists/checklists.php:738
 msgid "Yes"
 msgstr "Oui"
 
-#: modules/yoastseo/yoastseo.php:65
+#: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
 
-#: core/Legacy/LegacyPlugin.php:213
+#: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."
 msgstr "Vous n’avez pas les droits nécessaires pour réaliser cette action."
 
-#: modules/checklists/checklists.php:729
+#: modules/checklists/checklists.php:731
+#, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr "Vous n’avez pas à remplir de %stâche de la liste de contrôle%s."

@@ -4,10 +4,13 @@ let path = require('path');
 
 module.exports = {
     mode: NODE_ENV,
-    entry: './modules/checklists/assets/js/gutenberg-warning.jsx',
+    entry: {
+        'gutenberg-warning': './modules/checklists/assets/js/gutenberg-warning.jsx',
+        'gutenberg-panel': './modules/checklists/assets/js/gutenberg-panel.jsx',
+    },
     output: {
         path: path.join(__dirname, 'modules/checklists/assets/js'),
-        filename: 'gutenberg-warning.min.js'
+        filename: '[name].min.js'
     },
     module: {
         rules: [
