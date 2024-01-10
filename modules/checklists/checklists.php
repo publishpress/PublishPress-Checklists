@@ -100,10 +100,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'publishpress_checklists_plugin_title',
                     esc_html__('Checklists', 'publishpress-checklists')
                 ),
-                'short_description' => esc_html__(
-                    'Define tasks that must be complete before content is published.',
-                    'publishpress-checklists'
-                ),
+                'short_description' => '',
                 'module_url'        => $this->module_url,
                 'icon_class'        => 'dashicons dashicons-feedback',
                 'slug'              => 'checklists',
