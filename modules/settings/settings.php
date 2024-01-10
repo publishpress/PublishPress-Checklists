@@ -779,7 +779,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<label for="' . esc_attr($id) . '">';
             echo '<input type="text" value="'. esc_attr($value) .'" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[openai_api_key]" />';
             echo '<br />' . esc_html__(
-                    'Enter OpenAI API Key to use OpenAI prompt in checklists tasks.',
+                    'Enter your API Key to use OpenAI prompts in checklist tasks.',
                     'publishpress-checklists'
                 );
             echo '</label>';
