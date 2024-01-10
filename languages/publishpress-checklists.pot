@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2024-01-10 10:59+0000\n"
+"POT-Creation-Date: 2024-01-10 14:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -254,7 +254,7 @@ msgid "Enabled features"
 msgstr ""
 
 #: modules/settings/settings.php:781
-msgid "Enter OpenAI API Key to use OpenAI prompt in checklists tasks."
+msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
 msgstr ""
 
 #: core/Requirement/Featured_image.php:35
@@ -519,10 +519,6 @@ msgid ""
 "OpenAI checklists requires an API Key. Please add your API Key in settings."
 msgstr ""
 
-#: modules/checklists/templates/global-checklists.php:107
-msgid "OpenAI requires API key to work."
-msgstr ""
-
 #: modules/checklists/checklists.php:951
 msgid "Options"
 msgstr ""
@@ -596,7 +592,7 @@ msgstr ""
 msgid "Reviews"
 msgstr ""
 
-#: modules/checklists/templates/global-checklists.php:114
+#: modules/checklists/templates/global-checklists.php:108
 msgid "Save Changes"
 msgstr ""
 
@@ -623,21 +619,16 @@ msgstr ""
 msgid "Task"
 msgstr ""
 
-#: modules/checklists/templates/global-checklists.php:103
-msgid ""
-"The expected response is either Yes/No depending on if the content meet the "
-"prompt requirement. You can open support ticket for prompt suggestion or "
-"compatibility issue."
-msgstr ""
-
 #: modules/checklists/templates/global-checklists.php:101
-msgid ""
-"The prompt should be in form of a question that ends with a question mark "
-"for efficient result."
+msgid "The prompt should be in form of a question."
 msgstr ""
 
 #: modules/settings/settings.php:312
 msgid "There are no PublishPress modules registered"
+msgstr ""
+
+#: modules/checklists/templates/global-checklists.php:101
+msgid "This feature requires an OpenAI API Key."
 msgstr ""
 
 #: modules/settings/settings.php:741
@@ -666,10 +657,6 @@ msgstr ""
 
 #: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
-msgstr ""
-
-#: modules/checklists/templates/global-checklists.php:105
-msgid "You can start by clicking on suggested prompt."
 msgstr ""
 
 #: core/Legacy/LegacyPlugin.php:214
