@@ -92,6 +92,7 @@ class PPChecklistsPanel extends Component {
      * Add a method to perform checks before updating
      */
     performChecksBeforePostUpdate = () => {
+
         var editor   = wp.data.dispatch('core/editor');
         var notices  = wp.data.dispatch('core/notices');
         var savePost = editor.savePost;
@@ -123,13 +124,15 @@ class PPChecklistsPanel extends Component {
          * is this solution as it also solves third party conflict with
          * locking post (Rankmath, Yoast SEO etc)
          */
-        editor.savePost = function () {
+        editor.savePost = function (options) {
 
             notices.removeNotices('publishpress-checklists-validation');
             
             var publishing_post = false;
 
-            if (this.currentStatus !== '') {
+            if (typeof options === "object" && (options.isAutosave || options.isPreview)) {
+                publishing_post = false;// this is autosave
+            } else if (this.currentStatus !== '') {
                 publishing_post = (this.currentStatus !== 'publish') ? false : true;
             } else {
                 if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
@@ -142,7 +145,7 @@ class PPChecklistsPanel extends Component {
             }
 
             if (!publishing_post || typeof this.state.failedRequirements.block === "undefined" || this.state.failedRequirements.block.length === 0) {
-                savePost();
+                savePost(options);
             } else {
                 wp.data.dispatch('core/edit-post').closePublishSidebar();
                 notices.createErrorNotice(__("Please complete the required(*) checklists task.", "publishpress-checklists"), {
