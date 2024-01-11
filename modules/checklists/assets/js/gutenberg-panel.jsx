@@ -28,7 +28,9 @@ class PPChecklistsPanel extends Component {
         this.unsubscribe = wp.data.subscribe(boundPerformChecksBeforePostUpdate);
     
         this.isMounted = true;
-        this.updateRequirements(ppChecklists.requirements);
+        if (typeof ppChecklists !== "undefined") {
+            this.updateRequirements(ppChecklists.requirements);
+        }
 
         hooks.addAction('pp-checklists.update-failed-requirements', 'publishpress/checklists', this.updateFailedRequirements.bind(this), 10);
         hooks.addAction('pp-checklists.requirements-updated', 'publishpress/checklists', this.handleRequirementStatusChange.bind(this), 10);
@@ -189,7 +191,7 @@ class PPChecklistsPanel extends Component {
                             {requirements.length === 0 ? (
                                 <p>
                                     <em>
-                                        {ppChecklists.empty_checklist_message}
+                                        {__("You don't have to complete any Checklist tasks.", "publishpress-checklists")}
                                     </em>
                                 </p>
                             ) : (
