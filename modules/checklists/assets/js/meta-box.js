@@ -222,8 +222,8 @@
                     };
 
                     $.post(ajaxurl, data, function (response) {
-                        var response_content = response.content;
-                        var response_content = response_content.replace(/\n/g, '<br>');
+                        var response_raw_content = response.content;
+                        var response_content = response_raw_content.replace(/\n/g, '<br>');
                         if (response.yes_no == 'yes') {
                             $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').removeClass('dashicons-yes');
                             global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
@@ -231,11 +231,11 @@
                             $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').addClass('dashicons-yes');
                             global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
                         }
-                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated published"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
                         target_li.find('.pp-checklists-check-item').prop('disabled', false);
                         target_li.find('.spinner').removeClass('is-active');
                     }).fail(function (jqXHR, textStatus, errorThrown) {
-                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated published"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
                         target_li.find('.pp-checklists-check-item').prop('disabled', false);
                         target_li.find('.spinner').removeClass('is-active');
                     });
@@ -778,19 +778,14 @@
     }
 
     /*----------  Warning icon in submit button  ----------*/
-
-    // Show warning icon close to the submit button
-    if (ppChecklists.show_warning_icon_submit) {
-        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-            if (has_unchecked.length > 0) {
-                $('body').addClass('ppch-show-publishing-warning-icon');
-            } else {
-                $('body').removeClass('ppch-show-publishing-warning-icon');
-            }
-        });
-    }
-
+    $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+        var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
+        if (has_unchecked.length > 0) {
+            $('body').addClass('ppch-show-publishing-warning-icon');
+        } else {
+            $('body').removeClass('ppch-show-publishing-warning-icon');
+        }
+    });
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
