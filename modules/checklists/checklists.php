@@ -142,9 +142,6 @@ if (!class_exists('PPCH_Checklists')) {
                     $settingsOptions->enabled                  = 'on';
                     $settingsOptions->loaded_once              = 1;
                     $settingsOptions->post_types               = isset($legacyOptions->post_types) ? $legacyOptions->post_types : ['post' => 'on'];
-                    $settingsOptions->show_warning_icon_submit = isset($legacyOptions->show_warning_icon_submit) ? $legacyOptions->show_warning_icon_submit : Base_requirement::VALUE_YES;
-
-                    unset($legacyOptions->post_types, $legacyOptions->show_warning_icon_submit);
 
                     update_option('publishpress_checklists_settings_options', $settingsOptions);
                     update_option('publishpress_checklists_checklists_options', $legacyOptions);
@@ -756,7 +753,6 @@ if (!class_exists('PPCH_Checklists')) {
                             'Not required, but important: ',
                             'publishpress-checklists'
                         ),
-                        'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
                         'user_can_manage_options'         => current_user_can( 'manage_options' ),

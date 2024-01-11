@@ -778,19 +778,14 @@
     }
 
     /*----------  Warning icon in submit button  ----------*/
-
-    // Show warning icon close to the submit button
-    if (ppChecklists.show_warning_icon_submit) {
-        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
-            if (has_unchecked.length > 0) {
-                $('body').addClass('ppch-show-publishing-warning-icon');
-            } else {
-                $('body').removeClass('ppch-show-publishing-warning-icon');
-            }
-        });
-    }
-
+    $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+        var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
+        if (has_unchecked.length > 0) {
+            $('body').addClass('ppch-show-publishing-warning-icon');
+        } else {
+            $('body').removeClass('ppch-show-publishing-warning-icon');
+        }
+    });
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
