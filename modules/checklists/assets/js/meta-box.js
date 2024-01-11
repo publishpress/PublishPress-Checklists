@@ -222,8 +222,8 @@
                     };
 
                     $.post(ajaxurl, data, function (response) {
-                        var response_content = response.content;
-                        var response_content = response_content.replace(/\n/g, '<br>');
+                        var response_raw_content = response.content;
+                        var response_content = response_raw_content.replace(/\n/g, '<br>');
                         if (response.yes_no == 'yes') {
                             $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').removeClass('dashicons-yes');
                             global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
