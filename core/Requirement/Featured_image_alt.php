@@ -47,7 +47,13 @@ class Featured_image_alt extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $thumbnail_id = get_post_thumbnail_id($post);
+        $thumbnail_id = get_post_thumbnail_id($post);        
+        /**
+         * check if new post
+         * new post will have no thumbnail in initialize page
+         */
+        if($thumbnail_id === 0) return true;
+
         $img_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
 
         return !empty($img_alt);

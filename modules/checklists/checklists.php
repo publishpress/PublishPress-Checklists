@@ -845,6 +845,8 @@ if (!class_exists('PPCH_Checklists')) {
 
         private function featured_image_alt() {
             $thumbnail_id = get_post_thumbnail_id(get_the_ID());
+            if(!$thumbnail_id) return [];
+
             $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
             return [$thumbnail_id => $alt];
         }

@@ -762,8 +762,26 @@
          */
         getEditor: function () {
             return wp.data.select('core/editor');
-        }
+        },
 
+        /**
+         * This function checks whether a post has a featured image or not.
+         * 
+         * - For Gutenberg, it checks the featured_media attribute of the post.
+         * - For the Classic Editor, it checks the set-post-thumbnail element.
+         * @returns {boolean}
+         */
+        hasFeaturedImage: function () {
+            var has_image = false;
+
+            if (PP_Checklists.is_gutenberg_active()) {
+                has_image = PP_Checklists.getEditor().getEditedPostAttribute('featured_media') > 0;
+            } else {
+                has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
+            }
+            
+            return has_image;
+        }
     };
 
     // Exposes and initialize the object
@@ -793,13 +811,7 @@
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_image = false;
-
-            if (PP_Checklists.is_gutenberg_active()) {
-                has_image = PP_Checklists.getEditor().getEditedPostAttribute('featured_media') > 0;
-            } else {
-                has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
-            }
+            var has_image = PP_Checklists.hasFeaturedImage();
 
             $('#pp-checklists-req-featured_image').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
@@ -812,33 +824,36 @@
     // Check if the featured image is set or not
     if ($('#pp-checklists-req-featured_image_alt').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_alt = false;
-            var meta_id = 0;
-            if (PP_Checklists.is_gutenberg_active()) {
-                meta_id = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
-            } else {
-                meta_id = $('#_thumbnail_id').val();
-            }
-            has_alt = ppChecklists.featured_image_alt[meta_id] ?? false;
+            var has_alt = true;
+            var has_image = PP_Checklists.hasFeaturedImage();
+            if (has_image) {
+                var meta_id = 0;
+                if (PP_Checklists.is_gutenberg_active()) {
+                    meta_id = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
+                } else {
+                    meta_id = $('#_thumbnail_id').val();
+                }
+                has_alt = ppChecklists.featured_image_alt[meta_id] ?? false;
 
-            if ($('#attachment-details-alt-text').length > 0) {
-                const callableFunc = function () {
-                    var current_alt = $('#attachment-details-alt-text').val();
-                    var previous_alt = ppChecklists.featured_image_alt[meta_id] ?? '';
-                    if (current_alt !== previous_alt) {
-                        ppChecklists.featured_image_alt[meta_id] = current_alt;
-                    }
-                };
-                $('#attachment-details-alt-text')
-                .ready(function () {
-                    $('.attachments-wrapper li').each(function () {
-                        if ($(this).attr('aria-checked') === 'true') {
-                        meta_id = $(this).attr('data-id');
-                        callableFunc();
+                if ($('#attachment-details-alt-text').length > 0) {
+                    const callableFunc = function () {
+                        const current_alt = $('#attachment-details-alt-text').val();
+                        const previous_alt = ppChecklists.featured_image_alt[meta_id] ?? '';
+                        if (current_alt !== previous_alt) {
+                            ppChecklists.featured_image_alt[meta_id] = current_alt;
                         }
-                    });
-                })
-                .on('change', callableFunc);
+                    };
+                    $('#attachment-details-alt-text')
+                    .ready(function () {
+                        $('.attachments-wrapper li').each(function () {
+                            if ($(this).attr('aria-checked') === 'true') {
+                            meta_id = $(this).attr('data-id');
+                            callableFunc();
+                            }
+                        });
+                    })
+                    .on('change', callableFunc);
+                }
             }
             $('#pp-checklists-req-featured_image_alt').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
