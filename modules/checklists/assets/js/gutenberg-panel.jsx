@@ -128,7 +128,21 @@ class PPChecklistsPanel extends Component {
          */
         editor.savePost = function (options) {
 
-            notices.removeNotices('publishpress-checklists-validation');
+
+            if (typeof options === "object" && options.pp_checklists_filtered === 1) {
+                savePost(options);
+                return;
+            }
+
+            /*if (typeof options !== "object" || options.pp_checklists_filtered !== 1) {
+                notices.removeNotices('publishpress-checklists-validation');
+            }*/
+
+            if (typeof options === "object") {
+                options.pp_checklists_filtered = 1;
+            } else {
+                options = {pp_checklists_filtered: 1};
+            }
             
             var publishing_post = false;
 

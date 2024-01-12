@@ -81,7 +81,7 @@ if (!defined('PPCH_LOADED')) {
         if (!defined('PPCH_LOADED')) {
             define('PPCH_LOADED', 1);
             define('PPCH_PATH_BASE', plugin_dir_path(__FILE__));
-            define('PPCH_VERSION', '2.10.1');
+            define('PPCH_VERSION', '2.10.1.1-beta');
             define('PPCH_FILE', __DIR__ . '/publishpress-checklists.php');
             define('PPCH_MODULES_PATH', PPCH_PATH_BASE . '/modules');
             define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
