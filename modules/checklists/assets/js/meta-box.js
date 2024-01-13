@@ -823,37 +823,38 @@
     /*----------  Featured Image Alt  ----------*/
     // Check if the featured image is set or not
     if ($('#pp-checklists-req-featured_image_alt').length > 0) {
+        var meta_id = 0;
+        if (PP_Checklists.is_gutenberg_active()) {
+            meta_id = ppChecklists.requirements.featured_image_alt.attribute.thumbnail_id;
+        } else {
+            meta_id = $('#_thumbnail_id').val();
+        }
+        var featured_image_alt = {[meta_id]: ppChecklists.requirements.featured_image_alt.attribute.alt};
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
             var has_alt = true;
             var has_image = PP_Checklists.hasFeaturedImage();
             if (has_image) {
-                var meta_id = 0;
-                if (PP_Checklists.is_gutenberg_active()) {
-                    meta_id = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
-                } else {
-                    meta_id = $('#_thumbnail_id').val();
-                }
-                has_alt = ppChecklists.featured_image_alt[meta_id] ?? false;
+                has_alt = Boolean(featured_image_alt[meta_id]);
+            }
 
-                if ($('#attachment-details-alt-text').length > 0) {
-                    const callableFunc = function () {
-                        const current_alt = $('#attachment-details-alt-text').val();
-                        const previous_alt = ppChecklists.featured_image_alt[meta_id] ?? '';
-                        if (current_alt !== previous_alt) {
-                            ppChecklists.featured_image_alt[meta_id] = current_alt;
-                        }
-                    };
-                    $('#attachment-details-alt-text')
-                    .ready(function () {
-                        $('.attachments-wrapper li').each(function () {
-                            if ($(this).attr('aria-checked') === 'true') {
+            if ($('#attachment-details-alt-text').length > 0) {
+                const callableFunc = function () {
+                    const current_alt = $('#attachment-details-alt-text').val();
+                    const previous_alt = featured_image_alt[meta_id] ?? '';
+                    if (current_alt !== previous_alt) {
+                        featured_image_alt[meta_id] = current_alt;
+                    }
+                };
+                $('#attachment-details-alt-text')
+                .ready(function () {
+                    $('.attachments-wrapper li').each(function () {
+                        if ($(this).attr('aria-checked') === 'true') {
                             meta_id = $(this).attr('data-id');
                             callableFunc();
-                            }
-                        });
-                    })
-                    .on('change', callableFunc);
-                }
+                        }
+                    });
+                })
+                .on('change', callableFunc);
             }
             $('#pp-checklists-req-featured_image_alt').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,

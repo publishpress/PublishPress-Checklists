@@ -761,7 +761,6 @@ if (!class_exists('PPCH_Checklists')) {
                         'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
                         'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
                         'is_gutenberg_active'             => $this->is_gutenberg_active(),
-                        'featured_image_alt'              => $this->featured_image_alt(),
                         'user_can_manage_options'         => current_user_can( 'manage_options' ),
                         'configure_url'                   => esc_url( $this->get_admin_link() ),
                     ]
@@ -841,14 +840,6 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             return $use_block_editor;
-        }
-
-        private function featured_image_alt() {
-            $thumbnail_id = get_post_thumbnail_id(get_the_ID());
-            if(!$thumbnail_id) return [];
-
-            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
-            return [$thumbnail_id => $alt];
         }
 
         /**
