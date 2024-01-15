@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2024-01-10 14:57+0000\n"
+"POT-Creation-Date: 2024-01-15 15:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: modules/checklists/checklists.php:952
+#: modules/checklists/checklists.php:953
 msgid "Add custom task"
 msgstr ""
 
@@ -134,11 +134,11 @@ msgstr ""
 msgid "Approved by a user in this role"
 msgstr ""
 
-#: modules/checklists/checklists.php:735
+#: modules/checklists/checklists.php:736
 msgid "Are you sure you want to publish anyway?"
 msgstr ""
 
-#: modules/checklists/checklists.php:739
+#: modules/checklists/checklists.php:740
 msgid "Are you sure you want to update the published post anyway?"
 msgstr ""
 
@@ -179,16 +179,19 @@ msgstr ""
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: modules/checklists/checklists.php:787
+#: modules/checklists/checklists.php:788
+#: modules/checklists/assets/js/gutenberg-panel.jsx:242
 msgid "Check Now"
 msgstr ""
 
-#: modules/checklists/checklists.php:668 modules/checklists/checklists.php:733
+#: modules/checklists/checklists.php:669 modules/checklists/checklists.php:734
 msgid "Checklist"
 msgstr ""
 
 #: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:101
-#: modules/checklists/checklists.php:886 modules/checklists/checklists.php:901
+#: modules/checklists/checklists.php:887 modules/checklists/checklists.php:902
+#: modules/checklists/assets/js/gutenberg-panel.jsx:197
+#: modules/checklists/assets/js/gutenberg-panel.jsx:201
 msgid "Checklists"
 msgstr ""
 
@@ -196,7 +199,7 @@ msgstr ""
 msgid "Checklists Settings"
 msgstr ""
 
-#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:734
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:735
 msgid "Configure"
 msgstr ""
 
@@ -230,7 +233,7 @@ msgstr ""
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 
-#: modules/checklists/checklists.php:974
+#: modules/checklists/checklists.php:975
 msgid "Disabled"
 msgstr ""
 
@@ -241,7 +244,7 @@ msgid ""
 "loaded file."
 msgstr ""
 
-#: modules/checklists/checklists.php:950
+#: modules/checklists/checklists.php:951
 msgid "Disabled, Recommended or Required"
 msgstr ""
 
@@ -454,11 +457,11 @@ msgstr ""
 msgid "New Item"
 msgstr ""
 
-#: modules/checklists/checklists.php:789
+#: modules/checklists/checklists.php:790
 msgid "No"
 msgstr ""
 
-#: modules/checklists/checklists.php:751 modules/checklists/checklists.php:755
+#: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
 msgid "Not required, but important: "
 msgstr ""
 
@@ -502,7 +505,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: modules/checklists/checklists.php:788
+#: modules/checklists/checklists.php:789
 msgid "Ok"
 msgstr ""
 
@@ -516,10 +519,11 @@ msgstr ""
 
 #: core/Requirement/Openai_item.php:287
 msgid ""
-"OpenAI checklists requires an API Key. Please add your API Key in settings."
+"OpenAI tasks require an API Key. Please add your API Key in the Settings "
+"area."
 msgstr ""
 
-#: modules/checklists/checklists.php:951
+#: modules/checklists/checklists.php:952
 msgid "Options"
 msgstr ""
 
@@ -531,23 +535,27 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: modules/checklists/checklists.php:743
+#: modules/checklists/checklists.php:744
 msgid "Please complete the following tasks before publishing:"
 msgstr ""
 
-#: modules/checklists/checklists.php:747
+#: modules/checklists/checklists.php:748
 msgid "Please complete the following tasks before updating the published post:"
+msgstr ""
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:167
+msgid "Please complete the required(*) checklists task."
 msgstr ""
 
 #: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
 msgstr ""
 
-#: modules/checklists/checklists.php:593
+#: modules/checklists/checklists.php:594
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr ""
 
-#: modules/checklists/checklists.php:589
+#: modules/checklists/checklists.php:590
 msgid "Please make sure to complete the settings for"
 msgstr ""
 
@@ -575,17 +583,21 @@ msgstr ""
 msgid "Readability: %s"
 msgstr ""
 
-#: modules/checklists/checklists.php:975
+#: modules/checklists/checklists.php:976
 msgid "Recommended"
 msgstr ""
 
 #: core/Requirement/Custom_item.php:121 core/Requirement/Openai_item.php:139
-#: modules/checklists/checklists.php:601
+#: modules/checklists/checklists.php:602
 msgid "Remove"
 msgstr ""
 
-#: modules/checklists/checklists.php:786 modules/checklists/checklists.php:976
+#: modules/checklists/checklists.php:787 modules/checklists/checklists.php:977
 msgid "Required"
+msgstr ""
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:255
+msgid "required"
 msgstr ""
 
 #: modules/reviews/reviews.php:61
@@ -597,7 +609,7 @@ msgid "Save Changes"
 msgstr ""
 
 #: core/Requirement/Openai_item.php:365
-msgid "See Full Response."
+msgid "See the full response."
 msgstr ""
 
 #. %s expands to the seo score
@@ -615,7 +627,7 @@ msgstr ""
 msgid "Show warning icon:"
 msgstr ""
 
-#: modules/checklists/checklists.php:949
+#: modules/checklists/checklists.php:950
 msgid "Task"
 msgstr ""
 
@@ -639,11 +651,11 @@ msgstr ""
 msgid "Validation error. Kindly reload this page and try agai.n"
 msgstr ""
 
-#: modules/checklists/checklists.php:605
+#: modules/checklists/checklists.php:606
 msgid "What's the expected OpenAI response to mark the requirement as pass?"
 msgstr ""
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:597
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:598
 msgid "Which roles can mark this task as complete?"
 msgstr ""
 
@@ -651,7 +663,7 @@ msgstr ""
 msgid "Who can ignore the task?"
 msgstr ""
 
-#: modules/checklists/checklists.php:790
+#: modules/checklists/checklists.php:791
 msgid "Yes"
 msgstr ""
 
@@ -663,11 +675,12 @@ msgstr ""
 msgid "You do not have necessary permissions to complete this action."
 msgstr ""
 
-#: modules/checklists/checklists.php:782
+#: modules/checklists/checklists.php:783
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr ""
 
-#: modules/checklists/checklists.php:729
+#: modules/checklists/checklists.php:730
+#: modules/checklists/assets/js/gutenberg-panel.jsx:208
 msgid "You don't have to complete any Checklist tasks."
 msgstr ""
