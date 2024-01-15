@@ -20,12 +20,12 @@
 
 /* Warning icon in the Publish button */
 body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
-.pp-checklists-toolbar-icon {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon {
     position: relative;
     overflow: visible;
 }
 
-.pp-checklists-toolbar-icon:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     font-family: dashicons;
     position: absolute;
     top: -10px;
@@ -48,7 +48,7 @@ body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
     transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
 }
 
-.pp-checklists-toolbar-icon:hover:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     background: #66bb6a;
     font-size: 23px;
     width: 25px;
