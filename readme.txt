@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.4
-Stable tag: 2.10.1
+Stable tag: 2.10.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -283,6 +283,17 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+
+= [2.10.2] - 15 Jan 2024 =
+
+* Fixed: Fix issues with saving while editing post, #598
+* Update: Re-Enable "Show Warning Icon" settings, #605
+* Update: Update OpenAI tasks "Check now" button styles, #604
+* Update: Small text update for OpenAI response, #603
+* Update: Update Checklists sidebar items spacing, #600
+* Fixed: The "publishpress-checklists-panel" plugin encountered error and cannot be rendered, #594
+* Update: CheckLists Translation Updates 11 January 2024, #597
 
 
 = [2.10.1] - 11 Jan 2024 =
