@@ -285,7 +285,7 @@ class Openai_item extends Base_simple implements Interface_required
             $api_key     = !empty($legacyPlugin->settings->module->options->openai_api_key) ? $legacyPlugin->settings->module->options->openai_api_key : '';
             if (empty(trim($api_key))) {
                 $response['content'] = esc_html__(
-                    'OpenAI checklists requires an API Key. Please add your API Key in settings.',
+                    'OpenAI tasks require an API Key. Please add your API Key in the Settings area.',
                     'publishpress-checklists'
                 );
             } else {
@@ -361,8 +361,8 @@ class Openai_item extends Base_simple implements Interface_required
                         if (in_array($yes_no_response, ['yes', 'no'])) {
                             $response['yes_no'] = $yes_no_response;
                             $response_content = '<div class="ppch-yes-no-response">';
-                            $response_content .= strtoupper($yes_no_response);
-                            $response_content .= '. <a href="#" onclick="event.preventDefault(); var message = this.closest(\'.ppch-message\'); var fullResponse = message.querySelector(\'.ppch-full-response\'); var yesNoResponse = message.querySelector(\'.ppch-yes-no-response\'); if (fullResponse && yesNoResponse) { fullResponse.style.display = \'block\'; yesNoResponse.remove(); }">'. esc_html__('See Full Response.', 'publishpress-checklists') .'</a>';
+                            $response_content .= ucfirst($yes_no_response);
+                            $response_content .= '. <a href="#" onclick="event.preventDefault(); var message = this.closest(\'.ppch-message\'); var fullResponse = message.querySelector(\'.ppch-full-response\'); var yesNoResponse = message.querySelector(\'.ppch-yes-no-response\'); if (fullResponse && yesNoResponse) { fullResponse.style.display = \'block\'; yesNoResponse.remove(); }">'. esc_html__('See the full response.', 'publishpress-checklists') .'</a>';
 
                             $response_content .= '</div>';
                             $response_content .= '<div style="display: none;" class="ppch-full-response">';
