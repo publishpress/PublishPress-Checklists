@@ -8,12 +8,12 @@
     vertical-align: middle;
 }
 
-.pp-checklists-req.status-yes * {
+.pp-checklists-req.status-yes *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #66bb6a;
     font-weight: normal;
 }
 
-.pp-checklists-req.status-no * {
+.pp-checklists-req.status-no *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #ef5350;
     font-weight: bold;
 }
