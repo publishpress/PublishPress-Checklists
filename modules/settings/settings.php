@@ -70,6 +70,7 @@ if (!class_exists('PPCH_Settings')) {
                     'post_types'               => [
                         'post' => 'on',
                     ],
+                    'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
                 ],
                 'autoload'             => true,
@@ -558,6 +559,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['enabled'] = 'on';
             }
 
+            if (!isset($new_options['show_warning_icon_submit'])) {
+                $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
+            }
+
             if (!isset ($new_options['disable_quick_edit_publish'])) {
                 $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
             }
@@ -683,6 +688,14 @@ if (!class_exists('PPCH_Settings')) {
             );
 
             add_settings_field(
+                'show_warning_icon_submit',
+                __('Show warning icon:', 'publishpress-checklists'),
+                [$this, 'settings_show_warning_icon_submit_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
+            add_settings_field(
                 'disable_quick_edit_publish',
                 __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_publish_option'],
@@ -709,6 +722,27 @@ if (!class_exists('PPCH_Settings')) {
             $legacyPlugin = Factory::getLegacyPlugin();
 
             $legacyPlugin->settings->helper_option_custom_post_type($this->module);
+        }
+
+        /**
+         * Displays the field to choose between display or not the warning icon
+         * close to the submit button
+         *
+         * @param array
+         */
+        public function settings_show_warning_icon_submit_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_show_warning_icon_submit';
+            $value = isset($this->module->options->show_warning_icon_submit) ? $this->module->options->show_warning_icon_submit : 'no';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_warning_icon_submit]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                    'This will display a warning icon in the "Publish" box.',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
         }
 
         /**
@@ -774,6 +808,11 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['post_types'],
                 $this->module->post_type_support
             );
+
+            if (!isset ($new_options['show_warning_icon_submit'])) {
+                $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
+            }
+            $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             return $new_options;
         }
