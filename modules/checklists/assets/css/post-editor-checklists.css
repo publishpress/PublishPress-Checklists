@@ -8,24 +8,24 @@
     vertical-align: middle;
 }
 
-.pp-checklists-req.status-yes * {
+.pp-checklists-req.status-yes *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #66bb6a;
     font-weight: normal;
 }
 
-.pp-checklists-req.status-no * {
+.pp-checklists-req.status-no *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #ef5350;
     font-weight: bold;
 }
 
 /* Warning icon in the Publish button */
 body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
-.pp-checklists-toolbar-icon {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon {
     position: relative;
     overflow: visible;
 }
 
-.pp-checklists-toolbar-icon:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     font-family: dashicons;
     position: absolute;
     top: -10px;
@@ -48,7 +48,7 @@ body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
     transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
 }
 
-.pp-checklists-toolbar-icon:hover:after {
+body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     background: #66bb6a;
     font-size: 23px;
     width: 25px;
@@ -105,8 +105,6 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
 
 .pp-checklists-req.metabox-req,
 .pp-checklists-req.panel-req {
-    border: 1px solid #e0e0e0;
-    padding: 10px 2px 10px 5px;
     display: block;
 }
 

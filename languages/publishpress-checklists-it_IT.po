@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
-"POT-Creation-Date: 2023-11-30 13:48+0000\n"
-"PO-Revision-Date: 2023-12-02 18:36+0100\n"
+"POT-Creation-Date: 2024-01-10 14:57+0000\n"
+"PO-Revision-Date: 2024-01-11 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -82,15 +82,19 @@ msgstr "%s categoria"
 msgid "About"
 msgstr "Chi siamo"
 
-#: modules/checklists/checklists.php:900
+#: modules/checklists/checklists.php:952
 msgid "Add custom task"
 msgstr "Aggiungi attività personalizzata"
+
+#: modules/checklists/templates/global-checklists.php:94
+msgid "Add OpenAI Prompt task"
+msgstr "Aggiungi attività prompt OpenAI"
 
 #. Description of the plugin
 msgid "Add support for checklists in WordPress"
 msgstr "Aggiunge il supporto alla liste di controllo in WordPress"
 
-#: modules/settings/settings.php:687
+#: modules/settings/settings.php:684
 msgid "Add to these post types:"
 msgstr "Aggiungi a questi tipi di articoli:"
 
@@ -103,6 +107,15 @@ msgstr "Tutti i link utilizzano un formato valido"
 msgid "Alt text for all images"
 msgstr "Testo alternativo per tutte le immagini"
 
+#: core/Requirement/Openai_item.php:266
+msgid "An error occured."
+msgstr "Si è verificato un errore."
+
+#: core/Requirement/Openai_item.php:340
+#, php-format
+msgid "API Error: %1s."
+msgstr "Errore API: %1s."
+
 #: core/Requirement/Approved_by.php:41
 #, php-format
 msgid "Approved by %s"
@@ -112,11 +125,11 @@ msgstr "Approvato da %s"
 msgid "Approved by a user in this role"
 msgstr "Approvato da un utente in questo ruolo"
 
-#: modules/checklists/checklists.php:681
+#: modules/checklists/checklists.php:735
 msgid "Are you sure you want to publish anyway?"
 msgstr "Sei certo di voler pubblicare comunque?"
 
-#: modules/checklists/checklists.php:685
+#: modules/checklists/checklists.php:739
 msgid "Are you sure you want to update the published post anyway?"
 msgstr "Se certo di voler aggiornare in qualsiasi caso l'articolo pubblicato?"
 
@@ -153,24 +166,28 @@ msgstr "Tra %d e %d parole nel contenuto"
 msgid "Between %s and %s categories"
 msgstr "Tra %s e %s categorie"
 
-#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:443
+#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:444
 msgid "Cheatin&#8217; uh?"
 msgstr "Si tenta di fare i furbi, eh?"
 
-#: modules/checklists/checklists.php:623 modules/checklists/checklists.php:679
+#: modules/checklists/checklists.php:787
+msgid "Check Now"
+msgstr "Controlla adesso"
+
+#: modules/checklists/checklists.php:668 modules/checklists/checklists.php:733
 msgid "Checklist"
 msgstr "Lista di controllo"
 
-#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:100
-#: modules/checklists/checklists.php:834 modules/checklists/checklists.php:849
+#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:101
+#: modules/checklists/checklists.php:886 modules/checklists/checklists.php:901
 msgid "Checklists"
 msgstr "Liste di controllo"
 
-#: modules/settings/settings.php:61 modules/settings/settings.php:111
+#: modules/settings/settings.php:61 modules/settings/settings.php:112
 msgid "Checklists Settings"
 msgstr "Impostazioni Liste di controllo"
 
-#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:680
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:734
 msgid "Configure"
 msgstr "Configura"
 
@@ -182,7 +199,7 @@ msgstr "Contatto"
 msgid "Custom"
 msgstr "Personalizzato"
 
-#: modules/checklists/templates/global-checklists.php:75
+#: modules/checklists/templates/global-checklists.php:87
 msgid ""
 "Custom tasks do not complete automatically. Users must check the box to show "
 "they have completed the task."
@@ -199,26 +216,20 @@ msgstr "Definisci le attività relative ai permalink"
 msgid "Define tasks related to Yoast SEO"
 msgstr "Definisci le attività correlate a Yoast SEO"
 
-#: modules/checklists/checklists.php:102
-msgid "Define tasks that must be complete before content is published."
-msgstr ""
-"Definisci le attività che devono essere completate prima che il contenuto "
-"venga pubblicato."
+#: modules/checklists/templates/global-checklists.php:75
+msgid "Description"
+msgstr "Descrizione"
 
-#: modules/settings/settings.php:711
-msgid "Disable blocking of updates for published posts:"
-msgstr "Disabilita il blocco degli aggiornamenti per gli articoli pubblicati:"
-
-#: modules/settings/settings.php:703
+#: modules/settings/settings.php:700
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 "Disabilita l'opzione \"Stato\" mentre stai usando la \"Modifica rapida\":"
 
-#: modules/checklists/checklists.php:922
+#: modules/checklists/checklists.php:974
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: modules/settings/settings.php:407
+#: modules/settings/settings.php:408
 #, php-format
 msgid ""
 "Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
@@ -227,7 +238,7 @@ msgstr ""
 "Disabilitato perché add_post_type_support('%1$s', '%2$s') è incluso in un "
 "file caricato."
 
-#: modules/checklists/checklists.php:898
+#: modules/checklists/checklists.php:950
 msgid "Disabled, Recommended or Required"
 msgstr "Disabilitato, Raccomandato o Richiesto"
 
@@ -235,24 +246,30 @@ msgstr "Disabilitato, Raccomandato o Richiesto"
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: modules/settings/settings.php:260
+#: modules/settings/settings.php:261
 msgid "Enabled features"
 msgstr "Funzionalità abilitate"
+
+#: modules/settings/settings.php:781
+msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
+msgstr ""
+"Inserisci la tua chiave API per utilizzare i prompt di OpenAI nelle attività "
+"delle liste di controllo."
 
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
 msgid "Featured image"
 msgstr "Immagine in evidenza"
 
-#: modules/settings/settings.php:251
+#: modules/settings/settings.php:252
 msgid "Features"
 msgstr "Funzionalità"
 
-#: modules/settings/settings.php:252
+#: modules/settings/settings.php:253
 msgid "Feel free to select only the features you need."
 msgstr "Puoi selezionare anche solo le funzionalità di cui hai bisogno."
 
-#: modules/settings/settings.php:678
+#: modules/settings/settings.php:675
 msgid "General:"
 msgstr "Generale:"
 
@@ -271,16 +288,7 @@ msgstr "https://publishpress.com"
 msgid "https://publishpress.com/"
 msgstr "https://publishpress.com/"
 
-#: modules/settings/settings.php:785
-msgid ""
-"If Checklists requirements are not met and the plugin blocks updates for "
-"published posts, this can cause conflicts with other plugins."
-msgstr ""
-"Se i requisiti delle liste di controllo non sono soddisfatti e il plugin "
-"blocca gli aggiornamenti degli articoli pubblicati, ciò può causare "
-"conflitti con altri plugin."
-
-#: modules/settings/settings.php:765
+#: modules/settings/settings.php:762
 msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
 "Checklists requirements."
@@ -293,11 +301,15 @@ msgstr ""
 msgid "If you like %s please leave us a %s rating. Thank you!"
 msgstr "Se sei soddisfatto di %s, lasciaci una valutazione di %s!"
 
+#: core/Requirement/Openai_item.php:386
+msgid "Invalid response"
+msgstr "Risposta non valida"
+
 #: modules/permalinks/lib/Requirement/ValidChars.php:37
 msgid "Latin characters in permalink"
 msgstr "Caratteri latini nel permalink"
 
-#: core/Requirement/Base_counter.php:294
+#: core/Requirement/Base_counter.php:293
 msgid "Max"
 msgstr "Massimo"
 
@@ -364,7 +376,7 @@ msgstr "Massimo di %s categorie"
 msgid "Maximum of %s category"
 msgstr "Massimo di %s categoria"
 
-#: core/Requirement/Base_counter.php:286
+#: core/Requirement/Base_counter.php:285
 msgid "Min"
 msgstr "Minimo"
 
@@ -439,11 +451,15 @@ msgstr "Punteggio minimo di analisi Yoast SEO"
 msgid "Minimum Yoast SEO readability score"
 msgstr "Punteggio minimo di leggibilità Yoast SEO"
 
-#: modules/checklists/checklists.php:737
+#: modules/checklists/templates/global-checklists.php:74
+msgid "New Item"
+msgstr "Nuovo elemento"
+
+#: modules/checklists/checklists.php:789
 msgid "No"
 msgstr "No"
 
-#: modules/checklists/checklists.php:697 modules/checklists/checklists.php:701
+#: modules/checklists/checklists.php:751 modules/checklists/checklists.php:755
 msgid "Not required, but important: "
 msgstr "Non richiesto, ma importante: "
 
@@ -487,11 +503,26 @@ msgstr "Numero di caratteri nel riassunto"
 msgid "OK"
 msgstr "OK"
 
-#: modules/checklists/checklists.php:736
+#: modules/checklists/checklists.php:788
 msgid "Ok"
 msgstr "Ok"
 
-#: modules/checklists/checklists.php:899
+#: core/Requirement/Openai_item.php:61 core/Requirement/Openai_item.php:62
+msgid "Openai"
+msgstr "Openai"
+
+#: modules/settings/settings.php:708
+msgid "OpenAI API Key:"
+msgstr "Chiave API di OpenAI:"
+
+#: core/Requirement/Openai_item.php:287
+msgid ""
+"OpenAI checklists requires an API Key. Please add your API Key in settings."
+msgstr ""
+"Le liste di controllo OpenAI richiedono una chiave API. Aggiungere la chiave "
+"API nelle impostazioni."
+
+#: modules/checklists/checklists.php:951
 msgid "Options"
 msgstr "Opzioni"
 
@@ -503,11 +534,11 @@ msgstr "Permalink"
 msgid "Permissions"
 msgstr "Autorizzazioni"
 
-#: modules/checklists/checklists.php:689
+#: modules/checklists/checklists.php:743
 msgid "Please complete the following tasks before publishing:"
 msgstr "Completare le seguenti attività prima della pubblicazione:"
 
-#: modules/checklists/checklists.php:693
+#: modules/checklists/checklists.php:747
 msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 "Completa le seguenti attività prima di aggiornare l'articolo pubblicato:"
@@ -516,13 +547,17 @@ msgstr ""
 msgid "Please correct your form errors below and try again."
 msgstr "Correggi gli errori nel modulo sottostante e riprova."
 
-#: modules/checklists/checklists.php:581
+#: modules/checklists/checklists.php:593
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr "Assicurati di aggiungere un nome per tutte le attività personalizzate."
 
-#: modules/checklists/checklists.php:577
+#: modules/checklists/checklists.php:589
 msgid "Please make sure to complete the settings for"
 msgstr "Assicurati di completare le impostazioni per"
+
+#: core/Requirement/Openai_item.php:278
+msgid "Post content is empty."
+msgstr "Il contenuto dell'articolo è vuoto."
 
 #: core/Legacy/LegacyPlugin.php:218
 msgid "Post does not exist"
@@ -544,15 +579,16 @@ msgstr "PublishPress Checklists"
 msgid "Readability: %s"
 msgstr "Leggibilità: %s"
 
-#: modules/checklists/checklists.php:923
+#: modules/checklists/checklists.php:975
 msgid "Recommended"
 msgstr "Raccomandato"
 
-#: core/Requirement/Custom_item.php:120 modules/checklists/checklists.php:589
+#: core/Requirement/Custom_item.php:121 core/Requirement/Openai_item.php:139
+#: modules/checklists/checklists.php:601
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: modules/checklists/checklists.php:735 modules/checklists/checklists.php:924
+#: modules/checklists/checklists.php:786 modules/checklists/checklists.php:976
 msgid "Required"
 msgstr "Richiesto"
 
@@ -560,9 +596,13 @@ msgstr "Richiesto"
 msgid "Reviews"
 msgstr "Recensioni"
 
-#: modules/checklists/templates/global-checklists.php:79
+#: modules/checklists/templates/global-checklists.php:108
 msgid "Save Changes"
 msgstr "Salva modifiche"
+
+#: core/Requirement/Openai_item.php:365
+msgid "See Full Response."
+msgstr "Vedi risposta completa."
 
 #. %s expands to the seo score
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
@@ -571,27 +611,45 @@ msgstr "Salva modifiche"
 msgid "Seo: %s"
 msgstr "Seo: %s"
 
-#: modules/settings/settings.php:113
+#: modules/settings/settings.php:114
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: modules/settings/settings.php:695
+#: modules/settings/settings.php:692
 msgid "Show warning icon:"
 msgstr "Mostra l'icona di avviso:"
 
-#: modules/checklists/checklists.php:897
+#: modules/checklists/checklists.php:949
 msgid "Task"
 msgstr "Attività"
 
-#: modules/settings/settings.php:311
+#: modules/checklists/templates/global-checklists.php:101
+msgid "The prompt should be in form of a question."
+msgstr "Il prompt deve essere nel formato di una domanda."
+
+#: modules/settings/settings.php:312
 msgid "There are no PublishPress modules registered"
 msgstr "Non ci sono moduli PublishPress registrati"
 
-#: modules/settings/settings.php:744
+#: modules/checklists/templates/global-checklists.php:101
+msgid "This feature requires an OpenAI API Key."
+msgstr "Questa funzionalità richiede una chiave API di OpenAI."
+
+#: modules/settings/settings.php:741
 msgid "This will display a warning icon in the \"Publish\" box."
 msgstr "Questo visualizzerà una icona di attenzione nel box \"Pubblica\"."
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:585
+#: core/Requirement/Openai_item.php:273
+msgid "Validation error. Kindly reload this page and try agai.n"
+msgstr "Errore di convalida. Ricarica questa pagina e riprova."
+
+#: modules/checklists/checklists.php:605
+msgid "What's the expected OpenAI response to mark the requirement as pass?"
+msgstr ""
+"Qual è la risposta attesa da OpenAI per contrassegnare il requisito come "
+"superato?"
+
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:597
 msgid "Which roles can mark this task as complete?"
 msgstr "Quali ruoli possono contrassegnare questa attività come completata?"
 
@@ -599,7 +657,7 @@ msgstr "Quali ruoli possono contrassegnare questa attività come completata?"
 msgid "Who can ignore the task?"
 msgstr "Chi può ignorare l'attività?"
 
-#: modules/checklists/checklists.php:738
+#: modules/checklists/checklists.php:790
 msgid "Yes"
 msgstr "Sì"
 
@@ -612,7 +670,28 @@ msgid "You do not have necessary permissions to complete this action."
 msgstr ""
 "Non disponi delle autorizzazioni necessarie per completare questa azione."
 
-#: modules/checklists/checklists.php:731
+#: modules/checklists/checklists.php:782
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr "Non è necessario completare nessuna %sattività di Checklist%s."
+
+#: modules/checklists/checklists.php:729
+msgid "You don't have to complete any Checklist tasks."
+msgstr "Non è necessario completare nessuna attività delle liste di controllo."
+
+#~ msgid "Define tasks that must be complete before content is published."
+#~ msgstr ""
+#~ "Definisci le attività che devono essere completate prima che il contenuto "
+#~ "venga pubblicato."
+
+#~ msgid "Disable blocking of updates for published posts:"
+#~ msgstr ""
+#~ "Disabilita il blocco degli aggiornamenti per gli articoli pubblicati:"
+
+#~ msgid ""
+#~ "If Checklists requirements are not met and the plugin blocks updates for "
+#~ "published posts, this can cause conflicts with other plugins."
+#~ msgstr ""
+#~ "Se i requisiti delle liste di controllo non sono soddisfatti e il plugin "
+#~ "blocca gli aggiornamenti degli articoli pubblicati, ciò può causare "
+#~ "conflitti con altri plugin."

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'dedd4fb64af6f13a51e9621a6089f4aa433fb5d1',
+        'reference' => 'de7c3306cc782d937d05062f51b02dc42d0efd3e',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'dedd4fb64af6f13a51e9621a6089f4aa433fb5d1',
+            'reference' => 'de7c3306cc782d937d05062f51b02dc42d0efd3e',
             'dev_requirement' => false,
         ),
         'publishpress/instance-protection' => array(
