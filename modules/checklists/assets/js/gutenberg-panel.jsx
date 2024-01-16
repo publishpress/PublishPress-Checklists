@@ -21,12 +21,13 @@ class PPChecklistsPanel extends Component {
     }
 
     componentDidMount() {
+    
         // Bind the arrow function to access 'this' inside subscribe
-        const boundPerformChecksBeforePostUpdate = this.performChecksBeforePostUpdate.bind(this);
+        const boundperformPostStatusCheck = this.performPostStatusCheck.bind(this);
     
         // Subscribe to the data
-        this.unsubscribe = wp.data.subscribe(boundPerformChecksBeforePostUpdate);
-    
+        this.unsubscribe = wp.data.subscribe(boundperformPostStatusCheck);
+
         this.isMounted = true;
         if (typeof ppChecklists !== "undefined") {
             this.updateRequirements(ppChecklists.requirements);
@@ -34,17 +35,101 @@ class PPChecklistsPanel extends Component {
 
         hooks.addAction('pp-checklists.update-failed-requirements', 'publishpress/checklists', this.updateFailedRequirements.bind(this), 10);
         hooks.addAction('pp-checklists.requirements-updated', 'publishpress/checklists', this.handleRequirementStatusChange.bind(this), 10);
+
+        /**
+         * Our less problematic solution till gutenberg Add a way 
+         * for third parties to perform additional save validation 
+         * in this issue https://github.com/WordPress/gutenberg/issues/13413
+         * is this solution as it also solves third party conflict with
+         * locking post (Rankmath, Yoast SEO etc)
+         */
+        let coreEditor   = wp.data.dispatch('core/editor');
+        let notices  = wp.data.dispatch('core/notices');
+        let coreSavePost = coreEditor.savePost;
+
+        wp.data.dispatch('core/editor').savePost = async (options) => {
+            options = options || {};
+
+            let publishing_post = false;
+                
+            if (options.isAutosave || options.isPreview) {
+                publishing_post = false
+            } else if (this.currentStatus !== '') {
+                publishing_post = (this.currentStatus !== 'publish') ? false : true;
+            } else {
+                if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
+                    publishing_post = false;
+                } else if (wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
+                    publishing_post = true;
+                } else if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
+                    publishing_post = true;
+                }
+            }
+
+            if (!publishing_post || typeof this.state.failedRequirements.block === "undefined" || this.state.failedRequirements.block.length === 0) {
+                return coreSavePost(options);
+            } else {
+                wp.data.dispatch('core/edit-post').closePublishSidebar();
+                notices.createErrorNotice(__("Please complete the required(*) checklists task.", "publishpress-checklists"), {
+                    id: 'publishpress-checklists-validation',
+                    isDismissible: true
+                });
+                wp.data.dispatch('core/edit-post').openGeneralSidebar('publishpress-checklists-panel/checklists-sidebar');
+
+                /**
+                 * change status to draft or old status if failed to 
+                 * solve further save draft button not working. This is
+                 * because at this state, the status has been updated to publish 
+                 * and further click on "Save draft" from editor UI won't work
+                 * as that doesn't update the status to publish
+                 */
+                if (this.oldStatus !== '') {
+                    wp.data.dispatch('core/editor').editPost({status: this.oldStatus, pp_checklists_post_status_edit: true});
+                }
+                return;
+            }
+        };
     }
 
     componentWillUnmount() {
+
         if (this.unsubscribe) {
             this.unsubscribe();
         }
-    
+
         hooks.removeAction('pp-checklists.update-failed-requirements', 'publishpress/checklists');
         hooks.removeAction('pp-checklists.requirements-updated', 'publishpress/checklists');
 
         this.isMounted = false;
+    }
+    /**
+     *  This is the best way to get edited post status. 
+     * For now, both getEditedPostAttribute('status') and 
+     * getCurrentPost()['status'] are not helpful because they don't usually return same
+     * status or valid status between when a post Publish button is used / Save draft is clicked
+     * for new and already published post.
+    */
+    performPostStatusCheck = () => {
+
+        let coreEdiPost  = wp.data.dispatch('core/editor').editPost;
+
+        if (!this.oldStatus || this.oldStatus == '') {
+            this.oldStatus = wp.data.select('core/editor').getCurrentPost()['status'];
+        }
+        
+        wp.data.dispatch('core/editor').editPost = async (edits, options) => {
+            options = options || {};
+            if (options.pp_checklists_edit_filtered === 1 || options.pp_checklists_post_status_edit === 1) {
+                return coreEdiPost(edits, options);
+            }
+            
+            if (typeof edits === 'object' && edits.status) {
+                // set status to be used later when preventing publish for posts that doesn't meet requirement.
+                this.currentStatus = edits.status;
+            }
+            options.pp_checklists_edit_filtered = 1;
+            return coreEdiPost(edits, options);
+        };
     }
 
     /**
@@ -88,101 +173,6 @@ class PPChecklistsPanel extends Component {
 
             this.setState({ showRequiredLegend, requirements: updatedRequirements });
         }
-    };
-
-    /**
-     * Add a method to perform checks before updating
-     */
-    performChecksBeforePostUpdate = () => {
-
-        var editor   = wp.data.dispatch('core/editor');
-        var notices  = wp.data.dispatch('core/notices');
-        var savePost = editor.savePost;
-        var editPost = editor.editPost;
-
-        if (!this.oldStatus || this.oldStatus == '') {
-            this.oldStatus = wp.data.select('core/editor').getCurrentPost()['status'];
-        }
-        
-        /**
-        * This is the best way to get edited post status. 
-        * For now, both getEditedPostAttribute('status') and 
-        * getCurrentPost()['status'] are not helpful because they don't usually return same
-        * status or valid status between when a post Publish button is used / Save draft is clicked
-        * for new and already published post.
-        */
-        editor.editPost = function (edits, options) {
-            if (typeof edits === 'object' && edits.status) {
-                // set status to be used later when preventing publish for posts that doesn't meet requirement.
-                this.currentStatus = edits.status;
-            }
-            editPost(edits, options);
-        }.bind(this);
-
-        /**
-         * Our less problematic solution till gutenberg Add a way 
-         * for third parties to perform additional save validation 
-         * in this issue https://github.com/WordPress/gutenberg/issues/13413
-         * is this solution as it also solves third party conflict with
-         * locking post (Rankmath, Yoast SEO etc)
-         */
-        editor.savePost = function (options) {
-
-
-            if (typeof options === "object" && options.pp_checklists_filtered === 1) {
-                savePost(options);
-                return;
-            }
-
-            /*if (typeof options !== "object" || options.pp_checklists_filtered !== 1) {
-                notices.removeNotices('publishpress-checklists-validation');
-            }*/
-
-            if (typeof options === "object") {
-                options.pp_checklists_filtered = 1;
-            } else {
-                options = {pp_checklists_filtered: 1};
-            }
-            
-            var publishing_post = false;
-
-            if (typeof options === "object" && (options.isAutosave || options.isPreview)) {
-                publishing_post = false;// this is autosave
-            } else if (this.currentStatus !== '') {
-                publishing_post = (this.currentStatus !== 'publish') ? false : true;
-            } else {
-                if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
-                    publishing_post = false;
-                } else if (wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
-                    publishing_post = true;
-                } else if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') == 'publish') {
-                    publishing_post = true;
-                }
-            }
-
-            if (!publishing_post || typeof this.state.failedRequirements.block === "undefined" || this.state.failedRequirements.block.length === 0) {
-                savePost(options);
-            } else {
-                wp.data.dispatch('core/edit-post').closePublishSidebar();
-                notices.createErrorNotice(__("Please complete the required(*) checklists task.", "publishpress-checklists"), {
-                    id: 'publishpress-checklists-validation',
-                    isDismissible: true
-                });
-                wp.data.dispatch('core/edit-post').openGeneralSidebar('publishpress-checklists-panel/checklists-sidebar');
-
-                /**
-                 * change status to draft or old status if failed to 
-                 * solve further save draft button not working. This is
-                 * because at this state, the status has been updated to publish 
-                 * and further click on "Save draft" from editor UI won't work
-                 * as that doesn't update the status to publish
-                 */
-                if (this.oldStatus !== '') {
-                    wp.data.dispatch('core/editor').editPost({status: this.oldStatus, pp_checklists_edit: true});
-                }
-
-            }
-        }.bind(this);
     };
 
     render() {
