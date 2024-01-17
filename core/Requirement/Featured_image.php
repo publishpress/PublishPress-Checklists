@@ -23,7 +23,7 @@ class Featured_image extends Base_simple
     /**
      * @var int
      */
-    public $position = 100;
+    public $position = 140;
 
     /**
      * Initialize the language strings for the instance

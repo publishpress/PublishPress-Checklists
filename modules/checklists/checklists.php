@@ -351,13 +351,21 @@ if (!class_exists('PPCH_Checklists')) {
             $taxonomies = $this->getPostTypeTaxonomies($post_type);
 
             $taxonomies_map = [
-                'category' => '\\PublishPress\\Checklists\\Core\\Requirement\\Categories_count',
-                'post_tag' => '\\PublishPress\\Checklists\\Core\\Requirement\\Tags_count',
+                'category' => [
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Categories_count', 
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_categories',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_categories',
+                ],
+                'post_tag' => [
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Tags_count',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_tags',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_tags',
+                ],
             ];
 
             foreach ($taxonomies as $taxonomy) {
                 if (array_key_exists($taxonomy, $taxonomies_map)) {
-                    $classes[] = $taxonomies_map[$taxonomy];
+                    $classes = array_merge($classes, $taxonomies_map[$taxonomy]);
                 } else {
                     $classes[] = maybe_serialize(
                         [

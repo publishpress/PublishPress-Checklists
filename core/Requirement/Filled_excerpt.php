@@ -23,7 +23,7 @@ class Filled_excerpt extends Base_counter
     /**
      * @var int
      */
-    public $position = 50;
+    public $position = 90;
 
     /**
      * Initialize the language strings for the instance
