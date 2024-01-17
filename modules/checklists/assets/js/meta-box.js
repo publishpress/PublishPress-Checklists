@@ -823,16 +823,29 @@
     /*----------  Featured Image Alt  ----------*/
     // Check if the featured image is set or not
     if ($('#pp-checklists-req-featured_image_alt').length > 0) {
-        var meta_id = 0;
+        let loaded = false, meta_id = 0, meta_alt = '';
+        let featured_image_alt = {};
+        const updateFeaturedImageAlt = (id, alt) => {
+            meta_id = Number(id);
+            meta_alt = alt;
+            featured_image_alt = {[meta_id]: meta_alt};
+            loaded = true;
+        };
         if (PP_Checklists.is_gutenberg_active()) {
-            meta_id = ppChecklists.requirements.featured_image_alt.attribute.thumbnail_id;
+            wp.data.subscribe(function () {
+                if(loaded) return;
+                const dataMedia = wp.data.select('core').getMedia(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
+                meta_id = Number(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
+                if(typeof dataMedia === 'object' && dataMedia) {
+                    updateFeaturedImageAlt(meta_id, dataMedia.alt_text);
+                }
+            });
         } else {
-            meta_id = $('#_thumbnail_id').val();
+            updateFeaturedImageAlt($('#_thumbnail_id').val(), $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'));
         }
-        var featured_image_alt = {[meta_id]: ppChecklists.requirements.featured_image_alt.attribute.alt};
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_alt = true;
-            var has_image = PP_Checklists.hasFeaturedImage();
+            if(!loaded) return;
+            let has_alt = true, has_image = PP_Checklists.hasFeaturedImage();
             if (has_image) {
                 has_alt = Boolean(featured_image_alt[meta_id]);
             }
@@ -849,7 +862,7 @@
                 .ready(function () {
                     $('.attachments-wrapper li').each(function () {
                         if ($(this).attr('aria-checked') === 'true') {
-                            meta_id = $(this).attr('data-id');
+                            meta_id = Number($(this).attr('data-id'));
                             callableFunc();
                         }
                     });
