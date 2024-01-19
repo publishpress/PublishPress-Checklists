@@ -762,8 +762,26 @@
          */
         getEditor: function () {
             return wp.data.select('core/editor');
-        }
+        },
 
+        /**
+         * This function checks whether a post has a featured image or not.
+         * 
+         * - For Gutenberg, it checks the featured_media attribute of the post.
+         * - For the Classic Editor, it checks the set-post-thumbnail element.
+         * @returns {boolean}
+         */
+        hasFeaturedImage: function () {
+            var has_image = false;
+
+            if (PP_Checklists.is_gutenberg_active()) {
+                has_image = PP_Checklists.getEditor().getEditedPostAttribute('featured_media') > 0;
+            } else {
+                has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
+            }
+            
+            return has_image;
+        }
     };
 
     // Exposes and initialize the object
@@ -793,17 +811,67 @@
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            var has_image = false;
-
-            if (PP_Checklists.is_gutenberg_active()) {
-                has_image = PP_Checklists.getEditor().getEditedPostAttribute('featured_media') > 0;
-            } else {
-                has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
-            }
+            var has_image = PP_Checklists.hasFeaturedImage();
 
             $('#pp-checklists-req-featured_image').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                 has_image
+            );
+        });
+    }
+   
+    /*----------  Featured Image Alt  ----------*/
+    // Check if the featured image is set or not
+    if ($('#pp-checklists-req-featured_image_alt').length > 0) {
+        let loaded = false, meta_id = 0, meta_alt = '';
+        let featured_image_alt = {};
+        const updateFeaturedImageAlt = (id, alt) => {
+            meta_id = Number(id);
+            meta_alt = alt;
+            featured_image_alt = {[meta_id]: meta_alt};
+            loaded = true;
+        };
+        if (PP_Checklists.is_gutenberg_active()) {
+            wp.data.subscribe(function () {
+                if(loaded) return;
+                const dataMedia = wp.data.select('core').getMedia(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
+                meta_id = Number(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
+                if(typeof dataMedia === 'object' && dataMedia) {
+                    updateFeaturedImageAlt(meta_id, dataMedia.alt_text);
+                }
+            });
+        } else {
+            updateFeaturedImageAlt($('#_thumbnail_id').val(), $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'));
+        }
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            if(!loaded) return;
+            let has_alt = true, has_image = PP_Checklists.hasFeaturedImage();
+            if (has_image) {
+                has_alt = Boolean(featured_image_alt[meta_id]);
+            }
+
+            if ($('#attachment-details-alt-text').length > 0) {
+                const callableFunc = function () {
+                    const current_alt = $('#attachment-details-alt-text').val();
+                    const previous_alt = featured_image_alt[meta_id] ?? '';
+                    if (current_alt !== previous_alt) {
+                        featured_image_alt[meta_id] = current_alt;
+                    }
+                };
+                $('#attachment-details-alt-text')
+                .ready(function () {
+                    $('.attachments-wrapper li').each(function () {
+                        if ($(this).attr('aria-checked') === 'true') {
+                            meta_id = Number($(this).attr('data-id'));
+                            callableFunc();
+                        }
+                    });
+                })
+                .on('change', callableFunc);
+            }
+            $('#pp-checklists-req-featured_image_alt').trigger(
+                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                has_alt
             );
         });
     }
@@ -816,10 +884,16 @@
                 min_value = parseInt(ppChecklists.requirements.tags_count.value[0]),
                 max_value = parseInt(ppChecklists.requirements.tags_count.value[1]);
 
+            /**
+             * For Gutenberg
+             */
             if (PP_Checklists.is_gutenberg_active()) {
                 // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
                 var obj = PP_Checklists.getEditor().getEditedPostAttribute('tags');
             } else {
+                /**
+                 * For the Classic Editor
+                 */
                 var obj = $('#post_tag.tagsdiv ul.tagchecklist').children('li');
             }
 

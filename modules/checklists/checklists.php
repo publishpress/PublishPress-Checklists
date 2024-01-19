@@ -387,6 +387,7 @@ if (!class_exists('PPCH_Checklists')) {
                 ],
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
                 ],
                 'excerpt'   => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',
