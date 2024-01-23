@@ -107,6 +107,10 @@ msgstr "Tutti i link utilizzano un formato valido"
 msgid "Alt text for all images"
 msgstr "Testo alternativo per tutte le immagini"
 
+#: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
+msgid "Alt text for featured images"
+msgstr "Testo alternativo per le immagini in primo piano"
+
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
 msgstr "Si è verificato un errore."
