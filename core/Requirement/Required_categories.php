@@ -54,7 +54,7 @@ class Required_categories extends Base_multiple
     public function get_current_status($post, $option_value)
     {
         $categories = wp_get_post_categories($post->ID);
-        $option_ids = $this->_category_parser($option_value, 0);
+        $option_ids = $this->category_parser($option_value, 0);
 
         return !empty(array_intersect($option_ids, $categories));
     }
@@ -65,14 +65,14 @@ class Required_categories extends Base_multiple
      * @param array $args
      * @return WP_Term[]
      */
-    private function _get_categories_hierarchical($args = array())
+    private function get_categories_hierarchical($args = array())
     {
         if( !isset( $args[ 'parent' ] ) ) $args[ 'parent' ] = 0;
 
         $categories = get_categories( $args );
         foreach( $categories as $key => $category ) {
             $args['parent'] = $category->term_id;
-            $categories[$key]->children = $this->_get_categories_hierarchical($args);
+            $categories[$key]->children = $this->get_categories_hierarchical($args);
         }
 
         return $categories;
@@ -84,7 +84,7 @@ class Required_categories extends Base_multiple
      * @param WP_Term[] $categories
      * @return String[] $labels
      */
-    private function _transform_categories($categories = array())
+    private function transform_categories($categories = array())
     {
         $labels = [];
 
@@ -107,13 +107,13 @@ class Required_categories extends Base_multiple
      */
     public function get_setting_drop_down_labels()
     {
-        $categories = $this->_get_categories_hierarchical(array(
+        $categories = $this->get_categories_hierarchical(array(
             'orderby'      => 'name',
             'order'        => 'ASC',
             'hide_empty'   => 0,
         ));
 
-        return $this->_transform_categories($categories);
+        return $this->transform_categories($categories);
     }
 
     /**
@@ -126,7 +126,7 @@ class Required_categories extends Base_multiple
      * @param int $index
      * @return String[] $categories
      */
-    private function _category_parser($categories = array(), $index = 0|1)
+    private function category_parser($categories = array(), $index = 0|1)
     {
         return array_map(function($value) use ($index) {
             return explode($this->DELIMITER, $value)[$index];

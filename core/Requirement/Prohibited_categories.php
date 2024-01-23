@@ -65,14 +65,14 @@ class Prohibited_categories extends Base_multiple
      * @param array $args
      * @return WP_Term[]
      */
-    private function _get_categories_hierarchical($args = array())
+    private function get_categories_hierarchical($args = array())
     {
         if( !isset( $args[ 'parent' ] ) ) $args[ 'parent' ] = 0;
 
         $categories = get_categories( $args );
         foreach( $categories as $key => $category ) {
             $args['parent'] = $category->term_id;
-            $categories[$key]->children = $this->_get_categories_hierarchical($args);
+            $categories[$key]->children = $this->get_categories_hierarchical($args);
         }
 
         return $categories;
@@ -84,7 +84,7 @@ class Prohibited_categories extends Base_multiple
      * @param WP_Term[] $categories
      * @return String[] $labels
      */
-    private function _transform_categories($categories = array())
+    private function transform_categories($categories = array())
     {
         $labels = [];
 
@@ -107,13 +107,13 @@ class Prohibited_categories extends Base_multiple
      */
     public function get_setting_drop_down_labels()
     {
-        $categories = $this->_get_categories_hierarchical(array(
+        $categories = $this->get_categories_hierarchical(array(
             'orderby'      => 'name',
             'order'        => 'ASC',
             'hide_empty'   => 0,
         ));
 
-        return $this->_transform_categories($categories);
+        return $this->transform_categories($categories);
     }
 
     /**

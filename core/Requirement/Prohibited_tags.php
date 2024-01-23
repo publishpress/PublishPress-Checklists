@@ -65,7 +65,7 @@ class Prohibited_tags extends Base_multiple
      * @param WP_Term[] $tags
      * @return String[] $labels
      */
-    private function _transform_tags($tags = array())
+    private function transform_tags($tags = array())
     {
         $labels = [];
 
@@ -94,7 +94,7 @@ class Prohibited_tags extends Base_multiple
             'hide_empty'   => 0,
         ));
 
-        return $this->_transform_tags($tags);
+        return $this->transform_tags($tags);
     }
 
     /**
