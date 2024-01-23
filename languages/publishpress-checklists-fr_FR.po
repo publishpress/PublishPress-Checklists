@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
-"POT-Creation-Date: 2024-01-10 14:57+0000\n"
-"PO-Revision-Date: 2024-01-11 22:22+0100\n"
+"POT-Creation-Date: 2024-01-15 15:59+0000\n"
+"PO-Revision-Date: 2024-01-16 12:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -82,7 +82,7 @@ msgstr "%s catégorie"
 msgid "About"
 msgstr "À propos"
 
-#: modules/checklists/checklists.php:952
+#: modules/checklists/checklists.php:953
 msgid "Add custom task"
 msgstr "Ajouter une tâche personnalisée"
 
@@ -129,11 +129,11 @@ msgstr "Approuvé par %s"
 msgid "Approved by a user in this role"
 msgstr "Approuvé par un compte avec ce rôle"
 
-#: modules/checklists/checklists.php:735
+#: modules/checklists/checklists.php:736
 msgid "Are you sure you want to publish anyway?"
 msgstr "Confirmez-vous vouloir publier de toute façon ?"
 
-#: modules/checklists/checklists.php:739
+#: modules/checklists/checklists.php:740
 msgid "Are you sure you want to update the published post anyway?"
 msgstr ""
 "Confirmez-vous vouloir tout de même mettre à jour la publication publiée ?"
@@ -175,16 +175,19 @@ msgstr "Entre %s et %s catégories"
 msgid "Cheatin&#8217; uh?"
 msgstr "Une mauvaise manipulation ?"
 
-#: modules/checklists/checklists.php:787
+#: modules/checklists/checklists.php:788
+#: modules/checklists/assets/js/gutenberg-panel.jsx:242
 msgid "Check Now"
 msgstr "Vérifier maintenant"
 
-#: modules/checklists/checklists.php:668 modules/checklists/checklists.php:733
+#: modules/checklists/checklists.php:669 modules/checklists/checklists.php:734
 msgid "Checklist"
 msgstr "Liste de contrôle"
 
 #: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:101
-#: modules/checklists/checklists.php:886 modules/checklists/checklists.php:901
+#: modules/checklists/checklists.php:887 modules/checklists/checklists.php:902
+#: modules/checklists/assets/js/gutenberg-panel.jsx:197
+#: modules/checklists/assets/js/gutenberg-panel.jsx:201
 msgid "Checklists"
 msgstr "Listes de contrôle"
 
@@ -192,7 +195,7 @@ msgstr "Listes de contrôle"
 msgid "Checklists Settings"
 msgstr "Réglages des listes de contrôle"
 
-#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:734
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:735
 msgid "Configure"
 msgstr "Configurer"
 
@@ -230,7 +233,7 @@ msgid "Disable the \"Status\" option when using \"Quick Edit\":"
 msgstr ""
 "Désactivez l’option « État » lorsque vous utilisez « Modification rapide » :"
 
-#: modules/checklists/checklists.php:974
+#: modules/checklists/checklists.php:975
 msgid "Disabled"
 msgstr "Désactivée"
 
@@ -243,7 +246,7 @@ msgstr ""
 "Désactivé parce que add_post_type_support(’%1$s’, ’%2$s’) est inclus dans un "
 "fichier chargé."
 
-#: modules/checklists/checklists.php:950
+#: modules/checklists/checklists.php:951
 msgid "Disabled, Recommended or Required"
 msgstr "Désactivée, recommandée ou nécessaire"
 
@@ -462,11 +465,11 @@ msgstr "Score minimum de lisibilité Yoast SEO"
 msgid "New Item"
 msgstr "Nouvel élément"
 
-#: modules/checklists/checklists.php:789
+#: modules/checklists/checklists.php:790
 msgid "No"
 msgstr "Non"
 
-#: modules/checklists/checklists.php:751 modules/checklists/checklists.php:755
+#: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
 msgid "Not required, but important: "
 msgstr "Non nécessaire, mais importante : "
 
@@ -510,7 +513,7 @@ msgstr "Nombre de caractères dans l’extrait"
 msgid "OK"
 msgstr "OK"
 
-#: modules/checklists/checklists.php:788
+#: modules/checklists/checklists.php:789
 msgid "Ok"
 msgstr "Ok"
 
@@ -524,12 +527,13 @@ msgstr "Clé API de OpenAI :"
 
 #: core/Requirement/Openai_item.php:287
 msgid ""
-"OpenAI checklists requires an API Key. Please add your API Key in settings."
+"OpenAI tasks require an API Key. Please add your API Key in the Settings "
+"area."
 msgstr ""
-"Les listes de contrôle OpenAI nécessitent une clé API. Veuillez ajouter "
-"votre clé API dans les réglages."
+"Les tâches de OpenAI nécessitent une clé API. Veuillez ajouter votre clé API "
+"dans les réglages."
 
-#: modules/checklists/checklists.php:951
+#: modules/checklists/checklists.php:952
 msgid "Options"
 msgstr "Options"
 
@@ -541,32 +545,35 @@ msgstr "Permaliens"
 msgid "Permissions"
 msgstr "Droits"
 
-#: modules/checklists/checklists.php:743
+#: modules/checklists/checklists.php:744
 msgid "Please complete the following tasks before publishing:"
 msgstr "Veuillez accomplir les tâches suivantes avant de publier :"
 
-#: modules/checklists/checklists.php:747
+#: modules/checklists/checklists.php:748
 msgid "Please complete the following tasks before updating the published post:"
 msgstr ""
 "Veuillez effectuer les tâches suivantes avant de mettre à jour la "
 "publication publiée :"
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:167
+msgid "Please complete the required(*) checklists task."
+msgstr "Veuillez compléter les tâches nécessaire (*) de listes de contrôle."
 
 #: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
 msgstr ""
 "Veuillez corriger les erreurs de votre formulaire ci-dessous et réessayer."
 
-#: modules/checklists/checklists.php:593
+#: modules/checklists/checklists.php:594
 msgid "Please make sure to add a name for all the custom tasks."
 msgstr ""
 "Veuillez vous assurer d’ajouter un nom pour toutes les tâches personnalisées."
 
-#: modules/checklists/checklists.php:589
+#: modules/checklists/checklists.php:590
 msgid "Please make sure to complete the settings for"
 msgstr "Veuillez vous assurez-vous d’effectuer tous les réglages pour"
 
 #: core/Requirement/Openai_item.php:278
-#| msgid "Post does not exist"
 msgid "Post content is empty."
 msgstr "Le contenu de la publication est vide."
 
@@ -590,18 +597,22 @@ msgstr "PublishPress Checklists"
 msgid "Readability: %s"
 msgstr "Lisibilité : %s"
 
-#: modules/checklists/checklists.php:975
+#: modules/checklists/checklists.php:976
 msgid "Recommended"
 msgstr "Recommandée"
 
 #: core/Requirement/Custom_item.php:121 core/Requirement/Openai_item.php:139
-#: modules/checklists/checklists.php:601
+#: modules/checklists/checklists.php:602
 msgid "Remove"
 msgstr "Retirer"
 
-#: modules/checklists/checklists.php:786 modules/checklists/checklists.php:976
+#: modules/checklists/checklists.php:787 modules/checklists/checklists.php:977
 msgid "Required"
 msgstr "Nécessaire"
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:255
+msgid "required"
+msgstr "nécessaire"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
@@ -612,7 +623,7 @@ msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
 #: core/Requirement/Openai_item.php:365
-msgid "See Full Response."
+msgid "See the full response."
 msgstr "Voir la réponse complète."
 
 #. %s expands to the seo score
@@ -630,7 +641,7 @@ msgstr "Réglages"
 msgid "Show warning icon:"
 msgstr "Afficher une icône d’avertissement :"
 
-#: modules/checklists/checklists.php:949
+#: modules/checklists/checklists.php:950
 msgid "Task"
 msgstr "Tâche"
 
@@ -654,13 +665,13 @@ msgstr "Ceci affichera une icône d’avertissement dans la boîte « Publier 
 msgid "Validation error. Kindly reload this page and try agai.n"
 msgstr "Erreur de validation. Veuillez recharger cette page et réessayer."
 
-#: modules/checklists/checklists.php:605
+#: modules/checklists/checklists.php:606
 msgid "What's the expected OpenAI response to mark the requirement as pass?"
 msgstr ""
 "Quelle est la réponse attendue de l’OpenAI pour marquer le prérequis comme "
 "réussie ?"
 
-#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:597
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:598
 msgid "Which roles can mark this task as complete?"
 msgstr "Quels rôles peuvent marquer cette tâche comme étant terminée ?"
 
@@ -668,7 +679,7 @@ msgstr "Quels rôles peuvent marquer cette tâche comme étant terminée ?"
 msgid "Who can ignore the task?"
 msgstr "Qui peut ignorer la tâche ?"
 
-#: modules/checklists/checklists.php:790
+#: modules/checklists/checklists.php:791
 msgid "Yes"
 msgstr "Oui"
 
@@ -680,13 +691,13 @@ msgstr "Yoast SEO"
 msgid "You do not have necessary permissions to complete this action."
 msgstr "Vous n’avez pas les droits nécessaires pour réaliser cette action."
 
-#: modules/checklists/checklists.php:782
+#: modules/checklists/checklists.php:783
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
 msgstr "Vous n’avez pas à remplir de %stâche de la liste de contrôle%s."
 
-#: modules/checklists/checklists.php:729
-#| msgid "You don't have to complete any %sChecklist tasks%s."
+#: modules/checklists/checklists.php:730
+#: modules/checklists/assets/js/gutenberg-panel.jsx:208
 msgid "You don't have to complete any Checklist tasks."
 msgstr "Vous n’avez pas besoin d’accomplir les tâches de la liste de contrôle."
 
