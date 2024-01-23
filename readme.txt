@@ -1,13 +1,13 @@
-=== PublishPress Checklists: Pre-Publishing Approval Task Checklist for WordPress Content ===
+=== PublishPress Checklists: Pre-Publishing Approval Checklist - OpenAI Post Scanner ===
 
 Contributors: publishpress, kevinB, stevejburge, andergmartins, ojopaul, olatechpro
 Author: PublishPress
 Author URI: https://publishpress.com
-Tags: approval, checklist, maximum, minimum, requirement
+Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured image, alt tag, featured images, alt tags, checklists, broken links, chatgpt, featured image size, yoast seo, user approval, spell checker, spelling, grammar
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.4
-Stable tag: 2.10.2
+Stable tag: 2.10.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ You can define tasks that must be complete before content is published. Do you g
 
 == Description ==
 
-[PublishPress Checklists](https://publishpress.com/authors/) is the best plugin to make sure your content is ready to go live. With PublishPress Checklists, you can choose pre-publishing requirements for your content. Using PublishPress Checklists, you define tasks that must be completed before content is published.
+[PublishPress Checklists](https://publishpress.com/checklists/) is the best plugin to make sure your content is ready to go live. With PublishPress Checklists, you can choose pre-publishing requirements for your content. Using PublishPress Checklists, you define tasks that must be completed before content is published.
 
 Let's show you a few possible options for your posts:
 
@@ -24,8 +24,11 @@ Let's show you a few possible options for your posts:
 * Check for any broken links.
 * Force authors to use a specific number of Tags or Categories.
 * Require posts to be approved by a user in a specific role.
+* Use OpenAI to scan your content and make sure it uses good grammar or the correct tone.
 
 Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
+
+PublishPress Checklists integrates with OpenAI. You can use OpenAI technology to scan your posts and check for the right tone, good spelling, or correct grammar.
 
 ## PublishPress Checklists Pro ##
 
@@ -63,6 +66,20 @@ You can configure each requirement, depending on whether you want to require wri
 * Required
 
 If you choose the “Required” option, it will be impossible to publish without completing the task.
+
+## OpenAI Checklist Requirements
+
+PublishPress Checklists integrates with OpenAI. You can use prompts to analyze your content. If OpenAI decides that your content doesn't meet the requirements, it will show the task as incomplete.
+
+You can create checklist requirements like these:</p>
+
+* "Is the content clear and easy to read?"
+* "Is this content tone professional?"
+* "Does this article use correct grammar?"
+
+OpenAI will scan your content and given a detailed verdict. This is an excellent way to catch errors and improve your content before publishing.
+
+[Click here to see how to create OpenAI requirements](https://publishpress.com/knowledge-base/custom-requirements-checklist/).
 
 ## You Can Create New Checklist Requirements
 
@@ -278,11 +295,28 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 [Read about requiring approval by Yoast SEO](https://publishpress.com/knowledge-base/yoast-seo-tasks/)
 
+== Screenshots ==
+
+1. Create your own checklists. Next to every post and page, writers see a checklist box, showing the tasks they need to complete. As writers complete each item, the red text automatically turns to green when it is complete.
+2. Configure your requirements. Each item on the checklist can be configured to meet your site’s needs. You can decide whether items are recommended, required or ignored. You can also set maximum and minimum values.
+3. Feedback before publishing. If the writers don’t complete all the requirements, PublishPress Checklists will show them a message explaining what they need to do
+4. OpenAI support. PublishPress Checklists supports AI to suggest new tasks and analyze your content.
+5. WooCommerce Products Checklist. This feature in Checklists Pro allows you to create requirements for WooCommerce products. You can set over 20 requirements that must be met before a product is published.
+6. Custom checklist rules. In addition to the default rules, PublishPress Checklists allows you to create your own rules. Click “Add custom item” to create as many rules as you want.
+
+
 
 == Changelog ==
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+
+= [2.10.3] - 24 Jan 2024 =
+
+* Fixed: Uncaught RangeError: Maximum call stack size exceeded coming from gutenberg panel, #613
+* Fixed: Image alt requirement HTTP request loop, #623
+* Update: New Translation ES-FR-IT Updates, #615
 
 
 = [2.10.2] - 15 Jan 2024 =
