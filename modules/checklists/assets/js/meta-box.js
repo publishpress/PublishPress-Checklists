@@ -608,27 +608,21 @@
          * @return {Array}
          */
         missing_alt_images: function (content, missing_alt = []) {
-            var img,
-                alt,
-                regex = /<img[^>]+src="?([^"\s]+)"?[^>]*>/g;
-
+            var alt,
+                regex = /<img[^>]*>/g;
+        
             if (content) {
-
-                while (img = regex.exec(content)) {
-                    alt = $('<div>' + img + '</div>').find('img:first').attr('alt');
-
-                    if (!alt) {
-                        missing_alt.push(img);
-                    } else if (!alt.replace(/\s/g, '').length) {
-                        missing_alt.push(img);
+                var imgTags = content.match(regex) || [];
+                imgTags.forEach(function (imgTag) {
+                    alt = imgTag.match(/alt="([^"]*)"/);
+        
+                    if (!alt || !alt[1].replace(/\s/g, '').length) {
+                        missing_alt.push(imgTag);
                     }
-                }
-
-
+                });
             }
-
+        
             return missing_alt;
-
         },
 
         extract_links_from_content: function(content) {
