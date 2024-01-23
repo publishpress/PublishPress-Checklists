@@ -5,7 +5,7 @@
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
- * Version: 2.10.3-beta
+ * Version: 2.10.2
  * Text Domain: publishpress-checklists
  * Domain Path: /languages
  * Requires at least: 5.5
