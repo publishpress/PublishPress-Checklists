@@ -953,9 +953,20 @@
                 const labelEl = el.find('.status-label');
                 const current_label_text = label.replace(/:.*/, "");
                 const prohibited_tags_str = prohibited_tags_reached.map(el => el.split('__')[1]).join(', ');
+                const final_label_text = prohibited_tags_str.length > 0 ? `${current_label_text}: ${prohibited_tags_str}` : current_label_text;
     
+                ppChecklists = {
+                    ...ppChecklists,
+                    requirements: {
+                        ...ppChecklists.requirements,
+                        prohibited_tags: {
+                            ...ppChecklists.requirements.prohibited_tags,
+                            label: final_label_text
+                        }
+                    }
+                }
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_tags);
-                labelEl.text(`${current_label_text}${prohibited_tags_str.length > 0 ? ': ' + prohibited_tags_str : ''}`);
+                labelEl.text(final_label_text);
             }
         });
     }
@@ -1032,9 +1043,20 @@
                 const labelEl = el.find('.status-label');
                 const current_label_text = label.replace(/:.*/, "");
                 const prohibited_categories_str = prohibited_categories_reached.map(el => el.split('__')[1]).join(', ');
-    
+                const final_label_text = prohibited_categories_str.length > 0 ? `${current_label_text}: ${prohibited_categories_str}` : current_label_text;
+
+                ppChecklists = {
+                    ...ppChecklists,
+                    requirements: {
+                        ...ppChecklists.requirements,
+                        prohibited_categories: {
+                            ...ppChecklists.requirements.prohibited_categories,
+                            label: final_label_text
+                        }
+                    }
+                }
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_categories);
-                labelEl.text(`${current_label_text}${prohibited_categories_str.length > 0 ? ': ' + prohibited_categories_str : ''}`);
+                labelEl.text(final_label_text);
             }
         });
     }

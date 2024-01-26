@@ -91,6 +91,12 @@ class PPChecklistsPanel extends Component {
         };
     }
 
+    componentDidUpdate(_, prevState) {
+        if (typeof ppChecklists !== "undefined" && JSON.stringify(Object.values(ppChecklists.requirements)) !== JSON.stringify(prevState.requirements)) {
+            this.updateRequirements(ppChecklists.requirements);
+        }
+    }
+
     componentWillUnmount() {
 
         if (this.unsubscribe) {
