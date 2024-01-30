@@ -571,6 +571,22 @@ msgstr ""
 msgid "Post does not exist"
 msgstr ""
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr ""
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr ""
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr ""
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr ""
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr ""
@@ -602,6 +618,22 @@ msgstr ""
 
 #: modules/checklists/assets/js/gutenberg-panel.jsx:255
 msgid "required"
+msgstr ""
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr ""
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr ""
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr ""
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
 msgstr ""
 
 #: modules/reviews/reviews.php:61

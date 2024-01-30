@@ -557,6 +557,22 @@ msgstr ""
 msgid "Post does not exist"
 msgstr "O post não existe"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Categorias proibidas"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Categorias proibidas: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Tags proibidas"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Tags proibidas: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -584,6 +600,22 @@ msgstr ""
 #: modules/checklists/checklists.php:733 modules/checklists/checklists.php:922
 msgid "Required"
 msgstr "Obrigatório"
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Categorias obrigatórias"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Categorias obrigatórias: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Tags obrigatórias"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Tags obrigatórias: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
