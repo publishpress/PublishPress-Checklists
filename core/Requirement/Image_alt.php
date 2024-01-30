@@ -24,7 +24,7 @@ class Image_alt extends Base_simple
     /**
      * @var int
      */
-    public $position = 90;
+    public $position = 130;
 
     /**
      * Initialize the language strings for the instance

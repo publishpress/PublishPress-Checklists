@@ -902,6 +902,75 @@
         });
     }
 
+    /*----------  Required Tags  ----------*/
+
+    if ($('#pp-checklists-req-required_tags').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            let obj = PP_Checklists.is_gutenberg_active()
+                ? PP_Checklists.getEditor().getEditedPostAttribute('tags')
+                : $('.tagchecklist li').map((_, el) => $(el).contents().filter((_, node) => node.nodeType === 3).text().trim()).get();
+
+            if (typeof obj !== 'undefined') {
+                let { value: required_tags, label } = ppChecklists.requirements.required_tags;
+                let required_tags_reached = required_tags.length > 0 
+                    ? required_tags.filter(value => {
+                        if (PP_Checklists.is_gutenberg_active()) return !obj.includes(Number(value.split('__')[0]));
+                        return !obj.includes(value.split('__')[1]);
+                    })
+                    : [];
+                let has_required_tags = required_tags_reached.length > 0;
+
+                const el = $('#pp-checklists-req-required_tags');
+                const labelEl = el.find('.status-label');
+                const current_label_text = label.replace(/:.*/, "");
+                const required_tags_str = required_tags_reached.map(el => el.split('__')[1]).join(', ');
+    
+                el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_tags);
+                labelEl.text(`${current_label_text}${required_tags_str.length > 0 ? ': ' + required_tags_str : ''}`);
+            }
+        });
+    }
+
+    /*----------  Prohibited Tags  ----------*/
+
+    if ($('#pp-checklists-req-prohibited_tags').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            let obj = PP_Checklists.is_gutenberg_active() 
+                ? PP_Checklists.getEditor().getEditedPostAttribute('tags') 
+                : $('.tagchecklist li').map((_, el) => $(el).contents().filter((_, node) => node.nodeType === 3).text().trim()).get();
+            
+            if (typeof obj !== 'undefined') {
+                let { value: prohibited_tags, label } = ppChecklists.requirements.prohibited_tags;
+                let prohibited_tags_reached = prohibited_tags.length > 0 
+                    ? prohibited_tags.filter(value => {
+                        if (PP_Checklists.is_gutenberg_active()) return obj.includes(Number(value.split('__')[0]));
+                        return obj.includes(value.split('__')[1]);
+                    })
+                    : [];
+                let has_prohibited_tags = prohibited_tags_reached.length > 0;
+
+                const el = $('#pp-checklists-req-prohibited_tags');
+                const labelEl = el.find('.status-label');
+                const current_label_text = label.replace(/:.*/, "");
+                const prohibited_tags_str = prohibited_tags_reached.map(el => el.split('__')[1]).join(', ');
+                const final_label_text = prohibited_tags_str.length > 0 ? `${current_label_text}: ${prohibited_tags_str}` : current_label_text;
+    
+                ppChecklists = {
+                    ...ppChecklists,
+                    requirements: {
+                        ...ppChecklists.requirements,
+                        prohibited_tags: {
+                            ...ppChecklists.requirements.prohibited_tags,
+                            label: final_label_text
+                        }
+                    }
+                }
+                el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_tags);
+                labelEl.text(final_label_text);
+            }
+        });
+    }
+
     /*----------  Categories Number  ----------*/
 
     if ($('#pp-checklists-req-categories_count').length > 0) {
@@ -924,6 +993,70 @@
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
                     PP_Checklists.check_valid_quantity(count, min_value, max_value)
                 );
+            }
+        });
+    }
+
+
+    /*----------  Required Categories  ----------*/
+
+    if ($('#pp-checklists-req-required_categories').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            let obj = PP_Checklists.is_gutenberg_active() 
+                ? PP_Checklists.getEditor().getEditedPostAttribute('categories') 
+                : $('#categorychecklist input:checked').map((_, chkEl) => Number($(chkEl).val())).get();
+
+            if (typeof obj !== 'undefined') {
+                let { value: required_categories, label } = ppChecklists.requirements.required_categories;
+                let required_categories_reached = required_categories.length > 0 
+                    ? required_categories.filter(value => !obj.includes(Number(value.split('__')[0]))) 
+                    : [];
+                let has_required_categories = required_categories_reached.length > 0;
+    
+                const el = $('#pp-checklists-req-required_categories');
+                const labelEl = el.find('.status-label');
+                const current_label_text = label.replace(/:.*/, "");
+                const required_categories_str = required_categories_reached.map(el => el.split('__')[1]).join(', ');
+    
+                el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_categories);
+                labelEl.text(`${current_label_text}${required_categories_str.length > 0 ? ': ' + required_categories_str : ''}`);
+            }
+        });
+    }
+
+    /*----------  Prohibited Categories  ----------*/
+
+    if ($('#pp-checklists-req-prohibited_categories').length > 0) {
+        $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+            let obj = PP_Checklists.is_gutenberg_active() 
+                ? PP_Checklists.getEditor().getEditedPostAttribute('categories') 
+                : $('#categorychecklist input:checked').map((_, chkEl) => Number($(chkEl).val())).get();
+            
+            if (typeof obj !== 'undefined') {
+                let { value: prohibited_categories, label } = ppChecklists.requirements.prohibited_categories;
+                let prohibited_categories_reached = prohibited_categories.length > 0 
+                    ? prohibited_categories.filter(value => obj.includes(Number(value.split('__')[0]))) 
+                    : [];
+                let has_prohibited_categories = prohibited_categories_reached.length > 0;
+    
+                const el = $('#pp-checklists-req-prohibited_categories');
+                const labelEl = el.find('.status-label');
+                const current_label_text = label.replace(/:.*/, "");
+                const prohibited_categories_str = prohibited_categories_reached.map(el => el.split('__')[1]).join(', ');
+                const final_label_text = prohibited_categories_str.length > 0 ? `${current_label_text}: ${prohibited_categories_str}` : current_label_text;
+
+                ppChecklists = {
+                    ...ppChecklists,
+                    requirements: {
+                        ...ppChecklists.requirements,
+                        prohibited_categories: {
+                            ...ppChecklists.requirements.prohibited_categories,
+                            label: final_label_text
+                        }
+                    }
+                }
+                el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_categories);
+                labelEl.text(final_label_text);
             }
         });
     }
