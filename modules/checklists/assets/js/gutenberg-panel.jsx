@@ -21,12 +21,6 @@ class PPChecklistsPanel extends Component {
     }
 
     componentDidMount() {
-    
-        // Bind the arrow function to access 'this' inside subscribe
-        const boundperformPostStatusCheck = this.performPostStatusCheck.bind(this);
-    
-        // Subscribe to the data
-        this.unsubscribe = wp.data.subscribe(boundperformPostStatusCheck);
 
         this.isMounted = true;
         if (typeof ppChecklists !== "undefined") {
@@ -46,6 +40,33 @@ class PPChecklistsPanel extends Component {
         let coreEditor   = wp.data.dispatch('core/editor');
         let notices  = wp.data.dispatch('core/notices');
         let coreSavePost = coreEditor.savePost;
+        let coreEdiPost  = coreEditor.editPost;
+
+        if (!this.oldStatus || this.oldStatus == '') {
+            this.oldStatus = wp.data.select('core/editor').getCurrentPost()['status'];
+        }    
+        
+        /**
+        *  This is the best way to get edited post status. 
+        * For now, both getEditedPostAttribute('status') and 
+        * getCurrentPost()['status'] are not helpful because they don't usually return same
+        * status or valid status between when a post Publish button is used / Save draft is clicked
+        * for new and already published post.
+       */
+        
+        wp.data.dispatch('core/editor').editPost = async (edits, options) => {
+            options = options || {};
+            if (options.pp_checklists_edit_filtered === 1 || options.pp_checklists_post_status_edit === 1) {
+                return coreEdiPost(edits, options);
+            }
+            
+            if (typeof edits === 'object' && edits.status) {
+                // set status to be used later when preventing publish for posts that doesn't meet requirement.
+                this.currentStatus = edits.status;
+            }
+            options.pp_checklists_edit_filtered = 1;
+            return coreEdiPost(edits, options);
+        };
 
         wp.data.dispatch('core/editor').savePost = async (options) => {
             options = options || {};
@@ -99,43 +120,10 @@ class PPChecklistsPanel extends Component {
 
     componentWillUnmount() {
 
-        if (this.unsubscribe) {
-            this.unsubscribe();
-        }
-
         hooks.removeAction('pp-checklists.update-failed-requirements', 'publishpress/checklists');
         hooks.removeAction('pp-checklists.requirements-updated', 'publishpress/checklists');
 
         this.isMounted = false;
-    }
-    /**
-     *  This is the best way to get edited post status. 
-     * For now, both getEditedPostAttribute('status') and 
-     * getCurrentPost()['status'] are not helpful because they don't usually return same
-     * status or valid status between when a post Publish button is used / Save draft is clicked
-     * for new and already published post.
-    */
-    performPostStatusCheck = () => {
-
-        let coreEdiPost  = wp.data.dispatch('core/editor').editPost;
-
-        if (!this.oldStatus || this.oldStatus == '') {
-            this.oldStatus = wp.data.select('core/editor').getCurrentPost()['status'];
-        }
-        
-        wp.data.dispatch('core/editor').editPost = async (edits, options) => {
-            options = options || {};
-            if (options.pp_checklists_edit_filtered === 1 || options.pp_checklists_post_status_edit === 1) {
-                return coreEdiPost(edits, options);
-            }
-            
-            if (typeof edits === 'object' && edits.status) {
-                // set status to be used later when preventing publish for posts that doesn't meet requirement.
-                this.currentStatus = edits.status;
-            }
-            options.pp_checklists_edit_filtered = 1;
-            return coreEdiPost(edits, options);
-        };
     }
 
     /**
