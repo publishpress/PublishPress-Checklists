@@ -581,6 +581,22 @@ msgstr "Le contenu de la publication est vide."
 msgid "Post does not exist"
 msgstr "La publication n’existe pas"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Catégories interdites"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Catégories interdites: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Balises interdites"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Balises interdites: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -613,6 +629,22 @@ msgstr "Nécessaire"
 #: modules/checklists/assets/js/gutenberg-panel.jsx:255
 msgid "required"
 msgstr "nécessaire"
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Catégories requises"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Catégories requises: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Balises requises"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Balises requises: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"

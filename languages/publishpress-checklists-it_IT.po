@@ -575,6 +575,22 @@ msgstr "Il contenuto dell'articolo è vuoto."
 msgid "Post does not exist"
 msgstr "L'articolo non esiste"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Categorie vietate"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Categorie vietate: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Tag vietati"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Tag vietati: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -607,6 +623,22 @@ msgstr "Richiesto"
 #: modules/checklists/assets/js/gutenberg-panel.jsx:255
 msgid "required"
 msgstr "richiesto"
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Categorie richieste"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Categorie richieste: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Tag richiesti"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Tag richiesti: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
