@@ -99,6 +99,10 @@ msgstr "Alle Links im gültigen Format"
 msgid "Alt text for all images"
 msgstr "Alt-Text für alle Bilder"
 
+#: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
+msgid "Alt text for featured images"
+msgstr "Alt-Text für vorgestellte Bilder"
+
 #: core/Requirement/Approved_by.php:41
 msgid "Approved by %s"
 msgstr "Genehmigt von %s"
@@ -496,6 +500,22 @@ msgstr "Stelle sicher, dass alle Einstellungen gemacht sind"
 msgid "Post does not exist"
 msgstr "Beitrag existiert nicht"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Verbotene Kategorien"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Verbotene Kategorien: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Verbotene Tags"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Verbotene Tags: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -522,6 +542,22 @@ msgstr "Entfernen"
 #: modules/checklists/checklists.php:733 modules/checklists/checklists.php:922
 msgid "Required"
 msgstr "Erforderlich"
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Erforderliche Kategorien"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Erforderliche Kategorien: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Erforderliche Tags"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Erforderliche Tags: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"

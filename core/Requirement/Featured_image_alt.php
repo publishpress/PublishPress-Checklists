@@ -11,19 +11,19 @@ namespace PublishPress\Checklists\Core\Requirement;
 
 defined('ABSPATH') or die('No direct script access allowed.');
 
-class Featured_image extends Base_simple
+class Featured_image_alt extends Base_simple
 {
     /**
      * The name of the requirement, in a slug format
      *
      * @var string
      */
-    public $name = 'featured_image';
+    public $name = 'featured_image_alt';
 
     /**
      * @var int
      */
-    public $position = 140;
+    public $position = 110;
 
     /**
      * Initialize the language strings for the instance
@@ -32,8 +32,8 @@ class Featured_image extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Featured image', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Featured image', 'publishpress-checklists');
+        $this->lang['label']          = __('Alt text for featured images', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('Alt text for featured images', 'publishpress-checklists');
     }
 
     /**
@@ -46,8 +46,15 @@ class Featured_image extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $thumbnail = get_the_post_thumbnail($post);
+        $thumbnail_id = get_post_thumbnail_id($post);
+        /**
+         * check if new post
+         * new post will have no thumbnail in initialize page
+         */
+        if($thumbnail_id === 0) return true;
 
-        return !empty($thumbnail);
+        $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+
+        return !empty($thumbnail_alt);
     }
 }

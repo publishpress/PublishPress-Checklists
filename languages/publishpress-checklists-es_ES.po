@@ -107,6 +107,10 @@ msgstr "Todos los enlaces usan un formato válido"
 msgid "Alt text for all images"
 msgstr "Texto alternativo para todas las imágenes"
 
+#: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
+msgid "Alt text for featured images"
+msgstr "Texto alternativo para imágenes destacadas"
+
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
 msgstr "Se ha producido un error."
@@ -573,6 +577,22 @@ msgstr "El contenido de la entrada es vacío."
 msgid "Post does not exist"
 msgstr "La entrada no existe"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Categorías prohibidas"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Categorías prohibidas: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Etiquetas prohibidas"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Etiquetas prohibidas: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -605,6 +625,22 @@ msgstr "Obligatorio"
 #: modules/checklists/assets/js/gutenberg-panel.jsx:255
 msgid "required"
 msgstr "obligatorio"
+
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Categorías requeridas"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Categorías requeridas: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Etiquetas requeridas"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Etiquetas requeridas: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"

@@ -18,6 +18,12 @@
     font-weight: bold;
 }
 
+.interface-pinned-items button.components-button[aria-label='Checklists'] {
+    padding: 0 !important;
+    background: transparent !important;
+    width: auto !important;
+}
+
 /* Warning icon in the Publish button */
 body.ppch-show-publishing-warning-icon #publishing-action, /* Classic Editor */
 body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon {

@@ -28,7 +28,7 @@ class Validate_links extends Base_simple
     /**
      * @var int
      */
-    public $position = 80;
+    public $position = 120;
 
     /**
      * @var HyperlinkExtractor
