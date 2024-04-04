@@ -1,0 +1,702 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PublishPress Checklists\n"
+"POT-Creation-Date: 2024-01-15 15:59+0000\n"
+"PO-Revision-Date: 2024-03-29 23:08+0300\n"
+"Last-Translator: \n"
+"Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: publishpress-checklists.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: core/Requirement/Taxonomies_count.php:48
+#: core/Requirement/Taxonomies_count.php:49
+msgid "%d "
+msgstr "%d "
+
+#: core/Requirement/Filled_excerpt.php:41
+msgid "%d character in excerpt"
+msgstr "Alıntıda %d karakter"
+
+#: core/Requirement/Title_count.php:39
+msgid "%d character in title"
+msgstr "Başlıkta %d karakter"
+
+#: core/Requirement/Filled_excerpt.php:42
+msgid "%d characters in excerpt"
+msgstr "Alıntıdaki %d karakterler"
+
+#: core/Requirement/Title_count.php:40
+msgid "%d characters in title"
+msgstr "Başlıkta %d karakterler"
+
+#: core/Requirement/External_links.php:41
+msgid "%d external link in content"
+msgstr "İçerikte %d dış bağlantı"
+
+#: core/Requirement/External_links.php:42
+msgid "%d external links in content"
+msgstr "İçerikteki %d dış bağlantılar"
+
+#: core/Requirement/Internal_links.php:41
+msgid "%d internal link in content"
+msgstr "İçerikteki %d iç bağlantı"
+
+#: core/Requirement/Internal_links.php:42
+msgid "%d internal links in content"
+msgstr "İçerikteki %d iç bağlantılar"
+
+#: core/Requirement/Tags_count.php:45
+msgid "%d tag"
+msgstr "%d etiketi"
+
+#: core/Requirement/Tags_count.php:46
+msgid "%d tags"
+msgstr "%d etiketler"
+
+#: core/Requirement/Words_count.php:41
+msgid "%d word in content"
+msgstr "İçerikte %d kelime"
+
+#: core/Requirement/Words_count.php:42
+msgid "%d words in content"
+msgstr "İçerikte %d kelimeler"
+
+#: core/Requirement/Categories_count.php:46
+#, php-format
+msgid "%s categories"
+msgstr "%s kategorileri"
+
+#: core/Requirement/Categories_count.php:45
+#, php-format
+msgid "%s category"
+msgstr "%s kategorisi"
+
+#: modules/checklists/templates/footer.php:23
+msgid "About"
+msgstr "Hakkında"
+
+#: modules/checklists/checklists.php:953
+msgid "Add custom task"
+msgstr "Özel görev ekle"
+
+#: modules/checklists/templates/global-checklists.php:94
+msgid "Add OpenAI Prompt task"
+msgstr "OpenAI İstemi görevi ekle"
+
+#. Description of the plugin
+msgid "Add support for checklists in WordPress"
+msgstr "WordPresste kontrol listeleri için destek ekle"
+
+#: modules/settings/settings.php:684
+msgid "Add to these post types:"
+msgstr "Bu gönderi türlerine ekleyin:"
+
+#: core/Requirement/Validate_links.php:58
+#: core/Requirement/Validate_links.php:59
+msgid "All links use a valid format"
+msgstr "Tüm bağlantılar geçerli bir format kullanır"
+
+#: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
+msgid "Alt text for all images"
+msgstr "Tüm görseller için alt metin"
+
+#: core/Requirement/Openai_item.php:266
+msgid "An error occured."
+msgstr "Bir hata oluştu."
+
+#: core/Requirement/Openai_item.php:340
+#, php-format
+msgid "API Error: %1s."
+msgstr "API Hatası: %1s."
+
+#: core/Requirement/Approved_by.php:41
+#, php-format
+msgid "Approved by %s"
+msgstr " %s tarafından onaylandı"
+
+#: core/Requirement/Approved_by.php:42
+msgid "Approved by a user in this role"
+msgstr "Bu roldeki bir kullanıcı tarafından onaylandı"
+
+#: modules/checklists/checklists.php:736
+msgid "Are you sure you want to publish anyway?"
+msgstr "Yine de yayınlamak istediğinize emin misin?"
+
+#: modules/checklists/checklists.php:740
+msgid "Are you sure you want to update the published post anyway?"
+msgstr "Yine de yayınlanan gönderiyi güncellemek istediğinizden emin misiniz?"
+
+#: core/Requirement/Taxonomies_count.php:50
+msgid "Between %d and %d "
+msgstr " %d ve %d arasında "
+
+#: core/Requirement/Filled_excerpt.php:43
+msgid "Between %d and %d characters in excerpt"
+msgstr "Alıntı %d ve %d karakterleri arasında"
+
+#: core/Requirement/Title_count.php:41
+msgid "Between %d and %d characters in title"
+msgstr "Başlık %d ve %d karakterleri arasında"
+
+#: core/Requirement/External_links.php:43
+msgid "Between %d and %d external links in content"
+msgstr " %d ile %d arasında içerikteki dış bağlantılar"
+
+#: core/Requirement/Internal_links.php:43
+msgid "Between %d and %d internal links in content"
+msgstr " %d ile %d arasında içerikteki iç bağlantılar"
+
+#: core/Requirement/Tags_count.php:47
+msgid "Between %d and %d tags"
+msgstr " %d ve %d etiketleri arasında"
+
+#: core/Requirement/Words_count.php:43
+msgid "Between %d and %d words in content"
+msgstr "İçerikte %d ve %d kelime arasında"
+
+#: core/Requirement/Categories_count.php:47
+#, php-format
+msgid "Between %s and %s categories"
+msgstr " %s ve %s kategorileri arasında"
+
+#: core/Legacy/LegacyPlugin.php:213 modules/settings/settings.php:444
+msgid "Cheatin&#8217; uh?"
+msgstr "Hile&#8217; ha?"
+
+#: modules/checklists/checklists.php:788
+#: modules/checklists/assets/js/gutenberg-panel.jsx:242
+msgid "Check Now"
+msgstr "Şimdi Kontrol Et"
+
+#: modules/checklists/checklists.php:669 modules/checklists/checklists.php:734
+msgid "Checklist"
+msgstr "Kontrol Listesi"
+
+#: core/Legacy/LegacyPlugin.php:349 modules/checklists/checklists.php:101
+#: modules/checklists/checklists.php:887 modules/checklists/checklists.php:902
+#: modules/checklists/assets/js/gutenberg-panel.jsx:197
+#: modules/checklists/assets/js/gutenberg-panel.jsx:201
+msgid "Checklists"
+msgstr "Kontrol listeleri"
+
+#: modules/settings/settings.php:61 modules/settings/settings.php:112
+msgid "Checklists Settings"
+msgstr "Kontrol Listeleri Ayarları"
+
+#: core/Legacy/LegacyPlugin.php:206 modules/checklists/checklists.php:735
+msgid "Configure"
+msgstr "Yapılandır"
+
+#: modules/checklists/templates/footer.php:37
+msgid "Contact"
+msgstr "İletişim"
+
+#: core/Requirement/Custom_item.php:52 core/Requirement/Custom_item.php:53
+msgid "Custom"
+msgstr "Özel"
+
+#: modules/checklists/templates/global-checklists.php:87
+msgid ""
+"Custom tasks do not complete automatically. Users must check the box to show "
+"they have completed the task."
+msgstr ""
+"Özel görevler otomatik olarak tamamlanmaz. Kullanıcılar görevi "
+"tamamladıklarını göstermek için kutuyu işaretlemelidir."
+
+#: modules/permalinks/permalinks.php:66
+msgid "Define tasks related to permalinks"
+msgstr "Kalıcı bağlantılarla ilgili görevleri tanımla"
+
+#: modules/yoastseo/yoastseo.php:67
+msgid "Define tasks related to Yoast SEO"
+msgstr "Yoast SEO ile ilgili görevleri tanımla"
+
+#: modules/checklists/templates/global-checklists.php:75
+msgid "Description"
+msgstr "Açıklama"
+
+#: modules/settings/settings.php:700
+msgid "Disable the \"Status\" option when using \"Quick Edit\":"
+msgstr ""
+"\"Hızlı Düzenleme\" kullanılırken \"Durum\" seçeneğini devre dışı bırakın:"
+
+#: modules/checklists/checklists.php:975
+msgid "Disabled"
+msgstr "Devre dışı"
+
+#: modules/settings/settings.php:408
+#, php-format
+msgid ""
+"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
+"loaded file."
+msgstr ""
+"Yüklü bir dosyaya add_post_type_support('%1$s', '%2$s') dahil edildiği için "
+"devre dışı bırakıldı."
+
+#: modules/checklists/checklists.php:951
+msgid "Disabled, Recommended or Required"
+msgstr "Devre Dışı, Önerilen veya Gerekli"
+
+#: modules/checklists/templates/footer.php:30
+msgid "Documentation"
+msgstr "Belgeler"
+
+#: modules/settings/settings.php:261
+msgid "Enabled features"
+msgstr " Özellikler etkilendirilmiş"
+
+#: modules/settings/settings.php:781
+msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
+msgstr ""
+"Kontrol listesi görevlerinde OpenAI istemlerini kullanmak için API "
+"Anahtarınızı girin."
+
+#: core/Requirement/Featured_image.php:35
+#: core/Requirement/Featured_image.php:36
+msgid "Featured image"
+msgstr "Öne Çıkan Görsel"
+
+#: modules/settings/settings.php:252
+msgid "Features"
+msgstr "Özellikler"
+
+#: modules/settings/settings.php:253
+msgid "Feel free to select only the features you need."
+msgstr ""
+"Yalnızca ihtiyacınız olan özellikleri seçmekten çekinmeyin, rahat olun."
+
+#: modules/settings/settings.php:675
+msgid "General:"
+msgstr "Genel:"
+
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:129
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:160
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:130
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:161
+msgid "Good"
+msgstr "İyi"
+
+#. Author URI of the plugin
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#. URI of the plugin
+msgid "https://publishpress.com/"
+msgstr "https://publishpress.com/"
+
+#: modules/settings/settings.php:762
+msgid ""
+"If the \"Status\" option is enabled, it can be used to avoid using the "
+"Checklists requirements."
+msgstr ""
+" \"Durum\" seçeneği etkinleştirilirse, Kontrol Listeleri gereksinimlerini "
+"kullanmaktan kaçınmak için kullanılabilir."
+
+#: core/Legacy/Module.php:288
+#, php-format
+msgid "If you like %s please leave us a %s rating. Thank you!"
+msgstr "Eğer %s beğendiyseniz lütfen bize %s puan bırakın. Teşekkür ederiz!"
+
+#: core/Requirement/Openai_item.php:386
+msgid "Invalid response"
+msgstr "Yanıt geçersiz"
+
+#: modules/permalinks/lib/Requirement/ValidChars.php:37
+msgid "Latin characters in permalink"
+msgstr "Kalıcı bağlantıda Latin karakterler"
+
+#: core/Requirement/Base_counter.php:293
+msgid "Max"
+msgstr "Maksimum"
+
+#: core/Requirement/Taxonomies_count.php:46
+#: core/Requirement/Taxonomies_count.php:47
+msgid "Maximum of %d "
+msgstr "Maksimum %d "
+
+#: core/Requirement/Filled_excerpt.php:39
+msgid "Maximum of %d character in excerpt"
+msgstr "Alıntıda en fazla %d karakter"
+
+#: core/Requirement/Title_count.php:37
+msgid "Maximum of %d character in title"
+msgstr "Başlıkta en fazla %d karakter"
+
+#: core/Requirement/Filled_excerpt.php:40
+msgid "Maximum of %d characters in excerpt"
+msgstr "Alıntıda en fazla %d karakterler"
+
+#: core/Requirement/Title_count.php:38
+msgid "Maximum of %d characters in title"
+msgstr "Başlıkta en fazla %d karakterler"
+
+#: core/Requirement/External_links.php:39
+msgid "Maximum of %d external link in content"
+msgstr "İçerikte en fazla %d dış bağlantı"
+
+#: core/Requirement/External_links.php:40
+msgid "Maximum of %d external links in content"
+msgstr "İçerikte en fazla %d dış bağlantılar"
+
+#: core/Requirement/Internal_links.php:39
+msgid "Maximum of %d internal link in content"
+msgstr "İçerikte en fazla %d iç bağlantı"
+
+#: core/Requirement/Internal_links.php:40
+msgid "Maximum of %d internal links in content"
+msgstr "İçerikte en fazla %d iç bağlantı"
+
+#: core/Requirement/Tags_count.php:43
+msgid "Maximum of %d tag"
+msgstr "Maksimum %d etiket"
+
+#: core/Requirement/Tags_count.php:44
+msgid "Maximum of %d tags"
+msgstr "En fazla %d etiketler"
+
+#: core/Requirement/Words_count.php:39
+msgid "Maximum of %d word in content"
+msgstr "İçerikte en fazla %d kelime"
+
+#: core/Requirement/Words_count.php:40
+msgid "Maximum of %d words in content"
+msgstr "İçerikte en fazla %d kelimeler"
+
+#: core/Requirement/Categories_count.php:44
+#, php-format
+msgid "Maximum of %s categories"
+msgstr "Maksimum %s kategoriler"
+
+#: core/Requirement/Categories_count.php:43
+#, php-format
+msgid "Maximum of %s category"
+msgstr "Maksimum %s kategori"
+
+#: core/Requirement/Base_counter.php:285
+msgid "Min"
+msgstr "Minimum"
+
+#: core/Requirement/Taxonomies_count.php:44
+#: core/Requirement/Taxonomies_count.php:45
+msgid "Minimum of %d "
+msgstr "Minimum %d "
+
+#: core/Requirement/Filled_excerpt.php:37
+msgid "Minimum of %d character in excerpt"
+msgstr "Alıntıda en az %d karakter"
+
+#: core/Requirement/Title_count.php:35
+msgid "Minimum of %d character in title"
+msgstr "Başlıkta en az %d karakter"
+
+#: core/Requirement/Filled_excerpt.php:38
+msgid "Minimum of %d characters in excerpt"
+msgstr "Alıntıda en az %d karakter"
+
+#: core/Requirement/Title_count.php:36
+msgid "Minimum of %d characters in title"
+msgstr "Başlıkta en az %d karakter"
+
+#: core/Requirement/External_links.php:37
+msgid "Minimum of %d external link in content"
+msgstr "İçerikte en az %d dış bağlantı"
+
+#: core/Requirement/External_links.php:38
+msgid "Minimum of %d external links in content"
+msgstr "İçerikte en az %d dış bağlantılar"
+
+#: core/Requirement/Internal_links.php:37
+msgid "Minimum of %d internal link in content"
+msgstr "İçerikte en az %d iç bağlantı"
+
+#: core/Requirement/Internal_links.php:38
+msgid "Minimum of %d internal links in content"
+msgstr "İçerikte en az %d iç bağlantılar"
+
+#: core/Requirement/Tags_count.php:41
+msgid "Minimum of %d tag"
+msgstr "Minimum %d etiketi"
+
+#: core/Requirement/Tags_count.php:42
+msgid "Minimum of %d tags"
+msgstr "En az %d etiketi"
+
+#: core/Requirement/Words_count.php:37
+msgid "Minimum of %d word in content"
+msgstr "İçerikte en az %d kelime"
+
+#: core/Requirement/Words_count.php:38
+msgid "Minimum of %d words in content"
+msgstr "İçerikte en az %d kelime"
+
+#: core/Requirement/Categories_count.php:42
+#, php-format
+msgid "Minimum of %s categories"
+msgstr "En az %s kategoriler"
+
+#: core/Requirement/Categories_count.php:41
+#, php-format
+msgid "Minimum of %s category"
+msgstr "En az %s kategori"
+
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:46
+msgid "Minimum Yoast SEO analysis score"
+msgstr "Minimum Yoast SEO analiz skoru"
+
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:47
+msgid "Minimum Yoast SEO readability score"
+msgstr "Minimum Yoast SEO okunabilirlik skoru"
+
+#: modules/checklists/templates/global-checklists.php:74
+msgid "New Item"
+msgstr "Yeni Öğe"
+
+#: modules/checklists/checklists.php:790
+msgid "No"
+msgstr "Hayır"
+
+#: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
+msgid "Not required, but important: "
+msgstr "Gerekli değil ama önemli: "
+
+#: core/Requirement/Taxonomies_count.php:43
+msgid "Number of "
+msgstr "Sayısı"
+
+#: core/Requirement/Categories_count.php:40
+msgid "Number of categories"
+msgstr "Kategori sayısı"
+
+#: core/Requirement/Title_count.php:33 core/Requirement/Title_count.php:34
+msgid "Number of characters in title"
+msgstr "Başlıktaki karakter sayısı"
+
+#: core/Requirement/External_links.php:36
+msgid "Number of external links in content"
+msgstr "İçerikteki harici bağlantı sayısı"
+
+#: core/Requirement/Internal_links.php:36
+msgid "Number of internal links in content"
+msgstr "İçerikteki dahili bağlantı sayısı"
+
+#: core/Requirement/Tags_count.php:40
+msgid "Number of tags"
+msgstr "Etiketlerin sayısı"
+
+#: core/Requirement/Words_count.php:36
+msgid "Number of words in content"
+msgstr "İçerikteki kelime sayısı"
+
+#: core/Requirement/Filled_excerpt.php:35
+#: core/Requirement/Filled_excerpt.php:36
+msgid "Numbers of characters in excerpt"
+msgstr "Alıntıdaki karakter sayısı"
+
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:159
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:125
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:160
+msgid "OK"
+msgstr "TAMAM"
+
+#: modules/checklists/checklists.php:789
+msgid "Ok"
+msgstr "Tamam"
+
+#: core/Requirement/Openai_item.php:61 core/Requirement/Openai_item.php:62
+msgid "Openai"
+msgstr "Openai"
+
+#: modules/settings/settings.php:708
+msgid "OpenAI API Key:"
+msgstr "OpenAI API Anahtarı:"
+
+#: core/Requirement/Openai_item.php:287
+msgid ""
+"OpenAI tasks require an API Key. Please add your API Key in the Settings "
+"area."
+msgstr ""
+"OpenAI görevleri için bir API Anahtarı gerektirir. Lütfen API Anahtarınızı "
+"Ayarlar alanına ekleyin."
+
+#: modules/checklists/checklists.php:952
+msgid "Options"
+msgstr "Seçenekler"
+
+#: modules/permalinks/permalinks.php:65
+msgid "Permalinks"
+msgstr "Kalıcı Bağlantılar"
+
+#: modules/permissions/permissions.php:68
+msgid "Permissions"
+msgstr "İzinler"
+
+#: modules/checklists/checklists.php:744
+msgid "Please complete the following tasks before publishing:"
+msgstr "Lütfen yayınlamadan önce aşağıdaki görevleri tamamlayın:"
+
+#: modules/checklists/checklists.php:748
+msgid "Please complete the following tasks before updating the published post:"
+msgstr ""
+"Lütfen yayınlanan gönderiyi güncellemeden önce aşağıdaki görevleri "
+"tamamlayın:"
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:167
+msgid "Please complete the required(*) checklists task."
+msgstr "Lütfen gerekli(*) kontrol listeleri görevini tamamlayın."
+
+#: core/Legacy/LegacyPlugin.php:209
+msgid "Please correct your form errors below and try again."
+msgstr "Lütfen form hatalarınızı aşağıda düzeltin ve tekrar deneyin."
+
+#: modules/checklists/checklists.php:594
+msgid "Please make sure to add a name for all the custom tasks."
+msgstr "Lütfen tüm özel görevler için bir ad eklediğinizden emin olun."
+
+#: modules/checklists/checklists.php:590
+msgid "Please make sure to complete the settings for"
+msgstr "Lütfen bunlar için ayarları tamamladığınızdan emin olun"
+
+#: core/Requirement/Openai_item.php:278
+msgid "Post content is empty."
+msgstr "Yazı içeriği boş."
+
+#: core/Legacy/LegacyPlugin.php:218
+msgid "Post does not exist"
+msgstr "Yazı mevcut değil"
+
+#. Author of the plugin
+msgid "PublishPress"
+msgstr "PublishPress"
+
+#. Name of the plugin
+#: core/Legacy/Module.php:285
+msgid "PublishPress Checklists"
+msgstr "PublishPress Kontrol Listeleri Pro"
+
+#. %s expands to the readability score
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
+msgid "Readability: %s"
+msgstr "Okunabilirlik: %s"
+
+#: modules/checklists/checklists.php:976
+msgid "Recommended"
+msgstr "Tavsiye edilen"
+
+#: core/Requirement/Custom_item.php:121 core/Requirement/Openai_item.php:139
+#: modules/checklists/checklists.php:602
+msgid "Remove"
+msgstr "Kaldır"
+
+#: modules/checklists/checklists.php:787 modules/checklists/checklists.php:977
+msgid "Required"
+msgstr "Gerekli"
+
+#: modules/checklists/assets/js/gutenberg-panel.jsx:255
+msgid "required"
+msgstr "gerekli"
+
+#: modules/reviews/reviews.php:61
+msgid "Reviews"
+msgstr "Değerlendirmeler"
+
+#: modules/checklists/templates/global-checklists.php:108
+msgid "Save Changes"
+msgstr "Değişiklikleri Kaydet"
+
+#: core/Requirement/Openai_item.php:365
+msgid "See the full response."
+msgstr "Yanıtın tamamını görün."
+
+#. %s expands to the seo score
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
+msgid "Seo: %s"
+msgstr "Seo: %s"
+
+#: modules/settings/settings.php:114
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: modules/settings/settings.php:692
+msgid "Show warning icon:"
+msgstr "Uyarı simgesini göster:"
+
+#: modules/checklists/checklists.php:950
+msgid "Task"
+msgstr "Görev"
+
+#: modules/checklists/templates/global-checklists.php:101
+msgid "The prompt should be in form of a question."
+msgstr "Bilgi istemi bir soru şeklinde olmalıdır."
+
+#: modules/settings/settings.php:312
+msgid "There are no PublishPress modules registered"
+msgstr "Kayıtlı PublishPress modülü yok"
+
+#: modules/checklists/templates/global-checklists.php:101
+msgid "This feature requires an OpenAI API Key."
+msgstr "Bu özellik bir OpenAI API Anahtarı gerektirir."
+
+#: modules/settings/settings.php:741
+msgid "This will display a warning icon in the \"Publish\" box."
+msgstr "Bu, \"Yayınla\" kutusunda bir uyarı simgesi görüntüleyecektir."
+
+#: core/Requirement/Openai_item.php:273
+msgid "Validation error. Kindly reload this page and try agai.n"
+msgstr ""
+"Doğrulama hatası. Lütfen bu sayfayı yeniden yükleyin ve tekrar deneyin.n"
+
+#: modules/checklists/checklists.php:606
+msgid "What's the expected OpenAI response to mark the requirement as pass?"
+msgstr ""
+"Gereksinimi başarılı olarak işaretlemek için beklenen OpenAI yanıtı nedir?"
+
+#: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:598
+msgid "Which roles can mark this task as complete?"
+msgstr "Hangi roller bu görevi tamamlandı olarak işaretleyebilir?"
+
+#: modules/permissions/permissions.php:143
+msgid "Who can ignore the task?"
+msgstr "Bu görevi kim görmezden gelebilir?"
+
+#: modules/checklists/checklists.php:791
+msgid "Yes"
+msgstr "Evet"
+
+#: modules/yoastseo/yoastseo.php:66
+msgid "Yoast SEO"
+msgstr "Yoast SEO"
+
+#: core/Legacy/LegacyPlugin.php:214
+msgid "You do not have necessary permissions to complete this action."
+msgstr "Bu eylemi tamamlamak için gerekli izinlere sahip değilsiniz."
+
+#: modules/checklists/checklists.php:783
+#, php-format
+msgid "You don't have to complete any %sChecklist tasks%s."
+msgstr ""
+"Herhangi bir %sKontrol Listesi görevini%s tamamlamak zorunda değilsiniz."
+
+#: modules/checklists/checklists.php:730
+#: modules/checklists/assets/js/gutenberg-panel.jsx:208
+msgid "You don't have to complete any Checklist tasks."
+msgstr "Herhangi bir Kontrol Listesi görevini tamamlamak zorunda değilsiniz."
