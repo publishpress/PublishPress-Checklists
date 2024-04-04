@@ -353,13 +353,13 @@ if (!class_exists('PPCH_Checklists')) {
             $taxonomies_map = [
                 'category' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Categories_count', 
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_categories',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_categories',
+                    //'\\PublishPress\\Checklists\\Core\\Requirement\\Required_categories',
+                    //'\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_categories',
                 ],
                 'post_tag' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Tags_count',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_tags',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_tags',
+                    //'\\PublishPress\\Checklists\\Core\\Requirement\\Required_tags',
+                    //'\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_tags',
                 ],
             ];
 
@@ -395,7 +395,7 @@ if (!class_exists('PPCH_Checklists')) {
                 ],
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
+                    //'\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
                 ],
                 'excerpt'   => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',
