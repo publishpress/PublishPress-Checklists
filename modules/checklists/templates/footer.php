@@ -19,33 +19,24 @@
     <nav>
         <ul>
             <li>
-                <a href="//publishpress.com" target="_blank" rel="noopener noreferrer"
+                <a href="//publishpress.com/checklists" target="_blank" rel="noopener noreferrer"
                    title="About <?php echo esc_attr($context['plugin_name']); ?>"><?php echo esc_html__(
                         'About',
                         'publishpress-checklists'
                     ); ?></a>
             </li>
             <li>
-                <a href="//publishpress.com/documentation/" target="_blank" rel="noopener noreferrer"
+                <a href="//publishpress.com/knowledge-base/checklist-introduction/" target="_blank" rel="noopener noreferrer"
                    title="<?php echo esc_attr($context['plugin_name']); ?> Documentation"><?php echo esc_html__(
                         'Documentation',
                         'publishpress-checklists'
                     ); ?></a>
             </li>
             <li>
-                <a href="//publishpress.com/contact" target="_blank" rel="noopener noreferrer"
+                <a href="//publishpress.com/publishpress-support/" target="_blank" rel="noopener noreferrer"
                    title="Contact the PublishPress team"><?php echo esc_html__('Contact', 'publishpress-checklists'); ?></a>
             </li>
-            <li>
-                <a href="//twitter.com/publishpresscom" target="_blank" rel="noopener noreferrer">
-                    <span class="dashicons dashicons-twitter"></span>
-                </a>
-            </li>
-            <li>
-                <a href="//facebook.com/publishpress" target="_blank" rel="noopener noreferrer">
-                    <span class="dashicons dashicons-facebook"></span>
-                </a>
-            </li>
+            
         </ul>
     </nav>
     <div class="pp-pressshack-logo">
