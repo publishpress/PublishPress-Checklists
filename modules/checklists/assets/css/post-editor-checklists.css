@@ -8,12 +8,12 @@
     vertical-align: middle;
 }
 
-.pp-checklists-req.status-yes *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(.request-response *) {
+.pp-checklists-req.status-yes *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #66bb6a;
     font-weight: normal;
 }
 
-.pp-checklists-req.status-no *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(.request-response *) {
+.pp-checklists-req.status-no *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap) {
     color: #ef5350;
     font-weight: bold;
 }
@@ -119,7 +119,6 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     width: 100%;
     text-align: center;
     cursor: pointer;
-    margin: 10px 0 !important;
 }
 
 .edit-post-meta-boxes-area #pp_checklist_meta.postbox>.inside {
