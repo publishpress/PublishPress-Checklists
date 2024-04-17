@@ -374,3 +374,8 @@ textarea.pp-checklists-custom-item-title {
 .pp-checklists-unit {
     margin-left: 2px;
 }
+
+.submit-top {
+    display: flex;
+    justify-content: end;
+}
