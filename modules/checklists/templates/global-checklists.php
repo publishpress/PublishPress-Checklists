@@ -1,6 +1,10 @@
 <form method="post" id="pp-checklists-global">
     <?php wp_nonce_field('ppch-global-checklists'); ?>
 
+    <div class="submit-top">
+        <input type="submit" name="submit" id="submit-top" class="button button-primary"
+             value="<?php echo esc_attr__('Save Changes', 'publishpress-checklists'); ?>">
+    </div>
     <ul id="pp-checklists-post-type-filter" class="nav-tab-wrapper">
         <?php foreach ($context['post_types'] as $post_type_key => $post_type_label) : ?>
             <li class="nav-tab post-type-<?php echo esc_attr($post_type_key); ?>">
