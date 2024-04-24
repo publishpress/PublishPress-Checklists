@@ -152,6 +152,14 @@ class Openai_item extends Base_simple implements Interface_required
      */
     public function filter_requirements_list($requirements, $post)
     {
+        // Check if the OpenAI API key is set
+        $legacyPlugin = Factory::getLegacyPlugin();
+        $api_key     = !empty($legacyPlugin->settings->module->options->openai_api_key) ? $legacyPlugin->settings->module->options->openai_api_key : '';
+        
+        if (empty(trim($api_key))) {
+            return $requirements;
+        }    
+
         // Check if it is a compatible post type. If not, ignore this requirement.
         if ($post->post_type !== $this->post_type) {
             return $requirements;
