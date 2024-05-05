@@ -127,7 +127,7 @@ if (!defined('PPCH_LOADED')) {
                             function ($settings) {
                             $settings['publishpress-checklists'] = [
                                 'parent' => 'ppch-checklists',
-                                'label' => 'Upgrade to Pro',
+                                'label' => __('Upgrade to Pro', 'publishpress-checklists'),
                                 'link' => 'https://publishpress.com/links/checklists-menu',
                             ];
 
