@@ -609,38 +609,38 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'remove'            => esc_html__('Remove', 'publishpress-checklists'),
-                        'custom_enter_name' => esc_html__('Enter name of custom task', 'publishpres-checklists'),
-                        'openai_enter_name' => esc_html__('Enter OpenAI task prompt', 'publishpres-checklists'),
-                        'suggestion_title' => esc_html__('Suggested Prompts', 'publishpres-checklists'),
+                        'custom_enter_name' => esc_html__('Enter name of custom task', 'publishpress-checklists'),
+                        'openai_enter_name' => esc_html__('Enter OpenAI task prompt', 'publishpress-checklists'),
+                        'suggestion_title' => esc_html__('Suggested Prompts', 'publishpress-checklists'),
                         'openai_option_description' => esc_html__('What\'s the expected OpenAI response to mark the requirement as pass?', 'publishpress-checklists'),
                         'openai_suggestions' => [
                             'clear_content' => [
-                                'label' => esc_html__('Clear Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content clear and easy to read?', 'publishpres-checklists'),
+                                'label' => esc_html__('Clear Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content clear and easy to read?', 'publishpress-checklists'),
                             ],
                             'friendly_tone' => [
-                                'label' => esc_html__('Friendly Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone friendly?', 'publishpres-checklists'),
+                                'label' => esc_html__('Friendly Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone friendly?', 'publishpress-checklists'),
                             ],
                             'professional_tone' => [
-                                'label' => esc_html__('Professional Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone professional?', 'publishpres-checklists'),
+                                'label' => esc_html__('Professional Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone professional?', 'publishpress-checklists'),
                             ],
                             'persuasive_tone' => [
-                                'label' => esc_html__('Persuasive Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone persuasive?', 'publishpres-checklists'),
+                                'label' => esc_html__('Persuasive Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone persuasive?', 'publishpress-checklists'),
                             ],
                             'empathetic_tone' => [
-                                'label' => esc_html__('Empathetic Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone empathetic?', 'publishpres-checklists'),
+                                'label' => esc_html__('Empathetic Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone empathetic?', 'publishpress-checklists'),
                             ],
                             'adventurous_tone' => [
-                                'label' => esc_html__('Adventurous Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone adventurous?', 'publishpres-checklists'),
+                                'label' => esc_html__('Adventurous Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone adventurous?', 'publishpress-checklists'),
                             ],
                             'promotional_tone' => [
-                                'label' => esc_html__('Promotional Tone Content', 'publishpres-checklists'),
-                                'prompt' => esc_html__('Is this content tone promotional?', 'publishpres-checklists'),
+                                'label' => esc_html__('Promotional Tone Content', 'publishpress-checklists'),
+                                'prompt' => esc_html__('Is this content tone promotional?', 'publishpress-checklists'),
                             ]
                         ],
                     ]

@@ -89,7 +89,7 @@ class Openai_item extends Base_simple implements Interface_required
             '<textarea name="%s" data-id="%s" placeholder="%s" class="pp-checklists-custom-item-title">%s</textarea>',
             $name,
             esc_attr($this->name),
-            esc_html__('Enter OpenAI task prompt', 'publishpres-checklists'),
+            esc_html__('Enter OpenAI task prompt', 'publishpress-checklists'),
             esc_attr($this->get_title())
         );
 
