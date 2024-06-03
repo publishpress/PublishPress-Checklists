@@ -189,7 +189,7 @@ if (!class_exists('PPCH_Settings')) {
         public function print_default_settings()
         {
             $legacyPlugin = Factory::getLegacyPlugin();
-            if (file_exists(WP_PLUGIN_DIR . '/publishpress-checklists-pro/publishpress-checklists-pro.php')) {
+            if (defined('PPCHPRO_VERSION')) {
                 define('PPCHPRO_INSTALLED', true);
             } else {
                 define('PPCHPRO_INSTALLED', false);
