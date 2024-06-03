@@ -99,7 +99,7 @@ if (!defined('PPCH_LOADED')) {
                         \PPVersionNotices\Module\TopNotice\Module::SETTINGS_FILTER,
                         function ($settings) {
                         $settings['publishpress-checklists'] = [
-                            'message' => 'You\'re using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s',
+                            'message' => esc_html__("You're using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s", 'publishpress-checklists'),
                             'link' => 'https://publishpress.com/links/checklists-banner',
                             'screens' => [
                                 [
