@@ -189,17 +189,10 @@ if (!class_exists('PPCH_Settings')) {
         public function print_default_settings()
         {
             $legacyPlugin = Factory::getLegacyPlugin();
-            if (defined('PPCHPRO_VERSION')) {
-                define('PPCHPRO_INSTALLED', true);
-            } else {
-                define('PPCHPRO_INSTALLED', false);
-            }
 
             ?>
 
-            
-
-            <div class="pp-columns-wrapper<?php echo !PPCHPRO_INSTALLED ? ' pp-enable-sidebar' : '' ?>">
+            <div class="pp-columns-wrapper<?php echo !defined('PPCHPRO_VERSION') ? ' pp-enable-sidebar' : '' ?>">
                 <div class="pp-column-left">
                     <form class="basic-settings"
                   action="<?php echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
@@ -307,7 +300,7 @@ if (!class_exists('PPCH_Settings')) {
                 submit_button(null, 'primary', 'submit', false); ?>
                 </form>
                 </div><!-- .pp-column-left -->
-                <?php if (!PPCHPRO_INSTALLED) { ?>
+                <?php if (!defined('PPCHPRO_VERSION')) { ?>
                     <div class="pp-column-right">
                         <div class="ppch-advertisement-right-sidebar">
                             <div class="advertisement-box-content postbox ppch-advert">
