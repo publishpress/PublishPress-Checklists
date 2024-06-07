@@ -69,6 +69,40 @@ if (!defined('PPCH_LOADED')) {
         define('PUBLISHPRESS_CHECKLISTS_VENDOR_PATH', PPCH_LIB_VENDOR_PATH);
     }
 
+    $pro_active = false;
+
+	foreach ((array)get_option('active_plugins') as $plugin_file) {
+		if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
+			$pro_active = true;
+			break;
+		}
+	}
+
+	if (!$pro_active && is_multisite()) {
+		foreach (array_keys((array)get_site_option('active_sitewide_plugins')) as $plugin_file) {
+			if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
+				$pro_active = true;
+				break;
+			}
+		}
+	}
+
+	if ($pro_active) {
+		add_filter(
+			'plugin_row_meta',
+			function ($links, $file) {
+				if ($file == plugin_basename(__FILE__)) {
+					$links[] = '<strong>' . esc_html__('This plugin can be deleted.', 'publishpress-checklists') . '</strong>';
+				}
+
+				return $links;
+			},
+			10,
+			2
+		);
+	}
+
+
     $autoloadFilePath = PPCH_LIB_VENDOR_PATH . '/autoload.php';
     if (! class_exists('ComposerAutoloaderInitPPChecklists')
         && is_file($autoloadFilePath)
