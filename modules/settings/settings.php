@@ -182,13 +182,17 @@ if (!class_exists('PPCH_Settings')) {
 
             $status = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
             if ($status == 'yes') :
-                ?>
-                <script type="text/javascript">
-                    jQuery(document).ready(function($) {
-                        $('span.inline').remove();
-                    });
-                </script>
-                <?php
+                $post_type = (!empty($_GET['post_type'])) ? sanitize_text_field($_GET['post_type']) : 'post';
+                $post_types = array_keys($this->get_post_types());
+                if (in_array($post_type, $post_types)) :
+                    ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            $('span.inline').remove();
+                        });
+                    </script>
+                    <?php
+                endif;
             endif;
         }
 
