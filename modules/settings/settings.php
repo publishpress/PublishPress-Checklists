@@ -216,8 +216,12 @@ if (!class_exists('PPCH_Settings')) {
         public function print_default_settings()
         {
             $legacyPlugin = Factory::getLegacyPlugin();
+
             ?>
-            <form class="basic-settings"
+
+            <div class="pp-columns-wrapper<?php echo (!Util::isChecklistsProActive()) ? ' pp-enable-sidebar' : '' ?>">
+                <div class="pp-column-left">
+                    <form class="basic-settings"
                   action="<?php echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
 
                 <?php
@@ -321,10 +325,14 @@ if (!class_exists('PPCH_Settings')) {
                 wp_nonce_field('edit-publishpress-settings');
 
                 submit_button(null, 'primary', 'submit', false); ?>
-            </form>
-            <?php
-
-            ?>
+                </form>
+                </div><!-- .pp-column-left -->
+                <?php if (!Util::isChecklistsProActive()) :  ?>
+                    <div class="pp-column-right">
+                        <?php Util::ppch_pro_sidebar(); ?>
+                    </div><!-- .pp-column-right -->
+                 <?php endif; ?>
+            </div><!-- .pp-columns-wrapper -->
             <div class="publishpress-modules">
                 <?php $this->print_modules(); ?>
             </div>
