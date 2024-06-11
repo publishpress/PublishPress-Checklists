@@ -32,7 +32,6 @@ use PublishPress\Checklists\Core\Factory;
 use PublishPress\Checklists\Core\Legacy\Module;
 use PublishPress\Checklists\Core\Legacy\Util;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
-use PublishPress\Checklists\Core\Utils\Utils;
 
 if (!class_exists('PPCH_Settings')) {
     #[\AllowDynamicProperties]
@@ -193,7 +192,7 @@ if (!class_exists('PPCH_Settings')) {
 
             ?>
 
-            <div class="pp-columns-wrapper<?php echo (!Utils::isChecklistsProActive()) ? ' pp-enable-sidebar' : '' ?>">
+            <div class="pp-columns-wrapper<?php echo (!Util::isChecklistsProActive()) ? ' pp-enable-sidebar' : '' ?>">
                 <div class="pp-column-left">
                     <form class="basic-settings"
                   action="<?php echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
@@ -301,9 +300,11 @@ if (!class_exists('PPCH_Settings')) {
                 submit_button(null, 'primary', 'submit', false); ?>
                 </form>
                 </div><!-- .pp-column-left -->
-                <?php if (!Utils::isChecklistsProActive()) { 
-                    Utils::ppch_pro_sidebar();
-                 } ?>
+                <?php if (!Util::isChecklistsProActive()) :  ?>
+                    <div class="pp-column-right">
+                        <?php Util::ppch_pro_sidebar(); ?>
+                    </div><!-- .pp-column-right -->
+                 <?php endif; ?>
             </div><!-- .pp-columns-wrapper -->
             <div class="publishpress-modules">
                 <?php $this->print_modules(); ?>
