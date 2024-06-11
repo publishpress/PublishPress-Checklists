@@ -91,6 +91,7 @@ if (!class_exists('PPCH_Settings')) {
             add_action('publishpress_checklists_admin_submenu', [$this, 'action_admin_submenu'], 990);
 
             add_action('admin_head-edit.php', [$this, 'remove_quick_edit_status_row']);
+            add_action('admin_head-edit.php', [$this, 'remove_quick_edit_row']);
             add_action('admin_print_styles', [$this, 'action_admin_print_styles']);
             add_action('admin_print_scripts', [$this, 'action_admin_print_scripts']);
             add_action('admin_enqueue_scripts', [$this, 'action_admin_enqueue_scripts']);
@@ -162,6 +163,32 @@ if (!class_exists('PPCH_Settings')) {
                             $('label.inline-edit-status').each(function () {
                                 $(this).remove();
                             });
+                        });
+                    </script>
+                    <?php
+                endif;
+            endif;
+        }
+
+        /**
+         * Remove quick edit option.
+         */
+        public function remove_quick_edit_row()
+        {
+            // If the current user can manage options, don't remove Quick Edit
+            if (current_user_can('manage_options')) {
+                return;
+            }
+
+            $status = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
+            if ($status == 'yes') :
+                $post_type = (!empty($_GET['post_type'])) ? sanitize_text_field($_GET['post_type']) : 'post';
+                $post_types = array_keys($this->get_post_types());
+                if (in_array($post_type, $post_types)) :
+                    ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            $('span.inline').remove();
                         });
                     </script>
                     <?php
@@ -567,6 +594,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset ($new_options['disable_quick_edit_completely'])) {
+                $new_options['disable_quick_edit_completely'] = Base_requirement::VALUE_NO;
+            }
+
             return $new_options;
         }
 
@@ -704,6 +735,14 @@ if (!class_exists('PPCH_Settings')) {
             );
 
             add_settings_field(
+                'disable_quick_edit_completely',
+                __('Disable "Quick Edit" completely:', 'publishpress-checklists'),
+                [$this, 'settings_disable_quick_edit_completely_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
+            add_settings_field(
                 'openai_api_key',
                 __('OpenAI API Key:', 'publishpress-checklists'),
                 [$this, 'settings_openai_api_key_option'],
@@ -761,6 +800,27 @@ if (!class_exists('PPCH_Settings')) {
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
                     'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
+        }
+
+        /**
+         * Displays the checkbox to enable or disable quick edit
+         * 
+         *
+         * @param array
+         */
+        public function settings_disable_quick_edit_completely_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_disable_quick_edit_completely';
+            $value = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_completely]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                    'Disable quick edit completely except user who has "manage_capability".',
                     'publishpress-checklists'
                 );
             echo '</label>';
