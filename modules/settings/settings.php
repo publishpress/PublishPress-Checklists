@@ -122,16 +122,16 @@ if (!class_exists('PPCH_Settings')) {
 
         public function action_admin_enqueue_scripts()
         {
-if ($this->isWhitelistedSettingsView()) {
-if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
-wp_enqueue_script(
-'ppch-settings',
-$this->module_url . 'lib/settings.js',
-['jquery'],
-PPCH_VERSION
-);
-}   
-}
+            if ($this->isWhitelistedSettingsView()) {
+                if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
+                    wp_enqueue_script(
+                        'ppch-settings',
+                        $this->module_url . 'lib/settings.js',
+                        ['jquery'],
+                        PPCH_VERSION
+                    );
+                }   
+            }
         }
 
         /**
