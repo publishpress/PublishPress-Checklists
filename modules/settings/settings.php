@@ -96,6 +96,7 @@ if (!class_exists('PPCH_Settings')) {
             add_action('admin_print_scripts', [$this, 'action_admin_print_scripts']);
             add_action('admin_enqueue_scripts', [$this, 'action_admin_enqueue_scripts']);
             add_filter('publishpress_checklists_validate_module_settings', [$this, 'validate_module_settings'], 10, 2);
+            add_filter('publishpress_checklists_settings_tabs', [$this, 'settings_tab']);
         }
 
         /**
@@ -121,9 +122,16 @@ if (!class_exists('PPCH_Settings')) {
 
         public function action_admin_enqueue_scripts()
         {
-            if ($this->isWhitelistedSettingsView()) {
-                // Enqueue scripts
-            }
+if ($this->isWhitelistedSettingsView()) {
+if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
+wp_enqueue_script(
+'ppch-settings',
+$this->module_url . 'lib/settings.js',
+['jquery'],
+PPCH_VERSION
+);
+}   
+}
         }
 
         /**
@@ -706,25 +714,18 @@ if (!class_exists('PPCH_Settings')) {
         {
             /**
              *
-             * Post types
+             * General
              */
+
 
             add_settings_section(
                 $this->module->options_group_name . '_general',
-                __('General:', 'publishpress-checklists'),
-                '__return_false',
+                __return_false(),
+                [$this, 'settings_section_general'],
                 $this->module->options_group_name
             );
 
             do_action('publishpress_checklists_register_settings_before');
-
-            add_settings_field(
-                'post_types',
-                __('Add to these post types:', 'publishpress-checklists'),
-                [$this, 'settings_post_types_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
 
             add_settings_field(
                 'show_warning_icon_submit',
@@ -756,6 +757,25 @@ if (!class_exists('PPCH_Settings')) {
                 [$this, 'settings_openai_api_key_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
+            );
+
+            /**
+             * Post Types
+             */
+
+            add_settings_section(
+                $this->module->options_group_name . '_post_types',
+                __return_false(),
+                [$this, 'settings_section_post_types'],
+                $this->module->options_group_name
+            );
+
+            add_settings_field(
+                'post_types',
+                __('Add to these post types:', 'publishpress-checklists'),
+                [$this, 'settings_post_types_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_post_types'
             );
 
             do_action('publishpress_checklists_register_settings_after');
@@ -883,6 +903,34 @@ if (!class_exists('PPCH_Settings')) {
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             return $new_options;
+        }
+
+        /**
+         * @param array $tabs
+         *
+         * @return array
+         */
+        public function settings_tab($tabs)
+        {
+            $tabs = array_merge(
+                $tabs,
+                [
+                    '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
+                    '#ppch-tab-post-types'     => esc_html__('Post Types', 'publishpress-checklists'),
+                ]
+            );
+
+            return $tabs;
+        }
+
+        public function settings_section_general()
+        {
+            echo '<input type="hidden" id="ppch-tab-general" />';
+        }
+
+        public function settings_section_post_types()
+        {
+            echo '<input type="hidden" id="ppch-tab-post-types" />';
         }
     }
 }

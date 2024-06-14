@@ -294,6 +294,10 @@ h3.nav-tab-wrapper {
     height: 16px;
 }
 
+#publishpress-checklists-settings-tabs .nav-tab {
+    margin-bottom: -1px;
+}
+
 
 .ppch-advertisement-right-sidebar .upgrade-btn a {
     background: #FCB223;
@@ -381,6 +385,19 @@ h3.nav-tab-wrapper {
     border: 1px solid #655897;
 }
 
+.pp-columns-wrapper.pp-enable-sidebar .pp-column-left {
+	width: 75%;
+}
+
+.pp-columns-wrapper.pp-enable-sidebar .pp-column-right {
+	width: calc( 25% - 20px );
+	margin-left: 20px;
+}
+
+.pp-columns-wrapper.pp-enable-sidebar .pp-column-left,
+.pp-columns-wrapper.pp-enable-sidebar .pp-column-right {
+	float: left;
+}
 
 
 @media only screen and (min-width: 1075px) {
