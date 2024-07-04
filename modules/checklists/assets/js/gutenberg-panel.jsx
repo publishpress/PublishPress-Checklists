@@ -216,7 +216,7 @@ class PPChecklistsPanel extends Component {
                                         ) : null}
                                         <div className={`status-icon dashicons ${req.is_custom ? (req.status ? 'dashicons-yes' : '') : (req.status ? 'dashicons-yes' : 'dashicons-no')}`}></div>
                                         <div className="status-label">
-                                            {req.label}
+                                            <span className="req-label" dangerouslySetInnerHTML={{ __html: req.label }} />
                                             {req.rule === 'block' ? (
                                                 <span className="required">*</span>
                                             ) : null}
