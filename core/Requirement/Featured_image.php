@@ -21,6 +21,13 @@ class Featured_image extends Base_simple
     public $name = 'featured_image';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'images';
+
+    /**
      * @var int
      */
     public $position = 140;

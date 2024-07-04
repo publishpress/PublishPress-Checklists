@@ -23,6 +23,13 @@ class Required_categories extends Base_multiple
     public $name = 'required_categories';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'categories';
+
+    /**
      * @var int
      */
     public $position = 40;

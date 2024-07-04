@@ -22,6 +22,13 @@ class Approved_by extends Base_multiple implements Interface_required
      */
     public $name = 'approved_by';
 
+    /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'content';
+
     protected $field_name = 'roles';
 
     const POST_META_PREFIX = 'pp_checklist_custom_item';

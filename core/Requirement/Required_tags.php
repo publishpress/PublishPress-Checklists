@@ -23,6 +23,13 @@ class Required_tags extends Base_multiple
     public $name = 'required_tags';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'tags';
+
+    /**
      * @var int
      */
     public $position = 70;

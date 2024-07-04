@@ -41,6 +41,9 @@
         $('#pp-checklists-post-type-filter a').on('click', function (event) {
             event.preventDefault();
 
+            // Hide all requirements except the first one (title)
+            $('.pp-checklists-requirement-row:not(.ppch-title-group)').hide();
+
             var $target = $(event.toElement || event.target),
                 post_type = $target.attr('href').substring(1);
 
@@ -301,13 +304,59 @@
 
         /*----------  Custom items  ----------*/
         $('#pp-checklists-add-button').on('click', function (event) {
+            //hide all tabs contents, and show Custom tab
+            $('.pp-checklists-requirement-row').hide();
+            $('.ppch-custom-group').show();
+            
             var newId = uidGen(15);
 
             create_row(newId, '', '', get_current_post_type(), 'custom');
         });
 
+        // Hide all requirements except the first one (title)
+        $('.pp-checklists-requirement-row:not(.ppch-title-group)').hide();
+        
+
+        /**
+         * boxes editor tab switch
+         */
+        $(document).on('click', '.ppma-author-box-editor-tabs a', function (event) {
+
+            event.preventDefault();
+
+            var clicked_tab = $(this).attr('data-tab');
+
+            //remove active class from all tabs
+            $('.ppma-author-box-editor-tabs a').removeClass('active');
+            //add active class to current tab
+            $(this).addClass('active');
+
+            //hide all tabs contents
+            $('.pp-checklists-requirement-row').hide();
+
+            //generate export data if it's export tab
+            if (clicked_tab === 'export') {
+                generateEditorExportData();
+            }
+            //clear previously generated template to allow new changes
+            if (clicked_tab === 'generate_template') {
+                $('#template_action').val('');
+            }
+            //show this current tab contents
+            $('.ppch-' + clicked_tab + '-group').show();
+            //only show active tab content if it's profile tab
+            if (clicked_tab === 'profile_fields') {
+                toggleProfileFieldsActiveTab();
+            }
+        });
+
+
         /*----------  OpenAI items  ----------*/
         $('#pp-checklists-openai-promt-button').on('click', function (event) {
+            //hide all tabs contents, and show Custom tab
+            $('.pp-checklists-requirement-row').hide();
+            $('.ppch-custom-group').show();
+
             var newId = uidGen(15);
 
             create_row(newId, '', '', get_current_post_type(), 'openai');

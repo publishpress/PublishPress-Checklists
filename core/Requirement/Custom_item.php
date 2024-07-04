@@ -24,6 +24,7 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     protected $title;
 
+
     /**
      * The constructor. It adds the action to load the requirement.
      *
@@ -38,6 +39,7 @@ class Custom_item extends Base_multiple implements Interface_required
         $this->name      = trim((string)$name);
         $this->is_custom = true;
         $this->field_name = 'editable_by';
+        $this->group     = 'custom';
 
         parent::__construct($module, $post_type);
     }
