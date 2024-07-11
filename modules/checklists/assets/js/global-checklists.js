@@ -325,7 +325,7 @@
         
 
         /**
-         * boxes editor tab switch
+         * Requirements tab switch
          */
         $(document).on('click', '.pp-checklists-tabs a', function (event) {
 
