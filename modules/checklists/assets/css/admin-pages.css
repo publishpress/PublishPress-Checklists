@@ -380,12 +380,12 @@ textarea.pp-checklists-custom-item-title {
     justify-content: end;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul {
     padding-top: 0;
     margin-top: 0;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul li a {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a {
     margin: 0;
     padding: 10px;
     display: block;
@@ -395,30 +395,30 @@ textarea.pp-checklists-custom-item-title {
     border-bottom: 1px solid #eee;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul li {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li {
     margin: 0;
     padding: 0;
     display: block;
     position: relative;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul li a.active {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a.active {
     color: #555;
     position: relative;
     background-color: #eee;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul li a span {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span {
     margin-right: 0.618em;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs ul li a span.dashicons {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span.dashicons {
     margin-left: 0;
     font-size: 15px;
     vertical-align: sub;
 }
 
-.publishpress-author-box-editor .ppma-author-box-editor-tabs {
+.pp-checklists-tabs-wrapper .pp-checklists-tabs {
     min-width: 150px;
     margin: 0;
     line-height: 1em;
@@ -429,7 +429,7 @@ textarea.pp-checklists-custom-item-title {
     box-sizing: border-box;
 }
 
-.ppma-author-box-editor-fields {
+.pp-checklists-content-wrapper {
     width: 100%;
     min-width: 320px;
     padding: 10px;
@@ -438,34 +438,34 @@ textarea.pp-checklists-custom-item-title {
 }
 
 @media only screen and (max-width: 1270px) {
-    .ppma-author-boxes-editor-table input[type=text],
-    .ppma-author-boxes-editor-table input[type=number],
-    .ppma-author-boxes-editor-table select{
+    .pp-checklists-content-table input[type=text],
+    .pp-checklists-content-table input[type=number],
+    .pp-checklists-content-table select{
         width: 95%;
     }
-    .ppma-author-box-editor-fields {
+    .pp-checklists-content-wrapper {
         min-width: unset;
     }
 }
 
 @media only screen and (max-width: 1100px) {
-    .ppma-author-box-editor-fields {
+    .pp-checklists-content-wrapper {
         min-width: unset;
     }
-    .ppma-author-boxes-editor-table input[type=text],
-    .ppma-author-boxes-editor-table input[type=number],
-    .ppma-author-boxes-editor-table select,
-    .ppma-author-boxes-editor-table textarea,
+    .pp-checklists-content-table input[type=text],
+    .pp-checklists-content-table input[type=number],
+    .pp-checklists-content-table select,
+    .pp-checklists-content-table textarea,
     .ppma-boxes-editor-tab-content.ppma-profile_fields-tab.profile_header .input {
         max-width: 95% !important;
         width: 95% !important;
     }
-    .publishpress-author-box-editor {
+    .pp-checklists-tabs-wrapper {
         display: block;
      }
 }
 
-.publishpress-author-box-editor {
+.pp-checklists-tabs-wrapper {
     display: flex;
     background: #fff;
 }

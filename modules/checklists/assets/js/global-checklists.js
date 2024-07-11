@@ -98,7 +98,14 @@
             // Hide the requirements which are not for the current post type
             $('#pp-checklists-requirements tr.pp-checklists-requirement-row').hide();
             // Display the correct requirements
-            $('#pp-checklists-requirements tr[data-post-type="' + post_type + '"]').show();
+            $('#pp-checklists-requirements tr.ppch-title-group[data-post-type="' + post_type + '"]').show();
+
+            //remove active class from all tabs
+            $('.pp-checklists-tabs a').removeClass('active');
+
+            //add active class to title tab
+            $('.pp-checklists-tabs a[data-tab="title"]').addClass('active');
+            
             // Mark the filter as selected
             $('#pp-checklists-post-type-filter li.nav-tab-active').removeClass('nav-tab-active');
             $('#pp-checklists-post-type-filter li.post-type-' + post_type).addClass('nav-tab-active');
@@ -320,34 +327,24 @@
         /**
          * boxes editor tab switch
          */
-        $(document).on('click', '.ppma-author-box-editor-tabs a', function (event) {
+        $(document).on('click', '.pp-checklists-tabs a', function (event) {
 
             event.preventDefault();
 
             var clicked_tab = $(this).attr('data-tab');
 
             //remove active class from all tabs
-            $('.ppma-author-box-editor-tabs a').removeClass('active');
+            $('.pp-checklists-tabs a').removeClass('active');
+
             //add active class to current tab
             $(this).addClass('active');
 
             //hide all tabs contents
             $('.pp-checklists-requirement-row').hide();
 
-            //generate export data if it's export tab
-            if (clicked_tab === 'export') {
-                generateEditorExportData();
-            }
-            //clear previously generated template to allow new changes
-            if (clicked_tab === 'generate_template') {
-                $('#template_action').val('');
-            }
-            //show this current tab contents
-            $('.ppch-' + clicked_tab + '-group').show();
-            //only show active tab content if it's profile tab
-            if (clicked_tab === 'profile_fields') {
-                toggleProfileFieldsActiveTab();
-            }
+            // Show the current tab contents that also have the matching data-post-type attribute
+            $('.ppch-' + clicked_tab + '-group[data-post-type="' + get_current_post_type() + '"]').show();
+            
         });
 
 

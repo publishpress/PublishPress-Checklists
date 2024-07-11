@@ -15,8 +15,8 @@
 
 
     
-    <div class="pressshack-admin-wrapper publishpress-author-box-editor">
-            <div class="ppma-author-box-editor-tabs">
+    <div class="pressshack-admin-wrapper pp-checklists-tabs-wrapper">
+            <div class="pp-checklists-tabs">
                 <ul>
                     <?php
                     /**
@@ -68,8 +68,8 @@
                     } ?>
                 </ul>
             </div>
-            <div class="ppma-author-box-editor-fields wrapper-column">
-                <table class="form-table ppma-author-boxes-editor-table fixed wp-list-table pp-checklists-requirements-settings" id="pp-checklists-requirements" role="presentation">
+            <div class="pp-checklists-content-wrapper wrapper-column">
+                <table class="form-table pp-checklists-content-table fixed wp-list-table pp-checklists-requirements-settings" id="pp-checklists-requirements" role="presentation">
                     <thead>
                         <tr>
                             <th><?php echo esc_html($context['lang']['description']); ?></th>
