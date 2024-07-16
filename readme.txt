@@ -311,6 +311,14 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [2.11.0] - 15 July 2024 =
+
+* Added: Added a sidebar feature #562
+* Added: Added an option to disable quick edit #665
+* Added: Added post type validation #403
+* Fixed: Issue with menu being empty on first install #552
+* Fixed: Default text color for OpenAI prompts #580
+* Update: Updated ES, FR, and IT translations #652
 
 = [2.10.4] - 04 April 2024 =
 

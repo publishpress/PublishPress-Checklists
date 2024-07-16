@@ -821,13 +821,13 @@ if (!class_exists('PPCH_Settings')) {
         public function settings_disable_quick_edit_publish_option($args = [])
         {
             $id    = $this->module->options_group_name . '_disable_quick_edit_publish';
-            $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
+            $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'no';
 
             echo '<label for="' . esc_attr($id) . '">';
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
+                    'Disabling the "Status" option is recommended because it can be used to avoid using the Checklists requirements.',
                     'publishpress-checklists'
                 );
             echo '</label>';
@@ -848,7 +848,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_completely]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'Disable quick edit completely except user who has "manage_capability".',
+                    'This will disable "Quick Edit" for all users except those with the "manage_options" capability.',
                     'publishpress-checklists'
                 );
             echo '</label>';
@@ -915,8 +915,8 @@ if (!class_exists('PPCH_Settings')) {
             $tabs = array_merge(
                 $tabs,
                 [
+                    '#ppch-tab-post-types'  => esc_html__('Post Types', 'publishpress-checklists'),
                     '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
-                    '#ppch-tab-post-types'     => esc_html__('Post Types', 'publishpress-checklists'),
                 ]
             );
 
