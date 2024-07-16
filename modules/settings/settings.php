@@ -91,10 +91,12 @@ if (!class_exists('PPCH_Settings')) {
             add_action('publishpress_checklists_admin_submenu', [$this, 'action_admin_submenu'], 990);
 
             add_action('admin_head-edit.php', [$this, 'remove_quick_edit_status_row']);
+            add_action('admin_head-edit.php', [$this, 'remove_quick_edit_row']);
             add_action('admin_print_styles', [$this, 'action_admin_print_styles']);
             add_action('admin_print_scripts', [$this, 'action_admin_print_scripts']);
             add_action('admin_enqueue_scripts', [$this, 'action_admin_enqueue_scripts']);
             add_filter('publishpress_checklists_validate_module_settings', [$this, 'validate_module_settings'], 10, 2);
+            add_filter('publishpress_checklists_settings_tabs', [$this, 'settings_tab']);
         }
 
         /**
@@ -121,7 +123,14 @@ if (!class_exists('PPCH_Settings')) {
         public function action_admin_enqueue_scripts()
         {
             if ($this->isWhitelistedSettingsView()) {
-                // Enqueue scripts
+                if (isset($_GET['page']) && $_GET['page'] === 'ppch-settings') {
+                    wp_enqueue_script(
+                        'ppch-settings',
+                        $this->module_url . 'lib/settings.js',
+                        ['jquery'],
+                        PPCH_VERSION
+                    );
+                }   
             }
         }
 
@@ -170,6 +179,32 @@ if (!class_exists('PPCH_Settings')) {
         }
 
         /**
+         * Remove quick edit option.
+         */
+        public function remove_quick_edit_row()
+        {
+            // If the current user can manage options, don't remove Quick Edit
+            if (current_user_can('manage_options')) {
+                return;
+            }
+
+            $status = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
+            if ($status == 'yes') :
+                $post_type = (!empty($_GET['post_type'])) ? sanitize_text_field($_GET['post_type']) : 'post';
+                $post_types = array_keys($this->get_post_types());
+                if (in_array($post_type, $post_types)) :
+                    ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            $('span.inline').remove();
+                        });
+                    </script>
+                    <?php
+                endif;
+            endif;
+        }
+
+        /**
          * Extra data we need on the page for transitions, etc.
          *
          * @since 0.7
@@ -189,8 +224,12 @@ if (!class_exists('PPCH_Settings')) {
         public function print_default_settings()
         {
             $legacyPlugin = Factory::getLegacyPlugin();
+
             ?>
-            <form class="basic-settings"
+
+            <div class="pp-columns-wrapper<?php echo (!Util::isChecklistsProActive()) ? ' pp-enable-sidebar' : '' ?>">
+                <div class="pp-column-left">
+                    <form class="basic-settings"
                   action="<?php echo esc_url(menu_page_url($this->module->settings_slug, false)); ?>" method="post">
 
                 <?php
@@ -294,10 +333,14 @@ if (!class_exists('PPCH_Settings')) {
                 wp_nonce_field('edit-publishpress-settings');
 
                 submit_button(null, 'primary', 'submit', false); ?>
-            </form>
-            <?php
-
-            ?>
+                </form>
+                </div><!-- .pp-column-left -->
+                <?php if (!Util::isChecklistsProActive()) :  ?>
+                    <div class="pp-column-right">
+                        <?php Util::ppch_pro_sidebar(); ?>
+                    </div><!-- .pp-column-right -->
+                 <?php endif; ?>
+            </div><!-- .pp-columns-wrapper -->
             <div class="publishpress-modules">
                 <?php $this->print_modules(); ?>
             </div>
@@ -567,6 +610,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset ($new_options['disable_quick_edit_completely'])) {
+                $new_options['disable_quick_edit_completely'] = Base_requirement::VALUE_NO;
+            }
+
             return $new_options;
         }
 
@@ -667,25 +714,18 @@ if (!class_exists('PPCH_Settings')) {
         {
             /**
              *
-             * Post types
+             * General
              */
+
 
             add_settings_section(
                 $this->module->options_group_name . '_general',
-                __('General:', 'publishpress-checklists'),
-                '__return_false',
+                __return_false(),
+                [$this, 'settings_section_general'],
                 $this->module->options_group_name
             );
 
             do_action('publishpress_checklists_register_settings_before');
-
-            add_settings_field(
-                'post_types',
-                __('Add to these post types:', 'publishpress-checklists'),
-                [$this, 'settings_post_types_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
 
             add_settings_field(
                 'show_warning_icon_submit',
@@ -704,11 +744,38 @@ if (!class_exists('PPCH_Settings')) {
             );
 
             add_settings_field(
+                'disable_quick_edit_completely',
+                __('Disable "Quick Edit" completely:', 'publishpress-checklists'),
+                [$this, 'settings_disable_quick_edit_completely_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
+            add_settings_field(
                 'openai_api_key',
                 __('OpenAI API Key:', 'publishpress-checklists'),
                 [$this, 'settings_openai_api_key_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
+            );
+
+            /**
+             * Post Types
+             */
+
+            add_settings_section(
+                $this->module->options_group_name . '_post_types',
+                __return_false(),
+                [$this, 'settings_section_post_types'],
+                $this->module->options_group_name
+            );
+
+            add_settings_field(
+                'post_types',
+                __('Add to these post types:', 'publishpress-checklists'),
+                [$this, 'settings_post_types_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_post_types'
             );
 
             do_action('publishpress_checklists_register_settings_after');
@@ -760,7 +827,28 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'If the "Status" option is enabled, it can be used to avoid using the Checklists requirements.',
+                    'Disabling the "Status" option is recommended because it can be used to avoid using the Checklists requirements.',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
+        }
+
+        /**
+         * Displays the checkbox to enable or disable quick edit
+         * 
+         *
+         * @param array
+         */
+        public function settings_disable_quick_edit_completely_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_disable_quick_edit_completely';
+            $value = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_completely]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                    'This will disable "Quick Edit" for all users except those with the "manage_options" capability.',
                     'publishpress-checklists'
                 );
             echo '</label>';
@@ -815,6 +903,34 @@ if (!class_exists('PPCH_Settings')) {
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             return $new_options;
+        }
+
+        /**
+         * @param array $tabs
+         *
+         * @return array
+         */
+        public function settings_tab($tabs)
+        {
+            $tabs = array_merge(
+                $tabs,
+                [
+                    '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
+                    '#ppch-tab-post-types'     => esc_html__('Post Types', 'publishpress-checklists'),
+                ]
+            );
+
+            return $tabs;
+        }
+
+        public function settings_section_general()
+        {
+            echo '<input type="hidden" id="ppch-tab-general" />';
+        }
+
+        public function settings_section_post_types()
+        {
+            echo '<input type="hidden" id="ppch-tab-post-types" />';
         }
     }
 }

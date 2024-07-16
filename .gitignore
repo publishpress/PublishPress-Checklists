@@ -1,20 +1,27 @@
-.svn
+# Version Control
 .git
-.DS_Store
-wpcom-helper.php
+.svn
 
-/local.sh
-node_modules
-
-/.properties.ini
-
-/packages
-/vendor
+# IDE
 .idea
+
+# Build Artifacts
 /dist
-.env.testing
-builder.yml
 
-/lib/**/.git
+# Dependencies
+/node_modules
+/vendor
 
+# Cache
+/cache/*
+
+# Miscellaneous
+.DS_Store
+.properties.ini
+wpcom-helper.php
 CONTRIBUTING.md
+builder.yml
+.env.testing
+/local.sh
+/packages
+/lib/**/.git

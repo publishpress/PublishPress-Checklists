@@ -70,7 +70,7 @@ class Custom_item extends Base_multiple implements Interface_required
             $name,
             esc_attr($this->get_title()),
             esc_attr($this->name),
-            esc_html__('Enter name of custom task', 'publishpres-checklists')
+            esc_html__('Enter name of custom task', 'publishpress-checklists')
         );
 
         $html .= sprintf(
