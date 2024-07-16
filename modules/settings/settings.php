@@ -821,7 +821,7 @@ if (!class_exists('PPCH_Settings')) {
         public function settings_disable_quick_edit_publish_option($args = [])
         {
             $id    = $this->module->options_group_name . '_disable_quick_edit_publish';
-            $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'yes';
+            $value = isset($this->module->options->disable_quick_edit_publish) ? $this->module->options->disable_quick_edit_publish : 'no';
 
             echo '<label for="' . esc_attr($id) . '">';
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_publish]" '
@@ -915,8 +915,8 @@ if (!class_exists('PPCH_Settings')) {
             $tabs = array_merge(
                 $tabs,
                 [
+                    '#ppch-tab-post-types'  => esc_html__('Post Types', 'publishpress-checklists'),
                     '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
-                    '#ppch-tab-post-types'     => esc_html__('Post Types', 'publishpress-checklists'),
                 ]
             );
 
