@@ -131,6 +131,8 @@ if (!defined('PPCH_LOADED')) {
                 $role->add_cap('manage_checklists');
             }
         }
+
+        update_option('ppch_activated', true);
 	});
 
     add_action('plugins_loaded', function () {
