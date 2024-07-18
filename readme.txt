@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured image, alt tag, featured images, alt tags, checklists, broken links, chatgpt, featured image size, yoast seo, user approval, spell checker, spelling, grammar
 Requires at least: 5.5
 Requires PHP: 7.2.5
-Tested up to: 6.5
-Stable tag: 2.10.4
+Tested up to: 6.6
+Stable tag: 2.11.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,11 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.11.1] - 18 July 2024 =
+
+* Fixed: Fixed compatibility with wordPress 6.6 #697
+* Fixed: Quick edit settings are now disabled by default #689
 
 = [2.11.0] - 15 July 2024 =
 
