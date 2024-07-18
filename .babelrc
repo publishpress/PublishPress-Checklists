@@ -1,11 +1,7 @@
 {
   "presets": [
-    [
-      "@wordpress/babel-preset-default"
-    ],
-    [
-      "minify"
-    ]
+    "@wordpress/babel-preset-default",
+    "minify"
   ],
   "plugins": [
     [
@@ -14,7 +10,13 @@
         "pragma": "wp.element.createElement"
       }
     ],
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ],
   "sourceMaps": "inline"
 }

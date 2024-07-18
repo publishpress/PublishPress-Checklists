@@ -842,7 +842,7 @@ if (!class_exists('PPCH_Settings')) {
         public function settings_disable_quick_edit_completely_option($args = [])
         {
             $id    = $this->module->options_group_name . '_disable_quick_edit_completely';
-            $value = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'yes';
+            $value = isset($this->module->options->disable_quick_edit_completely) ? $this->module->options->disable_quick_edit_completely : 'no';
 
             echo '<label for="' . esc_attr($id) . '">';
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_quick_edit_completely]" '
