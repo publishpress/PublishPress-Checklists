@@ -72,11 +72,14 @@ class PPChecklistsPanel extends Component {
             options = options || {};
 
             let publishing_post = false;
-                
+            const mapStatusPublishAllowed = {
+                publish: true, // already published post
+                future: true, // scheduled post
+            }
             if (options.isAutosave || options.isPreview) {
                 publishing_post = false
             } else if (this.currentStatus !== '') {
-                publishing_post = (this.currentStatus !== 'publish') ? false : true;
+                publishing_post = mapStatusPublishAllowed[this.currentStatus] ?? false;
             } else {
                 if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
                     publishing_post = false;
