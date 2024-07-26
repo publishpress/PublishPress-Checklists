@@ -39,6 +39,28 @@ class Required_categories extends Base_multiple
      */
     private $DELIMITER = '__';
 
+    public function __construct($module, $post_type)
+    {
+        parent::__construct($module, $post_type);
+        $this->init_hooks();
+    }
+
+    /**
+     * Initialize the hooks for the requirement
+     *
+     * @return void
+     */
+    public function init_hooks() {
+        // Check if the hooks were already initialized
+        if (isset($this->hooks_initialized) && $this->hooks_initialized) return;
+
+        // Add the AJAX action to get the list of categories
+        add_action('wp_ajax_pp_checklists_required_category', [$this, 'get_list_category_ajax']);
+
+        // Set the initialization flag to true
+        $this->hooks_initialized = true;
+    }
+
     /**
      * Initialize the language strings for the instance
      *
@@ -64,6 +86,129 @@ class Required_categories extends Base_multiple
         $option_ids = $this->category_parser($option_value, 0);
 
         return !empty(array_intersect($option_ids, $categories));
+    }
+
+    /**
+     * Get selected values from the settings
+     *
+     * @return array
+     */
+    public function get_selected_values()
+    {
+        // Option names
+        $option_name_multiple = $this->name . '_' . $this->field_name;
+        $option_value = array();
+        if (isset($this->module->options->{$option_name_multiple}[$this->post_type])) {
+            $option_value = $this->module->options->{$option_name_multiple}[$this->post_type];
+        }
+        $selected_categories = array();
+        foreach ($option_value as $category_str) {
+            [$category_id, $category_name] = explode($this->DELIMITER, $category_str);
+            $selected_categories[] = $category_id;
+        }
+
+        return $selected_categories;
+    }
+
+    /**
+     * Get the list of categories
+     *
+     * @param array $args
+     * @return WP_Term[]
+     */
+    public function get_list_categories($args = array('page' => 1, 'per_page' => 10, 'q' => ''))
+    {
+        // Get selected categories from the settings
+        $selected_categories = $this->get_selected_values();
+
+        // Retrieve selected categories only on the first page
+        $categories_selected = array();
+        if($args['page'] === 1) {
+            $args_selected = array(
+                'orderby'    => 'name',
+                'order'      => 'ASC',
+                'hide_empty' => 0,
+                'include'    => $selected_categories,
+                'search'     => $args['q'],
+            );
+            $categories_selected = $this->get_categories_hierarchical($args_selected);
+        }
+
+        // Retrieve categories with a limit of 10 rows
+        $args_limited = array(
+            'type'         => 'post',
+            'hide_empty'   => 0,
+            'hierarchical' => 1,
+            'taxonomy'     => 'category',
+            'pad_counts'   => false,
+            'orderby'      => 'name',
+            'order'        => 'ASC',
+            'hide_empty'   => 0,
+            'search'       => $args['q'],
+            'number'       => $args['per_page'],
+            'offset'       => ($args['page'] - 1) * $args['per_page']
+        );
+        $categories_limited = $this->get_categories_hierarchical($args_limited);
+
+         // Merge the two arrays
+        $categories = array_merge($categories_limited, $categories_selected);
+
+        // Remove duplicates based on term_id
+        $categories = array_values(array_reduce($categories, function ($carry, $item) {
+            if (!isset($carry[$item->term_id])) {
+                $carry[$item->term_id] = $item;
+            }
+            return $carry;
+        }, []));
+
+        // Sort the array by name
+        usort($categories, function ($a, $b) {
+            return strcasecmp($a->name, $b->name);
+        });
+
+        return $categories;
+    }
+
+    /**
+     * Get the list of categories via AJAX
+     *
+     * @return void
+     */
+    public function get_list_category_ajax()
+    {
+        // Check if the request is valid
+        check_ajax_referer('pp-checklists-rules', 'nonce');
+        
+        // Get the search query and page number from the request
+        $search = isset($_POST['q']) ? sanitize_text_field($_POST['q']) : '';
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $per_page = 10;
+        
+        // Get the categories
+        $categories = $this->get_list_categories(['page' => $page ,'per_page' => $per_page, 'q' => $search]);
+        $results = array();
+
+        foreach ($categories as $category) {
+            $results[] = array(
+                'id'   => $category->term_id . $this->DELIMITER . $category->name,
+                'text' => $category->name,
+            );
+            if(isset($category->children)) {
+                foreach ($category->children as $child) {
+                    $results[] = array(
+                        'id'   => $child->term_id . $this->DELIMITER . $child->name,
+                        'text' => '— ' . $child->name,
+                    );
+                }
+            }
+        }
+
+        // Check if there are more categories
+        $total_categories = wp_count_terms('category', array('search' => $search, 'hide_empty' => 0));
+        $has_next = ($page * $per_page) < $total_categories;
+    
+        wp_send_json_success(['items' => $results, 'has_next' => $has_next]);
+        wp_die();
     }
 
     /**
@@ -99,7 +244,7 @@ class Required_categories extends Base_multiple
             $labels[$category->term_id . $this->DELIMITER . $category->name] = $category->name;
             if(isset($category->children)) {
                 foreach ($category->children as $child) {
-                    $labels[$child->term_id . $this->DELIMITER . $child->name] = "- {$child->name}";
+                    $labels[$child->term_id . $this->DELIMITER . $child->name] = "— {$child->name}";
                 }
             }
         }
@@ -114,11 +259,7 @@ class Required_categories extends Base_multiple
      */
     public function get_setting_drop_down_labels()
     {
-        $categories = $this->get_categories_hierarchical(array(
-            'orderby'      => 'name',
-            'order'        => 'ASC',
-            'hide_empty'   => 0,
-        ));
+        $categories = $this->get_list_categories();
 
         return $this->transform_categories($categories);
     }
@@ -195,5 +336,10 @@ class Required_categories extends Base_multiple
         $requirements[$this->name]['label'] = sprintf($this->lang['label'], $required_category_names);
 
         return $requirements;
+    }
+
+    public function get_setting_field_html($css_class = '')
+    {
+        return parent::get_setting_field_html('pp-checklists-full-width');
     }
 }
