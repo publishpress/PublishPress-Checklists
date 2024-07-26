@@ -453,6 +453,9 @@ if (!class_exists('PPCH_Checklists')) {
             add_filter('publishpress_checklists_rules_list', [$this, 'filterRulesList']);
 
             add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsRule'], 1000);
+            
+            // Redirect on plugin activation
+            add_action('admin_init', [$this, 'redirect_on_activate'], 2000);
         }
 
         /**
@@ -1207,5 +1210,19 @@ if (!class_exists('PPCH_Checklists')) {
             return $new_requirements_array;
         }
         
+
+        /**
+         * Redirect user on plugin activation
+         *
+         * @return void
+         */
+        public function redirect_on_activate()
+        {
+            if (get_option('ppch_activated')) {
+                delete_option('ppch_activated');
+                wp_redirect(admin_url("admin.php?page=ppch-checklists"));
+                exit;
+              }
+        }
     }
 }
