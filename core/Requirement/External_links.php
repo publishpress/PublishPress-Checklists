@@ -21,6 +21,13 @@ class External_links extends Base_counter
      */
     public $name = 'external_links';
 
+     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'links';
+
     /**
      * @var int
      */
