@@ -23,7 +23,7 @@ class Featured_image_alt extends Base_simple
     /**
      * @var int
      */
-    public $position = 110;
+    public $position = 150;
 
     /**
      * Initialize the language strings for the instance
