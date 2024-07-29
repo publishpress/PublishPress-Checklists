@@ -1047,6 +1047,16 @@ if (!class_exists('PPCH_Checklists')) {
                         PPCH_VERSION,
                         true
                     );
+                    wp_localize_script(
+                        'pp-checklists-panel-gutenberg',
+                        'i18n',
+                        array(
+                            'completeRequirementMessage' => __("Please complete the required(*) checklists task.", "publishpress-checklists"),
+                            'checklistLabel' => __("Checklists", "publishpress-checklists"),
+                            'noTaskLabel' => __("You don't have to complete any Checklist tasks.", "publishpress-checklists"),
+                            'required' => __("required", "publishpress-checklists"),
+                        )
+                    );
                 }
             }
         }

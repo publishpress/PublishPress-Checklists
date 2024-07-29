@@ -94,7 +94,7 @@ class PPChecklistsPanel extends Component {
                 return coreSavePost(options);
             } else {
                 wp.data.dispatch('core/edit-post').closePublishSidebar();
-                notices.createErrorNotice(__("Please complete the required(*) checklists task.", "publishpress-checklists"), {
+                notices.createErrorNotice(i18n.completeRequirementMessage, {
                     id: 'publishpress-checklists-validation',
                     isDismissible: true
                 });
@@ -181,7 +181,7 @@ class PPChecklistsPanel extends Component {
                     target="checklists-sidebar"
                     icon={<CheckListIcon />}
                 >
-                    {__("Checklists", "publishpress-checklists")}
+                    {i18n.checklistLabel}
                 </PluginSidebarMoreMenuItem>
                 <PluginSidebar
                     name="checklists-sidebar"
@@ -192,7 +192,7 @@ class PPChecklistsPanel extends Component {
                             {requirements.length === 0 ? (
                                 <p>
                                     <em>
-                                        {__("You don't have to complete any Checklist tasks.", "publishpress-checklists")}
+                                        {i18n.noTaskLabel}
                                     </em>
                                 </p>
                             ) : (
@@ -239,7 +239,7 @@ class PPChecklistsPanel extends Component {
                         </ul>
                         {showRequiredLegend ? (
                             <em>
-                                (*) {__("required", "publishpress-checklists")}
+                                (*) {i18n.required}
                             </em>
                         ) : null}
                     </div>
