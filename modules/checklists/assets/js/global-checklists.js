@@ -41,6 +41,9 @@
         $('#pp-checklists-post-type-filter a').on('click', function (event) {
             event.preventDefault();
 
+            // Hide all requirements except the first one (title)
+            $('.pp-checklists-requirement-row:not(.ppch-title-group)').hide();
+
             var $target = $(event.toElement || event.target),
                 post_type = $target.attr('href').substring(1);
 
@@ -95,7 +98,14 @@
             // Hide the requirements which are not for the current post type
             $('#pp-checklists-requirements tr.pp-checklists-requirement-row').hide();
             // Display the correct requirements
-            $('#pp-checklists-requirements tr[data-post-type="' + post_type + '"]').show();
+            $('#pp-checklists-requirements tr.ppch-title-group[data-post-type="' + post_type + '"]').show();
+
+            //remove active class from all tabs
+            $('.pp-checklists-tabs a').removeClass('active');
+
+            //add active class to title tab
+            $('.pp-checklists-tabs a[data-tab="title"]').addClass('active');
+            
             // Mark the filter as selected
             $('#pp-checklists-post-type-filter li.nav-tab-active').removeClass('nav-tab-active');
             $('#pp-checklists-post-type-filter li.post-type-' + post_type).addClass('nav-tab-active');
@@ -301,13 +311,49 @@
 
         /*----------  Custom items  ----------*/
         $('#pp-checklists-add-button').on('click', function (event) {
+            //hide all tabs contents, and show Custom tab
+            $('.pp-checklists-requirement-row').hide();
+            $('.ppch-custom-group').show();
+            
             var newId = uidGen(15);
 
             create_row(newId, '', '', get_current_post_type(), 'custom');
         });
 
+        // Hide all requirements except the first one (title)
+        $('.pp-checklists-requirement-row:not(.ppch-title-group)').hide();
+        
+
+        /**
+         * Requirements tab switch
+         */
+        $(document).on('click', '.pp-checklists-tabs a', function (event) {
+
+            event.preventDefault();
+
+            var clicked_tab = $(this).attr('data-tab');
+
+            //remove active class from all tabs
+            $('.pp-checklists-tabs a').removeClass('active');
+
+            //add active class to current tab
+            $(this).addClass('active');
+
+            //hide all tabs contents
+            $('.pp-checklists-requirement-row').hide();
+
+            // Show the current tab contents that also have the matching data-post-type attribute
+            $('.ppch-' + clicked_tab + '-group[data-post-type="' + get_current_post_type() + '"]').show();
+            
+        });
+
+
         /*----------  OpenAI items  ----------*/
         $('#pp-checklists-openai-promt-button').on('click', function (event) {
+            //hide all tabs contents, and show Custom tab
+            $('.pp-checklists-requirement-row').hide();
+            $('.ppch-custom-group').show();
+
             var newId = uidGen(15);
 
             create_row(newId, '', '', get_current_post_type(), 'openai');

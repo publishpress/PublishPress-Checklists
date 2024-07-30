@@ -21,6 +21,13 @@ class Featured_image_alt extends Base_simple
     public $name = 'featured_image_alt';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'images';
+
+    /**
      * @var int
      */
     public $position = 150;

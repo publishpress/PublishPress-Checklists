@@ -45,6 +45,7 @@ class Openai_item extends Base_simple implements Interface_required
         $this->name      = trim((string)$name);
         $this->require_button = true;
         $this->is_custom = false;
+        $this->group     = 'custom';
 
         parent::__construct($module, $post_type);
 

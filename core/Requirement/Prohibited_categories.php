@@ -22,6 +22,13 @@ class Prohibited_categories extends Base_multiple
      */
     public $name = 'prohibited_categories';
 
+     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'categories';
+
     /**
      * @var int
      */

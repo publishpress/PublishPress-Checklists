@@ -20,6 +20,13 @@ class Filled_excerpt extends Base_counter
      */
     public $name = 'filled_excerpt';
 
+     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'content';
+
     /**
      * @var int
      */

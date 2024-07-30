@@ -22,6 +22,13 @@ class Image_alt extends Base_simple
     public $name = 'image_alt';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'images';
+
+    /**
      * @var int
      */
     public $position = 130;

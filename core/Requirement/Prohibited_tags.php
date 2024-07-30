@@ -23,6 +23,13 @@ class Prohibited_tags extends Base_multiple
     public $name = 'prohibited_tags';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'tags';
+
+    /**
      * @var int
      */
     public $position = 80;

@@ -379,3 +379,93 @@ textarea.pp-checklists-custom-item-title {
     display: flex;
     justify-content: end;
 }
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a {
+    margin: 0;
+    padding: 10px;
+    display: block;
+    box-shadow: none;
+    text-decoration: none;
+    line-height: 20px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a.active {
+    color: #555;
+    position: relative;
+    background-color: #eee;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span {
+    margin-right: 0.618em;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span.dashicons {
+    margin-left: 0;
+    font-size: 15px;
+    vertical-align: sub;
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs {
+    min-width: 150px;
+    margin: 0;
+    line-height: 1em;
+    padding: 0 0 10px;
+    position: relative;
+    background-color: #fafafa;
+    border-right: 1px solid #eee;
+    box-sizing: border-box;
+}
+
+.pp-checklists-content-wrapper {
+    width: 100%;
+    min-width: 320px;
+    padding: 10px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+@media only screen and (max-width: 1270px) {
+    .pp-checklists-content-table input[type=text],
+    .pp-checklists-content-table input[type=number],
+    .pp-checklists-content-table select{
+        width: 95%;
+    }
+    .pp-checklists-content-wrapper {
+        min-width: unset;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .pp-checklists-content-wrapper {
+        min-width: unset;
+    }
+    .pp-checklists-content-table input[type=text],
+    .pp-checklists-content-table input[type=number],
+    .pp-checklists-content-table select,
+    .pp-checklists-content-table textarea,
+    .ppma-boxes-editor-tab-content.ppma-profile_fields-tab.profile_header .input {
+        max-width: 95% !important;
+        width: 95% !important;
+    }
+    .pp-checklists-tabs-wrapper {
+        display: block;
+     }
+}
+
+.pp-checklists-tabs-wrapper {
+    display: flex;
+    background: #fff;
+}
