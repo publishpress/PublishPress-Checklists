@@ -26,6 +26,13 @@ class Tags_count extends Base_counter
     public $name = 'tags_count';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'tags';
+
+    /**
      * @var int
      */
     public $position = 60;

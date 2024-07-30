@@ -21,6 +21,13 @@ class Title_count extends Base_counter
      */
     public $name = 'title_count';
 
+    /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'title';
+
     public $position = 10;
 
     /**

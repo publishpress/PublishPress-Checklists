@@ -72,11 +72,14 @@ class PPChecklistsPanel extends Component {
             options = options || {};
 
             let publishing_post = false;
-                
+            const mapStatusPublishAllowed = {
+                publish: true, // already published post
+                future: true, // scheduled post
+            }
             if (options.isAutosave || options.isPreview) {
                 publishing_post = false
             } else if (this.currentStatus !== '') {
-                publishing_post = (this.currentStatus !== 'publish') ? false : true;
+                publishing_post = mapStatusPublishAllowed[this.currentStatus] ?? false;
             } else {
                 if (!wp.data.select('core/edit-post').isPublishSidebarOpened() && wp.data.select('core/editor').getEditedPostAttribute('status') !== 'publish' && wp.data.select('core/editor').getCurrentPost()['status'] !== 'publish') {
                     publishing_post = false;
@@ -91,7 +94,7 @@ class PPChecklistsPanel extends Component {
                 return coreSavePost(options);
             } else {
                 wp.data.dispatch('core/edit-post').closePublishSidebar();
-                notices.createErrorNotice(__("Please complete the required(*) checklists task.", "publishpress-checklists"), {
+                notices.createErrorNotice(i18n.completeRequirementMessage, {
                     id: 'publishpress-checklists-validation',
                     isDismissible: true
                 });
@@ -178,7 +181,7 @@ class PPChecklistsPanel extends Component {
                     target="checklists-sidebar"
                     icon={<CheckListIcon />}
                 >
-                    {__("Checklists", "publishpress-checklists")}
+                    {i18n.checklistLabel}
                 </PluginSidebarMoreMenuItem>
                 <PluginSidebar
                     name="checklists-sidebar"
@@ -189,7 +192,7 @@ class PPChecklistsPanel extends Component {
                             {requirements.length === 0 ? (
                                 <p>
                                     <em>
-                                        {__("You don't have to complete any Checklist tasks.", "publishpress-checklists")}
+                                        {i18n.noTaskLabel}
                                     </em>
                                 </p>
                             ) : (
@@ -236,7 +239,7 @@ class PPChecklistsPanel extends Component {
                         </ul>
                         {showRequiredLegend ? (
                             <em>
-                                (*) {__("required", "publishpress-checklists")}
+                                (*) {i18n.required}
                             </em>
                         ) : null}
                     </div>

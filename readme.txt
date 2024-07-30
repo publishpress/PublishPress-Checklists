@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.11.1
+Stable tag: 2.12.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,20 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.12.0] - 31 July 2024 =
+
+* Added: Tabs for different types of requirements #672
+* Fixed: Required and prohibited tags freeze webpage because of dropdown #671
+* Fixed: External link missing from checklists #710
+* Fixed: String not translated in Italian #638
+* Fixed: Checklists could be bypassed if scheduled #666
+* Fixed: Redirect to checklists screen on new activation #669
+* Updated: Composer dependencies
+* Updated: Position for feature image alt
+* Updated: Move banner to lib/vendor
+* Updated: Full-width CSS for better layout
+* Implemented: Cache mechanism for improved performance
 
 = [2.11.1] - 18 July 2024 =
 

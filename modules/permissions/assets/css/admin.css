@@ -10,3 +10,7 @@
 .pp-checklists-can-ignore {
     min-width: 250px;
 }
+
+.pp-checklists-full-width {
+    width: 100% !important;
+}

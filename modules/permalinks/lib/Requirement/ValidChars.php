@@ -22,6 +22,13 @@ class ValidChars extends Base_simple
      */
     public $name = 'permalink_valid_chars';
 
+     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'links';
+
     /**
      * @var int
      */
