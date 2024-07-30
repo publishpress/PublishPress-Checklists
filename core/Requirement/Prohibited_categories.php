@@ -93,7 +93,7 @@ class Prohibited_categories extends Base_multiple
      *
      * @return array
      */
-    public function get_selected_values()
+    private function get_selected_values()
     {
         // Option names
         $option_name_multiple = $this->name . '_' . $this->field_name;
@@ -116,7 +116,7 @@ class Prohibited_categories extends Base_multiple
      * @param array $args
      * @return WP_Term[]
      */
-    public function get_list_categories($args = array('page' => 1, 'per_page' => 10, 'q' => ''))
+    private function get_list_categories($args = array('page' => 1, 'per_page' => 10, 'q' => ''))
     {
         // Get selected categories from the settings
         $selected_categories = $this->get_selected_values();
@@ -143,7 +143,6 @@ class Prohibited_categories extends Base_multiple
             'pad_counts'   => false,
             'orderby'      => 'name',
             'order'        => 'ASC',
-            'hide_empty'   => 0,
             'search'       => $args['q'],
             'number'       => $args['per_page'],
             'offset'       => ($args['page'] - 1) * $args['per_page']
@@ -167,6 +166,25 @@ class Prohibited_categories extends Base_multiple
         });
 
         return $categories;
+    }
+
+    /**
+     * Get the total count of categories
+     *
+     * @param array $args
+     * @return int
+     */
+    private function get_total_count($args = array('search' => '', 'hide_empty' => 0)) {
+        $args_key = base64_encode($args['search']);
+        $cache_key = "total_prohib_category_count_${args_key}";
+
+        $total_categories = get_transient($cache_key);
+        if ($total_categories === false) {
+            $total_categories = wp_count_terms('category', $args);
+            set_transient($cache_key, $total_categories, HOUR_IN_SECONDS);
+        }
+        
+        return $total_categories;
     }
 
     /**
@@ -204,7 +222,7 @@ class Prohibited_categories extends Base_multiple
         }
 
         // Check if there are more categories
-        $total_categories = wp_count_terms('category', array('search' => $search, 'hide_empty' => 0));
+        $total_categories = $this->get_total_count(array('search' => $search, 'hide_empty' => 0));
         $has_next = ($page * $per_page) < $total_categories;
     
         wp_send_json_success(['items' => $results, 'has_next' => $has_next]);
@@ -221,10 +239,18 @@ class Prohibited_categories extends Base_multiple
     {
         if( !isset( $args[ 'parent' ] ) ) $args[ 'parent' ] = 0;
 
-        $categories = get_categories( $args );
-        foreach( $categories as $key => $category ) {
-            $args['parent'] = $category->term_id;
-            $categories[$key]->children = $this->get_categories_hierarchical($args);
+        $cache_key = md5('prohib_category' . json_encode($args));
+        $categories = get_transient($cache_key);
+
+        // if cache is empty, get value from database
+        if($categories === false) {
+            $categories = get_categories( $args );
+            foreach( $categories as $key => $category ) {
+                $args['parent'] = $category->term_id;
+                $categories[$key]->children = $this->get_categories_hierarchical($args);
+            }
+            // save result to cache
+            set_transient($cache_key, $categories, HOUR_IN_SECONDS);
         }
 
         return $categories;

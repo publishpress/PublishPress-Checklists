@@ -93,7 +93,7 @@ class Prohibited_tags extends Base_multiple
      *
      * @return array
      */
-    public function get_selected_values()
+    private function get_selected_values()
     {
         // Option names
         $option_name_multiple = $this->name . '_' . $this->field_name;
@@ -116,7 +116,7 @@ class Prohibited_tags extends Base_multiple
      * @param array $args
      * @return WP_Term[]
      */
-    public function get_list_tags($args = array('page' => 1, 'per_page' => 10, 'q' => ''))
+    private function get_list_tags($args = array('page' => 1, 'per_page' => 10, 'q' => ''))
     {
         // Get selected tags from the settings
         $selected_tags = $this->get_selected_values();
@@ -131,7 +131,12 @@ class Prohibited_tags extends Base_multiple
                 'include'    => $selected_tags,
                 'search'     => $args['q'],
             );
-            $tags_selected = get_tags($args_selected);
+            $cache_key_selected = md5('prohib_tag_selected' . json_encode($args_selected));
+            $tags_selected = get_transient($cache_key_selected);
+            if($tags_selected === false) {
+                $tags_selected = get_tags($args_selected);
+                set_transient($cache_key_selected, $tags_selected, HOUR_IN_SECONDS);
+            }
         }
 
         // Retrieve tags with a limit of 10 rows
@@ -143,8 +148,12 @@ class Prohibited_tags extends Base_multiple
             'number'     => $args['per_page'],
             'offset'     => ($args['page'] - 1) * $args['per_page'],
         );
-    
-        $tags_limited = get_tags($args_limited);
+        $cache_key = md5('prohib_tag' . json_encode($args_limited));
+        $tags_limited = get_transient($cache_key);
+        if($tags_limited === false) {
+            $tags_limited = get_tags($args_limited);
+            set_transient($cache_key, $tags_limited, HOUR_IN_SECONDS);
+        }
 
         // Merge the two arrays
         $tags = array_merge($tags_limited, $tags_selected);
@@ -163,6 +172,25 @@ class Prohibited_tags extends Base_multiple
         });
 
         return $tags;
+    }
+
+    /**
+     * Get the total count of tags
+     *
+     * @param array $args
+     * @return int
+     */
+    private function get_total_count($args = array('search' => '', 'hide_empty' => 0)) {
+        $args_key = base64_encode($args['search']);
+        $cache_key = "total_prohib_tag_count_${args_key}";
+
+        $total_tags = get_transient($cache_key);
+        if ($total_tags === false) {
+            $total_tags = wp_count_terms('post_tag', $args);
+            set_transient($cache_key, $total_tags, HOUR_IN_SECONDS);
+        }
+        
+        return $total_tags;
     }
 
     /**
@@ -192,7 +220,7 @@ class Prohibited_tags extends Base_multiple
         }
 
         // Check if there are more tags
-        $total_tags = wp_count_terms('post_tag', array('search' => $search, 'hide_empty' => 0));
+        $total_tags = $this->get_total_count(array('search' => $search, 'hide_empty' => 0));
         $has_next = ($page * $per_page) < $total_tags;
     
         wp_send_json_success(['items' => $results, 'has_next' => $has_next]);
