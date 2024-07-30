@@ -119,7 +119,6 @@ if (!class_exists('PPCH_Checklists')) {
             );
 
             $this->module = $legacyPlugin->register_module($this->module_name, $args);
-
         }
 
         public function migrateLegacyOptions()
@@ -353,13 +352,13 @@ if (!class_exists('PPCH_Checklists')) {
             $taxonomies_map = [
                 'category' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Categories_count', 
-                    // '\\PublishPress\\Checklists\\Core\\Requirement\\Required_categories',
-                    // '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_categories',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_categories',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_categories',
                 ],
                 'post_tag' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Tags_count',
-                    // '\\PublishPress\\Checklists\\Core\\Requirement\\Required_tags',
-                    // '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_tags',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Required_tags',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Prohibited_tags',
                 ],
             ];
 
@@ -599,6 +598,8 @@ if (!class_exists('PPCH_Checklists')) {
                         'roles'             => $roles,
                         'first_post_type'   => current($postTypes),
                         'required_rules'    => $required_rules,
+                        'ajaxurl'           => admin_url('admin-ajax.php'),
+                        'nonce'             => wp_create_nonce('pp-checklists-rules'),
                         'submit_error'      => esc_html__(
                             'Please make sure to complete the settings for',
                             'publishpress-checklists'

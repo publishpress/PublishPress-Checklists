@@ -58,7 +58,7 @@ textarea.pp-checklists-custom-item-title {
 .pressshack-admin-wrapper a:hover .dashicons:before,
 .pressshack-admin-wrapper a:focus .dashicons:before,
 .pressshack-admin-wrapper a:active .dashicons:before {
-    color: #5A4F87;
+    color: #5a4f87;
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -119,7 +119,7 @@ textarea.pp-checklists-custom-item-title {
     font-size: 12px;
     width: 12px;
     height: 12px;
-    color: #FFB300;
+    color: #ffb300;
     -webkit-transition: color 200ms ease-in-out;
     -moz-transition: color 200ms ease-in-out;
     -o-transition: color 200ms ease-in-out;
@@ -169,7 +169,6 @@ textarea.pp-checklists-custom-item-title {
 .pp-checklists-action-label {
     margin-left: 25px;
 }
-
 
 .pp-checklists-modal-list {
     text-align: center;
@@ -269,27 +268,27 @@ textarea.pp-checklists-custom-item-title {
 }
 
 #pp-checklists-global .checklists-save-notice .alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible {
-  padding-right: 35px;
+    padding-right: 35px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  color: inherit;
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
 
 #pp-checklists-global .checklists-save-notice .close {
@@ -300,7 +299,7 @@ textarea.pp-checklists-custom-item-title {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
-    opacity: .2;
+    opacity: 0.2;
 }
 
 #pp-checklists-global .checklists-save-notice a.close {
@@ -339,7 +338,7 @@ textarea.pp-checklists-custom-item-title {
     right: 10px;
 }
 
-.pp-checklists-requirement-row{
+.pp-checklists-requirement-row {
     cursor: move;
 }
 
@@ -378,6 +377,26 @@ textarea.pp-checklists-custom-item-title {
 .submit-top {
     display: flex;
     justify-content: end;
+}
+
+.pp-checklists-tabs-wrapper {
+    display: flex;
+    background: #fff;
+    position: relative;
+    min-width: 255px;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.pp-checklists-tabs-wrapper .pp-checklists-tabs {
+    min-width: 250px;
+    margin: 0;
+    line-height: 1em;
+    padding: 0 0 10px;
+    position: relative;
+    background-color: #fafafa;
+    border-right: 1px solid #eee;
+    box-sizing: border-box;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul {
@@ -438,9 +457,9 @@ textarea.pp-checklists-custom-item-title {
 }
 
 @media only screen and (max-width: 1270px) {
-    .pp-checklists-content-table input[type=text],
-    .pp-checklists-content-table input[type=number],
-    .pp-checklists-content-table select{
+    .pp-checklists-content-table input[type='text'],
+    .pp-checklists-content-table input[type='number'],
+    .pp-checklists-content-table select {
         width: 95%;
     }
     .pp-checklists-content-wrapper {
@@ -452,8 +471,8 @@ textarea.pp-checklists-custom-item-title {
     .pp-checklists-content-wrapper {
         min-width: unset;
     }
-    .pp-checklists-content-table input[type=text],
-    .pp-checklists-content-table input[type=number],
+    .pp-checklists-content-table input[type='text'],
+    .pp-checklists-content-table input[type='number'],
     .pp-checklists-content-table select,
     .pp-checklists-content-table textarea,
     .ppma-boxes-editor-tab-content.ppma-profile_fields-tab.profile_header .input {
@@ -462,7 +481,7 @@ textarea.pp-checklists-custom-item-title {
     }
     .pp-checklists-tabs-wrapper {
         display: block;
-     }
+    }
 }
 
 .pp-checklists-tabs-wrapper {

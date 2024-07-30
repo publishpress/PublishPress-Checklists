@@ -104,9 +104,10 @@ class Base_multiple extends Base_simple implements Interface_required
         }
 
         $html .= sprintf(
-            '<select id="%s" name="%s" multiple="multiple">',
+            '<select id="%s" name="%s" class="%s" multiple="multiple">',
             $id,
-            $name
+            $name,
+            $css_class
         );
 
         $labels = $this->get_setting_drop_down_labels();
