@@ -6,6 +6,7 @@
 .idea
 
 # Build Artifacts
+/build
 /dist
 
 # Dependencies
@@ -22,6 +23,7 @@ wpcom-helper.php
 CONTRIBUTING.md
 builder.yml
 .env.testing
+/bin
 /local.sh
 /packages
 /lib/**/.git
