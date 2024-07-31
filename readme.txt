@@ -314,7 +314,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 = [2.12.0] - 31 July 2024 =
 
 * Added: Tabs for different types of requirements #672
-* Fixed: Required and prohibited tags freeze webpage because of dropdown #671
+* Added: Required category & tag for new rule #492
+* Added: Prohibited category & tag for new rule #491
 * Fixed: External link missing from checklists #710
 * Fixed: String not translated in Italian #638
 * Fixed: Checklists could be bypassed if scheduled #666
