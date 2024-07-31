@@ -39,6 +39,13 @@ class Required_tags extends Base_multiple
      */
     private $DELIMITER = '__';
 
+    /**
+     * The cache expiry time in 10 minutes
+     * 
+     * @var int
+     */
+    private $cache_expiration = 10 * MINUTE_IN_SECONDS;
+
     public function __construct($module, $post_type)
     {
         parent::__construct($module, $post_type);
@@ -135,7 +142,7 @@ class Required_tags extends Base_multiple
             $tags_selected = get_transient($cache_key_selected);
             if($tags_selected === false) {
                 $tags_selected = get_tags($args_selected);
-                set_transient($cache_key_selected, $tags_selected, HOUR_IN_SECONDS);
+                set_transient($cache_key_selected, $tags_selected, $this->cache_expiration);
             }
         }
 
@@ -152,7 +159,7 @@ class Required_tags extends Base_multiple
         $tags_limited = get_transient($cache_key);
         if($tags_limited === false) {
             $tags_limited = get_tags($args_limited);
-            set_transient($cache_key, $tags_limited, HOUR_IN_SECONDS);
+            set_transient($cache_key, $tags_limited, $this->cache_expiration);
         }
 
         // Merge the two arrays
@@ -187,7 +194,7 @@ class Required_tags extends Base_multiple
         $total_tags = get_transient($cache_key);
         if ($total_tags === false) {
             $total_tags = wp_count_terms('post_tag', $args);
-            set_transient($cache_key, $total_tags, HOUR_IN_SECONDS);
+            set_transient($cache_key, $total_tags, $this->cache_expiration);
         }
         
         return $total_tags;
