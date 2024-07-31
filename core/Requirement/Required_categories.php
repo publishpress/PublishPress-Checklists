@@ -130,7 +130,7 @@ class Required_categories extends Base_multiple
 
         // Retrieve selected categories only on the first page
         $categories_selected = array();
-        if($args['page'] === 1) {
+        if($args['page'] === 1 && !empty($selected_categories)) {
             $args_selected = array(
                 'orderby'    => 'name',
                 'order'      => 'ASC',
