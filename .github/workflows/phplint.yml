@@ -6,21 +6,13 @@ jobs:
   phplint:
 
     runs-on: ubuntu-latest
+    container:
+      image: publishpress/dev-workspace-terminal:checklists-free-2
+      options: --privileged
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.0'
-        extensions: intl
-      env:
-        COMPOSER_TOKEN: ${{ secrets.COMPOSER_TOKEN }}
-
-    - name: Update the composer.lock file
-      run: composer update --lock
+      uses: actions/checkout@v4
 
     - name: Validate composer.json and composer.lock
       run: composer validate
