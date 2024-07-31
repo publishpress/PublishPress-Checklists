@@ -39,6 +39,13 @@ class Prohibited_categories extends Base_multiple
      */
     private $DELIMITER = '__';
 
+    /**
+     * The cache expiry time in 10 minutes
+     * 
+     * @var int
+     */
+    private $cache_expiration = 10 * MINUTE_IN_SECONDS;
+
     public function __construct($module, $post_type)
     {
         parent::__construct($module, $post_type);
@@ -123,7 +130,7 @@ class Prohibited_categories extends Base_multiple
 
         // Retrieve selected categories only on the first page
         $categories_selected = array();
-        if($args['page'] === 1) {
+        if($args['page'] === 1 && !empty($selected_categories)) {
             $args_selected = array(
                 'orderby'    => 'name',
                 'order'      => 'ASC',
@@ -181,7 +188,7 @@ class Prohibited_categories extends Base_multiple
         $total_categories = get_transient($cache_key);
         if ($total_categories === false) {
             $total_categories = wp_count_terms('category', $args);
-            set_transient($cache_key, $total_categories, HOUR_IN_SECONDS);
+            set_transient($cache_key, $total_categories, $this->cache_expiration);
         }
         
         return $total_categories;
@@ -250,7 +257,7 @@ class Prohibited_categories extends Base_multiple
                 $categories[$key]->children = $this->get_categories_hierarchical($args);
             }
             // save result to cache
-            set_transient($cache_key, $categories, HOUR_IN_SECONDS);
+            set_transient($cache_key, $categories, $this->cache_expiration);
         }
 
         return $categories;
