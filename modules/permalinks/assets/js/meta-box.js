@@ -53,10 +53,18 @@
                     slugHasValidChars = true;
 
                 if (PP_Checklists.is_gutenberg_active()) {
-                    var slugField = jQuery('.editor-post-permalink-editor__edit');
+                    let slugField = $('.editor-post-permalink-editor__edit');
+                    if(slugField.length) {
+                        // Gutenberg 8.4+ or wordpress 5.5+
+                        slugField = $('.editor-post-title');
+                    }
 
                     if (slugField.length > 0) {
                         slug = slugField.val();
+                        if (!slug) {
+                            // Gutenberg 8.4+ or wordpress 5.5+
+                            slug = slugField.text();
+                        }
                     } else {
                         var editor = PP_Checklists.getEditor(),
                             edits = editor.getPostEdits();
@@ -65,9 +73,13 @@
                             slug = edits.slug;
                         } else {
                             slug = editor.getCurrentPost().slug;
+                            const generatedSlug = editor.getCurrentPost().generated_slug;
 
                             if (slug === '') {
-                                if (typeof edits.title !== 'undefined') {
+                                // Gutenberg 8.4+ or wordpress 5.5+
+                                if (typeof generatedSlug !== 'undefined') {
+                                    slug = generatedSlug;
+                                } else if (typeof edits.title !== 'undefined') {
                                     slug = edits.title.replace(/[\s!\?]/g, '').toLocaleLowerCase();
                                 }
                             }
