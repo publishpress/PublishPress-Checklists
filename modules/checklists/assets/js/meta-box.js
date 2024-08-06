@@ -872,6 +872,29 @@
         });
     }
 
+        /*----------  Disable publish button  ----------*/
+    // Disable first save button until requirements are meet when "Include pre-publish checklist" is disabled
+    // @TODO Figure out how to get the status of "Include pre-publish checklist" and add it to the if() below
+    if (ppChecklists.disable_publish_button) {
+        $(window).on('load', function () {
+            if (
+                PP_Checklists.is_gutenberg_active() &&
+                ((PP_Checklists.is_published() !== true && PP_Checklists.is_pending() !== true) ||
+                    !ppChecklists.disable_published_block_feature)
+            ) {
+                $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+                    var has_unchecked_block = $('#pp-checklists-req-box').children('.status-no.pp-checklists-block');
+                    if (has_unchecked_block.length > 0) {
+                        wp.data.dispatch('core/editor').lockPostSaving('ppcPublishButton');
+                    } else {
+                        wp.data.dispatch('core/editor').unlockPostSaving('ppcPublishButton');
+                    }
+                });
+            }
+        });
+    }
+
+    
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
