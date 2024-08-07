@@ -121,8 +121,9 @@ class ValidChars extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $slug = $post->post_name;
+        // Fallback to title if slug is empty
+        $slug = $post->post_name ?: $post->post_title;
 
-        return preg_match('/^[a-z0-9\-_]+$/', $slug) === 1;
+        return preg_match('/^[a-z0-9_\-]+$/', sanitize_title($slug)) === 1;
     }
 }
