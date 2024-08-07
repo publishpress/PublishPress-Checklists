@@ -87,10 +87,10 @@
          * @type {Object}
          */
         elems: {
-            'original_post_status': $('#original_post_status'),
-            'post_status': $('#post_status'),
-            'publish_button': $('#publish'),
-            'document': $(document)
+            original_post_status: $('#original_post_status'),
+            post_status: $('#post_status'),
+            publish_button: $('#publish'),
+            document: $(document),
         },
 
         /**
@@ -120,7 +120,7 @@
              * Flag to say the validate method is already being executed.
              * @type {boolean}
              */
-            is_validating: false
+            is_validating: false,
         },
 
         /**
@@ -129,148 +129,199 @@
          */
         init: function () {
             // Create a custom event
-            this.elems.document.on(this.EVENT_VALIDATE_REQUIREMENTS, function (event) {
-                this.validate_requirements(event);
-            }.bind(this));
+            this.elems.document.on(
+                this.EVENT_VALIDATE_REQUIREMENTS,
+                function (event) {
+                    this.validate_requirements(event);
+                }.bind(this),
+            );
 
             // On clicking the submit button
-            this.elems.publish_button.click(function () {
-                this.state.is_publishing = true;
-            }.bind(this));
+            this.elems.publish_button.click(
+                function () {
+                    this.state.is_publishing = true;
+                }.bind(this),
+            );
 
             // On clicking the confirmation button in the modal window
-            this.elems.document.on('confirmation', '.remodal', function () {
-                this.state.is_confirmed = true;
+            this.elems.document.on(
+                'confirmation',
+                '.remodal',
+                function () {
+                    this.state.is_confirmed = true;
 
-                // Trigger the publish button
-                this.elems.publish_button.trigger('click');
+                    // Trigger the publish button
+                    this.elems.publish_button.trigger('click');
 
-                // For some reason, adding this again after the click is trigged solved the acf conflict issue https://github.com/publishpress/PublishPress-Checklists/issues/506
-                this.state.is_confirmed = true;
-                
-            }.bind(this));
+                    // For some reason, adding this again after the click is trigged solved the acf conflict issue https://github.com/publishpress/PublishPress-Checklists/issues/506
+                    this.state.is_confirmed = true;
+                }.bind(this),
+            );
 
             if (!this.is_gutenberg_active()) {
                 // Hook to the submit button
-                $('form#post').submit(function (event) {
-                    //do not trigger for preview action
-                    if ($('input#wp-preview').val() === 'dopreview') {
-                        return true;
-                    }
-                    
-                    // Reset the should_block state
-                    this.state.should_block = false;
+                $('form#post').submit(
+                    function (event) {
+                        //do not trigger for preview action
+                        if ($('input#wp-preview').val() === 'dopreview') {
+                            return true;
+                        }
 
-                    this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+                        // Reset the should_block state
+                        this.state.should_block = false;
 
-                    return !this.state.should_block;
-                }.bind(this));
+                        this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+
+                        return !this.state.should_block;
+                    }.bind(this),
+                );
             } else {
-                $(document).on(this.EVENT_TIC, function (event) {
-                    if (this.state.is_validating !== false) {
-                        return;
-                    }
+                $(document).on(
+                    this.EVENT_TIC,
+                    function (event) {
+                        if (this.state.is_validating !== false) {
+                            return;
+                        }
 
-                    var isSidebarOpened = wp.data.select('core/edit-post').isPublishSidebarOpened();
+                        var isSidebarOpened = wp.data.select('core/edit-post').isPublishSidebarOpened();
 
-                    if (isSidebarOpened) {
-                        this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
-                    } else {
-                        // We need this as validate requirement is not been triggered for publish post. I'll leave the condition for now till i study this very well.
-                        this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
-
-                    }
-                }.bind(this));
+                        if (isSidebarOpened) {
+                            this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+                        } else {
+                            // We need this as validate requirement is not been triggered for publish post. I'll leave the condition for now till i study this very well.
+                            this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
+                        }
+                    }.bind(this),
+                );
             }
 
             // Hook to the requirement items
-            $('[id^=pp-checklists-req]').on(this.EVENT_UPDATE_REQUIREMENT_STATE, function (event, state) {
-                this.update_requirement_icon(state, $(event.target));
-            }.bind(this));
+            $('[id^=pp-checklists-req]').on(
+                this.EVENT_UPDATE_REQUIREMENT_STATE,
+                function (event, state) {
+                    this.update_requirement_icon(state, $(event.target));
+                }.bind(this),
+            );
 
             // Add event to the custom items
-            $('.pp-checklists-custom-item').click(function (event) {
-                var target = event.target;
+            $('.pp-checklists-custom-item').click(
+                function (event) {
+                    var target = event.target;
 
-                if ('LI' !== target.nodeNAME) {
-                    target = $(target).parent('li')[0];
-                }
+                    if ('LI' !== target.nodeNAME) {
+                        target = $(target).parent('li')[0];
+                    }
 
-                if (typeof target !== 'undefined') {
-                    this.elems.document.trigger(this.EVENT_TOGGLE_CUSTOM_ITEM, $(target));
-                }
-            }.bind(this));
+                    if (typeof target !== 'undefined') {
+                        this.elems.document.trigger(this.EVENT_TOGGLE_CUSTOM_ITEM, $(target));
+                    }
+                }.bind(this),
+            );
 
             // Add event to the button custom items
-            this.elems.document.on('click', '.pp-checklists-req .pp-checklists-check-item', function (event) {
-                event.preventDefault();
-                var target = $(event.target);
-                var target_li = target.closest('li');
-                var global_this = this;
+            this.elems.document.on(
+                'click',
+                '.pp-checklists-req .pp-checklists-check-item',
+                function (event) {
+                    event.preventDefault();
+                    var target = $(event.target);
+                    var target_li = target.closest('li');
+                    var global_this = this;
 
-                $('.pp-checklists-req').find('.request-response').html('');
-             
-                if (typeof target_li !== 'undefined') {
-                    target_li.find('.pp-checklists-check-item').prop('disabled', true);
-                    target_li.find('.spinner').addClass('is-active');
+                    $('.pp-checklists-req').find('.request-response').html('');
 
-                    var data = {
-                        action: "pp_checklists_" + target_li.attr('data-source') + "_requirement",
-                        requirement: ppChecklists.requirements[target_li.attr('data-id')],
-                        content: PP_Checklists.get_editor_content(),
-                        nonce: ppChecklists.nonce,
-                    };
+                    if (typeof target_li !== 'undefined') {
+                        target_li.find('.pp-checklists-check-item').prop('disabled', true);
+                        target_li.find('.spinner').addClass('is-active');
 
-                    $.post(ajaxurl, data, function (response) {
-                        var response_raw_content = response.content;
-                        var response_content = response_raw_content.replace(/\n/g, '<br>');
-                        if (response.yes_no == 'yes') {
-                            $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').removeClass('dashicons-yes');
-                            global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
-                        } else if (response.yes_no == 'no') {
-                            $('#pp-checklists-req-' + target_li.attr('data-id')).find('.dashicons').addClass('dashicons-yes');
-                            global_this.elems.document.trigger(global_this.EVENT_TOGGLE_CUSTOM_ITEM, $('#pp-checklists-req-' + target_li.attr('data-id')));
-                        }
-                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated published"><p>' + response_content + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
-                        target_li.find('.pp-checklists-check-item').prop('disabled', false);
-                        target_li.find('.spinner').removeClass('is-active');
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        target_li.find('.request-response').html('<div id="message" class="ppch-message notice is-dismissible updated published"><p>' + errorThrown + ' ' + textStatus + '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
-                        target_li.find('.pp-checklists-check-item').prop('disabled', false);
-                        target_li.find('.spinner').removeClass('is-active');
-                    });
-                }
-            }.bind(this));
+                        var data = {
+                            action: 'pp_checklists_' + target_li.attr('data-source') + '_requirement',
+                            requirement: ppChecklists.requirements[target_li.attr('data-id')],
+                            content: PP_Checklists.get_editor_content(),
+                            nonce: ppChecklists.nonce,
+                        };
+
+                        $.post(ajaxurl, data, function (response) {
+                            var response_raw_content = response.content;
+                            var response_content = response_raw_content.replace(/\n/g, '<br>');
+                            if (response.yes_no == 'yes') {
+                                $('#pp-checklists-req-' + target_li.attr('data-id'))
+                                    .find('.dashicons')
+                                    .removeClass('dashicons-yes');
+                                global_this.elems.document.trigger(
+                                    global_this.EVENT_TOGGLE_CUSTOM_ITEM,
+                                    $('#pp-checklists-req-' + target_li.attr('data-id')),
+                                );
+                            } else if (response.yes_no == 'no') {
+                                $('#pp-checklists-req-' + target_li.attr('data-id'))
+                                    .find('.dashicons')
+                                    .addClass('dashicons-yes');
+                                global_this.elems.document.trigger(
+                                    global_this.EVENT_TOGGLE_CUSTOM_ITEM,
+                                    $('#pp-checklists-req-' + target_li.attr('data-id')),
+                                );
+                            }
+                            target_li
+                                .find('.request-response')
+                                .html(
+                                    '<div id="message" class="ppch-message notice is-dismissible updated published"><p>' +
+                                        response_content +
+                                        '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>',
+                                );
+                            target_li.find('.pp-checklists-check-item').prop('disabled', false);
+                            target_li.find('.spinner').removeClass('is-active');
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            target_li
+                                .find('.request-response')
+                                .html(
+                                    '<div id="message" class="ppch-message notice is-dismissible updated published"><p>' +
+                                        errorThrown +
+                                        ' ' +
+                                        textStatus +
+                                        '</p><button type="button" class="notice-dismiss" onclick="this.closest(\'#message\').remove();"><span class="screen-reader-text">Dismiss this notice.</span></button></div>',
+                                );
+                            target_li.find('.pp-checklists-check-item').prop('disabled', false);
+                            target_li.find('.spinner').removeClass('is-active');
+                        });
+                    }
+                }.bind(this),
+            );
 
             // On clicking the confirmation button in the modal window
-            this.elems.document.on(this.EVENT_TOGGLE_CUSTOM_ITEM, function (event, item) {
-                var $item = $(item),
-                    $icon = $item.children('.dashicons'),
-                    checked = $icon.hasClass('dashicons-yes');
+            this.elems.document.on(
+                this.EVENT_TOGGLE_CUSTOM_ITEM,
+                function (event, item) {
+                    var $item = $(item),
+                        $icon = $item.children('.dashicons'),
+                        checked = $icon.hasClass('dashicons-yes');
 
-                $icon.removeClass('dashicons-no');
+                    $icon.removeClass('dashicons-no');
 
-                if (checked) {
-                    $icon.removeClass('dashicons-yes');
-                    $item.removeClass('status-yes');
-                    $item.addClass('status-no');
-                    $item.find('.ppch_item_requirement').val('no');
-                    wp.hooks.doAction('pp-checklists.requirements-updated', $item);
-                } else {
-                    $icon.addClass('dashicons-yes');
-                    $item.addClass('status-yes');
-                    $item.removeClass('status-no');
-                    $item.find('.ppch_item_requirement').val('yes');
-                    wp.hooks.doAction('pp-checklists.requirements-updated', $item);
-                }
+                    if (checked) {
+                        $icon.removeClass('dashicons-yes');
+                        $item.removeClass('status-yes');
+                        $item.addClass('status-no');
+                        $item.find('.ppch_item_requirement').val('no');
+                        wp.hooks.doAction('pp-checklists.requirements-updated', $item);
+                    } else {
+                        $icon.addClass('dashicons-yes');
+                        $item.addClass('status-yes');
+                        $item.removeClass('status-no');
+                        $item.find('.ppch_item_requirement').val('yes');
+                        wp.hooks.doAction('pp-checklists.requirements-updated', $item);
+                    }
 
-                $item.children('input[type="hidden"]').val($item.hasClass('status-yes') ? 'yes' : 'no');
-            }.bind(this));
+                    $item.children('input[type="hidden"]').val($item.hasClass('status-yes') ? 'yes' : 'no');
+                }.bind(this),
+            );
 
             // Start the tic event
-            setInterval(function () {
-                $(document).trigger(this.EVENT_TIC);
-            }.bind(this), this.TIC_INTERVAL);
+            setInterval(
+                function () {
+                    $(document).trigger(this.EVENT_TIC);
+                }.bind(this),
+                this.TIC_INTERVAL,
+            );
         },
 
         /**
@@ -294,7 +345,10 @@
          * @return {Boolean} True if draft.
          */
         is_draft: function () {
-            return 'draft' === this.elems.original_post_status.val() || 'auto-draft' === this.elems.original_post_status.val();
+            return (
+                'draft' === this.elems.original_post_status.val() ||
+                'auto-draft' === this.elems.original_post_status.val()
+            );
         },
 
         /**
@@ -318,8 +372,8 @@
             }
 
             var uncheckedItems = {
-                'block': [],
-                'warning': []
+                block: [],
+                warning: [],
             };
 
             /**
@@ -380,7 +434,10 @@
                                 message = ppChecklists.msg_missed_required_publishing;
                             }
 
-                            message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.block.join('</li><li>') + '</li></ul></div>';
+                            message +=
+                                '<div class="pp-checklists-modal-list"><ul><li>' +
+                                uncheckedItems.block.join('</li><li>') +
+                                '</li></ul></div>';
 
                             if (uncheckedItems.warning.length > 0) {
                                 if (isUpdatingPublishedPost) {
@@ -389,7 +446,10 @@
                                     message += ppChecklists.msg_missed_important_publishing;
                                 }
 
-                                message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.warning.join('</li><li>') + '</li></ul></div>';
+                                message +=
+                                    '<div class="pp-checklists-modal-list"><ul><li>' +
+                                    uncheckedItems.warning.join('</li><li>') +
+                                    '</li></ul></div>';
                             }
 
                             // Display the alert
@@ -407,10 +467,17 @@
                                 message = ppChecklists.msg_missed_optional_publishing;
                             }
 
-                            message += '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.warning.join('</li><li>') + '</li></ul></div>';
+                            message +=
+                                '<div class="pp-checklists-modal-list"><ul><li>' +
+                                uncheckedItems.warning.join('</li><li>') +
+                                '</li></ul></div>';
 
                             if (uncheckedItems.block.length > 0) {
-                                message += ppChecklists.msg_missed_required + '<div class="pp-checklists-modal-list"><ul><li>' + uncheckedItems.block.join('</li><li>') + '</li></ul></div>';
+                                message +=
+                                    ppChecklists.msg_missed_required +
+                                    '<div class="pp-checklists-modal-list"><ul><li>' +
+                                    uncheckedItems.block.join('</li><li>') +
+                                    '</li></ul></div>';
                             }
 
                             // Display the confirm
@@ -532,12 +599,11 @@
         extract_internal_links: function (content, links = [], website = window.location.host) {
             var link;
             if (content) {
-
                 //remove image inside tags so we don't count them as link
-                content = content.replace(/<img[^>]*>/g, "");
+                content = content.replace(/<img[^>]*>/g, '');
 
                 //remove element inside <a href></a> to avoid double counting for one link in case of <a href="Link">Link</a>
-                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, "$1");
+                content = content.replace(/<a .*? *href="([^\'\"]+).*?<\/a>/g, '$1');
 
                 //check for every valid link and return array
                 content = content.match(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi);
@@ -553,12 +619,9 @@
                         links.push(link);
                     }
                 }
-
-
             }
 
             return links;
-
         },
 
         /**
@@ -578,9 +641,8 @@
         extract_external_links: function (content, links = [], website = window.location.host) {
             var link,
                 match,
-                regex = /<a.*?href=["\']([^"\']+)["\'].*?\>(.*?)\<\/a\>/ig;
+                regex = /<a.*?href=["\']([^"\']+)["\'].*?\>(.*?)\<\/a\>/gi;
             if (content) {
-
                 //check for external link and return array excluding other images url
                 while ((match = regex.exec(content)) !== null) {
                     link = match[1];
@@ -591,9 +653,7 @@
                     if (link.indexOf(website) > 0) continue;
                     //add valid link to array
                     links.push(link);
-
                 }
-
             }
 
             return links;
@@ -610,22 +670,22 @@
         missing_alt_images: function (content, missing_alt = []) {
             var alt,
                 regex = /<img[^>]*>/g;
-        
+
             if (content) {
                 var imgTags = content.match(regex) || [];
                 imgTags.forEach(function (imgTag) {
                     alt = imgTag.match(/alt="([^"]*)"/);
-        
+
                     if (!alt || !alt[1].replace(/\s/g, '').length) {
                         missing_alt.push(imgTag);
                     }
                 });
             }
-        
+
             return missing_alt;
         },
 
-        extract_links_from_content: function(content) {
+        extract_links_from_content: function (content) {
             let linksIterator = content.matchAll(/(?:<a[^>]+href=['"])([^'"]+)(?:['"][^>]*>)/gi);
 
             let linkResult = linksIterator.next();
@@ -640,11 +700,12 @@
             return linksList;
         },
 
-        is_valid_link: function(link) {
-
+        is_valid_link: function (link) {
             const linkWithoutFragment = link.split('#')[0];
 
-            return linkWithoutFragment.match(/^(?:(#[-a-zA-Z0-9@:%._\+~#=]{0,256})|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=*]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_;*]+)$/i);
+            return linkWithoutFragment.match(
+                /^(?:(#[-a-zA-Z0-9@:%._\+~#=]{0,256})|https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@;:%_\+.~#?&\/\/=*]*)|tel:\+?[0-9\-]+|mailto:[a-z0-9\-_\.]+@[a-z0-9\-_\.]+?[a-z0-9@\.\?=\s\%,\-&_;*]+)$/i,
+            );
         },
 
         /**
@@ -678,9 +739,13 @@
          * @returns {boolean}
          */
         is_gutenberg_active: function () {
-
             let gutenbergActive = false;
-            if (typeof wp.data !== 'undefined' && typeof wp.data.select('core') !== 'undefined' && typeof wp.data.select('core/edit-post') !== 'undefined' && typeof wp.data.select('core/editor') !== 'undefined') {
+            if (
+                typeof wp.data !== 'undefined' &&
+                typeof wp.data.select('core') !== 'undefined' &&
+                typeof wp.data.select('core/edit-post') !== 'undefined' &&
+                typeof wp.data.select('core/editor') !== 'undefined'
+            ) {
                 gutenbergActive = true;
             }
 
@@ -694,31 +759,37 @@
          */
         get_editor_content: function () {
             let data = '';
-  
-            try { // Gutenberg
-              data = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+            try {
+                // Gutenberg
+                data = PP_Checklists.getEditor().getEditedPostAttribute('content');
             } catch (error) {
-              try { // TinyMCE
-                let ed = tinyMCE.activeEditor;
-                if ('mce_fullscreen' == ed.id) {
-                  tinyMCE.get('content').setContent(ed.getContent({
-                    format: 'raw'
-                  }), {
-                    format: 'raw'
-                  });
+                try {
+                    // TinyMCE
+                    let ed = tinyMCE.activeEditor;
+                    if ('mce_fullscreen' == ed.id) {
+                        tinyMCE.get('content').setContent(
+                            ed.getContent({
+                                format: 'raw',
+                            }),
+                            {
+                                format: 'raw',
+                            },
+                        );
+                    }
+                    tinyMCE.get('content').save();
+                    data = jQuery('#content').val();
+                } catch (error) {
+                    try {
+                        // Quick Tags
+                        data = jQuery('#content').val();
+                    } catch (error) {}
                 }
-                tinyMCE.get('content').save();
-                data = jQuery('#content').val();
-              } catch (error) {
-                try { // Quick Tags
-                  data = jQuery('#content').val();
-                } catch (error) { }
-              }
             }
-      
+
             // Trim data
             data = data.replace(/^\s+/, '').replace(/\s+$/, '');
-      
+
             return data;
         },
 
@@ -760,7 +831,7 @@
 
         /**
          * This function checks whether a post has a featured image or not.
-         * 
+         *
          * - For Gutenberg, it checks the featured_media attribute of the post.
          * - For the Classic Editor, it checks the set-post-thumbnail element.
          * @returns {boolean}
@@ -773,9 +844,9 @@
             } else {
                 has_image = $('#postimagediv').find('#set-post-thumbnail').find('img').length > 0;
             }
-            
+
             return has_image;
-        }
+        },
     };
 
     // Exposes and initialize the object
@@ -800,46 +871,51 @@
             }
         });
     }
-    
+
     /*----------  Featured Image  ----------*/
 
     if ($('#pp-checklists-req-featured_image').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
             var has_image = PP_Checklists.hasFeaturedImage();
 
-            $('#pp-checklists-req-featured_image').trigger(
-                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                has_image
-            );
+            $('#pp-checklists-req-featured_image').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, has_image);
         });
     }
-   
+
     /*----------  Featured Image Alt  ----------*/
     // Check if the featured image is set or not
     if ($('#pp-checklists-req-featured_image_alt').length > 0) {
-        let loaded = false, meta_id = 0, meta_alt = '';
+        let loaded = false,
+            meta_id = 0,
+            meta_alt = '';
         let featured_image_alt = {};
         const updateFeaturedImageAlt = (id, alt) => {
             meta_id = Number(id);
             meta_alt = alt;
-            featured_image_alt = {[meta_id]: meta_alt};
+            featured_image_alt = { [meta_id]: meta_alt };
             loaded = true;
         };
         if (PP_Checklists.is_gutenberg_active()) {
             wp.data.subscribe(function () {
-                if(loaded) return;
-                const dataMedia = wp.data.select('core').getMedia(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
+                if (loaded) return;
+                const dataMedia = wp.data
+                    .select('core')
+                    .getMedia(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
                 meta_id = Number(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
-                if(typeof dataMedia === 'object' && dataMedia) {
+                if (typeof dataMedia === 'object' && dataMedia) {
                     updateFeaturedImageAlt(meta_id, dataMedia.alt_text);
                 }
             });
         } else {
-            updateFeaturedImageAlt($('#_thumbnail_id').val(), $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'));
+            updateFeaturedImageAlt(
+                $('#_thumbnail_id').val(),
+                $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'),
+            );
         }
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            if(!loaded) return;
-            let has_alt = true, has_image = PP_Checklists.hasFeaturedImage();
+            if (!loaded) return;
+            let has_alt = true,
+                has_image = PP_Checklists.hasFeaturedImage();
             if (has_image) {
                 has_alt = Boolean(featured_image_alt[meta_id]);
             }
@@ -853,20 +929,17 @@
                     }
                 };
                 $('#attachment-details-alt-text')
-                .ready(function () {
-                    $('.attachments-wrapper li').each(function () {
-                        if ($(this).attr('aria-checked') === 'true') {
-                            meta_id = Number($(this).attr('data-id'));
-                            callableFunc();
-                        }
-                    });
-                })
-                .on('change', callableFunc);
+                    .ready(function () {
+                        $('.attachments-wrapper li').each(function () {
+                            if ($(this).attr('aria-checked') === 'true') {
+                                meta_id = Number($(this).attr('data-id'));
+                                callableFunc();
+                            }
+                        });
+                    })
+                    .on('change', callableFunc);
             }
-            $('#pp-checklists-req-featured_image_alt').trigger(
-                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                has_alt
-            );
+            $('#pp-checklists-req-featured_image_alt').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, has_alt);
         });
     }
 
@@ -896,7 +969,7 @@
 
                 $('#pp-checklists-req-tags_count').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value),
                 );
             }
         });
@@ -908,23 +981,33 @@
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
             let obj = PP_Checklists.is_gutenberg_active()
                 ? PP_Checklists.getEditor().getEditedPostAttribute('tags')
-                : $('.tagchecklist li').map((_, el) => $(el).contents().filter((_, node) => node.nodeType === 3).text().trim()).get();
+                : $('.tagchecklist li')
+                      .map((_, el) =>
+                          $(el)
+                              .contents()
+                              .filter((_, node) => node.nodeType === 3)
+                              .text()
+                              .trim(),
+                      )
+                      .get();
 
             if (typeof obj !== 'undefined') {
                 let { value: required_tags, label } = ppChecklists.requirements.required_tags;
-                let required_tags_reached = required_tags.length > 0 
-                    ? required_tags.filter(value => {
-                        if (PP_Checklists.is_gutenberg_active()) return !obj.includes(Number(value.split('__')[0]));
-                        return !obj.includes(value.split('__')[1]);
-                    })
-                    : [];
+                let required_tags_reached =
+                    required_tags.length > 0
+                        ? required_tags.filter((value) => {
+                              if (PP_Checklists.is_gutenberg_active())
+                                  return !obj.includes(Number(value.split('__')[0]));
+                              return !obj.includes(value.split('__')[1]);
+                          })
+                        : [];
                 let has_required_tags = required_tags_reached.length > 0;
 
                 const el = $('#pp-checklists-req-required_tags');
                 const labelEl = el.find('.status-label');
-                const current_label_text = label.replace(/:.*/, "");
-                const required_tags_str = required_tags_reached.map(el => el.split('__')[1]).join(', ');
-    
+                const current_label_text = label.replace(/:.*/, '');
+                const required_tags_str = required_tags_reached.map((el) => el.split('__')[1]).join(', ');
+
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_tags);
                 labelEl.text(`${current_label_text}${required_tags_str.length > 0 ? ': ' + required_tags_str : ''}`);
             }
@@ -935,36 +1018,49 @@
 
     if ($('#pp-checklists-req-prohibited_tags').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            let obj = PP_Checklists.is_gutenberg_active() 
-                ? PP_Checklists.getEditor().getEditedPostAttribute('tags') 
-                : $('.tagchecklist li').map((_, el) => $(el).contents().filter((_, node) => node.nodeType === 3).text().trim()).get();
-            
+            let obj = PP_Checklists.is_gutenberg_active()
+                ? PP_Checklists.getEditor().getEditedPostAttribute('tags')
+                : $('.tagchecklist li')
+                      .map((_, el) =>
+                          $(el)
+                              .contents()
+                              .filter((_, node) => node.nodeType === 3)
+                              .text()
+                              .trim(),
+                      )
+                      .get();
+
             if (typeof obj !== 'undefined') {
                 let { value: prohibited_tags, label } = ppChecklists.requirements.prohibited_tags;
-                let prohibited_tags_reached = prohibited_tags.length > 0 
-                    ? prohibited_tags.filter(value => {
-                        if (PP_Checklists.is_gutenberg_active()) return obj.includes(Number(value.split('__')[0]));
-                        return obj.includes(value.split('__')[1]);
-                    })
-                    : [];
+                let prohibited_tags_reached =
+                    prohibited_tags.length > 0
+                        ? prohibited_tags.filter((value) => {
+                              if (PP_Checklists.is_gutenberg_active())
+                                  return obj.includes(Number(value.split('__')[0]));
+                              return obj.includes(value.split('__')[1]);
+                          })
+                        : [];
                 let has_prohibited_tags = prohibited_tags_reached.length > 0;
 
                 const el = $('#pp-checklists-req-prohibited_tags');
                 const labelEl = el.find('.status-label');
-                const current_label_text = label.replace(/:.*/, "");
-                const prohibited_tags_str = prohibited_tags_reached.map(el => el.split('__')[1]).join(', ');
-                const final_label_text = prohibited_tags_str.length > 0 ? `${current_label_text}: ${prohibited_tags_str}` : current_label_text;
-    
+                const current_label_text = label.replace(/:.*/, '');
+                const prohibited_tags_str = prohibited_tags_reached.map((el) => el.split('__')[1]).join(', ');
+                const final_label_text =
+                    prohibited_tags_str.length > 0
+                        ? `${current_label_text}: ${prohibited_tags_str}`
+                        : current_label_text;
+
                 ppChecklists = {
                     ...ppChecklists,
                     requirements: {
                         ...ppChecklists.requirements,
                         prohibited_tags: {
                             ...ppChecklists.requirements.prohibited_tags,
-                            label: final_label_text
-                        }
-                    }
-                }
+                            label: final_label_text,
+                        },
+                    },
+                };
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_tags);
                 labelEl.text(final_label_text);
             }
@@ -991,35 +1087,39 @@
 
                 $('#pp-checklists-req-categories_count').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value),
                 );
             }
         });
     }
 
-
     /*----------  Required Categories  ----------*/
 
     if ($('#pp-checklists-req-required_categories').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            let obj = PP_Checklists.is_gutenberg_active() 
-                ? PP_Checklists.getEditor().getEditedPostAttribute('categories') 
-                : $('#categorychecklist input:checked').map((_, chkEl) => Number($(chkEl).val())).get();
+            let obj = PP_Checklists.is_gutenberg_active()
+                ? PP_Checklists.getEditor().getEditedPostAttribute('categories')
+                : $('#categorychecklist input:checked')
+                      .map((_, chkEl) => Number($(chkEl).val()))
+                      .get();
 
             if (typeof obj !== 'undefined') {
                 let { value: required_categories, label } = ppChecklists.requirements.required_categories;
-                let required_categories_reached = required_categories.length > 0 
-                    ? required_categories.filter(value => !obj.includes(Number(value.split('__')[0]))) 
-                    : [];
+                let required_categories_reached =
+                    required_categories.length > 0
+                        ? required_categories.filter((value) => !obj.includes(Number(value.split('__')[0])))
+                        : [];
                 let has_required_categories = required_categories_reached.length > 0;
-    
+
                 const el = $('#pp-checklists-req-required_categories');
                 const labelEl = el.find('.status-label');
-                const current_label_text = label.replace(/:.*/, "");
-                const required_categories_str = required_categories_reached.map(el => el.split('__')[1]).join(', ');
-    
+                const current_label_text = label.replace(/:.*/, '');
+                const required_categories_str = required_categories_reached.map((el) => el.split('__')[1]).join(', ');
+
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_categories);
-                labelEl.text(`${current_label_text}${required_categories_str.length > 0 ? ': ' + required_categories_str : ''}`);
+                labelEl.text(
+                    `${current_label_text}${required_categories_str.length > 0 ? ': ' + required_categories_str : ''}`,
+                );
             }
         });
     }
@@ -1028,22 +1128,30 @@
 
     if ($('#pp-checklists-req-prohibited_categories').length > 0) {
         $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-            let obj = PP_Checklists.is_gutenberg_active() 
-                ? PP_Checklists.getEditor().getEditedPostAttribute('categories') 
-                : $('#categorychecklist input:checked').map((_, chkEl) => Number($(chkEl).val())).get();
-            
+            let obj = PP_Checklists.is_gutenberg_active()
+                ? PP_Checklists.getEditor().getEditedPostAttribute('categories')
+                : $('#categorychecklist input:checked')
+                      .map((_, chkEl) => Number($(chkEl).val()))
+                      .get();
+
             if (typeof obj !== 'undefined') {
                 let { value: prohibited_categories, label } = ppChecklists.requirements.prohibited_categories;
-                let prohibited_categories_reached = prohibited_categories.length > 0 
-                    ? prohibited_categories.filter(value => obj.includes(Number(value.split('__')[0]))) 
-                    : [];
+                let prohibited_categories_reached =
+                    prohibited_categories.length > 0
+                        ? prohibited_categories.filter((value) => obj.includes(Number(value.split('__')[0])))
+                        : [];
                 let has_prohibited_categories = prohibited_categories_reached.length > 0;
-    
+
                 const el = $('#pp-checklists-req-prohibited_categories');
                 const labelEl = el.find('.status-label');
-                const current_label_text = label.replace(/:.*/, "");
-                const prohibited_categories_str = prohibited_categories_reached.map(el => el.split('__')[1]).join(', ');
-                const final_label_text = prohibited_categories_str.length > 0 ? `${current_label_text}: ${prohibited_categories_str}` : current_label_text;
+                const current_label_text = label.replace(/:.*/, '');
+                const prohibited_categories_str = prohibited_categories_reached
+                    .map((el) => el.split('__')[1])
+                    .join(', ');
+                const final_label_text =
+                    prohibited_categories_str.length > 0
+                        ? `${current_label_text}: ${prohibited_categories_str}`
+                        : current_label_text;
 
                 ppChecklists = {
                     ...ppChecklists,
@@ -1051,10 +1159,10 @@
                         ...ppChecklists.requirements,
                         prohibited_categories: {
                             ...ppChecklists.requirements.prohibited_categories,
-                            label: final_label_text
-                        }
-                    }
-                }
+                            label: final_label_text,
+                        },
+                    },
+                };
                 el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_categories);
                 labelEl.text(final_label_text);
             }
@@ -1072,13 +1180,13 @@
                     min_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[0]),
                     max_value = parseInt(ppChecklists.requirements[taxonomy + '_count'].value[1]);
                 var obj = '';
-              if (PP_Checklists.is_gutenberg_active()) {
-                if (taxonomy_rest_base && taxonomy_rest_base !== '' && taxonomy_rest_base !== 'false') {
-                  obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy_rest_base);
+                if (PP_Checklists.is_gutenberg_active()) {
+                    if (taxonomy_rest_base && taxonomy_rest_base !== '' && taxonomy_rest_base !== 'false') {
+                        obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy_rest_base);
+                    } else {
+                        obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
+                    }
                 } else {
-                  obj = PP_Checklists.getEditor().getEditedPostAttribute(taxonomy);
-                }
-              } else {
                     obj = $('#' + taxonomy + 'checklist input:checked');
                 }
 
@@ -1087,10 +1195,9 @@
 
                     $('#pp-checklists-req-' + taxonomy + '_count').trigger(
                         PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                        PP_Checklists.check_valid_quantity(count, min_value, max_value),
                     );
                 }
-
             });
         });
     }
@@ -1117,7 +1224,7 @@
 
                     $('#pp-checklists-req-' + taxonomy + '_count').trigger(
                         PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                        PP_Checklists.check_valid_quantity(count, min_value, max_value),
                     );
                 }
             });
@@ -1148,7 +1255,7 @@
 
                 $('#pp-checklists-req-filled_excerpt').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value),
                 );
             }
         });
@@ -1178,7 +1285,7 @@
 
                 $('#pp-checklists-req-title_count').trigger(
                     PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    PP_Checklists.check_valid_quantity(count, min_value, max_value)
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value),
                 );
             }
         });
@@ -1191,33 +1298,30 @@
          * For Gutenberg
          */
         if ($('#pp-checklists-req-words_count').length > 0) {
-            wp.data.subscribe(
-                function () {
-                    // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
-                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            wp.data.subscribe(function () {
+                // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
+                var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
-                    if (typeof content == 'undefined') {
-                        return;
-                    }
-
-                    var count = wp.utils.WordCounter.prototype.count(content);
-
-                    if (lastCount == count) {
-                        return;
-                    }
-
-
-                    var min = parseInt(ppChecklists.requirements.words_count.value[0]),
-                        max = parseInt(ppChecklists.requirements.words_count.value[1]);
-
-                    $('#pp-checklists-req-words_count').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        PP_Checklists.check_valid_quantity(count, min, max)
-                    );
-
-                    lastCount = count;
+                if (typeof content == 'undefined') {
+                    return;
                 }
-            );
+
+                var count = wp.utils.WordCounter.prototype.count(content);
+
+                if (lastCount == count) {
+                    return;
+                }
+
+                var min = parseInt(ppChecklists.requirements.words_count.value[0]),
+                    max = parseInt(ppChecklists.requirements.words_count.value[1]);
+
+                $('#pp-checklists-req-words_count').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min, max),
+                );
+
+                lastCount = count;
+            });
         }
     } else {
         /**
@@ -1242,7 +1346,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = counter.count(text);
@@ -1256,7 +1360,7 @@
 
             $('#pp-checklists-req-words_count').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                PP_Checklists.check_valid_quantity(count, min, max)
+                PP_Checklists.check_valid_quantity(count, min, max),
             );
 
             lastCount = count;
@@ -1267,7 +1371,6 @@
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
-
                 editor.onInit.add(function () {
                     /**
                      * Bind the words count update triggers.
@@ -1296,32 +1399,29 @@
          * For Gutenberg
          */
         if ($('#pp-checklists-req-internal_links').length > 0) {
-            wp.data.subscribe(
-                function () {
-                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            wp.data.subscribe(function () {
+                var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
-                    if (typeof content == 'undefined') {
-                        return;
-                    }
-
-                    var count = PP_Checklists.extract_internal_links(content).length;
-
-                    if (lastCount == count) {
-                        return;
-                    }
-
-
-                    var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
-                        max = parseInt(ppChecklists.requirements.internal_links.value[1]);
-
-                    $('#pp-checklists-req-internal_links').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        PP_Checklists.check_valid_quantity(count, min, max)
-                    );
-
-                    lastCount = count;
+                if (typeof content == 'undefined') {
+                    return;
                 }
-            );
+
+                var count = PP_Checklists.extract_internal_links(content).length;
+
+                if (lastCount == count) {
+                    return;
+                }
+
+                var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
+                    max = parseInt(ppChecklists.requirements.internal_links.value[1]);
+
+                $('#pp-checklists-req-internal_links').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min, max),
+                );
+
+                lastCount = count;
+            });
         }
     } else {
         /**
@@ -1346,7 +1446,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = PP_Checklists.extract_internal_links(text).length;
@@ -1360,7 +1460,7 @@
 
             $('#pp-checklists-req-internal_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                PP_Checklists.check_valid_quantity(count, min, max)
+                PP_Checklists.check_valid_quantity(count, min, max),
             );
 
             lastCount = count;
@@ -1371,7 +1471,6 @@
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
-
                 editor.onInit.add(function () {
                     /**
                      * Bind the words count update triggers.
@@ -1393,7 +1492,6 @@
         update();
     }
 
-
     /*----------  External Links ----------*/
     var lastCount = 0;
     if (PP_Checklists.is_gutenberg_active()) {
@@ -1401,32 +1499,29 @@
          * For Gutenberg
          */
         if ($('#pp-checklists-req-external_links').length > 0) {
-            wp.data.subscribe(
-                function () {
-                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            wp.data.subscribe(function () {
+                var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
-                    if (typeof content == 'undefined') {
-                        return;
-                    }
-
-                    var count = PP_Checklists.extract_external_links(content).length;
-
-                    if (lastCount == count) {
-                        return;
-                    }
-
-
-                    var min = parseInt(ppChecklists.requirements.external_links.value[0]),
-                        max = parseInt(ppChecklists.requirements.external_links.value[1]);
-
-                    $('#pp-checklists-req-external_links').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        PP_Checklists.check_valid_quantity(count, min, max)
-                    );
-
-                    lastCount = count;
+                if (typeof content == 'undefined') {
+                    return;
                 }
-            );
+
+                var count = PP_Checklists.extract_external_links(content).length;
+
+                if (lastCount == count) {
+                    return;
+                }
+
+                var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+                    max = parseInt(ppChecklists.requirements.external_links.value[1]);
+
+                $('#pp-checklists-req-external_links').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min, max),
+                );
+
+                lastCount = count;
+            });
         }
     } else {
         /**
@@ -1451,7 +1546,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             count = PP_Checklists.extract_external_links(text).length;
@@ -1465,7 +1560,7 @@
 
             $('#pp-checklists-req-external_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                PP_Checklists.check_valid_quantity(count, min, max)
+                PP_Checklists.check_valid_quantity(count, min, max),
             );
 
             lastCount = count;
@@ -1476,7 +1571,6 @@
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
-
                 editor.onInit.add(function () {
                     /**
                      * Bind the words count update triggers.
@@ -1498,35 +1592,28 @@
         update();
     }
 
-
     /*----------  Image alt ----------*/
     if (PP_Checklists.is_gutenberg_active()) {
         /**
          * For Gutenberg
          */
         if ($('#pp-checklists-req-image_alt').length > 0) {
-            wp.data.subscribe(
-                function () {
-                    var no_missing_alt = false;
-                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            wp.data.subscribe(function () {
+                var no_missing_alt = false;
+                var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
-                    if (typeof content == 'undefined') {
-                        return;
-                    }
-
-                    var count = PP_Checklists.missing_alt_images(content).length;
-
-                    if (count == 0) {
-                        no_missing_alt = true;
-                    }
-
-                    $('#pp-checklists-req-image_alt').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        no_missing_alt
-                    );
-
+                if (typeof content == 'undefined') {
+                    return;
                 }
-            );
+
+                var count = PP_Checklists.missing_alt_images(content).length;
+
+                if (count == 0) {
+                    no_missing_alt = true;
+                }
+
+                $('#pp-checklists-req-image_alt').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, no_missing_alt);
+            });
         }
     } else {
         /**
@@ -1539,7 +1626,9 @@
          * Get the words count from TinyMCE and update the status of the requirement
          */
         function update() {
-            var text, count, no_missing_alt = false;
+            var text,
+                count,
+                no_missing_alt = false;
             if (typeof ppChecklists.requirements.image_alt === 'undefined') {
                 return;
             }
@@ -1549,7 +1638,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             var count = PP_Checklists.missing_alt_images(text).length;
@@ -1558,11 +1647,7 @@
                 no_missing_alt = true;
             }
 
-            $('#pp-checklists-req-image_alt').trigger(
-                PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                no_missing_alt
-            );
-
+            $('#pp-checklists-req-image_alt').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, no_missing_alt);
         }
 
         // For the editor.
@@ -1570,7 +1655,6 @@
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
-
                 editor.onInit.add(function () {
                     /**
                      * Bind the words count update triggers.
@@ -1598,23 +1682,20 @@
          * For Gutenberg
          */
         if ($('#pp-checklists-req-validate_links').length > 0) {
-            wp.data.subscribe(
-                function () {
-                    var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+            wp.data.subscribe(function () {
+                var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
-                    if (typeof content == 'undefined') {
-                        return;
-                    }
-
-                    var no_invalid_link = PP_Checklists.validate_links_format(content).length === 0;
-
-                    $('#pp-checklists-req-validate_links').trigger(
-                        PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                        no_invalid_link
-                    );
-
+                if (typeof content == 'undefined') {
+                    return;
                 }
-            );
+
+                var no_invalid_link = PP_Checklists.validate_links_format(content).length === 0;
+
+                $('#pp-checklists-req-validate_links').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    no_invalid_link,
+                );
+            });
         }
     } else {
         /**
@@ -1627,7 +1708,9 @@
          * Get the words count from TinyMCE and update the status of the requirement
          */
         function update() {
-            var text, count, no_invalid_link = false;
+            var text,
+                count,
+                no_invalid_link = false;
             if (typeof ppChecklists.requirements.validate_links === 'undefined') {
                 return;
             }
@@ -1637,7 +1720,7 @@
                 text = $content.val();
             } else {
                 // For the editor tab.
-                text = editor.getContent({format: 'raw'});
+                text = editor.getContent({ format: 'raw' });
             }
 
             var count = PP_Checklists.validate_links_format(text).length;
@@ -1648,9 +1731,8 @@
 
             $('#pp-checklists-req-validate_links').trigger(
                 PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                no_invalid_link
+                no_invalid_link,
             );
-
         }
 
         // For the editor.
@@ -1658,7 +1740,6 @@
             editor = tinymce.editors['content'];
 
             if (typeof editor !== 'undefined') {
-
                 editor.onInit.add(function () {
                     /**
                      * Bind the words count update triggers.
@@ -1682,11 +1763,16 @@
 
     /*----------  Configure link for Checklist metabox  ----------*/
     if (ppChecklists.user_can_manage_options == 1 && $('#pp_checklist_meta').length) {
-        var ppChecklistMetaboxLabel = $('#pp_checklist_meta').find('h2.hndle').val();
-        $('#pp_checklist_meta').find('h2.hndle').append(
-            ppChecklistMetaboxLabel +
-            '<span class="postbox-title-action"><a href="' + ppChecklists.configure_url +  '" class="edit-box open-box">' + ppChecklists.label_configure + '</a></span>'
-        );
+        // Create a new anchor element
+        var link = document.createElement('a');
+
+        // Set the properties of the anchor element
+        link.className = 'edit-box open-box';
+        link.href = ppChecklists.configure_url;
+        link.textContent = ppChecklists.label_configure;
+
+        // Append the anchor element to the desired parent element
+        $('#pp_checklist_meta').find('h2.hndle').append($('<span>').addClass('postbox-title-action').append(link));
     }
 
     /**

@@ -26,6 +26,13 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
     public $name = 'taxonomies_count';
 
     /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'categories';
+
+    /**
      * @var WP_Taxonomy
      */
     public $taxonomy;

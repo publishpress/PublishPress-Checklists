@@ -29,6 +29,13 @@ class Openai_item extends Base_simple implements Interface_required
      */
     protected $title;
 
+    /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'custom';
+
     public $require_button;
 
     /**

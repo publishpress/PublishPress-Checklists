@@ -1,4 +1,5 @@
-#pp_checklist_meta em {
+#pp_checklist_meta em,
+#pp-checklists-sidebar-content em {
     color: #afafaf;
 }
 
@@ -8,12 +9,18 @@
     vertical-align: middle;
 }
 
-.pp-checklists-req.status-yes *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(.request-response *) {
+.pp-checklists-req.status-yes
+    *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(
+        .request-response *
+    ) {
     color: #66bb6a;
     font-weight: normal;
 }
 
-.pp-checklists-req.status-no *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(.request-response *) {
+.pp-checklists-req.status-no
+    *:not(.pp-checklists-check-item):not(.requirement-button-task-wrap):not(.request-response):not(
+        .request-response *
+    ) {
     color: #ef5350;
     font-weight: bold;
 }
@@ -40,7 +47,7 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     width: 23px;
     height: 23px;
     font-size: 18px;
-    content: "\f147";
+    content: '\f147';
     background-color: #66bb6a;
     color: #ffede8;
     font-weight: bold;
@@ -51,7 +58,8 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     border-radius: 50px;
     text-shadow: none;
     text-align: center;
-    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
+    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms,
+        line-height 500ms;
 }
 
 body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
@@ -74,7 +82,7 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     width: 23px;
     height: 23px;
     font-size: 18px;
-    content: "!";
+    content: '!';
     background-color: #df0000;
     color: #ffede8;
     font-weight: bold;
@@ -85,7 +93,8 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:after {
     border-radius: 50px;
     text-shadow: none;
     text-align: center;
-    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms, line-height 500ms;
+    transition: background-color 500ms, font-size 500ms, width 500ms, height 500ms, top 500ms, right 500ms,
+        line-height 500ms;
 }
 
 body.ppch-show-publishing-warning-icon #publishing-action:hover:after,
@@ -122,7 +131,7 @@ body.ppch-show-publishing-warning-icon .pp-checklists-toolbar-icon:hover:after {
     margin: 10px 0px !important;
 }
 
-.edit-post-meta-boxes-area #pp_checklist_meta.postbox>.inside {
+.edit-post-meta-boxes-area #pp_checklist_meta.postbox > .inside {
     padding: 4px;
 }
 
