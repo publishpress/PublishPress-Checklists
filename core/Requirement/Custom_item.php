@@ -24,6 +24,12 @@ class Custom_item extends Base_multiple implements Interface_required
      */
     protected $title;
 
+    /**
+     * The name of the group, used for the tabs
+     * 
+     * @var string
+     */
+    public $group = 'custom';
 
     /**
      * The constructor. It adds the action to load the requirement.
