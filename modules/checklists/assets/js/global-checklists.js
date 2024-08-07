@@ -399,13 +399,16 @@
           //void submit and add to error if none of min and max field is set
           if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
             submit_form = false;
-            submit_error +=
-              '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a>' +
-              required_rules_notice +
-              ' "<strong>' +
-              row_requirement_title +
-              '</strong>"' +
-              '.</div>';
+            var field_title = $('<strong>').text(`"${row_requirement_title}"`);
+            submit_error += $('<div class="checklists-save-notice"></div>')
+              .append(
+                $('<div class="alert alert-danger alert-dismissible"></div>')
+                  .append('<a href="javascript:void(0);" class="close">×</a>')
+                  .append(document.createTextNode(required_rules_notice))
+                  .append(' ')
+                  .append(field_title),
+              )
+              .html();
           }
         }
       });
@@ -413,16 +416,20 @@
       $('.pp-checklists-custom-item-title').each(function () {
         if ($(this).val().trim() === '' && !custom_task_error_displayed) {
           submit_form = false;
-          submit_error +=
-            '<div class="alert alert-danger alert-dismissible"><a href="javascript:void(0);" class="close">×</a> ' +
-            objectL10n_checklists_global_checklist.custom_item_error +
-            '</div>';
+          submit_error += $('<div class="checklists-save-notice"></div>')
+            .append(
+              $('<div class="alert alert-danger alert-dismissible"></div>')
+                .append('<a href="javascript:void(0);" class="close">×</a>')
+                .append(document.createTextNode(objectL10n_checklists_global_checklist.custom_item_error)),
+            )
+            .html();
           custom_task_error_displayed = true;
         }
       });
 
       if (!submit_form) {
-        $('#pp-checklists-global #submit').before('<div class="checklists-save-notice">' + submit_error + '</div>');
+        var submit_error_el = $('<div class="checklists-save-notice"></div>').append(submit_error);
+        $('#pp-checklists-global #submit').before(submit_error_el);
       }
 
       return submit_form;
