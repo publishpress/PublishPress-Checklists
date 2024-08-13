@@ -35,6 +35,7 @@ use PublishPress\Checklists\Core\Plugin;
 use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
 use PublishPress\Checklists\Core\Requirement\Openai_item;
+use PublishPress\Checklists\Core\Utils\FieldsTabs;
 
 if (!class_exists('PPCH_Checklists')) {
     /**
@@ -79,6 +80,11 @@ if (!class_exists('PPCH_Checklists')) {
         protected $post_types = [];
 
         /**
+         * List of tab for settings page
+         */
+        protected $field_tabs = [];
+
+        /**
          * Instace for the module
          *
          * @var stdClass
@@ -119,6 +125,7 @@ if (!class_exists('PPCH_Checklists')) {
             );
 
             $this->module = $legacyPlugin->register_module($this->module_name, $args);
+            add_action('admin_init', [$this, 'retrieveFieldTabs']);
         }
 
         public function migrateLegacyOptions()
@@ -959,6 +966,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'global-checklists',
                 [
                     'requirements' => $new_requirements_array,
+                    'tabs'         => $this->field_tabs,
                     'post_types'   => $post_types,
                     'lang'         => [
                         'description'     => esc_html__('Task', 'publishpress-checklists'),
@@ -1235,6 +1243,17 @@ if (!class_exists('PPCH_Checklists')) {
                 wp_redirect(admin_url("admin.php?page=ppch-checklists"));
                 exit;
               }
+        }
+
+        /**
+         * Retrieves the field tabs and assigns them to the class property.
+         */
+        public function retrieveFieldTabs()
+        {
+            // Get the singleton instance
+            $fieldsTabs = FieldsTabs::getInstance();
+
+            $this->field_tabs = $fieldsTabs->getFieldsTabs();
         }
     }
 }
