@@ -22,39 +22,7 @@
                     /**
                      * Render field tabs
                      */
-
-                    $fields_tabs = array(
-                        "title" => array(
-                            "label" => "Title",
-                            "icon" => "dashicons dashicons-edit"
-                        ),
-                        "content" => array(
-                            "label" => "Content",
-                            "icon" => "dashicons dashicons-welcome-write-blog"
-                        ),
-                        "images" => array(
-                            "label" => "Images",
-                            "icon" => "dashicons dashicons-format-image"
-                        ),
-                        "links" => array(
-                            "label" => "Links",
-                            "icon" => "dashicons dashicons-admin-links"
-                        ),
-                        "categories" => array(
-                            "label" => "Categories",
-                            "icon" => "dashicons dashicons-category"
-                        ),
-                        "tags" => array(
-                            "label" => "Tags",
-                            "icon" => "dashicons dashicons-tag"
-                        ),
-                        "custom" => array(
-                            "label" => "Custom",
-                            "icon" => "dashicons dashicons-admin-generic"
-                        )
-                    );
-
-                    foreach ($fields_tabs as $key => $args) { ; ?>
+                    foreach ($context['tabs'] as $key => $args) { ; ?>
                     <li>
                         <a data-tab="<?php esc_attr_e($key); ?>"
                             class=""
