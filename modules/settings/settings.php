@@ -757,7 +757,7 @@ if (!class_exists('PPCH_Settings')) {
 
             add_settings_field(
                 'disable_publish_button',
-                __('Disable Publish button:', 'publishpress-checklists'),
+                __('Disable "Publish" button:', 'publishpress-checklists'),
                 [$this, 'settings_disable_publish_button_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
@@ -881,7 +881,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_publish_button]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                    'This will disable the Publish button when checklist requirements are not met.',
+                    'This will disable the "Publish" button when checklist requirements are not met.',
                     'publishpress-checklists'
                 );
             echo '</label>';
