@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
  * Description: Add support for checklists in WordPress
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
- * Version: 2.12.0
+ * Version: 2.13.0
  * Text Domain: publishpress-checklists
  * Domain Path: /languages
  * Requires at least: 5.5
@@ -60,7 +61,7 @@ if (class_exists('PublishPressInstanceProtection\\Config')) {
 if (!defined('PPCH_LOADED')) {
     define('PPCH_LOADED', 1);
     define('PPCH_PATH_BASE', plugin_dir_path(__FILE__));
-    define('PPCH_VERSION', '2.12.0');
+    define('PPCH_VERSION', '2.13.0');
     define('PPCH_FILE', __DIR__ . '/publishpress-checklists.php');
     define('PPCH_MODULES_PATH', PPCH_PATH_BASE . '/modules');
     define('PPCH_RELATIVE_PATH', 'publishpress-checklists');
@@ -78,40 +79,41 @@ if (!defined('PPCH_LOADED')) {
 
     $pro_active = false;
 
-	foreach ((array)get_option('active_plugins') as $plugin_file) {
-		if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
-			$pro_active = true;
-			break;
-		}
-	}
+    foreach ((array)get_option('active_plugins') as $plugin_file) {
+        if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
+            $pro_active = true;
+            break;
+        }
+    }
 
-	if (!$pro_active && is_multisite()) {
-		foreach (array_keys((array)get_site_option('active_sitewide_plugins')) as $plugin_file) {
-			if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
-				$pro_active = true;
-				break;
-			}
-		}
-	}
+    if (!$pro_active && is_multisite()) {
+        foreach (array_keys((array)get_site_option('active_sitewide_plugins')) as $plugin_file) {
+            if (false !== strpos($plugin_file, 'publishpress-checklists-pro.php')) {
+                $pro_active = true;
+                break;
+            }
+        }
+    }
 
-	if ($pro_active) {
-		add_filter(
-			'plugin_row_meta',
-			function ($links, $file) {
-				if ($file == plugin_basename(__FILE__)) {
-					$links[] = '<strong>' . esc_html__('This plugin can be deleted.', 'publishpress-checklists') . '</strong>';
-				}
+    if ($pro_active) {
+        add_filter(
+            'plugin_row_meta',
+            function ($links, $file) {
+                if ($file == plugin_basename(__FILE__)) {
+                    $links[] = '<strong>' . esc_html__('This plugin can be deleted.', 'publishpress-checklists') . '</strong>';
+                }
 
-				return $links;
-			},
-			10,
-			2
-		);
-	}
+                return $links;
+            },
+            10,
+            2
+        );
+    }
 
 
     $autoloadFilePath = PPCH_LIB_VENDOR_PATH . '/autoload.php';
-    if (! class_exists('ComposerAutoloaderInitPPChecklists')
+    if (
+        ! class_exists('ComposerAutoloaderInitPPChecklists')
         && is_file($autoloadFilePath)
         && is_readable($autoloadFilePath)
     ) {
@@ -119,7 +121,7 @@ if (!defined('PPCH_LOADED')) {
     }
 
     // Activation
-	register_activation_hook( __FILE__, function () {
+    register_activation_hook(__FILE__, function () {
         $role = get_role('administrator');
         if ($role && !$role->has_cap('manage_checklists')) {
             $role->add_cap('manage_checklists');
@@ -133,12 +135,12 @@ if (!defined('PPCH_LOADED')) {
         }
 
         update_option('ppch_activated', true);
-	});
+    });
 
     add_action('plugins_loaded', function () {
         if (is_admin() && ! defined('PUBLISHPRESS_CHECKLISTS_SKIP_VERSION_NOTICES')) {
             $includesPath = __DIR__ . DIRECTORY_SEPARATOR . 'lib'  . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'publishpress' . DIRECTORY_SEPARATOR
-            . 'wordpress-version-notices' . DIRECTORY_SEPARATOR . 'includes.php';
+                . 'wordpress-version-notices' . DIRECTORY_SEPARATOR . 'includes.php';
 
             if (file_exists($includesPath)) {
                 require_once $includesPath;
@@ -148,23 +150,23 @@ if (!defined('PPCH_LOADED')) {
                 add_filter(
                     \PPVersionNotices\Module\TopNotice\Module::SETTINGS_FILTER,
                     function ($settings) {
-                    $settings['publishpress-checklists'] = [
-                        'message' => esc_html__("You're using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s", 'publishpress-checklists'),
-                        'link' => 'https://publishpress.com/links/checklists-banner',
-                        'screens' => [
-                            [
-                                'base' => 'toplevel_page_ppch-checklists',
-                                'id' => 'toplevel_page_ppch-checklists',
-                            ],
-                            [
-                                'base' => 'checklists_page_ppch-settings',
-                                'id' => 'checklists_page_ppch-settings',
-                            ],
-                        ]
-                    ];
+                        $settings['publishpress-checklists'] = [
+                            'message' => esc_html__("You're using PublishPress Checklists Free. The Pro version has more features and support. %sUpgrade to Pro%s", 'publishpress-checklists'),
+                            'link' => 'https://publishpress.com/links/checklists-banner',
+                            'screens' => [
+                                [
+                                    'base' => 'toplevel_page_ppch-checklists',
+                                    'id' => 'toplevel_page_ppch-checklists',
+                                ],
+                                [
+                                    'base' => 'checklists_page_ppch-settings',
+                                    'id' => 'checklists_page_ppch-settings',
+                                ],
+                            ]
+                        ];
 
-                    return $settings;
-                }
+                        return $settings;
+                    }
                 );
 
                 $manageChecklistsCap = apply_filters(
