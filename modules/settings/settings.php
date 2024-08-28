@@ -614,6 +614,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['disable_quick_edit_completely'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset($new_options['disable_publish_button'])) {
+                $new_options['disable_publish_button'] = Base_requirement::VALUE_NO;
+            }
+
             return $new_options;
         }
 
@@ -752,6 +756,14 @@ if (!class_exists('PPCH_Settings')) {
             );
 
             add_settings_field(
+                'disable_publish_button',
+                __('Disable "Publish" button:', 'publishpress-checklists'),
+                [$this, 'settings_disable_publish_button_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
+            add_settings_field(
                 'openai_api_key',
                 __('OpenAI API Key:', 'publishpress-checklists'),
                 [$this, 'settings_openai_api_key_option'],
@@ -849,6 +861,27 @@ if (!class_exists('PPCH_Settings')) {
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
                     'This will disable "Quick Edit" for all users except those with the "manage_options" capability.',
+                    'publishpress-checklists'
+                );
+            echo '</label>';
+        }
+
+        /**
+         * Displays the checkbox to enable or disable quick edit
+         * 
+         *
+         * @param array
+         */
+        public function settings_disable_publish_button_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_disable_publish_button';
+            $value = isset($this->module->options->disable_publish_button) ? $this->module->options->disable_publish_button : 'no';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[disable_publish_button]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                    'This will disable the "Publish" button when checklist requirements are not met.',
                     'publishpress-checklists'
                 );
             echo '</label>';

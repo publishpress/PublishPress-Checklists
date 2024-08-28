@@ -1,49 +1,49 @@
 .publishpress-checklists-admin .logo-header {
-    display: inline-block;
-    margin-right: 5px;
-    height: 50px;
+  display: inline-block;
+  margin-right: 5px;
+  height: 50px;
 }
 
 .publishpress-checklists-admin .logo-header {
-    display: inline-block;
-    margin-right: 5px;
-    height: 50px;
+  display: inline-block;
+  margin-right: 5px;
+  height: 50px;
 }
 
 .publishpress-checklists-admin header {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .pp-checklists-custom-item-title {
-    width: 100%;
+  width: 100%;
 }
 
 textarea.pp-checklists-custom-item-title {
-    min-width: 200px;
-    min-height: 60px;
-    resize: none;
+  min-width: 200px;
+  min-height: 60px;
+  resize: none;
 }
 
 .pressshack-admin-wrapper a:link,
 .pressshack-admin-wrapper a:visited,
 .pressshack-admin-wrapper a:active,
 .pressshack-admin-wrapper a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .pressshack-admin-wrapper a,
 .pressshack-admin-wrapper button,
 .pressshack-admin-wrapper button::before {
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    -o-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .pressshack-admin-wrapper a,
 .pressshack-admin-wrapper a div,
 .pressshack-admin-wrapper a p {
-    color: #655997;
+  color: #655997;
 }
 
 .pressshack-admin-wrapper a:hover,
@@ -58,433 +58,439 @@ textarea.pp-checklists-custom-item-title {
 .pressshack-admin-wrapper a:hover .dashicons:before,
 .pressshack-admin-wrapper a:focus .dashicons:before,
 .pressshack-admin-wrapper a:active .dashicons:before {
-    color: #5a4f87;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    -o-box-shadow: none;
+  color: #5a4f87;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
 }
 
 .pressshack-admin-wrapper > header h1 a,
 .pressshack-admin-wrapper > header h1 a:hover,
 .pressshack-admin-wrapper > header h1 a:focus,
 .pressshack-admin-wrapper > header h1 a:active {
-    color: #23282d;
+  color: #23282d;
 }
 
 .pressshack-admin-wrapper .nav-tab-wrapper .nav-tab {
-    color: inherit;
+  color: inherit;
 }
 
 .pressshack-admin-wrapper .nav-tab-wrapper .nav-tab-active,
 .pressshack-admin-wrapper .nav-tab-wrapper .nav-tab:hover,
 .pressshack-admin-wrapper .nav-tab-wrapper .nav-tab:active,
 .pressshack-admin-wrapper .nav-tab-wrapper .nav-tab:focus {
-    border-top-color: #655997;
-    color: #655997;
+  border-top-color: #655997;
+  color: #655997;
 }
 
 .pressshack-admin-wrapper > footer {
-    text-align: center;
+  text-align: center;
 }
 
 .pressshack-admin-wrapper > footer > div.pp-rating {
-    font-size: 12px;
-    margin-bottom: 10px;
-    margin-top: 30px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 30px;
 }
 
 .pressshack-admin-wrapper > footer * {
-    color: #777;
+  color: #777;
 }
 
 .pressshack-admin-wrapper > footer > nav ul {
-    list-style: none;
+  list-style: none;
 }
 
 .pressshack-admin-wrapper > footer > nav ul > li {
-    display: inline-block;
+  display: inline-block;
 }
 
 .pressshack-admin-wrapper > footer > nav ul > li:not(:first-child) {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .pressshack-admin-wrapper > footer > nav ul > li > a {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .pressshack-admin-wrapper > footer .dashicons.dashicons-star-filled {
-    line-height: 18px;
-    font-size: 12px;
-    width: 12px;
-    height: 12px;
-    color: #ffb300;
-    -webkit-transition: color 200ms ease-in-out;
-    -moz-transition: color 200ms ease-in-out;
-    -o-transition: color 200ms ease-in-out;
-    transition: color 200ms ease-in-out;
+  line-height: 18px;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  color: #ffb300;
+  -webkit-transition: color 200ms ease-in-out;
+  -moz-transition: color 200ms ease-in-out;
+  -o-transition: color 200ms ease-in-out;
+  transition: color 200ms ease-in-out;
 }
 
 .pressshack-admin-wrapper button:not(.notice-dismiss),
 .pressshack-admin-wrapper .button:not(.notice-dismiss) {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    text-shadow: initial;
-    -webkit-box-shadow: initial;
-    -moz-box-shadow: initial;
-    box-shadow: initial;
-    vertical-align: middle;
-    line-height: 0;
-    min-height: 28px;
-    text-decoration: none;
-    padding: 15px 10px;
-    border-width: 1px;
-    border-style: solid;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: initial;
+  -webkit-box-shadow: initial;
+  -moz-box-shadow: initial;
+  box-shadow: initial;
+  vertical-align: middle;
+  line-height: 0;
+  min-height: 28px;
+  text-decoration: none;
+  padding: 15px 10px;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .pressshack-admin-wrapper .button:not(.notice-dismiss):hover,
 .pressshack-admin-wrapper .button:not(.notice-dismiss):active,
 .pressshack-admin-wrapper .button:not(.notice-dismiss):focus {
-    outline: none;
-    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  outline: none;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .pressshack-admin-wrapper .pp-pressshack-logo img {
-    width: 170px;
+  width: 170px;
 }
 
 /* Settings */
 .pp-checklists-small-input {
-    width: 50px;
+  width: 50px;
 }
 
 .pp-checklists-medium-input {
-    width: 60px;
+  width: 60px;
 }
 
 .pp-checklists-action-label {
-    margin-left: 25px;
+  margin-left: 25px;
 }
 
 .pp-checklists-modal-list {
-    text-align: center;
+  text-align: center;
 }
 
 .pp-checklists-modal-list ul {
-    text-align: left;
-    list-style: square;
-    display: inline-block;
+  text-align: left;
+  list-style: square;
+  display: inline-block;
 }
 
 .pp-checklists-warning-icon {
-    font-size: 30px;
-    padding-top: 1px;
-    width: 30px;
-    height: 30px;
-    color: #ef5350;
+  font-size: 30px;
+  padding-top: 1px;
+  width: 30px;
+  height: 30px;
+  color: #ef5350;
 }
 
 .pp-checklists-requirements-settings,
 .pp-custom-checklists-table {
-    width: 100%;
-    border: 1px solid silver;
-    background: #fff;
+  width: 100%;
+  border: 1px solid silver;
+  background: #fff;
 }
 
 .pp-checklists-requirements-settings th,
 .pp-custom-checklists-table th {
-    width: auto;
-    text-align: left;
-    height: 35px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-bottom: 1px solid silver;
-    font-weight: normal;
+  width: auto;
+  text-align: left;
+  height: 35px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid silver;
+  font-weight: normal;
 }
 
 .pp-checklists-requirements-settings td,
 .pp-custom-checklists-table td {
-    height: 80px;
-    padding: 10px;
-    box-sizing: border-box;
-    line-height: 32px;
+  height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  line-height: 32px;
 }
 
 #pp-checklists-post-type-filter {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 #pp-checklists-global #submit {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .pp-checklists-number label {
-    min-width: 30px;
-    display: inline-block;
+  min-width: 30px;
+  display: inline-block;
 }
 
 .pp-checklists-number input {
-    min-width: 80px;
+  min-width: 80px;
 }
 
 .pp-checklists-task-params input.full-width {
-    width: 95%;
+  width: 95%;
 }
 
 #pp-checklists-add-button,
 #pp-checklists-openai-promt-button {
-    border: 1px solid silver;
-    padding: 10px;
-    line-height: 20px;
+  border: 1px solid silver;
+  padding: 10px;
+  line-height: 20px;
 }
 
 .pp-custom-checklists-table {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .pp-custom-checklists-table tr {
-    background-color: #f6f7f7;
+  background-color: #f6f7f7;
 }
 
 .pp-custom-suggestion a {
-    color: #2271b1;
+  color: #2271b1;
 }
 
 .pp-suggestion-description {
-    line-height: 1.4em;
-    color: gray;
+  line-height: 1.4em;
+  color: gray;
 }
 
 .pp-checklists-req .status-label {
-    padding-left: 3px;
+  padding-left: 3px;
 }
 
 #pp-checklists-global .checklists-save-notice {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 #pp-checklists-global .checklists-save-notice .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible {
-    padding-right: 35px;
+  padding-right: 35px;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-dismissible .close {
-    position: relative;
-    top: -2px;
-    right: -21px;
-    color: inherit;
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
 }
 
 #pp-checklists-global .checklists-save-notice .alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 
 #pp-checklists-global .checklists-save-notice .close {
-    float: right;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: 0.2;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 0.2;
 }
 
 #pp-checklists-global .checklists-save-notice a.close {
-    text-decoration: none !important;
-    font-size: 18px !important;
-    line-height: 1.2;
+  text-decoration: none !important;
+  font-size: 18px !important;
+  line-height: 1.2;
 }
 
 .pp-checklists-task-params {
-    position: relative;
+  position: relative;
+  > .pp-checklists-remove-custom-item {
     padding-right: 40px !important;
+  }
 }
 
 .pp-checklists-task-params select {
-    width: 100%;
+  width: 100%;
 }
 
 .pp-checklists-editable-by-label {
-    margin-top: 11px;
-    display: block;
+  margin-top: 11px;
+  display: block;
 }
 
 .pp-checklists-field-description {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .pp-checklists-field-description,
 .pp-checklists-editable-by-description {
-    font-style: italic;
-    color: gray;
+  font-style: italic;
+  color: gray;
 }
 
 .pp-checklists-remove-custom-item {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .pp-checklists-requirement-row {
-    cursor: move;
+  cursor: move;
 }
 
 .pp-checklists-requirement-row td {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 @media only screen and (max-width: 781px) {
-    #pp-checklists-global table th {
-        display: none;
-    }
+  #pp-checklists-global table th {
+    display: none;
+  }
 
-    .pp-checklists-requirements-settings td,
-    .pp-custom-checklists-table td {
-        height: auto !important;
-    }
+  .pp-checklists-requirements-settings td,
+  .pp-custom-checklists-table td {
+    height: auto !important;
+  }
 
-    .pp-checklists-requirement-row td {
-        padding-left: 20px;
-    }
+  .pp-checklists-requirement-row td {
+    padding-left: 20px;
+  }
 
-    .pp-checklists-requirement-row td:first-child {
-        padding-left: 10px;
-    }
+  .pp-checklists-requirement-row td:first-child {
+    padding-left: 10px;
+  }
 
-    .pp-checklists-number {
-        display: inline-block;
-        margin-right: 10px;
-    }
+  .pp-checklists-number {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
 
 .pp-checklists-unit {
-    margin-left: 2px;
+  margin-left: 2px;
 }
 
 .submit-top {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
 .pp-checklists-tabs-wrapper {
-    display: flex;
-    background: #fff;
-    position: relative;
-    min-width: 255px;
-    border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  background: #fff;
+  position: relative;
+  min-width: 255px;
+  border: 1px solid #c3c4c7;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs {
-    min-width: 250px;
-    margin: 0;
-    line-height: 1em;
-    padding: 0 0 10px;
-    position: relative;
-    background-color: #fafafa;
-    border-right: 1px solid #eee;
-    box-sizing: border-box;
+  min-width: 250px;
+  margin: 0;
+  line-height: 1em;
+  padding: 0 0 10px;
+  position: relative;
+  background-color: #fafafa;
+  border-right: 1px solid #eee;
+  box-sizing: border-box;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul {
-    padding-top: 0;
-    margin-top: 0;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a {
-    margin: 0;
-    padding: 10px;
-    display: block;
-    box-shadow: none;
-    text-decoration: none;
-    line-height: 20px !important;
-    border-bottom: 1px solid #eee;
+  margin: 0;
+  padding: 10px;
+  display: block;
+  box-shadow: none;
+  text-decoration: none;
+  line-height: 20px !important;
+  border-bottom: 1px solid #eee;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li {
-    margin: 0;
-    padding: 0;
-    display: block;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: relative;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a.active {
-    color: #555;
-    position: relative;
-    background-color: #eee;
+  color: #555;
+  position: relative;
+  background-color: #eee;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span {
-    margin-right: 0.618em;
+  margin-right: 0.618em;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span.dashicons {
-    margin-left: 0;
-    font-size: 15px;
-    vertical-align: sub;
+  margin-left: 0;
+  font-size: 15px;
+  vertical-align: sub;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs {
-    min-width: 150px;
-    margin: 0;
-    line-height: 1em;
-    padding: 0 0 10px;
-    position: relative;
-    background-color: #fafafa;
-    border-right: 1px solid #eee;
-    box-sizing: border-box;
+  min-width: 160px;
+  margin: 0;
+  line-height: 1em;
+  padding: 0 0 10px;
+  position: relative;
+  background-color: #fafafa;
+  border-right: 1px solid #eee;
+  box-sizing: border-box;
 }
 
 .pp-checklists-content-wrapper {
-    width: 100%;
-    min-width: 320px;
-    padding: 10px;
-    margin-top: 0;
-    padding-top: 0;
+  width: 100%;
+  min-width: 320px;
+  padding: 10px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.pp-checklists-content-table .select2-container {
+  width: 100% !important;
 }
 
 @media only screen and (max-width: 1270px) {
-    .pp-checklists-content-table input[type='text'],
-    .pp-checklists-content-table input[type='number'],
-    .pp-checklists-content-table select {
-        width: 95%;
-    }
-    .pp-checklists-content-wrapper {
-        min-width: unset;
-    }
+  .pp-checklists-content-table input[type='text'],
+  .pp-checklists-content-table input[type='number'],
+  .pp-checklists-content-table select {
+    width: 95%;
+  }
+  .pp-checklists-content-wrapper {
+    min-width: unset;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
-    .pp-checklists-content-wrapper {
-        min-width: unset;
-    }
-    .pp-checklists-content-table input[type='text'],
-    .pp-checklists-content-table input[type='number'],
-    .pp-checklists-content-table select,
-    .pp-checklists-content-table textarea,
-    .ppma-boxes-editor-tab-content.ppma-profile_fields-tab.profile_header .input {
-        max-width: 95% !important;
-        width: 95% !important;
-    }
-    .pp-checklists-tabs-wrapper {
-        display: block;
-    }
+  .pp-checklists-content-wrapper {
+    min-width: unset;
+  }
+  .pp-checklists-content-table input[type='text'],
+  .pp-checklists-content-table input[type='number'],
+  .pp-checklists-content-table select,
+  .pp-checklists-content-table textarea,
+  .ppma-boxes-editor-tab-content.ppma-profile_fields-tab.profile_header .input {
+    max-width: 95% !important;
+    width: 95% !important;
+  }
+  .pp-checklists-tabs-wrapper {
+    display: block;
+  }
 }
 
 .pp-checklists-tabs-wrapper {
-    display: flex;
-    background: #fff;
+  display: flex;
+  background: #fff;
 }

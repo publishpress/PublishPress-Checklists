@@ -28,80 +28,93 @@
  */
 
 (function ($, window, document, PP_Checklists, PPCH_WooCommerce) {
-    'use strict';
+  'use strict';
 
-    $(function () {
+  $(function () {
+    function slugHasOnlyValidChars(text) {
+      if (text.trim() === '') {
+        return false;
+      }
 
-        function slugHasOnlyValidChars(text) {
-            if (text.trim() === '') {
-                return false;
+      var exp = /[^a-z0-9_\-]+/g;
+
+      return !exp.test(text);
+    }
+
+    /**
+     *
+     * Post slug
+     *
+     */
+    if ($('#pp-checklists-req-permalink_valid_chars').length > 0) {
+      $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+        var slug = '',
+          slugHasValidChars = true;
+
+        if (PP_Checklists.is_gutenberg_active()) {
+          let slugField = $('.editor-post-permalink-editor__edit');
+          if (slugField.length) {
+            // Gutenberg 8.4+ or wordpress 5.5+
+            slugField = $('.editor-post-title');
+          }
+
+          if (slugField.length > 0) {
+            slug = slugField.val();
+            if (!slug) {
+              // Gutenberg 8.4+ or wordpress 5.5+
+              slug = slugField.text();
             }
+          } else {
+            var editor = PP_Checklists.getEditor(),
+              edits = editor.getPostEdits();
 
-            var exp = /[^a-z0-9_\-]+/g;
+            if (typeof edits.slug !== 'undefined') {
+              slug = edits.slug;
+            } else {
+              slug = editor.getCurrentPost().slug;
+              const generatedSlug = editor.getCurrentPost().generated_slug;
 
-            return !exp.test(text);
+              if (slug === '') {
+                // Gutenberg 8.4+ or wordpress 5.5+
+                if (typeof generatedSlug !== 'undefined') {
+                  slug = generatedSlug;
+                } else if (typeof edits.title !== 'undefined') {
+                  slug = edits.title.replace(/[\s!\?]/g, '').toLocaleLowerCase();
+                }
+              }
+            }
+          }
+        } else {
+          slug = $('#editable-post-name input').val();
+
+          if (typeof slug === 'undefined' || slug === '') {
+            slug = $('#edit-slug-box #editable-post-name-full').text();
+          }
+
+          if (typeof slug === 'undefined' || slug === '') {
+            /* Only for the title, we ignore some chars like space, !, ? knowing those will be automatically
+             * replaced by WP when creating the slug from the title. This makes it more intuitive while
+             * adding a title for a new post without marking the permalink as invalid before it is really
+             * created by WP.
+             */
+            slug = $('#post-body #titlewrap input')
+              .val()
+              .replace(/[\s!\?]/g, '')
+              .toLocaleLowerCase();
+          }
         }
 
-        /**
-         *
-         * Post slug
-         *
-         */
-        if ($('#pp-checklists-req-permalink_valid_chars').length > 0) {
-            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
-                var slug = '',
-                    slugHasValidChars = true;
-
-                if (PP_Checklists.is_gutenberg_active()) {
-                    var slugField = jQuery('.editor-post-permalink-editor__edit');
-
-                    if (slugField.length > 0) {
-                        slug = slugField.val();
-                    } else {
-                        var editor = PP_Checklists.getEditor(),
-                            edits = editor.getPostEdits();
-
-                        if (typeof edits.slug !== 'undefined') {
-                            slug = edits.slug;
-                        } else {
-                            slug = editor.getCurrentPost().slug;
-
-                            if (slug === '') {
-                                if (typeof edits.title !== 'undefined') {
-                                    slug = edits.title.replace(/[\s!\?]/g, '').toLocaleLowerCase();
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    slug = $('#editable-post-name input').val();
-
-                    if (typeof slug === 'undefined' || slug === '') {
-                        slug = $('#edit-slug-box #editable-post-name-full').text();
-                    }
-
-                    if (typeof slug === 'undefined' || slug === '') {
-                        /* Only for the title, we ignore some chars like space, !, ? knowing those will be automatically
-                         * replaced by WP when creating the slug from the title. This makes it more intuitive while
-                         * adding a title for a new post without marking the permalink as invalid before it is really
-                         * created by WP.
-                         */
-                        slug = $('#post-body #titlewrap input').val().replace(/[\s!\?]/g, '').toLocaleLowerCase();
-                    }
-                }
-
-                if (typeof slug !== "undefined") {
-                    slugHasValidChars = slugHasOnlyValidChars(slug);
-                } else {
-                    slugHasValidChars = false;
-                }
-
-                $('#pp-checklists-req-permalink_valid_chars').trigger(
-                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-                    slugHasValidChars
-                );
-            });
+        if (typeof slug !== 'undefined') {
+          slugHasValidChars = slugHasOnlyValidChars(slug);
+        } else {
+          slugHasValidChars = false;
         }
-    });
 
+        $('#pp-checklists-req-permalink_valid_chars').trigger(
+          PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+          slugHasValidChars,
+        );
+      });
+    }
+  });
 })(jQuery, window, document, PP_Checklists);
