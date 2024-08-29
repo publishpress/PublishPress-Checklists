@@ -1300,7 +1300,8 @@
       }
 
       if (typeof obj !== 'undefined') {
-        count = obj.length;
+        var decodedObj = wp.htmlEntities.decodeEntities(obj);
+        count = decodedObj.length;
 
         $('#pp-checklists-req-title_count').trigger(
           PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
