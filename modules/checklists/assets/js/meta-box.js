@@ -688,6 +688,18 @@
       return missing_alt;
     },
 
+    get_image_alt_lengths: function(content) {
+      var lengths = [];
+      var regex = /<img[^>]+alt=(['"])(.*?)\1[^>]*>/gi;
+      var match;
+  
+      while ((match = regex.exec(content)) !== null) {
+        lengths.push(match[2].trim().length);
+      }
+  
+      return lengths;
+    },
+
     extract_links_from_content: function (content) {
       let linksIterator = content.matchAll(/(?:<a[^>]+href=['"])([^'"]+)(?:['"][^>]*>)/gi);
 
@@ -1762,6 +1774,81 @@
            * When a key has been released in the plain text content editor.
            */
 
+          if (editor.id !== 'content') {
+            return;
+          }
+
+          editor.on('nodechange keyup', _.debounce(update, 500));
+        });
+      }
+    });
+
+    $content.on('input keyup change', _.debounce(update, 500));
+    update();
+  }
+
+  /*----------  Image Alt Count ----------*/
+  if (PP_Checklists.is_gutenberg_active()) {
+    /**
+     * For Gutenberg
+     */
+    if ($('#pp-checklists-req-image_alt_count').length > 0) {
+      wp.data.subscribe(function () {
+        var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+
+        if (typeof content == 'undefined') {
+          return;
+        }
+
+        var altLengths = PP_Checklists.get_image_alt_lengths(content);
+        var min = parseInt(ppChecklists.requirements.image_alt_count.value[0]);
+        var max = parseInt(ppChecklists.requirements.image_alt_count.value[1]);
+
+        var isValid = altLengths.every(function(length) {
+          return PP_Checklists.check_valid_quantity(length, min, max);
+        });
+
+        $('#pp-checklists-req-image_alt_count').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, isValid);
+      });
+    }
+  } else {
+    /**
+     * For the Classic Editor
+     */
+    var $content = $('#content');
+    var editor;
+
+    function update() {
+      var text;
+      if (typeof ppChecklists.requirements.image_alt_count === 'undefined') {
+        return;
+      }
+
+      if (typeof editor == 'undefined' || !editor || editor.isHidden()) {
+        // For the text tab.
+        text = $content.val();
+      } else {
+        // For the editor tab.
+        text = editor.getContent({ format: 'raw' });
+      }
+
+      var altLengths = PP_Checklists.get_image_alt_lengths(text);
+      var min = parseInt(ppChecklists.requirements.image_alt_count.value[0]);
+      var max = parseInt(ppChecklists.requirements.image_alt_count.value[1]);
+
+      var isValid = altLengths.every(function(length) {
+        return PP_Checklists.check_valid_quantity(length, min, max);
+      });
+
+      $('#pp-checklists-req-image_alt_count').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, isValid);
+    }
+
+    // For the editor.
+    $(document).on(PP_Checklists.EVENT_TINYMCE_LOADED, function (event, tinymce) {
+      editor = tinymce.editors['content'];
+
+      if (typeof editor !== 'undefined') {
+        editor.onInit.add(function () {
           if (editor.id !== 'content') {
             return;
           }
