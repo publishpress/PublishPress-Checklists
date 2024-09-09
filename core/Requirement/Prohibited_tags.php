@@ -46,6 +46,13 @@ class Prohibited_tags extends Base_multiple
      */
     private $cache_expiration = 10 * MINUTE_IN_SECONDS;    
 
+    /**
+     * Flag to track if hooks have been initialized
+     *
+     * @var bool
+     */
+    private $hooks_initialized = false;
+
     public function __construct($module, $post_type)
     {
         parent::__construct($module, $post_type);
@@ -59,7 +66,7 @@ class Prohibited_tags extends Base_multiple
      */
     public function init_hooks() {
         // Check if the hooks were already initialized
-        if (isset($this->hooks_initialized) && $this->hooks_initialized) return;
+        if ($this->hooks_initialized) return;
 
         // Add the AJAX action to get the list of tags
         add_action('wp_ajax_pp_checklists_prohibited_tag', [$this, 'get_list_tag_ajax']);
@@ -189,7 +196,7 @@ class Prohibited_tags extends Base_multiple
      */
     private function get_total_count($args = array('search' => '', 'hide_empty' => 0)) {
         $args_key = base64_encode($args['search']);
-        $cache_key = "total_prohib_tag_count_${args_key}";
+        $cache_key = "total_prohib_tag_count_{$args_key}";
 
         $total_tags = get_transient($cache_key);
         if ($total_tags === false) {
