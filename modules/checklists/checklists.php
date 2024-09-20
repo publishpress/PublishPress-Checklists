@@ -398,6 +398,7 @@ if (!class_exists('PPCH_Checklists')) {
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Internal_links',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\External_links',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt_count',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Validate_links',
                 ],
                 'thumbnail' => [
