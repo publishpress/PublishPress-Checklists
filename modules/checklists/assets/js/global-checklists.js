@@ -145,6 +145,9 @@
       //add active class to title tab
       $('.pp-checklists-tabs li:first-child a').addClass('active');
 
+      $('.pp-checklists-tab-body').hide();
+      $('#pp-checklists-tab-body-' + post_type).show();
+
       const current_data_tab =
         $('#list-' + post_type)
           .find('li a.active')
