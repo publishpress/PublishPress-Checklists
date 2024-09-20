@@ -402,8 +402,13 @@ textarea.pp-checklists-custom-item-title {
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul {
+  display: none;
   padding-top: 0;
   margin-top: 0;
+
+  &.active {
+    display: block;
+  }
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a {
@@ -430,7 +435,7 @@ textarea.pp-checklists-custom-item-title {
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span {
-  margin-right: 0.618em;
+  margin-right: 0.1em;
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs ul li a span.dashicons {
@@ -440,7 +445,7 @@ textarea.pp-checklists-custom-item-title {
 }
 
 .pp-checklists-tabs-wrapper .pp-checklists-tabs {
-  min-width: 160px;
+  min-width: 180px;
   margin: 0;
   line-height: 1em;
   padding: 0 0 10px;

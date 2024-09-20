@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklistss
  * @author      PublishPress <help@publishpress.com>
@@ -53,9 +54,9 @@ class Module
         $allPostTypes              = array_keys($this->getAllPostTypes());
         foreach ($allPostTypes as $postType) {
             if ((isset($modulePostTypes[$postType]) && $modulePostTypes[$postType] == 'on') || post_type_supports(
-                    $postType,
-                    $postTypeSupport
-                )) {
+                $postType,
+                $postTypeSupport
+            )) {
                 $normalizedPostTypeOptions[$postType] = 'on';
             } else {
                 $normalizedPostTypeOptions[$postType] = 'off';
@@ -222,8 +223,8 @@ class Module
 
         if ($message && isset($current_module->messages[$message])) {
             $display_text .= '<div class="is-dismissible notice notice-info"><p>' . esc_html(
-                    $current_module->messages[$message]
-                ) . '</p></div>';
+                $current_module->messages[$message]
+            ) . '</p></div>';
         }
 
         // If there's been an error, let's display it
@@ -238,31 +239,31 @@ class Module
         }
         if ($error && isset($current_module->messages[$error])) {
             $display_text .= '<div class="is-dismissible notice notice-error"><p>' . esc_html(
-                    $current_module->messages[$error]
-                ) . '</p></div>';
+                $current_module->messages[$error]
+            ) . '</p></div>';
         }
-        ?>
+?>
 
         <div class="publishpress-checklists-admin pressshack-admin-wrapper wrap">
-        <header>
-            <h1 class="wp-heading-inline"><?php echo esc_html($current_module->title); ?></h1>
+            <header>
+                <h1 class="wp-heading-inline"><?php echo esc_html($current_module->title); ?></h1>
 
-            <?php echo !empty($display_text) ? esc_html($display_text) : ''; ?>
-            <?php // We keep the H2 tag to keep notices tied to the header
-            ?>
-            <h2>
+                <?php echo !empty($display_text) ? esc_html($display_text) : ''; ?>
+                <?php // We keep the H2 tag to keep notices tied to the header
+                ?>
+                <h2>
 
-                <?php if ($current_module->short_description && empty($custom_text)): ?>
-                    <?php echo esc_html($current_module->short_description); ?>
-                <?php endif; ?>
+                    <?php if ($current_module->short_description && empty($custom_text)): ?>
+                        <?php echo esc_html($current_module->short_description); ?>
+                    <?php endif; ?>
 
-                <?php if (!empty($custom_text)) : ?>
-                    <?php echo esc_html($custom_text); ?>
-                <?php endif; ?>
-            </h2>
+                    <?php if (!empty($custom_text)) : ?>
+                        <?php echo esc_html($custom_text); ?>
+                    <?php endif; ?>
+                </h2>
 
-        </header>
-        <?php
+            </header>
+    <?php
     }
 
     /**

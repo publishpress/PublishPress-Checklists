@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklistss
  * @author      PublishPress <help@publishpress.com>
@@ -31,9 +32,11 @@ class Util
             $post_type = $current_screen->post_type;
         } elseif (isset($_REQUEST['post_type'])) {
             $post_type = sanitize_key($_REQUEST['post_type']);
-        } elseif ('post.php' == $pagenow
+        } elseif (
+            'post.php' == $pagenow
             && $post_id
-            && !empty(get_post($post_id)->post_type)) {
+            && !empty(get_post($post_id)->post_type)
+        ) {
             $post_type = get_post($post_id)->post_type;
         } elseif ('edit.php' == $pagenow && empty($_REQUEST['post_type'])) {
             $post_type = 'post';
@@ -167,7 +170,7 @@ class Util
      */
     public static function ppch_pro_sidebar()
     {
-        ?>
+?>
         <div class="ppch-advertisement-right-sidebar">
             <div class="advertisement-box-content postbox ppch-advert">
                 <div class="postbox-header ppch-advert">
@@ -222,16 +225,16 @@ class Util
                 </div>
             </div>
         </div><?php
-    }
+            }
 
-    /**
-     * Check if Checklists Pro active
-     */
-    public static function isChecklistsProActive()
-    {
-        if (defined('PPCHPRO_VERSION')) {
-            return true;
+            /**
+             * Check if Checklists Pro active
+             */
+            public static function isChecklistsProActive()
+            {
+                if (defined('PPCHPRO_VERSION')) {
+                    return true;
+                }
+                return false;
+            }
         }
-        return false;
-    }
-}
