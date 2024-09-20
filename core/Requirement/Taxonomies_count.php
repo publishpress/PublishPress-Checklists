@@ -30,7 +30,7 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
      * 
      * @var string
      */
-    public $group = 'categories';
+    public $group = 'taxonomies';
 
     /**
      * @var WP_Taxonomy
