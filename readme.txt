@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.13.0
+Stable tag: 2.14.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,16 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.14.0] - 23 September 2024 =
+
+* Added: Taxonomies tab #747
+* Added: Minimum number of characters for alt text #616
+* Added: ACF (Advanced Custom Fields) integration support #639
+* Fixed: PHP 8.2 deprecated message #752
+* Fixed: Character count issue #740
+* Updated: Composer dependencies
+* Updated: Bumped Webpack from 5.91.0 to 5.94.0
 
 = [2.13.0] - 28 August 2024 =
 
