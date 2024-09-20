@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklists
  * @author      PublishPress <help@publishpress.com>
@@ -46,6 +47,13 @@ class Required_tags extends Base_multiple
      */
     private $cache_expiration = 10 * MINUTE_IN_SECONDS;
 
+    /**
+     * Flag to check if hooks have been initialized
+     *
+     * @var bool
+     */
+    private $hooks_initialized = false;
+
     public function __construct($module, $post_type)
     {
         parent::__construct($module, $post_type);
@@ -57,9 +65,10 @@ class Required_tags extends Base_multiple
      *
      * @return void
      */
-    public function init_hooks() {
+    public function init_hooks()
+    {
         // Check if the hooks were already initialized
-        if (isset($this->hooks_initialized) && $this->hooks_initialized) return;
+        if ($this->hooks_initialized) return;
 
         // Add the AJAX action to get the list of tags
         add_action('wp_ajax_pp_checklists_required_tag', [$this, 'get_list_tag_ajax']);
@@ -131,7 +140,7 @@ class Required_tags extends Base_multiple
         // Retrieve selected tags only on the first page
         $tags_selected = array();
 
-        if($args['page'] === 1 && !empty($selected_tags)) {
+        if ($args['page'] === 1 && !empty($selected_tags)) {
             $args_selected = array(
                 'taxonomy'   => 'post_tag',
                 'hide_empty' => 0,
@@ -140,7 +149,7 @@ class Required_tags extends Base_multiple
             );
             $cache_key_selected = md5('required_tag_selected' . json_encode($args_selected));
             $tags_selected = get_transient($cache_key_selected);
-            if($tags_selected === false) {
+            if ($tags_selected === false) {
                 $tags_selected = get_tags($args_selected);
                 set_transient($cache_key_selected, $tags_selected, $this->cache_expiration);
             }
@@ -157,7 +166,7 @@ class Required_tags extends Base_multiple
         );
         $cache_key = md5('required_tag' . json_encode($args_limited));
         $tags_limited = get_transient($cache_key);
-        if($tags_limited === false) {
+        if ($tags_limited === false) {
             $tags_limited = get_tags($args_limited);
             set_transient($cache_key, $tags_limited, $this->cache_expiration);
         }
@@ -187,16 +196,17 @@ class Required_tags extends Base_multiple
      * @param array $args
      * @return int
      */
-    private function get_total_count($args = array('search' => '', 'hide_empty' => 0)) {
+    private function get_total_count($args = array('search' => '', 'hide_empty' => 0))
+    {
         $args_key = base64_encode($args['search']);
-        $cache_key = "total_required_tag_count_${args_key}";
+        $cache_key = 'total_required_tag_count_' . $args_key;
 
         $total_tags = get_transient($cache_key);
         if ($total_tags === false) {
             $total_tags = wp_count_terms('post_tag', $args);
             set_transient($cache_key, $total_tags, $this->cache_expiration);
         }
-        
+
         return $total_tags;
     }
 
@@ -209,14 +219,14 @@ class Required_tags extends Base_multiple
     {
         // Check if the request is valid
         check_ajax_referer('pp-checklists-rules', 'nonce');
-        
+
         // Get the search query and page number from the request
         $search = isset($_POST['q']) ? sanitize_text_field($_POST['q']) : '';
         $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
         $per_page = 10;
-        
+
         // Get the tags
-        $tags = $this->get_list_tags(['page' => $page ,'per_page' => $per_page, 'q' => $search]);
+        $tags = $this->get_list_tags(['page' => $page, 'per_page' => $per_page, 'q' => $search]);
         $results = array();
 
         foreach ($tags as $tag) {
@@ -229,7 +239,7 @@ class Required_tags extends Base_multiple
         // Check if there are more tags
         $total_tags = $this->get_total_count(array('search' => $search, 'hide_empty' => 0));
         $has_next = ($page * $per_page) < $total_tags;
-    
+
         wp_send_json_success(['items' => $results, 'has_next' => $has_next]);
         wp_die();
     }
@@ -246,7 +256,7 @@ class Required_tags extends Base_multiple
 
         foreach ($tags as $tag) {
             $labels[$tag->term_id . $this->DELIMITER . $tag->name] = $tag->name;
-            if(isset($tag->children)) {
+            if (isset($tag->children)) {
                 foreach ($tag->children as $child) {
                     $labels[$child->term_id . $this->DELIMITER . $child->name] = "— {$child->name}";
                 }
@@ -255,7 +265,7 @@ class Required_tags extends Base_multiple
 
         return $labels;
     }
-    
+
     /**
      * Gets settings drop down labels.
      *
@@ -278,9 +288,9 @@ class Required_tags extends Base_multiple
      * @param int $index
      * @return String[] $tags
      */
-    private function tag_parser($tags = array(), $index = 0|1)
+    private function tag_parser($tags = array(), $index = 0 | 1)
     {
-        return array_map(function($value) use ($index) {
+        return array_map(function ($value) use ($index) {
             return explode($this->DELIMITER, $value)[$index];
         }, $tags);
     }
@@ -332,7 +342,7 @@ class Required_tags extends Base_multiple
 
         $required_tag_names = implode(', ', $required_tags);
 
-        if(empty($required_tag_names)) {
+        if (empty($required_tag_names)) {
             return $requirements;
         }
 
