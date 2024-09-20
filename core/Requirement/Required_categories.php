@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklists
  * @author      PublishPress <help@publishpress.com>
@@ -64,7 +65,8 @@ class Required_categories extends Base_multiple
      *
      * @return void
      */
-    public function init_hooks() {
+    public function init_hooks()
+    {
         // Check if the hooks were already initialized
         if ($this->hooks_initialized) return;
 
@@ -137,7 +139,7 @@ class Required_categories extends Base_multiple
 
         // Retrieve selected categories only on the first page
         $categories_selected = array();
-        if($args['page'] === 1 && !empty($selected_categories)) {
+        if ($args['page'] === 1 && !empty($selected_categories)) {
             $args_selected = array(
                 'orderby'    => 'name',
                 'order'      => 'ASC',
@@ -163,7 +165,7 @@ class Required_categories extends Base_multiple
         );
         $categories_limited = $this->get_categories_hierarchical($args_limited);
 
-         // Merge the two arrays
+        // Merge the two arrays
         $categories = array_merge($categories_limited, $categories_selected);
 
         // Remove duplicates based on term_id
@@ -188,16 +190,17 @@ class Required_categories extends Base_multiple
      * @param array $args
      * @return int
      */
-    private function get_total_count($args = array('search' => '', 'hide_empty' => 0)) {
+    private function get_total_count($args = array('search' => '', 'hide_empty' => 0))
+    {
         $args_key = base64_encode($args['search']);
-        $cache_key = "total_require_category_count_{$args_key}";
+        $cache_key = 'total_require_category_count_' . $args_key;
 
         $total_categories = get_transient($cache_key);
         if ($total_categories === false) {
             $total_categories = wp_count_terms('category', $args);
             set_transient($cache_key, $total_categories, $this->cache_expiration);
         }
-        
+
         return $total_categories;
     }
 
@@ -210,14 +213,14 @@ class Required_categories extends Base_multiple
     {
         // Check if the request is valid
         check_ajax_referer('pp-checklists-rules', 'nonce');
-        
+
         // Get the search query and page number from the request
         $search = isset($_POST['q']) ? sanitize_text_field($_POST['q']) : '';
         $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
         $per_page = 10;
-        
+
         // Get the categories
-        $categories = $this->get_list_categories(['page' => $page ,'per_page' => $per_page, 'q' => $search]);
+        $categories = $this->get_list_categories(['page' => $page, 'per_page' => $per_page, 'q' => $search]);
         $results = array();
 
         foreach ($categories as $category) {
@@ -225,7 +228,7 @@ class Required_categories extends Base_multiple
                 'id'   => $category->term_id . $this->DELIMITER . $category->name,
                 'text' => $category->name,
             );
-            if(isset($category->children)) {
+            if (isset($category->children)) {
                 foreach ($category->children as $child) {
                     $results[] = array(
                         'id'   => $child->term_id . $this->DELIMITER . $child->name,
@@ -238,7 +241,7 @@ class Required_categories extends Base_multiple
         // Check if there are more categories
         $total_categories = $this->get_total_count(array('search' => $search, 'hide_empty' => 0));
         $has_next = ($page * $per_page) < $total_categories;
-    
+
         wp_send_json_success(['items' => $results, 'has_next' => $has_next]);
         wp_die();
     }
@@ -251,15 +254,15 @@ class Required_categories extends Base_multiple
      */
     private function get_categories_hierarchical($args = array())
     {
-        if( !isset( $args[ 'parent' ] ) ) $args[ 'parent' ] = 0;
+        if (!isset($args['parent'])) $args['parent'] = 0;
 
         $cache_key = md5('required_category' . json_encode($args));
         $categories = get_transient($cache_key);
 
         // if cache is empty, get value from database
-        if($categories === false) {
-            $categories = get_categories( $args );
-            foreach( $categories as $key => $category ) {
+        if ($categories === false) {
+            $categories = get_categories($args);
+            foreach ($categories as $key => $category) {
                 $args['parent'] = $category->term_id;
                 $categories[$key]->children = $this->get_categories_hierarchical($args);
             }
@@ -282,7 +285,7 @@ class Required_categories extends Base_multiple
 
         foreach ($categories as $cat => $category) {
             $labels[$category->term_id . $this->DELIMITER . $category->name] = $category->name;
-            if(isset($category->children)) {
+            if (isset($category->children)) {
                 foreach ($category->children as $child) {
                     $labels[$child->term_id . $this->DELIMITER . $child->name] = "— {$child->name}";
                 }
@@ -291,7 +294,7 @@ class Required_categories extends Base_multiple
 
         return $labels;
     }
-    
+
     /**
      * Gets settings drop down labels.
      *
@@ -314,9 +317,9 @@ class Required_categories extends Base_multiple
      * @param int $index
      * @return String[] $categories
      */
-    private function category_parser($categories = array(), $index = 0|1)
+    private function category_parser($categories = array(), $index = 0 | 1)
     {
-        return array_map(function($value) use ($index) {
+        return array_map(function ($value) use ($index) {
             return explode($this->DELIMITER, $value)[$index];
         }, $categories);
     }
@@ -368,7 +371,7 @@ class Required_categories extends Base_multiple
 
         $required_category_names = implode(', ', $required_categories);
 
-        if(empty($required_category_names)) {
+        if (empty($required_category_names)) {
             return $requirements;
         }
 
