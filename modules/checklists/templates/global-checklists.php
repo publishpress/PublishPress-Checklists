@@ -23,19 +23,24 @@
              */
             $i = 0;
             foreach ($context['post_types'] as $post_type_key => $post_type_label) { ?>
-                <ul id="list-<?php echo $post_type_key; ?>" class="pp-checklists-tabs-list <?php echo $i === 0 ? 'active' : ''; ?>">
-                    <?php
-                    foreach ($context['tabs'][$post_type_key] as $key => $args) { ?>
-                        <li class="<?php echo $post_type_key; ?>">
-                            <a data-tab="<?php esc_attr_e($key); ?>"
-                                data-post-type="<?php esc_attr_e($post_type_key); ?>"
-                                class=""
+                <ul id="list-<?php echo esc_attr($post_type_key); ?>" class="pp-checklists-tabs-list <?php echo $i === 0 ? 'active' : ''; ?>">
+                    <?php foreach ($context['tabs'][$post_type_key] as $key => $args) {
+                        $has_requirements = array_filter($context['requirements'][$post_type_key], function ($requirement) use ($key) {
+                            return $requirement->group === $key;
+                        });
+
+                        if (empty($has_requirements) && $key !== 'custom') {
+                            continue;
+                        } ?>
+                        <li class="<?php echo esc_attr($post_type_key); ?>">
+                            <a data-tab="<?php echo esc_attr($key); ?>"
+                                data-post-type="<?php echo esc_attr($post_type_key); ?>"
                                 href="#">
-                                <span class="<?php esc_attr_e($args['icon']); ?>"></span>
-                                <span class="item"><?php esc_html_e($args['label']); ?></span>
+                                <span class="<?php echo esc_attr($args['icon']); ?>"></span>
+                                <span class="item"><?php echo esc_html($args['label']); ?></span>
                             </a>
                         </li>
-                    <?php };
+                    <?php }
                     $i++; ?>
                 </ul>
             <?php } ?>
@@ -58,45 +63,66 @@
                         <th><?php echo esc_html($context['lang']['params']); ?></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($context['requirements'] as $post_type => $post_type_requirements) : ?>
-                        <?php foreach ($post_type_requirements as $requirement) : ?>
-                            <tr
-                                class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group"
-                                style="display: none;"
-                                data-id="<?php echo esc_attr($requirement->name); ?>"
-                                data-post-type="<?php echo esc_attr($post_type); ?>">
-
-                                <td>
-                                    <?php
-                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                    echo $requirement->get_setting_title_html();
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                    echo $requirement->get_setting_action_list_html(); ?>
-                                </td>
+                <?php
+                $i = 0;
+                foreach ($context['post_types'] as $post_type_key => $post_type_label) : ?>
+                    <tbody id="<?php echo 'pp-checklists-tab-body-' . $post_type_key; ?>" class="pp-checklists-tab-body <?php echo $i === 0 ? 'active' : ''; ?>" style="display: none;">
+                        <?php
+                        foreach ($context['tabs'][$post_type_key] as $group => $tabInfo) :
+                            foreach ($context['requirements'] as $post_type => $post_type_requirements) : ?>
                                 <?php
-                                /**
-                                 * @param string $html
-                                 * @param $requirement
-                                 *
-                                 * @return string
-                                 */
-                                do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
+                                $group_has_requirements = false;
                                 ?>
-                                <td class="pp-checklists-task-params">
-                                    <?php
-                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                    echo $requirement->get_setting_field_html();
+                                <?php foreach ($post_type_requirements as $requirement) : ?>
+                                    <?php if ($requirement->group === $group) :
+                                        $group_has_requirements = true;
                                     ?>
-                                </td>
-                            </tr>
+                                        <tr
+                                            class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group"
+                                            style="display: none;"
+                                            data-id="<?php echo esc_attr($requirement->name); ?>"
+                                            data-post-type="<?php echo esc_attr($post_type); ?>">
+
+                                            <td>
+                                                <?php
+                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                echo $requirement->get_setting_title_html();
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                echo $requirement->get_setting_action_list_html(); ?>
+                                            </td>
+                                            <?php
+                                            /**
+                                             * @param string $html
+                                             * @param $requirement
+                                             *
+                                             * @return string
+                                             */
+                                            do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
+                                            ?>
+                                            <td class="pp-checklists-task-params">
+                                                <?php
+                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                echo $requirement->get_setting_field_html();
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php if ($post_type === $post_type_key && !$group_has_requirements) : ?>
+                                    <tr class="pp-checklists-requirement-row ppch-<?php echo esc_attr($group); ?>-group" data-post-type="<?php echo esc_attr($post_type); ?>">
+                                        <td colspan="4">
+                                            <?php echo esc_html(sprintf(__('No %s requirements for this post type.', 'publishpress-checklists'), $group)); ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         <?php endforeach; ?>
-                    <?php endforeach; ?>
-                </tbody>
+                    </tbody>
+                <?php endforeach; ?>
             </table>
         </div>
 
