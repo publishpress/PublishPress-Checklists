@@ -39,15 +39,15 @@ class Image_alt_count extends Base_counter
      */
     public function init_language()
     {
-        $this->lang['label']                = __('Number of character in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_settings']       = __('Number of character in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_min_singular']   = __('Minimum of %d character in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_min_plural']     = __('Minimum of %d characters in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_max_singular']   = __('Maximum of %d character in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_max_plural']     = __('Maximum of %d characters in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_exact_singular'] = __('%d character in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_exact_plural']   = __('%d characters in alt text for all images', 'publishpress-checklists');
-        $this->lang['label_between']        = __('Between %d and %d characters in alt text for all images', 'publishpress-checklists');
+        $this->lang['label']                = __('Number of characters in Alt text', 'publishpress-checklists');
+        $this->lang['label_settings']       = __('Number of characters in Alt text', 'publishpress-checklists');
+        $this->lang['label_min_singular']   = __('Minimum of %d character in Alt text', 'publishpress-checklists');
+        $this->lang['label_min_plural']     = __('Minimum of %d characters in Alt text', 'publishpress-checklists');
+        $this->lang['label_max_singular']   = __('Maximum of %d character in Alt text', 'publishpress-checklists');
+        $this->lang['label_max_plural']     = __('Maximum of %d characters in Alt text', 'publishpress-checklists');
+        $this->lang['label_exact_singular'] = __('%d character in Alt text', 'publishpress-checklists');
+        $this->lang['label_exact_plural']   = __('%d characters in Alt text', 'publishpress-checklists');
+        $this->lang['label_between']        = __('Between %d and %d characters in Alt text', 'publishpress-checklists');
     }
 
     /**
