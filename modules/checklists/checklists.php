@@ -708,6 +708,8 @@ if (!class_exists('PPCH_Checklists')) {
             foreach ($postTypeSlugs as $slug) {
                 $postType = get_post_type_object($slug);
                 if (is_object($postType)) {
+                    // Need to overide the value to prevent user confusion
+                    if ($slug === 'acf-field-group') $postType->label = 'ACF';
                     $postTypes[$slug] = $postType->label;
                 }
             }
