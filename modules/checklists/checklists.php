@@ -688,6 +688,12 @@ if (!class_exists('PPCH_Checklists')) {
 
             $supported_post_types = $this->getSelectedPostTypes();
 
+            // Hide checklist meta box from acf plugin
+            $excludeKey = 'acf-field-group';
+            if (array_key_exists($excludeKey, $supported_post_types)) {
+                unset($supported_post_types[$excludeKey]);
+            }
+
             foreach ($supported_post_types as $post_type => $label) {
                 add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
             }
