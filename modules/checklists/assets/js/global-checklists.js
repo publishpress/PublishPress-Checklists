@@ -130,20 +130,34 @@
      * @param  {string} post_type
      */
     function show_post_type_requirements(post_type) {
-      // Hide the requirements which are not for the current post type
-      $('#pp-checklists-requirements tr.pp-checklists-requirement-row').hide();
-      // Display the correct requirements
-      $('#pp-checklists-requirements tr.ppch-title-group[data-post-type="' + post_type + '"]').show();
+      // Mark the filter as selected
+      $('#pp-checklists-post-type-filter li.nav-tab-active').removeClass('nav-tab-active');
+      $('#pp-checklists-post-type-filter li.post-type-' + post_type).addClass('nav-tab-active');
+
+      $('.pp-checklists-tabs-list li a').removeClass('active');
 
       //remove active class from all tabs
       $('.pp-checklists-tabs a').removeClass('active');
 
-      //add active class to title tab
-      $('.pp-checklists-tabs a[data-tab="title"]').addClass('active');
+      $('.pp-checklists-tabs ul').removeClass('active');
+      $('.pp-checklists-tabs ul#list-' + post_type).addClass('active');
 
-      // Mark the filter as selected
-      $('#pp-checklists-post-type-filter li.nav-tab-active').removeClass('nav-tab-active');
-      $('#pp-checklists-post-type-filter li.post-type-' + post_type).addClass('nav-tab-active');
+      //add active class to title tab
+      $('.pp-checklists-tabs li:first-child a').addClass('active');
+
+      $('.pp-checklists-tab-body').hide();
+      $('#pp-checklists-tab-body-' + post_type).show();
+
+      const current_data_tab =
+        $('#list-' + post_type)
+          .find('li a.active')
+          .attr('data-tab') || 'title';
+      // Hide the requirements which are not for the current post type
+      $('#pp-checklists-requirements tr.pp-checklists-requirement-row').hide();
+      // Display the correct requirements
+      $(
+        '#pp-checklists-requirements tr.ppch-' + current_data_tab + '-group[data-post-type="' + post_type + '"]',
+      ).show();
     }
 
     /**

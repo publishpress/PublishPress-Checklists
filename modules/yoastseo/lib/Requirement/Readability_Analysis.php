@@ -38,6 +38,13 @@ class Readability_Analysis extends Base_dropdown
     public $name = 'yoast_readability_analysis';
 
     /**
+     * The name of the requirement, in a slug format
+     *
+     * @var string
+     */
+    public $group = 'content';
+
+    /**
      * Initialize the language strings for the instance
      *
      * @return void

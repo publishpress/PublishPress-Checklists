@@ -39,6 +39,10 @@ class FieldsTabs {
                 "label" => "Tags",
                 "icon" => "dashicons dashicons-tag"
             ),
+            "taxonomies" => array(
+                "label" => "Taxonomies",
+                "icon" => "dashicons dashicons-list-view"
+            ),
             "custom" => array(
                 "label" => "Custom",
                 "icon" => "dashicons dashicons-admin-generic"
