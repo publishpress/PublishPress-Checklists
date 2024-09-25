@@ -29,9 +29,9 @@
                             return $requirement->group === $key;
                         });
 
-                        if (empty($has_requirements) && $key !== 'custom') {
-                            continue;
-                        } ?>
+                        // Skip if the tab has no requirements or is not the custom tab
+                        if (empty($has_requirements) && $key !== 'custom') continue;
+                    ?>
                         <li class="<?php echo esc_attr($post_type_key); ?>">
                             <a data-tab="<?php echo esc_attr($key); ?>"
                                 data-post-type="<?php echo esc_attr($post_type_key); ?>"
@@ -71,6 +71,8 @@
                         foreach ($context['tabs'][$post_type_key] as $group => $tabInfo) :
                             foreach ($context['requirements'] as $post_type => $post_type_requirements) : ?>
                                 <?php
+                                // Skip if the post type is not the current one
+                                if ($post_type !== $post_type_key) continue;
                                 $group_has_requirements = false;
                                 ?>
                                 <?php foreach ($post_type_requirements as $requirement) : ?>

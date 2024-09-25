@@ -71,6 +71,7 @@ if (!class_exists('PPCH_Settings')) {
                     'post_types'               => [
                         'post' => 'on',
                     ],
+                    'disable_publish_button'   => Base_requirement::VALUE_NO,
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
                 ],

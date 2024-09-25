@@ -688,6 +688,12 @@ if (!class_exists('PPCH_Checklists')) {
 
             $supported_post_types = $this->getSelectedPostTypes();
 
+            // Hide checklist meta box from acf plugin
+            $excludeKey = 'acf-field-group';
+            if (array_key_exists($excludeKey, $supported_post_types)) {
+                unset($supported_post_types[$excludeKey]);
+            }
+
             foreach ($supported_post_types as $post_type => $label) {
                 add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
             }
@@ -702,6 +708,8 @@ if (!class_exists('PPCH_Checklists')) {
             foreach ($postTypeSlugs as $slug) {
                 $postType = get_post_type_object($slug);
                 if (is_object($postType)) {
+                    // Need to overide the value to prevent user confusion
+                    if ($slug === 'acf-field-group') $postType->label = 'ACF';
                     $postTypes[$slug] = $postType->label;
                 }
             }
@@ -775,12 +783,12 @@ if (!class_exists('PPCH_Checklists')) {
                             'Not required, but important: ',
                             'publishpress-checklists'
                         ),
-                        'show_warning_icon_submit'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
-                        'disable_publish_button'        => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->disable_publish_button,
-                        'title_warning_icon'              => esc_html__('One or more items in the checklist are not completed'),
-                        'is_gutenberg_active'             => $this->is_gutenberg_active(),
-                        'user_can_manage_options'         => current_user_can('manage_options'),
-                        'configure_url'                   => esc_url($this->get_admin_link()),
+                        'show_warning_icon_submit' => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->show_warning_icon_submit,
+                        'disable_publish_button'   => Base_requirement::VALUE_YES === $legacyPlugin->settings->module->options->disable_publish_button,
+                        'title_warning_icon'       => esc_html__('One or more items in the checklist are not completed'),
+                        'is_gutenberg_active'      => $this->is_gutenberg_active(),
+                        'user_can_manage_options'  => current_user_can('manage_options'),
+                        'configure_url'            => esc_url($this->get_admin_link()),
                     ]
                 );
 
