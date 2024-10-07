@@ -3,7 +3,7 @@
 /**
  * Plugin Name: PublishPress Checklists
  * Plugin URI:  https://publishpress.com/
- * Description: Add support for checklists in WordPress
+ * Description: With PublishPress Checklists, you can choose publishing requirements for your content
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
  * Version: 2.14.0
