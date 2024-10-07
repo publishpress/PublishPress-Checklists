@@ -83,8 +83,8 @@ msgid "Add custom task"
 msgstr "Eigene Aufgabe hinzufügen"
 
 #. Description of the plugin
-msgid "Add support for checklists in WordPress"
-msgstr "Support für Checklisten in WordPress"
+msgid "With PublishPress Checklists, you can choose publishing requirements for your content."
+msgstr "Mit den Checklisten von PublishPress können Sie Veröffentlichungsanforderungen für Ihre Inhalte auswählen."
 
 #: modules/settings/settings.php:677
 msgid "Add to these post types:"

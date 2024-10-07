@@ -91,8 +91,8 @@ msgid "Add OpenAI Prompt task"
 msgstr "Añadir tarea de indicación de OpenAI"
 
 #. Description of the plugin
-msgid "Add support for checklists in WordPress"
-msgstr "Anadir compatibilidad con las listas de verificación en WordPress"
+msgid "With PublishPress Checklists, you can choose publishing requirements for your content."
+msgstr "Con las listas de verificación de PublishPress, puede elegir los requisitos de publicación para su contenido."
 
 #: modules/settings/settings.php:684
 msgid "Add to these post types:"
