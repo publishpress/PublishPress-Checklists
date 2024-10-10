@@ -228,7 +228,8 @@
         $suggestionsObject = objectL10n_checklists_global_checklist[type + '_suggestions'],
         rule;
 
-      $table.append($tr);
+      $table.find('tbody#pp-checklists-tab-body-' + post_type).append($tr);
+      $table.find('tr.ppch-custom-group:contains("No custom requirements for this post type.")').hide();
 
       $tr
         .addClass('pp-checklists-requirement-row')
@@ -338,7 +339,7 @@
     /*----------  Custom items  ----------*/
     $('#pp-checklists-add-button').on('click', function (event) {
       //hide all tabs contents, and show Custom tab
-      $('.pp-checklists-requirement-row').hide();
+      // $('.pp-checklists-requirement-row').hide();
       $('.ppch-custom-group').show();
 
       var newId = uidGen(15);
@@ -373,7 +374,7 @@
     /*----------  OpenAI items  ----------*/
     $('#pp-checklists-openai-promt-button').on('click', function (event) {
       //hide all tabs contents, and show Custom tab
-      $('.pp-checklists-requirement-row').hide();
+      // $('.pp-checklists-requirement-row').hide();
       $('.ppch-custom-group').show();
 
       var newId = uidGen(15);
