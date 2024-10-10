@@ -716,6 +716,10 @@
     },
 
     is_valid_link: function (link) {
+      if (link.startsWith('#')) {
+        return true;
+      }
+      
       const linkWithoutFragment = link.split('#')[0];
 
       return linkWithoutFragment.match(
