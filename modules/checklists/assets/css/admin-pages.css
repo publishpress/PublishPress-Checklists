@@ -311,7 +311,8 @@ textarea.pp-checklists-custom-item-title {
 .pp-checklists-task-params {
   position: relative;
   > .pp-checklists-remove-custom-item {
-    padding-right: 40px !important;
+    padding-right: 5px !important;
+    padding-top: 5px !important;
   }
 }
 

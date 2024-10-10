@@ -688,15 +688,15 @@
       return missing_alt;
     },
 
-    get_image_alt_lengths: function(content) {
+    get_image_alt_lengths: function (content) {
       var lengths = [];
       var regex = /<img[^>]+alt=(['"])(.*?)\1[^>]*>/gi;
       var match;
-  
+
       while ((match = regex.exec(content)) !== null) {
         lengths.push(match[2].trim().length);
       }
-  
+
       return lengths;
     },
 
@@ -716,6 +716,10 @@
     },
 
     is_valid_link: function (link) {
+      if (link.startsWith('#')) {
+        return true;
+      }
+      
       const linkWithoutFragment = link.split('#')[0];
 
       return linkWithoutFragment.match(
@@ -935,12 +939,12 @@
     if (PP_Checklists.is_gutenberg_active()) {
       wp.data.subscribe(function () {
         if (loaded) return;
-        const dataMedia = wp.data
-          .select('core')
-          .getMedia(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
-        meta_id = Number(PP_Checklists.getEditor().getEditedPostAttribute('featured_media'));
-        if (typeof dataMedia === 'object' && dataMedia) {
-          updateFeaturedImageAlt(meta_id, dataMedia.alt_text);
+        const mediaId = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
+        if (mediaId) {
+          const dataMedia = wp.data.select('core').getMedia(mediaId);
+          if (typeof dataMedia === 'object' && dataMedia) {
+            updateFeaturedImageAlt(mediaId, dataMedia.alt_text);
+          }
         }
       });
     } else {
@@ -1112,7 +1116,7 @@
         // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
         var obj = PP_Checklists.getEditor().getEditedPostAttribute('categories');
       } else {
-        var obj = $('#categorychecklist input:checked');
+        var obj = $('#categorychecklist input:checked:not(.rank-math-make-primary)');
       }
 
       if (typeof obj !== 'undefined') {
@@ -1804,7 +1808,7 @@
         var min = parseInt(ppChecklists.requirements.image_alt_count.value[0]);
         var max = parseInt(ppChecklists.requirements.image_alt_count.value[1]);
 
-        var isValid = altLengths.every(function(length) {
+        var isValid = altLengths.every(function (length) {
           return PP_Checklists.check_valid_quantity(length, min, max);
         });
 
@@ -1836,7 +1840,7 @@
       var min = parseInt(ppChecklists.requirements.image_alt_count.value[0]);
       var max = parseInt(ppChecklists.requirements.image_alt_count.value[1]);
 
-      var isValid = altLengths.every(function(length) {
+      var isValid = altLengths.every(function (length) {
         return PP_Checklists.check_valid_quantity(length, min, max);
       });
 

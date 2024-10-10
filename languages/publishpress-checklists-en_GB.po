@@ -97,10 +97,8 @@ msgid "Add custom task"
 msgstr "Add custom task"
 
 #. Description of the plugin
-msgid "Add support for checklists in WordPress"
-msgstr ""
-"With PublishPress Checklists, you can choose pre-publishing requirements for "
-"your content."
+msgid "With PublishPress Checklists, you can choose publishing requirements for your content."
+msgstr "With PublishPress Checklists, you can choose publishing requirements for your content."
 
 #: modules/settings/settings.php:677
 msgid "Add to these post types:"
