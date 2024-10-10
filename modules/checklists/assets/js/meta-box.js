@@ -1116,7 +1116,7 @@
         // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
         var obj = PP_Checklists.getEditor().getEditedPostAttribute('categories');
       } else {
-        var obj = $('#categorychecklist input:checked');
+        var obj = $('#categorychecklist input:checked:not(.rank-math-make-primary)');
       }
 
       if (typeof obj !== 'undefined') {
