@@ -45,7 +45,7 @@ class Prohibited_tags extends Base_multiple
      * 
      * @var int
      */
-    private $cache_expiration = 10 * MINUTE_IN_SECONDS;
+    private $cache_expiration = 1 * MINUTE_IN_SECONDS;
 
     /**
      * Flag to track if hooks have been initialized
