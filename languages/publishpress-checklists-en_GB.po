@@ -2,18 +2,19 @@
 # This file is distributed under the same license as the PublishPress - PublishPress Checklists package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-03-06 13:26+0000\n"
+"Project-Id-Version: PublishPress - PublishPress Checklists\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2024-10-15 00:25+0700\n"
+"Last-Translator: \n"
+"Language-Team: English (UK)\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz/\n"
-"Language: en_GB\n"
-"Project-Id-Version: PublishPress - PublishPress Checklists\n"
-"Language-Team: English (UK)"
+"X-Generator: Poedit 3.0.1\n"
 
-#: core/Requirement/Taxonomies_count.php:48
-#: core/Requirement/Taxonomies_count.php:49
+#: core/Requirement/Taxonomies_count.php:48 core/Requirement/Taxonomies_count.php:49
 #| msgid "%s "
 msgid "%d "
 msgstr "%d"
@@ -104,8 +105,7 @@ msgstr "With PublishPress Checklists, you can choose publishing requirements for
 msgid "Add to these post types:"
 msgstr "Add checklists to these post types:"
 
-#: core/Requirement/Validate_links.php:58
-#: core/Requirement/Validate_links.php:59
+#: core/Requirement/Validate_links.php:58 core/Requirement/Validate_links.php:59
 msgid "All links use a valid format"
 msgstr ""
 
@@ -206,8 +206,8 @@ msgstr "Custom"
 
 #: modules/checklists/templates/global-checklists.php:75
 msgid ""
-"Custom tasks do not complete automatically. Users must check the box to show "
-"they have completed the task."
+"Custom tasks do not complete automatically. Users must check the box to show they have "
+"completed the task."
 msgstr ""
 
 #: modules/permalinks/permalinks.php:65
@@ -231,12 +231,8 @@ msgid "Disabled"
 msgstr "Disabled"
 
 #: modules/settings/settings.php:401
-msgid ""
-"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
-"loaded file."
-msgstr ""
-"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
-"loaded file."
+msgid "Disabled because add_post_type_support('%1$s', '%2$s') is included in a loaded file."
+msgstr "Disabled because add_post_type_support('%1$s', '%2$s') is included in a loaded file."
 
 #: modules/checklists/checklists.php:896
 msgid "Disabled, Recommended or Required"
@@ -250,8 +246,7 @@ msgstr "Documentation"
 msgid "Enabled features"
 msgstr "Enabled features"
 
-#: core/Requirement/Featured_image.php:35
-#: core/Requirement/Featured_image.php:36
+#: core/Requirement/Featured_image.php:35 core/Requirement/Featured_image.php:36
 msgid "Featured image is added"
 msgstr ""
 
@@ -284,8 +279,8 @@ msgstr "https://publishpress.com/"
 
 #: modules/settings/settings.php:747
 msgid ""
-"If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+"If the \"Status\" option is enabled, it can be used to avoid using the Checklists "
+"requirements.\""
 msgstr ""
 
 #: core/Legacy/Module.php:288
@@ -300,8 +295,7 @@ msgstr "Latin characters in permalink"
 msgid "Max"
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:46
-#: core/Requirement/Taxonomies_count.php:47
+#: core/Requirement/Taxonomies_count.php:46 core/Requirement/Taxonomies_count.php:47
 #, fuzzy
 #| msgid "Maximum of %s "
 msgid "Maximum of %d "
@@ -381,8 +375,7 @@ msgstr "Maximum of %s category"
 msgid "Min"
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:44
-#: core/Requirement/Taxonomies_count.php:45
+#: core/Requirement/Taxonomies_count.php:44 core/Requirement/Taxonomies_count.php:45
 #, fuzzy
 #| msgid "Minimum of %s "
 msgid "Minimum of %d "
@@ -502,8 +495,7 @@ msgstr "Number of tags"
 msgid "Number of words in content"
 msgstr ""
 
-#: core/Requirement/Filled_excerpt.php:35
-#: core/Requirement/Filled_excerpt.php:36
+#: core/Requirement/Filled_excerpt.php:35 core/Requirement/Filled_excerpt.php:36
 msgid "Numbers of characters in excerpt"
 msgstr ""
 
@@ -536,8 +528,7 @@ msgstr "Please complete the following tasks before publishing:"
 
 #: modules/checklists/checklists.php:692
 msgid "Please complete the following tasks before updating the published post:"
-msgstr ""
-"Please complete the following tasks before updating the published post:"
+msgstr "Please complete the following tasks before updating the published post:"
 
 #: core/Legacy/LegacyPlugin.php:208
 msgid "Please correct your form errors below and try again."

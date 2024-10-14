@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress - PublishPress Checklists\n"
 "POT-Creation-Date: 2020-08-04 15:40-0300\n"
-"PO-Revision-Date: 2023-03-06 13:26+0000\n"
+"PO-Revision-Date: 2024-10-15 00:25+0700\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
 "Language: pt_BR\n"
@@ -10,10 +10,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Poedit 3.0.1\n"
 
-#: core/Requirement/Taxonomies_count.php:48
-#: core/Requirement/Taxonomies_count.php:49
+#: core/Requirement/Taxonomies_count.php:48 core/Requirement/Taxonomies_count.php:49
 #, php-format
 msgid "%d "
 msgstr "%d "
@@ -104,8 +103,7 @@ msgstr "Com as listas de verificação do PublishPress, você pode escolher os r
 msgid "Add to these post types:"
 msgstr "Adicionar a estes tipos de post:"
 
-#: core/Requirement/Validate_links.php:58
-#: core/Requirement/Validate_links.php:59
+#: core/Requirement/Validate_links.php:58 core/Requirement/Validate_links.php:59
 msgid "All links use a valid format"
 msgstr ""
 
@@ -182,8 +180,8 @@ msgstr "Trapaceando&#8217; hein?"
 msgid "Checklist"
 msgstr "Checklist"
 
-#: core/Legacy/LegacyPlugin.php:348 modules/checklists/checklists.php:99
-#: modules/checklists/checklists.php:832 modules/checklists/checklists.php:847
+#: core/Legacy/LegacyPlugin.php:348 modules/checklists/checklists.php:99 modules/checklists/checklists.php:832
+#: modules/checklists/checklists.php:847
 msgid "Checklists"
 msgstr "Checklists"
 
@@ -204,9 +202,7 @@ msgid "Custom"
 msgstr "Personalizado"
 
 #: modules/checklists/templates/global-checklists.php:75
-msgid ""
-"Custom tasks do not complete automatically. Users must check the box to show "
-"they have completed the task."
+msgid "Custom tasks do not complete automatically. Users must check the box to show they have completed the task."
 msgstr ""
 
 #: modules/permalinks/permalinks.php:65
@@ -219,8 +215,7 @@ msgstr "Definir tarefas relacionadas ao Yoast SEO"
 
 #: modules/checklists/checklists.php:101
 msgid "Define tasks that must be complete before content is published."
-msgstr ""
-"Defina tarefas que devem ser completadas antes do conteúdo ser publicado."
+msgstr "Defina tarefas que devem ser completadas antes do conteúdo ser publicado."
 
 #: modules/settings/settings.php:693
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
@@ -232,12 +227,8 @@ msgstr "Inativo"
 
 #: modules/settings/settings.php:401
 #, php-format
-msgid ""
-"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
-"loaded file."
-msgstr ""
-"Desabilitado, pois add_post_type_support('%1$s', '%2$s') está incluído em um "
-"arquivo já carregado."
+msgid "Disabled because add_post_type_support('%1$s', '%2$s') is included in a loaded file."
+msgstr "Desabilitado, pois add_post_type_support('%1$s', '%2$s') está incluído em um arquivo já carregado."
 
 #: modules/checklists/checklists.php:896
 msgid "Disabled, Recommended or Required"
@@ -251,8 +242,7 @@ msgstr "Documentação"
 msgid "Enabled features"
 msgstr "Funcionalidades ativadas"
 
-#: core/Requirement/Featured_image.php:35
-#: core/Requirement/Featured_image.php:36
+#: core/Requirement/Featured_image.php:35 core/Requirement/Featured_image.php:36
 msgid "Featured image is added"
 msgstr "A imagem em destaque foi adicionada"
 
@@ -262,15 +252,13 @@ msgstr "Funcionalidades"
 
 #: modules/settings/settings.php:246
 msgid "Feel free to select only the features you need."
-msgstr ""
-"Sinta-se livre para selecionar somente as funcionalidades de que precisa."
+msgstr "Sinta-se livre para selecionar somente as funcionalidades de que precisa."
 
 #: modules/settings/settings.php:668
 msgid "General:"
 msgstr "Geral:"
 
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:129
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:160
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:129 modules/yoastseo/lib/Requirement/Seo_Analysis.php:160
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:130
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:161
 msgid "Good"
@@ -285,9 +273,7 @@ msgid "https://publishpress.com/"
 msgstr "https://publishpress.com/"
 
 #: modules/settings/settings.php:747
-msgid ""
-"If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements.\""
+msgid "If the \"Status\" option is enabled, it can be used to avoid using the Checklists requirements.\""
 msgstr ""
 
 #: core/Legacy/Module.php:288
@@ -303,8 +289,7 @@ msgstr "Caracteres latinos no link permanente"
 msgid "Max"
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:46
-#: core/Requirement/Taxonomies_count.php:47
+#: core/Requirement/Taxonomies_count.php:46 core/Requirement/Taxonomies_count.php:47
 #, php-format
 msgid "Maximum of %d "
 msgstr "Máximo de %d "
@@ -383,8 +368,7 @@ msgstr "Máximo de %s categoria"
 msgid "Min"
 msgstr ""
 
-#: core/Requirement/Taxonomies_count.php:44
-#: core/Requirement/Taxonomies_count.php:45
+#: core/Requirement/Taxonomies_count.php:44 core/Requirement/Taxonomies_count.php:45
 #, php-format
 msgid "Minimum of %d "
 msgstr "Mínimo de %d "
@@ -503,13 +487,11 @@ msgstr "Número de tags"
 msgid "Number of words in content"
 msgstr "Número de palavras no conteúdo"
 
-#: core/Requirement/Filled_excerpt.php:35
-#: core/Requirement/Filled_excerpt.php:36
+#: core/Requirement/Filled_excerpt.php:35 core/Requirement/Filled_excerpt.php:36
 msgid "Numbers of characters in excerpt"
 msgstr "Números de caracteres no resumo"
 
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:124
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:159
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:124 modules/yoastseo/lib/Requirement/Seo_Analysis.php:159
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:125
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:160
 msgid "OK"
@@ -537,9 +519,7 @@ msgstr "Por favor, complete as seguintes tarefas antes de publicar:"
 
 #: modules/checklists/checklists.php:692
 msgid "Please complete the following tasks before updating the published post:"
-msgstr ""
-"Por favor, complete as seguintes tarefas antes de atualizar este post já "
-"publicado:"
+msgstr "Por favor, complete as seguintes tarefas antes de atualizar este post já publicado:"
 
 #: core/Legacy/LegacyPlugin.php:208
 msgid "Please correct your form errors below and try again."
@@ -626,8 +606,7 @@ msgid "Save Changes"
 msgstr "Salvar Alterações"
 
 #. %s expands to the seo score
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123 modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
 #, php-format
 msgid "Seo: %s"
 msgstr "Seo: %s"

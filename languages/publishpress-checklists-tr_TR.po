@@ -1,30 +1,27 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress Checklists\n"
 "POT-Creation-Date: 2024-01-15 15:59+0000\n"
-"PO-Revision-Date: 2024-03-29 23:08+0300\n"
+"PO-Revision-Date: 2024-10-15 00:25+0700\n"
 "Last-Translator: \n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: publishpress-checklists.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;"
+"esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
 
-#: core/Requirement/Taxonomies_count.php:48
-#: core/Requirement/Taxonomies_count.php:49
+#: core/Requirement/Taxonomies_count.php:48 core/Requirement/Taxonomies_count.php:49
 msgid "%d "
 msgstr "%d "
 
@@ -106,8 +103,7 @@ msgstr "PublishPress Kontrol Listeleri ile içerikleriniz için yayınlama gerek
 msgid "Add to these post types:"
 msgstr "Bu gönderi türlerine ekleyin:"
 
-#: core/Requirement/Validate_links.php:58
-#: core/Requirement/Validate_links.php:59
+#: core/Requirement/Validate_links.php:58 core/Requirement/Validate_links.php:59
 msgid "All links use a valid format"
 msgstr "Tüm bağlantılar geçerli bir format kullanır"
 
@@ -182,8 +178,7 @@ msgstr " %s ve %s kategorileri arasında"
 msgid "Cheatin&#8217; uh?"
 msgstr "Hile&#8217; ha?"
 
-#: modules/checklists/checklists.php:788
-#: modules/checklists/assets/js/gutenberg-panel.jsx:242
+#: modules/checklists/checklists.php:788 modules/checklists/assets/js/gutenberg-panel.jsx:242
 msgid "Check Now"
 msgstr "Şimdi Kontrol Et"
 
@@ -216,11 +211,11 @@ msgstr "Özel"
 
 #: modules/checklists/templates/global-checklists.php:87
 msgid ""
-"Custom tasks do not complete automatically. Users must check the box to show "
-"they have completed the task."
+"Custom tasks do not complete automatically. Users must check the box to show they have completed the "
+"task."
 msgstr ""
-"Özel görevler otomatik olarak tamamlanmaz. Kullanıcılar görevi "
-"tamamladıklarını göstermek için kutuyu işaretlemelidir."
+"Özel görevler otomatik olarak tamamlanmaz. Kullanıcılar görevi tamamladıklarını göstermek için kutuyu "
+"işaretlemelidir."
 
 #: modules/permalinks/permalinks.php:66
 msgid "Define tasks related to permalinks"
@@ -236,8 +231,7 @@ msgstr "Açıklama"
 
 #: modules/settings/settings.php:700
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
-msgstr ""
-"\"Hızlı Düzenleme\" kullanılırken \"Durum\" seçeneğini devre dışı bırakın:"
+msgstr "\"Hızlı Düzenleme\" kullanılırken \"Durum\" seçeneğini devre dışı bırakın:"
 
 #: modules/checklists/checklists.php:975
 msgid "Disabled"
@@ -245,12 +239,9 @@ msgstr "Devre dışı"
 
 #: modules/settings/settings.php:408
 #, php-format
-msgid ""
-"Disabled because add_post_type_support('%1$s', '%2$s') is included in a "
-"loaded file."
+msgid "Disabled because add_post_type_support('%1$s', '%2$s') is included in a loaded file."
 msgstr ""
-"Yüklü bir dosyaya add_post_type_support('%1$s', '%2$s') dahil edildiği için "
-"devre dışı bırakıldı."
+"Yüklü bir dosyaya add_post_type_support('%1$s', '%2$s') dahil edildiği için devre dışı bırakıldı."
 
 #: modules/checklists/checklists.php:951
 msgid "Disabled, Recommended or Required"
@@ -266,12 +257,9 @@ msgstr " Özellikler etkilendirilmiş"
 
 #: modules/settings/settings.php:781
 msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
-msgstr ""
-"Kontrol listesi görevlerinde OpenAI istemlerini kullanmak için API "
-"Anahtarınızı girin."
+msgstr "Kontrol listesi görevlerinde OpenAI istemlerini kullanmak için API Anahtarınızı girin."
 
-#: core/Requirement/Featured_image.php:35
-#: core/Requirement/Featured_image.php:36
+#: core/Requirement/Featured_image.php:35 core/Requirement/Featured_image.php:36
 msgid "Featured image is added"
 msgstr "Öne çıkan görsel eklendi"
 
@@ -281,8 +269,7 @@ msgstr "Özellikler"
 
 #: modules/settings/settings.php:253
 msgid "Feel free to select only the features you need."
-msgstr ""
-"Yalnızca ihtiyacınız olan özellikleri seçmekten çekinmeyin, rahat olun."
+msgstr "Yalnızca ihtiyacınız olan özellikleri seçmekten çekinmeyin, rahat olun."
 
 #: modules/settings/settings.php:675
 msgid "General:"
@@ -304,12 +291,10 @@ msgid "https://publishpress.com/"
 msgstr "https://publishpress.com/"
 
 #: modules/settings/settings.php:762
-msgid ""
-"If the \"Status\" option is enabled, it can be used to avoid using the "
-"Checklists requirements."
+msgid "If the \"Status\" option is enabled, it can be used to avoid using the Checklists requirements."
 msgstr ""
-" \"Durum\" seçeneği etkinleştirilirse, Kontrol Listeleri gereksinimlerini "
-"kullanmaktan kaçınmak için kullanılabilir."
+" \"Durum\" seçeneği etkinleştirilirse, Kontrol Listeleri gereksinimlerini kullanmaktan kaçınmak için "
+"kullanılabilir."
 
 #: core/Legacy/Module.php:288
 #, php-format
@@ -328,8 +313,7 @@ msgstr "Kalıcı bağlantıda Latin karakterler"
 msgid "Max"
 msgstr "Maksimum"
 
-#: core/Requirement/Taxonomies_count.php:46
-#: core/Requirement/Taxonomies_count.php:47
+#: core/Requirement/Taxonomies_count.php:46 core/Requirement/Taxonomies_count.php:47
 msgid "Maximum of %d "
 msgstr "Maksimum %d "
 
@@ -395,8 +379,7 @@ msgstr "Maksimum %s kategori"
 msgid "Min"
 msgstr "Minimum"
 
-#: core/Requirement/Taxonomies_count.php:44
-#: core/Requirement/Taxonomies_count.php:45
+#: core/Requirement/Taxonomies_count.php:44 core/Requirement/Taxonomies_count.php:45
 msgid "Minimum of %d "
 msgstr "Minimum %d "
 
@@ -506,8 +489,7 @@ msgstr "Etiketlerin sayısı"
 msgid "Number of words in content"
 msgstr "İçerikteki kelime sayısı"
 
-#: core/Requirement/Filled_excerpt.php:35
-#: core/Requirement/Filled_excerpt.php:36
+#: core/Requirement/Filled_excerpt.php:35 core/Requirement/Filled_excerpt.php:36
 msgid "Numbers of characters in excerpt"
 msgstr "Alıntıdaki karakter sayısı"
 
@@ -531,12 +513,9 @@ msgid "OpenAI API Key:"
 msgstr "OpenAI API Anahtarı:"
 
 #: core/Requirement/Openai_item.php:287
-msgid ""
-"OpenAI tasks require an API Key. Please add your API Key in the Settings "
-"area."
+msgid "OpenAI tasks require an API Key. Please add your API Key in the Settings area."
 msgstr ""
-"OpenAI görevleri için bir API Anahtarı gerektirir. Lütfen API Anahtarınızı "
-"Ayarlar alanına ekleyin."
+"OpenAI görevleri için bir API Anahtarı gerektirir. Lütfen API Anahtarınızı Ayarlar alanına ekleyin."
 
 #: modules/checklists/checklists.php:952
 msgid "Options"
@@ -556,9 +535,7 @@ msgstr "Lütfen yayınlamadan önce aşağıdaki görevleri tamamlayın:"
 
 #: modules/checklists/checklists.php:748
 msgid "Please complete the following tasks before updating the published post:"
-msgstr ""
-"Lütfen yayınlanan gönderiyi güncellemeden önce aşağıdaki görevleri "
-"tamamlayın:"
+msgstr "Lütfen yayınlanan gönderiyi güncellemeden önce aşağıdaki görevleri tamamlayın:"
 
 #: modules/checklists/assets/js/gutenberg-panel.jsx:167
 msgid "Please complete the required(*) checklists task."
@@ -666,13 +643,11 @@ msgstr "Bu, \"Yayınla\" kutusunda bir uyarı simgesi görüntüleyecektir."
 
 #: core/Requirement/Openai_item.php:273
 msgid "Validation error. Kindly reload this page and try agai.n"
-msgstr ""
-"Doğrulama hatası. Lütfen bu sayfayı yeniden yükleyin ve tekrar deneyin.n"
+msgstr "Doğrulama hatası. Lütfen bu sayfayı yeniden yükleyin ve tekrar deneyin.n"
 
 #: modules/checklists/checklists.php:606
 msgid "What's the expected OpenAI response to mark the requirement as pass?"
-msgstr ""
-"Gereksinimi başarılı olarak işaretlemek için beklenen OpenAI yanıtı nedir?"
+msgstr "Gereksinimi başarılı olarak işaretlemek için beklenen OpenAI yanıtı nedir?"
 
 #: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:598
 msgid "Which roles can mark this task as complete?"
@@ -697,10 +672,8 @@ msgstr "Bu eylemi tamamlamak için gerekli izinlere sahip değilsiniz."
 #: modules/checklists/checklists.php:783
 #, php-format
 msgid "You don't have to complete any %sChecklist tasks%s."
-msgstr ""
-"Herhangi bir %sKontrol Listesi görevini%s tamamlamak zorunda değilsiniz."
+msgstr "Herhangi bir %sKontrol Listesi görevini%s tamamlamak zorunda değilsiniz."
 
-#: modules/checklists/checklists.php:730
-#: modules/checklists/assets/js/gutenberg-panel.jsx:208
+#: modules/checklists/checklists.php:730 modules/checklists/assets/js/gutenberg-panel.jsx:208
 msgid "You don't have to complete any Checklist tasks."
 msgstr "Herhangi bir Kontrol Listesi görevini tamamlamak zorunda değilsiniz."
