@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklists
  * @author      PublishPress <help@publishpress.com>
@@ -30,7 +31,7 @@ class Featured_image_alt extends Base_simple
     /**
      * @var int
      */
-    public $position = 150;
+    public $position = 105;
 
     /**
      * Initialize the language strings for the instance
@@ -39,8 +40,8 @@ class Featured_image_alt extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Alt text for featured images', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Alt text for featured images', 'publishpress-checklists');
+        $this->lang['label']          = __('Featured image has Alt text', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('Featured image has Alt text', 'publishpress-checklists');
     }
 
     /**
@@ -58,7 +59,7 @@ class Featured_image_alt extends Base_simple
          * check if new post
          * new post will have no thumbnail in initialize page
          */
-        if($thumbnail_id === 0) return true;
+        if ($thumbnail_id === 0) return true;
 
         $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
 

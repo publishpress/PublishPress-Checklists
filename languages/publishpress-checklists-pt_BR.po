@@ -110,12 +110,12 @@ msgid "All links use a valid format"
 msgstr ""
 
 #: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
-msgid "Alt text for all images"
-msgstr "Alt texto para todas as imagens"
+msgid "All images have Alt text"
+msgstr "Todas as imagens têm texto alternativo"
 
 #: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
-msgid "Alt text for featured images"
-msgstr "Texto alternativo para imagens em destaque"
+msgid "Featured image has Alt text"
+msgstr "A imagem em destaque tem texto alternativo"
 
 #: core/Requirement/Approved_by.php:41
 #, php-format
@@ -253,8 +253,8 @@ msgstr "Funcionalidades ativadas"
 
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
-msgid "Featured image"
-msgstr "Imagem destacada"
+msgid "Featured image is added"
+msgstr "A imagem em destaque foi adicionada"
 
 #: modules/settings/settings.php:245
 msgid "Features"
