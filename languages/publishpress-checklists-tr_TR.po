@@ -112,8 +112,12 @@ msgid "All links use a valid format"
 msgstr "Tüm bağlantılar geçerli bir format kullanır"
 
 #: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
-msgid "Alt text for all images"
-msgstr "Tüm görseller için alt metin"
+msgid "All images have Alt text"
+msgstr "Tüm görsellerin Alt metni var"
+
+#: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
+msgid "Featured image has Alt text"
+msgstr "Öne çıkan görselin Alt metni var"
 
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
@@ -268,8 +272,8 @@ msgstr ""
 
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
-msgid "Featured image"
-msgstr "Öne Çıkan Görsel"
+msgid "Featured image is added"
+msgstr "Öne çıkan görsel eklendi"
 
 #: modules/settings/settings.php:252
 msgid "Features"

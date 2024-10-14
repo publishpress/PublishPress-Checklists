@@ -102,12 +102,12 @@ msgid "All links use a valid format"
 msgstr "Tutti i link utilizzano un formato valido"
 
 #: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
-msgid "Alt text for all images"
-msgstr "Testo alternativo per tutte le immagini"
+msgid "All images have Alt text"
+msgstr "Tutte le immagini hanno un testo Alt"
 
 #: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
-msgid "Alt text for featured images"
-msgstr "Testo alternativo per le immagini in evidenza"
+msgid "Featured image has Alt text"
+msgstr "L'immagine in evidenza ha testo alternativo"
 
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
@@ -259,8 +259,8 @@ msgstr ""
 "liste di controllo."
 
 #: core/Requirement/Featured_image.php:35 core/Requirement/Featured_image.php:36
-msgid "Featured image"
-msgstr "Immagine in evidenza"
+msgid "Featured image is added"
+msgstr "L'immagine in evidenza è stata aggiunta"
 
 #: modules/settings/settings.php:252
 msgid "Features"
