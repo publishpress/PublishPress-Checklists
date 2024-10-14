@@ -310,10 +310,14 @@ textarea.pp-checklists-custom-item-title {
 
 .pp-checklists-task-params {
   position: relative;
-  > .pp-checklists-remove-custom-item {
-    padding-right: 5px !important;
-    padding-top: 5px !important;
-  }
+}
+
+.pp-checklists-task-params > .pp-checklists-remove-custom-item {
+  padding-top: 5px !important;
+}
+
+.pp-checklists-task-params:has(.pp-checklists-remove-custom-item) {
+  padding-right: 35px;
 }
 
 .pp-checklists-task-params select {
