@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2024-10-15 00:26+0700\n"
+"POT-Creation-Date: 2024-10-15 21:56+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anderson Grudtner Martins <anderson@publishpress.com>\n"
 "Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
@@ -115,6 +115,10 @@ msgstr ""
 
 #: core/Requirement/Featured_image_alt.php:36 core/Requirement/Featured_image_alt.php:37
 msgid "Featured image has Alt text"
+msgstr ""
+
+#: core/Requirement/Image_alt_count.php:42 core/Requirement/Image_alt_count.php:43
+msgid "Number of characters in Alt text"
 msgstr ""
 
 #: core/Requirement/Openai_item.php:266
