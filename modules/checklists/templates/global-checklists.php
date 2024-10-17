@@ -37,7 +37,7 @@
                                 data-post-type="<?php echo esc_attr($post_type_key); ?>"
                                 href="#">
                                 <span class="<?php echo esc_attr($args['icon']); ?>"></span>
-                                <span class="item"><?php echo esc_html($args['label']); ?></span>
+                                <span class="item"><?php echo esc_html_e($args['label']); ?></span>
                             </a>
                         </li>
                     <?php }
@@ -66,7 +66,7 @@
                 <?php
                 $i = 0;
                 foreach ($context['post_types'] as $post_type_key => $post_type_label) : ?>
-                    <tbody id="<?php echo 'pp-checklists-tab-body-' . $post_type_key; ?>" class="pp-checklists-tab-body <?php echo $i === 0 ? 'active' : ''; ?>" style="display: none;">
+                    <tbody id="<?php echo 'pp-checklists-tab-body-' . esc_attr($post_type_key); ?>" class="pp-checklists-tab-body <?php echo $i === 0 ? 'active' : ''; ?>" style="display: none;">
                         <?php
                         foreach ($context['tabs'][$post_type_key] as $group => $tabInfo) :
                             foreach ($context['requirements'] as $post_type => $post_type_requirements) : ?>
@@ -116,8 +116,8 @@
                                 <?php endforeach; ?>
                                 <?php if ($post_type === $post_type_key && !$group_has_requirements) : ?>
                                     <tr class="pp-checklists-requirement-row ppch-<?php echo esc_attr($group); ?>-group" data-post-type="<?php echo esc_attr($post_type); ?>">
-                                        <td colspan="4">
-                                            <?php echo esc_html(sprintf(__('No %s requirements for this post type.', 'publishpress-checklists'), $group)); ?>
+                                        <td colspan="4" id="empty-custom-rule">
+                                            <?php echo esc_html_e(sprintf(__('No %s requirements for this post type.', 'publishpress-checklists'), $group)); ?>
                                         </td>
                                     </tr>
                                 <?php endif; ?>

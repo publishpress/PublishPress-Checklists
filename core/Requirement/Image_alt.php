@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklists
  * @author      PublishPress <help@publishpress.com>
@@ -40,8 +41,8 @@ class Image_alt extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Alt text for all images', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Alt text for all images', 'publishpress-checklists');
+        $this->lang['label']          = __('All images have Alt text', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('All images have Alt text', 'publishpress-checklists');
     }
 
     /**
