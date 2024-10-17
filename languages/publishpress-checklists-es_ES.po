@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
 "POT-Creation-Date: 2024-10-15 21:56+0700\n"
-"PO-Revision-Date: 2024-10-15 21:56+0700\n"
+"PO-Revision-Date: 2024-10-17 12:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es_ES\n"
@@ -13,7 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Loco https://localise.biz/\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.6.11; wp-6.6.2"
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
@@ -90,36 +92,18 @@ msgstr "Añadir tarea personalizada"
 msgid "Add OpenAI Prompt task"
 msgstr "Añadir tarea de indicación de OpenAI"
 
-#. Description of the plugin
-msgid ""
-"With PublishPress Checklists, you can choose publishing requirements for "
-"your content."
-msgstr ""
-"Con las listas de verificación de PublishPress, puede elegir los requisitos "
-"de publicación para su contenido."
-
 #: modules/settings/settings.php:684
 msgid "Add to these post types:"
 msgstr "Añadir a estos tipos de contenido:"
-
-#: core/Requirement/Validate_links.php:58
-#: core/Requirement/Validate_links.php:59
-msgid "All links use a valid format"
-msgstr "Todos los enlaces usan un formato válido"
 
 #: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
 msgid "All images have Alt text"
 msgstr "Todas las imágenes tienen texto alternativo"
 
-#: core/Requirement/Featured_image_alt.php:36
-#: core/Requirement/Featured_image_alt.php:37
-msgid "Featured image has Alt text"
-msgstr "La imagen destacada tiene texto alternativo"
-
-#: core/Requirement/Image_alt_count.php:42
-#: core/Requirement/Image_alt_count.php:43
-msgid "Number of characters in Alt text"
-msgstr "Número de caracteres en el texto Alt"
+#: core/Requirement/Validate_links.php:58
+#: core/Requirement/Validate_links.php:59
+msgid "All links use a valid format"
+msgstr "Todos los enlaces usan un formato válido"
 
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
@@ -271,6 +255,11 @@ msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
 msgstr ""
 "Introduce tu clave API para utilizar las indicaciones de OpenAI en las "
 "tareas de las listas de verificación."
+
+#: core/Requirement/Featured_image_alt.php:36
+#: core/Requirement/Featured_image_alt.php:37
+msgid "Featured image has Alt text"
+msgstr "La imagen destacada tiene texto alternativo"
 
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
@@ -475,6 +464,10 @@ msgstr "Nuevo elemento"
 msgid "No"
 msgstr "No"
 
+#: modules/checklists/templates/global-checklists.php:101
+msgid "No %s requirements for this post type."
+msgstr "No hay %s requisitos para este tipo de publicación."
+
 #: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
 msgid "Not required, but important: "
 msgstr "No es obligatorio, pero es importante: "
@@ -486,6 +479,11 @@ msgstr "Número de "
 #: core/Requirement/Categories_count.php:40
 msgid "Number of categories"
 msgstr "Número de categorías"
+
+#: core/Requirement/Image_alt_count.php:42
+#: core/Requirement/Image_alt_count.php:43
+msgid "Number of characters in Alt text"
+msgstr "Número de caracteres en el texto Alt"
 
 #: core/Requirement/Title_count.php:33 core/Requirement/Title_count.php:34
 msgid "Number of characters in title"
@@ -719,6 +717,14 @@ msgstr "¿Qué perfiles pueden marcar esta tarea como completada?"
 msgid "Who can ignore the task?"
 msgstr "¿Quién puede ignorar la tarea?"
 
+#. Description of the plugin
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"Con las listas de verificación de PublishPress, puede elegir los requisitos "
+"de publicación para su contenido."
+
 #: modules/checklists/checklists.php:791
 msgid "Yes"
 msgstr "Sí"
@@ -742,18 +748,3 @@ msgstr ""
 #: modules/checklists/assets/js/gutenberg-panel.jsx:208
 msgid "You don't have to complete any Checklist tasks."
 msgstr "No tienes que completar ninguna tarea de la lista de verificación."
-
-#~ msgid "Define tasks that must be complete before content is published."
-#~ msgstr ""
-#~ "Define las tareas que deben completarse antes de publicar el contenido."
-
-#~ msgid "Disable blocking of updates for published posts:"
-#~ msgstr "Desactivar el bloqueo de actualizaciones de entradas publicadas:"
-
-#~ msgid ""
-#~ "If Checklists requirements are not met and the plugin blocks updates for "
-#~ "published posts, this can cause conflicts with other plugins."
-#~ msgstr ""
-#~ "Si no se reúnen los requisitos de listas de comprobación y el plugin "
-#~ "bloque las actualizaciones de las entradas publicadas este puede provocar "
-#~ "conflictos con otros plugins."
