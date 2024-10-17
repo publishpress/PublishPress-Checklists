@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Development (trunk)\n"
 "POT-Creation-Date: 2024-10-15 21:56+0700\n"
-"PO-Revision-Date: 2024-10-15 21:57+0700\n"
+"PO-Revision-Date: 2024-10-17 12:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -13,7 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Loco https://localise.biz/\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.6.11; wp-6.6.2"
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
@@ -88,48 +90,29 @@ msgstr "Eigene Aufgabe hinzufügen"
 
 #: modules/checklists/templates/global-checklists.php:94
 msgid "Add OpenAI Prompt task"
-msgstr ""
-
-#. Description of the plugin
-msgid ""
-"With PublishPress Checklists, you can choose publishing requirements for "
-"your content."
-msgstr ""
-"Mit den Checklisten von PublishPress können Sie "
-"Veröffentlichungsanforderungen für Ihre Inhalte auswählen."
+msgstr "OpenAI Prompt-Aufgabe hinzufügen"
 
 #: modules/settings/settings.php:684
 msgid "Add to these post types:"
 msgstr "Für diese Beitragstypen aktivieren:"
+
+#: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
+msgid "All images have Alt text"
+msgstr "Alle Bilder haben Alternativtext"
 
 #: core/Requirement/Validate_links.php:58
 #: core/Requirement/Validate_links.php:59
 msgid "All links use a valid format"
 msgstr "Alle Links im gültigen Format"
 
-#: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
-msgid "All images have Alt text"
-msgstr "Alle Bilder haben Alternativtext"
-
-#: core/Requirement/Featured_image_alt.php:36
-#: core/Requirement/Featured_image_alt.php:37
-msgid "Featured image has Alt text"
-msgstr "Das vorgestellte Bild hat einen Alternativtext"
-
-# msgid "Number of characters in title"
-#: core/Requirement/Image_alt_count.php:42
-#: core/Requirement/Image_alt_count.php:43
-msgid "Number of characters in Alt text"
-msgstr "Anzahl Zeichen in der Überschrift"
-
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten."
 
 #: core/Requirement/Openai_item.php:340
 #, php-format
 msgid "API Error: %1s."
-msgstr ""
+msgstr "API-Fehler: %1s."
 
 #: core/Requirement/Approved_by.php:41
 #, php-format
@@ -188,7 +171,7 @@ msgstr "Schummeln, oder?"
 #: modules/checklists/checklists.php:788
 #: modules/checklists/assets/js/gutenberg-panel.jsx:242
 msgid "Check Now"
-msgstr ""
+msgstr "Jetzt prüfen"
 
 #: modules/checklists/checklists.php:669 modules/checklists/checklists.php:734
 msgid "Checklist"
@@ -235,11 +218,11 @@ msgstr "Definiere Yoast SEO Aufgaben"
 
 #: modules/checklists/templates/global-checklists.php:75
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: modules/settings/settings.php:700
 msgid "Disable the \"Status\" option when using \"Quick Edit\":"
-msgstr ""
+msgstr "Deaktivieren Sie die Option „Status“, wenn Sie „Quick Edit“ verwenden:"
 
 #: modules/checklists/checklists.php:975
 msgid "Disabled"
@@ -269,6 +252,13 @@ msgstr "Aktivierte Elemente"
 #: modules/settings/settings.php:781
 msgid "Enter your API Key to use OpenAI prompts in checklist tasks."
 msgstr ""
+"Geben Sie Ihren API-Schlüssel ein, um OpenAI-Eingabeaufforderungen in "
+"Checklistenaufgaben zu verwenden."
+
+#: core/Requirement/Featured_image_alt.php:36
+#: core/Requirement/Featured_image_alt.php:37
+msgid "Featured image has Alt text"
+msgstr "Das vorgestellte Bild hat einen Alternativtext"
 
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
@@ -307,6 +297,8 @@ msgid ""
 "If the \"Status\" option is enabled, it can be used to avoid using the "
 "Checklists requirements."
 msgstr ""
+"Wenn die Option „Status“ aktiviert ist, kann sie verwendet werden, um die "
+"Verwendung der Checklistenanforderungen zu vermeiden."
 
 #: core/Legacy/Module.php:288
 #, php-format
@@ -315,7 +307,7 @@ msgstr "Wenn du %s magst, hinterlasse eine %s Wertung. Danke!"
 
 #: core/Requirement/Openai_item.php:386
 msgid "Invalid response"
-msgstr ""
+msgstr "Ungültige Antwort"
 
 #: modules/permalinks/lib/Requirement/ValidChars.php:37
 msgid "Latin characters in permalink"
@@ -323,7 +315,7 @@ msgstr "Lateinischer Zeichensatz im Permalink"
 
 #: core/Requirement/Base_counter.php:293
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 #: core/Requirement/Taxonomies_count.php:46
 #: core/Requirement/Taxonomies_count.php:47
@@ -390,7 +382,7 @@ msgstr "Maximum %s Kategorie"
 
 #: core/Requirement/Base_counter.php:285
 msgid "Min"
-msgstr ""
+msgstr "Mindest"
 
 #: core/Requirement/Taxonomies_count.php:44
 #: core/Requirement/Taxonomies_count.php:45
@@ -465,11 +457,15 @@ msgstr "Minimum Yoast SEO Lesbarkeitswert"
 
 #: modules/checklists/templates/global-checklists.php:74
 msgid "New Item"
-msgstr ""
+msgstr "Neues Produkt"
 
 #: modules/checklists/checklists.php:790
 msgid "No"
 msgstr "Nein"
+
+#: modules/checklists/templates/global-checklists.php:101
+msgid "No %s requirements for this post type."
+msgstr "Keine %s-Anforderungen für diesen Beitragstyp."
 
 #: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
 msgid "Not required, but important: "
@@ -482,6 +478,12 @@ msgstr "Anzahl an "
 #: core/Requirement/Categories_count.php:40
 msgid "Number of categories"
 msgstr "Anzahl an Kategorien"
+
+# msgid "Number of characters in title"
+#: core/Requirement/Image_alt_count.php:42
+#: core/Requirement/Image_alt_count.php:43
+msgid "Number of characters in Alt text"
+msgstr "Anzahl Zeichen in der Überschrift"
 
 #: core/Requirement/Title_count.php:33 core/Requirement/Title_count.php:34
 msgid "Number of characters in title"
@@ -521,17 +523,19 @@ msgstr "Ok"
 
 #: core/Requirement/Openai_item.php:61 core/Requirement/Openai_item.php:62
 msgid "Openai"
-msgstr ""
+msgstr "Openai"
 
 #: modules/settings/settings.php:708
 msgid "OpenAI API Key:"
-msgstr ""
+msgstr "OpenAI API-Schlüssel:"
 
 #: core/Requirement/Openai_item.php:287
 msgid ""
 "OpenAI tasks require an API Key. Please add your API Key in the Settings "
 "area."
 msgstr ""
+"OpenAI-Aufgaben erfordern einen API-Schlüssel. Bitte fügen Sie Ihren API-"
+"Schlüssel im Bereich „Einstellungen“ hinzu."
 
 #: modules/checklists/checklists.php:952
 msgid "Options"
@@ -555,7 +559,7 @@ msgstr "Bitte erledige die folgenden Aufgaben vor Veröffentlichung:"
 
 #: modules/checklists/assets/js/gutenberg-panel.jsx:167
 msgid "Please complete the required(*) checklists task."
-msgstr ""
+msgstr "Bitte führen Sie die erforderlichen(*) Checklistenaufgaben aus."
 
 #: core/Legacy/LegacyPlugin.php:209
 msgid "Please correct your form errors below and try again."
@@ -646,7 +650,7 @@ msgstr "Erforderliche Tags: %s"
 
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
-msgstr ""
+msgstr "Bewertungen"
 
 #: modules/checklists/templates/global-checklists.php:108
 msgid "Save Changes"
@@ -654,7 +658,7 @@ msgstr "Änderungen speichern "
 
 #: core/Requirement/Openai_item.php:365
 msgid "See the full response."
-msgstr ""
+msgstr "Sehen Sie sich die vollständige Antwort an."
 
 #. %s expands to the seo score
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
@@ -677,7 +681,7 @@ msgstr "Aufgabe"
 
 #: modules/checklists/templates/global-checklists.php:101
 msgid "The prompt should be in form of a question."
-msgstr ""
+msgstr "Die Eingabeaufforderung sollte die Form einer Frage haben."
 
 #: modules/settings/settings.php:312
 msgid "There are no PublishPress modules registered"
@@ -685,7 +689,7 @@ msgstr "Es sind keine PublishPress-Module registriert"
 
 #: modules/checklists/templates/global-checklists.php:101
 msgid "This feature requires an OpenAI API Key."
-msgstr ""
+msgstr "Diese Funktion erfordert einen OpenAI API-Schlüssel."
 
 # msgid "This will display a warning icon in the \"Publish\" box"
 #: modules/settings/settings.php:741
@@ -695,10 +699,14 @@ msgstr "Zeigt einen Warnhinweis in der Veröffentlichen-Box"
 #: core/Requirement/Openai_item.php:273
 msgid "Validation error. Kindly reload this page and try agai.n"
 msgstr ""
+"Validierungsfehler. Bitte laden Sie diese Seite neu und versuchen Sie es "
+"erneut."
 
 #: modules/checklists/checklists.php:606
 msgid "What's the expected OpenAI response to mark the requirement as pass?"
 msgstr ""
+"Was ist die erwartete OpenAI-Antwort, um die Anforderung als erfüllt zu "
+"markieren?"
 
 #: core/Requirement/Custom_item.php:54 modules/checklists/checklists.php:598
 msgid "Which roles can mark this task as complete?"
@@ -707,6 +715,14 @@ msgstr "Welche Rolle darf die Aufgabe als erledigt markieren?"
 #: modules/permissions/permissions.php:143
 msgid "Who can ignore the task?"
 msgstr "Wer darf die Aufgabe ignorieren?"
+
+#. Description of the plugin
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"Mit den Checklisten von PublishPress können Sie "
+"Veröffentlichungsanforderungen für Ihre Inhalte auswählen."
 
 #: modules/checklists/checklists.php:791
 msgid "Yes"
@@ -731,7 +747,3 @@ msgstr "Keine ausstehenden %sChecklist tasks%s."
 #: modules/checklists/assets/js/gutenberg-panel.jsx:208
 msgid "You don't have to complete any Checklist tasks."
 msgstr "Keine ausstehenden %sChecklist tasks%s."
-
-#~ msgid "Define tasks that must be complete before content is published."
-#~ msgstr ""
-#~ "Gib die Aufgaben ein, die vor Veröffentlichung erledigt werden müssen."

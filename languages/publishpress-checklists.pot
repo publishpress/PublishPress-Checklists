@@ -671,6 +671,10 @@ msgstr ""
 msgid "This feature requires an OpenAI API Key."
 msgstr ""
 
+#: modules/checklists/templates/global-checklists.php:101
+msgid "No %s requirements for this post type."
+msgstr ""
+
 #: modules/settings/settings.php:741
 msgid "This will display a warning icon in the \"Publish\" box."
 msgstr ""

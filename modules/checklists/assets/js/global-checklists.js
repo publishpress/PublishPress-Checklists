@@ -229,7 +229,7 @@
         rule;
 
       $table.find('tbody#pp-checklists-tab-body-' + post_type).append($tr);
-      $table.find('tr.ppch-custom-group:contains("No custom requirements for this post type.")').hide();
+      $table.find('tr.ppch-custom-group #empty-custom-rule').hide();
 
       $tr
         .addClass('pp-checklists-requirement-row')
