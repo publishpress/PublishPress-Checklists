@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Plugins - PublishPress Checklists: Pre-Publishing "
 "Approval Task Checklist for WordPress Content - Stable (latest release)\n"
 "POT-Creation-Date: 2024-10-15 21:56+0700\n"
-"PO-Revision-Date: 2024-10-17 12:50+0000\n"
+"PO-Revision-Date: 2024-10-17 20:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es_ES\n"
@@ -610,13 +610,6 @@ msgstr "PublishPress"
 msgid "PublishPress Checklists"
 msgstr "Publishpress Checklists"
 
-#. %s expands to the readability score
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
-#, php-format
-msgid "Readability: %s"
-msgstr "Legibilidad en Yoast SEO %s"
-
 #: modules/checklists/checklists.php:976
 msgid "Recommended"
 msgstr "Recomendado"
@@ -661,13 +654,6 @@ msgstr "Guardar cambios"
 #: core/Requirement/Openai_item.php:365
 msgid "See the full response."
 msgstr "Ver la respuesta completa."
-
-#. %s expands to the seo score
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
-#, php-format
-msgid "Seo: %s"
-msgstr "Seo: %s"
 
 #: modules/settings/settings.php:114
 msgid "Settings"
@@ -729,9 +715,23 @@ msgstr ""
 msgid "Yes"
 msgstr "Sí"
 
+#. %s expands to the readability score
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
+msgid "Yoast Readability: %s"
+msgstr "Legibilidad de Yoast: %s"
+
 #: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
+
+#. %s expands to the seo score
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
+msgid "Yoast SEO: %s"
+msgstr "SEO de Yoast: %s"
 
 #: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress - PublishPress Checklists\n"
 "POT-Creation-Date: 2024-10-15 21:56+0700\n"
-"PO-Revision-Date: 2024-10-17 12:51+0000\n"
+"PO-Revision-Date: 2024-10-17 20:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -603,13 +603,6 @@ msgstr "PublishPress"
 msgid "PublishPress Checklists"
 msgstr "PublishPress Checklists"
 
-#. %s expands to the readability score
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
-#, php-format
-msgid "Readability: %s"
-msgstr "Readability: %s"
-
 #: modules/checklists/checklists.php:976
 msgid "Recommended"
 msgstr "Recommended"
@@ -654,13 +647,6 @@ msgstr "Save Changes"
 #: core/Requirement/Openai_item.php:365
 msgid "See the full response."
 msgstr "See the full response."
-
-#. %s expands to the seo score
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
-#, php-format
-msgid "Seo: %s"
-msgstr "Seo: %s"
 
 #: modules/settings/settings.php:114
 msgid "Settings"
@@ -718,9 +704,23 @@ msgstr ""
 msgid "Yes"
 msgstr "Yes"
 
+#. %s expands to the readability score
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
+msgid "Yoast Readability: %s"
+msgstr "Yoast Readability: %s"
+
 #: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
+
+#. %s expands to the seo score
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
+msgid "Yoast SEO: %s"
+msgstr "Yoast SEO: %s"
 
 #: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."
