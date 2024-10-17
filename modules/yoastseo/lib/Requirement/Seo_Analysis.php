@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     PublishPress\Checklists
  * @author      PublishPress <help@publishpress.com>
@@ -126,13 +127,13 @@ class Seo_Analysis extends Base_dropdown
     {
         $labels = [
             self::OK   => sprintf(
-            /* translators: %s expands to the seo score */
-                __('Seo: %s', 'publishpress-checklists'),
+                /* translators: %s expands to the seo score */
+                __('Yoast SEO: %s', 'publishpress-checklists'),
                 __('OK', 'publishpress-checklists')
             ),
             self::GOOD => sprintf(
-            /* translators: %s expands to the seo score */
-                __('Seo: %s', 'publishpress-checklists'),
+                /* translators: %s expands to the seo score */
+                __('Yoast SEO: %s', 'publishpress-checklists'),
                 __('Good', 'publishpress-checklists')
             ),
         ];

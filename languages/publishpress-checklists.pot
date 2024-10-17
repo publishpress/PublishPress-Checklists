@@ -592,7 +592,7 @@ msgstr ""
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
 #: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
 #, php-format
-msgid "Readability: %s"
+msgid "Yoast Readability: %s"
 msgstr ""
 
 #: modules/checklists/checklists.php:976
@@ -644,7 +644,7 @@ msgstr ""
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
 #: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
 #, php-format
-msgid "Seo: %s"
+msgid "Yoast SEO: %s"
 msgstr ""
 
 #: modules/settings/settings.php:114
