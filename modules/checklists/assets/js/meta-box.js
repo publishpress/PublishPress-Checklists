@@ -719,7 +719,7 @@
       if (link.startsWith('#')) {
         return true;
       }
-      
+
       const linkWithoutFragment = link.split('#')[0];
 
       return linkWithoutFragment.match(
@@ -1047,9 +1047,21 @@
         const labelEl = el.find('.status-label');
         const current_label_text = label.replace(/:.*/, '');
         const required_tags_str = required_tags_reached.map((el) => el.split('__')[1]).join(', ');
+        const final_label_text =
+          required_tags_str.length > 0 ? `${current_label_text}: ${required_tags_str} ` : `${current_label_text} `;
 
         el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_tags);
-        labelEl.text(`${current_label_text}${required_tags_str.length > 0 ? ': ' + required_tags_str : ''}`);
+        // Need to update the text node directly because the element has a span inside
+        labelEl
+          .contents()
+          .filter(function () {
+            return this.nodeType === 3; // Node type 3 is a text node
+          })
+          .first()
+          .each(function () {
+            // Modify the text node
+            this.nodeValue = final_label_text;
+          });
       }
     });
   }
@@ -1086,7 +1098,7 @@
         const current_label_text = label.replace(/:.*/, '');
         const prohibited_tags_str = prohibited_tags_reached.map((el) => el.split('__')[1]).join(', ');
         const final_label_text =
-          prohibited_tags_str.length > 0 ? `${current_label_text}: ${prohibited_tags_str}` : current_label_text;
+          prohibited_tags_str.length > 0 ? `${current_label_text}: ${prohibited_tags_str} ` : `${current_label_text} `;
 
         ppChecklists = {
           ...ppChecklists,
@@ -1099,7 +1111,17 @@
           },
         };
         el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_tags);
-        labelEl.text(final_label_text);
+        // Need to update the text node directly because the element has a span inside
+        labelEl
+          .contents()
+          .filter(function () {
+            return this.nodeType === 3; // Node type 3 is a text node
+          })
+          .first()
+          .each(function () {
+            // Modify the text node
+            this.nodeValue = final_label_text;
+          });
       }
     });
   }
@@ -1152,11 +1174,23 @@
         const labelEl = el.find('.status-label');
         const current_label_text = label.replace(/:.*/, '');
         const required_categories_str = required_categories_reached.map((el) => el.split('__')[1]).join(', ');
+        const final_label_text =
+          required_categories_str.length > 0
+            ? `${current_label_text}: ${required_categories_str} `
+            : `${current_label_text} `;
 
         el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_required_categories);
-        labelEl.text(
-          `${current_label_text}${required_categories_str.length > 0 ? ': ' + required_categories_str : ''}`,
-        );
+        // Need to update the text node directly because the element has a span inside
+        labelEl
+          .contents()
+          .filter(function () {
+            return this.nodeType === 3; // Node type 3 is a text node
+          })
+          .first()
+          .each(function () {
+            // Modify the text node
+            this.nodeValue = final_label_text;
+          });
       }
     });
   }
@@ -1185,8 +1219,8 @@
         const prohibited_categories_str = prohibited_categories_reached.map((el) => el.split('__')[1]).join(', ');
         const final_label_text =
           prohibited_categories_str.length > 0
-            ? `${current_label_text}: ${prohibited_categories_str}`
-            : current_label_text;
+            ? `${current_label_text}: ${prohibited_categories_str} `
+            : `${current_label_text} `;
 
         ppChecklists = {
           ...ppChecklists,
@@ -1199,7 +1233,17 @@
           },
         };
         el.trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, !has_prohibited_categories);
-        labelEl.text(final_label_text);
+        // Need to update the text node directly because the element has a span inside
+        labelEl
+          .contents()
+          .filter(function () {
+            return this.nodeType === 3; // Node type 3 is a text node
+          })
+          .first()
+          .each(function () {
+            // Modify the text node
+            this.nodeValue = final_label_text;
+          });
       }
     });
   }
@@ -1301,23 +1345,23 @@
   if ($('#pp-checklists-req-title_count').length > 0) {
     $(document).on(PP_Checklists.EVENT_TIC, function (event) {
       var count = 0,
+        obj = null,
         min_value = parseInt(ppChecklists.requirements.title_count.value[0]),
         max_value = parseInt(ppChecklists.requirements.title_count.value[1]);
 
       if (PP_Checklists.is_gutenberg_active()) {
         // @todo: why does Multiple Authors "Remove author from new posts" setting cause this to return null?
-        var obj = PP_Checklists.getEditor().getEditedPostAttribute('title');
+        obj = wp.htmlEntities.decodeEntities(PP_Checklists.getEditor().getEditedPostAttribute('title'));
       } else {
         if ($('#title').length === 0) {
           return;
         }
 
-        var obj = $('#title').val();
+        obj = $('#title').val();
       }
 
       if (typeof obj !== 'undefined') {
-        var decodedObj = wp.htmlEntities.decodeEntities(obj);
-        count = decodedObj.length;
+        count = obj.length;
 
         $('#pp-checklists-req-title_count').trigger(
           PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
