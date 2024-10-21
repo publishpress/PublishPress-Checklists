@@ -45,7 +45,7 @@ class Required_categories extends Base_multiple
      * 
      * @var int
      */
-    private $cache_expiration = 10 * MINUTE_IN_SECONDS;
+    private $cache_expiration = 1 * MINUTE_IN_SECONDS;
 
     /**
      * Flag to check if hooks have been initialized
