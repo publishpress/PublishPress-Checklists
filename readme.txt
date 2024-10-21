@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.14.0
+Stable tag: 2.15.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,30 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.15.0] - 21 October 2024 =
+
+* Fixed: Conflict with Rank Math SEO plugin #791
+* Fixed: Promo banner update #779
+* Fixed: Anchor link not passing the valid link requirement #781
+* Fixed: Required and prohibited categories showing deleted terms #786
+* Fixed: OpenAI checklist button not working on the second tab #782
+* Fixed: Alt text for featured image not working on the first try #743
+* Fixed: Plugin description update #780
+* Fixed: Custom arrow position issue #778
+* Fixed: Reorganized the images checklists #801
+* Fixed: Updated Yoast SEO rule #809
+* Fixed: Updated required and prohibited categories #808
+* Fixed: Missing translation updates #780
+* Updated: Translations for checklist items
+* Updated: Translations for image-related checklist items
+* Updated: Translations "Featured image" updated to "Featured image is added"
+* Updated: Translations "Alt text for featured images" updated to "Featured image has Alt text"
+* Updated: Translations "Alt text for all images" updated to "All images have Alt text"
+* Updated: Translations "Readability" updated to "Yoast Readability"
+* Updated: Translations "SEO" updated to "Yoast SEO"
+* Updated: Changelog and translation files
+* Updated: Composer dependencies
 
 = [2.14.0] - 25 September 2024 =
 

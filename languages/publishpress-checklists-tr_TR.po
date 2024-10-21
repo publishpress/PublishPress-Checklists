@@ -1,16 +1,15 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PublishPress Checklists\n"
-"POT-Creation-Date: 2024-01-15 15:59+0000\n"
-"PO-Revision-Date: 2024-03-29 23:08+0300\n"
+"POT-Creation-Date: 2024-10-15 21:56+0700\n"
+"PO-Revision-Date: 2024-10-17 20:55+0000\n"
 "Last-Translator: \n"
-"Language-Team: Anderson Grudtner Martins <anderson@publishpress.com>\n"
+"Language-Team: Turkish\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: publishpress-checklists.php\n"
@@ -22,6 +21,9 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.6.11; wp-6.6.2"
 
 #: core/Requirement/Taxonomies_count.php:48
 #: core/Requirement/Taxonomies_count.php:49
@@ -98,22 +100,18 @@ msgstr "Özel görev ekle"
 msgid "Add OpenAI Prompt task"
 msgstr "OpenAI İstemi görevi ekle"
 
-#. Description of the plugin
-msgid "With PublishPress Checklists, you can choose publishing requirements for your content."
-msgstr "PublishPress Kontrol Listeleri ile içerikleriniz için yayınlama gereksinimlerini seçebilirsiniz."
-
 #: modules/settings/settings.php:684
 msgid "Add to these post types:"
 msgstr "Bu gönderi türlerine ekleyin:"
+
+#: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
+msgid "All images have Alt text"
+msgstr "Tüm görsellerin Alt metni var"
 
 #: core/Requirement/Validate_links.php:58
 #: core/Requirement/Validate_links.php:59
 msgid "All links use a valid format"
 msgstr "Tüm bağlantılar geçerli bir format kullanır"
-
-#: core/Requirement/Image_alt.php:36 core/Requirement/Image_alt.php:37
-msgid "Alt text for all images"
-msgstr "Tüm görseller için alt metin"
 
 #: core/Requirement/Openai_item.php:266
 msgid "An error occured."
@@ -266,10 +264,15 @@ msgstr ""
 "Kontrol listesi görevlerinde OpenAI istemlerini kullanmak için API "
 "Anahtarınızı girin."
 
+#: core/Requirement/Featured_image_alt.php:36
+#: core/Requirement/Featured_image_alt.php:37
+msgid "Featured image has Alt text"
+msgstr "Öne çıkan görselin Alt metni var"
+
 #: core/Requirement/Featured_image.php:35
 #: core/Requirement/Featured_image.php:36
-msgid "Featured image"
-msgstr "Öne Çıkan Görsel"
+msgid "Featured image is added"
+msgstr "Öne çıkan görsel eklendi"
 
 #: modules/settings/settings.php:252
 msgid "Features"
@@ -470,6 +473,10 @@ msgstr "Yeni Öğe"
 msgid "No"
 msgstr "Hayır"
 
+#: modules/checklists/templates/global-checklists.php:101
+msgid "No %s requirements for this post type."
+msgstr "Bu gönderi türü için %s gereksinimi yok."
+
 #: modules/checklists/checklists.php:752 modules/checklists/checklists.php:756
 msgid "Not required, but important: "
 msgstr "Gerekli değil ama önemli: "
@@ -481,6 +488,11 @@ msgstr "Sayısı"
 #: core/Requirement/Categories_count.php:40
 msgid "Number of categories"
 msgstr "Kategori sayısı"
+
+#: core/Requirement/Image_alt_count.php:42
+#: core/Requirement/Image_alt_count.php:43
+msgid "Number of characters in Alt text"
+msgstr "Başlıktaki karakter sayısı"
 
 #: core/Requirement/Title_count.php:33 core/Requirement/Title_count.php:34
 msgid "Number of characters in title"
@@ -580,6 +592,22 @@ msgstr "Yazı içeriği boş."
 msgid "Post does not exist"
 msgstr "Yazı mevcut değil"
 
+#: core/Requirement/Prohibited_categories.php:43
+msgid "Prohibited categories"
+msgstr "Yasaklı kategoriler"
+
+#: core/Requirement/Prohibited_categories.php:42
+msgid "Prohibited categories: %s"
+msgstr "Yasaklı kategoriler: %s"
+
+#: core/Requirement/Prohibited_tags.php:43
+msgid "Prohibited tags"
+msgstr "Yasaklanmış etiketler"
+
+#: core/Requirement/Prohibited_tags.php:42
+msgid "Prohibited tags: %s"
+msgstr "Yasaklanmış etiketler: %s"
+
 #. Author of the plugin
 msgid "PublishPress"
 msgstr "PublishPress"
@@ -588,13 +616,6 @@ msgstr "PublishPress"
 #: core/Legacy/Module.php:285
 msgid "PublishPress Checklists"
 msgstr "PublishPress Kontrol Listeleri Pro"
-
-#. %s expands to the readability score
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
-#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
-#, php-format
-msgid "Readability: %s"
-msgstr "Okunabilirlik: %s"
 
 #: modules/checklists/checklists.php:976
 msgid "Recommended"
@@ -613,6 +634,22 @@ msgstr "Gerekli"
 msgid "required"
 msgstr "gerekli"
 
+#: core/Requirement/Required_categories.php:43
+msgid "Required categories"
+msgstr "Gerekli kategoriler"
+
+#: core/Requirement/Required_categories.php:42
+msgid "Required categories: %s"
+msgstr "Gerekli kategoriler: %s"
+
+#: core/Requirement/Required_tags.php:43
+msgid "Required tags"
+msgstr "Gerekli etiketler"
+
+#: core/Requirement/Required_tags.php:42
+msgid "Required tags: %s"
+msgstr "Gerekli etiketler: %s"
+
 #: modules/reviews/reviews.php:61
 msgid "Reviews"
 msgstr "Değerlendirmeler"
@@ -624,13 +661,6 @@ msgstr "Değişiklikleri Kaydet"
 #: core/Requirement/Openai_item.php:365
 msgid "See the full response."
 msgstr "Yanıtın tamamını görün."
-
-#. %s expands to the seo score
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
-#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
-#, php-format
-msgid "Seo: %s"
-msgstr "Seo: %s"
 
 #: modules/settings/settings.php:114
 msgid "Settings"
@@ -678,13 +708,35 @@ msgstr "Hangi roller bu görevi tamamlandı olarak işaretleyebilir?"
 msgid "Who can ignore the task?"
 msgstr "Bu görevi kim görmezden gelebilir?"
 
+#. Description of the plugin
+msgid ""
+"With PublishPress Checklists, you can choose publishing requirements for "
+"your content."
+msgstr ""
+"PublishPress Kontrol Listeleri ile içerikleriniz için yayınlama "
+"gereksinimlerini seçebilirsiniz."
+
 #: modules/checklists/checklists.php:791
 msgid "Yes"
 msgstr "Evet"
 
+#. %s expands to the readability score
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:124
+#: modules/yoastseo/lib/Requirement/Readability_Analysis.php:129
+#, php-format
+msgid "Yoast Readability: %s"
+msgstr "Yoast Okunabilirliği: %s"
+
 #: modules/yoastseo/yoastseo.php:66
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
+
+#. %s expands to the seo score
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:123
+#: modules/yoastseo/lib/Requirement/Seo_Analysis.php:128
+#, php-format
+msgid "Yoast SEO: %s"
+msgstr "Yoast SEO: %s"
 
 #: core/Legacy/LegacyPlugin.php:214
 msgid "You do not have necessary permissions to complete this action."
