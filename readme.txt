@@ -311,7 +311,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.15.0] - 15 October 2024 =
+= [2.15.0] - 21 October 2024 =
 
 * Fixed: Conflict with Rank Math SEO plugin #791
 * Fixed: Promo banner update #779
@@ -322,11 +322,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed: Plugin description update #780
 * Fixed: Custom arrow position issue #778
 * Fixed: Reorganized the images checklists #801
-* Fixed: Custom arrow position issue #778
+* Fixed: Updated Yoast SEO rule #809
+* Fixed: Updated required and prohibited categories #808
+* Fixed: Missing translation updates #780
+* Updated: Translations for checklist items
 * Updated: Translations for image-related checklist items
 * Updated: Translations "Featured image" updated to "Featured image is added"
 * Updated: Translations "Alt text for featured images" updated to "Featured image has Alt text"
 * Updated: Translations "Alt text for all images" updated to "All images have Alt text"
+* Updated: Translations "Readability" updated to "Yoast Readability"
+* Updated: Translations "SEO" updated to "Yoast SEO"
 * Updated: Changelog and translation files
 * Updated: Composer dependencies
 
