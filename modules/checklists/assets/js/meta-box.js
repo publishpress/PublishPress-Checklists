@@ -1473,34 +1473,36 @@
   }
 
   /*----------  Internal Links ----------*/
-  var lastCount = 0;
+  var lastInternalCount = 0;
   if (PP_Checklists.is_gutenberg_active()) {
     /**
      * For Gutenberg
      */
     if ($('#pp-checklists-req-internal_links').length > 0) {
       wp.data.subscribe(function () {
-        var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
-
-        if (typeof content == 'undefined') {
-          return;
-        }
-
-        var count = PP_Checklists.extract_internal_links(content).length;
-
-        if (lastCount == count) {
-          return;
-        }
-
-        var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
-          max = parseInt(ppChecklists.requirements.internal_links.value[1]);
-
-        $('#pp-checklists-req-internal_links').trigger(
-          PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-          PP_Checklists.check_valid_quantity(count, min, max),
-        );
-
-        lastCount = count;
+        setTimeout(function() {
+          var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+    
+          if (typeof content == 'undefined') {
+            return;
+          }
+    
+          var count = PP_Checklists.extract_internal_links(content).length;
+    
+          if (lastInternalCount == count) {
+            return;
+          }
+    
+          var min = parseInt(ppChecklists.requirements.internal_links.value[0]),
+            max = parseInt(ppChecklists.requirements.internal_links.value[1]);
+    
+          $('#pp-checklists-req-internal_links').trigger(
+            PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+            PP_Checklists.check_valid_quantity(count, min, max),
+          );
+    
+          lastInternalCount = count;
+        }, 100);
       });
     }
   } else {
@@ -1573,34 +1575,36 @@
   }
 
   /*----------  External Links ----------*/
-  var lastCount = 0;
+  var lastExternalCount = 0;
   if (PP_Checklists.is_gutenberg_active()) {
     /**
      * For Gutenberg
      */
     if ($('#pp-checklists-req-external_links').length > 0) {
       wp.data.subscribe(function () {
-        var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
-
-        if (typeof content == 'undefined') {
-          return;
-        }
-
-        var count = PP_Checklists.extract_external_links(content).length;
-
-        if (lastCount == count) {
-          return;
-        }
-
-        var min = parseInt(ppChecklists.requirements.external_links.value[0]),
-          max = parseInt(ppChecklists.requirements.external_links.value[1]);
-
-        $('#pp-checklists-req-external_links').trigger(
-          PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
-          PP_Checklists.check_valid_quantity(count, min, max),
-        );
-
-        lastCount = count;
+        setTimeout(function() {
+          var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
+    
+          if (typeof content == 'undefined') {
+            return;
+          }
+    
+          var count = PP_Checklists.extract_external_links(content).length;
+    
+          if (lastExternalCount == count) {
+            return;
+          }
+    
+          var min = parseInt(ppChecklists.requirements.external_links.value[0]),
+            max = parseInt(ppChecklists.requirements.external_links.value[1]);
+    
+          $('#pp-checklists-req-external_links').trigger(
+            PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+            PP_Checklists.check_valid_quantity(count, min, max),
+          );
+    
+          lastExternalCount = count;
+        }, 150); 
       });
     }
   } else {
