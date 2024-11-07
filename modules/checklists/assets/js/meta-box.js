@@ -1679,17 +1679,36 @@
      */
     if ($('#pp-checklists-req-image_alt').length > 0) {
       wp.data.subscribe(function () {
-        var no_missing_alt = false;
         var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
 
         if (typeof content == 'undefined') {
           return;
         }
 
-        var count = PP_Checklists.missing_alt_images(content).length;
+        // Get missing alt images
+        var missingAltImages = PP_Checklists.missing_alt_images(content);
+        var no_missing_alt = missingAltImages.length === 0;
 
-        if (count == 0) {
-          no_missing_alt = true;
+
+        // Update block warnings if we're in the block editor
+        if (wp.data.select('core/block-editor')) {
+          const blocks = wp.data.select('core/block-editor').getBlocks();
+          const imageBlocks = blocks.filter(block => block.name === 'core/image');
+          
+          imageBlocks.forEach(block => {
+            // Check if this block's HTML matches any of the missing alt images
+            const hasWarning = missingAltImages.some(html => 
+              html.includes(block.attributes.id) || html.includes(block.attributes.url)
+            );
+            
+            // Set warning attribute on the list view item
+            const listViewElement = document.querySelector(
+              `.block-editor-list-view-leaf[data-block="${block.clientId}"]`
+            );
+            if (listViewElement) {
+              listViewElement.setAttribute('data-warning', hasWarning);
+            }
+          });
         }
 
         $('#pp-checklists-req-image_alt').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, no_missing_alt);
@@ -1764,13 +1783,39 @@
     if ($('#pp-checklists-req-validate_links').length > 0) {
       wp.data.subscribe(function () {
         var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
-
+    
         if (typeof content == 'undefined') {
           return;
         }
-
-        var no_invalid_link = PP_Checklists.validate_links_format(content).length === 0;
-
+    
+        // Get invalid links
+        var invalidLinks = PP_Checklists.validate_links_format(content);
+        var no_invalid_link = invalidLinks.length === 0;
+    
+        // Update block warnings if we're in the block editor
+        if (wp.data.select('core/block-editor')) {
+          const blocks = wp.data.select('core/block-editor').getBlocks();
+          
+          // Check all blocks that might contain links
+          blocks.forEach(block => {
+            // Get block content/HTML
+            const blockContent = block.attributes.content || '';
+            
+            // Check if this block contains any invalid links
+            const hasWarning = invalidLinks.some(invalidLink => 
+              blockContent.includes(invalidLink)
+            );
+            
+            // Set warning attribute on the list view item
+            const listViewElement = document.querySelector(
+              `.block-editor-list-view-leaf[data-block="${block.clientId}"]`
+            );
+            if (listViewElement) {
+              listViewElement.setAttribute('data-warning', hasWarning);
+            }
+          });
+        }
+    
         $('#pp-checklists-req-validate_links').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, no_invalid_link);
       });
     }
@@ -1843,19 +1888,39 @@
     if ($('#pp-checklists-req-image_alt_count').length > 0) {
       wp.data.subscribe(function () {
         var content = PP_Checklists.getEditor().getEditedPostAttribute('content');
-
+    
         if (typeof content == 'undefined') {
           return;
         }
-
+    
         var altLengths = PP_Checklists.get_image_alt_lengths(content);
         var min = parseInt(ppChecklists.requirements.image_alt_count.value[0]);
         var max = parseInt(ppChecklists.requirements.image_alt_count.value[1]);
-
+    
+        // Check if we have access to block editor
+        if (wp.data.select('core/block-editor')) {
+          const blocks = wp.data.select('core/block-editor').getBlocks();
+          const imageBlocks = blocks.filter(block => block.name === 'core/image');
+          
+          imageBlocks.forEach(block => {
+            // Check if this block's alt text length is within limits
+            const altLength = block.attributes.alt ? block.attributes.alt.length : 0;
+            const hasWarning = !PP_Checklists.check_valid_quantity(altLength, min, max);
+            
+            // Set warning attribute on the list view item
+            const listViewElement = document.querySelector(
+              `.block-editor-list-view-leaf[data-block="${block.clientId}"]`
+            );
+            if (listViewElement) {
+              listViewElement.setAttribute('data-warning', hasWarning);
+            }
+          });
+        }
+    
         var isValid = altLengths.every(function (length) {
           return PP_Checklists.check_valid_quantity(length, min, max);
         });
-
+    
         $('#pp-checklists-req-image_alt_count').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, isValid);
       });
     }
