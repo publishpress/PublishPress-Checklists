@@ -362,8 +362,11 @@ class Openai_item extends Base_simple implements Interface_required
 
                         // Extract Yes/No response
                         $yes_no_response = '';
+                        
                         if (preg_match('/^(Yes|No):/i', $api_content, $matches)) {
-                            $yes_no_response = strtolower(trim($matches[1]));
+                            if (isset($matches[1])) {
+                                $yes_no_response = strtolower(trim($matches[1]));
+                            }
                         }
 
                         if (in_array($yes_no_response, ['yes', 'no'])) {
