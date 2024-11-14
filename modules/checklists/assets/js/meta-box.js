@@ -870,8 +870,16 @@
 
   // Exposes and initialize the object
   window.PP_Checklists = PP_Checklists;
-  // RankMath and Yoast SEO plugins break if we init immediately
-  if (typeof rankMath !== 'undefined' || typeof YoastSEO !== 'undefined') {
+
+  if (typeof rankMath !== 'undefined' && typeof YoastSEO !== 'undefined') {
+    setTimeout(function () {
+      PP_Checklists.init();
+    }, 4000);
+  } else if (typeof rankMath !== 'undefined') {
+    setTimeout(function () {
+      PP_Checklists.init();
+    }, 3000);
+  } else if (typeof YoastSEO !== 'undefined') {
     setTimeout(function () {
       PP_Checklists.init();
     }, 3000);
