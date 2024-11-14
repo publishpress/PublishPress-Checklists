@@ -27,7 +27,7 @@ class Approved_by extends Base_multiple implements Interface_required
      * 
      * @var string
      */
-    public $group = 'content';
+    public $group = 'approval';
 
     protected $field_name = 'roles';
 

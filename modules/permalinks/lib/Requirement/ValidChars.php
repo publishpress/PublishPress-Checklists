@@ -27,7 +27,7 @@ class ValidChars extends Base_simple
      * 
      * @var string
      */
-    public $group = 'links';
+    public $group = 'permalinks';
 
     /**
      * @var int
