@@ -23,13 +23,25 @@ class FieldsTabs {
                 "label" => "Content",
                 "icon" => "dashicons dashicons-welcome-write-blog"
             ),
+            "approval" => array(
+                "label" => "Approval",
+                "icon" => "dashicons dashicons-yes"
+            ),
             "images" => array(
                 "label" => "Images",
                 "icon" => "dashicons dashicons-format-image"
             ),
+            "featured_image" => array(
+                "label" => "Featured Image",
+                "icon" => "dashicons dashicons-cover-image"
+            ),
             "links" => array(
                 "label" => "Links",
                 "icon" => "dashicons dashicons-admin-links"
+            ),
+            "permalinks" => array(
+                "label" => "Permalink",
+                "icon" => "dashicons dashicons-editor-unlink"
             ),
             "categories" => array(
                 "label" => "Categories",

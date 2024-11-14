@@ -26,7 +26,7 @@ class Featured_image_alt extends Base_simple
      * 
      * @var string
      */
-    public $group = 'images';
+    public $group = 'featured_image';
 
     /**
      * @var int
