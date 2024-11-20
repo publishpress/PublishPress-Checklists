@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.15.0
+Stable tag: 2.16.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,19 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.16.0] - 20 November 2024 =
+
+* Fixed: Links with ! are marked as invalid #261
+* Fixed: Internal link does not update real time #824
+* Fixed: Wrong result openAI checklists #823
+* Added: "List" view to highlight blocks with issues? #783
+* Added: New tab for Featured Image #814
+* Added: New tab for Permalinks #812
+* Added: New tab for Approval #813
+* Updated: Update to ACF text #817
+* Updated: Update the readme #820
+
 
 = [2.15.0] - 21 October 2024 =
 
