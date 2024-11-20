@@ -338,7 +338,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added: New tab for Featured Image #814
 * Added: New tab for Permalinks #812
 * Added: New tab for Approval #813
-* Updated: Update to ACF text #817
 * Updated: Update the readme #820
 
 
