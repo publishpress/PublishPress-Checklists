@@ -1,21 +1,21 @@
-=== PublishPress Checklists: Pre-Publishing Approval Checklist - OpenAI Post Scanner ===
+=== PublishPress Checklists: Pre-Publishing Approval Checklist - Validate Post Requirements ===
 
 Contributors: publishpress, kevinB, stevejburge, andergmartins, ojopaul, olatechpro
 Author: PublishPress
 Author URI: https://publishpress.com
-Tags: approval, checklist, maximum, minimum, requirement, task, OpenAI, featured image, alt tag, featured images, alt tags, checklists, broken links, chatgpt, featured image size, yoast seo, user approval, spell checker, spelling, grammar
+Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.15.0
+Stable tag: 2.16.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-You can define tasks that must be complete before content is published. Do you get a red X or a green checkmark?
+Define checklist tasks to complete before publishing posts. Make sure your content meets your requirements.
 
 == Description ==
 
-[PublishPress Checklists](https://publishpress.com/checklists/) is the best plugin to make sure your content is ready to go live. With PublishPress Checklists, you can choose pre-publishing requirements for your content. Using PublishPress Checklists, you define tasks that must be completed before content is published.
+[PublishPress Checklists](https://publishpress.com/checklists/) is the best plugin to make sure your content is ready to go live. Using PublishPress Checklists, you define tasks that must be completed before content is published.
 
 Let's show you a few possible options for your posts:
 
@@ -26,9 +26,11 @@ Let's show you a few possible options for your posts:
 * Require posts to be approved by a user in a specific role.
 * Use OpenAI to scan your content and make sure it uses good grammar or the correct tone.
 
-Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.
+Next to every post and page, writers see a checklist box, showing the tasks they need to complete. Tasks can either be recommended or required. As authors complete each task, the red X automatically turns to a green checkmark.  
 
-PublishPress Checklists integrates with OpenAI. You can use OpenAI technology to scan your posts and check for the right tone, good spelling, or correct grammar.
+PublishPress Checklists integrates with WooCommerce, Yoast SEO, and Advanced Custom Fields. You can set requirements based on those plugins.
+
+PublishPress Checklists also integrates with OpenAI. You can use OpenAI technology to scan your posts and check for the right tone, good spelling, or correct grammar.
 
 ## PublishPress Checklists Pro ##
 
@@ -45,19 +47,23 @@ Here are the default tasks you can use on your checklists:
 
 * **Title**: Maximum or minimum number of characters
 * **Body text**: Maximum or minimum number of words
-* **Categories**: Maximum or minimum number of categories
-* **Tags**: Maximum or minimum number of tags
-* **Taxonomy terms**: Maximum or minimum number of terms
 * **Excerpt**: Maximum or minimum number of characters
-* **Internal links**: Maximum or minimum number of internal links
-* **External links**: Maximum or minimum number of external links
+* **User approval**: Require that posts are approved by users in a specific role
+
 * **Featured image**: Require a featured image
 * **Featured image size (Pro version)**: Require a maximum and minimum height and width for featured images
 * **ALT text**: Require ALT text for all images
+* **Number of images in content (Pro version)**: Require a maximum and minimum number of images in the post
+
+* **Taxonomy terms**: Maximum or minimum number of categories or tags
+* **Required taxonomy terms**: Force users to add specific terms
+* **Prohibited taxonomy terms**: Force users to not add specific terms
+
+* **Internal links**: Maximum or minimum number of internal links
+* **External links**: Maximum or minimum number of external links
 * **Broken links**: Check that all links use a valid format
 * **Permalink**: Control the characters in the URL
-* **User approval**: Require that posts are approved by users in a specific role
-* **Yoast SEO**: Require that posts get Yoast SEO approval
+
 
 You can configure each requirement, depending on whether you want to require writers to complete the tasks. Here are the three options:
 
@@ -114,11 +120,23 @@ The Pro version of PublishPress Checklists has support for WooCommerce. There ar
 
 [Click here to read more about WooCommerce checklists](https://publishpress.com/knowledge-base/use-woocommerce-checklist-add-publishpress/).
 
+## Pro Version: Checklists for Advanced Custom Fields
+
+The Pro version of PublishPress Checklists has support for the Advanced Custom Fields plugin. For example, you can require that text fields have a certain number of characters or that image fields are filled in.
+
+[Click here to read more about ACF checklists](https://publishpress.com/knowledge-base/advance-custom-fields-tasks/).
+
+## Pro Version: Checklists for Yoast SEO
+
+With the PublishPress Checklists plugin, you can require that site's content meets minimum standards with the Yoast SEO plugin. If the content doesn't meet those standards, you can choose to show a warning, or prevent the post from being published. The Checklists plugin integrates with the SEO and Readability features in Yoast SEO.
+
+[Click here to read more about Yoast SEO checklists](https://publishpress.com/knowledge-base/yoast-seo-tasks/.
+
 ## Join PublishPress and get the Pro plugins ##
 
 The Pro versions of the PublishPress plugins are well worth your investment. The Pro versions have extra features and faster support. [Click here to join PublishPress](https://publishpress.com/pricing/).
 
-Join PublishPress and you'll get access to these nince Pro plugins:
+Join PublishPress and you'll get access to these Pro plugins:
 
 * [PublishPress Authors Pro](https://publishpress.com/authors) allows you to add multiple authors and guest authors to WordPress posts.
 * [PublishPress Blocks Pro](https://publishpress.com/blocks) has everything you need to build professional websites with the WordPress block editor.
@@ -310,6 +328,18 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.16.0] - 20 November 2024 =
+
+* Fixed: Links with ! are marked as invalid #261
+* Fixed: Internal link does not update real time #824
+* Fixed: Wrong result openAI checklists #823
+* Added: "List" view to highlight blocks with issues? #783
+* Added: New tab for Featured Image #814
+* Added: New tab for Permalinks #812
+* Added: New tab for Approval #813
+* Updated: Update the readme #820
+
 
 = [2.15.0] - 21 October 2024 =
 

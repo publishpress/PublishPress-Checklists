@@ -307,13 +307,15 @@ class Openai_item extends Base_simple implements Interface_required
             } else {
                 // configure prompt
                 $prompt = "
+                You are a content analyzer. Your task is to analyze the following content based on the given prompt.
+                You must start your response with either 'No:' or 'Yes:' followed by your explanation.
+                Do not use any other format for the yes/no response.
+
                 Prompt: {$requirement['label']}
 
                 Content: {$content}
 
-                Please provide your analysis in the following format:
-                Yes/No: [Your Yes/No response]
-                Full Response: [Your detailed analysis]
+                Remember: Start your response with either 'Yes:' or 'No:' followed by your explanation.
                 ";
 
                 // prepare body data
@@ -360,17 +362,10 @@ class Openai_item extends Base_simple implements Interface_required
 
                         // Extract Yes/No response
                         $yes_no_response = '';
-                        preg_match('/Yes\/No: (Yes|No)/', $api_content, $matches);
-                        if (isset($matches[1])) {
-                            $yes_no_response = strtolower(trim($matches[1]));
-                        }
-
-                        // Compatibility for rare cases where the api may not follow our requested format
-                        if (!in_array($yes_no_response, ['yes', 'no'])) {
-                            if (stripos($api_content, "Yes") === 0) {
-                                $yes_no_response = 'yes';
-                            } elseif (stripos($api_content, "Yes") === 0) {
-                                $yes_no_response = 'no';
+                        
+                        if (preg_match('/^(Yes|No):/i', $api_content, $matches)) {
+                            if (isset($matches[1])) {
+                                $yes_no_response = strtolower(trim($matches[1]));
                             }
                         }
 
