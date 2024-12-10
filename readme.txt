@@ -329,7 +329,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.17.0] - 12 December 2024 =
+= [2.17.0] - 10 December 2024 =
 
 * Fixed: Remove space at top of the Checklists screen #834
 * Added: New tab for Yoast #815
