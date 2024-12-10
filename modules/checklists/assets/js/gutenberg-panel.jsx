@@ -174,7 +174,7 @@ class PPChecklistsPanel extends Component {
 
     render() {
         const { showRequiredLegend, requirements } = this.state;
-
+        
         return (
             <Fragment>
                 <PluginSidebarMoreMenuItem
@@ -188,55 +188,61 @@ class PPChecklistsPanel extends Component {
                     title={__("Checklists", "publishpress-checklists")}
                 >
                     <div id="pp-checklists-sidebar-content" className="components-panel__body is-opened">
-                        <ul id="pp-checklists-sidebar-req-box">
-                            {requirements.length === 0 ? (
-                                <p>
-                                    <em>
-                                        {i18n.noTaskLabel}
-                                    </em>
-                                </p>
-                            ) : (
-                                requirements.map((req, key) => (
-                                    <li
-                                        key={`pp-checklists-req-panel-${key}`}
-                                        className={`pp-checklists-req panel-req pp-checklists-${req.rule} status-${req.status ? 'yes' : 'no'} ${req.is_custom ? 'pp-checklists-custom-item' : ''
-                                            }`}
-                                        data-id={req.id}
-                                        data-type={req.type}
-                                        data-extra={req.extra || ''}
-                                        data-source={req.source || ''}
-                                        onClick={() => {
-                                            if (req.is_custom) {
-                                                const element = document.querySelector(`#pp-checklists-req-${req.id}` + ' .status-label');
-                                                if (element) {
-                                                    element.click();
-                                                }
-                                            }
-                                        }}
-                                    >
-                                        {req.is_custom || req.require_button ? (
-                                            <input type="hidden" name={`_PPCH_custom_item[${req.id}]`} value={req.status ? 'yes' : 'no'} />
-                                        ) : null}
-                                        <div className={`status-icon dashicons ${req.is_custom ? (req.status ? 'dashicons-yes' : '') : (req.status ? 'dashicons-yes' : 'dashicons-no')}`}></div>
-                                        <div className="status-label">
-                                            <span className="req-label" dangerouslySetInnerHTML={{ __html: req.label }} />
-                                            {req.rule === 'block' ? (
-                                                <span className="required">*</span>
-                                            ) : null}
-                                            {req.require_button ? (
-                                                <div className="requirement-button-task-wrap">
-                                                    <button type="button" className="button button-secondary pp-checklists-check-item">
-                                                        {__("Check Now", "publishpress-checklists")}
-                                                        <span className="spinner"></span>
-                                                    </button>
-                                                    <div className="request-response"></div>
+                        {i18n.isElementorEnabled == "1" ? (
+                            <p><em>{i18n.elementorNotice}</em></p>
+                        ) : (
+                            <Fragment>
+                                {requirements.length === 0 ? (
+                                    <p>
+                                        <em>
+                                            {i18n.noTaskLabel}
+                                        </em>
+                                    </p>
+                                ) : (
+                                    <ul id="pp-checklists-sidebar-req-box">
+                                        {requirements.map((req, key) => (
+                                            <li
+                                                key={`pp-checklists-req-panel-${key}`}
+                                                className={`pp-checklists-req panel-req pp-checklists-${req.rule} status-${req.status ? 'yes' : 'no'} ${req.is_custom ? 'pp-checklists-custom-item' : ''
+                                                    }`}
+                                                data-id={req.id}
+                                                data-type={req.type}
+                                                data-extra={req.extra || ''}
+                                                data-source={req.source || ''}
+                                                onClick={() => {
+                                                    if (req.is_custom) {
+                                                        const element = document.querySelector(`#pp-checklists-req-${req.id}` + ' .status-label');
+                                                        if (element) {
+                                                            element.click();
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                {req.is_custom || req.require_button ? (
+                                                    <input type="hidden" name={`_PPCH_custom_item[${req.id}]`} value={req.status ? 'yes' : 'no'} />
+                                                ) : null}
+                                                <div className={`status-icon dashicons ${req.is_custom ? (req.status ? 'dashicons-yes' : '') : (req.status ? 'dashicons-yes' : 'dashicons-no')}`}></div>
+                                                <div className="status-label">
+                                                    <span className="req-label" dangerouslySetInnerHTML={{ __html: req.label }} />
+                                                    {req.rule === 'block' ? (
+                                                        <span className="required">*</span>
+                                                    ) : null}
+                                                    {req.require_button ? (
+                                                        <div className="requirement-button-task-wrap">
+                                                            <button type="button" className="button button-secondary pp-checklists-check-item">
+                                                                {__("Check Now", "publishpress-checklists")}
+                                                                <span className="spinner"></span>
+                                                            </button>
+                                                            <div className="request-response"></div>
+                                                        </div>
+                                                    ) : null}
                                                 </div>
-                                            ) : null}
-                                        </div>
-                                    </li>
-                                ))
-                            )}
-                        </ul>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </Fragment>
+                        )}
                         {showRequiredLegend ? (
                             <em>
                                 (*) {i18n.required}

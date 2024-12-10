@@ -37,6 +37,7 @@ use PublishPress\Checklists\Core\Requirement\Base_requirement;
 use PublishPress\Checklists\Core\Requirement\Custom_item;
 use PublishPress\Checklists\Core\Requirement\Openai_item;
 use PublishPress\Checklists\Core\Utils\FieldsTabs;
+use PublishPress\Checklists\Core\Utils\ElementorUtils;
 
 if (!class_exists('PPCH_Checklists')) {
     /**
@@ -1074,6 +1075,8 @@ if (!class_exists('PPCH_Checklists')) {
                             'checklistLabel' => __("Checklists", "publishpress-checklists"),
                             'noTaskLabel' => __("You don't have to complete any Checklist tasks.", "publishpress-checklists"),
                             'required' => __("required", "publishpress-checklists"),
+                            'elementorNotice' => __("Checklists tasks are not available in Elementor editors", "publishpress-checklists"),
+                            'isElementorEnabled' => ElementorUtils::isElementorEnabled() ? "1" : "0",
                         )
                     );
                 }

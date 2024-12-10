@@ -8,6 +8,7 @@
 # Build Artifacts
 /build
 /dist
+/svn
 
 # Dependencies
 /node_modules

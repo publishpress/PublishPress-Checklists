@@ -43,7 +43,7 @@ class Readability_Analysis extends Base_dropdown
      *
      * @var string
      */
-    public $group = 'content';
+    public $group = 'yoastseo';
 
     /**
      * Initialize the language strings for the instance
