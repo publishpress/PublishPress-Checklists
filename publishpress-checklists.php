@@ -6,7 +6,7 @@
  * Description: With PublishPress Checklists, you can choose publishing requirements for your content.
  * Author:      PublishPress
  * Author URI:  https://publishpress.com
- * Version: 2.16.0
+ * Version: 2.17.0
  * Text Domain: publishpress-checklists
  * Domain Path: /languages
  * Requires at least: 5.5
