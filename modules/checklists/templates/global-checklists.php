@@ -36,7 +36,9 @@
                             <a data-tab="<?php echo esc_attr($key); ?>"
                                 data-post-type="<?php echo esc_attr($post_type_key); ?>"
                                 href="#">
-                                <span class="<?php echo esc_attr($args['icon']); ?>"></span>
+                                <span class="<?php echo esc_attr($args['icon']); ?>">
+                                    <?php if (isset($args['svg']) && !empty($args['svg'])) : echo $args['svg']; endif; ?>
+                                </span>
                                 <span class="item"><?php echo esc_html_e($args['label']); ?></span>
                             </a>
                         </li>
