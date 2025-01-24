@@ -57,8 +57,7 @@ class Meta_Description extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        var_dump('All Yoast Meta: ' . print_r(get_post_meta($post->ID), true));
-        
+
         // Get focus keyword from Yoast SEO meta
         $meta_description = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);   
         
