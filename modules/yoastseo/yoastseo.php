@@ -5,6 +5,8 @@ use PublishPress\Checklists\Core\Legacy\LegacyPlugin;
 use PublishPress\Checklists\Core\Legacy\Module;
 use PublishPress\Checklists\Yoastseo\Requirement\Readability_Analysis;
 use PublishPress\Checklists\Yoastseo\Requirement\Seo_Analysis;
+use PublishPress\Checklists\Yoastseo\Requirement\Focus_Keyword;
+use PublishPress\Checklists\Yoastseo\Requirement\Meta_Description;
 
 /**
  * @package     PublishPress\Checklists
@@ -150,6 +152,8 @@ class PPCH_Yoastseo extends Module
     {
         $requirements[] = Readability_Analysis::class;
         $requirements[] = Seo_Analysis::class;
+        $requirements[] = Focus_Keyword::class;
+        $requirements[] = Meta_Description::class;
 
         return $requirements;
     }
