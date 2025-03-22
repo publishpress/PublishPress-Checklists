@@ -54,6 +54,9 @@ class Plugin
 
         $this->loadTextDomain();
 
+        // Initialize the API
+        \PublishPress\Checklists\Core\API\Bootstrap::init();
+
         Factory::getLegacyPlugin();
     }
 

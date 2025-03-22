@@ -4,6 +4,7 @@
 
 # IDE
 .idea
+.windsurfrules
 
 # Build Artifacts
 /build
