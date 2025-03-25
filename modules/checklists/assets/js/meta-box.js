@@ -185,10 +185,7 @@
 
             var isSidebarOpened = wp.data.select('core/edit-post').isPublishSidebarOpened();
 
-            if (isSidebarOpened) {
-              this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
-            } else {
-              // We need this as validate requirement is not been triggered for publish post. I'll leave the condition for now till i study this very well.
+            if (isSidebarOpened && !this.state.is_validating) {
               this.elems.document.trigger(this.EVENT_VALIDATE_REQUIREMENTS);
             }
           }.bind(this),
