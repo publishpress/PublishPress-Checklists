@@ -94,6 +94,62 @@
 
         }
 
+        /**
+         *
+         * Yoast SEO Focus Keyword
+         *
+         *
+         */
+
+        if ($('#pp-checklists-req-focus_keyword').length > 0) {
+            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+              var count = 0,
+                obj = null,
+                min_value = parseInt(ppChecklists.requirements.focus_keyword.value[0]),
+                max_value = parseInt(ppChecklists.requirements.focus_keyword.value[1]);
+        
+            if ($('#focus-keyword-input-metabox').length === 0) {
+                return;
+            }
+          
+            obj = $('#focus-keyword-input-metabox').val();
+        
+              if (typeof obj !== 'undefined') {
+                count = obj.length;
+        
+                $('#pp-checklists-req-focus_keyword').trigger(
+                  PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                  PP_Checklists.check_valid_quantity(count, min_value, max_value),
+                );
+              }
+            });
+        }
+
+        /**
+         *
+         * Yoast SEO Meta Description
+         *
+         */
+
+        if ($('#pp-checklists-req-meta_description').length > 0) {
+            $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+                var count = 0,
+                    obj = '', 
+                    min_value = parseInt(ppChecklists.requirements.meta_description.value[0]),
+                    max_value = parseInt(ppChecklists.requirements.meta_description.value[1]);
+            
+              
+                obj = $('#yoast-google-preview-description-metabox').find('span[data-text="true"]').text() || '';
+            
+                count = obj.length;
+            
+                $('#pp-checklists-req-meta_description').trigger(
+                    PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE,
+                    PP_Checklists.check_valid_quantity(count, min_value, max_value),
+                );
+            });
+        }
+
     });
 
 })(jQuery, window, document, PP_Checklists);
