@@ -78,10 +78,11 @@ class FieldsTabs {
         return $this->fields_tabs;
     }
 
-    public function addTab($key, $label, $icon, $position = null) {
+    public function addTab($key, $label, $icon, $svg = null, $position = null) {
         $new_tab = array(
             "label" => $label,
-            "icon" => $icon
+            "icon" => $icon,
+            "svg" => $svg
         );
 
         if ($position === null || $position >= count($this->fields_tabs)) {
