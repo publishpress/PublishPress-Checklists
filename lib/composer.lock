@@ -386,10 +386,10 @@
             "type": "library",
             "extra": {
                 "generator": {
-                    "lib-class-test": "class_exists('PublishPress\\WordpressVersionNotices\\ServicesProvider')",
                     "src-dir": "src",
-                    "action-initialize-priority": "-150",
-                    "action-register-priority": "-190"
+                    "lib-class-test": "class_exists('PublishPress\\WordpressVersionNotices\\ServicesProvider')",
+                    "action-register-priority": "-190",
+                    "action-initialize-priority": "-150"
                 }
             },
             "autoload": {

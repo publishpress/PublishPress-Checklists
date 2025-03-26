@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.6
-Stable tag: 2.17.0
+Stable tag: 2.18.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,13 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.18.0] - 26 March 2025 =
+
+* Added: Support for Yoast Focus Keyword, meta description #555
+* Added: Allow custom SVG icons in Tabs #849
+* Added: API for adding values programmatically #635
+* Fixed: Rankmath Analyzer stopped working when Checklists initializes #846
 
 = [2.17.0] - 10 December 2024 =
 
