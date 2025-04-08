@@ -1984,19 +1984,7 @@
     update();
   }
 
-  /*----------  Configure link for Checklist metabox  ----------*/
-  if (ppChecklists.user_can_manage_options == 1 && $('#pp_checklist_meta').length) {
-    // Create a new anchor element
-    var link = document.createElement('a');
-
-    // Set the properties of the anchor element
-    link.className = 'edit-box open-box';
-    link.href = ppChecklists.configure_url;
-    link.textContent = ppChecklists.label_configure;
-
-    // Append the anchor element to the desired parent element
-    $('#pp_checklist_meta').find('h2.hndle').append($('<span>').addClass('postbox-title-action').append(link));
-  }
+  
 
   /**
    *

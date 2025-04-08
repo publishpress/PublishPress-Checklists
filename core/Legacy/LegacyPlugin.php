@@ -203,7 +203,6 @@ class LegacyPlugin
             'default_options'      => [],
             'options'              => false,
             'configure_page_cb'    => false,
-            'configure_link_text'  => __('Configure', 'publishpress-checklists'),
             // These messages are applied to modules and can be overridden if custom messages are needed
             'messages'             => [
                 'form-error'          => __(

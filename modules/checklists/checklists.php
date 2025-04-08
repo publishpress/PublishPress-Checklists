@@ -759,7 +759,6 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'label_checklist'                 => esc_html__('Checklist', 'publishpress-checklists'),
-                        'label_configure'                 => esc_html__('Configure', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => esc_html__(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
