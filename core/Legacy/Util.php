@@ -189,6 +189,8 @@ class Util
                         <li><?php echo esc_html__('Checklists for WooCommerce products', 'publishpress-checklists'); ?></li>
                         <li><?php echo esc_html__('Checklists for Advanced Custom Fields', 'publishpress-checklists'); ?></li>
                         <li><?php echo esc_html__('Checklists for Yoast SEO', 'publishpress-checklists'); ?></li>
+                        <li><?php echo esc_html__('Checklists for Rank Math', 'publishpress-checklists'); ?></li>
+                        <li><?php echo esc_html__('Checklists for All in One SEO', 'publishpress-checklists'); ?></li>
                         <li><?php echo esc_html__('Remove PublishPress ads and branding', 'publishpress-checklists'); ?></li>
                         <li><?php echo esc_html__('Fast, professional support', 'publishpress-checklists'); ?></li>
                     </ul>
