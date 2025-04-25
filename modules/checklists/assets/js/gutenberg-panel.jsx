@@ -175,7 +175,7 @@ class PPChecklistsPanel extends Component {
     render() {
         const { showRequiredLegend, requirements } = this.state;
         
-        return (
+        return requirements.length > 0 ? (
             <Fragment>
                 <PluginSidebarMoreMenuItem
                     target="checklists-sidebar"
@@ -251,7 +251,7 @@ class PPChecklistsPanel extends Component {
                     </div>
                 </PluginSidebar>
             </Fragment>
-        );
+        ) : null;
     }
 }
 
