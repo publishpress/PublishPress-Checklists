@@ -405,6 +405,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_caption',
                 ],
                 'excerpt'   => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',

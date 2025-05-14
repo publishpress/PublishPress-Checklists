@@ -989,6 +989,75 @@
     });
   }
 
+  /*----------  Featured Image Caption  ----------*/
+  // Check if the featured image is set or not
+  if ($('#pp-checklists-req-featured_image_caption').length > 0) {
+    let loaded = false,
+      meta_id = 0,
+      meta_caption = '';
+    let featured_image_caption = {};
+    const updateFeaturedImageCaption = (id, caption) => {
+      meta_id = Number(id);
+      meta_caption = caption;
+      featured_image_caption = { [meta_id]: meta_caption };
+      loaded = true;
+    };
+    if (PP_Checklists.is_gutenberg_active()) {
+      wp.data.subscribe(function () {
+        if (loaded) return;
+        const mediaId = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
+        if (mediaId) {
+          const dataMedia = wp.data.select('core').getMedia(mediaId);
+          if (typeof dataMedia === 'object' && dataMedia) {
+            let actualCaption = '';
+            if (dataMedia.caption) {
+              if (typeof dataMedia.caption === 'object' && dataMedia.caption.raw !== undefined) {
+                actualCaption = dataMedia.caption.raw;
+              } else if (typeof dataMedia.caption === 'string') {
+                actualCaption = dataMedia.caption;
+              }
+            }
+            updateFeaturedImageCaption(mediaId, actualCaption);
+          }
+        }
+      });
+    } else {
+      updateFeaturedImageCaption(
+        $('#_thumbnail_id').val(),
+        $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'),
+      );
+    }
+    $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+      if (!loaded) return;
+      let has_caption = true,
+        has_image = PP_Checklists.hasFeaturedImage();
+      if (has_image) {
+        has_caption = Boolean(featured_image_caption[meta_id]);
+      }
+
+      if ($('#attachment-details-caption').length > 0) {
+        const callableFunc = function () {
+          const current_caption = $('#attachment-details-caption').val();
+          const previous_caption = featured_image_caption[meta_id] ?? '';
+          if (current_caption !== previous_caption) {
+            featured_image_caption[meta_id] = current_caption;
+          }
+        };
+        $('#attachment-details-caption')
+          .ready(function () {
+            $('.attachments-wrapper li').each(function () {
+              if ($(this).attr('aria-checked') === 'true') {
+                meta_id = Number($(this).attr('data-id'));
+                callableFunc();
+              }
+            });
+          })
+          .on('change', callableFunc);
+      }
+      $('#pp-checklists-req-featured_image_caption').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, has_caption);
+    });
+  }
+
   /*---------- Tags Number  ----------*/
 
   if ($('#pp-checklists-req-tags_count').length > 0) {
