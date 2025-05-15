@@ -679,15 +679,7 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function handle_post_meta_boxes()
         {
-            /**
-             *
-             * TODO:
-             * - Check if there is any active requirement before display the box
-             */
-
-
             $title = esc_html__('Checklist', 'publishpress-checklists');
-
             $supported_post_types = $this->getSelectedPostTypes();
 
             // Hide checklist meta box from acf plugin
@@ -697,7 +689,14 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             foreach ($supported_post_types as $post_type => $label) {
-                add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
+                // Create a dummy post object for requirement checks
+                $dummy_post = (object) [ 'post_type' => $post_type ];
+                $requirements = [];
+                $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $dummy_post);
+
+                if (!empty($requirements)) {
+                    add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
+                }
             }
         }
 
