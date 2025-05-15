@@ -1268,7 +1268,7 @@ if (!class_exists('PPCH_Checklists')) {
             $postTypes = $this->get_post_types();
             $allFieldsTabs =  $fieldsTabs->getFieldsTabs();
             $filteredFieldsTabs = array_filter($allFieldsTabs, function ($_, $key) {
-                return !in_array($key, ['advanced-custom-fields', 'woocommerce']);
+                return !in_array($key, ['advanced-custom-fields']);
             }, ARRAY_FILTER_USE_BOTH);
             $result = [];
             foreach ($postTypes as $key => $postType) {

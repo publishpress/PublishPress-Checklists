@@ -29,8 +29,9 @@
                             return $requirement->group === $key;
                         });
 
-                        // Skip if the tab has no requirements or is not the custom tab
-                        if (empty($has_requirements) && $key !== 'custom') continue;
+                        // Show Pro tabs even if they have no requirements, so they can display the promo
+                        $is_pro_tab = isset($args['pro']) && $args['pro'];
+                        if (empty($has_requirements) && $key !== 'custom' && !$is_pro_tab) continue;
                     ?>
                         <li class="<?php echo esc_attr($post_type_key); ?>">
                             <a data-tab="<?php echo esc_attr($key); ?>"
@@ -76,46 +77,59 @@
                                 // Skip if the post type is not the current one
                                 if ($post_type !== $post_type_key) continue;
                                 $group_has_requirements = false;
-                                ?>
-                                <?php foreach ($post_type_requirements as $requirement) : ?>
-                                    <?php if ($requirement->group === $group) :
-                                        $group_has_requirements = true;
+                                // Check if this tab is Pro-only and Pro is NOT active
+                                $is_pro_tab = isset($tabInfo['pro']) && $tabInfo['pro'];
+                                if ($is_pro_tab && empty($pro_active)) {
+                                    // Show a promo message for Pro tabs if Pro is not active
+                                    echo '<tr class="pp-checklists-requirement-row ppch-' . esc_attr($group) . '-group" data-post-type="' . esc_attr($post_type) . '"><td colspan="4" class="pp-pro-tab-promo">';
+                                    echo esc_html__('This feature is available in the Pro version. ', 'publishpress-checklists');
+                                    echo '<a href="https://publishpress.com/" target="_blank" rel="noopener">' . esc_html__('Upgrade to Pro', 'publishpress-checklists') . '</a>';
+                                    echo '</td></tr>';
+                                    $group_has_requirements = true; // Prevents "No requirements" message
+                                } else {
+                                    // Render requirements as usual
+                                    foreach ($post_type_requirements as $requirement) :
+                                        if ($requirement->group === $group) :
+                                            $group_has_requirements = true;
                                     ?>
-                                        <tr
-                                            class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group"
-                                            style="display: none;"
-                                            data-id="<?php echo esc_attr($requirement->name); ?>"
-                                            data-post-type="<?php echo esc_attr($post_type); ?>">
+                                            <tr
+                                                class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group"
+                                                style="display: none;"
+                                                data-id="<?php echo esc_attr($requirement->name); ?>"
+                                                data-post-type="<?php echo esc_attr($post_type); ?>">
 
-                                            <td>
+                                                <td>
+                                                    <?php
+                                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                    echo $requirement->get_setting_title_html();
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                    echo $requirement->get_setting_action_list_html(); ?>
+                                                </td>
                                                 <?php
-                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                echo $requirement->get_setting_title_html();
+                                                /**
+                                                 * @param string $html
+                                                 * @param $requirement
+                                                 *
+                                                 * @return string
+                                                 */
+                                                do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                echo $requirement->get_setting_action_list_html(); ?>
-                                            </td>
-                                            <?php
-                                            /**
-                                             * @param string $html
-                                             * @param $requirement
-                                             *
-                                             * @return string
-                                             */
-                                            do_action('publishpress_checklists_tasks_list_td', $requirement, $post_type);
-                                            ?>
-                                            <td class="pp-checklists-task-params">
-                                                <?php
-                                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                echo $requirement->get_setting_field_html();
-                                                ?>
-                                            </td>
-                                        </tr>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                                                <td class="pp-checklists-task-params">
+                                                    <?php
+                                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                                    echo $requirement->get_setting_field_html();
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                }
+                                ?>
                                 <?php if ($post_type === $post_type_key && !$group_has_requirements) : ?>
                                     <tr class="pp-checklists-requirement-row ppch-<?php echo esc_attr($group); ?>-group" data-post-type="<?php echo esc_attr($post_type); ?>">
                                         <td colspan="4" id="empty-custom-rule">

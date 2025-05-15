@@ -170,7 +170,7 @@ class Util
      */
     public static function ppch_pro_sidebar()
     {
-?>
+        ?>
         <div class="ppch-advertisement-right-sidebar">
             <div class="advertisement-box-content postbox ppch-advert">
                 <div class="postbox-header ppch-advert">
@@ -229,17 +229,66 @@ class Util
                     </p>
                 </div>
             </div>
-        </div><?php
-            }
+        </div>
+        <?php
+    }
 
-            /**
-             * Check if Checklists Pro active
-             */
-            public static function isChecklistsProActive()
-            {
-                if (defined('PPCHPRO_VERSION')) {
-                    return true;
-                }
-                return false;
-            }
+    /**
+     * Check if Checklists Pro active
+     */
+    public static function isChecklistsProActive()
+    {
+        if (defined('PPCHPRO_VERSION')) {
+            return true;
         }
+        return false;
+    }
+
+    /**
+     * Check if Rank Math plugin is activated
+     * 
+     * @return bool
+     */
+    public static function isRankMathActivated()
+    {
+        return class_exists('RankMath') || is_plugin_active('seo-by-rank-math/rank-math.php');
+    }
+
+    /**
+     * Check if All in One SEO plugin is activated
+     * 
+     * @return bool
+     */
+    public static function isAllInOneSeoActivated()
+    {
+        return class_exists('AIOSEO\\Plugin\\AIOSEO') || is_plugin_active('all-in-one-seo-pack/all-in-one-seo-pack.php');
+    }
+
+    /**
+     * Check if WooCommerce plugin is activated
+     */
+    public static function isWooCommerceActivated()
+    {
+        return class_exists('WooCommerce') || is_plugin_active('woocommerce/woocommerce.php');
+    }
+
+    /**
+     * Check if Yoast SEO plugin is activated
+     */
+    public static function isYoastSeoActivated()
+    {
+        return class_exists('WPSEO_Options') || is_plugin_active('wordpress-seo/wp-seo.php') || is_plugin_active(
+                'wordpress-seo-premium/wp-seo-premium.php'
+            );
+    }
+
+    /**
+     * Check if ACF plugin is activated
+     */
+    public static function isACFActivated()
+    {
+        return class_exists('ACF') || is_plugin_active('advanced-custom-fields/advanced-custom-fields.php');
+    }
+
+
+}
