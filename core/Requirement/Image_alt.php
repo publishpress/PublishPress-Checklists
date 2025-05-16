@@ -80,7 +80,8 @@ class Image_alt extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        $count = count($this->missing_alt_images($post->post_content));
+        $post_content = isset($post->post_content) ? $post->post_content : '';
+        $count = count($this->missing_alt_images($post_content));
 
         return $count == 0;
     }

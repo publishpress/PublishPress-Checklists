@@ -105,6 +105,7 @@ class Validate_links extends Base_simple
      */
     public function get_current_status($post, $option_value)
     {
-        return $this->has_no_invalid_links($post->post_content);
+        $post_content = isset($post->post_content) ? $post->post_content : '';
+        return $this->has_no_invalid_links($post_content);
     }
 }

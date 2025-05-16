@@ -58,7 +58,8 @@ class Title_count extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        $count = strlen(trim($post->post_title));
+        $post_title = isset($post->post_title) ? $post->post_title : '';
+        $count = strlen(trim($post_title));
 
         return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }
