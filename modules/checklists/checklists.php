@@ -734,6 +734,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
+            $options = get_option('publishpress_checklists_settings_options');
 
             $checklistsLink = add_query_arg(['page' => 'ppch-checklists'], get_admin_url(null, 'admin.php'));
 
@@ -789,6 +790,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'is_gutenberg_active'      => $this->is_gutenberg_active(),
                         'user_can_manage_options'  => current_user_can('manage_options'),
                         'configure_url'            => esc_url($this->get_admin_link()),
+                        'status_filter_enabled'    => isset($options->status_filter_enabled) ? $options->status_filter_enabled : 'off',
                     ]
                 );
 

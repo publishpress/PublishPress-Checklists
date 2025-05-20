@@ -886,8 +886,8 @@
 
   /*----------  Warning icon in submit button  ----------*/
   // Need this validation for status filter in Pro to work
-if (ppChecklists.show_warning_icon_submit && (!PP_Checklists.is_gutenberg_active() || typeof window.ppcStatusFilterGutenbergData === 'undefined')) {    
-	$(document).on(PP_Checklists.EVENT_TIC, function (event) {
+  if (ppChecklists.show_warning_icon_submit && ppChecklists.status_filter_enabled) {    
+    $(document).on(PP_Checklists.EVENT_TIC, function (event) {
       var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
       if (has_unchecked.length > 0) {
         $('body').addClass('ppch-show-publishing-warning-icon');
