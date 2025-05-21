@@ -60,7 +60,8 @@ class Words_count extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        $count = str_word_count(strip_tags($post->post_content));
+        $post_content = isset($post->post_content) ? $post->post_content : '';
+        $count = str_word_count(strip_tags($post_content));
 
         return ($count >= $option_value[0]) && ($option_value[1] == 0 || $count <= $option_value[1]);
     }

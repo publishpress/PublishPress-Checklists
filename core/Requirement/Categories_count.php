@@ -64,7 +64,8 @@ class Categories_count extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        $categories = wp_get_post_categories($post->ID);
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        $categories = wp_get_post_categories($post_id);
 
         $count = count($categories);
 

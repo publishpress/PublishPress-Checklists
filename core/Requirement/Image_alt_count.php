@@ -60,7 +60,8 @@ class Image_alt_count extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        $alt_lengths = $this->get_image_alt_lengths($post->post_content);
+        $post_content = isset($post->post_content) ? $post->post_content : '';
+        $alt_lengths = $this->get_image_alt_lengths($post_content);
         
         foreach ($alt_lengths as $length) {
             if ($length < $option_value[0] || ($option_value[1] > 0 && $length > $option_value[1])) {

@@ -98,7 +98,8 @@ class Prohibited_categories extends Base_multiple
      */
     public function get_current_status($post, $option_value)
     {
-        $categories = wp_get_post_categories($post->ID);
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        $categories = wp_get_post_categories($post_id);
         $option_ids = $this->category_parser($option_value, 0);
 
         return empty(array_intersect($option_ids, $categories));
@@ -360,7 +361,8 @@ class Prohibited_categories extends Base_multiple
             return $requirements;
         }
 
-        $post_categories = wp_get_post_categories($post->ID);
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        $post_categories = wp_get_post_categories($post_id);
         $blocked_categories = array();
         foreach ($option_value as $category_str) {
             [$category_id, $category_name] = explode($this->DELIMITER, $category_str);
