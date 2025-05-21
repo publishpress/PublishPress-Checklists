@@ -405,6 +405,7 @@ if (!class_exists('PPCH_Checklists')) {
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
+                    '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_caption',
                 ],
                 'excerpt'   => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',
@@ -678,15 +679,7 @@ if (!class_exists('PPCH_Checklists')) {
          */
         public function handle_post_meta_boxes()
         {
-            /**
-             *
-             * TODO:
-             * - Check if there is any active requirement before display the box
-             */
-
-
             $title = esc_html__('Checklist', 'publishpress-checklists');
-
             $supported_post_types = $this->getSelectedPostTypes();
 
             // Hide checklist meta box from acf plugin
@@ -696,7 +689,14 @@ if (!class_exists('PPCH_Checklists')) {
             }
 
             foreach ($supported_post_types as $post_type => $label) {
-                add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
+                // Create a dummy post object for requirement checks
+                $dummy_post = (object) [ 'post_type' => $post_type ];
+                $requirements = [];
+                $requirements = apply_filters('publishpress_checklists_requirement_list', $requirements, $dummy_post);
+
+                if (!empty($requirements)) {
+                    add_meta_box(self::METADATA_TAXONOMY, $title, [$this, 'display_meta_box'], $post_type, 'side', 'high');
+                }
             }
         }
 
@@ -734,6 +734,7 @@ if (!class_exists('PPCH_Checklists')) {
 
             $legacyPlugin = Factory::getLegacyPlugin();
 
+            $options = get_option('publishpress_checklists_settings_options');
 
             $checklistsLink = add_query_arg(['page' => 'ppch-checklists'], get_admin_url(null, 'admin.php'));
 
@@ -759,7 +760,6 @@ if (!class_exists('PPCH_Checklists')) {
                             'publishpress-checklists'
                         ),
                         'label_checklist'                 => esc_html__('Checklist', 'publishpress-checklists'),
-                        'label_configure'                 => esc_html__('Configure', 'publishpress-checklists'),
                         'msg_missed_optional_publishing'  => esc_html__(
                             'Are you sure you want to publish anyway?',
                             'publishpress-checklists'
@@ -790,6 +790,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'is_gutenberg_active'      => $this->is_gutenberg_active(),
                         'user_can_manage_options'  => current_user_can('manage_options'),
                         'configure_url'            => esc_url($this->get_admin_link()),
+                        'status_filter_enabled'    => isset($options->status_filter_enabled) ? $options->status_filter_enabled : 'off',
                     ]
                 );
 
@@ -1267,7 +1268,7 @@ if (!class_exists('PPCH_Checklists')) {
             $postTypes = $this->get_post_types();
             $allFieldsTabs =  $fieldsTabs->getFieldsTabs();
             $filteredFieldsTabs = array_filter($allFieldsTabs, function ($_, $key) {
-                return !in_array($key, ['advanced-custom-fields', 'woocommerce']);
+                return !in_array($key, ['advanced-custom-fields']);
             }, ARRAY_FILTER_USE_BOTH);
             $result = [];
             foreach ($postTypes as $key => $postType) {

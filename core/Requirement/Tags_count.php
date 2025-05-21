@@ -64,7 +64,8 @@ class Tags_count extends Base_counter
      */
     public function get_current_status($post, $option_value)
     {
-        $tags = wp_get_post_tags($post->ID);
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        $tags = wp_get_post_tags($post_id);
 
         $count = count($tags);
 

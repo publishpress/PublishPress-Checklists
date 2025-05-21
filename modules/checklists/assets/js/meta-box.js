@@ -885,7 +885,8 @@
   }
 
   /*----------  Warning icon in submit button  ----------*/
-  if (ppChecklists.show_warning_icon_submit) {
+  // Need this validation for status filter in Pro to work
+  if (ppChecklists.show_warning_icon_submit && ppChecklists.status_filter_enabled) {    
     $(document).on(PP_Checklists.EVENT_TIC, function (event) {
       var has_unchecked = $('#pp-checklists-req-box').children('.status-no');
       if (has_unchecked.length > 0) {
@@ -986,6 +987,75 @@
           .on('change', callableFunc);
       }
       $('#pp-checklists-req-featured_image_alt').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, has_alt);
+    });
+  }
+
+  /*----------  Featured Image Caption  ----------*/
+  // Check if the featured image is set or not
+  if ($('#pp-checklists-req-featured_image_caption').length > 0) {
+    let loaded = false,
+      meta_id = 0,
+      meta_caption = '';
+    let featured_image_caption = {};
+    const updateFeaturedImageCaption = (id, caption) => {
+      meta_id = Number(id);
+      meta_caption = caption;
+      featured_image_caption = { [meta_id]: meta_caption };
+      loaded = true;
+    };
+    if (PP_Checklists.is_gutenberg_active()) {
+      wp.data.subscribe(function () {
+        if (loaded) return;
+        const mediaId = PP_Checklists.getEditor().getEditedPostAttribute('featured_media');
+        if (mediaId) {
+          const dataMedia = wp.data.select('core').getMedia(mediaId);
+          if (typeof dataMedia === 'object' && dataMedia) {
+            let actualCaption = '';
+            if (dataMedia.caption) {
+              if (typeof dataMedia.caption === 'object' && dataMedia.caption.raw !== undefined) {
+                actualCaption = dataMedia.caption.raw;
+              } else if (typeof dataMedia.caption === 'string') {
+                actualCaption = dataMedia.caption;
+              }
+            }
+            updateFeaturedImageCaption(mediaId, actualCaption);
+          }
+        }
+      });
+    } else {
+      updateFeaturedImageCaption(
+        $('#_thumbnail_id').val(),
+        $('#postimagediv').find('#set-post-thumbnail').find('img').attr('alt'),
+      );
+    }
+    $(document).on(PP_Checklists.EVENT_TIC, function (event) {
+      if (!loaded) return;
+      let has_caption = true,
+        has_image = PP_Checklists.hasFeaturedImage();
+      if (has_image) {
+        has_caption = Boolean(featured_image_caption[meta_id]);
+      }
+
+      if ($('#attachment-details-caption').length > 0) {
+        const callableFunc = function () {
+          const current_caption = $('#attachment-details-caption').val();
+          const previous_caption = featured_image_caption[meta_id] ?? '';
+          if (current_caption !== previous_caption) {
+            featured_image_caption[meta_id] = current_caption;
+          }
+        };
+        $('#attachment-details-caption')
+          .ready(function () {
+            $('.attachments-wrapper li').each(function () {
+              if ($(this).attr('aria-checked') === 'true') {
+                meta_id = Number($(this).attr('data-id'));
+                callableFunc();
+              }
+            });
+          })
+          .on('change', callableFunc);
+      }
+      $('#pp-checklists-req-featured_image_caption').trigger(PP_Checklists.EVENT_UPDATE_REQUIREMENT_STATE, has_caption);
     });
   }
 
@@ -1984,19 +2054,7 @@
     update();
   }
 
-  /*----------  Configure link for Checklist metabox  ----------*/
-  if (ppChecklists.user_can_manage_options == 1 && $('#pp_checklist_meta').length) {
-    // Create a new anchor element
-    var link = document.createElement('a');
-
-    // Set the properties of the anchor element
-    link.className = 'edit-box open-box';
-    link.href = ppChecklists.configure_url;
-    link.textContent = ppChecklists.label_configure;
-
-    // Append the anchor element to the desired parent element
-    $('#pp_checklist_meta').find('h2.hndle').append($('<span>').addClass('postbox-title-action').append(link));
-  }
+  
 
   /**
    *

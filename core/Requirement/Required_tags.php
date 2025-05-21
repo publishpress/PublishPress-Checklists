@@ -98,7 +98,8 @@ class Required_tags extends Base_multiple
      */
     public function get_current_status($post, $option_value)
     {
-        $tags = wp_get_post_tags($post->ID, array('fields' => 'ids'));
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        $tags = wp_get_post_tags($post_id, array('fields' => 'ids'));
         $option_ids = $this->tag_parser($option_value, 0);
 
         return !empty(array_intersect($option_ids, $tags));

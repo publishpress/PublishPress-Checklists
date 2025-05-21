@@ -6,8 +6,8 @@ Author URI: https://publishpress.com
 Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
-Tested up to: 6.6
-Stable tag: 2.18.0
+Tested up to: 6.8
+Stable tag: 2.19.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,14 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.19.0] - 20 May 2025 =
+
+* Updated: Checklists panel and metabox will be hidden if there are no checklists #854
+* Updated: Promo Banner for PublishPress Checklists Pro #863
+* Updated: Remove "Configure" link inside the metabox #860
+* Added: Promo for Pro Checklists #856
+* Added: New checklists item "Featured Image has Caption" #870
 
 = [2.18.0] - 26 March 2025 =
 

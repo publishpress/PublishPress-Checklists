@@ -59,7 +59,8 @@ class Approved_by extends Base_multiple implements Interface_required
      */
     public function get_current_status($post, $option_value)
     {
-        return self::VALUE_YES === get_post_meta($post->ID, static::POST_META_PREFIX . '_' . $this->name, true);
+        $post_id = isset($post->ID) ? $post->ID : 0;
+        return self::VALUE_YES === get_post_meta($post_id, static::POST_META_PREFIX . '_' . $this->name, true);
     }
 
     /**
