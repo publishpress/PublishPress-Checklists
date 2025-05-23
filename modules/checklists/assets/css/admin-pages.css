@@ -508,3 +508,51 @@ textarea.pp-checklists-custom-item-title {
   vertical-align: sub;
   padding: 2px;
 }
+
+/* Start Pro Lock badge */
+
+.pp-checklists-requirement-row {
+  position: relative;
+}
+
+.pp-checklists-requirement-row.ppc-pro-locked-row > td:not(.ppc-pro-overlay-cell) {
+  opacity: 0.4; 
+  pointer-events: none; 
+}
+
+.ppc-pro-overlay-cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ppc-pro-overlay-text {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  gap: 4px; 
+  color: #fff !important; 
+  background-color: #0073aa;
+  padding: 6px 12px; 
+  border-radius: 15px; 
+  line-height: 1; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  pointer-events: auto;
+}
+
+.ppc-pro-overlay-text .dashicons {
+  line-height: 1; 
+}
+
+/* End Pro Lock badge */
