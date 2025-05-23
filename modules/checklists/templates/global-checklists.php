@@ -77,27 +77,22 @@
                                 // Skip if the post type is not the current one
                                 if ($post_type !== $post_type_key) continue;
                                 $group_has_requirements = false;
-                                // Check if this tab is Pro-only and Pro is NOT active
-                                $is_pro_tab = isset($tabInfo['pro']) && $tabInfo['pro'];
-                                if ($is_pro_tab && empty($pro_active)) {
-                                    // Show a promo message for Pro tabs if Pro is not active
-                                    echo '<tr class="pp-checklists-requirement-row ppch-' . esc_attr($group) . '-group" data-post-type="' . esc_attr($post_type) . '"><td colspan="4" class="pp-pro-tab-promo">';
-                                    echo esc_html__('This feature is available in the Pro version. ', 'publishpress-checklists');
-                                    echo '<a href="https://publishpress.com/" target="_blank" rel="noopener">' . esc_html__('Upgrade to Pro', 'publishpress-checklists') . '</a>';
-                                    echo '</td></tr>';
-                                    $group_has_requirements = true; // Prevents "No requirements" message
-                                } else {
-                                    // Render requirements as usual
                                     foreach ($post_type_requirements as $requirement) :
                                         if ($requirement->group === $group) :
                                             $group_has_requirements = true;
+                                            // Determine if the current requirement is locked
+                                            $is_locked = false; // Default to not locked
+                                            // Ensure $requirement->pro exists and is true, and $pro_active is empty (Pro plugin not active)
+                                            if (isset($requirement->pro) && $requirement->pro && empty($pro_active)) {
+                                                $is_locked = true;
+                                            }
                                     ?>
                                             <tr
-                                                class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group"
+                                                class="pp-checklists-requirement-row ppch-<?php echo esc_attr($requirement->group); ?>-group <?php echo $is_locked ? ' ppc-pro-locked-row' : ''; ?>"
                                                 style="display: none;"
                                                 data-id="<?php echo esc_attr($requirement->name); ?>"
                                                 data-post-type="<?php echo esc_attr($post_type); ?>">
-
+                                               
                                                 <td>
                                                     <?php
                                                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -124,11 +119,19 @@
                                                     echo $requirement->get_setting_field_html();
                                                     ?>
                                                 </td>
+                                                <?php if ($is_locked): ?>
+                                                    <td class="ppc-pro-overlay-cell" colspan="4">
+                                                        <a href="https://publishpress.com/checklists/" target="_blank">
+                                                        <div class="ppc-pro-overlay-text">
+                                                            <span class="dashicons dashicons-lock"></span> Pro feature
+                                                        </div>
+                                                        </a>
+                                                    </td>
+                                                <?php endif; ?>
                                             </tr>
                                     <?php
                                         endif;
                                     endforeach;
-                                }
                                 ?>
                                 <?php if ($post_type === $post_type_key && !$group_has_requirements) : ?>
                                     <tr class="pp-checklists-requirement-row ppch-<?php echo esc_attr($group); ?>-group" data-post-type="<?php echo esc_attr($post_type); ?>">
