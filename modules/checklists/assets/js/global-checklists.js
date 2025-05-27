@@ -409,7 +409,7 @@
         //check if selected rule require validation and option is Base_counter
         if ($.inArray(requirement_rule, required_rules) !== -1 && (min_field.length > 0 || max_field.length > 0)) {
           //void submit and add to error if none of min and max field is set
-          if (Number(min_field.val()) === 0 && Number(max_field.val()) === 0) {
+          if (min_field.val().trim() === '' && max_field.val().trim() === '') {
             submit_form = false;
             var field_title = $('<strong>').text(`"${row_requirement_title}"`);
             submit_error += $('<div class="checklists-save-notice"></div>')
