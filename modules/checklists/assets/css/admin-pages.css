@@ -61,10 +61,10 @@ textarea.pp-checklists-custom-item-title {
   -o-box-shadow: none;
 }
 
-.pressshack-admin-wrapper > header h1 a,
-.pressshack-admin-wrapper > header h1 a:hover,
-.pressshack-admin-wrapper > header h1 a:focus,
-.pressshack-admin-wrapper > header h1 a:active {
+.pressshack-admin-wrapper>header h1 a,
+.pressshack-admin-wrapper>header h1 a:hover,
+.pressshack-admin-wrapper>header h1 a:focus,
+.pressshack-admin-wrapper>header h1 a:active {
   color: #23282d;
 }
 
@@ -80,37 +80,37 @@ textarea.pp-checklists-custom-item-title {
   color: #655997;
 }
 
-.pressshack-admin-wrapper > footer {
+.pressshack-admin-wrapper>footer {
   text-align: center;
 }
 
-.pressshack-admin-wrapper > footer > div.pp-rating {
+.pressshack-admin-wrapper>footer>div.pp-rating {
   font-size: 12px;
   margin-bottom: 10px;
   margin-top: 30px;
 }
 
-.pressshack-admin-wrapper > footer * {
+.pressshack-admin-wrapper>footer * {
   color: #777;
 }
 
-.pressshack-admin-wrapper > footer > nav ul {
+.pressshack-admin-wrapper>footer>nav ul {
   list-style: none;
 }
 
-.pressshack-admin-wrapper > footer > nav ul > li {
+.pressshack-admin-wrapper>footer>nav ul>li {
   display: inline-block;
 }
 
-.pressshack-admin-wrapper > footer > nav ul > li:not(:first-child) {
+.pressshack-admin-wrapper>footer>nav ul>li:not(:first-child) {
   margin-left: 15px;
 }
 
-.pressshack-admin-wrapper > footer > nav ul > li > a {
+.pressshack-admin-wrapper>footer>nav ul>li>a {
   font-weight: bold;
 }
 
-.pressshack-admin-wrapper > footer .dashicons.dashicons-star-filled {
+.pressshack-admin-wrapper>footer .dashicons.dashicons-star-filled {
   line-height: 18px;
   font-size: 12px;
   width: 12px;
@@ -308,7 +308,7 @@ textarea.pp-checklists-custom-item-title {
   position: relative;
 }
 
-.pp-checklists-task-params > .pp-checklists-remove-custom-item {
+.pp-checklists-task-params>.pp-checklists-remove-custom-item {
   padding-top: 5px !important;
 }
 
@@ -469,11 +469,13 @@ textarea.pp-checklists-custom-item-title {
 }
 
 @media only screen and (max-width: 1270px) {
+
   .pp-checklists-content-table input[type='text'],
   .pp-checklists-content-table input[type='number'],
   .pp-checklists-content-table select {
     width: 95%;
   }
+
   .pp-checklists-content-wrapper {
     min-width: unset;
   }
@@ -483,6 +485,7 @@ textarea.pp-checklists-custom-item-title {
   .pp-checklists-content-wrapper {
     min-width: unset;
   }
+
   .pp-checklists-content-table input[type='text'],
   .pp-checklists-content-table input[type='number'],
   .pp-checklists-content-table select,
@@ -491,6 +494,7 @@ textarea.pp-checklists-custom-item-title {
     max-width: 95% !important;
     width: 95% !important;
   }
+
   .pp-checklists-tabs-wrapper {
     display: block;
   }
@@ -515,9 +519,9 @@ textarea.pp-checklists-custom-item-title {
   position: relative;
 }
 
-.pp-checklists-requirement-row.ppc-pro-locked-row > td:not(.ppc-pro-overlay-cell) {
-  opacity: 0.4; 
-  pointer-events: none; 
+.pp-checklists-requirement-row.ppc-pro-locked-row>td:not(.ppc-pro-overlay-cell) {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .ppc-pro-overlay-cell {
@@ -527,32 +531,47 @@ textarea.pp-checklists-custom-item-title {
   right: 0;
   bottom: 0;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1px);
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
 }
 
 .ppc-pro-overlay-text {
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px; 
-  color: #fff !important; 
-  background-color: #0073aa;
-  padding: 6px 12px; 
-  border-radius: 15px; 
-  line-height: 1; 
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  padding: 6px 12px;
+  border-radius: 4px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   pointer-events: auto;
+  background: #FEB123;
+  color: #000 !important;
+  font-weight: normal;
+  text-decoration: none;
+  padding: 9px 12px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px solid #fca871;
+  break-inside: avoid;
+  white-space: nowrap;
+  gap: 4px;
+}
+
+.ppc-pro-overlay-text:hover {
+  background: #fcca46;
+  color: #000 !important;
 }
 
 .ppc-pro-overlay-text .dashicons {
-  line-height: 1; 
+  line-height: 1;
 }
 
 /* End Pro Lock badge */
