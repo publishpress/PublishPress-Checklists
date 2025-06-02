@@ -38,6 +38,7 @@ use PublishPress\Checklists\Core\Requirement\Custom_item;
 use PublishPress\Checklists\Core\Requirement\Openai_item;
 use PublishPress\Checklists\Core\Utils\FieldsTabs;
 use PublishPress\Checklists\Core\Utils\ElementorUtils;
+use PublishPress\Checklists\Core\Requirement\Pro_Requirement;
 
 if (!class_exists('PPCH_Checklists')) {
     /**
@@ -401,30 +402,38 @@ if (!class_exists('PPCH_Checklists')) {
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Image_alt_count',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Validate_links',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_RankMathScore',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_PublishTimeExact',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_PublishTimeFuture',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_NoHeadingTags',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_ImageCount',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_ApprovedByUser',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_AIOHeadlineScore',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_AIOSeoScore',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_TableHeader',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_SingleH1PerPage',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_HeadingInHierarchy',
-
                 ],
                 'thumbnail' => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_alt',
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Featured_image_caption',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_FeaturedImageHeight',
-                    '\\PublishPress\\Checklists\\Core\\Requirement\\Pro_FeaturedImageWidth',
                 ],
                 'excerpt'   => [
                     '\\PublishPress\\Checklists\\Core\\Requirement\\Filled_excerpt',
                 ],
             ];
+
+            // Config-driven Pro rules
+            $pro_requirements_file = __DIR__ . '/pro-requirements.php';
+            if ( file_exists( $pro_requirements_file ) ) {
+                $pro_requirements = include $pro_requirements_file;
+                foreach ( $pro_requirements as $req ) {
+                    if (
+                      ! empty( $req['post_types'] )
+                      && ! in_array( $post_type, (array) $req['post_types'], true )
+                    ) {
+                        continue;
+                    }
+                    
+                    $support = Pro_Requirement::get_support_for_config( $req );
+                    if ( post_type_supports( $post_type, $support ) ) {
+                        $supports_map[ $support ][] = [
+                            'class'  => Pro_Requirement::class,
+                            'params' => $req,
+                        ];
+                    }
+                }
+            }
 
             foreach ($supports_map as $supports => $requirements) {
                 foreach ($requirements as $requirement) {
