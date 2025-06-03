@@ -121,7 +121,7 @@
                                                 </td>
                                                 <?php if ($is_locked): ?>
                                                     <td class="ppc-pro-overlay-cell" colspan="4">
-                                                        <a href="https://publishpress.com/checklists/" target="_blank">
+                                                        <a href="https://publishpress.com/links/publishpress-checklists-nudge" target="_blank">
                                                         <div class="ppc-pro-overlay-text">
                                                             <span class="dashicons dashicons-lock"></span> Pro feature
                                                         </div>

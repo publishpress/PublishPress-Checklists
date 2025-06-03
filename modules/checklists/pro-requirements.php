@@ -1,7 +1,19 @@
 <?php
-// List of Pro checklist rules.
-// Add a new rule here with its id, support group, label, and parameters.
-return [
+/**
+ * Static Pro checklist rules.
+ *
+ * This array defines the built-in Pro requirements, each entry containing:
+ *   - id: unique identifier
+ *   - type: requirement type (simple, counter, multiple, time)
+ *   - support: WP post_type_supports key
+ *   - group: requirement group/tab
+ *   - label: displayed text in settings
+ *   - post_type: post type need to be supported
+ *   - optional params: min, max, post_type, field_key
+ *
+ * @since 1.0.0
+ */
+$static = [
     [
         'id'       => 'all_in_one_seo_headline_score',
         'type'     => 'counter',
@@ -83,7 +95,7 @@ return [
         'type'      => 'time',
         'support'   => 'editor',
         'group'     => 'publish_date_time',
-        'label'     => 'Publish time should be in the future',
+        'label'    => 'Publish time should be in the future',
         'field_key' => '_publish_time_future'
     ],
     [
@@ -215,3 +227,53 @@ return [
     ]
     
 ];
+
+/**
+ * Dynamically generate Pro requirement entries for each ACF field.
+ *
+ * - For 'text' and 'textarea' fields: uses 'counter' type to count characters.
+ * - For other field types: uses 'simple' type to check if the field is filled.
+ *
+ * @since 1.0.0
+ * @link https://www.advancedcustomfields.com/resources/acf_get_field_groups/ ACF Field Groups API
+ */
+$acf = [];
+if ( function_exists('acf_get_field_groups') ) {
+    $groups = acf_get_field_groups();
+    foreach ( $groups as $group ) {
+        $fields = acf_get_fields( $group );
+        if ( empty( $fields ) ) {
+            continue;
+        }
+        foreach ( $fields as $f ) {
+            if ( in_array( $f['type'], ['text', 'textarea'] ) ) {
+                $acf[] = [
+                    'id'        => 'acf_' . $f['key'],
+                    'type'      => 'counter',
+                    'support'   => 'editor',
+                    'group'     => 'advanced-custom-fields',
+                    'label'     => sprintf(
+                        __('Number of Characters in %s field', 'publishpress-checklists'),
+                        $f['label']
+                    ),
+                    'name'      => $f['name'],
+                    'field_key' => $f['key'],
+                ];
+            } else {
+                $acf[] = [
+                    'id'        => 'acf_' . $f['key'],
+                    'type'      => 'simple',
+                    'support'   => 'editor',
+                    'group'     => 'advanced-custom-fields',
+                    'label'     => sprintf(
+                        __('%s is filled', 'publishpress-checklists'),
+                        $f['label']
+                    ),
+                    'name'      => $f['name'],
+                    'field_key' => $f['key'],
+                ];
+            }
+        }
+    }
+}
+return array_merge( $static, $acf );

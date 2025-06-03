@@ -117,6 +117,13 @@ class FieldsTabs {
             );
         }
 
+        if (Util::isACFActivated()) {
+            $custom_plugins["advanced-custom-fields"] = array(
+                "label" => esc_html__('ACF', 'publishpress-checklists'),
+                "icon" => "dashicons dashicons-welcome-widgets-menus",
+            );
+        }
+
         return $custom_plugins; // Make sure to return the array!
     }
 
