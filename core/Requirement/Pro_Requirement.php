@@ -112,6 +112,12 @@ class Pro_Requirement extends Base_simple implements Interface_required
                 esc_attr($max)
             );
         }
+        if ($this->config['type'] === 'multiple') {
+            return sprintf(
+                '<select class="%s" multiple="multiple"></select>',
+                esc_attr($css_class)
+            );
+        }
         return parent::get_setting_field_html($css_class);
     }
 
