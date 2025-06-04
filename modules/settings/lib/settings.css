@@ -159,6 +159,26 @@
 /* Display disabled inputs with a very light gray background */
 .publishpress-checklists-admin input[disabled] {
     background-color: #eee;
+    cursor: not-allowed;
+}
+
+/* Styles for disabled pro options */
+.publishpress-checklists-admin .disabled-pro-option {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Pro badge styles */
+.publishpress-checklists-admin .pro-badge {
+    display: inline-block;
+    background-color: #FDB324;
+    color: black;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-left: 5px;
+    text-transform: uppercase;
+    vertical-align: middle;
 }
 
 .publishpress-modules .publishpress-module input.button,
