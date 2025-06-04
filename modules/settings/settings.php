@@ -746,6 +746,14 @@ if (!class_exists('PPCH_Settings')) {
             );
 
             add_settings_field(
+                'status_filter_settings',
+                __('Enable Status Filter:', 'publishpress-checklists'),
+                [$this, 'settings_status_filter_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
+            add_settings_field(
                 'disable_quick_edit_publish',
                 __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_publish_option'],
@@ -808,6 +816,29 @@ if (!class_exists('PPCH_Settings')) {
 
             $legacyPlugin->settings->helper_option_custom_post_type($this->module);
         }
+
+        /**
+         * Displays the field to choose between display or not the warning icon
+         * close to the submit button
+         *
+         * @param array
+         */
+        public function settings_status_filter_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_status_filter_settings';
+            $value = 'no';
+
+            echo '<label for="' . esc_attr($id) . '" class="disabled-pro-option">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[status_filter_settings]" '
+                . checked($value, 'yes', false) . ' disabled="disabled" />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                'This will enable the status filter in the checklists',
+                'publishpress-checklists'
+            );
+            echo '</label>';
+            echo ' <a href="https://publishpress.com/links/checklists-menu" target="_blank" class="pro-badge">PRO</a>';
+        }
+
 
         /**
          * Displays the field to choose between display or not the warning icon
