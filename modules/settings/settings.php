@@ -745,13 +745,15 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
-            add_settings_field(
-                'status_filter_settings',
-                __('Enable Status Filter:', 'publishpress-checklists'),
-                [$this, 'settings_status_filter_option'],
-                $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
-            );
+            if (!Util::isChecklistsProActive()) {
+                add_settings_field(
+                    'status_filter_settings',
+                    __('Enable Status Filter:', 'publishpress-checklists'),
+                    [$this, 'settings_status_filter_option'],
+                    $this->module->options_group_name,
+                    $this->module->options_group_name . '_general'
+                );
+            }
 
             add_settings_field(
                 'disable_quick_edit_publish',
@@ -832,7 +834,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[status_filter_settings]" '
                 . checked($value, 'yes', false) . ' disabled="disabled" />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                'This will enable the status filter in the checklists',
+                'This allows tasks to be disabled for specific statuses such as "Draft" or "Published.',
                 'publishpress-checklists'
             );
             echo '</label>';

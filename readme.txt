@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.8
-Stable tag: 2.19.0
+Stable tag: 2.20.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,13 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.20.0] - 5 June 2025 =
+* Updated: Remove branding feature #888
+* Updated: Promo for Checklists Pro in Checklists screen #881
+* Added: Setting links on Plugins screen. #902
+* Added: Status Filter Promo in Setting. #906
+* Fixed: Allow 0 on max in link checklists. #892
 
 = [2.19.0] - 20 May 2025 =
 
