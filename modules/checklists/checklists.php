@@ -414,23 +414,25 @@ if (!class_exists('PPCH_Checklists')) {
             ];
 
             // Config-driven Pro rules
-            $pro_requirements_file = __DIR__ . '/pro-requirements.php';
-            if ( file_exists( $pro_requirements_file ) ) {
-                $pro_requirements = include $pro_requirements_file;
-                foreach ( $pro_requirements as $req ) {
-                    if (
-                      ! empty( $req['post_types'] )
-                      && ! in_array( $post_type, (array) $req['post_types'], true )
-                    ) {
-                        continue;
-                    }
-                    
-                    $support = Pro_Requirement::get_support_for_config( $req );
-                    if ( post_type_supports( $post_type, $support ) ) {
-                        $supports_map[ $support ][] = [
-                            'class'  => Pro_Requirement::class,
-                            'params' => $req,
-                        ];
+            if (!Util::isChecklistsProActive()) {
+                $pro_requirements_file = __DIR__ . '/pro-requirements.php';
+                if ( file_exists( $pro_requirements_file ) ) {
+                    $pro_requirements = include $pro_requirements_file;
+                    foreach ( $pro_requirements as $req ) {
+                        if (
+                        ! empty( $req['post_types'] )
+                        && ! in_array( $post_type, (array) $req['post_types'], true )
+                        ) {
+                            continue;
+                        }
+                        
+                        $support = Pro_Requirement::get_support_for_config( $req );
+                        if ( post_type_supports( $post_type, $support ) ) {
+                            $supports_map[ $support ][] = [
+                                'class'  => Pro_Requirement::class,
+                                'params' => $req,
+                            ];
+                        }
                     }
                 }
             }
