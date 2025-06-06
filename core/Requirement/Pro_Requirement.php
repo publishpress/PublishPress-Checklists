@@ -72,6 +72,10 @@ class Pro_Requirement extends Base_simple implements Interface_required
 
     public function get_current_status($post, $option)
     {
+        if (!($post instanceof WP_Post)) {
+            $post = get_post($post);
+        }
+        
         $html = $post->post_content;
         switch ($this->config['type']) {
             case 'simple':
