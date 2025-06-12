@@ -74,6 +74,7 @@ if (!class_exists('PPCH_Settings')) {
                     'disable_publish_button'   => Base_requirement::VALUE_NO,
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
+                    'show_checklists_column'   => 'off',
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -624,6 +625,11 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['disable_publish_button'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset($new_options['show_checklists_column'])) {
+                $new_options['show_checklists_column'] = 'off';
+            }
+            $new_options['show_checklists_column'] = $new_options['show_checklists_column'] === 'on' ? 'on' : 'off';
+
             return $new_options;
         }
 
@@ -755,6 +761,16 @@ if (!class_exists('PPCH_Settings')) {
                 );
             }
 
+            if (!Util::isChecklistsProActive()) {
+                add_settings_field(
+                    'show_checklists_column',
+                    __('Show Checklists column in post lists:', 'publishpress-checklists'),
+                    [$this, 'settings_show_checklists_column_option'],
+                    $this->module->options_group_name,
+                    $this->module->options_group_name . '_general'
+                );
+            }
+
             add_settings_field(
                 'disable_quick_edit_publish',
                 __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
@@ -841,6 +857,27 @@ if (!class_exists('PPCH_Settings')) {
             echo ' <a href="https://publishpress.com/links/checklists-menu" target="_blank" class="pro-badge">PRO</a>';
         }
 
+        /**
+         * Displays the checkbox to enable or disable the Checklists column in post lists
+         * close to the submit button
+         *
+         * @param array
+         */
+        public function settings_show_checklists_column_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_show_checklists_column';
+            $value = 'no';
+
+            echo '<label for="' . esc_attr($id) . '" class="disabled-pro-option">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_checklists_column]" '
+                . checked($value, 'yes', false) . ' disabled="disabled" />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                'Show Checklists column in post lists',
+                'publishpress-checklists'
+            );
+            echo '</label>';
+            echo ' <a href="https://publishpress.com/links/checklists-menu" target="_blank" class="pro-badge">PRO</a>';
+        }
 
         /**
          * Displays the field to choose between display or not the warning icon
