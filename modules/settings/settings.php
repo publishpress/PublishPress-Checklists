@@ -771,12 +771,22 @@ if (!class_exists('PPCH_Settings')) {
                 );
             }
 
+            /**
+             * Publishing Options
+             */
+            add_settings_section(
+                $this->module->options_group_name . '_publishing_options',
+                __return_false(),
+                [$this, 'settings_section_publishing_options'],
+                $this->module->options_group_name
+            );
+
             add_settings_field(
                 'disable_quick_edit_publish',
                 __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_publish_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
             );
 
             add_settings_field(
@@ -784,7 +794,7 @@ if (!class_exists('PPCH_Settings')) {
                 __('Disable "Quick Edit" completely:', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_completely_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
             );
 
             add_settings_field(
@@ -792,7 +802,17 @@ if (!class_exists('PPCH_Settings')) {
                 __('Disable "Publish" button:', 'publishpress-checklists'),
                 [$this, 'settings_disable_publish_button_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
+            );
+
+            /**
+             * Integration
+             */
+            add_settings_section(
+                $this->module->options_group_name . '_integration',
+                __return_false(),
+                [$this, 'settings_section_integration'],
+                $this->module->options_group_name
             );
 
             add_settings_field(
@@ -800,7 +820,7 @@ if (!class_exists('PPCH_Settings')) {
                 __('OpenAI API Key:', 'publishpress-checklists'),
                 [$this, 'settings_openai_api_key_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_integration'
             );
 
             /**
@@ -1026,6 +1046,8 @@ if (!class_exists('PPCH_Settings')) {
                 [
                     '#ppch-tab-post-types'  => esc_html__('Post Types', 'publishpress-checklists'),
                     '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
+                    '#ppch-tab-publishing-options' => esc_html__('Publishing Options', 'publishpress-checklists'),
+                    '#ppch-tab-integration'       => esc_html__('Integration', 'publishpress-checklists'),
                 ]
             );
 
@@ -1040,6 +1062,16 @@ if (!class_exists('PPCH_Settings')) {
         public function settings_section_post_types()
         {
             echo '<input type="hidden" id="ppch-tab-post-types" />';
+        }
+
+        public function settings_section_publishing_options()
+        {
+            echo '<input type="hidden" id="ppch-tab-publishing-options" />';
+        }
+
+        public function settings_section_integration()
+        {
+            echo '<input type="hidden" id="ppch-tab-integration" />';
         }
     }
 }
