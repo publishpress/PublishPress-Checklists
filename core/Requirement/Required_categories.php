@@ -98,6 +98,7 @@ class Required_categories extends Base_multiple
      */
     public function get_current_status($post, $option_value)
     {
+        
         $post_id = isset($post->ID) ? $post->ID : 0;
         $categories = wp_get_post_categories($post_id);
         $option_ids = $this->category_parser($option_value, 0);
@@ -339,6 +340,10 @@ class Required_categories extends Base_multiple
         // Check if it is a compatible post type. If not, ignore this requirement.
         if ($post->post_type !== $this->post_type) {
             return $requirements;
+        }
+
+        if (!($post instanceof WP_Post)) {
+            $post = get_post($post);
         }
 
         $requirements = parent::filter_requirements_list($requirements, $post);
