@@ -87,7 +87,10 @@ class PPCH_Permissions extends Module
      */
     public function init()
     {
-        $this->setHooks();
+        if (isset($this->legacyPlugin->modules->settings->options->who_can_ignore_option)
+        && $this->legacyPlugin->modules->settings->options->who_can_ignore_option === 'yes') {
+            $this->setHooks();
+        }
     }
 
     private function setHooks()
