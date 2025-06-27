@@ -207,6 +207,10 @@ class Openai_item extends Base_simple implements Interface_required
      */
     public function get_current_status($post, $option_value)
     {
+        if (!($post instanceof WP_Post)) {
+            $post = get_post($post);
+        }
+
         return self::VALUE_YES === get_post_meta($post->ID, PPCH_Checklists::POST_META_PREFIX . $this->name, true);
     }
 
