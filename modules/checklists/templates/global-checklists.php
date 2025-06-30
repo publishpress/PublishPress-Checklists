@@ -64,6 +64,8 @@
                         do_action('publishpress_checklists_tasks_list_th');
                         ?>
                         <th><?php echo esc_html($context['lang']['params']); ?></th>
+                        <!-- We need this empty th for pro badge layout so it's not cramped -->
+                        <th id="pp-checklists-pro-badge-heading"></th>
                     </tr>
                 </thead>
                 <?php
