@@ -515,7 +515,7 @@ textarea.pp-checklists-custom-item-title {
 /* Start Pro Lock badge */
 
 .pp-checklists-requirement-row {
-  position: relative;
+  position: sticky;
 }
 
 .pp-checklists-requirement-row.ppc-pro-locked-row > td:not(.ppc-pro-overlay-cell) {
@@ -572,6 +572,10 @@ textarea.pp-checklists-custom-item-title {
 
 .ppc-pro-overlay-text .dashicons {
   line-height: 1;
+}
+
+.pp-checklists-requirements-settings th#pp-checklists-pro-badge-heading {
+  width: 1px !important;
 }
 
 /* End Pro Lock badge */
