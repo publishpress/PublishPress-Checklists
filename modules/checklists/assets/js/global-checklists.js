@@ -460,6 +460,18 @@
         var submit_error_el = $('<div class="checklists-save-notice"></div>').append(submit_error);
         $('#pp-checklists-global #submit').before(submit_error_el);
       }
+      
+      // Handle empty multiselects - ensure they submit an empty value
+      // This fixes the issue where deselecting all options doesn't clear the saved values
+      $('select[multiple]').each(function() {
+        if ($(this).val() === null || $(this).val().length === 0) {
+          // Create a hidden input with the same name and empty value
+          var hiddenInput = $('<input type="hidden">');
+          hiddenInput.attr('name', $(this).attr('name'));
+          hiddenInput.val('');
+          $(this).after(hiddenInput);
+        }
+      });
 
       return submit_form;
     });
