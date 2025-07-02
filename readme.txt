@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.8
-Stable tag: 2.20.0
+Stable tag: 2.21.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,6 @@ PublishPress Checklists also [integrates with OpenAI](https://publishpress.com/k
 > <strong>Checklists Pro</strong><br />
 > This plugin is the free version of the Checklists Pro plugin that comes with all the features you need to set standards for your WordPress content. <a href="https://publishpress.com/checklists"  title="Checklists Pro">Click here to purchase the best premium WordPress checklists plugin now!</a>
 
-
 Each task on your pre-publish checklist can be configured to meet your siteâ€™s needs. You can also set maximum and minimum values.
 
 [Read the Getting Started guide for PublishPress Checklists](https://publishpress.com/knowledge-base/checklists-started/).
@@ -63,7 +62,7 @@ Each task on your pre-publish checklist can be configured to meet your siteâ€
 ## Image Tasks ##
 
 * [All images have ALT text](https://publishpress.com/knowledge-base/alt-text-for-all-images/): Require ALT text for all images.
-* [Number of images in content](https://publishpress.com/knowledge-base/number-of-images-in-content/) (Pro version)**: Require a maximum and minimum number of images in the post.
+* [Number of images in content](https://publishpress.com/knowledge-base/number-of-images-in-content/) (Pro version): Require a maximum and minimum number of images in the post.
 
 ## Featured Image Tasks ##
 
@@ -366,8 +365,14 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.20.0] - 5 June 2025 =
+= [2.21.0] - 3 July 2025 =
+* Added: New Checklists in Plugin Link #935
+* Added: Option to disable "Who can ignore the task" #901
+* Added: New tab on setting #900
+* Fixed: Category dropdown does not handle empty options #933
+* Fixed: Undefined property stdClass::$ID on several checklists #932
 
+= [2.20.0] - 5 June 2025 =
 * Updated: Remove branding feature #888
 * Updated: Promo for Checklists Pro in Checklists screen #881
 * Added: Setting links on Plugins screen. #902
