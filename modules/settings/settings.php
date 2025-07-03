@@ -75,7 +75,7 @@ if (!class_exists('PPCH_Settings')) {
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
                     'show_checklists_column'   => 'off',
-                    'who_can_ignore'           => Base_requirement::VALUE_YES
+                    'who_can_ignore_option'      => Base_requirement::VALUE_YES
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -615,7 +615,7 @@ if (!class_exists('PPCH_Settings')) {
             }
 
             if (!isset($new_options['who_can_ignore_option'])) {
-                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_NO;
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES;
             }
 
             if (!isset($new_options['disable_quick_edit_publish'])) {
@@ -1066,7 +1066,7 @@ if (!class_exists('PPCH_Settings')) {
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             if (!isset($new_options['who_can_ignore_option'])) {
-                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_NO;
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES;
             }
             $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES === $new_options['who_can_ignore_option'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
