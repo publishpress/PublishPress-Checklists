@@ -478,6 +478,7 @@ if (!class_exists('PPCH_Checklists')) {
             add_filter('mce_external_plugins', [$this, 'add_mce_plugin']);
 
             add_action('admin_enqueue_scripts', [$this, 'add_admin_scripts']);
+            add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
 
             do_action('publishpress_checklists_load_addons');
 
@@ -689,6 +690,44 @@ if (!class_exists('PPCH_Checklists')) {
                     [],
                     PPCH_VERSION,
                     'all'
+                );
+            }
+        }
+
+        /**
+         * Enqueue scripts and stylesheets for the admin pages.
+         */
+        public function enqueueAdminScripts()
+        {
+            if (isset($_GET['page']) && $_GET['page'] === 'ppch-checklists') {
+                wp_enqueue_script(
+                    'publishpress-select2-js',
+                    plugins_url('/assets/lib/select2-v4.0.13/js/select2.full.min.js', PPCH_FILE),
+                    [],
+                    PPCH_VERSION
+                );
+
+                wp_enqueue_script(
+                    'publishpress-checklists-admin-js',
+                    plugins_url('/modules/permissions/assets/js/admin.js', PPCH_FILE),
+                    ['jquery', 'publishpress-select2-js'],
+                    PPCH_VERSION
+                );
+
+                wp_enqueue_style(
+                    'publishpress-select2-css',
+                    plugins_url('/assets/lib/select2-v4.0.13/css/select2.min.css', PPCH_FILE),
+                    false,
+                    PPCH_VERSION,
+                    'screen'
+                );
+
+                wp_enqueue_style(
+                    'publishpress-checklists-admin-css',
+                    plugins_url('/modules/permissions/assets/css/admin.css', PPCH_FILE),
+                    false,
+                    PPCH_VERSION,
+                    'screen'
                 );
             }
         }
