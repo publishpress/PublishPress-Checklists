@@ -157,7 +157,7 @@ $static = [
         'id'       => 'image',
         'type'     => 'simple',
         'support'  => 'editor',
-        'group'    => 'images',
+        'group'    => 'woocommerce',
         'label'    => 'Product image',
         'post_type' => 'product',
     ],
