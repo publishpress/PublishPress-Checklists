@@ -615,7 +615,7 @@ if (!class_exists('PPCH_Settings')) {
             }
 
             if (!isset($new_options['who_can_ignore_option'])) {
-                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES;
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_NO;
             }
 
             if (!isset($new_options['disable_quick_edit_publish'])) {
