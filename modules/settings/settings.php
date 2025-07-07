@@ -927,7 +927,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_warning_icon_submit]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                'This will display a warning icon in the "Publish" box.',
+                'This will display a warning icon in the "Checklists" box.',
                 'publishpress-checklists'
             );
             echo '</label>';
