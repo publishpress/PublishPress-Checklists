@@ -75,7 +75,7 @@ if (!class_exists('PPCH_Settings')) {
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
                     'show_checklists_column'   => 'off',
-                    'who_can_ignore'           => Base_requirement::VALUE_YES
+                    'who_can_ignore_option'      => Base_requirement::VALUE_YES
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -927,7 +927,7 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_warning_icon_submit]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                'This will display a warning icon in the "Publish" box.',
+                'This will display a warning icon in the "Checklists" box.',
                 'publishpress-checklists'
             );
             echo '</label>';
@@ -1066,7 +1066,7 @@ if (!class_exists('PPCH_Settings')) {
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
             if (!isset($new_options['who_can_ignore_option'])) {
-                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_NO;
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES;
             }
             $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES === $new_options['who_can_ignore_option'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 

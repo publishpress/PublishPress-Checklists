@@ -67,6 +67,11 @@ class Taxonomies_count extends Base_counter implements Interface_parametrized
      */
     public function get_current_status($post, $option_value)
     {
+
+        if (!($post instanceof WP_Post)) {
+            $post = get_post($post);
+        }
+
         $terms = wp_get_post_terms($post->ID, $this->taxonomy->name);
 
         $count = count($terms);
