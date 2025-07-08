@@ -365,7 +365,7 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-= [2.21.0] - 3 July 2025 =
+= [2.21.0] - 8 July 2025 =
 * Added: New Checklists in Plugin Link #935
 * Added: Option to disable "Who can ignore the task" #901
 * Added: New tab on setting #900
