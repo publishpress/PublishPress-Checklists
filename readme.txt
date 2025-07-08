@@ -370,7 +370,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added: Option to disable "Who can ignore the task" #901
 * Added: New tab on setting #900
 * Fixed: Category dropdown does not handle empty options #933
-* Fixed: Undefined property stdClass::$ID on several checklists #932
+* Fixed: Undefined property stdClass::$ID on several checklists #932 ##942 #941 #940 #934 #938 #913 #921 #914 #923 #922 #919
+* Fixed: Responsive issue on Pro overlay #936
+* Fixed: Pro badge position in Safari #937
+* Fixed: Category dropdown does not handle empty options #933
 
 = [2.20.0] - 5 June 2025 =
 * Updated: Remove branding feature #888
