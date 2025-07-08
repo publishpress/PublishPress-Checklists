@@ -87,7 +87,10 @@ class PPCH_Permissions extends Module
      */
     public function init()
     {
-        $this->setHooks();
+        if (isset($this->legacyPlugin->modules->settings->options->who_can_ignore_option)
+        && $this->legacyPlugin->modules->settings->options->who_can_ignore_option === 'yes') {
+            $this->setHooks();
+        }
     }
 
     private function setHooks()
@@ -95,47 +98,8 @@ class PPCH_Permissions extends Module
         add_action('publishpress_checklists_tasks_list_th', [$this, 'actionTasksListTh'], 10);
         add_action('publishpress_checklists_tasks_list_td', [$this, 'actionTasksListTd'], 10, 2);
         add_filter('publishpress_checklists_ignore_item_capability', [$this, 'filterIgnoreItemCapability'], 10, 3);
-        add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
         add_filter('publishpress_checklists_requirement_list', [$this, 'filterRequirementsList'], 30, 3);
         add_filter('publishpress_checklists_validate_requirement_settings', [$this, 'validateRequirementSettings']);
-    }
-
-    /**
-     * Enqueue scripts and stylesheets for the admin pages.
-     */
-    public function enqueueAdminScripts()
-    {
-        if (isset($_GET['page']) && $_GET['page'] === 'ppch-checklists') {
-            wp_enqueue_script(
-                'publishpress-select2-js',
-                plugins_url('/assets/lib/select2-v4.0.13/js/select2.full.min.js', $this->pluginFile),
-                [],
-                $this->pluginVersion
-            );
-
-            wp_enqueue_script(
-                'publishpress-checklists-admin-js',
-                plugins_url('/modules/permissions/assets/js/admin.js', $this->pluginFile),
-                ['jquery', 'publishpress-select2-js'],
-                $this->pluginVersion
-            );
-
-            wp_enqueue_style(
-                'publishpress-select2-css',
-                plugins_url('/assets/lib/select2-v4.0.13/css/select2.min.css', $this->pluginFile),
-                false,
-                $this->pluginVersion,
-                'screen'
-            );
-
-            wp_enqueue_style(
-                'publishpress-checklists-admin-css',
-                plugins_url('/modules/permissions/assets/css/admin.css', $this->pluginFile),
-                false,
-                $this->pluginVersion,
-                'screen'
-            );
-        }
     }
 
     public function actionTasksListTh($postType)

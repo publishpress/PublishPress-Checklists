@@ -100,7 +100,8 @@ class Plugin
     public function add_plugin_meta($links, $file)
     {
         if ($file == plugin_basename(PPCH_FILE)) {
-            $links[] = '<a href="'. esc_url(admin_url('admin.php?page=ppch-checklists')) .'">' . esc_html__('Settings', 'publishpress-checklists') . '</a>';
+            $links[] = '<a href="'. esc_url(admin_url('admin.php?page=ppch-checklists')) .'">' . esc_html__('Checklists', 'publishpress-checklists') . '</a>';
+            $links[] = '<a href="'. esc_url(admin_url('admin.php?page=ppch-settings')) .'">' . esc_html__('Settings', 'publishpress-checklists') . '</a>';
         }
 
         return $links;

@@ -74,6 +74,8 @@ if (!class_exists('PPCH_Settings')) {
                     'disable_publish_button'   => Base_requirement::VALUE_NO,
                     'show_warning_icon_submit' => Base_requirement::VALUE_YES,
                     'openai_api_key'           => '',
+                    'show_checklists_column'   => 'off',
+                    'who_can_ignore_option'      => Base_requirement::VALUE_YES
                 ],
                 'autoload'             => true,
                 'add_menu'             => true,
@@ -612,6 +614,10 @@ if (!class_exists('PPCH_Settings')) {
                 $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_NO;
             }
 
+            if (!isset($new_options['who_can_ignore_option'])) {
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_NO;
+            }
+
             if (!isset($new_options['disable_quick_edit_publish'])) {
                 $new_options['disable_quick_edit_publish'] = Base_requirement::VALUE_NO;
             }
@@ -623,6 +629,11 @@ if (!class_exists('PPCH_Settings')) {
             if (!isset($new_options['disable_publish_button'])) {
                 $new_options['disable_publish_button'] = Base_requirement::VALUE_NO;
             }
+
+            if (!isset($new_options['show_checklists_column'])) {
+                $new_options['show_checklists_column'] = 'off';
+            }
+            $new_options['show_checklists_column'] = $new_options['show_checklists_column'] === 'on' ? 'on' : 'off';
 
             return $new_options;
         }
@@ -745,6 +756,14 @@ if (!class_exists('PPCH_Settings')) {
                 $this->module->options_group_name . '_general'
             );
 
+            add_settings_field(
+                'show_who_can_ignore',
+                __('Enable Who Can Ignore:', 'publishpress-checklists'),
+                [$this, 'settings_who_can_ignore_option'],
+                $this->module->options_group_name,
+                $this->module->options_group_name . '_general'
+            );
+
             if (!Util::isChecklistsProActive()) {
                 add_settings_field(
                     'status_filter_settings',
@@ -755,12 +774,32 @@ if (!class_exists('PPCH_Settings')) {
                 );
             }
 
+            if (!Util::isChecklistsProActive()) {
+                add_settings_field(
+                    'show_checklists_column',
+                    __('Show Checklists column in post lists:', 'publishpress-checklists'),
+                    [$this, 'settings_show_checklists_column_option'],
+                    $this->module->options_group_name,
+                    $this->module->options_group_name . '_general'
+                );
+            }
+
+            /**
+             * Publishing Options
+             */
+            add_settings_section(
+                $this->module->options_group_name . '_publishing_options',
+                __return_false(),
+                [$this, 'settings_section_publishing_options'],
+                $this->module->options_group_name
+            );
+
             add_settings_field(
                 'disable_quick_edit_publish',
                 __('Disable the "Status" option when using "Quick Edit":', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_publish_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
             );
 
             add_settings_field(
@@ -768,7 +807,7 @@ if (!class_exists('PPCH_Settings')) {
                 __('Disable "Quick Edit" completely:', 'publishpress-checklists'),
                 [$this, 'settings_disable_quick_edit_completely_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
             );
 
             add_settings_field(
@@ -776,7 +815,17 @@ if (!class_exists('PPCH_Settings')) {
                 __('Disable "Publish" button:', 'publishpress-checklists'),
                 [$this, 'settings_disable_publish_button_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_publishing_options'
+            );
+
+            /**
+             * Integration
+             */
+            add_settings_section(
+                $this->module->options_group_name . '_integration',
+                __return_false(),
+                [$this, 'settings_section_integration'],
+                $this->module->options_group_name
             );
 
             add_settings_field(
@@ -784,7 +833,7 @@ if (!class_exists('PPCH_Settings')) {
                 __('OpenAI API Key:', 'publishpress-checklists'),
                 [$this, 'settings_openai_api_key_option'],
                 $this->module->options_group_name,
-                $this->module->options_group_name . '_general'
+                $this->module->options_group_name . '_integration'
             );
 
             /**
@@ -841,6 +890,27 @@ if (!class_exists('PPCH_Settings')) {
             echo ' <a href="https://publishpress.com/links/checklists-menu" target="_blank" class="pro-badge">PRO</a>';
         }
 
+        /**
+         * Displays the checkbox to enable or disable the Checklists column in post lists
+         * close to the submit button
+         *
+         * @param array
+         */
+        public function settings_show_checklists_column_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_show_checklists_column';
+            $value = 'no';
+
+            echo '<label for="' . esc_attr($id) . '" class="disabled-pro-option">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_checklists_column]" '
+                . checked($value, 'yes', false) . ' disabled="disabled" />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                'Show Checklists column in post lists',
+                'publishpress-checklists'
+            );
+            echo '</label>';
+            echo ' <a href="https://publishpress.com/links/checklists-menu" target="_blank" class="pro-badge">PRO</a>';
+        }
 
         /**
          * Displays the field to choose between display or not the warning icon
@@ -857,7 +927,28 @@ if (!class_exists('PPCH_Settings')) {
             echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[show_warning_icon_submit]" '
                 . checked($value, 'yes', false) . ' />';
             echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
-                'This will display a warning icon in the "Publish" box.',
+                'This will display a warning icon in the "Checklists" box.',
+                'publishpress-checklists'
+            );
+            echo '</label>';
+        }
+
+        /**
+         * Display the field to enable or disable who can ignore
+         * 
+         * @param array
+         * 
+         */
+        public function settings_who_can_ignore_option($args = [])
+        {
+            $id    = $this->module->options_group_name . '_who_can_ignore_option';
+            $value = isset($this->module->options->who_can_ignore_option) ? $this->module->options->who_can_ignore_option : 'no';
+
+            echo '<label for="' . esc_attr($id) . '">';
+            echo '<input type="checkbox" value="yes" id="' . esc_attr($id) . '" name="' . esc_attr($this->module->options_group_name) . '[who_can_ignore_option]" '
+                . checked($value, 'yes', false) . ' />';
+            echo '&nbsp;&nbsp;&nbsp;' . esc_html__(
+                'This will show "Who can ignore" options',
                 'publishpress-checklists'
             );
             echo '</label>';
@@ -974,6 +1065,11 @@ if (!class_exists('PPCH_Settings')) {
             }
             $new_options['show_warning_icon_submit'] = Base_requirement::VALUE_YES === $new_options['show_warning_icon_submit'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
 
+            if (!isset($new_options['who_can_ignore_option'])) {
+                $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES;
+            }
+            $new_options['who_can_ignore_option'] = Base_requirement::VALUE_YES === $new_options['who_can_ignore_option'] ? Base_requirement::VALUE_YES : Base_requirement::VALUE_NO;
+
             return $new_options;
         }
 
@@ -989,6 +1085,8 @@ if (!class_exists('PPCH_Settings')) {
                 [
                     '#ppch-tab-post-types'  => esc_html__('Post Types', 'publishpress-checklists'),
                     '#ppch-tab-general'     => esc_html__('General', 'publishpress-checklists'),
+                    '#ppch-tab-publishing-options' => esc_html__('Publishing Options', 'publishpress-checklists'),
+                    '#ppch-tab-integration'       => esc_html__('Integration', 'publishpress-checklists'),
                 ]
             );
 
@@ -1003,6 +1101,16 @@ if (!class_exists('PPCH_Settings')) {
         public function settings_section_post_types()
         {
             echo '<input type="hidden" id="ppch-tab-post-types" />';
+        }
+
+        public function settings_section_publishing_options()
+        {
+            echo '<input type="hidden" id="ppch-tab-publishing-options" />';
+        }
+
+        public function settings_section_integration()
+        {
+            echo '<input type="hidden" id="ppch-tab-integration" />';
         }
     }
 }

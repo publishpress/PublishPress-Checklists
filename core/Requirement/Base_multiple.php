@@ -139,4 +139,34 @@ class Base_multiple extends Base_simple implements Interface_required
     {
         return '<option value="' . esc_attr($value) . '" ' . $selected . '>' . esc_html($label) . '</option>';
     }
+    
+    /**
+     * Validates the option group for multiple select fields.
+     * Ensures empty selections are properly handled by creating an empty array.
+     * Also filters out any empty values to prevent PHP notices.
+     *
+     * @param array $new_options
+     *
+     * @return array
+     */
+    public function filter_settings_validate($new_options)
+    {
+        // Option name for the multiple field
+        $option_name_multiple = $this->name . '_' . $this->field_name;
+        
+        // If the key doesn't exist at all (completely empty multiselect), create it as an empty array
+        if (!isset($new_options[$option_name_multiple][$this->post_type])) {
+            $new_options[$option_name_multiple][$this->post_type] = array();
+        } 
+        
+        // Filter out empty values to prevent PHP notices when parsing id__name strings
+        $new_options[$option_name_multiple][$this->post_type] = array_filter(
+            $new_options[$option_name_multiple][$this->post_type],
+            function($value) {
+                return !empty($value);
+            }
+        );
+        
+        return $new_options;
+    }
 }
