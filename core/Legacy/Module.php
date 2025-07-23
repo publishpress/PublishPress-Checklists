@@ -110,8 +110,8 @@ class Module
         // Remove ignored post types
         $validPostTypes = [];
         foreach ($postTypes as $slug => $postType) {
-            // Ignore: Media, Block, Custom Field, Custom Layout, Notification Workflow
-            if (!in_array($slug, ['attachment', 'wp_block', 'ppmacf_field', 'ppmacf_layout', 'psppnotif_workflow'])) {
+            // Ignore: Media, Block, Custom Field, Custom Layout, Notification Workflow, WooCommerce Orders, WooCommerce Coupons, Navigation Menu, ACF Taxonomy, ACF Post Type, ACF Field Group
+            if (!in_array($slug, ['attachment', 'wp_block', 'ppmacf_field', 'ppmacf_layout', 'psppnotif_workflow', 'shop_order', 'shop_coupon', 'wp_navigation', 'acf-taxonomy', 'acf-post-type', 'acf-field-group'])) {
                 $validPostTypes[$slug] = $postType;
             }
         }
