@@ -29,6 +29,21 @@
                             return $requirement->group === $key;
                         });
 
+                        // Count enabled requirements (not disabled)
+                        $enabled_count = 0;
+                        if (!empty($has_requirements)) {
+                            foreach ($has_requirements as $requirement) {
+                                $option_name = $requirement->name . '_rule';
+                                if (isset($context['module']->options->{$option_name}[$post_type_key])) {
+                                    $rule_value = $context['module']->options->{$option_name}[$post_type_key];
+                                    // Count as enabled if it's not disabled (warning or block)
+                                    if ($rule_value !== 'off') {
+                                        $enabled_count++;
+                                    }
+                                }
+                            }
+                        }
+
                         // Show Pro tabs even if they have no requirements, so they can display the promo
                         $is_pro_tab = isset($args['pro']) && $args['pro'];
                         if (empty($has_requirements) && $key !== 'custom' && !$is_pro_tab) continue;
@@ -41,6 +56,9 @@
                                     <?php if (isset($args['svg']) && !empty($args['svg'])) : echo $args['svg']; endif; ?>
                                 </span>
                                 <span class="item"><?php echo esc_html_e($args['label']); ?></span>
+                                <?php if ($enabled_count > 0) : ?>
+                                    <span class="pp-checklists-count-indicator"><?php echo esc_html($enabled_count); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                     <?php }

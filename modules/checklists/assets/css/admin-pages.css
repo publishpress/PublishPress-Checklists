@@ -445,6 +445,26 @@ textarea.pp-checklists-custom-item-title {
   vertical-align: sub;
 }
 
+/* Count Indicator Style */
+.pp-checklists-count-indicator {
+  display: inline-block;
+  background-color: #f0f6fc;
+  color: #2c3338;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 6px;
+  min-width: 16px;
+  text-align: center;
+  line-height: 1.2;
+} 
+
+/* END Count Indicator Style */
+
+
+
 .pp-checklists-tabs-wrapper .pp-checklists-tabs {
   min-width: 180px;
   margin: 0;
