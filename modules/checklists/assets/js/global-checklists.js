@@ -32,8 +32,16 @@
 
   $(function () {
     show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
+    
+    // Initialize count indicators
+    update_count_indicators();
 
     $('#pp-checklists-requirements tbody').sortable({ items: ' > tr' });
+    
+    // Update count indicators when requirement rule dropdowns change
+    $(document).on('change', 'select[name*="_rule"]', function() {
+      update_count_indicators();
+    });
 
     // Set the event for the post type filter
     $('#pp-checklists-post-type-filter a').on('click', function (event) {
@@ -173,6 +181,43 @@
       }
 
       return post_type;
+    }
+
+    /**
+     * Update count indicators for all tabs based on current requirement settings
+     */
+    function update_count_indicators() {
+      $('.pp-checklists-tabs-list').each(function() {
+        var $tabsList = $(this);
+        var postType = $tabsList.attr('id').replace('list-', '');
+        
+        $tabsList.find('li a').each(function() {
+          var $tabLink = $(this);
+          var tabGroup = $tabLink.attr('data-tab');
+          var count = 0;
+          
+          // Count enabled requirements for this tab group and post type
+          $('#pp-checklists-requirements tr.ppch-' + tabGroup + '-group[data-post-type="' + postType + '"]').each(function() {
+            var $row = $(this);
+            var $select = $row.find('select[name*="_rule"]');
+            if ($select.length && $select.val() !== 'off') {
+              count++;
+            }
+          });
+          
+          // Update or remove indicator
+          var $indicator = $tabLink.find('.pp-checklists-count-indicator');
+          if (count > 0) {
+            if ($indicator.length) {
+              $indicator.text(count);
+            } else {
+              $tabLink.find('.item').after('<span class="pp-checklists-count-indicator">' + count + '</span>');
+            }
+          } else {
+            $indicator.remove();
+          }
+        });
+      });
     }
 
     /**
@@ -333,7 +378,14 @@
       // Re-initialize select 2
       $('#pp-checklists-global select').select2();
 
-      $a.on('click', callback_remove_row);
+      $a.on('click', function(event) {
+        callback_remove_row(event);
+        // Update count indicators after removing item
+        setTimeout(update_count_indicators, 100);
+      });
+      
+      // Update count indicators after adding new item
+      setTimeout(update_count_indicators, 100);
     }
 
     /*----------  Custom items  ----------*/
