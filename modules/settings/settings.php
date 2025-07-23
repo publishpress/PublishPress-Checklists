@@ -749,17 +749,17 @@ if (!class_exists('PPCH_Settings')) {
             do_action('publishpress_checklists_register_settings_before');
 
             add_settings_field(
-                'show_warning_icon_submit',
-                __('Show warning icon:', 'publishpress-checklists'),
-                [$this, 'settings_show_warning_icon_submit_option'],
+                'show_who_can_ignore',
+                __('Enable Who Can Ignore:', 'publishpress-checklists'),
+                [$this, 'settings_who_can_ignore_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
             );
 
             add_settings_field(
-                'show_who_can_ignore',
-                __('Enable Who Can Ignore:', 'publishpress-checklists'),
-                [$this, 'settings_who_can_ignore_option'],
+                'show_warning_icon_submit',
+                __('Show warning icon:', 'publishpress-checklists'),
+                [$this, 'settings_show_warning_icon_submit_option'],
                 $this->module->options_group_name,
                 $this->module->options_group_name . '_general'
             );
