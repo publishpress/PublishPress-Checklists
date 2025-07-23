@@ -1126,6 +1126,7 @@ if (!class_exists('PPCH_Checklists')) {
                             'wp-element',
                             'wp-hooks',
                             'wp-edit-post',
+                            'wp-polyfill',
                             'react',
                             'react-dom',
                         ],
