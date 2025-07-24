@@ -634,7 +634,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'ajaxurl'           => admin_url('admin-ajax.php'),
                         'nonce'             => wp_create_nonce('pp-checklists-rules'),
                         'submit_error'      => esc_html__(
-                            'Please make sure to complete the settings for',
+                            'options cannot be empty',
                             'publishpress-checklists'
                         ),
                         'custom_item_error' => esc_html__(
