@@ -1208,6 +1208,16 @@ if (!class_exists('PPCH_Checklists')) {
             } else {
                 $redirect_url = admin_url('admin.php?page=' . self::MENU_SLUG);
             }
+            
+            // Preserve tab state in redirect URL
+            if (isset($_POST['ppch_active_post_type']) && !empty($_POST['ppch_active_post_type'])) {
+                $redirect_url = add_query_arg('post_type', sanitize_text_field($_POST['ppch_active_post_type']), $redirect_url);
+            }
+            
+            if (isset($_POST['ppch_active_inner_tab']) && !empty($_POST['ppch_active_inner_tab'])) {
+                $redirect_url = add_query_arg('inner_tab', sanitize_text_field($_POST['ppch_active_inner_tab']), $redirect_url);
+            }
+            
             wp_redirect($redirect_url);
             exit();
         }

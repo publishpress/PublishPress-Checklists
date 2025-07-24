@@ -40,8 +40,8 @@ class Featured_image_caption extends Base_simple
      */
     public function init_language()
     {
-        $this->lang['label']          = __('Featured image has Caption', 'publishpress-checklists');
-        $this->lang['label_settings'] = __('Featured image has Caption', 'publishpress-checklists');
+        $this->lang['label']          = __('Featured image has caption', 'publishpress-checklists');
+        $this->lang['label_settings'] = __('Featured image has caption', 'publishpress-checklists');
     }
 
     /**
