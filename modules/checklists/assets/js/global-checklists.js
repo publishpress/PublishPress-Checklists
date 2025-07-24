@@ -444,8 +444,10 @@
         required_rules_notice = objectL10n_checklists_global_checklist.submit_error,
         custom_task_error_displayed = false;
 
-      //remove previous notice
+      //remove previous notice and inline validation errors
       $('.checklists-save-notice').remove();
+      $('.field-validation-error').remove();
+      $('.has-validation-error').removeClass('has-validation-error');
 
       //select all row
       $('.pp-checklists-requirement-row').each(function () {
@@ -463,16 +465,21 @@
           //void submit and add to error if none of min and max field is set
           if (min_field.val().trim() === '' && max_field.val().trim() === '') {
             submit_form = false;
-            var field_title = $('<strong>').text(`"${row_requirement_title}"`);
+            var field_title = $('<strong>').text(`${row_requirement_title}`);
             submit_error += $('<div class="checklists-save-notice"></div>')
               .append(
                 $('<div class="alert alert-danger alert-dismissible"></div>')
                   .append('<a href="javascript:void(0);" class="close">×</a>')
-                  .append(document.createTextNode(required_rules_notice))
-                  .append(' ')
-                  .append(field_title),
+                  .append(field_title)
+                  .append(document.createTextNode(required_rules_notice)),
               )
               .html();
+            
+            // Add inline field validation notice
+            var $row = $(this);
+            $row.find('.field-validation-error').remove();
+            
+            $row.addClass('has-validation-error');
           }
         }
 
@@ -490,6 +497,14 @@
                   .append(field_title),
               )
               .html();
+            
+            // Add inline field validation notice
+            var $row = $(this);
+            $row.find('.field-validation-error').remove();
+            var inline_notice = $('<div class="field-validation-error"></div>')
+              .html('<span class="dashicons dashicons-warning"></span> Please set a time for this requirement');
+            $row.find('td:last-child').append(inline_notice);
+            $row.addClass('has-validation-error');
           }
         }
       });
@@ -510,7 +525,16 @@
 
       if (!submit_form) {
         var submit_error_el = $('<div class="checklists-save-notice"></div>').append(submit_error);
-        $('#pp-checklists-global #submit').before(submit_error_el);
+        
+        // Add notice at the top of the form for better visibility
+        $('#pp-checklists-global').prepend(submit_error_el.clone());
+        
+        
+        
+        // Scroll to top to show the notice
+        $('html, body').animate({
+          scrollTop: $('#pp-checklists-global').offset().top - 50
+        }, 500);
       }
       
       // Handle empty multiselects - ensure they submit an empty value
@@ -531,14 +555,31 @@
     // Remove current notice on dismiss
     $(document).on('click', '#pp-checklists-global .checklists-save-notice .close', function (event) {
       event.preventDefault();
-      //remove whole current notice
-      $(this).parent('.alert-dismissible').remove();
+      //remove all notices (both top and bottom)
+      $('#pp-checklists-global .checklists-save-notice').remove();
     });
 
     // Remove notice on any number input changed
     $(document).on('change input paste', '.pp-checklists-number', function () {
       //remove previous notice
       $('.checklists-save-notice').remove();
+      // Remove inline validation for this row
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+    });
+    
+    // Remove inline validation when dropdown values change
+    $(document).on('change', 'select[name*="_rule"]', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+    });
+    
+    // Remove inline validation when time fields change
+    $(document).on('change', 'input[type="time"]', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+    });
+    
+    // Remove inline validation when custom task titles change
+    $(document).on('input', '.pp-checklists-custom-item-title', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
     });
   });
 

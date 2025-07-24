@@ -263,6 +263,19 @@ textarea.pp-checklists-custom-item-title {
   margin-top: 1rem;
 }
 
+/* Top notice styling when saving */
+#pp-checklists-global .checklists-save-notice:first-child {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 32px;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* End of Top notice styling when saving */
+
+
 #pp-checklists-global .checklists-save-notice .alert {
   padding: 15px;
   margin-bottom: 20px;
@@ -303,6 +316,37 @@ textarea.pp-checklists-custom-item-title {
   font-size: 18px !important;
   line-height: 1.2;
 }
+
+/* Inline field validation styling */
+.field-validation-error {
+  color: #d63638;
+  background-color: #fcf0f1;
+  border: 1px solid #f1aeb5;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field-validation-error .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.has-validation-error {
+  border-left: 4px solid #d63638;
+}
+
+.has-validation-error td {
+  border-left: none;
+}
+
+/* End of inline field validation styling */
 
 .pp-checklists-task-params {
   position: relative;
