@@ -31,7 +31,8 @@
   'use strict';
 
   $(function () {
-    show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
+    // Initialize tab persistence
+    initializeTabPersistence();
     
     // Initialize count indicators
     update_count_indicators();
@@ -52,6 +53,11 @@
 
       var $target = $(event.toElement || event.target),
         post_type = $target.attr('href').substring(1);
+
+      // Save the selected post type
+      if (typeof saveToStorage === 'function') {
+        saveToStorage('ppch_active_post_type', post_type);
+      }
 
       show_post_type_requirements(post_type);
     });
@@ -407,6 +413,7 @@
       event.preventDefault();
 
       var clicked_tab = $(this).attr('data-tab');
+      var current_post_type = get_current_post_type();
 
       //remove active class from all tabs
       $('.pp-checklists-tabs a').removeClass('active');
@@ -414,11 +421,16 @@
       //add active class to current tab
       $(this).addClass('active');
 
+      // Save the selected inner tab for the current post type
+      if (typeof saveToStorage === 'function') {
+        saveToStorage('ppch_active_inner_tab_' + current_post_type, clicked_tab);
+      }
+
       // hide all tabs contents
       $('.pp-checklists-requirement-row').hide();
 
       // Show the current tab contents that also have the matching data-post-type attribute
-      $('.ppch-' + clicked_tab + '-group[data-post-type="' + get_current_post_type() + '"]').show();
+      $('.ppch-' + clicked_tab + '-group[data-post-type="' + current_post_type + '"]').show();
     });
 
     /*----------  OpenAI items  ----------*/
@@ -581,6 +593,89 @@
     $(document).on('input', '.pp-checklists-custom-item-title', function () {
       $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
     });
+
+    /**
+     * Initialize tab persistence functionality
+     */
+    function initializeTabPersistence() {
+      // Get URL parameters
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlPostType = urlParams.get('post_type');
+      var urlInnerTab = urlParams.get('inner_tab');
+      
+      // Determine active post type
+      var activePostType = urlPostType || getFromStorage('ppch_active_post_type') || objectL10n_checklists_global_checklist.first_post_type;
+      
+      // Show the post type requirements
+      show_post_type_requirements(activePostType);
+      
+      // Determine active inner tab for this post type
+      var activeInnerTab = urlInnerTab || getFromStorage('ppch_active_inner_tab_' + activePostType) || 'title';
+      
+      // Set the active inner tab
+      setTimeout(function() {
+        var $innerTabLink = $('.pp-checklists-tabs ul#list-' + activePostType + ' a[data-tab="' + activeInnerTab + '"]');
+        if ($innerTabLink.length) {
+          $innerTabLink.click();
+        }
+      }, 100);
+      
+      // Add form submission handler to preserve tab state
+      $('#pp-checklists-global').on('submit', function() {
+        var currentPostType = get_current_post_type();
+        var currentInnerTab = $('.pp-checklists-tabs ul#list-' + currentPostType + ' a.active').attr('data-tab') || 'title';
+        
+        // Save current state
+        saveToStorage('ppch_active_post_type', currentPostType);
+        saveToStorage('ppch_active_inner_tab_' + currentPostType, currentInnerTab);
+        
+        // Add hidden fields to preserve tab state in form submission
+        var $form = $(this);
+        $form.find('input[name="ppch_active_post_type"]').remove();
+        $form.find('input[name="ppch_active_inner_tab"]').remove();
+        
+        $form.append('<input type="hidden" name="ppch_active_post_type" value="' + currentPostType + '">');
+        $form.append('<input type="hidden" name="ppch_active_inner_tab" value="' + currentInnerTab + '">');
+      });
+    }
+
+    /**
+     * Check if browser supports localStorage
+     */
+    function browserSupportStorage() {
+      try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    /**
+     * Save data to localStorage
+     */
+    function saveToStorage(key, value) {
+      if (browserSupportStorage()) {
+        try {
+          localStorage.setItem(key, value);
+        } catch (e) {
+          // Storage quota exceeded or other error
+        }
+      }
+    }
+
+    /**
+     * Get data from localStorage
+     */
+    function getFromStorage(key) {
+      if (browserSupportStorage()) {
+        try {
+          return localStorage.getItem(key);
+        } catch (e) {
+          return null;
+        }
+      }
+      return null;
+    }
   });
 
   function uidGen(len) {
@@ -593,4 +688,7 @@
 
     return text.trim();
   }
+
+
+
 })(jQuery, objectL10n_checklists_global_checklist);
