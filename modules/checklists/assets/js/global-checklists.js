@@ -241,7 +241,7 @@
         .appendTo($('#pp-checklists-requirements'));
 
       $('tr[data-id="' + id + '"]').remove();
-    }
+          }
 
     /**
      * Callback for events where we want to trigger
@@ -397,10 +397,17 @@
     /*----------  Custom items  ----------*/
     $('#pp-checklists-add-button').on('click', function (event) {
       $('.ppch-custom-group').show();
+      
+      // Switch to Custom tab before adding the item
+      var current_post_type = get_current_post_type();
+      var $customTabLink = $('.pp-checklists-tabs ul#list-' + current_post_type + ' a[data-tab="custom"]');
+      if ($customTabLink.length) {
+        $customTabLink.click();
+      }
 
       var newId = uidGen(15);
 
-      create_row(newId, '', '', get_current_post_type(), 'custom');
+      create_row(newId, '', '', current_post_type, 'custom');
     });
 
     // Hide all requirements except the first one (title)
@@ -436,10 +443,17 @@
     /*----------  OpenAI items  ----------*/
     $('#pp-checklists-openai-promt-button').on('click', function (event) {
       $('.ppch-custom-group').show();
+      
+      // Switch to Custom tab before adding the item
+      var current_post_type = get_current_post_type();
+      var $customTabLink = $('.pp-checklists-tabs ul#list-' + current_post_type + ' a[data-tab="custom"]');
+      if ($customTabLink.length) {
+        $customTabLink.click();
+      }
 
       var newId = uidGen(15);
 
-      create_row(newId, '', '', get_current_post_type(), 'openai');
+      create_row(newId, '', '', current_post_type, 'openai');
     });
     $(document).on('click', '.pp-custom-suggestion a', function (event) {
       event.preventDefault();
@@ -521,8 +535,12 @@
         }
       });
 
-      $('.pp-checklists-custom-item-title').each(function () {
-        if ($(this).val().trim() === '' && !custom_task_error_displayed) {
+      // Only check visible custom task title fields that are part of existing rows
+      $('.pp-checklists-custom-item-title').filter(':visible').each(function () {
+        var $this = $(this);
+        var $row = $this.closest('tr');
+        // Only validate if the row is visible and not marked for removal
+        if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '' && !custom_task_error_displayed) {
           submit_form = false;
           submit_error += $('<div class="checklists-save-notice"></div>')
             .append(
@@ -592,6 +610,38 @@
     // Remove inline validation when custom task titles change
     $(document).on('input', '.pp-checklists-custom-item-title', function () {
       $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+      // Also remove the main validation notice if all custom tasks now have titles
+      var hasEmptyCustomTasks = false;
+      $('.pp-checklists-custom-item-title').filter(':visible').each(function() {
+        var $this = $(this);
+        var $row = $this.closest('tr');
+        if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '') {
+          hasEmptyCustomTasks = true;
+          return false; // break the loop
+        }
+      });
+      if (!hasEmptyCustomTasks) {
+        $('.checklists-save-notice').remove();
+      }
+    });
+    
+    // Remove validation notices when custom tasks are removed
+    $(document).on('click', '.pp-checklists-remove-button', function() {
+      setTimeout(function() {
+        // Check if there are any remaining empty custom tasks after removal
+        var hasEmptyCustomTasks = false;
+        $('.pp-checklists-custom-item-title').filter(':visible').each(function() {
+          var $this = $(this);
+          var $row = $this.closest('tr');
+          if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '') {
+            hasEmptyCustomTasks = true;
+            return false; // break the loop
+          }
+        });
+        if (!hasEmptyCustomTasks) {
+          $('.checklists-save-notice').remove();
+        }
+      }, 150); // Wait for the removal to complete
     });
 
     /**
