@@ -124,7 +124,7 @@ class Custom_item extends Base_multiple implements Interface_required
         $html = parent::get_setting_field_html(esc_attr($css_class));
 
         $html .= sprintf(
-            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s" title="%2$s"><span class="dashicons dashicons-no" data-id="%1$s"></span></a>',
+            '<a href="javascript:void(0);" class="pp-checklists-remove-custom-item" data-id="%1$s" data-type="custom" title="%2$s"><span class="dashicons dashicons-no" data-id="%1$s" data-type="custom"></span></a>',
             esc_attr($this->name),
             __('Remove', 'publishpress-checklists')
         );
