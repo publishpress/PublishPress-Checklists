@@ -1,6 +1,15 @@
 <form method="post" id="pp-checklists-global">
     <?php wp_nonce_field('ppch-global-checklists'); ?>
 
+    <?php if (isset($context['success']) && $context['success']) : ?>
+        <div class="checklists-save-notice">
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <?php echo esc_html__('Settings saved successfully!', 'publishpress-checklists'); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="submit-top">
         <input type="submit" name="submit" id="submit-top" class="button button-primary"
             value="<?php echo esc_attr__('Save Changes', 'publishpress-checklists'); ?>">

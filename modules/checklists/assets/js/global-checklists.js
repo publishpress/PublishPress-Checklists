@@ -36,6 +36,13 @@
     
     // Initialize count indicators
     update_count_indicators();
+    
+    // Auto-hide success notice after 5 seconds
+    if ($('.checklists-save-notice').length > 0) {
+      setTimeout(function() {
+        $('.checklists-save-notice').fadeOut(500);
+      }, 2500);
+    }
 
     $('#pp-checklists-requirements tbody').sortable({ items: ' > tr' });
     

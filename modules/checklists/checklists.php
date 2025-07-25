@@ -1043,6 +1043,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'requirements' => $new_requirements_array,
                     'tabs'         => $this->field_tabs,
                     'post_types'   => $post_types,
+                    'success'      => isset($_GET['success']) && $_GET['success'] === '1',
                     'lang'         => [
                         'description'     => esc_html__('Task', 'publishpress-checklists'),
                         'action'          => esc_html__('Disabled, Recommended or Required', 'publishpress-checklists'),
@@ -1217,6 +1218,9 @@ if (!class_exists('PPCH_Checklists')) {
             if (isset($_POST['ppch_active_inner_tab']) && !empty($_POST['ppch_active_inner_tab'])) {
                 $redirect_url = add_query_arg('inner_tab', sanitize_text_field($_POST['ppch_active_inner_tab']), $redirect_url);
             }
+            
+            // Add success parameter to show success notice
+            $redirect_url = add_query_arg('success', '1', $redirect_url);
             
             wp_redirect($redirect_url);
             exit();
