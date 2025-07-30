@@ -172,33 +172,7 @@ class Util
     {
         ?>
         <div class="ppch-advertisement-right-sidebar">
-            <div class="advertisement-box-content postbox ppch-advert">
-                <div class="postbox-header ppch-advert">
-                    <h3 class="advertisement-box-header hndle is-non-sortable">
-                        <span><?php echo esc_html__('Upgrade to PublishPress Checklists Pro', 'publishpress-checklists'); ?></span>
-                    </h3>
-                </div>
-
-                <div class="inside ppch-advert">
-                    <p>
-                        <?php echo esc_html__('Enhance the power of PublishPress Checklists with the Pro version:', 'publishpress-checklists'); ?>
-                    </p>
-                    <ul>
-                        <li><?php echo esc_html__('Control height and width for featured images', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Control the number of images in posts', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Checklists for WooCommerce products', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Checklists for Advanced Custom Fields', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Checklists for Yoast SEO', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Checklists for Rank Math SEO', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Checklists for All in One SEO', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Remove PublishPress ads and branding', 'publishpress-checklists'); ?></li>
-                        <li><?php echo esc_html__('Fast, professional support', 'publishpress-checklists'); ?></li>
-                    </ul>
-                    <div class="upgrade-btn">
-                        <a href="https://publishpress.com/links/checklists-menu" target="__blank"><?php echo esc_html__('Upgrade to Pro', 'publishpress-checklists'); ?></a>
-                    </div>
-                </div>
-            </div>
+            
             <div class="advertisement-box-content postbox ppch-advert">
                 <div class="postbox-header ppch-advert">
                     <h3 class="advertisement-box-header hndle is-non-sortable">

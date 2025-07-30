@@ -7,7 +7,7 @@ Tags: approval, checklist, maximum, minimum, requirement
 Requires at least: 5.5
 Requires PHP: 7.2.5
 Tested up to: 6.8
-Stable tag: 2.21.0
+Stable tag: 2.22.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -364,6 +364,19 @@ With the PublishPress Checklists plugin, you can require that site's content mee
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [2.22.0] - 31 July 2025 =
+* Added: Small indicator for active tasks #920
+* Lang: Brazil Translation #964
+* Added: Keep recent tab after saving #927
+* Fixed: Remove unnecessary post type #959
+* Added: Improve error notice on saving #926
+* Added: Add notice on save changes #928
+* Fixed: Keep tabs on adding custom task #973
+* Updated: Small setting improvement #947
+* Updated: Update PublishPress banner library #972
+* Updated: Capital letter for consistency #930
+* Fixed: Double display of error message #945
 
 = [2.21.0] - 8 July 2025 =
 * Added: New Checklists in Plugin Link #935
