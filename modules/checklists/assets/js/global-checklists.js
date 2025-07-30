@@ -520,23 +520,20 @@
         if ($.inArray(requirement_rule, required_rules) !== -1 && time_field.length > 0) {
           if (!time_field.val()) {
             submit_form = false;
-            var field_title = $('<strong>').text(`"${row_requirement_title}"`);
+            var field_title = $('<strong>').text(`${row_requirement_title}`);
             submit_error += $('<div class="checklists-save-notice"></div>')
               .append(
                 $('<div class="alert alert-danger alert-dismissible"></div>')
                   .append('<a href="javascript:void(0);" class="close">×</a>')
-                  .append(document.createTextNode(required_rules_notice))
-                  .append(' ')
-                  .append(field_title),
+                  .append(field_title)
+                  .append(document.createTextNode(required_rules_notice)),
               )
               .html();
             
             // Add inline field validation notice
             var $row = $(this);
             $row.find('.field-validation-error').remove();
-            var inline_notice = $('<div class="field-validation-error"></div>')
-              .html('<span class="dashicons dashicons-warning"></span> Please set a time for this requirement');
-            $row.find('td:last-child').append(inline_notice);
+            
             $row.addClass('has-validation-error');
           }
         }
