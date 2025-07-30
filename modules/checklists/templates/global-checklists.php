@@ -1,6 +1,15 @@
 <form method="post" id="pp-checklists-global">
     <?php wp_nonce_field('ppch-global-checklists'); ?>
 
+    <?php if (isset($context['success']) && $context['success']) : ?>
+        <div class="checklists-save-notice">
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <?php echo esc_html__('Settings saved successfully!', 'publishpress-checklists'); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="submit-top">
         <input type="submit" name="submit" id="submit-top" class="button button-primary"
             value="<?php echo esc_attr__('Save Changes', 'publishpress-checklists'); ?>">
@@ -29,6 +38,21 @@
                             return $requirement->group === $key;
                         });
 
+                        // Count enabled requirements (not disabled)
+                        $enabled_count = 0;
+                        if (!empty($has_requirements)) {
+                            foreach ($has_requirements as $requirement) {
+                                $option_name = $requirement->name . '_rule';
+                                if (isset($context['module']->options->{$option_name}[$post_type_key])) {
+                                    $rule_value = $context['module']->options->{$option_name}[$post_type_key];
+                                    // Count as enabled if it's not disabled (warning or block)
+                                    if ($rule_value !== 'off') {
+                                        $enabled_count++;
+                                    }
+                                }
+                            }
+                        }
+
                         // Show Pro tabs even if they have no requirements, so they can display the promo
                         $is_pro_tab = isset($args['pro']) && $args['pro'];
                         if (empty($has_requirements) && $key !== 'custom' && !$is_pro_tab) continue;
@@ -41,6 +65,9 @@
                                     <?php if (isset($args['svg']) && !empty($args['svg'])) : echo $args['svg']; endif; ?>
                                 </span>
                                 <span class="item"><?php echo esc_html_e($args['label']); ?></span>
+                                <?php if ($enabled_count > 0) : ?>
+                                    <span class="pp-checklists-count-indicator"><?php echo esc_html($enabled_count); ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                     <?php }

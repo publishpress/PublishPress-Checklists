@@ -31,9 +31,25 @@
   'use strict';
 
   $(function () {
-    show_post_type_requirements(objectL10n_checklists_global_checklist.first_post_type);
+    // Initialize tab persistence
+    initializeTabPersistence();
+    
+    // Initialize count indicators
+    update_count_indicators();
+    
+    // Auto-hide success notice after 5 seconds
+    if ($('.checklists-save-notice').length > 0) {
+      setTimeout(function() {
+        $('.checklists-save-notice').fadeOut(500);
+      }, 2500);
+    }
 
     $('#pp-checklists-requirements tbody').sortable({ items: ' > tr' });
+    
+    // Update count indicators when requirement rule dropdowns change
+    $(document).on('change', 'select[name*="_rule"]', function() {
+      update_count_indicators();
+    });
 
     // Set the event for the post type filter
     $('#pp-checklists-post-type-filter a').on('click', function (event) {
@@ -44,6 +60,11 @@
 
       var $target = $(event.toElement || event.target),
         post_type = $target.attr('href').substring(1);
+
+      // Save the selected post type
+      if (typeof saveToStorage === 'function') {
+        saveToStorage('ppch_active_post_type', post_type);
+      }
 
       show_post_type_requirements(post_type);
     });
@@ -176,6 +197,43 @@
     }
 
     /**
+     * Update count indicators for all tabs based on current requirement settings
+     */
+    function update_count_indicators() {
+      $('.pp-checklists-tabs-list').each(function() {
+        var $tabsList = $(this);
+        var postType = $tabsList.attr('id').replace('list-', '');
+        
+        $tabsList.find('li a').each(function() {
+          var $tabLink = $(this);
+          var tabGroup = $tabLink.attr('data-tab');
+          var count = 0;
+          
+          // Count enabled requirements for this tab group and post type
+          $('#pp-checklists-requirements tr.ppch-' + tabGroup + '-group[data-post-type="' + postType + '"]').each(function() {
+            var $row = $(this);
+            var $select = $row.find('select[name*="_rule"]');
+            if ($select.length && $select.val() !== 'off') {
+              count++;
+            }
+          });
+          
+          // Update or remove indicator
+          var $indicator = $tabLink.find('.pp-checklists-count-indicator');
+          if (count > 0) {
+            if ($indicator.length) {
+              $indicator.text(count);
+            } else {
+              $tabLink.find('.item').after('<span class="pp-checklists-count-indicator">' + count + '</span>');
+            }
+          } else {
+            $indicator.remove();
+          }
+        });
+      });
+    }
+
+    /**
      * Method to remove custom item from the requirements list, identified
      * by the temporary ID/
      *
@@ -190,7 +248,7 @@
         .appendTo($('#pp-checklists-requirements'));
 
       $('tr[data-id="' + id + '"]').remove();
-    }
+          }
 
     /**
      * Callback for events where we want to trigger
@@ -333,16 +391,30 @@
       // Re-initialize select 2
       $('#pp-checklists-global select').select2();
 
-      $a.on('click', callback_remove_row);
+      $a.on('click', function(event) {
+        callback_remove_row(event);
+        // Update count indicators after removing item
+        setTimeout(update_count_indicators, 100);
+      });
+      
+      // Update count indicators after adding new item
+      setTimeout(update_count_indicators, 100);
     }
 
     /*----------  Custom items  ----------*/
     $('#pp-checklists-add-button').on('click', function (event) {
       $('.ppch-custom-group').show();
+      
+      // Switch to Custom tab before adding the item
+      var current_post_type = get_current_post_type();
+      var $customTabLink = $('.pp-checklists-tabs ul#list-' + current_post_type + ' a[data-tab="custom"]');
+      if ($customTabLink.length) {
+        $customTabLink.click();
+      }
 
       var newId = uidGen(15);
 
-      create_row(newId, '', '', get_current_post_type(), 'custom');
+      create_row(newId, '', '', current_post_type, 'custom');
     });
 
     // Hide all requirements except the first one (title)
@@ -355,6 +427,7 @@
       event.preventDefault();
 
       var clicked_tab = $(this).attr('data-tab');
+      var current_post_type = get_current_post_type();
 
       //remove active class from all tabs
       $('.pp-checklists-tabs a').removeClass('active');
@@ -362,20 +435,32 @@
       //add active class to current tab
       $(this).addClass('active');
 
+      // Save the selected inner tab for the current post type
+      if (typeof saveToStorage === 'function') {
+        saveToStorage('ppch_active_inner_tab_' + current_post_type, clicked_tab);
+      }
+
       // hide all tabs contents
       $('.pp-checklists-requirement-row').hide();
 
       // Show the current tab contents that also have the matching data-post-type attribute
-      $('.ppch-' + clicked_tab + '-group[data-post-type="' + get_current_post_type() + '"]').show();
+      $('.ppch-' + clicked_tab + '-group[data-post-type="' + current_post_type + '"]').show();
     });
 
     /*----------  OpenAI items  ----------*/
     $('#pp-checklists-openai-promt-button').on('click', function (event) {
       $('.ppch-custom-group').show();
+      
+      // Switch to Custom tab before adding the item
+      var current_post_type = get_current_post_type();
+      var $customTabLink = $('.pp-checklists-tabs ul#list-' + current_post_type + ' a[data-tab="custom"]');
+      if ($customTabLink.length) {
+        $customTabLink.click();
+      }
 
       var newId = uidGen(15);
 
-      create_row(newId, '', '', get_current_post_type(), 'openai');
+      create_row(newId, '', '', current_post_type, 'openai');
     });
     $(document).on('click', '.pp-custom-suggestion a', function (event) {
       event.preventDefault();
@@ -392,8 +477,10 @@
         required_rules_notice = objectL10n_checklists_global_checklist.submit_error,
         custom_task_error_displayed = false;
 
-      //remove previous notice
+      //remove previous notice and inline validation errors
       $('.checklists-save-notice').remove();
+      $('.field-validation-error').remove();
+      $('.has-validation-error').removeClass('has-validation-error');
 
       //select all row
       $('.pp-checklists-requirement-row').each(function () {
@@ -411,16 +498,21 @@
           //void submit and add to error if none of min and max field is set
           if (min_field.val().trim() === '' && max_field.val().trim() === '') {
             submit_form = false;
-            var field_title = $('<strong>').text(`"${row_requirement_title}"`);
+            var field_title = $('<strong>').text(`${row_requirement_title}`);
             submit_error += $('<div class="checklists-save-notice"></div>')
               .append(
                 $('<div class="alert alert-danger alert-dismissible"></div>')
                   .append('<a href="javascript:void(0);" class="close">×</a>')
-                  .append(document.createTextNode(required_rules_notice))
-                  .append(' ')
-                  .append(field_title),
+                  .append(field_title)
+                  .append(document.createTextNode(required_rules_notice)),
               )
               .html();
+            
+            // Add inline field validation notice
+            var $row = $(this);
+            $row.find('.field-validation-error').remove();
+            
+            $row.addClass('has-validation-error');
           }
         }
 
@@ -428,22 +520,31 @@
         if ($.inArray(requirement_rule, required_rules) !== -1 && time_field.length > 0) {
           if (!time_field.val()) {
             submit_form = false;
-            var field_title = $('<strong>').text(`"${row_requirement_title}"`);
+            var field_title = $('<strong>').text(`${row_requirement_title}`);
             submit_error += $('<div class="checklists-save-notice"></div>')
               .append(
                 $('<div class="alert alert-danger alert-dismissible"></div>')
                   .append('<a href="javascript:void(0);" class="close">×</a>')
-                  .append(document.createTextNode(required_rules_notice))
-                  .append(' ')
-                  .append(field_title),
+                  .append(field_title)
+                  .append(document.createTextNode(required_rules_notice)),
               )
               .html();
+            
+            // Add inline field validation notice
+            var $row = $(this);
+            $row.find('.field-validation-error').remove();
+            
+            $row.addClass('has-validation-error');
           }
         }
       });
 
-      $('.pp-checklists-custom-item-title').each(function () {
-        if ($(this).val().trim() === '' && !custom_task_error_displayed) {
+      // Only check visible custom task title fields that are part of existing rows
+      $('.pp-checklists-custom-item-title').filter(':visible').each(function () {
+        var $this = $(this);
+        var $row = $this.closest('tr');
+        // Only validate if the row is visible and not marked for removal
+        if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '' && !custom_task_error_displayed) {
           submit_form = false;
           submit_error += $('<div class="checklists-save-notice"></div>')
             .append(
@@ -458,7 +559,16 @@
 
       if (!submit_form) {
         var submit_error_el = $('<div class="checklists-save-notice"></div>').append(submit_error);
-        $('#pp-checklists-global #submit').before(submit_error_el);
+        
+        // Add notice at the top of the form for better visibility
+        $('#pp-checklists-global').prepend(submit_error_el.clone());
+        
+        
+        
+        // Scroll to top to show the notice
+        $('html, body').animate({
+          scrollTop: $('#pp-checklists-global').offset().top - 50
+        }, 500);
       }
       
       // Handle empty multiselects - ensure they submit an empty value
@@ -479,15 +589,147 @@
     // Remove current notice on dismiss
     $(document).on('click', '#pp-checklists-global .checklists-save-notice .close', function (event) {
       event.preventDefault();
-      //remove whole current notice
-      $(this).parent('.alert-dismissible').remove();
+      //remove all notices (both top and bottom)
+      $('#pp-checklists-global .checklists-save-notice').remove();
     });
 
     // Remove notice on any number input changed
     $(document).on('change input paste', '.pp-checklists-number', function () {
       //remove previous notice
       $('.checklists-save-notice').remove();
+      // Remove inline validation for this row
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
     });
+    
+    // Remove inline validation when dropdown values change
+    $(document).on('change', 'select[name*="_rule"]', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+    });
+    
+    // Remove inline validation when time fields change
+    $(document).on('change', 'input[type="time"]', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+    });
+    
+    // Remove inline validation when custom task titles change
+    $(document).on('input', '.pp-checklists-custom-item-title', function () {
+      $(this).closest('tr').removeClass('has-validation-error').find('.field-validation-error').remove();
+      // Also remove the main validation notice if all custom tasks now have titles
+      var hasEmptyCustomTasks = false;
+      $('.pp-checklists-custom-item-title').filter(':visible').each(function() {
+        var $this = $(this);
+        var $row = $this.closest('tr');
+        if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '') {
+          hasEmptyCustomTasks = true;
+          return false; // break the loop
+        }
+      });
+      if (!hasEmptyCustomTasks) {
+        $('.checklists-save-notice').remove();
+      }
+    });
+    
+    // Remove validation notices when custom tasks are removed
+    $(document).on('click', '.pp-checklists-remove-button', function() {
+      setTimeout(function() {
+        // Check if there are any remaining empty custom tasks after removal
+        var hasEmptyCustomTasks = false;
+        $('.pp-checklists-custom-item-title').filter(':visible').each(function() {
+          var $this = $(this);
+          var $row = $this.closest('tr');
+          if ($row.is(':visible') && !$row.hasClass('removed') && $this.val().trim() === '') {
+            hasEmptyCustomTasks = true;
+            return false; // break the loop
+          }
+        });
+        if (!hasEmptyCustomTasks) {
+          $('.checklists-save-notice').remove();
+        }
+      }, 150); // Wait for the removal to complete
+    });
+
+    /**
+     * Initialize tab persistence functionality
+     */
+    function initializeTabPersistence() {
+      // Get URL parameters
+      var urlParams = new URLSearchParams(window.location.search);
+      var urlPostType = urlParams.get('post_type');
+      var urlInnerTab = urlParams.get('inner_tab');
+      
+      // Determine active post type
+      var activePostType = urlPostType || getFromStorage('ppch_active_post_type') || objectL10n_checklists_global_checklist.first_post_type;
+      
+      // Show the post type requirements
+      show_post_type_requirements(activePostType);
+      
+      // Determine active inner tab for this post type
+      var activeInnerTab = urlInnerTab || getFromStorage('ppch_active_inner_tab_' + activePostType) || 'title';
+      
+      // Set the active inner tab
+      setTimeout(function() {
+        var $innerTabLink = $('.pp-checklists-tabs ul#list-' + activePostType + ' a[data-tab="' + activeInnerTab + '"]');
+        if ($innerTabLink.length) {
+          $innerTabLink.click();
+        }
+      }, 100);
+      
+      // Add form submission handler to preserve tab state
+      $('#pp-checklists-global').on('submit', function() {
+        var currentPostType = get_current_post_type();
+        var currentInnerTab = $('.pp-checklists-tabs ul#list-' + currentPostType + ' a.active').attr('data-tab') || 'title';
+        
+        // Save current state
+        saveToStorage('ppch_active_post_type', currentPostType);
+        saveToStorage('ppch_active_inner_tab_' + currentPostType, currentInnerTab);
+        
+        // Add hidden fields to preserve tab state in form submission
+        var $form = $(this);
+        $form.find('input[name="ppch_active_post_type"]').remove();
+        $form.find('input[name="ppch_active_inner_tab"]').remove();
+        
+        $form.append('<input type="hidden" name="ppch_active_post_type" value="' + currentPostType + '">');
+        $form.append('<input type="hidden" name="ppch_active_inner_tab" value="' + currentInnerTab + '">');
+      });
+    }
+
+    /**
+     * Check if browser supports localStorage
+     */
+    function browserSupportStorage() {
+      try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    /**
+     * Save data to localStorage
+     */
+    function saveToStorage(key, value) {
+      if (browserSupportStorage()) {
+        try {
+          localStorage.setItem(key, value);
+        } catch (e) {
+          // Storage quota exceeded or other error
+        }
+      }
+    }
+
+    /**
+     * Get data from localStorage
+     */
+    function getFromStorage(key) {
+      if (browserSupportStorage()) {
+        try {
+          return localStorage.getItem(key);
+        } catch (e) {
+          return null;
+        }
+      }
+      return null;
+    }
   });
 
   function uidGen(len) {
@@ -500,4 +742,7 @@
 
     return text.trim();
   }
+
+
+
 })(jQuery, objectL10n_checklists_global_checklist);

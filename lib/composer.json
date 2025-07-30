@@ -13,7 +13,7 @@
     "php": ">=7.2.5",
     "publishpress/psr-container": "^2.0",
     "publishpress/pimple-pimple": "^3.5",
-    "publishpress/wordpress-version-notices": "^2.1",
+    "publishpress/wordpress-version-notices": "^2.1.5",
     "publishpress/wordpress-reviews": "^1.1",
     "publishpress/instance-protection": "^1.0",
     "publishpress/wordpress-banners": "^1.3"

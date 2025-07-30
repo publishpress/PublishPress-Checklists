@@ -634,7 +634,7 @@ if (!class_exists('PPCH_Checklists')) {
                         'ajaxurl'           => admin_url('admin-ajax.php'),
                         'nonce'             => wp_create_nonce('pp-checklists-rules'),
                         'submit_error'      => esc_html__(
-                            'Please make sure to complete the settings for',
+                            'options cannot be empty.',
                             'publishpress-checklists'
                         ),
                         'custom_item_error' => esc_html__(
@@ -1043,6 +1043,7 @@ if (!class_exists('PPCH_Checklists')) {
                     'requirements' => $new_requirements_array,
                     'tabs'         => $this->field_tabs,
                     'post_types'   => $post_types,
+                    'success'      => isset($_GET['success']) && $_GET['success'] === '1',
                     'lang'         => [
                         'description'     => esc_html__('Task', 'publishpress-checklists'),
                         'action'          => esc_html__('Disabled, Recommended or Required', 'publishpress-checklists'),
@@ -1126,6 +1127,7 @@ if (!class_exists('PPCH_Checklists')) {
                             'wp-element',
                             'wp-hooks',
                             'wp-edit-post',
+                            'wp-polyfill',
                             'react',
                             'react-dom',
                         ],
@@ -1207,6 +1209,19 @@ if (!class_exists('PPCH_Checklists')) {
             } else {
                 $redirect_url = admin_url('admin.php?page=' . self::MENU_SLUG);
             }
+            
+            // Preserve tab state in redirect URL
+            if (isset($_POST['ppch_active_post_type']) && !empty($_POST['ppch_active_post_type'])) {
+                $redirect_url = add_query_arg('post_type', sanitize_text_field($_POST['ppch_active_post_type']), $redirect_url);
+            }
+            
+            if (isset($_POST['ppch_active_inner_tab']) && !empty($_POST['ppch_active_inner_tab'])) {
+                $redirect_url = add_query_arg('inner_tab', sanitize_text_field($_POST['ppch_active_inner_tab']), $redirect_url);
+            }
+            
+            // Add success parameter to show success notice
+            $redirect_url = add_query_arg('success', '1', $redirect_url);
+            
             wp_redirect($redirect_url);
             exit();
         }

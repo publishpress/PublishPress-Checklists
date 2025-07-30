@@ -37,6 +37,10 @@ class FieldsTabs {
                 "label" => "Images",
                 "icon" => "dashicons dashicons-format-image"
             ),
+            "audio_video" => array(
+                "label" => "Audio / Video",
+                "icon" => "dashicons dashicons-admin-media"
+            ),
             "featured_image" => array(
                 "label" => "Featured Image",
                 "icon" => "dashicons dashicons-cover-image"
