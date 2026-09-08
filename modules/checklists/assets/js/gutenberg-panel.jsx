@@ -9,6 +9,7 @@ const { hooks } = wp;
 
 import CheckListIcon from './CheckListIcon.jsx';
 import { openChecklistFromWarning } from './open-checklist.js';
+import { runRequirementAction } from './requirement-actions.jsx';
 
 const SUPPORTED_RENDERING_MODES = ['post-only', 'template-locked'];
 
@@ -347,6 +348,7 @@ class PPChecklistsPanel extends Component {
                 extra: req.extra || '',
                 is_custom: !!req.is_custom,
                 require_button: !!req.require_button,
+                action: req.action ? JSON.stringify(req.action) : '',
             }))
         );
     };
@@ -506,6 +508,19 @@ class PPChecklistsPanel extends Component {
                                                         <span className="req-label" dangerouslySetInnerHTML={{ __html: req.label }} />
                                                         {req.rule === 'block' ? (
                                                             <span className="required">*</span>
+                                                        ) : null}
+                                                        {!req.status && req.action && req.action.label ? (
+                                                            <button
+                                                                type="button"
+                                                                className="pp-checklists-req-action"
+                                                                onClick={(event) => {
+                                                                    event.preventDefault();
+                                                                    event.stopPropagation();
+                                                                    runRequirementAction(req.action);
+                                                                }}
+                                                            >
+                                                                {req.action.label}
+                                                            </button>
                                                         ) : null}
                                                         {req.require_button ? (
                                                             <div className="requirement-button-task-wrap">
