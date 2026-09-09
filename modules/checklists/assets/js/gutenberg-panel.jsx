@@ -13,6 +13,8 @@ import { runRequirementAction } from './requirement-actions.jsx';
 
 const SUPPORTED_RENDERING_MODES = ['post-only', 'template-locked'];
 
+const BLOCKED_NOTICE_ID = 'publishpress-checklists-validation';
+
 const isSupportedEditorContext = ({ renderingMode, currentPostType, supportedPostTypes }) => {
     if (renderingMode && !SUPPORTED_RENDERING_MODES.includes(renderingMode)) {
         return false;
@@ -107,6 +109,56 @@ class PPChecklistsPanel extends Component {
             }
         });
 
+        this.showBlockedNotice = () => {
+            notices.createErrorNotice(i18n.completeRequirementMessage, {
+                id: BLOCKED_NOTICE_ID,
+                isDismissible: true,
+                actions: [
+                    {
+                        label: i18n.openChecklistLabel,
+                        onClick: openChecklistFromWarning
+                    }
+                ]
+            });
+        };
+
+        /**
+         * Raise the notice as soon as the publishing panel is opened on a post that
+         * still fails a required task, instead of waiting for the save to be
+         * intercepted.
+         *
+         * The interception in savePost() below only sees the publish when the editor
+         * routes it through core. PublishPress Statuses publishes through its own
+         * workflow, so core only ever receives autosaves from it and the notice was
+         * never raised: the only pointer back to the checklist was the collapsed
+         * panel section at the very bottom of the publishing sidebar, which is easy
+         * to miss.
+         *
+         * @see https://github.com/publishpress/publishpress-checklists/issues/1215
+         */
+        this.isBlockedNoticeVisible = false;
+
+        this.publishPanelSubscription = wp.data.subscribe(() => {
+            if (!this.isMounted || !this.state.isSupportedContext) {
+                return;
+            }
+
+            const failedBlock = this.state.failedRequirements.block || [];
+            const shouldWarn = getIsPublishSidebarOpened() && failedBlock.length > 0;
+
+            if (shouldWarn === this.isBlockedNoticeVisible) {
+                return;
+            }
+
+            this.isBlockedNoticeVisible = shouldWarn;
+
+            if (shouldWarn) {
+                this.showBlockedNotice();
+            } else {
+                notices.removeNotice(BLOCKED_NOTICE_ID);
+            }
+        });
+
         if (!this.oldStatus || this.oldStatus == '') {
             const currentPost = wp.data.select('core/editor').getCurrentPost();
             this.oldStatus = currentPost && currentPost.status ? currentPost.status : '';
@@ -171,16 +223,7 @@ class PPChecklistsPanel extends Component {
             if (!publishing_post || !hasBlockRequirements) {
                 return coreSavePost(options);
             } else {
-                notices.createErrorNotice(i18n.completeRequirementMessage, {
-                    id: 'publishpress-checklists-validation',
-                    isDismissible: true,
-                    actions: [
-                        {
-                            label: i18n.openChecklistLabel,
-                            onClick: openChecklistFromWarning
-                        }
-                    ]
-                });
+                this.showBlockedNotice();
 
                 /**
                  * The Checklists toolbar button is hidden while the publish panel is
@@ -220,6 +263,10 @@ class PPChecklistsPanel extends Component {
         hooks.removeAction('pp-checklists.requirements-updated', 'publishpress/checklists');
         if (typeof this.contextSubscription === 'function') {
             this.contextSubscription();
+        }
+
+        if (typeof this.publishPanelSubscription === 'function') {
+            this.publishPanelSubscription();
         }
 
         this.isMounted = false;
